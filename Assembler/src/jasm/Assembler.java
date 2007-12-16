@@ -8,7 +8,7 @@ import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.IdentityHashSet;
 import com.sun.max.collect.Sequence;
-import com.sun.max.lang.Longs;
+import jasm.util.Longs;
 import jasm.util.WordWidth;
 import com.sun.max.program.ProgramError;
 import java.io.ByteArrayOutputStream;

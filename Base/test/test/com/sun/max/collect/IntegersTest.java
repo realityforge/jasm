@@ -5,7 +5,7 @@
 package test.com.sun.max.collect;
 
 import com.sun.max.ide.MaxTestCase;
-import com.sun.max.lang.Ints;
+import jasm.util.Ints;
 
 /**
  * Tests for {@link Integers}.

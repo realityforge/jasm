@@ -2,27 +2,17 @@
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
 /*VCSID=f0111b43-e97d-4715-bdc5-67e5eb9c0795*/
-package test.com.sun.max.lang;
+package test.jasm.util;
 
-import com.sun.max.lang.Ints;
-import com.sun.max.lang.Longs;
+import jasm.util.Longs;
 import junit.framework.TestCase;
 
 /**
- * Tests for {@link Ints}.
+ * Tests for {@link Longs}.
  *
  * @author Bernd Mathiske
  */
 public class LongsTest extends TestCase {
-
-    public LongsTest(String name) {
-        super(name);
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(LongsTest.class);
-    }
-
     public void test_numberOfEffectiveUnsignedBits() {
         assertTrue(Longs.numberOfEffectiveUnsignedBits(0L) == 0);
         assertTrue(Longs.numberOfEffectiveUnsignedBits(1L) == 1);

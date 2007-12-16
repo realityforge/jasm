@@ -2,9 +2,9 @@
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
 /*VCSID=6da9cd72-c8d6-4c34-a0f0-014071ef8a96*/
-package test.com.sun.max.lang;
+package test.jasm.util;
 
-import com.sun.max.lang.Ints;
+import jasm.util.Ints;
 import junit.framework.TestCase;
 
 /**
@@ -13,15 +13,6 @@ import junit.framework.TestCase;
  * @author Bernd Mathiske
  */
 public class IntsTest extends TestCase {
-
-    public IntsTest(String name) {
-        super(name);
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(IntsTest.class);
-    }
-
     public void test_numberOfEffectiveUnsignedBits() {
         assertTrue(Ints.numberOfEffectiveUnsignedBits(0) == 0);
         assertTrue(Ints.numberOfEffectiveUnsignedBits(1) == 1);

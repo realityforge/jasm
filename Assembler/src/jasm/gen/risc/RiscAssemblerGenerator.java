@@ -7,6 +7,7 @@ package jasm.gen.risc;
 import jasm.Argument;
 import jasm.LabelOffsetInstruction;
 import jasm.SymbolicArgument;
+import jasm.util.Ints;
 import jasm.gen.AssemblerGenerator;
 import jasm.gen.Assembly;
 import jasm.gen.ImmediateArgument;
@@ -20,7 +21,6 @@ import jasm.gen.risc.field.OperandField;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.Sequence;
 import com.sun.max.io.IndentWriter;
-import com.sun.max.lang.Ints;
 import com.sun.max.program.ProgramError;
 
 /**

@@ -2,7 +2,9 @@
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
 /*VCSID=8ef1462b-2a0e-4a7e-a9bc-c42be24dc3be*/
-package com.sun.max.lang;
+package jasm.util;
+
+import com.sun.max.lang.Strings;
 
 /**
  * Additonal methods that one might want in java.lang.Integer
@@ -25,18 +27,18 @@ public final class Ints {
         }
         return -1;
     }
-    
+
     public static int numberOfEffectiveSignedBits(int signed) {
         if (signed >= 0) {
             return 33 - Integer.numberOfLeadingZeros(signed);
         }
         return 33 - Integer.numberOfLeadingZeros(~signed);
     }
-    
+
     public static int numberOfEffectiveUnsignedBits(int unsigned) {
         return 32 - Integer.numberOfLeadingZeros(unsigned);
     }
-    
+
     public static int log2(int n) {
         if (n <= 0) {
             throw new ArithmeticException();
@@ -54,11 +56,11 @@ public final class Ints {
         }
         return value + (by - rest);
     }
-    
+
     public static String toHexLiteral(int value) {
         return "0x" + String.format("%08X", value);
     }
-    
+
     public static String toPaddedHexString(int n, char pad) {
         final String s = Integer.toHexString(n);
         return Strings.times(pad, 8 - s.length()) + s;
@@ -72,22 +74,22 @@ public final class Ints {
         }
         return false;
     }
-    
+
     public static int[] append(int[] array, int element) {
         final int resultLength = array.length + 1;
         final int[] result = new int[resultLength];
         System.arraycopy(array, 0, result, 0, array.length);
         result[array.length] = element;
-        return result;        
+        return result;
     }
-    
+
     public static int[] append(int[] head, int[] tail) {
         final int[] result = new int[head.length + tail.length];
         System.arraycopy(head, 0, result, 0, head.length);
         System.arraycopy(tail, 0, result, head.length, tail.length);
         return result;
     }
-    
+
     public static int[] createRange(int first, int last) {
         if (first > last) {
             throw new IllegalArgumentException();
@@ -99,13 +101,13 @@ public final class Ints {
         }
         return result;
     }
-    
+
     public static void copyAll(int[] fromArray, int[] toArray) {
         for (int i = 0; i < fromArray.length; i++) {
             toArray[i] = fromArray[i];
         }
     }
-    
+
     /**
      * Returns a string representation of the contents of the specified array.
      * Adjacent elements are separated by the specified separator. Elements are
@@ -123,15 +125,15 @@ public final class Ints {
         if (array.length == 0) {
             return "";
         }
- 
+
         final StringBuilder buf = new StringBuilder();
         buf.append(array[0]);
- 
+
         for (int i = 1; i < array.length; i++) {
             buf.append(separator);
             buf.append(array[i]);
         }
- 
+
         return buf.toString();
     }
 

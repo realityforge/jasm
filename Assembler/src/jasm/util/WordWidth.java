@@ -4,9 +4,6 @@
 /*VCSID=965daa4f-e3d7-4169-8512-ed72cd296924*/
 package jasm.util;
 
-import com.sun.max.lang.Ints;
-import com.sun.max.lang.Longs;
-
 /**
  * A word width value describes many bits there are in a machine word.
  *
