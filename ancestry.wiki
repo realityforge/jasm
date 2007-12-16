@@ -1,0 +1,6 @@
+#summary Ancestry of jasm
+#labels Phase-Requirements
+
+= Ancestry =
+
+The jasm assembler framework started out by cloning the [https://maxwellassembler.dev.java.net/ Project Maxwell Assembler Framework], which in turn started out by copying the Java version of the Klein assembly framework, which is based on the original Self version of the Klein assembly framework.
