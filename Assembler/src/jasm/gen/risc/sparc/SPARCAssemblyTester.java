@@ -5,13 +5,13 @@
 package jasm.gen.risc.sparc;
 
 import jasm.Argument;
+import jasm.util.WordWidth;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.risc.RiscAssemblyTester;
 import com.sun.max.collect.Sequence;
 import com.sun.max.io.IndentWriter;
 import com.sun.max.lang.Endianness;
-import com.sun.max.lang.WordWidth;
 import com.sun.max.program.ProgramError;
 import java.io.IOException;
 import java.io.InputStream;

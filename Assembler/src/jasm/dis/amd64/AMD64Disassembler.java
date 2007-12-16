@@ -6,6 +6,7 @@ package jasm.dis.amd64;
 
 import jasm.Argument;
 import jasm.Assembler;
+import jasm.util.WordWidth;
 import jasm.amd64.AMD64Assembler;
 import jasm.dis.x86.X86Disassembler;
 import jasm.dis.x86.X86InstructionHeader;
@@ -14,7 +15,6 @@ import jasm.gen.cisc.amd64.AMD64Template;
 import jasm.gen.cisc.x86.X86Opcode;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.lang.WordWidth;
 import com.sun.max.util.HexByte;
 import java.util.Map;
 

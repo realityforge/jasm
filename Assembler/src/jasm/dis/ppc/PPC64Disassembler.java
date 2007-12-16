@@ -10,7 +10,7 @@ import jasm.gen.risc.ppc.PPCAssembly;
 import jasm.gen.risc.ppc.PPCTemplate;
 import jasm.ppc.PPC64Assembler;
 import com.sun.max.collect.Sequence;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 
 /**
  *

@@ -5,6 +5,7 @@
 package jasm.gen.cisc.amd64;
 
 import jasm.Argument;
+import jasm.util.WordWidth;
 import jasm.amd64.AMD64BaseRegister32;
 import jasm.amd64.AMD64BaseRegister64;
 import jasm.amd64.AMD64GeneralRegister16;
@@ -42,7 +43,6 @@ import jasm.x86.MMXRegister;
 import jasm.x86.Scale;
 import jasm.x86.SegmentRegister;
 import com.sun.max.collect.Sequence;
-import com.sun.max.lang.WordWidth;
 import com.sun.max.program.ProgramError;
 
 /**

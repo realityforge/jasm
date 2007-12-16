@@ -8,7 +8,7 @@ import jasm.gen.cisc.x86.InstructionAssessment;
 import jasm.gen.cisc.x86.X86InstructionDescription;
 import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.gen.cisc.x86.X86TemplateCreator;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 
 /**
  * @author Bernd Mathiske

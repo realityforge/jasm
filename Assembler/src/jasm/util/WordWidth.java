@@ -2,12 +2,14 @@
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
 /*VCSID=965daa4f-e3d7-4169-8512-ed72cd296924*/
-package com.sun.max.lang;
+package jasm.util;
 
+import com.sun.max.lang.Ints;
+import com.sun.max.lang.Longs;
 
 /**
  * A word width value describes many bits there are in a machine word.
- * 
+ *
  * @author Bernd Mathiske
  */
 public enum WordWidth {
@@ -44,27 +46,27 @@ public enum WordWidth {
     public long min() {
         return _min;
     }
-    
+
     public long max() {
         return _max;
     }
-    
+
     public boolean lessThan(WordWidth other) {
         return numberOfBits() < other.numberOfBits();
     }
-    
+
     public boolean lessEqual(WordWidth other) {
         return numberOfBits() <= other.numberOfBits();
     }
-    
+
     public boolean greaterThan(WordWidth other) {
         return numberOfBits() > other.numberOfBits();
     }
-    
+
     public boolean greaterEqual(WordWidth other) {
         return numberOfBits() >= other.numberOfBits();
     }
-    
+
     @Override
     public String toString() {
         return Integer.toString(_nBits);
@@ -82,7 +84,7 @@ public enum WordWidth {
         }
         return WordWidth.BITS_64;
     }
-    
+
     /**
      * @return which word width is minimally required to represent all the non-one bits in the signed argument, and a sign bit
      */

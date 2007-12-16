@@ -5,8 +5,8 @@
 package jasm.gen.cisc.x86;
 
 import jasm.gen.InstructionDescription;
+import jasm.util.WordWidth;
 import com.sun.max.collect.MutableSequence;
-import com.sun.max.lang.WordWidth;
 
 /**
  * @author Bernd Mathiske

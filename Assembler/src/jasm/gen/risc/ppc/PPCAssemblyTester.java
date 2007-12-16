@@ -11,7 +11,7 @@ import jasm.gen.risc.RiscAssemblyTester;
 import com.sun.max.collect.Sequence;
 import com.sun.max.io.IndentWriter;
 import com.sun.max.lang.Endianness;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;

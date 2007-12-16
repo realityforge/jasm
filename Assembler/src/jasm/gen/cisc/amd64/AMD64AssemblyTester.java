@@ -6,6 +6,7 @@ package jasm.gen.cisc.amd64;
 
 import jasm.Argument;
 import jasm.Assembler;
+import jasm.util.WordWidth;
 import jasm.amd64.AMD64Assembler;
 import jasm.amd64.AMD64GeneralRegister8;
 import jasm.amd64.AMD64XMMRegister;
@@ -15,7 +16,6 @@ import jasm.gen.AssemblyTestComponent;
 import jasm.gen.cisc.x86.X86AssemblyTester;
 import jasm.x86.GeneralRegister;
 import com.sun.max.collect.Sequence;
-import com.sun.max.lang.WordWidth;
 import java.util.EnumSet;
 
 /**
@@ -52,7 +52,8 @@ public class AMD64AssemblyTester extends X86AssemblyTester<AMD64Template, AMD64D
                     if (template.hasRexPrefix(arguments)) {
                         return false;
                     }
-                } else if (generalRegister8.value() >= 4 && externalCodeSizeAttribute != null && externalCodeSizeAttribute.lessThan(WordWidth.BITS_64)) {
+                } else if (generalRegister8.value() >= 4 && externalCodeSizeAttribute != null && externalCodeSizeAttribute.lessThan(
+                    WordWidth.BITS_64)) {
                     return false;
                 }
             } else if (externalCodeSizeAttribute != null && externalCodeSizeAttribute.lessThan(WordWidth.BITS_64)) {

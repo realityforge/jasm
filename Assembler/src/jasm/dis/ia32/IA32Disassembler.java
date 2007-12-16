@@ -6,6 +6,7 @@ package jasm.dis.ia32;
 
 import jasm.Argument;
 import jasm.Assembler;
+import jasm.util.WordWidth;
 import jasm.dis.x86.X86Disassembler;
 import jasm.dis.x86.X86InstructionHeader;
 import jasm.gen.cisc.ia32.IA32Assembly;
@@ -13,7 +14,6 @@ import jasm.gen.cisc.ia32.IA32Template;
 import jasm.ia32.IA32Assembler;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.lang.WordWidth;
 import com.sun.max.util.HexByte;
 import java.util.Map;
 

@@ -10,7 +10,7 @@ import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 import com.sun.max.util.HexByte;
 import java.util.HashMap;
 import java.util.Map;

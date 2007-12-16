@@ -74,7 +74,7 @@ import static jasm.gen.cisc.x86.X86Opcode.REPNE;
 import static jasm.gen.cisc.x86.X86Opcode.SEG_CS;
 import static jasm.gen.cisc.x86.X86Opcode.SEG_FS;
 import static jasm.gen.cisc.x86.X86Opcode.SEG_GS;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 import static com.sun.max.util.HexByte._00;
 import static com.sun.max.util.HexByte._01;
 import static com.sun.max.util.HexByte._02;

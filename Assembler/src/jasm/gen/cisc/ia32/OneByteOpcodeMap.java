@@ -87,7 +87,7 @@ import static jasm.x86.SegmentRegister.CS;
 import static jasm.x86.SegmentRegister.DS;
 import static jasm.x86.SegmentRegister.ES;
 import static jasm.x86.SegmentRegister.SS;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 import static com.sun.max.util.HexByte._00;
 import static com.sun.max.util.HexByte._01;
 import static com.sun.max.util.HexByte._02;

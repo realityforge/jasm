@@ -5,7 +5,7 @@
 /* VCSID=a5b1da0c-ba1a-4c30-89a6-ad3e43802e06 */
 package jasm;
 
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 
 /**
  * Interface for target code edition. Currently, used by the JIT only, for template-based code generation.

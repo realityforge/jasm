@@ -15,9 +15,9 @@ import jasm.gen.cisc.x86.X86Opcode;
 import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
+import jasm.util.WordWidth;
 import com.sun.max.io.IndentWriter;
 import com.sun.max.lang.Bytes;
-import com.sun.max.lang.WordWidth;
 import com.sun.max.program.ProgramError;
 
 /**

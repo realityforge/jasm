@@ -5,6 +5,7 @@
 package jasm.gen.cisc.x86;
 
 import jasm.EnumerableArgument;
+import jasm.util.WordWidth;
 import jasm.gen.ArgumentRange;
 import jasm.gen.Immediate8Argument;
 import jasm.gen.ImplicitOperand;
@@ -19,7 +20,6 @@ import jasm.x86.SegmentRegister;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.lang.WordWidth;
 import com.sun.max.program.ProgramError;
 import com.sun.max.program.Trace;
 import com.sun.max.util.Enumerator;

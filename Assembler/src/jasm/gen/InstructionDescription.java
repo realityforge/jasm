@@ -7,9 +7,9 @@ package jasm.gen;
 import jasm.gen.cisc.x86.X86InstructionDescriptionVisitor;
 import jasm.gen.risc.RiscInstructionDescriptionVisitor;
 import jasm.gen.risc.field.InputOperandField;
+import jasm.util.WordWidth;
 import com.sun.max.collect.MutableSequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.lang.WordWidth;
 import com.sun.max.program.ProgramError;
 import java.util.Iterator;
 

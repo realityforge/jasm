@@ -6,7 +6,7 @@ package jasm.amd64;
 
 import jasm.AssemblyException;
 import jasm.AssemblyInstructionEditor;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 
 /**
  * Facility to patch AMD64 assembly instructions.

@@ -5,13 +5,13 @@
 package jasm.gen.risc;
 
 import jasm.Argument;
+import jasm.util.WordWidth;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.Assembly;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.AssemblyTester;
 import jasm.gen.InstructionConstraint;
 import com.sun.max.collect.Sequence;
-import com.sun.max.lang.WordWidth;
 import java.io.IOException;
 import java.io.PushbackInputStream;
 import java.util.EnumSet;

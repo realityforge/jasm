@@ -5,7 +5,7 @@
 package jasm.gen;
 
 import jasm.Argument;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 
 /**
  * @author Bernd Mathiske

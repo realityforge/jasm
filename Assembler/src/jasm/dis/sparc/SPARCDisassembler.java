@@ -9,7 +9,7 @@ import jasm.dis.risc.RiscDisassembler;
 import jasm.gen.risc.sparc.SPARCAssembly;
 import jasm.gen.risc.sparc.SPARCTemplate;
 import com.sun.max.lang.Endianness;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 
 /**
  *

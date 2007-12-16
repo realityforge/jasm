@@ -6,7 +6,7 @@ package jasm.amd64;
 
 import jasm.x86.GeneralRegister;
 import jasm.x86.IndirectRegister;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 import com.sun.max.util.Enumerator;
 
 /**

@@ -5,7 +5,7 @@
 package jasm.gen.cisc;
 
 import jasm.gen.Parameter;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 
 /**
  * @author Bernd Mathiske

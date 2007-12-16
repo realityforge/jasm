@@ -9,7 +9,7 @@ import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.IdentityHashSet;
 import com.sun.max.collect.Sequence;
 import com.sun.max.lang.Longs;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 import com.sun.max.program.ProgramError;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

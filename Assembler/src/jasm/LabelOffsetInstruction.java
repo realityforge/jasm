@@ -7,7 +7,7 @@ package jasm;
 import com.sun.max.collect.Enums;
 import com.sun.max.collect.Sequence;
 import com.sun.max.lang.Ints;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 
 /**
  * @author Bernd Mathiske

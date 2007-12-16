@@ -6,11 +6,11 @@ package jasm.dis.sparc;
 
 import jasm.Argument;
 import jasm.Assembler;
+import jasm.util.WordWidth;
 import jasm.gen.risc.sparc.SPARCAssembly;
 import jasm.gen.risc.sparc.SPARCTemplate;
 import jasm.sparc.SPARC32Assembler;
 import com.sun.max.collect.Sequence;
-import com.sun.max.lang.WordWidth;
 
 /**
  *

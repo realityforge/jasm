@@ -17,7 +17,7 @@ import com.sun.max.collect.MutableSequence;
 import com.sun.max.collect.Sequence;
 import com.sun.max.lang.Endianness;
 import com.sun.max.lang.Strings;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 import com.sun.max.program.ProgramError;
 import java.io.BufferedInputStream;
 import java.io.IOException;

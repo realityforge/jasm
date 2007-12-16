@@ -6,10 +6,10 @@ package jasm.gen.cisc.x86;
 
 import jasm.gen.InstructionDescription;
 import jasm.gen.InstructionDescriptionCreator;
+import jasm.util.WordWidth;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.lang.WordWidth;
 import com.sun.max.program.Trace;
 
 /**

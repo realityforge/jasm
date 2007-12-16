@@ -10,7 +10,7 @@ import jasm.gen.risc.sparc.SPARCAssembly;
 import jasm.gen.risc.sparc.SPARCTemplate;
 import jasm.sparc.SPARC64Assembler;
 import com.sun.max.collect.Sequence;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 
 /**
  *

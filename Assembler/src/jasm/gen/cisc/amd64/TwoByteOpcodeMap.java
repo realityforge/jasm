@@ -68,7 +68,7 @@ import jasm.gen.cisc.x86.X86InstructionDescriptionCreator;
 import jasm.gen.cisc.x86.X86TemplateContext;
 import static jasm.x86.SegmentRegister.FS;
 import static jasm.x86.SegmentRegister.GS;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 import static com.sun.max.util.HexByte._00;
 import static com.sun.max.util.HexByte._01;
 import static com.sun.max.util.HexByte._02;

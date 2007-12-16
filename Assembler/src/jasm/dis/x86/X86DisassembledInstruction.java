@@ -24,7 +24,7 @@ import jasm.x86.Scale;
 import com.sun.max.collect.MutableQueue;
 import com.sun.max.collect.Sequence;
 import com.sun.max.lang.Strings;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 import java.util.Queue;
 
 /**

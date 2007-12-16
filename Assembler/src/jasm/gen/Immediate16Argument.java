@@ -4,7 +4,7 @@
 /*VCSID=afea3aff-700a-4ef4-be3d-339ff3dd69a1*/
 package jasm.gen;
 
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 
 /**
  * @author Bernd Mathiske

@@ -5,7 +5,7 @@
 package jasm.x86;
 
 import jasm.EnumerableArgument;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 
 /**
  * @author Bernd Mathiske

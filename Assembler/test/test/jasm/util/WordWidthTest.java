@@ -2,13 +2,13 @@
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
 /*VCSID=090d5e65-4339-427c-8b8e-157042710938*/
-package test.com.sun.max.lang;
+package test.jasm.util;
 
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 import junit.framework.TestCase;
 
 /**
- * Tests for {@link Objects}.
+ * Tests for {@link jasm.util.WordWidth}.
  *
  * @author Hiroshi Yamauchi
  */

@@ -5,7 +5,7 @@
 package jasm.gen.cisc.x86;
 
 import jasm.gen.AddressParameter;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 
 /**
  * @author Bernd Mathiske

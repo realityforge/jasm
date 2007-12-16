@@ -8,8 +8,8 @@ import jasm.dis.DisassembledInstruction;
 import jasm.dis.risc.RiscDisassembler;
 import jasm.gen.risc.ppc.PPCAssembly;
 import jasm.gen.risc.ppc.PPCTemplate;
+import jasm.util.WordWidth;
 import com.sun.max.lang.Endianness;
-import com.sun.max.lang.WordWidth;
 
 /**
  *

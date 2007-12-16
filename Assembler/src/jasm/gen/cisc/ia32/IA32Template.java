@@ -34,7 +34,7 @@ import jasm.x86.DebugRegister;
 import jasm.x86.MMXRegister;
 import jasm.x86.Scale;
 import jasm.x86.SegmentRegister;
-import com.sun.max.lang.WordWidth;
+import jasm.util.WordWidth;
 import com.sun.max.program.ProgramError;
 
 /**
