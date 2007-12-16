@@ -1,0 +1,44 @@
+<project name="jasm" default="main" basedir=".">
+
+  <property name="base.main.src.java" location="Base/src"/>
+  <property name="base.test.src.java" location="Base/test"/>
+  <property name="assembler.main.src.java" location="Assembler/src"/>
+  <property name="assembler.test.src.java" location="Assembler/test"/>
+
+  <property name="junit.jar" location="lib/junit-4.4.jar"/>
+
+  <property name="output.dir" location="target"/>
+  <property name="output.main.classes" location="${output.dir}/main-classes"/>
+  <property name="output.test.classes" location="${output.dir}/test-classes"/>
+  <property name="output.jar" location="${output.dir}/jasm.jar"/>
+
+  <target name="clean" description="Clean the output directory">
+    <delete dir="target"/>
+  </target>
+
+  <target name="compile" description="Compile the code">
+    <mkdir dir="${output.main.classes}"/>
+    <javac srcdir="${base.main.src.java}:${assembler.main.src.java}"
+           destdir="${output.main.classes}"
+           debug="true"
+           deprecation="true"
+           optimize="false"/>
+  </target>
+
+  <target name="compile-tests" depends="compile" description="Compile the code">
+    <mkdir dir="${output.test.classes}"/>
+    <javac srcdir="${base.test.src.java}:${assembler.test.src.java}"
+           destdir="${output.test.classes}"
+           classpath="${junit.jar}"
+           debug="true"
+           deprecation="true"
+           optimize="false"/>
+  </target>
+
+  <target name="package" depends="compile" description="Package the code">
+    <jar jarfile="${output.jar}" basedir="${output.main.classes}"/>
+  </target>
+
+  <target name="main" depends="package" description="Compile, package and test the code"/>
+
+</project>
