@@ -8,12 +8,8 @@
  */
 package com.sun.max.collect;
 
-import com.sun.max.lang.StaticLoophole;
 import com.sun.max.util.Predicate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * A Sequence presents an immutable view of a linear collection.

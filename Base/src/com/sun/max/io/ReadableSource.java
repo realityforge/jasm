@@ -8,12 +8,8 @@
  */
 package com.sun.max.io;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.io.StringReader;
 
 /**
  * A readable source is a character data source that provides a Reader to read the data.
