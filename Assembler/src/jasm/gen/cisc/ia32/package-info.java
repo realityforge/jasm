@@ -1,11 +1,14 @@
 /*
- * Copyright (c) 2005 Sun Microsystems, Inc.  All rights reserved.  U.S. Government Rights - Commercial software.
- * Government users are subject to the Sun Microsystems, Inc. standard license agreement and applicable provisions
- * of the FAR and its supplements. Use is subject to license terms. Sun, Sun Microsystems, the Sun logo and
- * Java are trademarks or registered trademarks of Sun Microsystems, Inc. in the U.S. and other countries. All SPARC
- * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
- * U.S. and other countries.
+ *  This file is part of the jasm project (http://code.google.com/p/jasm).
+ *
+ *  This file is licensed to you under the BSD License; You may not use
+ *  this file except in compliance with the License. See the LICENSE.txt
+ *  file distributed with this work for a copy of the License.
+ *
+ *  See the COPYRIGHT.txt file distributed with this work for information
+ *  regarding copyright ownership.
  */
+
 /**
  * IA32 instruction assembly template instruction format specifications and construction
  *
