@@ -14,7 +14,7 @@ import com.sun.max.collect.*;
 
 /**
  * A field that contains an immediate value.
- * 
+ *
  * @author Bernd Mathiske
  * @author Doug Simon
  * @author Dave Ungar
@@ -22,24 +22,20 @@ import com.sun.max.collect.*;
  */
 public class ImmediateOperandField extends OperandField<ImmediateArgument> implements ImmediateParameter, WrappableSpecification, InstructionConstraint {
 
-    @Implement(InstructionConstraint.class)
     public String asJavaExpression() {
         final String value = valueString();
         return minArgumentValue() + " <= " + value + " && " + value + " <= " + maxArgumentValue();
     }
 
-    @Implement(InstructionConstraint.class)
     public boolean check(Template template, Sequence<Argument> arguments) {
         final long value = evaluate(template, arguments);
         return minArgumentValue() <= value && value <= maxArgumentValue();
     }
 
-    @Implement(InstructionConstraint.class)
     public Method predicateMethod() {
         return null;
     }
 
-    @Implement(InstructionConstraint.class)
     public boolean referencesParameter(Parameter parameter) {
         return parameter == this;
     }
@@ -51,11 +47,11 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
     public static ImmediateOperandField createDescending(int firstBitIndex, int lastBitIndex) {
         return new ImmediateOperandField(new DescendingBitRange(firstBitIndex, lastBitIndex));
     }
-    
+
     public static ImmediateOperandField createAscending(int firstBitIndex, int lastBitIndex) {
         return new ImmediateOperandField(new AscendingBitRange(firstBitIndex, lastBitIndex));
     }
-    
+
     public static ImmediateOperandField createAscending(int... bits) {
         final BitRange bitRange = BitRange.create(bits, BitRangeOrder.ASCENDING);
         return new ImmediateOperandField(bitRange);
@@ -65,21 +61,20 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
     public Class type() {
         return int.class;
     }
-    
-    @Implement(Parameter.class)
+
     public String valueString() {
         if (boundTo() != null) {
             return boundTo().valueString();
         }
         return variableName();
     }
-    
-    @Override 
+
+    @Override
     public ImmediateOperandField beSigned() {
         return (ImmediateOperandField) super.beSigned();
     }
 
-    @Override 
+    @Override
     public ImmediateOperandField beSignedOrUnsigned() {
         return (ImmediateOperandField) super.beSignedOrUnsigned();
     }
@@ -88,34 +83,31 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
     public Immediate32Argument disassemble(int instruction) {
         return new Immediate32Argument(extract(instruction));
     }
-    
+
     @Override
     public ImmediateOperandField setVariableName(String name) {
         super.setVariableName(name);
         return this;
     }
-    
+
     private ArgumentRange _argumentRange;
-    
-    @Implement(Parameter.class)
+
     public ArgumentRange argumentRange() {
         if (_argumentRange == null) {
             _argumentRange = new ArgumentRange(this, minArgumentValue(), maxArgumentValue());
         }
         return _argumentRange;
     }
-    
+
     private Iterable<? extends Argument> _testArguments;
     private Iterable<? extends Argument> _illegalTestArguments;
-    
+
     private static final MapFunction<Integer, Immediate32Argument> ARGUMENT_WRAPPER = new MapFunction<Integer, Immediate32Argument>() {
-        @Implement(MapFunction.class)
         public Immediate32Argument map(Integer integer) {
             return new Immediate32Argument(integer);
         }
     };
-    
-    @Implement(Parameter.class)
+
     public Iterable<? extends Argument> getLegalTestArguments() {
         if (_testArguments == null) {
             final Sequence<Integer> integers = signDependentOperations().legalTestArgumentValues(minArgumentValue(), maxArgumentValue(), grain());
@@ -124,7 +116,6 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
         return _testArguments;
     }
 
-    @Implement(Parameter.class)
     public Iterable<? extends Argument> getIllegalTestArguments() {
         if (_illegalTestArguments == null) {
             final AppendableSequence<Immediate32Argument> illegalTestArguments = new ArrayListSequence<Immediate32Argument>(4);
@@ -143,7 +134,6 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
         return _illegalTestArguments;
     }
 
-    @Implement(WrappableSpecification.class)
     public TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
         return TestArgumentExclusion.NONE;
     }

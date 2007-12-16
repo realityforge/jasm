@@ -9,7 +9,7 @@ import com.sun.max.asm.*;
 
 /**
  * The concrete class for a 64-bit PowerPC assembler.
- * 
+ *
  * @author Bernd Mathiske
  */
 public class PPC64Assembler extends PPCAssembler implements Assembler64 {
@@ -23,22 +23,18 @@ public class PPC64Assembler extends PPCAssembler implements Assembler64 {
         _startAddress = startAddress;
     }
 
-    @Implement(Assembler64.class)
     public long startAddress() {
         return _startAddress;
     }
 
-    @Implement(Assembler64.class)
     public void setStartAddress(long address) {
         _startAddress = address;
     }
-    
-    @Implement(Assembler64.class)
+
     public void fixLabel(Label label, long address) {
         fixLabel64(label, address);
     }
-    
-    @Implement(Assembler64.class)
+
     public long address(Label label) throws AssemblyException {
         return address64(label);
     }

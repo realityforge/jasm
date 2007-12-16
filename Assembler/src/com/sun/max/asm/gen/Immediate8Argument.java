@@ -14,7 +14,7 @@ import com.sun.max.lang.*;
 public class Immediate8Argument extends ImmediateArgument {
 
     private byte _value;
-    
+
     public Immediate8Argument(byte value) {
         _value = value;
     }
@@ -23,22 +23,19 @@ public class Immediate8Argument extends ImmediateArgument {
     public WordWidth width() {
         return WordWidth.BITS_8;
     }
-    
+
     public byte value() {
         return _value;
     }
-    
-    @Implement(Argument.class)
+
     public long asLong() {
         return value();
     }
 
-    @Implement(Argument.class)
     public String externalValue() {
         return "0x" + Integer.toHexString(_value & 0xff);
-    }    
+    }
 
-    @Implement(Argument.class)
     public String disassembledValue() {
         return "0x" + String.format("%X", _value);
     }
@@ -46,7 +43,7 @@ public class Immediate8Argument extends ImmediateArgument {
     @Override
     public String signedExternalValue() {
         return Integer.toString(_value);
-    }    
+    }
 
     @Override
     public Object boxedJavaValue() {
@@ -61,7 +58,7 @@ public class Immediate8Argument extends ImmediateArgument {
         }
         return false;
     }
-    
+
     @Override
     public int hashCode() {
         return _value;

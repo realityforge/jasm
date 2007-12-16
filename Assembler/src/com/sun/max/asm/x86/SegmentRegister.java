@@ -19,32 +19,27 @@ public enum SegmentRegister implements EnumerableArgument<SegmentRegister> {
     DS,
     FS,
     GS;
-    
-    @Implement(Symbol.class)
+
     public int value() {
         return ordinal();
     }
-        
-    @Implement(Argument.class)
+
     public long asLong() {
         return value();
     }
 
-    @Implement(Argument.class)
     public String externalValue() {
         return "%" + name().toLowerCase();
     }
-    
-    @Implement(Argument.class)
+
     public String disassembledValue() {
         return name().toLowerCase();
     }
 
-    @Implement(Enumerable.class)
     public Enumerator<SegmentRegister> enumerator() {
         return ENUMERATOR;
     }
-    
+
     public static final Enumerator<SegmentRegister> ENUMERATOR = new Enumerator<SegmentRegister>(SegmentRegister.class);
 
 }

@@ -28,7 +28,7 @@ public class SymbolicOperandField<Argument_Type extends SymbolicArgument> extend
         assert symbolizer != null;
         _symbolizer = symbolizer;
     }
-    
+
     public static <Argument_Type extends SymbolicArgument> SymbolicOperandField<Argument_Type> createAscending(Symbolizer<Argument_Type> symbolizer, int... bits) {
         final BitRange bitRange = BitRange.create(bits, BitRangeOrder.ASCENDING);
         return new SymbolicOperandField<Argument_Type>(bitRange, symbolizer);
@@ -51,20 +51,19 @@ public class SymbolicOperandField<Argument_Type extends SymbolicArgument> extend
     public RiscConstant constant(Argument_Type argument) {
         return new RiscConstant(new ConstantField(name(), bitRange()), argument);
     }
-    
+
     @Override
     public Class type() {
         return _symbolizer.type();
     }
 
-    @Implement(Parameter.class)
     public String valueString() {
         if (boundTo() != null) {
             return boundTo().valueString();
         }
         return variableName() + ".value()";
     }
-    
+
     public int assemble(Argument_Type argument) throws AssemblyException {
         return bitRange().assembleUncheckedUnsignedInt(argument.value());
     }
@@ -80,17 +79,14 @@ public class SymbolicOperandField<Argument_Type extends SymbolicArgument> extend
         return this;
     }
 
-    @Implement(Parameter.class)
     public ArgumentRange argumentRange() {
         return null;
     }
-    
-    @Implement(Parameter.class)
+
     public Iterable<? extends Argument> getLegalTestArguments() {
         return _symbolizer;
     }
 
-    @Implement(Parameter.class)
     public Iterable<? extends Argument> getIllegalTestArguments() {
         return Iterables.empty();
     }
@@ -100,8 +96,7 @@ public class SymbolicOperandField<Argument_Type extends SymbolicArgument> extend
         final Class<SymbolicOperandField<Argument_Type>> type = null;
         return StaticLoophole.cast(type, super.withExcludedExternalTestArguments(arguments));
     }
-    
-    @Implement(WrappableSpecification.class)
+
     public TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
         return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, this, Sets.from(arguments));
     }

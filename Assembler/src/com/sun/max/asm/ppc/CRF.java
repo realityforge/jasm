@@ -11,7 +11,7 @@ import com.sun.max.util.*;
 /**
  * The constants denoting the eight 4-bit fields into which the 32-bit Condition Register
  * is logically partitioned.
- * 
+ *
  * @author Bernd Mathiske
  * @author Doug Simon
  */
@@ -25,36 +25,31 @@ public enum CRF implements EnumerableArgument<CRF> {
     public static boolean isExactlyOneCRFSelected(int mask) {
         return (mask & (mask - 1)) == 0 && mask > 0 && mask <= 128;
     }
-    
-    @Implement(Symbol.class)
+
     public int value() {
         return ordinal();
     }
-    
-    @Implement(Argument.class)
+
     public long asLong() {
         return value();
     }
 
-    @Implement(Argument.class)
     public String externalValue() {
         return Integer.toString(ordinal());
     }
-    
-    @Implement(Argument.class)
+
     public String disassembledValue() {
         return externalValue();
     }
 
-    @Implement(Enumerable.class)
     public Enumerator<CRF> enumerator() {
         return ENUMERATOR;
     }
-    
+
     /**
      * Given the index of a bit within this 4-bit field, returns the index of the same bit
      * in the 32-bit Condition Register.
-     * 
+     *
      * @throws IllegalArgumentException if n is not between 0 and 3 inclusive
      */
     public int bitFor(int n) {
@@ -63,28 +58,28 @@ public enum CRF implements EnumerableArgument<CRF> {
         }
         return ordinal() * 4 + n;
     }
-    
+
     /**
      * @return the index of the bit within the 32-bit Condition Register corresponding to the <i>less than</i> bit in this Condition Register field
      */
     public int lt() {
         return bitFor(LT);
     }
-    
+
     /**
      * @return the index of the bit within the 32-bit Condition Register corresponding to the <i>greater than</i> bit in this Condition Register field
      */
     public int gt() {
         return bitFor(GT);
     }
-    
+
     /**
      * @return the index of the bit within the 32-bit Condition Register corresponding to the <i>equal</i> bit in this Condition Register field
      */
     public int eq() {
         return bitFor(EQ);
     }
-    
+
     /**
      * @return the index of the bit within the 32-bit Condition Register corresponding to the <i>summary overflow</i> bit in this Condition Register field
      */
@@ -123,8 +118,8 @@ public enum CRF implements EnumerableArgument<CRF> {
      * Index of the bit in a 4-bit Condition Register field indicating an <i>unordered (after floating-point comparison)</i> condition.
      */
     public static final int UN = 3;
-    
-    
+
+
     public static final Enumerator<CRF> ENUMERATOR = new Enumerator<CRF>(CRF.class);
-    
+
 }

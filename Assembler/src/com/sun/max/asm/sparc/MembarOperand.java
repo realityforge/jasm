@@ -18,33 +18,33 @@ import com.sun.max.util.*;
  * @author Doug Simon
  */
 public final class MembarOperand extends AbstractSymbolicArgument {
-    
+
     private String _externalName;
-    
+
     private MembarOperand(String name, String externalName, int value) {
         super(name, value);
         _externalName = externalName;
     }
-    
+
     private MembarOperand(MembarOperand addend1, MembarOperand addend2) {
         super(addend1.name() + "_" + addend2.name(), addend1.value() | addend2.value());
         _externalName = addend1._externalName + " | " + addend2._externalName;
     }
-    
+
     @Override
     public String externalValue() {
         return _externalName;
-    }    
-    
+    }
+
     @Override
     public String toString() {
         return externalValue();
     }
-    
+
     public MembarOperand or(MembarOperand other) {
         return new MembarOperand(this, other);
     }
-    
+
     public static final MembarOperand NO_MEMBAR = new MembarOperand("None", "0", 0);
     public static final MembarOperand LOAD_LOAD = new MembarOperand("LoadLoad", "#LoadLoad", 1);
     public static final MembarOperand STORE_LOAD = new MembarOperand("StoreLoad", "#StoreLoad", 2);
@@ -53,17 +53,15 @@ public final class MembarOperand extends AbstractSymbolicArgument {
     public static final MembarOperand LOOKASIDE = new MembarOperand("Lookaside", "#Lookaside", 16);
     public static final MembarOperand MEM_ISSUE = new MembarOperand("MemIssue", "#MemIssue", 32);
     public static final MembarOperand SYNC = new MembarOperand("Sync", "#Sync", 64);
-    
+
     public static final Symbolizer<MembarOperand> SYMBOLIZER = new Symbolizer<MembarOperand>() {
-        
+
         private final Sequence<MembarOperand> _values = new ArraySequence<MembarOperand>(new MembarOperand[]{NO_MEMBAR, LOAD_LOAD, STORE_LOAD, LOAD_STORE, STORE_STORE, LOOKASIDE, MEM_ISSUE, SYNC});
 
-        @Implement(Symbolizer.class)
         public Class<MembarOperand> type() {
             return MembarOperand.class;
         }
-        
-        @Implement(Symbolizer.class)
+
         public MembarOperand fromValue(int value) {
             MembarOperand result = NO_MEMBAR;
             for (MembarOperand operand : _values) {
@@ -77,11 +75,10 @@ public final class MembarOperand extends AbstractSymbolicArgument {
             }
             return result;
         }
-        
-        @Implement(Iterable.class)
+
         public Iterator<MembarOperand> iterator() {
             return _values.iterator();
         }
     };
-    
+
 }

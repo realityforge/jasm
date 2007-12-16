@@ -17,59 +17,45 @@ import com.sun.max.util.*;
  */
 public class X86InstructionDescriptionAdapter implements X86InstructionDescriptionVisitor {
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitOperandCode(OperandCode operandCode, X86Operand.Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) throws TemplateNotNeededException {
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
-    public void visitAddressingMethodCode(AddressingMethodCode addressingMethodCode, X86Operand.Designation designation) {        
+    public void visitAddressingMethodCode(AddressingMethodCode addressingMethodCode, X86Operand.Designation designation) {
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
-    public void visitOperandTypeCode(OperandTypeCode operandTypeCode) {        
+    public void visitOperandTypeCode(OperandTypeCode operandTypeCode) {
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, X86Operand.Designation designation, ImplicitOperand.ExternalPresence externalPresence) {
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitGeneralRegister(GeneralRegister generalRegister, X86Operand.Designation designation, ImplicitOperand.ExternalPresence externalPresence) {
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitSegmentRegister(SegmentRegister segmentRegister, X86Operand.Designation designation) {
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitModRMGroup(ModRMGroup modRMGroup) {
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
-    public void visitModCase(X86TemplateContext.ModCase modCase) throws TemplateNotNeededException {        
+    public void visitModCase(X86TemplateContext.ModCase modCase) throws TemplateNotNeededException {
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
-    public void visitFloatingPointOperandCode(FloatingPointOperandCode floatingPointOperandCode, X86Operand.Designation designation, TestArgumentExclusion testArgumentExclusion) {     
-    }
-    
-    @Implement(X86InstructionDescriptionVisitor.class)
-    public void visitFPStackRegister(FPStackRegister fpStackRegister, X86Operand.Designation designation) {        
+    public void visitFloatingPointOperandCode(FloatingPointOperandCode floatingPointOperandCode, X86Operand.Designation designation, TestArgumentExclusion testArgumentExclusion) {
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
+    public void visitFPStackRegister(FPStackRegister fpStackRegister, X86Operand.Designation designation) {
+    }
+
     public void visitString(String string) {
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitInteger(Integer integer, X86Operand.Designation designation) {
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitHexByte(HexByte hexByte) {
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitInstructionConstraint(InstructionConstraint constraint) {
     }
 }

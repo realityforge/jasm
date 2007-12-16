@@ -24,18 +24,17 @@ public enum FloatingPointOperandCode implements WrappableSpecification {
     extended_real("t"),
     packed_bcd(""),
     ST_i("");
-    
+
     private final String _operandTypeSuffix;
-    
+
     private FloatingPointOperandCode(String operandTypeSuffix) {
         _operandTypeSuffix = operandTypeSuffix;
     }
-    
+
     public String operandTypeSuffix() {
         return _operandTypeSuffix;
     }
 
-    @Implement(WrappableSpecification.class)
     public TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
         return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, this, Sets.from(arguments));
     }

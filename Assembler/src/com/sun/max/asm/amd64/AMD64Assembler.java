@@ -18,7 +18,7 @@ public class AMD64Assembler extends AMD64LabelAssembler implements Assembler64 {
     public final InstructionSet instructionSet() {
         return InstructionSet.AMD64;
     }
-    
+
     private long _startAddress; // address of first instruction
 
     public AMD64Assembler(long startAddress) {
@@ -28,22 +28,18 @@ public class AMD64Assembler extends AMD64LabelAssembler implements Assembler64 {
     public AMD64Assembler() {
     }
 
-    @Implement(Assembler64.class)
     public long startAddress() {
         return _startAddress;
     }
 
-    @Implement(Assembler64.class)
     public void setStartAddress(long address) {
         _startAddress = address;
     }
-    
-    @Implement(Assembler64.class)
+
     public void fixLabel(Label label, long address) {
         fixLabel64(label, address);
     }
-    
-    @Implement(Assembler64.class)
+
     public long address(Label label) throws AssemblyException {
         return address64(label);
     }

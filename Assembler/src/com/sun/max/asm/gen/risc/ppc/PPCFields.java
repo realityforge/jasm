@@ -16,29 +16,29 @@ import com.sun.max.asm.ppc.*;
 import com.sun.max.lang.*;
 
 /**
- * The fields used in defining the PowerPC instruction templates. 
- * 
+ * The fields used in defining the PowerPC instruction templates.
+ *
  * @author Bernd Mathiske
  * @author Doug Simon
  * @author Dave Ungar
  * @author Adam Spitz
  */
 final class PPCFields {
-    
+
     private PPCFields() {
     }
 
     // Checkstyle: stop constant name checks
-    
+
     /**
      * RA field that can also accept the constant 0.
      */
     public static final SymbolicOperandField<ZeroOrRegister> _ra0 = SymbolicOperandField.createAscending(ZeroOrRegister.symbolizer(), 11, 15).setVariableName("ra");
-    
+
     public static RiscConstant ra0(ZeroOrRegister value) {
         return _ra0.constant(value);
     }
-    
+
     /**
      * RA field that can only accept GPR symbols.
      */
@@ -57,13 +57,13 @@ final class PPCFields {
      * GPR symbol or 0 RA field with constraint: RA != GPR.R0.
      */
     public static final Object[] _ra0_notR0 = {_ra0, ne(_ra0, GPR.R0)};
-    
+
     public static final SymbolicOperandField<GPR> _rb = SymbolicOperandField.createAscending(GPR.GPR_SYMBOLIZER, 16, 20);
-    
+
     public static RiscConstant rb(GPR value) {
         return _rb.constant(value);
     }
-    
+
     public static RiscConstant rs(GPR value) {
         return _rs.constant(value);
     }
@@ -74,7 +74,7 @@ final class PPCFields {
 
     public static final SymbolicOperandField<GPR> _rs = SymbolicOperandField.createAscending(GPR.GPR_SYMBOLIZER, 6, 10);
     public static final SymbolicOperandField<GPR> _rt = SymbolicOperandField.createAscending(GPR.GPR_SYMBOLIZER, 6, 10);
-    
+
     /**
      * GPR symbol RA field with constraint: RA != GPR.R0 && RA != RT.
      */
@@ -84,13 +84,13 @@ final class PPCFields {
      * GCP symbol or 0 RA field with constraint: RA != GPR.R0 && RA < RT.
      */
     public static final Object[] _ra0_notR0_ltRT = {_ra0, ne(_ra0, GPR.R0), lt(_ra0, _rt)};
-    
+
     public static final SymbolicOperandField<CRF> _bf = SymbolicOperandField.createAscending(CRF.ENUMERATOR, 6, 8);
-    
+
     public static RiscConstant bf(CRF value) {
         return _bf.constant(value);
     }
-    
+
     public static final SymbolicOperandField<CRF> _bfa = SymbolicOperandField.createAscending(CRF.ENUMERATOR, 11, 13);
     public static final SymbolicOperandField<CRF> _br_crf = SymbolicOperandField.createAscending(CRF.ENUMERATOR, 11, 13).setVariableName("crf");
 
@@ -128,7 +128,7 @@ final class PPCFields {
     public static final ImmediateOperandField _u = ImmediateOperandField.createAscending(16, 19);
     public static final ImmediateOperandField _flm = ImmediateOperandField.createAscending(7, 14);
     public static final ImmediateOperandField _l = ImmediateOperandField.createAscending(10, 10);
-    
+
     private static final ImmediateOperandField _bh_raw = ImmediateOperandField.createAscending(19, 20).setVariableName("bh");
     public static final Object[] _bh = {_bh_raw, InstructionConstraint.Static.ne(_bh_raw, 2)};
 
@@ -141,7 +141,7 @@ final class PPCFields {
     public static final InputOperandField _b = InputOperandField.create(_sh);
     public static final InputOperandField _n64 = InputOperandField.create(_sh64).setVariableName("n");
     public static final InputOperandField _b64 = InputOperandField.create(_sh64).setVariableName("b");
-    
+
     public static RiscConstant to(int value) {
         return _to.constant(value);
     }
@@ -201,7 +201,7 @@ final class PPCFields {
     public static ImmediateOperandField bb(Expression expression) {
         return _bb.bindTo(expression);
     }
-    
+
     public static ImmediateOperandField bt(Expression expression) {
         return _bt.bindTo(expression);
     }
@@ -236,7 +236,7 @@ final class PPCFields {
 
     public static final BranchDisplacementOperandField _li = BranchDisplacementOperandField.createAscendingBranchDisplacementOperandField(6, 29);
     public static final BranchDisplacementOperandField _bd = BranchDisplacementOperandField.createAscendingBranchDisplacementOperandField(16, 29);
-    
+
     private static final ConstantField _bit_11 = ConstantField.createAscending(11, 11);
 
     public static RiscConstant bit_11(int value) {
@@ -256,54 +256,54 @@ final class PPCFields {
     }
 
     private static final ConstantField _opcd = ConstantField.createAscending(0,  5);
-    
+
     public static RiscConstant opcd(int value) {
         return _opcd.constant(value);
     }
-    
+
     private static final ConstantField _xo_21_29 = ConstantField.createAscending(21, 29);
-    
+
     public static RiscConstant xo_21_29(int value) {
         return _xo_21_29.constant(value);
     }
-    
+
     private static final ConstantField _xo_21_30 = ConstantField.createAscending(21, 30);
-    
+
     public static RiscConstant xo_21_30(int value) {
         return _xo_21_30.constant(value);
     }
-    
+
     private static final ConstantField _xo_22_30 = ConstantField.createAscending(22, 30);
-    
+
     public static RiscConstant xo_22_30(int value) {
         return _xo_22_30.constant(value);
     }
-    
+
     private static final ConstantField _xo_27_29 = ConstantField.createAscending(27, 29);
-    
+
     public static RiscConstant xo_27_29(int value) {
         return _xo_27_29.constant(value);
     }
-    
+
     private static final ConstantField _xo_26_30 = ConstantField.createAscending(26, 30);
-    
+
     public static RiscConstant xo_26_30(int value) {
         return _xo_26_30.constant(value);
     }
-    
+
     private static final ConstantField _xo_27_30 = ConstantField.createAscending(27, 30);
-    
+
     public static RiscConstant xo_27_30(int value) {
         return _xo_27_30.constant(value);
     }
-    
+
     private static final ConstantField _xo_30_31 = ConstantField.createAscending(30, 31);
-    
+
     public static RiscConstant xo_30_31(int value) {
         return _xo_30_31.constant(value);
     }
-    
-    
+
+
     public static final ReservedField _res_6 = ReservedField.createAscending(6,  6);
     public static final ReservedField _res_6_10 = ReservedField.createAscending(6, 10);
     public static final ReservedField _res_9 = ReservedField.createAscending(9,  9);
@@ -325,11 +325,11 @@ final class PPCFields {
     public static final OptionField _rc = OptionField.createAscending(31, 31).withOption("", 0).withOption("_", 1, ".");
     public static final OptionField _lk = OptionField.createAscending(31, 31).withOption("", 0).withOption("l", 1);
     public static final OptionField _aa = OptionField.createAscending(30, 30).withOption("", 0).withOption("a", 1);
-  
+
     public static RiscConstant lk(int value) {
         return _lk.constant(value);
     }
-    
+
     public static final OptionField _to_option = OptionField.createAscending(6, 10).
         withOption("lt", 16).
         withOption("le", 20).
@@ -345,12 +345,12 @@ final class PPCFields {
         withOption("lgt", 1).
         withOption("lnl", 5).
         withOption("lng", 6);
-    
+
     public static final OptionField _spr_option = OptionField.createAscending(16, 20, 11, 15).
         withOption("xer", SPR.XER).
         withOption("lr", SPR.LR).
         withOption("ctr", SPR.CTR);
-          
+
     private static OptionField createSuffixField(String suffix) {
         // When using option fields, we sometimes need a suffix in the mnemonic AFTER the option field.
         // We can construct this using option field with one option and no bits in it.
@@ -360,15 +360,15 @@ final class PPCFields {
     public static final OptionField _put_i_in_name = createSuffixField("i");
     public static final OptionField _put_lr_in_name = createSuffixField("lr");
     public static final OptionField _put_ctr_in_name = createSuffixField("ctr");
-        
+
     private static int boTrue(int crValue) {
         return CRTrue.value() | crValue;
     }
-    
+
     private static int boFalse(int crValue) {
         return CRFalse.value() | crValue;
     }
-    
+
     public static final OptionField _branch_conds = OptionField.createAscending(6, 8, 14, 15).
         withOption("lt", boTrue(CRF.LT)).
         withOption("le", boFalse(CRF.GT)).
@@ -382,7 +382,7 @@ final class PPCFields {
         withOption("ns", boFalse(CRF.SO)).
         withOption("un", boTrue(CRF.UN)).
         withOption("nu", boFalse(CRF.UN));
-        
+
     /**
      * An OptionField for the BO values that are in terms of the Count Register (CTR) and a bit in the Condition Register (CR).
      */
@@ -391,14 +391,14 @@ final class PPCFields {
         withOption("dnzf", CTRNonZero_CRFalse).
         withOption("dzt", CTRZero_CRTrue).
         withOption("dzf", CTRZero_CRFalse);
-    
+
     /**
      * An OptionField for the BO values that are only in terms of the Count Register (CTR) and don't include the prediction bits.
      */
     public static final OptionField _bo_CTR = OptionField.createAscending(6, 6, 8, 9).
         withOption("dnz", CTRNonZero.valueWithoutPredictionBits()).
         withOption("dz", CTRZero.valueWithoutPredictionBits());
-    
+
     /**
      * An OperandField for the prediction bits in the BO values that are only in terms of a bit in the Condition Register (CR).
      */
@@ -424,7 +424,7 @@ final class PPCFields {
         withOption("t", CRTrue.valueWithoutPredictionBits()).
         withOption("f", CRFalse.valueWithoutPredictionBits());
 
-    
+
     /**
      * An OptionField for the prediction bits in the BO values that are only in terms of a bit in the Condition Register (CR).
      */
@@ -432,12 +432,11 @@ final class PPCFields {
         withOption("", BranchPredictionBits.NONE).
         withOption("_pt", BranchPredictionBits.PT).
         withOption("_pn", BranchPredictionBits.PN);
-    
+
     // Checkstyle: resume constant name checks
 
     static {
         StaticFieldName.Static.initialize(PPCFields.class, new StaticFieldName.StringFunction() {
-            @Implement(StaticFieldName.StringFunction.class)
             public String function(String name) {
                 if (name.startsWith("_")) {
                     return name.substring(1);

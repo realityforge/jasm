@@ -51,7 +51,6 @@ public interface InstructionConstraint {
     Method predicateMethod();
 
     public abstract static class SimpleInstructionConstraint implements InstructionConstraint {
-        @Implement(InstructionConstraint.class)
         public Method predicateMethod() {
             return null;
         }
@@ -73,17 +72,14 @@ public interface InstructionConstraint {
         public static InstructionConstraint eq(final Parameter first, final SymbolicArgument symbol) {
             return new SimpleInstructionConstraint() {
 
-                @Implement(InstructionConstraint.class)
                 public boolean check(Template template, Sequence<Argument> arguments) {
                     return template.bindingFor(first, arguments) == symbol;
                 }
 
-                @Implement(InstructionConstraint.class)
                 public String asJavaExpression() {
                     return first.variableName() + " == " + symbol.name();
                 }
 
-                @Implement(InstructionConstraint.class)
                 public boolean referencesParameter(Parameter parameter) {
                     return parameter == first;
                 }
@@ -96,17 +92,14 @@ public interface InstructionConstraint {
         public static InstructionConstraint ne(final Parameter first, final Parameter second) {
             return new SimpleInstructionConstraint() {
 
-                @Implement(InstructionConstraint.class)
                 public boolean check(Template template, Sequence<Argument> arguments) {
                     return template.bindingFor(first, arguments).asLong() != template.bindingFor(second, arguments).asLong();
                 }
 
-                @Implement(InstructionConstraint.class)
                 public String asJavaExpression() {
                     return first.valueString() + " != " + second.valueString();
                 }
 
-                @Implement(InstructionConstraint.class)
                 public boolean referencesParameter(Parameter parameter) {
                     return parameter == first || parameter == second;
                 }
@@ -119,17 +112,14 @@ public interface InstructionConstraint {
         public static InstructionConstraint ne(final Parameter first, final SymbolicArgument symbol) {
             return new SimpleInstructionConstraint() {
 
-                @Implement(InstructionConstraint.class)
                 public boolean check(Template template, Sequence<Argument> arguments) {
                     return template.bindingFor(first, arguments) != symbol;
                 }
 
-                @Implement(InstructionConstraint.class)
                 public String asJavaExpression() {
                     return first.variableName() + " != " + symbol.name();
                 }
 
-                @Implement(InstructionConstraint.class)
                 public boolean referencesParameter(Parameter parameter) {
                     return parameter == first;
                 }
@@ -143,17 +133,14 @@ public interface InstructionConstraint {
         public static InstructionConstraint lt(final Parameter first, final Parameter second) {
             return new SimpleInstructionConstraint() {
 
-                @Implement(InstructionConstraint.class)
                 public boolean check(Template template, Sequence<Argument> arguments) {
                     return template.bindingFor(first, arguments).asLong() < template.bindingFor(second, arguments).asLong();
                 }
 
-                @Implement(InstructionConstraint.class)
                 public String asJavaExpression() {
                     return first.valueString() + " < " + second.valueString();
                 }
 
-                @Implement(InstructionConstraint.class)
                 public boolean referencesParameter(Parameter parameter) {
                     return parameter == first || parameter == second;
                 }
@@ -168,17 +155,14 @@ public interface InstructionConstraint {
         public static InstructionConstraint le(final Parameter first, final Parameter second) {
             return new SimpleInstructionConstraint() {
 
-                @Implement(InstructionConstraint.class)
                 public boolean check(Template template, Sequence<Argument> arguments) {
                     return template.bindingFor(first, arguments).asLong() <= template.bindingFor(second, arguments).asLong();
                 }
 
-                @Implement(InstructionConstraint.class)
                 public String asJavaExpression() {
                     return first.valueString() + " <= " + second.valueString();
                 }
 
-                @Implement(InstructionConstraint.class)
                 public boolean referencesParameter(Parameter parameter) {
                     return parameter == first || parameter == second;
                 }
@@ -192,17 +176,14 @@ public interface InstructionConstraint {
         public static InstructionConstraint gt(final Parameter first, final long value) {
             return new SimpleInstructionConstraint() {
 
-                @Implement(InstructionConstraint.class)
                 public boolean check(Template template, Sequence<Argument> arguments) {
                     return template.bindingFor(first, arguments).asLong() > value;
                 }
 
-                @Implement(InstructionConstraint.class)
                 public String asJavaExpression() {
                     return first.valueString() + " > " + value;
                 }
 
-                @Implement(InstructionConstraint.class)
                 public boolean referencesParameter(Parameter parameter) {
                     return parameter == first;
                 }
@@ -216,17 +197,14 @@ public interface InstructionConstraint {
         public static InstructionConstraint lt(final Parameter first, final long value) {
             return new SimpleInstructionConstraint() {
 
-                @Implement(InstructionConstraint.class)
                 public boolean check(Template template, Sequence<Argument> arguments) {
                     return template.bindingFor(first, arguments).asLong() < value;
                 }
 
-                @Implement(InstructionConstraint.class)
                 public String asJavaExpression() {
                     return first.valueString() + " < " + value;
                 }
 
-                @Implement(InstructionConstraint.class)
                 public boolean referencesParameter(Parameter parameter) {
                     return parameter == first;
                 }
@@ -240,17 +218,14 @@ public interface InstructionConstraint {
         public static InstructionConstraint ne(final Parameter parameter, final long value) {
             return new SimpleInstructionConstraint() {
 
-                @Implement(InstructionConstraint.class)
                 public boolean check(Template template, Sequence<Argument> arguments) {
                     return template.bindingFor(parameter, arguments).asLong() != value;
                 }
 
-                @Implement(InstructionConstraint.class)
                 public String asJavaExpression() {
                     return parameter.valueString() + " != " + value;
                 }
 
-                @Implement(InstructionConstraint.class)
                 public boolean referencesParameter(Parameter p) {
                     return parameter == p;
                 }
@@ -294,7 +269,6 @@ public interface InstructionConstraint {
                /**
                 * @return the method implementing the constraint
                 */
-                @Implement(InstructionConstraint.class)
                 public Method predicateMethod() {
                     return predicateMethod;
                 }
@@ -308,7 +282,6 @@ public interface InstructionConstraint {
                  *            the actual values
                  * @return true if the constraint held for {@code arguments}
                  */
-                @Implement(InstructionConstraint.class)
                 public boolean check(Template template, Sequence<Argument> arguments) {
                     int parameterIndex;
                     final Object receiver;
@@ -345,7 +318,6 @@ public interface InstructionConstraint {
                 /**
                  * @return the Java boolean expression that is a call to the constraint method
                  */
-                @Implement(InstructionConstraint.class)
                 public String asJavaExpression() {
                     final StringBuilder buf = new StringBuilder();
                     int i;
@@ -369,7 +341,6 @@ public interface InstructionConstraint {
                     return buf.toString();
                 }
 
-                @Implement(InstructionConstraint.class)
                 public boolean referencesParameter(Parameter parameter) {
                     return Arrays.contains(parameters, parameter);
                 }

@@ -126,7 +126,6 @@ public abstract class Template implements Cloneable, Comparable<Template> {
         return null;
     }
 
-    @Implement(Comparable.class)
     public int compareTo(Template other) {
         int result = _internalName.compareTo(other._internalName);
         if (result != 0) {

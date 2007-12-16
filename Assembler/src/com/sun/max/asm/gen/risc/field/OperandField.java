@@ -19,7 +19,7 @@ import com.sun.max.lang.*;
  * assembler method. The field is also a parameter in the external assembler syntax unless
  * it's {@link #type value type} implements {@link ExternalMnemonicSuffixArgument} in which
  * case, the field's value is represented as a suffix of the mnemonic in the external assembler syntax.
- * 
+ *
  * @author Bernd Mathiske
  * @author Doug Simon
  * @author Dave Ungar
@@ -65,7 +65,7 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
     public abstract Argument_Type disassemble(int instruction);
 
     /**
-     * @return the minimal difference between any two potential operands 
+     * @return the minimal difference between any two potential operands
      */
     public int grain() {
         return 1 << zeroes();
@@ -100,12 +100,10 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
         return _signDependentOperations == SignDependentOperations.SIGNED;
     }
 
-    @Implement(Operand.class)
     public abstract Class type();
 
     private String _variableName;
 
-    @Implement(Parameter.class)
     public String variableName() {
         if (_variableName != null) {
             return _variableName;
@@ -134,7 +132,6 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
         return withExcludedDisassemblerTestArguments(Sets.from(arguments));
     }
 
-    @Implement(Parameter.class)
     public Set<Argument> excludedDisassemblerTestArguments() {
         return _excludedDisassemblerTestArguments;
     }
@@ -151,32 +148,29 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
         return withExcludedExternalTestArguments(Sets.from(arguments));
     }
 
-    @Implement(Parameter.class)
     public Set<Argument> excludedExternalTestArguments() {
         return _excludedExternalTestArguments;
     }
 
-    @Implement(Comparable.class)
     public int compareTo(Parameter other) {
         return type().getName().compareTo(other.type().getName());
     }
-    
-    @Implement(Expression.class)
+
     public long evaluate(Template template, Sequence<Argument> arguments) {
         if (boundTo() != null) {
             return boundTo().evaluate(template, arguments);
         }
         return template.bindingFor(this, arguments).asLong();
     }
-    
+
     private Expression _expression;
-    
+
     public OperandField<Argument_Type> bindTo(Expression expression) {
         final OperandField<Argument_Type> result = clone();
         result._expression = expression;
         return result;
     }
-    
+
     public Expression boundTo() {
         return _expression;
     }

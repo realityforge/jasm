@@ -21,27 +21,22 @@ public enum AMD64XMMComparison implements EnumerableArgument<AMD64XMMComparison>
     NOT_LESS_THAN_OR_EQUAL,
     ORDERED;
 
-    @Implement(Symbol.class)
     public int value() {
         return ordinal();
     }
-    
-    @Implement(Argument.class)
+
     public long asLong() {
         return value();
     }
 
-    @Implement(Argument.class)
     public String externalValue() {
         return "$" + Integer.toString(value());
     }
 
-    @Implement(Argument.class)
     public String disassembledValue() {
         return name().toLowerCase();
-    }    
+    }
 
-    @Implement(Enumerable.class)
     public Enumerator<AMD64XMMComparison> enumerator() {
         return ENUMERATOR;
     }

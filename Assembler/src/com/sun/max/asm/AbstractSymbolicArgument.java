@@ -18,48 +18,42 @@ public abstract class AbstractSymbolicArgument implements SymbolicArgument, Stat
 
     private String _name;
     private final int _value;
-    
+
     protected AbstractSymbolicArgument(String name, int value) {
         _name = name;
         _value = value;
     }
-    
+
     protected AbstractSymbolicArgument(int value) {
         _value = value;
     }
-    
-    @Implement(StaticFieldName.class)
+
     public void setName(String name) {
         _name = name;
     }
-    
-    @Implement(Symbol.class)
+
     public String name() {
         return _name;
     }
-    
-    @Implement(Symbol.class)
+
     public int value() {
         return _value;
     }
-    
-    @Implement(Argument.class)
+
     public String externalValue() {
         return "%" + name().toLowerCase();
     }
 
-    @Implement(Argument.class)
     public long asLong() {
         return value();
     }
 
-    @Implement(Argument.class)
     public String disassembledValue() {
         return externalValue();
     }
-    
+
     @Override
     public String toString() {
         return name();
-    }    
+    }
 }

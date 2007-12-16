@@ -24,22 +24,18 @@ public abstract class X86NumericalParameter extends X86Parameter implements Appe
         _width = width;
     }
 
-    @Implement(AppendedParameter.class)
     public WordWidth width() {
         return _width;
     }
 
-    @Implement(Parameter.class)
     public String valueString() {
         return variableName();
     }
 
-    @Implement(Operand.class)
     public Class type() {
         return width().canonicalPrimitiveType();
     }
 
-    @Implement(Parameter.class)
     public Iterable< ? extends ImmediateArgument> getLegalTestArguments() {
         try {
             switch (_width) {
@@ -61,7 +57,6 @@ public abstract class X86NumericalParameter extends X86Parameter implements Appe
         return null;
     }
 
-    @Implement(Parameter.class)
     public Iterable<? extends Argument> getIllegalTestArguments() {
         return Iterables.empty();
     }

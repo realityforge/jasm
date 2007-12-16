@@ -12,8 +12,8 @@ import com.sun.max.asm.sparc.*;
 import com.sun.max.lang.*;
 
 /**
- * The fields used in defining the SPARC instruction templates. 
- * 
+ * The fields used in defining the SPARC instruction templates.
+ *
  * @author Bernd Mathiske
  * @author Doug Simon
  * @author Dave Ungar
@@ -23,9 +23,9 @@ public final class SPARCFields {
 
     private SPARCFields() {
     }
-    
+
     // Checkstyle: stop constant name checks
-    
+
     private static final ConstantField _bits_29_29 = ConstantField.createDescending(29, 29);
 
     public static RiscConstant bits_29_29(int value) {
@@ -147,7 +147,7 @@ public final class SPARCFields {
     }
 
     public static final IgnoredOperandField _const22 = IgnoredOperandField.createDescendingIgnored(21, 0);
-    
+
     public static final ImmediateOperandField _fcn = ImmediateOperandField.createDescending(29, 25);
 
     public static final ImmediateOperandField _imm22 = ImmediateOperandField.createDescending(21, 0).beSignedOrUnsigned();
@@ -231,7 +231,7 @@ public final class SPARCFields {
     public static RiscConstant rs2(GPR gpr) {
         return _rs2.constant(gpr);
     }
-    
+
     public static SymbolicOperandField<GPR> rs2(Expression expression) {
         return _rs2.bindTo(expression);
     }
@@ -263,11 +263,11 @@ public final class SPARCFields {
     private static final SymbolicOperandField<QFPR> _qfrs1_raw = SymbolicOperandField.createDescending("rs1", QFPR.SYMBOLIZER, 14, 14, 18, 16, -2);
     private static final SymbolicOperandField<QFPR> _qfrs2_raw = SymbolicOperandField.createDescending("rs2", QFPR.SYMBOLIZER, 0, 0, 4, 2, -2);
     private static final SymbolicOperandField<QFPR> _qfrd_raw = SymbolicOperandField.createDescending("rd", QFPR.SYMBOLIZER, 25, 25, 29, 27, -2);
-    
+
     public static final Object[] _qfrs1 = {_qfrs1_raw, ReservedField.createDescending(15, 15)};
     public static final Object[] _qfrs2 = {_qfrs2_raw, ReservedField.createDescending(1, 1)};
     public static final Object[] _qfrd =  {_qfrd_raw, ReservedField.createDescending(26, 26)};
-    
+
     public static final SymbolicOperandField<BPr> _rcond_27_25 = SymbolicOperandField.createDescending("cond", BPr.SYMBOLIZER, 27, 25);
 
     public static RiscConstant rcond_27_25(BPr value) {
@@ -295,7 +295,7 @@ public final class SPARCFields {
     public static RiscConstant p(BranchPredictionBit value) {
         return _p.constant(value);
     }
-    
+
     public static final ReservedField _res_29_29 = ReservedField.createDescending(29, 29);
     public static final ReservedField _res_29_25 = ReservedField.createDescending(29, 25);
     public static final ReservedField _res_18_14 = ReservedField.createDescending(18, 14);
@@ -316,7 +316,6 @@ public final class SPARCFields {
     static {
         StaticFieldName.Static.initialize(SPARCFields.class, new StaticFieldName.StringFunction() {
 
-            @Implement(StaticFieldName.StringFunction.class)
             public String function(String name) {
                 if (name.startsWith("_")) {
                     return name.substring(1);

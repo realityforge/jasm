@@ -18,25 +18,22 @@ import com.sun.max.collect.*;
 public class IA32DisassembledInstruction extends X86DisassembledInstruction<IA32Template> implements Address32Instruction {
 
     private final Address32Instruction.Mixin _addressInstruction;
-    
+
     IA32DisassembledInstruction(int startAddress, int offset, byte[] bytes, IA32Template template, Sequence<Argument> arguments) {
         super(offset, bytes, template, arguments);
         _addressInstruction = new Address32Instruction.Mixin(this, startAddress);
     }
-    
-    @Implement(Address32Instruction.class)
+
     public int address() {
         return _addressInstruction.address();
     }
-    
-    @Implement(AddressInstruction.class)
+
     public String addressString() {
         return _addressInstruction.addressString();
     }
-    
-    @Implement(AddressInstruction.class)
+
     public int addressToOffset(ImmediateArgument argument) {
         return _addressInstruction.addressToOffset(argument);
     }
-    
+
 }

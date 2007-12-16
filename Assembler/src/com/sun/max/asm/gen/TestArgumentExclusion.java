@@ -18,17 +18,17 @@ public class TestArgumentExclusion {
     private final AssemblyTestComponent _component;
     private final WrappableSpecification _specification;
     private final Set<Argument> _arguments;
-    
+
     public TestArgumentExclusion(AssemblyTestComponent component, WrappableSpecification specification, Set<Argument> arguments) {
         _component = component;
         _specification = specification;
         _arguments = arguments;
     }
-    
+
     public AssemblyTestComponent component() {
         return _component;
     }
-    
+
     public WrappableSpecification wrappedSpecification() {
         return _specification;
     }
@@ -36,9 +36,8 @@ public class TestArgumentExclusion {
     public Set<Argument> arguments() {
         return _arguments;
     }
-    
+
     public static final TestArgumentExclusion NONE = new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, new WrappableSpecification() {
-        @Implement(WrappableSpecification.class)
         public TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
             return TestArgumentExclusion.NONE;
         }

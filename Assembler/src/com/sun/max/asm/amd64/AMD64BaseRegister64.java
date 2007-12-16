@@ -12,11 +12,11 @@ import com.sun.max.util.*;
 
 /**
  * Aliases for 64-bit AMD64 general registers to be used as base registers.
- * 
+ *
  * @author Bernd Mathiske
  */
 public enum AMD64BaseRegister64 implements GeneralRegister<AMD64BaseRegister64> {
-    
+
     RAX_BASE,
     RCX_BASE,
     RDX_BASE,
@@ -37,41 +37,34 @@ public enum AMD64BaseRegister64 implements GeneralRegister<AMD64BaseRegister64> 
     public static AMD64BaseRegister64 from(GeneralRegister generalRegister) {
         return values()[generalRegister.id()];
     }
-    
-    @Implement(GeneralRegister.class)    
+
     public WordWidth width() {
         return WordWidth.BITS_64;
     }
 
-    @Implement(GeneralRegister.class)
     public int id() {
         return ordinal();
     }
 
-    @Implement(Symbol.class)
     public int value() {
         return id();
     }
-    
-    @Implement(Argument.class)
+
     public long asLong() {
         return value();
     }
 
-    @Implement(Argument.class)
     public String externalValue() {
         return AMD64GeneralRegister64.from(this).externalValue();
     }
-    
-    @Implement(Argument.class)
+
     public String disassembledValue() {
         return AMD64GeneralRegister64.from(this).disassembledValue();
     }
 
-    @Implement(Enumerable.class)
     public Enumerator<AMD64BaseRegister64> enumerator() {
         return ENUMERATOR;
     }
-    
+
     public static final Enumerator<AMD64BaseRegister64> ENUMERATOR = new Enumerator<AMD64BaseRegister64>(AMD64BaseRegister64.class);
 }

@@ -18,13 +18,12 @@ public abstract class NameSuffixSymbolicArgument extends AbstractSymbolicArgumen
     protected NameSuffixSymbolicArgument(int value) {
         super(value);
     }
-  
+
     @Override
     public String externalValue() {
         return name().toLowerCase();
     }
 
-    @Implement(ExternalMnemonicSuffixArgument.class)
     public boolean isOptional() {
         return false;
     }

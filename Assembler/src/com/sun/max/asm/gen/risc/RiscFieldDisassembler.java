@@ -3,7 +3,7 @@
  */
 /*VCSID=cd183128-2a91-4e3c-a930-7afdd95bd486*/
 /**
- * 
+ *
  */
 package com.sun.max.asm.gen.risc;
 
@@ -20,17 +20,17 @@ import com.sun.max.lang.*;
  * @author Doug Simon
  */
 class RiscFieldDisassembler<Template_Type extends Template> implements RiscInstructionDescriptionVisitor {
-    
+
     private final Template_Type _template;
     private final int _assembledInstruction;
     private String _string;
-    
+
     public RiscFieldDisassembler(Template_Type template, byte[] assembledInstruction) {
         assert assembledInstruction.length == 4;
         _template = template;
         _assembledInstruction = assembledInstruction[0] << 24 | ((assembledInstruction[1] & 0xFF) << 16) | ((assembledInstruction[2] & 0xFF) << 8) | (assembledInstruction[3] & 0xFF);
     }
-    
+
     @Override
     public String toString() {
         if (_string == null) {
@@ -40,16 +40,13 @@ class RiscFieldDisassembler<Template_Type extends Template> implements RiscInstr
         return _string;
     }
 
-    @Implement(RiscInstructionDescriptionVisitor.class)
     public void visitConstant(RiscConstant constant) {
         visitField(constant.field());
     }
 
-    @Implement(RiscInstructionDescriptionVisitor.class)
     public void visitConstraint(InstructionConstraint constraint) {
     }
 
-    @Implement(RiscInstructionDescriptionVisitor.class)
     public void visitField(RiscField field) {
         if (_string.length() != 0) {
             _string += ' ';
@@ -57,7 +54,7 @@ class RiscFieldDisassembler<Template_Type extends Template> implements RiscInstr
         final int value;
         final BitRange bitRange = field.bitRange();
         final int width = bitRange.width();
-        
+
         if (field instanceof OperandField) {
             value = ((OperandField) field).extract(_assembledInstruction);
         } else {
@@ -69,13 +66,12 @@ class RiscFieldDisassembler<Template_Type extends Template> implements RiscInstr
         } else if (binary.length() < width) {
             binary = Strings.times('0', width - binary.length()) + binary;
         }
-        
+
         _string += field.name() + "[" + bitRange + "]=" + value + "{" + binary + "}";
     }
 
-    @Implement(RiscInstructionDescriptionVisitor.class)
     public void visitString(String string) {
     }
-    
-    
+
+
 }

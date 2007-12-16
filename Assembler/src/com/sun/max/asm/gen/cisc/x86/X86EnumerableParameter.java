@@ -17,7 +17,7 @@ import com.sun.max.util.*;
 public class X86EnumerableParameter<EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument<EnumerableArgument_Type>> extends X86Parameter implements EnumerableParameter {
 
     private final Enumerator<EnumerableArgument_Type> _enumerator;
-    
+
     public X86EnumerableParameter(X86Operand.Designation designation, ParameterPlace place, Enumerator<EnumerableArgument_Type> enumerator) {
         super(designation, place);
         _enumerator = enumerator;
@@ -54,27 +54,23 @@ public class X86EnumerableParameter<EnumerableArgument_Type extends Enum<Enumera
                 ProgramError.unexpected();
         }
     }
-    
+
     public Enumerator<EnumerableArgument_Type> enumerator() {
         return _enumerator;
     }
 
-    @Implement(Operand.class)
     public Class type() {
         return _enumerator.type();
     }
 
-    @Implement(Parameter.class)
     public String valueString() {
         return variableName() + ".value()";
     }
-    
-    @Implement(Parameter.class)
+
     public Iterable<EnumerableArgument_Type> getLegalTestArguments() {
         return _enumerator;
     }
-    
-    @Implement(Parameter.class)
+
     public Iterable<? extends Argument> getIllegalTestArguments() {
         return Iterables.empty();
     }

@@ -20,9 +20,9 @@ import com.sun.max.collect.*;
 
 /**
  * See A-7 in the book.
- * 
+ *
  * @see com.sun.max.asm.x86
- * 
+ *
  * @author Bernd Mathiske
  */
 public enum IA32ModRMGroup implements ModRMGroup {
@@ -45,7 +45,7 @@ public enum IA32ModRMGroup implements ModRMGroup {
         modRM(ModRMGroup.Opcode._4, "SHL"),
         modRM(ModRMGroup.Opcode._5, "SHR"),
         modRM(ModRMGroup.Opcode._7, "SAR")
-    ), 
+    ),
     GROUP_3b(
         modRM(ModRMGroup.Opcode._0, "TEST", Eb.excludeExternalTestArguments(AL), Ib),
         modRM(ModRMGroup.Opcode._1, "TEST", Eb.excludeExternalTestArguments(AL), Ib),
@@ -68,8 +68,8 @@ public enum IA32ModRMGroup implements ModRMGroup {
     ),
     GROUP_4(
         modRM(ModRMGroup.Opcode._0, "INC"),
-        modRM(ModRMGroup.Opcode._1, "DEC")        
-    ), 
+        modRM(ModRMGroup.Opcode._1, "DEC")
+    ),
     GROUP_5(
         modRM(ModRMGroup.Opcode._0, "INC", v, Ev.excludeExternalTestArguments(AX, CX, DX, BX, SP, BP, SI, DI, EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI)),
         modRM(ModRMGroup.Opcode._1, "DEC", v, Ev.excludeExternalTestArguments(AX, CX, DX, BX, SP, BP, SI, DI, EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI)),
@@ -99,7 +99,7 @@ public enum IA32ModRMGroup implements ModRMGroup {
         modRM(ModRMGroup.Opcode._4, "SMSW", Mw),
         modRM(ModRMGroup.Opcode._6, "LMSW", Ew),
         modRM(ModRMGroup.Opcode._7, "INVLPG", M)
-    ), 
+    ),
     GROUP_7b(
         modRM(ModRMGroup.Opcode._4, "SMSW", Rv)
     ),
@@ -113,14 +113,14 @@ public enum IA32ModRMGroup implements ModRMGroup {
         modRM(ModRMGroup.Opcode._1, "CMPXCHG8B", Mq)
     ),
     GROUP_10(
-        modRM(ModRMGroup.Opcode._0, "UD2"),                    
-        modRM(ModRMGroup.Opcode._1, "UD2"),                    
-        modRM(ModRMGroup.Opcode._2, "UD2"),                    
-        modRM(ModRMGroup.Opcode._3, "UD2"),                    
-        modRM(ModRMGroup.Opcode._4, "UD2"),                    
-        modRM(ModRMGroup.Opcode._5, "UD2"),                    
-        modRM(ModRMGroup.Opcode._6, "UD2"),                    
-        modRM(ModRMGroup.Opcode._7, "UD2")              
+        modRM(ModRMGroup.Opcode._0, "UD2"),
+        modRM(ModRMGroup.Opcode._1, "UD2"),
+        modRM(ModRMGroup.Opcode._2, "UD2"),
+        modRM(ModRMGroup.Opcode._3, "UD2"),
+        modRM(ModRMGroup.Opcode._4, "UD2"),
+        modRM(ModRMGroup.Opcode._5, "UD2"),
+        modRM(ModRMGroup.Opcode._6, "UD2"),
+        modRM(ModRMGroup.Opcode._7, "UD2")
     ),
     GROUP_11(
         modRM(ModRMGroup.Opcode._2, "PSRLW", PRq, Ib),
@@ -138,74 +138,74 @@ public enum IA32ModRMGroup implements ModRMGroup {
     ),
     FP_D8(
         modRM(ModRMGroup.Opcode._0, "FADD", single_real),
-        modRM(ModRMGroup.Opcode._1, "FMUL", single_real), 
-        modRM(ModRMGroup.Opcode._2, "FCOM", single_real), 
-        modRM(ModRMGroup.Opcode._3, "FCOMP", single_real), 
+        modRM(ModRMGroup.Opcode._1, "FMUL", single_real),
+        modRM(ModRMGroup.Opcode._2, "FCOM", single_real),
+        modRM(ModRMGroup.Opcode._3, "FCOMP", single_real),
         modRM(ModRMGroup.Opcode._4, "FSUB", single_real),
-        modRM(ModRMGroup.Opcode._5, "FSUBR", single_real), 
+        modRM(ModRMGroup.Opcode._5, "FSUBR", single_real),
         modRM(ModRMGroup.Opcode._6, "FDIV", single_real),
         modRM(ModRMGroup.Opcode._7, "FDIVR", single_real)
     ),
     FP_D9(
         modRM(ModRMGroup.Opcode._0, "FLD", single_real),
-        modRM(ModRMGroup.Opcode._2, "FST", single_real), 
-        modRM(ModRMGroup.Opcode._3, "FSTP", single_real), 
+        modRM(ModRMGroup.Opcode._2, "FST", single_real),
+        modRM(ModRMGroup.Opcode._3, "FSTP", single_real),
         modRM(ModRMGroup.Opcode._4, "FLDENV", bytes_14_28),
-        modRM(ModRMGroup.Opcode._5, "FLDCW", bytes_2), 
+        modRM(ModRMGroup.Opcode._5, "FLDCW", bytes_2),
         modRM(ModRMGroup.Opcode._6, "FSTENV", bytes_14_28),
-        modRM(ModRMGroup.Opcode._7, "FSTCW", bytes_2)        
+        modRM(ModRMGroup.Opcode._7, "FSTCW", bytes_2)
     ),
     FP_DA(
         modRM(ModRMGroup.Opcode._0, "FIADD", short_integer),
-        modRM(ModRMGroup.Opcode._1, "FIMUL", short_integer), 
-        modRM(ModRMGroup.Opcode._2, "FICOM", short_integer), 
-        modRM(ModRMGroup.Opcode._3, "FICOMP", short_integer), 
+        modRM(ModRMGroup.Opcode._1, "FIMUL", short_integer),
+        modRM(ModRMGroup.Opcode._2, "FICOM", short_integer),
+        modRM(ModRMGroup.Opcode._3, "FICOMP", short_integer),
         modRM(ModRMGroup.Opcode._4, "FISUB", short_integer),
-        modRM(ModRMGroup.Opcode._5, "FISUBR", short_integer), 
+        modRM(ModRMGroup.Opcode._5, "FISUBR", short_integer),
         modRM(ModRMGroup.Opcode._6, "FIDIV", short_integer),
         modRM(ModRMGroup.Opcode._7, "FIDIVR", short_integer)
     ),
     FP_DB(
         modRM(ModRMGroup.Opcode._0, "FILD", short_integer),
-        modRM(ModRMGroup.Opcode._2, "FIST", short_integer), 
-        modRM(ModRMGroup.Opcode._3, "FISTP", short_integer), 
-        modRM(ModRMGroup.Opcode._5, "FLD", extended_real), 
+        modRM(ModRMGroup.Opcode._2, "FIST", short_integer),
+        modRM(ModRMGroup.Opcode._3, "FISTP", short_integer),
+        modRM(ModRMGroup.Opcode._5, "FLD", extended_real),
         modRM(ModRMGroup.Opcode._7, "FSTP", extended_real)
     ),
     FP_DC(
         modRM(ModRMGroup.Opcode._0, "FADD", double_real),
-        modRM(ModRMGroup.Opcode._1, "FMUL", double_real), 
-        modRM(ModRMGroup.Opcode._2, "FCOM", double_real), 
-        modRM(ModRMGroup.Opcode._3, "FCOMP", double_real), 
+        modRM(ModRMGroup.Opcode._1, "FMUL", double_real),
+        modRM(ModRMGroup.Opcode._2, "FCOM", double_real),
+        modRM(ModRMGroup.Opcode._3, "FCOMP", double_real),
         modRM(ModRMGroup.Opcode._4, "FSUB", double_real),
-        modRM(ModRMGroup.Opcode._5, "FSUBR", double_real), 
+        modRM(ModRMGroup.Opcode._5, "FSUBR", double_real),
         modRM(ModRMGroup.Opcode._6, "FDIV", double_real),
         modRM(ModRMGroup.Opcode._7, "FDIVR", double_real)
     ),
     FP_DD(
         modRM(ModRMGroup.Opcode._0, "FLD", double_real),
-        modRM(ModRMGroup.Opcode._2, "FST", double_real), 
-        modRM(ModRMGroup.Opcode._3, "FSTP", double_real), 
+        modRM(ModRMGroup.Opcode._2, "FST", double_real),
+        modRM(ModRMGroup.Opcode._3, "FSTP", double_real),
         modRM(ModRMGroup.Opcode._4, "FRSTOR", bytes_98_108),
         modRM(ModRMGroup.Opcode._6, "FSAVE", bytes_98_108),
         modRM(ModRMGroup.Opcode._7, "FSTSW", bytes_2)
     ),
     FP_DE(
         modRM(ModRMGroup.Opcode._0, "FIADD", word_integer),
-        modRM(ModRMGroup.Opcode._1, "FIMUL", word_integer), 
-        modRM(ModRMGroup.Opcode._2, "FICOM", word_integer), 
-        modRM(ModRMGroup.Opcode._3, "FICOMP", word_integer), 
+        modRM(ModRMGroup.Opcode._1, "FIMUL", word_integer),
+        modRM(ModRMGroup.Opcode._2, "FICOM", word_integer),
+        modRM(ModRMGroup.Opcode._3, "FICOMP", word_integer),
         modRM(ModRMGroup.Opcode._4, "FISUB", word_integer),
-        modRM(ModRMGroup.Opcode._5, "FISUBR", word_integer), 
+        modRM(ModRMGroup.Opcode._5, "FISUBR", word_integer),
         modRM(ModRMGroup.Opcode._6, "FIDIV", word_integer),
         modRM(ModRMGroup.Opcode._7, "FIDIVR", word_integer)
     ),
     FP_DF(
         modRM(ModRMGroup.Opcode._0, "FILD", word_integer),
-        modRM(ModRMGroup.Opcode._2, "FIST", word_integer), 
-        modRM(ModRMGroup.Opcode._3, "FISTP", word_integer), 
+        modRM(ModRMGroup.Opcode._2, "FIST", word_integer),
+        modRM(ModRMGroup.Opcode._3, "FISTP", word_integer),
         modRM(ModRMGroup.Opcode._4, "FBLD", packed_bcd),
-        modRM(ModRMGroup.Opcode._5, "FILD", long_integer), 
+        modRM(ModRMGroup.Opcode._5, "FILD", long_integer),
         modRM(ModRMGroup.Opcode._6, "FBSTP", packed_bcd),
         modRM(ModRMGroup.Opcode._7, "FISTP", long_integer)
     );
@@ -213,14 +213,13 @@ public enum IA32ModRMGroup implements ModRMGroup {
     private static ModRMDescription modRM(ModRMGroup.Opcode opcode, String name, Object... specifications) {
         return new ModRMDescription(opcode, name, new ArrayListSequence<Object>(specifications));
     }
-    
+
     private final ModRMDescription[] _instructionDescriptions;
 
     private IA32ModRMGroup(ModRMDescription... instructionDescriptions) {
         _instructionDescriptions = instructionDescriptions;
     }
 
-    @Implement(ModRMGroup.class)
     public ModRMDescription getInstructionDescription(ModRMGroup.Opcode opcode) {
         for (ModRMDescription instructionDescription : _instructionDescriptions) {
             if (instructionDescription.opcode() == opcode) {

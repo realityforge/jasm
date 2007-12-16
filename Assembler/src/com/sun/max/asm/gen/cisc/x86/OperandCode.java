@@ -19,8 +19,8 @@ import com.sun.max.util.*;
 /**
  * @author Bernd Mathiske
  */
-public enum OperandCode implements WrappableSpecification {    
-    
+public enum OperandCode implements WrappableSpecification {
+
     Ap(A, p),
     Cd(C, d),
     Cq(C, q),
@@ -95,32 +95,31 @@ public enum OperandCode implements WrappableSpecification {
     Yb(Y, b),
     Yv(Y, v),
     Yz(Y, z);
-    
+
     private final AddressingMethodCode _addressingMethodCode;
     private final OperandTypeCode _operandTypeCode;
-    
+
     private OperandCode(AddressingMethodCode addressingMethodCode, OperandTypeCode operandTypeCode) {
         _addressingMethodCode = addressingMethodCode;
         _operandTypeCode = operandTypeCode;
     }
-    
+
     public AddressingMethodCode addressingMethodCode() {
         return _addressingMethodCode;
     }
-    
+
     public OperandTypeCode operandTypeCode() {
         return _operandTypeCode;
     }
-    
+
     public TestArgumentExclusion excludeDisassemblerTestArguments(Argument... arguments) {
         return new TestArgumentExclusion(AssemblyTestComponent.DISASSEMBLER, this, Sets.from(arguments));
     }
-    
-    @Implement(WrappableSpecification.class)
+
     public TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
         return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, this, Sets.from(arguments));
     }
-    
+
     public TestArgumentExclusion excludeExternalTestArguments(Enumerator... argumentEnumerators) {
         final Set<Argument> arguments = new HashSet<Argument>();
         for (Enumerator argumentEnumerator : argumentEnumerators) {
@@ -128,10 +127,10 @@ public enum OperandCode implements WrappableSpecification {
             final Class<Set<Argument>> type = null;
             final Set<Argument> set = StaticLoophole.cast(type, argumentEnumerator.asSet());
             arguments.addAll(set);
-        }        
+        }
         return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, this, arguments);
     }
-    
+
     public ArgumentRange range(long minValue, long maxValue) {
         return new ArgumentRange(this, minValue, maxValue);
     }

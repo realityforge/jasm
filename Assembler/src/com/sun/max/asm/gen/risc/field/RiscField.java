@@ -11,7 +11,7 @@ import com.sun.max.program.*;
 
 /**
  * A field describes a bit range and how it relates to an operand.
- * 
+ *
  * @author Bernd Mathiske
  * @author Dave Ungar
  * @author Adam Spitz
@@ -19,11 +19,11 @@ import com.sun.max.program.*;
 public abstract class RiscField implements Cloneable, StaticFieldName, StaticFieldLiteral {
 
     private final BitRange _bitRange;
-    
+
     protected RiscField(BitRange bitRange) {
         _bitRange = bitRange;
     }
-    
+
     @Override
     public RiscField clone() {
         try {
@@ -33,39 +33,33 @@ public abstract class RiscField implements Cloneable, StaticFieldName, StaticFie
         }
         return null;
     }
-    
+
     private String _name;
 
-    @Implement(StaticFieldName.class)
     public String name() {
         return _name;
     }
 
-    @Implement(StaticFieldName.class)
     public void setName(String name) {
         _name = name;
     }
-    
+
     private String _literal;
 
-    @Implement(StaticFieldLiteral.class)
     public String literal() {
         return _literal;
     }
 
-    @Implement(StaticFieldLiteral.class)
     public void setLiteral(String literal) {
         _literal = literal;
     }
 
     private Class _literalClass;
-    
-    @Implement(StaticFieldLiteral.class)
+
     public Class literalClass() {
         return _literalClass;
     }
-    
-    @Implement(StaticFieldLiteral.class)
+
     public void setLiteralClass(Class literalClass) {
         _literalClass = literalClass;
     }

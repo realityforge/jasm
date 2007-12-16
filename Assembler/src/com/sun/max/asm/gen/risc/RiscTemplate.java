@@ -22,11 +22,11 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
     private final AppendableSequence<OptionField> _optionFields = new ArrayListSequence<OptionField>();
     private final AppendableSequence<OperandField> _parameters = new ArrayListSequence<OperandField>();
     private final AppendableSequence<Option> _options = new ArrayListSequence<Option>();
-    
+
     private int _opcode;
     private int _opcodeMask;
     private RiscTemplate _canonicalRepresentative;
-    
+
     protected RiscTemplate(InstructionDescription instructionDescription) {
         super(instructionDescription);
     }
@@ -35,7 +35,7 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
     public RiscInstructionDescription instructionDescription() {
         return (RiscInstructionDescription) super.instructionDescription();
     }
-    
+
     private RiscTemplate _synthesizedFrom;
 
     public void setSynthesizedFrom(RiscTemplate synthesizedFrom) {
@@ -46,11 +46,11 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
     public RiscTemplate synthesizedFrom() {
         return _synthesizedFrom;
     }
-    
+
     /**
      * Adds the value of a constant field to the opcode of the instruction and
      * updates the opcode mask to include the bits of the field.
-     * 
+     *
      * @param field a field containing a constant value
      * @param value the constant value
      */
@@ -62,12 +62,11 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
             ProgramError.unexpected("operand for constant field " + field.name() + " does not fit: " + value);
         }
     }
-    
-    @Implement(RiscInstructionDescriptionVisitor.class)
+
     public void visitField(RiscField field) {
         _allFields.append(field);
         if (field instanceof OperandField) {
-            final OperandField operandField = (OperandField) field; 
+            final OperandField operandField = (OperandField) field;
             if (field instanceof OffsetParameter) {
                 setLabelParameterIndex();
             }
@@ -81,30 +80,27 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
             organizeConstant(field, 0);
         } else {
             ProgramError.unexpected("unknown or unallowed type of field: " + field);
-        }              
+        }
     }
-    
-    @Implement(RiscInstructionDescriptionVisitor.class)
+
     public void visitConstant(RiscConstant constant) {
         organizeConstant(constant.field(), constant.value());
     }
-    
-    @Implement(RiscInstructionDescriptionVisitor.class)
+
     public void visitConstraint(InstructionConstraint constraint) {
     }
 
     /**
      * Sets the internal name of this template from a given string it is not already set.
-     * 
+     *
      * @param string  a string specified in the to consider
      */
-    @Implement(RiscInstructionDescriptionVisitor.class)
     public void visitString(String string) {
         if (internalName() == null) {
             setInternalName(string);
         }
     }
-    
+
     public Sequence<OperandField> operandFields() {
         return _operandFields;
     }
@@ -120,12 +116,12 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
     public Sequence<OptionField> optionFields() {
         return _optionFields;
     }
-    
+
     public void addOptionField(OptionField f) {
         _allFields.append(f);
         _optionFields.append(f);
     }
-   
+
     public int specificity() {
         return Integer.bitCount(_opcodeMask);
     }
@@ -151,7 +147,7 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
     }
 
     @Override
-    public boolean isEquivalentTo(Template other) {        
+    public boolean isEquivalentTo(Template other) {
         if (this == other) {
             return true;
         }
@@ -177,7 +173,7 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
     @Override
     public Sequence<Operand> operands() {
         Problem.unimplemented();
-        return null;        
+        return null;
     }
 
     @Override
@@ -189,5 +185,5 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
     public String toString() {
         return "<" + getClass().getSimpleName() + " #" + serial() + ": " + internalName() + " " + Integer.toHexString(opcode()) + ", " + parameters() + ">";
     }
-    
+
 }

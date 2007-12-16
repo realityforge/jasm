@@ -22,13 +22,13 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     private static final int MAX_NUM_OF_OPERANDS = 3;
     private static final int MAX_NUM_OF_IMPLICIT_OPERANDS = 3;
     private static final int MAX_NUM_OF_PARAMETERS = 3;
-          
+
     private final InstructionAssessment _instructionFamily;
     private boolean _hasSibByte;
     private final X86TemplateContext _context;
     private HexByte _instructionSelectionPrefix;
     private HexByte _opcode1;
-    private HexByte _opcode2;    
+    private HexByte _opcode2;
     private ModRMGroup _modRMGroup;
     private ModRMGroup.Opcode _modRMGroupOpcode;
     private AppendableSequence<X86Operand> _operands = new ArrayListSequence<X86Operand>(MAX_NUM_OF_OPERANDS);
@@ -51,11 +51,11 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     protected X86TemplateContext context() {
         return _context;
     }
-    
+
     public HexByte instructionSelectionPrefix() {
         return _instructionSelectionPrefix;
     }
-    
+
     public HexByte opcode1() {
         return _opcode1;
     }
@@ -91,7 +91,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     protected void haveSibByte() {
         _hasSibByte = true;
     }
-    
+
     public X86TemplateContext.SibBaseCase sibBaseCase() {
         return _context.sibBaseCase();
     }
@@ -105,24 +105,24 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     }
 
     private WordWidth _externalCodeSizeAttribute;
-    
+
     public WordWidth externalCodeSizeAttribute() {
         return _externalCodeSizeAttribute;
     }
-    
+
     protected void setExternalCodeSizeAttribute(WordWidth externalCodeSizeAttribute) {
         _externalCodeSizeAttribute = externalCodeSizeAttribute;
     }
-    
+
     @Override
     public String internalName() {
         String result = super.internalName();
         if (result != null && _internalOperandTypeSuffix != null) {
             result += _internalOperandTypeSuffix;
         }
-        return result; 
+        return result;
     }
-    
+
     @Override
     public String externalName() {
         if (instructionDescription().externalName() != null) {
@@ -134,26 +134,26 @@ public abstract class X86Template extends Template implements X86InstructionDesc
         }
         return result;
     }
-    
+
     private String format(HexByte parameter) {
         return parameter == null ? "" : parameter.toString() + ", ";
     }
-    
+
     @Override
     public String toString() {
         return "<X86Template #" + serial() + ": " + internalName() + " " + format(_instructionSelectionPrefix) + format(_opcode1) + format(_opcode2) + _operands + ">";
     }
 
     private String _namePrefix = "";
-    
+
     protected void useNamePrefix(String namePrefix) {
         if (_namePrefix.length() == 0) {
             _namePrefix = namePrefix;
         }
     }
-    
+
     private String _assemblerMethodName;
-    
+
     @Override
     public String assemblerMethodName() {
         if (_assemblerMethodName == null) {
@@ -197,7 +197,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
         }
         return parameter;
     }
-    
+
     protected void addParameter(X86Parameter parameter, ArgumentRange argumentRange) {
         addParameter(parameter);
         parameter.setArgumentRange(argumentRange);
@@ -208,11 +208,11 @@ public abstract class X86Template extends Template implements X86InstructionDesc
         parameter.excludeTestArguments(testArgumentExclusion);
     }
 
-    protected <EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument<EnumerableArgument_Type>> X86Parameter addEnumerableParameter(X86Operand.Designation designation, ParameterPlace parameterPlace, 
+    protected <EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument<EnumerableArgument_Type>> X86Parameter addEnumerableParameter(X86Operand.Designation designation, ParameterPlace parameterPlace,
                                             final Enumerator<EnumerableArgument_Type> enumerator) {
         return addParameter(new X86EnumerableParameter<EnumerableArgument_Type>(designation, parameterPlace, enumerator));
     }
-    
+
     protected void addImplicitOperand(X86ImplicitOperand implicitOperand) {
         _implicitOperands.append(implicitOperand);
         _operands.append(implicitOperand);
@@ -232,7 +232,6 @@ public abstract class X86Template extends Template implements X86InstructionDesc
         return _parameters;
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitAddressingMethodCode(AddressingMethodCode addressingMethodCode, X86Operand.Designation designation) throws TemplateNotNeededException {
         switch (addressingMethodCode) {
             case M: {
@@ -249,12 +248,12 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     private String getOperandTypeSuffix(OperandTypeCode operandTypeCode) throws TemplateNotNeededException {
         switch (operandTypeCode) {
             case b:
-                return "b";               
+                return "b";
             case z:
                 if (operandSizeAttribute() != addressSizeAttribute()) {
                     throw new TemplateNotNeededException();
                 }
-            case d_q:    
+            case d_q:
             case v:
                 switch (operandSizeAttribute()) {
                     case BITS_16:
@@ -277,11 +276,11 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     private void checkSuffix(String newSuffix, String oldSuffix) {
         if (oldSuffix != null) {
             ProgramError.check(newSuffix.equals(oldSuffix), "conflicting operand type codes specified: " + newSuffix + " vs. " + oldSuffix);
-        }                
+        }
     }
-    
-    private String _externalOperandTypeSuffix;    
-    
+
+    private String _externalOperandTypeSuffix;
+
     private void setExternalOperandTypeSuffix(String suffix) {
         checkSuffix(suffix, _externalOperandTypeSuffix);
         _externalOperandTypeSuffix = suffix;
@@ -298,23 +297,19 @@ public abstract class X86Template extends Template implements X86InstructionDesc
         checkSuffix(suffix, _internalOperandTypeSuffix);
         _internalOperandTypeSuffix = suffix;
     }
-    
-    @Implement(X86InstructionDescriptionVisitor.class)
+
     public void visitOperandTypeCode(OperandTypeCode operandTypeCode) throws TemplateNotNeededException {
         setOperandTypeSuffix(getOperandTypeSuffix(operandTypeCode));
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitGeneralRegister(GeneralRegister generalRegister, X86Operand.Designation designation, ImplicitOperand.ExternalPresence externalPresence) {
         addImplicitOperand(new X86ImplicitOperand(designation, externalPresence, generalRegister));
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitSegmentRegister(SegmentRegister segmentRegister, X86Operand.Designation designation) {
         addImplicitOperand(new X86ImplicitOperand(designation, ImplicitOperand.ExternalPresence.EXPLICIT, segmentRegister));
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitModRMGroup(ModRMGroup modRMGroup) throws TemplateNotNeededException {
         _modRMGroup = modRMGroup;
         final ModRMDescription instructionDescription = modRMGroup.getInstructionDescription(_context.modRMGroupOpcode());
@@ -325,19 +320,17 @@ public abstract class X86Template extends Template implements X86InstructionDesc
         setInternalName(instructionDescription.name().toLowerCase());
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitModCase(X86TemplateContext.ModCase modCase) throws TemplateNotNeededException {
         if (_context.modCase() != X86TemplateContext.ModCase.MOD_3) {
             throw new TemplateNotNeededException();
         }
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitInstructionConstraint(InstructionConstraint constraint) {
     }
 
     protected abstract void organize_M(X86Operand.Designation designation) throws TemplateNotNeededException;
-    
+
     protected <EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument<EnumerableArgument_Type>> void organize_E(X86Operand.Designation designation, ParameterPlace place,
                     final Enumerator<EnumerableArgument_Type> registerEnumerator, TestArgumentExclusion testArgumentExclusion) throws TemplateNotNeededException {
         if (context().modCase() == X86TemplateContext.ModCase.MOD_3) {
@@ -353,7 +346,6 @@ public abstract class X86Template extends Template implements X86InstructionDesc
         }
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitFloatingPointOperandCode(FloatingPointOperandCode floatingPointOperandCode, X86Operand.Designation designation,
                                               final TestArgumentExclusion testArgumentExclusion) throws TemplateNotNeededException {
         switch (floatingPointOperandCode) {
@@ -367,23 +359,19 @@ public abstract class X86Template extends Template implements X86InstructionDesc
         }
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
-    public void visitFPStackRegister(FPStackRegister fpStackRegister, X86Operand.Designation designation) {        
+    public void visitFPStackRegister(FPStackRegister fpStackRegister, X86Operand.Designation designation) {
         addImplicitOperand(new X86ImplicitOperand(designation, ImplicitOperand.ExternalPresence.EXPLICIT, fpStackRegister));
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitString(String string) {
         assert internalName() == null;
         setInternalName(string.toLowerCase());
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitInteger(Integer integer, X86Operand.Designation designation) {
         addImplicitOperand(new X86ImplicitOperand(designation, ImplicitOperand.ExternalPresence.EXPLICIT, new Immediate8Argument((byte) integer.intValue())));
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitHexByte(HexByte hexByte) throws TemplateNotNeededException {
         if (_opcode1 == null) {
             _opcode1 = hexByte;
@@ -403,8 +391,8 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     /**
      * @param other
      *            another template to compare against
-     * @return whether both templates have the same name and operands and thus 
-     *         are assumed to implement the same machine instruction semantics, 
+     * @return whether both templates have the same name and operands and thus
+     *         are assumed to implement the same machine instruction semantics,
      *         though potentially denoting different machine codes
      */
     public boolean isRedundant(X86Template other) {

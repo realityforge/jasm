@@ -17,7 +17,7 @@ import com.sun.max.util.*;
  */
 public final class FBfcc extends NameSuffixSymbolicArgument implements Predicate<FCCOperand, FBfcc> {
     private FBfcc _negation;
-    
+
     private FBfcc(int value) {
         super(value);
     }
@@ -26,7 +26,7 @@ public final class FBfcc extends NameSuffixSymbolicArgument implements Predicate
         _negation = negation;
         negation._negation = this;
     }
-    
+
     public static final FBfcc A = new FBfcc(8);
     public static final FBfcc N = new FBfcc(0, A);
     public static final FBfcc U = new FBfcc(7);
@@ -42,9 +42,8 @@ public final class FBfcc extends NameSuffixSymbolicArgument implements Predicate
     public static final FBfcc UGE = new FBfcc(12, L);
     public static final FBfcc LE = new FBfcc(13, UG);
     public static final FBfcc ULE = new FBfcc(14, G);
-    public static final FBfcc O = new FBfcc(15, U);    
-    
+    public static final FBfcc O = new FBfcc(15, U);
+
     public static final Symbolizer<FBfcc> SYMBOLIZER = Symbolizer.Static.initialize(FBfcc.class);
-    @Implement(Predicate.class)
     public FBfcc negate() { return _negation; }
 }

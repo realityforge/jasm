@@ -149,7 +149,7 @@ public class IA32Template extends X86Template {
                     default:
                         throw new TemplateNotNeededException();
                 }
-                break; 
+                break;
             }
             case MOD_2: {
                 switch (context().addressSizeAttribute()) {
@@ -200,11 +200,10 @@ public class IA32Template extends X86Template {
         }
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitOperandCode(OperandCode operandCode, X86Operand.Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion)
         throws TemplateNotNeededException {
         switch (operandCode) {
-            case Ap: 
+            case Ap:
                 instructionDescription().beNotExternallyTestable(); // gas does not support cross-segment instructions
                 switch (context().addressSizeAttribute()) {
                     case BITS_16:
@@ -382,15 +381,15 @@ public class IA32Template extends X86Template {
             }
             case Pd:
             case Pq: {
-                addEnumerableParameter(designation, ParameterPlace.MOD_REG, MMXRegister.ENUMERATOR).excludeTestArguments(testArgumentExclusion);                
+                addEnumerableParameter(designation, ParameterPlace.MOD_REG, MMXRegister.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
                 break;
             }
             case PRq: {
                 if (context().modCase() != X86TemplateContext.ModCase.MOD_3) {
                     throw new TemplateNotNeededException();
                 }
-                addEnumerableParameter(designation, ParameterPlace.MOD_RM, MMXRegister.ENUMERATOR).excludeTestArguments(testArgumentExclusion);                
-                break;                
+                addEnumerableParameter(designation, ParameterPlace.MOD_RM, MMXRegister.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                break;
             }
             case Qd:
             case Qq: {
@@ -441,7 +440,6 @@ public class IA32Template extends X86Template {
         }
     }
 
-    @Implement(X86InstructionDescriptionVisitor.class)
     public void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, X86Operand.Designation designation, ImplicitOperand.ExternalPresence externalPresence) {
         switch (operandSizeAttribute()) {
             case BITS_16:

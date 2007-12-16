@@ -27,7 +27,7 @@ import com.sun.max.lang.*;
  *     bne    . -200
  *
  * Examples of branch instructions with detected labels:
- * 
+ *
  *     ba     L1: +112
  *     be,pt  L2: -50
  *
@@ -37,7 +37,7 @@ import com.sun.max.lang.*;
  * @author Greg Wright
  */
 public abstract class RiscExternalInstruction implements RiscInstructionDescriptionVisitor {
-    
+
     protected final RiscTemplate _template;
     protected final Queue<Argument> _arguments;
     protected final int _offset;
@@ -59,7 +59,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
         _labels = labels;
         _globalLabelMapper = null;
     }
- 
+
     public RiscExternalInstruction(RiscTemplate template, Sequence<Argument> arguments, int offset, Sequence<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
         _template = template;
         _arguments = new MutableQueue<Argument>(arguments);
@@ -69,7 +69,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
     }
 
     private String _nameString;
-    
+
     public String name() {
         if (_nameString == null) {
             _nameString = _template.externalName();
@@ -80,9 +80,9 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
                 }
             }
         }
-        return _nameString;        
+        return _nameString;
     }
-    
+
     private String _operandsString;
 
     public String operands() {
@@ -101,16 +101,16 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
     private void print(String s) {
         _operandsString += s;
     }
-    
+
     protected abstract boolean isAbsoluteBranch();
-    
+
     /**
      * @return the symbol used to represent the value of the current location counter
      */
     protected String locationCounterSymbol() {
         return ".";
     }
-    
+
     private void printBranchDisplacement(ImmediateArgument immediateArgument) {
         final int delta = (int) immediateArgument.asLong();
         if (_offset > 0) {
@@ -138,10 +138,9 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
         }
         print(Integer.toString(delta));
     }
-    
+
     private Object _previousSpecification;
-    
-    @Implement(RiscInstructionDescriptionVisitor.class)
+
     public void visitField(RiscField field) {
         if (field instanceof OperandField) {
             final OperandField operandField = (OperandField) field;
@@ -163,7 +162,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
                     if (operandField.isSigned()) {
                         print(immediateArgument.signedExternalValue());
                     } else {
-                        print(immediateArgument.externalValue());                        
+                        print(immediateArgument.externalValue());
                     }
                 }
             } else {
@@ -172,14 +171,12 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
             _previousSpecification = field;
         }
     }
-    
-    @Implement(RiscInstructionDescriptionVisitor.class)
-    public void visitConstant(RiscConstant constant) { 
+
+    public void visitConstant(RiscConstant constant) {
     }
-    
+
     private boolean _writingStrings;
-    
-    @Implement(RiscInstructionDescriptionVisitor.class)
+
     public void visitString(String string) {
         if (_writingStrings) {
             print(string);
@@ -188,7 +185,6 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
         _writingStrings = true;
     }
 
-    @Implement(RiscInstructionDescriptionVisitor.class)
     public void visitConstraint(InstructionConstraint constraint) {
     }
 

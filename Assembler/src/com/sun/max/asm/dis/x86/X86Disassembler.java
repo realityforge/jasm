@@ -21,7 +21,7 @@ import com.sun.max.util.*;
 
 /**
  * A disassembler for x86 instructions.
- * 
+ *
  * @see Disassembler
  * @see X86DisassembledInstruction
  *
@@ -29,15 +29,15 @@ import com.sun.max.util.*;
  */
 public abstract class X86Disassembler<Template_Type extends X86Template, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
                           extends Disassembler<Template_Type, DisassembledInstruction_Type> {
-    
+
     private int _currentOffset;
 
-    protected X86Disassembler(Assembly<Template_Type> assembly, WordWidth addressWidth) {   
+    protected X86Disassembler(Assembly<Template_Type> assembly, WordWidth addressWidth) {
         super(assembly, addressWidth, Endianness.LITTLE);
     }
-    
+
     protected abstract boolean isRexPrefix(HexByte opcode);
-    
+
     private X86InstructionHeader scanInstructionHeader(BufferedInputStream stream) throws IOException {
         int byteValue = stream.read();
         if (byteValue < 0) {
@@ -61,13 +61,13 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
                 }
             } else {
                 header._opcode2 = hexByte;
-                return header;                
+                return header;
             }
             byteValue = stream.read();
         } while (byteValue >= 0);
         return header;
     }
-    
+
     private Sequence<Argument> scanArguments(BufferedInputStream stream, Template_Type template, X86InstructionHeader header, byte modRMByte, byte sibByte) throws IOException {
         final AppendableSequence<Argument> arguments = new ArrayListSequence<Argument>();
         final byte rexByte = (header._rexPrefix != null) ? header._rexPrefix.byteValue() : 0;
@@ -134,7 +134,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
                     value = X86Field.extractRexValue(X86Field.REX_B_BIT_INDEX, rexByte);
                     // fall through...
                 case OPCODE2:
-                    value += header._opcode2.ordinal() & 7;                    
+                    value += header._opcode2.ordinal() & 7;
                     break;
             }
             final X86EnumerableParameter enumerableParameter = (X86EnumerableParameter) parameter;
@@ -147,7 +147,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
         }
         return arguments;
     }
-    
+
     private int getModVariantParameterIndex(Template_Type template, byte modRMByte, byte sibByte) {
         if (template.modCase() == X86TemplateContext.ModCase.MOD_0 && X86Field.MOD.extract(modRMByte) != X86TemplateContext.ModCase.MOD_0.value()) {
             switch (template.rmCase()) {
@@ -179,7 +179,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
                                 default:
                                     break;
                             }
-                        }                        
+                        }
                     }
                     break;
                 default:
@@ -188,7 +188,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
         }
         return -1;
     }
-    
+
     private byte getSibByte(BufferedInputStream stream, Template_Type template, byte modRMByte) throws IOException {
         if (template.addressSizeAttribute() == WordWidth.BITS_16) {
             return 0;
@@ -202,11 +202,11 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
         }
         return 0;
     }
-    
+
     protected abstract Map<X86InstructionHeader, AppendableSequence<Template_Type>> headerToTemplates();
-    
+
     private static int _serial;
-    
+
     public DisassembledInstruction_Type scanInstruction(BufferedInputStream stream, X86InstructionHeader header) throws IOException, AssemblyException {
         _serial++;
         Trace.line(3, "instruction: " + _serial);
@@ -253,11 +253,10 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
                             // Remove the mod variant argument
                             final Argument modVariantArgument = arguments.get(modVariantParameterIndex);
                             arguments = Sequence.Static.filter(arguments, new Predicate<Argument>() {
-                                @Implement(Predicate.class)
                                 public boolean evaluate(Argument argument) {
                                     return modVariantArgument != argument;
                                 }
-                            }); 
+                            });
                         }
                         if (!Sequence.Static.containsIdentical(arguments, null)) {
                             final Assembler assembler = createAssembler(_currentOffset);
@@ -283,14 +282,14 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
             final Template_Type template = prefixTemplates.first();
             final byte[] bytes = new byte[]{header._instructionSelectionPrefix.byteValue()};
             final DisassembledInstruction_Type disassembledInstruction = createDisassembledInstruction(_currentOffset, bytes, template, Sequence.Static.empty(Argument.class));
-            _currentOffset++;            
+            _currentOffset++;
             return disassembledInstruction;
         }
         throw new AssemblyException("unknown instruction");
     }
-    
+
     private static final int MORE_THAN_ANY_INSTRUCTION_LENGTH = 100;
-    
+
     @Override
     public Sequence<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream) throws IOException, AssemblyException {
         stream.mark(MORE_THAN_ANY_INSTRUCTION_LENGTH);
@@ -300,7 +299,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
         }
         return new ArrayListSequence<DisassembledInstruction_Type>(scanInstruction(stream, header));
     }
-    
+
     @Override
     public Sequence<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException {
         final AppendableSequence<DisassembledInstruction_Type> result = new ArrayListSequence<DisassembledInstruction_Type>();
@@ -308,7 +307,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
             stream.mark(MORE_THAN_ANY_INSTRUCTION_LENGTH);
             final X86InstructionHeader header = scanInstructionHeader(stream);
             if (header == null) {
-                return result;                
+                return result;
             }
             final DisassembledInstruction_Type disassembledInstruction = scanInstruction(stream, header);
             result.append(disassembledInstruction);

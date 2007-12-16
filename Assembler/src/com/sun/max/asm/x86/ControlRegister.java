@@ -14,38 +14,33 @@ import com.sun.max.util.*;
 public enum ControlRegister implements EnumerableArgument<ControlRegister> {
 
     CR0(0), CR2(2), CR3(3);
-    
+
     private final int _number;
-    
+
     private ControlRegister(int number) {
         _number = number;
     }
-    
-    @Implement(Symbol.class)
+
     public int value() {
         return _number;
     }
-    
-    @Implement(Argument.class)
+
     public long asLong() {
         return value();
     }
 
-    @Implement(Argument.class)
     public String externalValue() {
         return "%" + name().toLowerCase();
     }
-    
-    @Implement(Argument.class)
+
     public String disassembledValue() {
         return name().toLowerCase();
     }
-    
-    @Implement(Enumerable.class)
+
     public Enumerator<ControlRegister> enumerator() {
         return ENUMERATOR;
     }
-    
+
     public static final Enumerator<ControlRegister> ENUMERATOR = new Enumerator<ControlRegister>(ControlRegister.class);
 
 }

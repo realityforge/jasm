@@ -24,40 +24,40 @@ import com.sun.max.program.*;
  * The types for these two instruction categories are enumerated by
  * the {@code visit...} methods in the {@link RiscInstructionDescriptionVisitor}
  * and {@link X86InstructionDescriptionVisitor} classes.
- * 
+ *
  * @author Bernd Mathiske
  */
 public abstract class InstructionDescription implements Iterable<Object>, Cloneable {
 
     private static int _nextSerial;
-    
+
     private int _serial;
-    
+
     /**
      * The components of the description.
      */
     private final MutableSequence<Object> _specifications;
-    
+
     public InstructionDescription(MutableSequence<Object> specifications) {
         _specifications = specifications;
         _serial = _nextSerial++;
     }
-    
+
     public int serial() {
         return _serial;
     }
-    
+
     /**
-     * @return the objects from which this description is composed 
+     * @return the objects from which this description is composed
      */
     public MutableSequence<Object> specifications() {
         return _specifications;
     }
 
     private Sequence<InstructionConstraint> _constraints;
-    
+
     /**
-     * @return the {@link InstructionConstraint} instances (if any) within this description   
+     * @return the {@link InstructionConstraint} instances (if any) within this description
      */
     public Sequence<InstructionConstraint> constraints() {
         if (_constraints == null) {
@@ -65,31 +65,31 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
         }
         return _constraints;
     }
-    
+
     private String _architectureManualSection;
-    
+
     public InstructionDescription setArchitectureManualSection(String section) {
         _architectureManualSection = section;
         return this;
     }
-    
+
     public String architectureManualSection() {
         return _architectureManualSection;
     }
-    
+
     private String _externalName;
 
     public String externalName() {
         return _externalName;
     }
-    
+
     public InstructionDescription setExternalName(String externalName) {
         _externalName = externalName;
         return this;
     }
-    
+
     private boolean _isDisassemblable = true;
-    
+
     /**
      * Determines if the templates created from the description can be recovered from an assembled instruction.
      * This is almost always possible. One example where it isn't is an instruction description that
@@ -100,50 +100,49 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
     public boolean isDisassemblable() {
         return _isDisassemblable;
     }
-    
+
     public InstructionDescription beNotDisassemblable() {
         _isDisassemblable = false;
         return this;
     }
-    
+
     public boolean isSynthetic() {
         return false;
     }
-    
+
     private boolean _isExternallyTestable = true;
-    
+
     public boolean isExternallyTestable() {
         return _isExternallyTestable;
     }
-    
+
     public InstructionDescription beNotExternallyTestable() {
         _isExternallyTestable = false;
         return this;
     }
-    
+
     private WordWidth _requiredAddressSize;
-    
+
     public WordWidth requiredAddressSize() {
         return _requiredAddressSize;
     }
-    
+
     public InstructionDescription requireAddressSize(WordWidth requiredAddressSize) {
         _requiredAddressSize = requiredAddressSize;
         return this;
     }
-    
+
     private WordWidth _requiredOperandSize;
-    
+
     public WordWidth requiredOperandSize() {
         return _requiredOperandSize;
     }
-    
+
     public InstructionDescription requireOperandSize(WordWidth requiredOperandSize) {
         _requiredOperandSize = requiredOperandSize;
         return this;
     }
-    
-    @Implement(Iterable.class)
+
     public Iterator<Object> iterator() {
         return _specifications.iterator();
     }
@@ -172,6 +171,6 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
         }
         return false;
     }
-    
-    
+
+
 }

@@ -21,17 +21,14 @@ public class SPARC32Assembler extends SPARCAssembler implements Assembler32 {
         _startAddress = startAddress;
     }
 
-    @Implement(Assembler32.class)
     public int startAddress() {
         return _startAddress;
     }
 
-    @Implement(Assembler32.class)
     public void fixLabel(Label label, int address) {
         fixLabel32(label, address);
     }
-    
-    @Implement(Assembler32.class)
+
     public int address(Label label) throws AssemblyException {
         return address32(label);
     }

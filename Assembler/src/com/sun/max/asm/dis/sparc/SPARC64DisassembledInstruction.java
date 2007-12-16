@@ -12,32 +12,29 @@ import com.sun.max.asm.gen.risc.sparc.*;
 import com.sun.max.collect.*;
 
 /**
- * 
+ *
  *
  * @author Bernd Mathiske
  */
 public class SPARC64DisassembledInstruction extends SPARCDisassembledInstruction implements Address64Instruction {
 
     private final Address64Instruction.Mixin _addressInstruction;
-    
+
     SPARC64DisassembledInstruction(long startAddress, int offset, byte[] bytes, SPARCTemplate template, Sequence<Argument> arguments) {
         super(offset, bytes, template, arguments);
         _addressInstruction = new Address64Instruction.Mixin(this, startAddress);
     }
-    
-    @Implement(Address64Instruction.class)
+
     public long address() {
         return _addressInstruction.address();
     }
-    
-    @Implement(AddressInstruction.class)
+
     public String addressString() {
         return _addressInstruction.addressString();
     }
-    
-    @Implement(AddressInstruction.class)
+
     public int addressToOffset(ImmediateArgument argument) {
         return _addressInstruction.addressToOffset(argument);
-    }            
+    }
 
 }

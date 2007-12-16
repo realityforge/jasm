@@ -18,10 +18,9 @@ public class IA32Assembler extends IA32LabelAssembler implements Assembler32 {
     public final InstructionSet instructionSet() {
         return InstructionSet.IA32;
     }
-    
+
     private int _startAddress; // address of first instruction
 
-    @Implement(Assembler32.class)
     public int startAddress() {
         return _startAddress;
     }
@@ -33,12 +32,10 @@ public class IA32Assembler extends IA32LabelAssembler implements Assembler32 {
         _startAddress = startAddress;
     }
 
-    @Implement(Assembler32.class)
     public void fixLabel(Label label, int address) {
         fixLabel32(label, address);
     }
-    
-    @Implement(Assembler32.class)
+
     public int address(Label label) throws AssemblyException {
         return address32(label);
     }

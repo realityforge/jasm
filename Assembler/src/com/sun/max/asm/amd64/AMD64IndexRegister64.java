@@ -12,11 +12,11 @@ import com.sun.max.util.*;
 
 /**
  * Aliases for 64-bit AMD64 general registers to be used as index registers.
- * 
+ *
  * @author Bernd Mathiske
  */
 public enum AMD64IndexRegister64 implements GeneralRegister<AMD64IndexRegister64> {
-    
+
     RAX_INDEX,
     RCX_INDEX,
     RDX_INDEX,
@@ -33,7 +33,7 @@ public enum AMD64IndexRegister64 implements GeneralRegister<AMD64IndexRegister64
     R13_INDEX,
     R14_INDEX,
     R15_INDEX;
-    
+
     public static AMD64IndexRegister64 from(GeneralRegister generalRegister) {
         int ordinal = generalRegister.id();
         if (ordinal >= AMD64GeneralRegister64.RSP.id()) {
@@ -41,8 +41,7 @@ public enum AMD64IndexRegister64 implements GeneralRegister<AMD64IndexRegister64
         }
         return values()[ordinal];
     }
-    
-    @Implement(GeneralRegister.class)
+
     public int id() {
         int ordinal = ordinal();
         if (ordinal >= AMD64GeneralRegister64.RSP.id()) {
@@ -51,35 +50,29 @@ public enum AMD64IndexRegister64 implements GeneralRegister<AMD64IndexRegister64
         return ordinal;
     }
 
-    @Implement(GeneralRegister.class)    
     public WordWidth width() {
         return WordWidth.BITS_64;
     }
 
-    @Implement(Symbol.class)
     public int value() {
         return id();
     }
 
-    @Implement(Argument.class)
     public long asLong() {
         return value();
     }
 
-    @Implement(Argument.class)
     public String externalValue() {
         return AMD64GeneralRegister64.from(this).externalValue();
     }
-    
-    @Implement(Argument.class)
+
     public String disassembledValue() {
         return AMD64GeneralRegister64.from(this).disassembledValue();
     }
 
-    @Implement(Enumerable.class)
     public Enumerator<AMD64IndexRegister64> enumerator() {
         return ENUMERATOR;
     }
-    
+
     public static final Enumerator<AMD64IndexRegister64> ENUMERATOR = new Enumerator<AMD64IndexRegister64>(AMD64IndexRegister64.class);
 }

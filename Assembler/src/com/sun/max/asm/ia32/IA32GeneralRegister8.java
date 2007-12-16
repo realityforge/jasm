@@ -14,13 +14,13 @@ import com.sun.max.util.*;
  * @author Bernd Mathiske
  */
 public enum IA32GeneralRegister8 implements GeneralRegister<IA32GeneralRegister8> {
-        
-    // Note: keep the order such that 'value()' can rely on ordinals: 
-    
+
+    // Note: keep the order such that 'value()' can rely on ordinals:
+
     AL, CL, DL, BL, AH, CH, DH, BH;
 
     private static final IA32GeneralRegister8[] LOW_REGISTERS = {AL, CL, DL, BL};
-    
+
     public static IA32GeneralRegister8 lowFrom(GeneralRegister generalRegister) {
         return LOW_REGISTERS[generalRegister.id()];
     }
@@ -31,41 +31,34 @@ public enum IA32GeneralRegister8 implements GeneralRegister<IA32GeneralRegister8
         return HIGH_REGISTERS[generalRegister.id()];
     }
 
-    @Implement(GeneralRegister.class)    
     public WordWidth width() {
         return WordWidth.BITS_8;
     }
 
-    @Implement(Symbol.class)
     public int value() {
         return ordinal();
     }
-    
-    @Implement(GeneralRegister.class)
+
     public int id() {
         return ordinal() % 4;
     }
 
-    @Implement(Argument.class)
     public long asLong() {
         return value();
     }
 
-    @Implement(Argument.class)
     public String externalValue() {
         return "%" + name().toLowerCase();
     }
-  
-    @Implement(Argument.class)
+
     public String disassembledValue() {
         return name().toLowerCase();
     }
-  
-    @Implement(Enumerable.class)
+
     public Enumerator<IA32GeneralRegister8> enumerator() {
         return ENUMERATOR;
     }
 
     public static final Enumerator<IA32GeneralRegister8> ENUMERATOR = new Enumerator<IA32GeneralRegister8>(IA32GeneralRegister8.class);
-    
+
 }

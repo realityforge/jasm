@@ -14,32 +14,27 @@ import com.sun.max.util.*;
 public enum Scale implements EnumerableArgument<Scale> {
 
     SCALE_1, SCALE_2, SCALE_4, SCALE_8;
-    
-    @Implement(Symbol.class)
+
     public int value() {
         return ordinal();
     }
-    
-    @Implement(Argument.class)
+
     public long asLong() {
         return value();
     }
 
-    @Implement(Argument.class)
     public String externalValue() {
         return name().substring(name().length() - 1);
     }
-    
-    @Implement(Argument.class)
+
     public String disassembledValue() {
         return name().substring(name().length() - 1);
     }
 
-    @Implement(Enumerable.class)
     public Enumerator<Scale> enumerator() {
         return ENUMERATOR;
     }
-    
+
     public static final Enumerator<Scale> ENUMERATOR = new Enumerator<Scale>(Scale.class);
-    
+
 }

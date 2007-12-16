@@ -23,7 +23,7 @@ import com.sun.max.program.*;
  * @author Bernd Mathiske
  */
 public abstract class AssemblerGenerator<Template_Type extends Template> {
-    
+
     private final Assembly<Template_Type> _assembly;
     private final MaxPackage _outputPackage;
     private final String _rawAssemblerClassSimpleName;
@@ -31,7 +31,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     private final String _rawAssemblerClassName;
     private final String _labelAssemblerClassName;
     private final boolean _sortAssemblerMethods;
-    
+
     protected AssemblerGenerator(Assembly<Template_Type> assembly, boolean sortAssemblerMethods) {
         super();
         _assembly = assembly;
@@ -42,26 +42,26 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         _labelAssemblerClassName = _outputPackage.name() + "." + _labelAssemblerClassSimpleName;
         _sortAssemblerMethods = sortAssemblerMethods;
     }
-    
+
     public Assembly<Template_Type> assembly() {
         return _assembly;
     }
-    
+
     private File getFile(String classSimpleName) {
         final String directory = JavaProject.findSourceDirectory() + File.separator + _outputPackage.name().replace('.', File.separatorChar);
         return new File(directory, classSimpleName + JavaProject.SOURCE_FILE_EXTENSION);
     }
-    
+
     private void printPackageAffiliation(IndentWriter writer) {
         writer.println("package " + _outputPackage.name() + ";");
     }
-    
+
     private void printClassHeader(IndentWriter writer) {
         writer.println();
         printPackageAffiliation(writer);
-        writer.println();        
+        writer.println();
     }
-    
+
     private void printImports(IndentWriter writer, Set<MaxPackage> packages) {
         final MaxPackage[] array = packages.toArray(new MaxPackage[packages.size()]);
         java.util.Arrays.sort(array);
@@ -69,31 +69,31 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
             if (!p.equals(_outputPackage)) {
                 writer.println("import " + p.name() + ".*;");
             }
-        }         
+        }
     }
-    
+
     protected void printRawImports(IndentWriter writer, Set<MaxPackage> packages) {
         printImports(writer, packages);
     }
-    
+
     protected void printLabelImports(IndentWriter writer, Set<MaxPackage> packages) {
         printImports(writer, packages);
     }
-    
+
     private void printAssemblerConstructor(IndentWriter writer, String classSimpleName) {
-        writer.println("protected " + classSimpleName + "() {");        
+        writer.println("protected " + classSimpleName + "() {");
         writer.indent();
         writer.println("super();");
         writer.outdent();
         writer.println("}");
     }
-    
+
     protected String formatParameterList(String separator, Sequence<? extends Parameter> parameters, boolean typesOnly) {
         String sep = separator;
         final StringBuilder sb = new StringBuilder();
         for (Parameter parameter : parameters) {
             sb.append(sep);
-            if (parameter.type().isMemberClass()) {                
+            if (parameter.type().isMemberClass()) {
                 sb.append(parameter.type().getEnclosingClass().getSimpleName() + ".");
             }
             sb.append(parameter.type().getSimpleName());
@@ -107,17 +107,17 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         }
         return sb.toString();
     }
-    
+
     /**
      * Prints the source code for the assembler method corresponding to a given template.
-     * 
+     *
      * @return the number of source code lines printed
      */
     protected abstract int printMethod(IndentWriter writer, Template_Type template);
-    
+
     /**
      * Prints the source code for support methods that are used by the methods printed by {@link #printMethod(IndentWriter, Template)}.
-     * 
+     *
      * @return the number of source code lines printed
      */
     protected int printSubroutines(IndentWriter writer) {
@@ -130,17 +130,17 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
             for (Parameter parameter : template.parameters()) {
                 final Class type = parameter.type();
                 if (!type.isPrimitive()) {
-                    packages.add(MaxPackage.fromClass(type));                    
+                    packages.add(MaxPackage.fromClass(type));
                 }
             }
         }
         return packages;
     }
-    
+
     protected abstract Class<? extends Assembler> endiannessSpecificAssemblerClass();
-    
+
     private Sequence<Template_Type> _templates;
-    
+
     private Sequence<Template_Type> templates() {
         if (_templates == null) {
             if (_sortAssemblerMethods) {
@@ -156,7 +156,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
 
     private void printMethodComment(IndentWriter writer, Template_Type template, int number) {
         printMethodJavadoc(writer, template);
-        writer.println("// Template#: " + number + ", Serial#: " + template.serial());        
+        writer.println("// Template#: " + number + ", Serial#: " + template.serial());
     }
 
     /**
@@ -170,21 +170,21 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     /**
      * Allows subclasses to print ISA specific details for a template. For example, RISC synthetic instructions
      * print what raw instruction they are derived from.
-     * 
+     *
      * @param extraLinks
      *                a sequence to which extra javadoc links should be appended
      */
     protected void printExtraMethodJavadoc(IndentWriter writer, Template_Type template, AppendableSequence<String> extraLinks) {
     }
-    
+
     /**
      * Writes the javadoc comment for an assembler method.
-     * 
+     *
      * @param template the template from which the assembler method is generated
      */
-    protected void printMethodJavadoc(IndentWriter writer, Template_Type template) { 
+    protected void printMethodJavadoc(IndentWriter writer, Template_Type template) {
         final AppendableSequence<String> extraLinks = new ArrayListSequence<String>();
-        final Sequence<? extends Parameter> parameters = getParameters(template); 
+        final Sequence<? extends Parameter> parameters = getParameters(template);
         writer.println("/**");
         writer.println(" * Pseudo-external assembler syntax: {@code " + template.externalName() + externalMnemonicSuffixes(parameters) + "  }" + externalParameters(parameters));
         printExtraMethodJavadoc(writer, template, extraLinks);
@@ -270,12 +270,12 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         importPackages.add(MaxPackage.fromClass(AssemblyException.class));
         printRawImports(writer, importPackages);
         writer.println();
-        writer.println("public abstract class " + _rawAssemblerClassSimpleName + " extends " + endiannessSpecificAssemblerClass().getSimpleName() + " {");        
+        writer.println("public abstract class " + _rawAssemblerClassSimpleName + " extends " + endiannessSpecificAssemblerClass().getSimpleName() + " {");
         writer.println();
         writer.indent();
         printAssemblerConstructor(writer, _rawAssemblerClassSimpleName);
         writer.println();
-        
+
         int codeLineCount = 0;
         final Map<InstructionDescription, Integer> instructionDescriptions = new HashMap<InstructionDescription, Integer>();
         int maxTemplatesPerDescription = 0;
@@ -284,7 +284,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
             printMethodComment(writer, template, i + 1);
             codeLineCount += printMethod(writer, template);
             writer.println();
-            
+
             Integer count = instructionDescriptions.get(template.instructionDescription());
             if (count == null) {
                 count = 1;
@@ -300,7 +300,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         writer.outdent();
         writer.println("}");
         writer.close();
-        
+
         Trace.line(1, "Generated raw assembler: " + _rawAssemblerClassSimpleName +
                         " [code line count=" + codeLineCount + ", total line count=" + writer.lineCount() +
                         ", method count=" + (templates().length() + subroutineCount) +
@@ -309,7 +309,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
 
         return Files.updateGeneratedContent(rawAssemblerFile, charArrayWriter, "// START GENERATED CONTENT", "// END GENERATED CONTENT");
     }
-    
+
     /**
      * Gets the parameters for a template, replacing the label parameter with a LabelParameter instance
      * if the template has a label parameter and this generator is currently generating the label assembler.
@@ -323,7 +323,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         parameters.set(template.labelParameterIndex(), new LabelParameter());
         return parameters;
     }
-    
+
     protected Sequence<Parameter> printLabelMethodHead(IndentWriter writer, Template_Type template) {
         final Sequence<Parameter> parameters = getParameters(template);
         writer.print("public void " + template.assemblerMethodName() + "(");
@@ -332,7 +332,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         writer.indent();
         return parameters;
     }
-        
+
     protected void printInitialRawCall(IndentWriter writer, Template_Type template) {
         writer.println("final " + template.parameters().get(template.labelParameterIndex()).type() + " placeHolder = 0;");
         writer.print(template.assemblerMethodName() + "(");
@@ -342,13 +342,13 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
             if (i == template.labelParameterIndex()) {
                 writer.print("placeHolder");
             } else {
-                writer.print(template.parameters().get(i).variableName());                    
+                writer.print(template.parameters().get(i).variableName());
             }
             separator = ", ";
         }
         writer.println(");");
     }
-    
+
     protected void printRawCall(IndentWriter writer, Template_Type template, Sequence<Parameter> parameters) {
         writer.print(template.assemblerMethodName() + "(");
         String separator = "";
@@ -357,14 +357,14 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
             if (i == template.labelParameterIndex()) {
                 writer.print("label");
                 if (template.parameters().get(template.labelParameterIndex()) instanceof OffsetParameter) {
-                    writer.print("Offset"); 
+                    writer.print("Offset");
                 } else {
                     assert template.parameters().get(template.labelParameterIndex()) instanceof AddressParameter;
-                    writer.print("Address");              
+                    writer.print("Address");
                 }
                 writer.print("As" + Strings.firstCharToUpperCase(template.parameters().get(i).type().getSimpleName()) + "()");
             } else {
-                writer.print(parameters.get(i).variableName());                
+                writer.print(parameters.get(i).variableName());
             }
             separator = ", ";
         }
@@ -374,7 +374,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     protected abstract int printLabelMethod(IndentWriter writer, Template_Type labelTemplate, Sequence<Template_Type> labelTemplates);
 
     private boolean _generatingLabelAssembler;
-    
+
     protected boolean generatingLabelAssembler() {
         return _generatingLabelAssembler;
     }
@@ -383,14 +383,13 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         CharArraySource(int initialSize) {
             super(initialSize);
         }
-        @Implement(ReadableSource.class)
         public Reader reader(boolean buffered) {
             final Reader reader = new CharArrayReader(buf, 0, count);
             return buffered ? new BufferedReader(reader) : reader;
         }
-        
+
     }
-    
+
     private boolean generateLabelAssemblerClass() throws IOException {
         _generatingLabelAssembler = true;
         Trace.line(1, "Generating label assembler: " + _labelAssemblerClassSimpleName);
@@ -403,12 +402,12 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         importPackages.add(MaxPackage.fromClass(Label.class)); // for Label parameters
         printLabelImports(writer, importPackages);
         writer.println();
-        writer.println("public abstract class " + _labelAssemblerClassSimpleName + " extends " + _rawAssemblerClassSimpleName + " {");        
+        writer.println("public abstract class " + _labelAssemblerClassSimpleName + " extends " + _rawAssemblerClassSimpleName + " {");
         writer.println();
         writer.indent();
         printAssemblerConstructor(writer, _labelAssemblerClassSimpleName);
         writer.println();
-        
+
         int codeLineCount = 0;
         for (int i = 0; i < labelTemplates.length(); i++) {
             printMethodComment(writer, labelTemplates.get(i), i + 1);
@@ -418,18 +417,18 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         writer.println("}");
         writer.close();
         _generatingLabelAssembler = false;
-        
+
         Trace.line(1, "Generated label assembler: " + _labelAssemblerClassSimpleName + " [code line count=" + codeLineCount + ", total line count=" +
                         writer.lineCount() + ", method count=" + templates().length() + ")");
-        
+
         return Files.updateGeneratedContent(labelAssemblerFile, charArrayWriter, "// START GENERATED CONTENT", "// END GENERATED CONTENT");
     }
-    
+
     protected void emitByte(IndentWriter writer, String byteValue) {
         writer.print("emitByte(" + byteValue + ");");
     }
-    
-    protected void emitByte(IndentWriter writer, byte value) {        
+
+    protected void emitByte(IndentWriter writer, byte value) {
         emitByte(writer, "((byte) " + Bytes.toHexLiteral(value) + ")");
     }
 
@@ -443,21 +442,21 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
             } else {
                 Trace.line(1, "unmodified: " + _rawAssemblerClassName);
             }
-            
+
             if (generateLabelAssemblerClass()) {
                 Trace.line(1, "compiling: " + _labelAssemblerClassName);
                 if (!ToolChain.compile(_labelAssemblerClassName)) {
-                    ProgramError.fatal("compilation failed for: " + _labelAssemblerClassName);                
+                    ProgramError.fatal("compilation failed for: " + _labelAssemblerClassName);
                 }
             } else {
                 Trace.line(1, "unmodified: " + _labelAssemblerClassName);
             }
-            
+
             Trace.line(1, "done");
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             System.err.println("something went wrong: " + throwable + ": " + throwable.getMessage());
         }
     }
-    
+
 }

@@ -9,13 +9,13 @@ import com.sun.max.program.*;
 
 /**
  * Assembler labels for symbolic addressing.
- * 
+ *
  * This class provides combined functionality for both 32-bit and 64-bit address spaces.
  * The respective assembler narrows the usable interface to either.
  *
  * @see Assembler32
  * @see Assembler64
- * 
+ *
  * @author Bernd Mathiske
  */
 public class Label implements Argument {
@@ -49,12 +49,12 @@ public class Label implements Argument {
      * Binds this label to an address in the assembler's instruction stream that represents the start of an instruction.
      * The assembler may update the address if any emitted instructions change lengths, so that this label keeps
      * addressing the same logical instruction.
-     * 
+     *
      * Only to be called by {@link Assembler#bindLabel(Label)}.
-     * 
+     *
      * @param address
      *            an instruction's start address in the assembler's instruction stream
-     * 
+     *
      * @see Assembler#bindLabel(Label)
      */
     void bind(int offset) {
@@ -67,28 +67,28 @@ public class Label implements Argument {
         _offset += delta;
     }
 
-    private int _address32;    
+    private int _address32;
     private long _address64;
 
     /**
      * Assigns a fixed, absolute 32-bit address to this label.
-     * If used in a 64-bit assembler, 
+     * If used in a 64-bit assembler,
      * the effective address value would be unsigned-extended.
-     * 
+     *
      * @param address an absolute memory location
-     * 
+     *
      * @see Assembler#bindLabel(Label)
      */
     void fix32(int address32) {
         _address32 = address32;
         _state = State.FIXED_32;
     }
-    
+
     /**
      * Assigns a fixed, absolute 64-bit address to this label.
-     * 
+     *
      * @param address an absolute memory location
-     * 
+     *
      * @see Assembler#bindLabel(Label)
      */
     void fix64(long address64) {
@@ -104,7 +104,7 @@ public class Label implements Argument {
             case FIXED_32: {
                 return _address32;
             }
-            case FIXED_64: {                
+            case FIXED_64: {
                 ProgramError.unexpected("64-bit address in 32-bit assembler");
                 return -1;
             }
@@ -132,19 +132,16 @@ public class Label implements Argument {
         }
     }
 
-    @Implement(Argument.class)
     public String externalValue() {
         ProgramError.unexpected();
         return null;
     }
 
-    @Implement(Argument.class)
     public String disassembledValue() {
         ProgramError.unexpected();
         return null;
     }
 
-    @Implement(Argument.class)
     public long asLong() {
         Problem.unimplemented();
         return 0L;

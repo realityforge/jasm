@@ -22,7 +22,7 @@ public class InputOperandField extends OperandField<ImmediateArgument> {
 
     private final Iterable< ? extends Argument> _testArguments;
     private final ArgumentRange _argumentRange;
-    
+
     public InputOperandField(Iterable< ? extends Argument> testArguments, ArgumentRange argumentRange) {
         super(BitRange.create(new int[] {-1}, BitRangeOrder.DESCENDING));
         _testArguments = testArguments;
@@ -31,8 +31,8 @@ public class InputOperandField extends OperandField<ImmediateArgument> {
 
     public static InputOperandField create(OperandField valueRangeProvider) {
         return new InputOperandField(valueRangeProvider.getLegalTestArguments(), valueRangeProvider.argumentRange());
-    }    
-    
+    }
+
     @Override
     public ImmediateArgument disassemble(int instruction) {
         ProgramError.unexpected();
@@ -44,7 +44,6 @@ public class InputOperandField extends OperandField<ImmediateArgument> {
         return int.class;
     }
 
-    @Implement(Parameter.class)
     public String valueString() {
         return variableName();
     }
@@ -54,18 +53,15 @@ public class InputOperandField extends OperandField<ImmediateArgument> {
         super.setVariableName(name);
         return this;
     }
-    
-    @Implement(Parameter.class)
+
     public Iterable< ? extends Argument> getLegalTestArguments() {
         return _testArguments;
     }
 
-    @Implement(Parameter.class)
     public Iterable<? extends Argument> getIllegalTestArguments() {
         return Iterables.empty();
     }
 
-    @Implement(Parameter.class)
     public ArgumentRange argumentRange() {
         return _argumentRange;
     }

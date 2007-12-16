@@ -15,7 +15,7 @@ import com.sun.max.asm.gen.*;
 public interface Address32Instruction extends AddressInstruction {
 
     int address();
-    
+
     public static class Mixin implements Address32Instruction {
 
         private final int _startAddress;
@@ -25,23 +25,19 @@ public interface Address32Instruction extends AddressInstruction {
             _startAddress = startAddress;
             _disassembledInstruction = disassembledInstruction;
         }
-        
-        @Implement(Address32Instruction.class)
+
         public int address() {
             return _startAddress + startOffset();
         }
 
-        @Implement(AddressInstruction.class)
         public int startOffset() {
             return _disassembledInstruction.startOffset();
         }
-        
-        @Implement(AddressInstruction.class)
+
         public String addressString() {
             return String.format("0x%08X", address());
         }
 
-        @Implement(AddressInstruction.class)
         public int addressToOffset(ImmediateArgument argument) {
             final int argumentAddress = (int) argument.asLong();
             return argumentAddress - _startAddress;
