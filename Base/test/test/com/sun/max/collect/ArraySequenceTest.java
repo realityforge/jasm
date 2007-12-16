@@ -71,11 +71,12 @@ public class ArraySequenceTest extends TestCase {
     }
 
     public void test_add() {
+        final int count = 99;
         final AppendableSequence<Integer> seq1 = makeIntegerArraySequence(0);
         final AppendableSequence<Integer> seq2 = makeIntegerArraySequence(0);
-        final AppendableSequence<Integer> seq3 = makeIntegerArraySequence(99);
+        final AppendableSequence<Integer> seq3 = makeIntegerArraySequence(count);
         assertTrue(seq1.equals(seq2));
-        for (int i = 0; i < 95; i++) {
+        for (int i = 0; i < count; i++) {
             seq1.append(new Integer(i));
             seq2.append(new Integer(i));
             assertTrue(seq1.equals(seq2));
