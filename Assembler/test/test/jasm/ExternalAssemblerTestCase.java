@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=e41a0fef-5a42-49fa-9b28-da61c85178be*/
 package test.jasm;
 
 import com.sun.max.program.option.ProgramArgumentsParser;

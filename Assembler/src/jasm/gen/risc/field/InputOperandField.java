@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=40cde656-db9c-43c7-ba31-80bee57765cb*/
 package jasm.gen.risc.field;
 
 import com.sun.max.collect.Iterables;

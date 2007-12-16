@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=de44d5ac-8539-4b8f-94c8-acace3ba1395*/
 // START GENERATED CONTENT
 
 package jasm.ia32;

@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=2a1b0ea8-e4a9-49e9-aad8-13bad365e9b1*/
 package jasm.dis;
 
 import com.sun.max.collect.ArraySequence;

@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=c5ae3dc5-b2ec-4c80-86b8-0ee248848d05*/
 package test.com.sun.max.collect;
 
 import com.sun.max.ide.MaxTestCase;

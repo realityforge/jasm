@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=048f6b6a-4a54-4241-9a33-2eedcbbfdc2d*/
 package jasm.gen.cisc.x86;
 
 import com.sun.max.collect.Sets;

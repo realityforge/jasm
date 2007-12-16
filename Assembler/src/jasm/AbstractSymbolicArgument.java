@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=61c465be-328d-4985-a4d0-3ab5b361c84d*/
 package jasm;
 
 import jasm.util.StaticFieldName;

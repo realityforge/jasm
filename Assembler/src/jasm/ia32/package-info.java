@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=fb98ca65-8055-410c-a353-a6eb16a21b66*/
 /**
  * An assembly system for (almost all of) the IA32 instruction set.
  * Our own restriction here: the default address and operand size is ALWAYS 32 bits.

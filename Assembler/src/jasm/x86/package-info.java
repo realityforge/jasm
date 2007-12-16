@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=0f2c34f9-ba87-4c9e-b015-027a500efc3a*/
 /**
  * Common features of assemblers for any of the x86 instruction sets.
  *

@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=6e73a029-ec1e-4a1a-936a-73a3cbbb8b36*/
 package jasm.dis.x86;
 
 import com.sun.max.collect.MutableQueue;

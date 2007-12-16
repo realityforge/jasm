@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=bcb2a749-7f64-404d-8da3-b5651b8c3abc*/
 package com.sun.max.io;
 
 import com.sun.max.program.ProgramWarning;

@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=cd183128-2a91-4e3c-a930-7afdd95bd486*/
 /**
  *
  */

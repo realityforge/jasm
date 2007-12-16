@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=5bbc9ca1-8d94-4829-9767-462dd8a55104*/
 package com.sun.max.lang;
 
 import java.lang.reflect.Constructor;

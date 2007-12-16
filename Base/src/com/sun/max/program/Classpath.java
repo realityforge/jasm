@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=2bb80cb5-a008-4a2a-8664-dbe2ae1d312f*/
 package com.sun.max.program;
 
 import com.sun.max.collect.ArraySequence;

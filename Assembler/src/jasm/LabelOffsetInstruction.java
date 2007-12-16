@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=65f9c573-4904-4d65-99bf-89e5b8158a6a*/
 package jasm;
 
 import com.sun.max.collect.Enums;

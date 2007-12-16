@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=6f119a9d-8097-4894-87ef-1dd806afc442*/
 package test.jasm.ppc;
 
 import com.sun.max.ide.MaxTestCase;

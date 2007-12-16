@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=d50a56b5-3cd4-4d2f-862c-d3ea05e743a7*/
 package jasm.sparc;
 
 import jasm.Assembler32;

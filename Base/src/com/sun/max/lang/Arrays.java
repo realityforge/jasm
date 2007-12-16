@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=0dd00894-cf4f-4480-953f-bc8dc9d6abc1*/
 package com.sun.max.lang;
 
 import com.sun.max.collect.AppendableSequence;

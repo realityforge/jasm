@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=145e9c27-8827-4a2c-9830-23dc3e81250a*/
 package jasm.sparc;
 
 import jasm.NameSuffixSymbolicArgument;

@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=f6a3092a-f164-42d0-8ca8-eb34522944ab*/
 package com.sun.max.collect;
 
 
@@ -17,10 +16,10 @@ public class IntHashMap<Value_Type> {
     private MutableSequence<Value_Type> _values;
     private int _numberOfValues;
     private int _threshold;
-    
+
     public IntHashMap() {
     }
-    
+
     public Value_Type get(int key) {
         if (_keys == null) {
             return null;
@@ -36,21 +35,21 @@ public class IntHashMap<Value_Type> {
                 return null;
             }
             if (_keys[index] == key) {
-                return _values.get(index);  
+                return _values.get(index);
             }
             index++;
             index %= _keys.length;
         } while (index != start);
         return null;
     }
-    
+
     private static final int INITIAL_SIZE = 4;
-    
+
     private void setThreshold() {
         assert _keys.length == _values.length();
         _threshold = (_keys.length * 3) / 4;
     }
-    
+
     public void grow() {
         if (_keys == null) {
             _keys = new int[INITIAL_SIZE];
@@ -72,7 +71,7 @@ public class IntHashMap<Value_Type> {
             }
         }
     }
-    
+
     public Value_Type put(int key, Value_Type value) {
         assert value != null;
         if (_numberOfValues >= _threshold) {
@@ -96,7 +95,7 @@ public class IntHashMap<Value_Type> {
         _numberOfValues++;
         return null;
     }
-       
+
     public Sequence<Value_Type> toSequence() {
         final MutableSequence<Value_Type> sequence = new ArraySequence<Value_Type>(_numberOfValues);
         if (_values == null) {

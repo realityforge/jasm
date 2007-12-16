@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=24095ab5-3502-425f-9559-c6886bfe4b79*/
 package com.sun.max.lang;
 
 
@@ -23,5 +22,5 @@ public final class StaticLoophole {
     public static <T> T cast(Class<T> type, Object object) {
         return (T) object;
     }
-    
+
 }

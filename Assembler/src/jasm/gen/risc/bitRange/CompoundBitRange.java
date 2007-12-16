@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=3aa1199b-7b32-4421-b0c3-18b3377a309c*/
 package jasm.gen.risc.bitRange;
 
 import com.sun.max.collect.AppendableSequence;

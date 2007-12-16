@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=5503b4cd-bf94-4687-9ebe-6aae2a583d91*/
 /**
  * Common functionality of disassemblers for any of the x86 instruction sets
  *

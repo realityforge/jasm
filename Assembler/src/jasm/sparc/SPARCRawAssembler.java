@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=996d57fb-897e-460a-abda-34233daceb58*/
 // START GENERATED CONTENT
 
 package jasm.sparc;

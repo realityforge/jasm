@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=3754ac6e-d5bf-42d7-8881-be201fe91b41*/
 package com.sun.max.collect;
 
 import com.sun.max.lang.StaticLoophole;

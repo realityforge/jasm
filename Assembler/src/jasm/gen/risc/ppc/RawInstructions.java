@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=f6f3f1a7-2284-4a70-88c9-ee9f09494c29*/
 package jasm.gen.risc.ppc;
 
 import jasm.gen.InstructionConstraint;

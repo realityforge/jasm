@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=bb1334d6-3028-472a-bfcb-80bbe7d89154*/
 package jasm.gen;
 
 import jasm.Argument;

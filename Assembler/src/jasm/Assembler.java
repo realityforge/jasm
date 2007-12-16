@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=1a31fe07-4ce2-428b-ac77-2d9fa199cd80*/
 package jasm;
 
 import com.sun.max.collect.AppendableSequence;

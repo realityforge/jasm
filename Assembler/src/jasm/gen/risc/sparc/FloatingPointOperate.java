@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=b641de9d-0457-493d-8ae8-f6e9f9528d70*/
 package jasm.gen.risc.sparc;
 
 import static jasm.gen.risc.sparc.SPARCFields._dfrd;

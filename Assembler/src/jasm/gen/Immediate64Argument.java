@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=4347eb2c-d5da-40b3-b287-38a227fb5a9d*/
 package jasm.gen;
 
 import jasm.util.WordWidth;

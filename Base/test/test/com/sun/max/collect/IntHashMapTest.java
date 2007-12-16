@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=9b95977e-9e0a-4d53-95f1-9c2286da3ee0*/
 package test.com.sun.max.collect;
 
 import com.sun.max.collect.IntHashMap;

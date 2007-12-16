@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=640e4510-40c9-4c8f-a101-06ed223d1548*/
 package jasm.gen.risc.bitRange;
 
 

@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=110cdbb7-648e-4032-88d3-b908891b5b06*/
 package jasm.ppc;
 
 import jasm.util.Symbolizer;

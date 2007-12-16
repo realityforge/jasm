@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=e19286e4-b44f-4071-ab3c-ce1a4961889b*/
 package jasm.ia32;
 
 import jasm.Assembler32;

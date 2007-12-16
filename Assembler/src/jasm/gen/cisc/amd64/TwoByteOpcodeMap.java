@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=347ad031-88ed-4d13-9524-c821d95e56e5*/
 package jasm.gen.cisc.amd64;
 
 import static jasm.amd64.AMD64GeneralRegister8.CL;

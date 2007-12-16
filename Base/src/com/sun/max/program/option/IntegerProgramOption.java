@@ -1,22 +1,21 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=c0662793-9bd2-453e-af82-e63ca21b75d6*/
 package com.sun.max.program.option;
 
 
 /**
  * An assignment option that expects an integer value.
- * 
+ *
  * @author Bernd Mathiske
  */
 public class IntegerProgramOption extends AssignmentProgramOption<Integer> {
 
     private final Object _arg;
-    
+
     /**
      * Creates a program option that accepts an integer argument.
-     * 
+     *
      * @param prefix
      *            the prefix that uniquely identifies the option
      * @param description

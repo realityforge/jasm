@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=67d33df2-4111-4008-b5a6-1f2594701292*/
 package com.sun.max.program.option;
 
 /**

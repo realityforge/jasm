@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=dc4d7f34-2a2a-45f5-9d72-59047c9780e2*/
 package jasm.ppc;
 
 import jasm.OptionSuffixSymbolicArgument;

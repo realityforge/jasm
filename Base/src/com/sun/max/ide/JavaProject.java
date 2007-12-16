@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=bdabe898-1657-46ee-90cb-2f2ae6682aea*/
 package com.sun.max.ide;
 
 import com.sun.max.MaxPackage;

@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=27164aab-035e-41db-b67d-2cea49280af2*/
 package jasm.gen.cisc.ia32;
 
 import com.sun.max.program.ProgramError;

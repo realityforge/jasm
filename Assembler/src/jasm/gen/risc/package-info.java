@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=33919e4d-e95b-4b2f-aacb-b2a43e9e53f2*/
 /**
  * RISC Assembly
  *

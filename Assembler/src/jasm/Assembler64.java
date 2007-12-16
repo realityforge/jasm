@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=9fafb5bd-9ca0-4720-bec8-117ae079bbe4*/
 package jasm;
 
 /**

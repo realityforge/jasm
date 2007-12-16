@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=5dec5cb7-8efa-41af-8ca5-195762c136f6*/
 /**
  * A SPARC assembly system according to this book:
  * <a href="http://www.sparc.com/standards/SPARCV9.pdf">The SPARC Architecture Manual - Version 9</a>,

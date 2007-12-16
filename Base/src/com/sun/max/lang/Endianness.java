@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=69c5e913-ef6c-43c3-9930-6b1b2c55e210*/
 package com.sun.max.lang;
 
 import java.io.IOException;

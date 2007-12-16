@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=fa29398f-c171-4bd5-891e-9ea6860b9ca4*/
 package jasm.amd64;
 
 import jasm.util.Enumerator;

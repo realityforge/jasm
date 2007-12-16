@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=a38ec30c-dd08-46da-993d-768fe8e62d1c*/
 /**
  * A PowerPC instruction set assembly system.
  *

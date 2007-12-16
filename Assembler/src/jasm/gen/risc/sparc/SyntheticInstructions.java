@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=df07c4d9-c082-4204-bfd1-f6d16f874c1c*/
 package jasm.gen.risc.sparc;
 
 import static jasm.gen.InstructionConstraint.Static.getPredicateMethod;

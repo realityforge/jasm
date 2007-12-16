@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=884fd455-1443-490a-96b8-43dcc19b099a*/
 package jasm;
 
 import com.sun.max.program.Problem;

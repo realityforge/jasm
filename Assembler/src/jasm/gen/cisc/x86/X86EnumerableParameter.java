@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=9c40620d-d9ad-477a-ac5c-f1e34a750de2*/
 package jasm.gen.cisc.x86;
 
 import com.sun.max.collect.Iterables;

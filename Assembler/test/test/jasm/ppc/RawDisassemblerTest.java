@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=21e0b5a1-30f0-44ac-9e9c-bd35eddf807e*/
 package test.jasm.ppc;
 
 import jasm.gen.AssemblyTestComponent;

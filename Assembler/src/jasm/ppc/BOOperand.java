@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=3f10dcd7-9003-44bd-b97e-06f5127f643e*/
 package jasm.ppc;
 
 import jasm.AbstractSymbolicArgument;

@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=8bf76a1c-2892-43f5-bffa-9ef6880f6200*/
 package jasm.dis.ppc;
 
 import com.sun.max.collect.Sequence;

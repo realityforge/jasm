@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=6b91e61c-4bed-4e7e-9f5a-14fc8d20898f*/
 package com.sun.max.collect;
 
 import java.util.Iterator;
@@ -13,7 +12,7 @@ import java.util.LinkedList;
  * affected if a key is <i>re-inserted</i> into the map.
  * <p>
  * Note that {@linkplain #add(Object) insertion} and {@linkplain #iterator() iteration} should have the same performance
- * as for a standard {@code IdentityHashSet}. 
+ * as for a standard {@code IdentityHashSet}.
  *
  * @author Doug Simon
  */

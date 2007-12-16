@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=2115d981-e6fa-423b-977a-55220b79ede1*/
 package jasm.gen.risc.bitRange;
 
 import com.sun.max.program.ProgramError;

@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=e89be4a7-dcd9-4af2-b606-d8a6b9e4c684*/
 package jasm.gen.risc.sparc;
 
 import com.sun.max.collect.Sequence;

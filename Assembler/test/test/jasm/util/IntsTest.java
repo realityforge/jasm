@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=6da9cd72-c8d6-4c34-a0f0-014071ef8a96*/
 package test.jasm.util;
 
 import jasm.util.Ints;

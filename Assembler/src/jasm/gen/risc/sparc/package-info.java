@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=a9516c83-782c-4a71-ba58-6ef664a0c1df*/
 /**
  * SPARC assembler template descriptions
  *

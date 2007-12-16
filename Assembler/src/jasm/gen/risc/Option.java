@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=1b5f71f1-6728-4820-9dad-ce9284d5f953*/
 package jasm.gen.risc;
 
 import jasm.gen.risc.field.OptionField;

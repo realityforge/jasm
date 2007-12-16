@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=60a3c717-bbb4-480f-a692-e7cb8d85fb95*/
 package com.sun.max.collect;
 
 import java.util.Iterator;

@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=5d452936-3fa5-4d47-b2c2-e81c8a014cb0*/
 package jasm.gen.cisc.ia32;
 
 import static jasm.gen.cisc.ia32.IA32ModRMGroup.FP_D8;

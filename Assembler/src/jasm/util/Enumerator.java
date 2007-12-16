@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=c7dc824c-e917-4658-8b28-6781fc05846f*/
 package jasm.util;
 
 import java.util.EnumSet;

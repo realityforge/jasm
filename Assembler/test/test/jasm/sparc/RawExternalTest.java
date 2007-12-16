@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=d47335a4-270c-4a7b-97bd-7fa3ab96a052*/
 package test.jasm.sparc;
 
 import jasm.gen.AssemblyTestComponent;

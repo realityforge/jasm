@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=296a5002-b096-495c-b022-7a05e7a77948*/
 package jasm.dis.sparc;
 
 import com.sun.max.lang.Endianness;

@@ -1,21 +1,20 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=02bf96a0-de6e-4457-aecd-68e233e96565*/
 package com.sun.max.program.option;
 
 /**
  * An assignment option that expects a string value.
- * 
+ *
  * @author Doug Simon
  */
 public class StringProgramOption extends AssignmentProgramOption<String> {
 
     private final Object _arg;
-    
+
     /**
      * Creates a program option that accepts a string argument.
-     * 
+     *
      * @param prefix
      *            the prefix that uniquely identifies the option
      * @param description
@@ -49,5 +48,5 @@ public class StringProgramOption extends AssignmentProgramOption<String> {
     public StringProgramOption beMandatory() {
         return (StringProgramOption) super.beMandatory();
     }
-    
+
 }

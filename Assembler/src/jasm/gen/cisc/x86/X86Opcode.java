@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=27b78613-7cfc-4064-9b64-72e9761fb92c*/
 package jasm.gen.cisc.x86;
 
 import jasm.util.HexByte;

@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=a22df1ab-a902-44b8-ab10-5b684eb3572c*/
 package com.sun.max.program.option;
 
 import java.io.File;

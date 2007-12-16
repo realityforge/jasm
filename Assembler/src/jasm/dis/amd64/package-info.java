@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=4a97e8b5-95d5-441b-8751-9fc370b1d114*/
 /**
  * An AMD64 disassembler.
  *

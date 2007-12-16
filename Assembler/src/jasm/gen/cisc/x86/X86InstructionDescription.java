@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=9da43812-0d8e-4262-8f2b-662e48921351*/
 package jasm.gen.cisc.x86;
 
 import com.sun.max.collect.MutableSequence;

@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=0afa959f-a3ba-439c-b7b1-5b1955c49a32*/
 package jasm.gen.risc;
 
 import com.sun.max.collect.MutableQueue;

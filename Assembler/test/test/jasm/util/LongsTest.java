@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=f0111b43-e97d-4715-bdc5-67e5eb9c0795*/
 package test.jasm.util;
 
 import jasm.util.Longs;

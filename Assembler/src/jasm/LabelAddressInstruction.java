@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=59b102d2-1868-4b7f-b120-d794bc3ecf54*/
 package jasm;
 
 import com.sun.max.program.ProgramError;

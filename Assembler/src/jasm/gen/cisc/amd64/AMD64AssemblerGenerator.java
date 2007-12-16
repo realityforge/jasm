@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=ee2cf78b-0cb7-46fd-8d28-f06010e4e0ff*/
 package jasm.gen.cisc.amd64;
 
 import com.sun.max.io.IndentWriter;

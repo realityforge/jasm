@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=0137f2af-d65a-4b1e-855f-ac20629dd383*/
 /**
  * IA32 instruction assembly template instruction format specifications and construction
  *

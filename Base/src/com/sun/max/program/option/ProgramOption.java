@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=041bf595-f71d-4939-a3b1-861d9c30e7cb*/
 package com.sun.max.program.option;
 
 import java.util.HashSet;

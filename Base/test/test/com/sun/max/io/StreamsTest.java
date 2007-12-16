@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=1f91f430-5856-4251-8a5d-8c708563d55a*/
 package test.com.sun.max.io;
 
 import com.sun.max.io.Streams;

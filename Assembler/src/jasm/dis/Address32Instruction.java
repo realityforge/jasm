@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=88d6bb90-c720-4bd2-89ae-5fa13ef0d31f*/
 package jasm.dis;
 
 import jasm.gen.ImmediateArgument;

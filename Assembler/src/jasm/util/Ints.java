@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=8ef1462b-2a0e-4a7e-a9bc-c42be24dc3be*/
 package jasm.util;
 
 import com.sun.max.lang.Strings;

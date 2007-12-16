@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=010c15da-93cb-49a5-9e5a-e6bb6e0cd5c1*/
 /**
  * Bit ranges in 32 bit instructions.
  *

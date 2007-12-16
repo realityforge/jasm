@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=6cd804cd-dbe1-48b6-8ef4-811e25574386*/
 /**
  * x86 assembly instruction tables and generated templates,
  * operand types

@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=870c2028-2a8d-4eaa-8d71-8abd871dd212*/
 /**
  * Risc disassembler
  *

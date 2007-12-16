@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=420ad3c6-93ab-402e-b7f8-6135a685fb47*/
 package com.sun.max.lang;
 
 import com.sun.max.program.ProgramError;

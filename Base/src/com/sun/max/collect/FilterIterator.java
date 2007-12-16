@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=8cd511f0-7ff0-4f22-aeff-a62f321fcb33*/
 package com.sun.max.collect;
 
 import com.sun.max.util.Predicate;

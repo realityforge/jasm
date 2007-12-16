@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=0d108985-2ede-4303-a50b-da0d7bf6f3e6*/
 package jasm.gen.risc.ppc;
 
 import static jasm.gen.Expression.Static.add;

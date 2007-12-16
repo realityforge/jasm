@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=bf1aaf6d-3625-436c-ad38-5c73d4ff5a31*/
 package test.jasm.ia32;
 
 import jasm.gen.AssemblyTestComponent;

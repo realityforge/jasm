@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=11973ec0-3ebe-4644-8371-1db8c8075322*/
 /**
  * An IA32 disassembler
  *

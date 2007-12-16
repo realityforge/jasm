@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=3f054089-84d1-409f-8bee-f799b66de069*/
 package jasm.gen.risc.field;
 
 import jasm.gen.OffsetParameter;

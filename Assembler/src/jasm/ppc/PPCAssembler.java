@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=c782b878-1965-4cf1-aff9-35a649349582*/
 package jasm.ppc;
 
 import jasm.InstructionSet;

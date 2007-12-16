@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=2831ce98-7e3a-41de-9a93-dc8cec892b71*/
 // START GENERATED CONTENT
 
 package jasm.ppc;

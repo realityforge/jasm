@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=fafc0239-6c89-4405-b7ed-bb1eff0eb185*/
 /**
  * AMD64 assembly system specifications and construction
  *

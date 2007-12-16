@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=996b28c2-9e0c-4566-9efa-9f5de5e445aa*/
 package jasm.gen.risc.ppc;
 
 import jasm.gen.Expression;

@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=d3798235-d7e7-414c-bfe6-07e2835f39f2*/
 /**
  * The core of the assembly generator framework:
  * abstract representations of assembly instructions,

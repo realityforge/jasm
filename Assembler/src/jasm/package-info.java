@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=77973e8b-9fa0-41e8-8f48-9e12cb03092e*/
 /**
  * The Maxwell assembler framework,
  * which started out by copying the Java version of the Klein assembly framework,

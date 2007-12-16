@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=a6a72968-a716-4b0b-80f9-a52ed7aed04a*/
 package test.com.sun.max.collect;
 
 import com.sun.max.collect.Iterables;

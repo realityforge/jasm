@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=8a5759a4-1aa6-4ecd-ab31-db69dda6baa4*/
 package jasm.sparc;
 
 import jasm.util.StaticFieldName;

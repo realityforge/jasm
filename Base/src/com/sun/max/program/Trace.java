@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=2c19481b-f940-40b0-bb90-27288678f475*/
 package com.sun.max.program;
 
 import com.sun.max.io.MultiOutputStream;

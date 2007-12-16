@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=5070ed91-5e42-46c1-a73e-35a3d5f05f01*/
 package com.sun.max.io;
 
 import java.io.BufferedReader;

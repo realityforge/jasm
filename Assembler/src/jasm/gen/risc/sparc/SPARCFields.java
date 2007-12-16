@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=b9db9ea8-5b95-4b73-b367-a54b1df54bcd*/
 package jasm.gen.risc.sparc;
 
 import com.sun.max.lang.StaticFieldLiteral;

@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=46f154df-dad5-4dbb-82d6-ef1e421cbd47*/
 package jasm.dis.risc;
 
 import com.sun.max.collect.AppendableSequence;

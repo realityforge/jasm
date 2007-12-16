@@ -6,7 +6,6 @@
  * trademarks are used under license and are trademarks or registered trademarks of SPARC International, Inc. in the
  * U.S. and other countries.
  */
-/*VCSID=805b4e94-ce4e-482d-a86d-3ec3ab3bd4d6*/
 /**
  * Bit fields in assembler syllables.
  *

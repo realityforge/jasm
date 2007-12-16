@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=04e9bbc4-fbce-405b-ba84-6bf03b59271b*/
 package jasm.x86;
 
 import jasm.EnumerableArgument;

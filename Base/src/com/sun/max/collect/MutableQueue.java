@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=6731a767-fe08-496a-9bc9-74873e86cc13*/
 package com.sun.max.collect;
 
 import java.util.LinkedList;

@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=18a17901-9f1d-4893-bc12-63faed18b7b5*/
 package com.sun.max.collect;
 
 import java.util.EnumSet;

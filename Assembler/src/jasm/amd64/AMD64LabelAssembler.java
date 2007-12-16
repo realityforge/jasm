@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=ddf44d84-4e6a-4f14-b94f-5130ace94d1c*/
 // START GENERATED CONTENT
 
 package jasm.amd64;

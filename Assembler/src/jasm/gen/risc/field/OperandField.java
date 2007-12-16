@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=b60ee7c6-a89d-42fb-985d-d77214edbb06*/
 package jasm.gen.risc.field;
 
 import com.sun.max.collect.Sequence;

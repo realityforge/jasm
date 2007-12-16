@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=1282c4f5-c2fe-4a44-9833-97ab5d449cdc*/
 package com.sun.max.collect;
 
 import java.util.IdentityHashMap;

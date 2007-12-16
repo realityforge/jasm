@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=2fcd891c-dc01-4031-a59e-e5c84bd7314c*/
 package jasm.amd64;
 
 import jasm.Assembler64;

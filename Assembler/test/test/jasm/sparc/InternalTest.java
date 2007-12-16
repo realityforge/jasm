@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
-/*VCSID=4507a0da-6869-4c82-8c16-b10a29e34f74*/
 package test.jasm.sparc;
 
 import com.sun.max.ide.MaxTestCase;
