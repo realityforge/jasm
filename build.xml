@@ -55,7 +55,7 @@
              nonavbar="false"
              notree="false"
              source="1.5"
-             sourcepath="${main.src.path}"
+             sourcepath="${assembler.main.src.java}"
              splitindex="true"
              use="true"
              version="true">
