@@ -23,15 +23,6 @@ public class IterablesTest extends MaxTestCase {
         junit.textui.TestRunner.run(IterablesTest.class);
     }
 
-    public void test_from() {
-        final Iterable<Integer> iterable = Iterables.from(new Integer(0), new Integer(1), new Integer(2));
-        int sum = 0;
-        for (Integer i : iterable) {
-            sum += i;
-        }
-        assertTrue(sum == 3);
-    }
-
     private static final class StringEnumeration implements Enumeration<String> {
         private String[] _strings;
         private int _index;
@@ -51,16 +42,6 @@ public class IterablesTest extends MaxTestCase {
         public String nextElement() {
             return _strings[_index++];
         }
-    }
-
-    public void test_fromEnumeration() {
-        final StringEnumeration enumeration = new StringEnumeration(new String[] {"I", "am", "a", "cat"});
-        final Iterable<String> iterable = Iterables.fromEnumeration(enumeration);
-        String concat = "";
-        for (String s : iterable) {
-            concat += s;
-        }
-        assertTrue(concat.equals("Iamacat"));
     }
 
     public void test_empty() {

@@ -16,7 +16,7 @@ import java.util.Collection;
  *
  * @author Bernd Mathiske
  */
-public class ArrayListSequence<Element_Type> extends ArrayList<Element_Type> implements VariableSequence<Element_Type> {
+public class ArrayListSequence<Element_Type> extends ArrayList<Element_Type> implements AppendableSequence<Element_Type> {
 
     public ArrayListSequence() {
         super();

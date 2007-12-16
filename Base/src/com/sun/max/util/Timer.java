@@ -18,9 +18,6 @@ import java.util.Stack;
  * including nested computations. The timing data gathered for each computation includes
  * both flat time (time not spent inside timed inner computations) and total time.
  *
- * The {@link NanoTimer} class provides similiar functionality but at nanosecond
- * granularity and no support for total times.
- *
  * @author  Doug Simon
  */
 public final class Timer<Key_Type> {

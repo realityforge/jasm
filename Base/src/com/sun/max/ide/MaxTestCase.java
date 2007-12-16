@@ -5,15 +5,8 @@
 package com.sun.max.ide;
 
 import com.sun.max.MaxPackage;
-import com.sun.max.PackageLoader;
-import com.sun.max.lang.StaticLoophole;
-import com.sun.max.program.Classpath;
-import com.sun.max.program.ProgramError;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 public class MaxTestCase extends TestCase {
 
@@ -46,36 +39,5 @@ public class MaxTestCase extends TestCase {
             cause = invocationTargetException.getTargetException();
         }
         return cause;
-    }
-
-    /**
-     * Creates a JUnit test suite for a given package and populates it with all the classes
-     * in that package that subclass {@link TestCase} if {@code addClasses == true}.
-     */
-    public static TestSuite createSuite(MaxPackage maxPackage, boolean addClasses) {
-        final TestSuite suite = new TestSuite(maxPackage.name());
-        if (addClasses) {
-            addTests(maxPackage, suite);
-        }
-        return suite;
-    }
-
-    /**
-     * Adds all the classes in {@code javaPackage} that subclass {@link TestCase} to {@code suite}.
-     */
-    public static void addTests(MaxPackage maxPackage, TestSuite suite) {
-        try {
-            final PackageLoader packageLoader = new PackageLoader(maxPackage.getClass().getClassLoader(), Classpath.fromSystem());
-            for (Class javaClass : packageLoader.load(maxPackage)) {
-                if (!Modifier.isAbstract(javaClass.getModifiers()) &&  TestCase.class.isAssignableFrom(javaClass)) {
-                    final Class<Class<? extends TestCase>> type = null;
-                    suite.addTestSuite(StaticLoophole.cast(type, javaClass));
-                }
-            }
-        } catch (ClassNotFoundException e) {
-            ProgramError.unexpected(e);
-        } catch (IOException e) {
-            ProgramError.unexpected(e);
-        }
     }
 }

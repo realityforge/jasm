@@ -159,8 +159,8 @@ public abstract class MaxPackage implements Comparable<MaxPackage> {
                     for (final Enumeration<? extends ZipEntry> e = zipFile.entries(); e.hasMoreElements();) {
                         final ZipEntry zipEntry = e.nextElement();
                         final String nameWithSlashes = zipEntry.getName();
-                        if (nameWithSlashes.endsWith(Classpath.CLASS_FILE_EXTENSION)) {
-                            final String nameWithDots = Strings.chopSuffix(nameWithSlashes, Classpath.CLASS_FILE_EXTENSION.length()).replace('/', '.');
+                        if (nameWithSlashes.endsWith(".class")) {
+                            final String nameWithDots = Strings.chopSuffix(nameWithSlashes, ".class".length()).replace('/', '.');
                             if (nameWithDots.startsWith(name())) {
                                 final String subPackageName = nameWithDots.substring(0, nameWithDots.lastIndexOf('.'));
                                 packages.add(MaxPackage.fromName(subPackageName));

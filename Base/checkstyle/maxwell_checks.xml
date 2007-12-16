@@ -76,7 +76,7 @@ Description:
         <module name="FinalLocalVariable"/>
         <module name="IllegalType">
             <property name="tokens" value="METHOD_DEF,PARAMETER_DEF,VARIABLE_DEF"/>
-            <property name="illegalClassNames" value="java.util.GregorianCalendar, java.util.Hashtable, java.util.HashSet, java.util.HashMap, java.util.ArrayList, java.util.LinkedHashMap, java.util.LinkedHashSet, java.util.TreeMap, com.sun.max.collect.ArrayListSequence, com.sun.max.collect.ArraySequence, com.sun.max.collect.SequenceMultiMap, com.sun.max.collect.WeakIdentityHashMap"/>
+            <property name="illegalClassNames" value="java.util.GregorianCalendar, java.util.Hashtable, java.util.HashSet, java.util.HashMap, java.util.ArrayList, java.util.LinkedHashMap, java.util.LinkedHashSet, java.util.TreeMap, com.sun.max.collect.ArrayListSequence, com.sun.max.collect.ArraySequence, com.sun.max.collect.SequenceMultiMap"/>
             <property name="format" value="^(.*[\.])?Abstract[A-Z].*$"/>
         </module>
         <module name="MultipleVariableDeclarations"/>

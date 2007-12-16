@@ -9,12 +9,11 @@ import java.util.LinkedList;
 
 /**
  * This is an {@link IdentityHashSet} with a predictable iteration order based on the order in which elements are
- * {@linkplain #add(Object) inserted} (<i>a la</i>{@link LinkedHashMap}). In particular, insertion order is not
+ * {@linkplain #add(Object) inserted} (<i>a la</i>{@link java.util.LinkedHashMap}). In particular, insertion order is not
  * affected if a key is <i>re-inserted</i> into the map.
  * <p>
  * Note that {@linkplain #add(Object) insertion} and {@linkplain #iterator() iteration} should have the same performance
- * as for a standard {@code IdentityHashSet}. However, {@linkplain #remove(Object) deletion} is a linear operation due
- * to the linked list use to record insertion order.
+ * as for a standard {@code IdentityHashSet}. 
  *
  * @author Doug Simon
  */
@@ -31,24 +30,11 @@ public class LinkedIdentityHashSet<Element_Type> extends IdentityHashSet<Element
         return true;
     }
 
-    @Override
-    public void clear() {
-        _order.clear();
-        super.clear();
-    }
-
     /**
      * Gets an iterator over the elements in the order they were (originally) inserted.
      */
     @Override
     public Iterator<Element_Type> iterator() {
-        assert _order.size() == size() : _order.size() + " != " + size();
         return _order.iterator();
-    }
-
-    @Override
-    public void remove(Element_Type element) {
-        _order.remove(element);
-        super.remove(element);
     }
 }
