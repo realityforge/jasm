@@ -3,4 +3,9 @@
 
 = PowerPC =
 
-Add your content here.
+A PowerPC assembly system.
+
+Once the assemblers have been generated, this package can be used separate from the framework by importing the following assembler packages only:
+
+    * jasm
+    * jasm.ppc
