@@ -10,12 +10,10 @@ import com.sun.max.collect.Sequence;
 import com.sun.max.lang.Arrays;
 import com.sun.max.lang.Strings;
 import com.sun.max.program.ProgramError;
-import com.sun.max.program.option.gui.ProgramOptionDialog;
 
 /**
  * A facility for parsing program options. The options may be supplied on the command line
- * but it's not a requirement. If the system property name "useProgramOptionDialog" is not null,
- * a dialog is presented to the user based on the configured options.
+ * but it's not a requirement.
  *
  * @author Bernd Mathiske
  * @author Doug Simon
@@ -139,9 +137,6 @@ public class ProgramArgumentsParser {
         }
         assert _arguments == null;
 
-        if (System.getProperty("useProgramOptionDialog") != null) {
-            _arguments = ProgramOptionDialog.show(null, this);
-        }
         if (_arguments == null) {
             _arguments = arguments.clone();
         }

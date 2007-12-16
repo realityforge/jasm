@@ -48,11 +48,10 @@ public abstract class MaxPackage implements Comparable<MaxPackage> {
 
     protected MaxPackage() {
         _packageName = toJava().getName();
-        assert getClass().getSimpleName().equals(Package.class.getSimpleName());
     }
 
     public static MaxPackage fromName(String packageName) {
-        final String name = packageName + "." + Package.class.getSimpleName();
+        final String name = packageName + ".Package";
         if (name.equals(java.lang.Package.class.getName())) {
             // Special case!
             return null;
