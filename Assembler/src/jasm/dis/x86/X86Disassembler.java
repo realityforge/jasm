@@ -50,7 +50,7 @@ import java.util.Map;
  * @author Bernd Mathiske
  */
 public abstract class X86Disassembler<Template_Type extends X86Template, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
-                          extends Disassembler<Template_Type, DisassembledInstruction_Type> {
+    extends Disassembler<Template_Type, DisassembledInstruction_Type> {
 
     private int _currentOffset;
 
@@ -71,7 +71,9 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
             if (header._opcode1 == null) {
                 if (hexByte == X86Opcode.ADDRESS_SIZE) {
                     header._hasAddressSizePrefix = true;
-                } else if (hexByte == X86Opcode.OPERAND_SIZE || hexByte == X86Opcode.REPE || hexByte == X86Opcode.REPNE) {
+                } else if (hexByte == X86Opcode.OPERAND_SIZE ||
+                           hexByte == X86Opcode.REPE ||
+                           hexByte == X86Opcode.REPNE) {
                     header._instructionSelectionPrefix = hexByte;
                 } else if (isRexPrefix(hexByte)) {
                     header._rexPrefix = hexByte;
@@ -229,90 +231,95 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
 
     private static int _serial;
 
-    public DisassembledInstruction_Type scanInstruction(BufferedInputStream stream, X86InstructionHeader header) throws IOException, AssemblyException {
-        _serial++;
-        Trace.line(3, "instruction: " + _serial);
-        boolean isFloatingPointEscape = false;
-        if (X86Opcode.isFloatingPointEscape(header._opcode1)) {
-            final int byte2 = stream.read();
-            if (byte2 >= 0xC0) {
-                isFloatingPointEscape = true;
-                header._opcode2 = HexByte.values()[byte2];
-            }
-        }
-        if (header._opcode1 != null) {
-            final Sequence<Template_Type> templates = headerToTemplates().get(header);
-            if (templates != null) {
-                for (Template_Type template : templates) {
-                    stream.reset();
-                    scanInstructionHeader(stream);
-                    if (isFloatingPointEscape) {
-                        stream.read();
-                    }
-                    try {
-                        byte modRMByte = 0;
-                        byte sibByte = 0;
-                        int modVariantParameterIndex = -1;
-                        Sequence<Argument> arguments = null;
-                        if (template.hasModRMByte()) {
-                            modRMByte = endianness().readByte(stream);
-                            sibByte = getSibByte(stream, template, modRMByte);
-                            modVariantParameterIndex = getModVariantParameterIndex(template, modRMByte, sibByte);
-                            if (modVariantParameterIndex >= 0) {
-                                final Template_Type modVariantTemplate = X86Assembly.getModVariantTemplate(templates, template, template.parameters().get(modVariantParameterIndex).type());
-                                arguments = scanArguments(stream, modVariantTemplate, header, modRMByte, sibByte);
-                            }
-                        }
-                        if (arguments == null) {
-                            arguments = scanArguments(stream, template, header, modRMByte, sibByte);
-                        }
-                        if (modVariantParameterIndex >= 0) {
-                            final Immediate8Argument immediateArgument = (Immediate8Argument) arguments.get(modVariantParameterIndex);
-                            if (immediateArgument.value() != 0) {
-                                continue;
-                            }
-
-                            // Remove the mod variant argument
-                            final Argument modVariantArgument = arguments.get(modVariantParameterIndex);
-                            arguments = Sequence.Static.filter(arguments, new Predicate<Argument>() {
-                                public boolean evaluate(Argument argument) {
-                                    return modVariantArgument != argument;
-                                }
-                            });
-                        }
-                        if (!Sequence.Static.containsIdentical(arguments, null)) {
-                            final Assembler assembler = createAssembler(_currentOffset);
-                            assembly().assemble(assembler, template, arguments);
-                            final byte[] bytes = assembler.toByteArray();
-                            stream.reset();
-                            if (Streams.startsWith(stream, bytes)) {
-                                final DisassembledInstruction_Type disassembledInstruction = createDisassembledInstruction(_currentOffset, bytes, template, arguments);
-                                _currentOffset += bytes.length;
-                                return disassembledInstruction;
-                            }
-                        }
-                    } catch (IOException ioException) {
-                        // this one did not work, so loop back up and try another template
-                    }
-                }
-            }
-        }
-        if (header._instructionSelectionPrefix == X86Opcode.REPE || header._instructionSelectionPrefix == X86Opcode.REPNE) {
-            final X86InstructionHeader prefixHeader = new X86InstructionHeader();
-            prefixHeader._opcode1 = header._instructionSelectionPrefix;
-            final Sequence<Template_Type> prefixTemplates = headerToTemplates().get(prefixHeader);
-            final Template_Type template = prefixTemplates.first();
-            final byte[] bytes = new byte[]{header._instructionSelectionPrefix.byteValue()};
-          final Sequence<Argument> arguments = Sequence.Static.empty();
-          final DisassembledInstruction_Type disassembledInstruction =
-              createDisassembledInstruction(_currentOffset, bytes, template, arguments);
-            _currentOffset++;
-            return disassembledInstruction;
-        }
-        throw new AssemblyException("unknown instruction");
+  public DisassembledInstruction_Type scanInstruction(BufferedInputStream stream, X86InstructionHeader header)
+      throws IOException, AssemblyException {
+    _serial++;
+    Trace.line(3, "instruction: " + _serial);
+    boolean isFloatingPointEscape = false;
+    if (X86Opcode.isFloatingPointEscape(header._opcode1)) {
+      final int byte2 = stream.read();
+      if (byte2 >= 0xC0) {
+        isFloatingPointEscape = true;
+        header._opcode2 = HexByte.values()[byte2];
+      }
     }
+    if (header._opcode1 != null) {
+      final Sequence<Template_Type> templates = headerToTemplates().get(header);
+      if (templates != null) {
+        for (Template_Type template : templates) {
+          stream.reset();
+          scanInstructionHeader(stream);
+          if (isFloatingPointEscape) {
+            stream.read();
+          }
+          try {
+            byte modRMByte = 0;
+            byte sibByte = 0;
+            int modVariantParameterIndex = -1;
+            Sequence<Argument> arguments = null;
+            if (template.hasModRMByte()) {
+              modRMByte = endianness().readByte(stream);
+              sibByte = getSibByte(stream, template, modRMByte);
+              modVariantParameterIndex = getModVariantParameterIndex(template, modRMByte, sibByte);
+              if (modVariantParameterIndex >= 0) {
+                final Template_Type modVariantTemplate =
+                    X86Assembly.getModVariantTemplate(templates,
+                                                      template,
+                                                      template.parameters().get(modVariantParameterIndex).type());
+                arguments = scanArguments(stream, modVariantTemplate, header, modRMByte, sibByte);
+              }
+            }
+            if (arguments == null) {
+              arguments = scanArguments(stream, template, header, modRMByte, sibByte);
+            }
+            if (modVariantParameterIndex >= 0) {
+              final Immediate8Argument immediateArgument = (Immediate8Argument) arguments.get(modVariantParameterIndex);
+              if (immediateArgument.value() != 0) {
+                continue;
+              }
 
-    private static final int MORE_THAN_ANY_INSTRUCTION_LENGTH = 100;
+              // Remove the mod variant argument
+              final Argument modVariantArgument = arguments.get(modVariantParameterIndex);
+              arguments = Sequence.Static.filter(arguments, new Predicate<Argument>() {
+                public boolean evaluate(Argument argument) {
+                  return modVariantArgument != argument;
+                }
+              });
+            }
+            if (!Sequence.Static.containsIdentical(arguments, null)) {
+              final Assembler assembler = createAssembler(_currentOffset);
+              assembly().assemble(assembler, template, arguments);
+              final byte[] bytes = assembler.toByteArray();
+              stream.reset();
+              if (Streams.startsWith(stream, bytes)) {
+                final DisassembledInstruction_Type disassembledInstruction =
+                    createDisassembledInstruction(_currentOffset, bytes, template, arguments);
+                _currentOffset += bytes.length;
+                return disassembledInstruction;
+              }
+            }
+          } catch (IOException ioException) {
+            // this one did not work, so loop back up and try another template
+          }
+        }
+      }
+    }
+    if (header._instructionSelectionPrefix == X86Opcode.REPE || header._instructionSelectionPrefix == X86Opcode.REPNE) {
+      final X86InstructionHeader prefixHeader = new X86InstructionHeader();
+      prefixHeader._opcode1 = header._instructionSelectionPrefix;
+      final Sequence<Template_Type> prefixTemplates = headerToTemplates().get(prefixHeader);
+      final Template_Type template = prefixTemplates.first();
+      final byte[] bytes = new byte[]{header._instructionSelectionPrefix.byteValue()};
+      final Sequence<Argument> arguments = Sequence.Static.empty();
+      final DisassembledInstruction_Type disassembledInstruction =
+          createDisassembledInstruction(_currentOffset, bytes, template, arguments);
+      _currentOffset++;
+      return disassembledInstruction;
+    }
+    throw new AssemblyException("unknown instruction");
+  }
+
+  private static final int MORE_THAN_ANY_INSTRUCTION_LENGTH = 100;
 
     @Override
     public Sequence<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream) throws IOException, AssemblyException {
