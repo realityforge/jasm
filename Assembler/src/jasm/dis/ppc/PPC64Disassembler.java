@@ -4,12 +4,12 @@
 /*VCSID=d1f423ec-4981-41bd-be8f-0ab5e0ef0586*/
 package jasm.dis.ppc;
 
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.gen.risc.ppc.PPCAssembly;
 import jasm.gen.risc.ppc.PPCTemplate;
 import jasm.ppc.PPC64Assembler;
-import com.sun.max.collect.Sequence;
 import jasm.util.WordWidth;
 
 /**

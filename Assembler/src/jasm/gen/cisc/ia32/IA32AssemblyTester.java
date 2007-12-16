@@ -4,15 +4,15 @@
 /*VCSID=d7fb6f79-6e9c-4ba9-85b7-a1830917f79c*/
 package jasm.gen.cisc.ia32;
 
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.Assembler;
-import jasm.util.WordWidth;
 import jasm.dis.ia32.IA32DisassembledInstruction;
 import jasm.dis.ia32.IA32Disassembler;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.cisc.x86.X86AssemblyTester;
 import jasm.ia32.IA32Assembler;
-import com.sun.max.collect.Sequence;
+import jasm.util.WordWidth;
 import java.util.EnumSet;
 
 /**

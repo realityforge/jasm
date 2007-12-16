@@ -4,13 +4,13 @@
 /*VCSID=8e2d1eca-ccb0-4736-af94-639e121892e0*/
 package jasm.dis.sparc;
 
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.DisassembledLabel;
 import jasm.dis.GlobalLabelMapper;
 import jasm.dis.risc.RiscDisassembledInstruction;
 import jasm.gen.risc.sparc.SPARCExternalInstruction;
 import jasm.gen.risc.sparc.SPARCTemplate;
-import com.sun.max.collect.Sequence;
 
 /**
  * @author Bernd Mathiske

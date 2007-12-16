@@ -33,8 +33,6 @@ import static jasm.gen.cisc.x86.OperandCode.Qq;
 import static jasm.gen.cisc.x86.OperandCode.Rd;
 import jasm.gen.cisc.x86.X86InstructionDescriptionCreator;
 import static jasm.ia32.IA32GeneralRegister8.CL;
-import static jasm.x86.SegmentRegister.FS;
-import static jasm.x86.SegmentRegister.GS;
 import static jasm.util.HexByte._00;
 import static jasm.util.HexByte._01;
 import static jasm.util.HexByte._02;
@@ -185,6 +183,8 @@ import static jasm.util.HexByte._FA;
 import static jasm.util.HexByte._FC;
 import static jasm.util.HexByte._FD;
 import static jasm.util.HexByte._FE;
+import static jasm.x86.SegmentRegister.FS;
+import static jasm.x86.SegmentRegister.GS;
 
 /**
  * @author Bernd Mathiske

@@ -4,7 +4,6 @@
 /*VCSID=a6a72968-a716-4b0b-80f9-a52ed7aed04a*/
 package test.com.sun.max.collect;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.collect.Iterables;
 import com.sun.max.ide.MaxTestCase;
 import java.util.Enumeration;
@@ -42,7 +41,6 @@ public class IterablesTest extends MaxTestCase {
             _index = 0;
         }
 
-        @Implement(Enumeration.class)
         public boolean hasMoreElements() {
             if (_index < _strings.length) {
                 return true;
@@ -50,7 +48,6 @@ public class IterablesTest extends MaxTestCase {
             return false;
         }
 
-        @Implement(Enumeration.class)
         public String nextElement() {
             return _strings[_index++];
         }

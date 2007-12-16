@@ -4,9 +4,9 @@
 /*VCSID=a1ecb77c-63cf-4fba-a8ef-5f7bde5c0357*/
 package jasm.gen;
 
-import jasm.Argument;
 import com.sun.max.collect.Sequence;
 import com.sun.max.program.ProgramError;
+import jasm.Argument;
 import java.lang.reflect.Method;
 
 /**

@@ -4,6 +4,9 @@
 /*VCSID=b60ee7c6-a89d-42fb-985d-d77214edbb06*/
 package jasm.gen.risc.field;
 
+import com.sun.max.collect.Sequence;
+import com.sun.max.collect.Sets;
+import com.sun.max.lang.StaticLoophole;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.ExternalMnemonicSuffixArgument;
@@ -12,9 +15,6 @@ import jasm.gen.Parameter;
 import jasm.gen.Template;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
-import com.sun.max.collect.Sequence;
-import com.sun.max.collect.Sets;
-import com.sun.max.lang.StaticLoophole;
 import java.util.Set;
 
 /**

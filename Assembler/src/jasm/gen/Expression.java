@@ -4,8 +4,8 @@
 /*VCSID=1a630d30-3a55-47b6-8647-c434f7c9eb9d*/
 package jasm.gen;
 
-import jasm.Argument;
 import com.sun.max.collect.Sequence;
+import jasm.Argument;
 
 /**
  * An expression can provide the value of an operand field. This enables synthetic instructions to be

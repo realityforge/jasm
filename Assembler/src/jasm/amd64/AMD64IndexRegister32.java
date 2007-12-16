@@ -4,9 +4,9 @@
 /*VCSID=a6b38a23-ea71-4b85-81c1-9bd92af85982*/
 package jasm.amd64;
 
-import jasm.x86.GeneralRegister;
-import jasm.util.WordWidth;
 import jasm.util.Enumerator;
+import jasm.util.WordWidth;
+import jasm.x86.GeneralRegister;
 
 /**
  * Aliases for 32-bit AMD64 general registers to be used as index registers.

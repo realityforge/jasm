@@ -4,7 +4,6 @@
 /*VCSID=8cd511f0-7ff0-4f22-aeff-a62f321fcb33*/
 package com.sun.max.collect;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.util.Predicate;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -26,7 +25,6 @@ public class FilterIterator<Element_Type> implements Iterator<Element_Type> {
         _predicate = predicate;
     }
 
-    @Implement(Iterator.class)
     public boolean hasNext() {
         if (_advanced) {
             return true;
@@ -34,7 +32,6 @@ public class FilterIterator<Element_Type> implements Iterator<Element_Type> {
         return advance();
     }
 
-    @Implement(Iterator.class)
     public Element_Type next() {
         if (!_advanced) {
             if (!advance()) {
@@ -45,7 +42,6 @@ public class FilterIterator<Element_Type> implements Iterator<Element_Type> {
         return _next;
     }
 
-    @Implement(Iterator.class)
     public void remove() {
         if (_advanced) {
             throw new IllegalStateException("remove() cannot be called");

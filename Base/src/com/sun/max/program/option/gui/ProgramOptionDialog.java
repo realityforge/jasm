@@ -4,7 +4,6 @@
 /*VCSID=680dc262-0a16-467f-8f1c-2121ab61505c*/
 package com.sun.max.program.option.gui;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.Sequence;
@@ -31,7 +30,6 @@ import java.util.Enumeration;
 import java.util.LinkedHashSet;
 import java.util.Properties;
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -75,7 +73,6 @@ public class ProgramOptionDialog extends JDialog {
             fileChooser.setFileHidingEnabled(false);
 
             final JButton load = new JButton(new AbstractAction("Load") {
-                @Implement(Action.class)
                 public void actionPerformed(ActionEvent e) {
                     try {
                         final FileInputStream fileInputStream = new FileInputStream(path.getText());
@@ -99,7 +96,6 @@ public class ProgramOptionDialog extends JDialog {
             });
 
             final JButton save = new JButton(new AbstractAction("Save") {
-                @Implement(Action.class)
                 public void actionPerformed(ActionEvent e) {
                     try {
                         final Properties properties = new Properties();
@@ -117,15 +113,12 @@ public class ProgramOptionDialog extends JDialog {
             });
 
             path.getDocument().addDocumentListener(new DocumentListener() {
-                @Implement(DocumentListener.class)
                 public void changedUpdate(DocumentEvent e) {
                     load.setEnabled(canLoadFrom(path.getText()));
                 }
-                @Implement(DocumentListener.class)
                 public void insertUpdate(DocumentEvent e) {
                     load.setEnabled(canLoadFrom(path.getText()));
                 }
-                @Implement(DocumentListener.class)
                 public void removeUpdate(DocumentEvent e) {
                     load.setEnabled(canLoadFrom(path.getText()));
                 }
@@ -135,7 +128,6 @@ public class ProgramOptionDialog extends JDialog {
             path.setText(new File(homeDirectory, "." + programName + ".options").getAbsolutePath());
 
             final JButton fileChooserButton = new JButton(new AbstractAction("...") {
-                @Implement(Action.class)
                 public void actionPerformed(ActionEvent e) {
                     final File file = new File(path.getText());
                     if (file.exists() && file.isFile()) {
@@ -231,7 +223,6 @@ public class ProgramOptionDialog extends JDialog {
                 programOptionInput.setEnabled(true);
 
                 enabled.addItemListener(new ItemListener() {
-                    @Implement(ItemListener.class)
                     public void itemStateChanged(ItemEvent e) {
                         final boolean isSelected = enabled.isSelected();
                         programOptionInput.setEnabled(isSelected);
@@ -265,7 +256,6 @@ public class ProgramOptionDialog extends JDialog {
 
         // Configure buttons
         final JButton ok = new JButton(new AbstractAction("OK") {
-            @Implement(Action.class)
             public void actionPerformed(ActionEvent e) {
                 _commandLineArguments = asCommandLineArguments(enabledProgramOptionInputs);
                 ProgramOptionDialog.this.setVisible(false);
@@ -273,7 +263,6 @@ public class ProgramOptionDialog extends JDialog {
         });
 
         final JButton cancel = new JButton(new AbstractAction("Cancel") {
-            @Implement(Action.class)
             public void actionPerformed(ActionEvent e) {
                 ProgramOptionDialog.this.setVisible(false);
             }

@@ -4,6 +4,7 @@
 /*VCSID=c5b6d192-c284-4b63-900e-2415684e1530*/
 package test.jasm.ia32;
 
+import com.sun.max.ide.MaxTestCase;
 import jasm.AssemblyException;
 import jasm.Label;
 import jasm.dis.ia32.IA32Disassembler;
@@ -37,7 +38,6 @@ import static jasm.x86.Scale.SCALE_1;
 import static jasm.x86.Scale.SCALE_2;
 import static jasm.x86.Scale.SCALE_4;
 import static jasm.x86.Scale.SCALE_8;
-import com.sun.max.ide.MaxTestCase;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

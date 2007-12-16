@@ -4,7 +4,6 @@
 /*VCSID=4c911956-0936-4667-8f83-00e6793f0634*/
 package com.sun.max.collect;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.lang.StaticLoophole;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,27 +45,22 @@ public class ArrayListSequence<Element_Type> extends ArrayList<Element_Type> imp
         super(java.util.Arrays.asList(array));
     }
 
-    @Implement(Sequence.class)
     public int length() {
         return size();
     }
 
-    @Implement(Sequence.class)
     public Element_Type first() {
         return get(0);
     }
 
-    @Implement(Sequence.class)
     public Element_Type last() {
         return get(length() - 1);
     }
 
-    @Implement(ShrinkableSequence.class)
     public Element_Type removeFirst() {
         return remove(0);
     }
 
-    @Implement(ShrinkableSequence.class)
     public Element_Type removeLast() {
         return remove(length() - 1);
     }
@@ -98,22 +92,18 @@ public class ArrayListSequence<Element_Type> extends ArrayList<Element_Type> imp
         return super.hashCode();
     }
 
-    @Implement(AppendableSequence.class)
     public void append(Element_Type element) {
         add(element);
     }
 
-    @Implement(PrependableSequence.class)
     public void prepend(Element_Type element) {
         add(0, element);
     }
 
-    @Implement(PrependableSequence.class)
     public void prependAll(Element_Type... elements) {
         addAll(0, Arrays.asList(elements));
     }
 
-    @Implement(PrependableSequence.class)
     public void prependAll(Sequence<? extends Element_Type> elements) {
         if (elements instanceof ArrayListSequence) {
             final Class<ArrayListSequence<Element_Type>> type = null;
@@ -128,7 +118,6 @@ public class ArrayListSequence<Element_Type> extends ArrayList<Element_Type> imp
         }
     }
 
-    @Implement(Sequence.class)
     @Override
     public Sequence<Element_Type> clone() {
         return new ArrayListSequence<Element_Type>((Sequence<? extends Element_Type>) this);
@@ -142,7 +131,6 @@ public class ArrayListSequence<Element_Type> extends ArrayList<Element_Type> imp
         return to;
     }
 
-    @Implement(Sequence.class)
     public <To_Type> AppendableSequence<To_Type> map(Class<To_Type> toType, MapFunction<Element_Type, To_Type> mapFunction) {
         return map(this, toType, mapFunction);
     }

@@ -4,8 +4,8 @@
 /*VCSID=4850c5f4-3904-4dc1-bd37-ef486e453d9b*/
 package jasm.gen.cisc.x86;
 
-import jasm.gen.InstructionDescription;
 import com.sun.max.collect.MutableSequence;
+import jasm.gen.InstructionDescription;
 
 /**
  * @author Bernd Mathiske

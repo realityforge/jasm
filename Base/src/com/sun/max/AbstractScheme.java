@@ -4,8 +4,6 @@
 /*VCSID=4633e851-6b8e-4cfa-a588-1ef09b0d22aa*/
 package com.sun.max;
 
-import com.sun.max.annotate.Implement;
-
 /**
  * @author Bernd Mathiske
  */
@@ -14,7 +12,6 @@ public abstract class AbstractScheme implements Scheme {
     protected AbstractScheme() {
     }
 
-    @Implement(Scheme.class)
     public String name() {
         return getClass().getSimpleName();
     }

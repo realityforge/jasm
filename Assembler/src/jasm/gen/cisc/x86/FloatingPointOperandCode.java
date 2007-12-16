@@ -4,11 +4,11 @@
 /*VCSID=2198ad67-ecbb-4139-9ed7-fafc608ac668*/
 package jasm.gen.cisc.x86;
 
+import com.sun.max.collect.Sets;
 import jasm.Argument;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.TestArgumentExclusion;
 import jasm.gen.WrappableSpecification;
-import com.sun.max.collect.Sets;
 
 /**
  * @author Bernd Mathiske

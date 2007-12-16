@@ -4,8 +4,9 @@
 /*VCSID=e07099c7-82fa-45f5-8659-02754b8e6d4c*/
 package jasm.gen.cisc.x86;
 
+import com.sun.max.collect.Iterables;
+import com.sun.max.program.ProgramError;
 import jasm.Argument;
-import jasm.util.WordWidth;
 import jasm.gen.Immediate16Argument;
 import jasm.gen.Immediate32Argument;
 import jasm.gen.Immediate64Argument;
@@ -13,8 +14,7 @@ import jasm.gen.Immediate8Argument;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.ImmediateParameter;
 import jasm.gen.cisc.AppendedParameter;
-import com.sun.max.collect.Iterables;
-import com.sun.max.program.ProgramError;
+import jasm.util.WordWidth;
 
 /**
  * @author Bernd Mathiske

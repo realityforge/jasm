@@ -4,13 +4,13 @@
 /*VCSID=af58e9d8-0ed6-493b-a45b-6cb554be8952*/
 package jasm.dis.ppc;
 
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.DisassembledLabel;
 import jasm.dis.GlobalLabelMapper;
 import jasm.dis.risc.RiscDisassembledInstruction;
 import jasm.gen.risc.ppc.PPCExternalInstruction;
 import jasm.gen.risc.ppc.PPCTemplate;
-import com.sun.max.collect.Sequence;
 
 /**
  * @author Bernd Mathiske

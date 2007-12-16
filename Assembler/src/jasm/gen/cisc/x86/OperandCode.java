@@ -4,9 +4,9 @@
 /*VCSID=048f6b6a-4a54-4241-9a33-2eedcbbfdc2d*/
 package jasm.gen.cisc.x86;
 
-import com.sun.max.annotate.JavacSyntax;
+import com.sun.max.collect.Sets;
+import com.sun.max.lang.StaticLoophole;
 import jasm.Argument;
-import jasm.util.Enumerator;
 import jasm.gen.ArgumentRange;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.TestArgumentExclusion;
@@ -48,8 +48,7 @@ import static jasm.gen.cisc.x86.OperandTypeCode.ss;
 import static jasm.gen.cisc.x86.OperandTypeCode.v;
 import static jasm.gen.cisc.x86.OperandTypeCode.w;
 import static jasm.gen.cisc.x86.OperandTypeCode.z;
-import com.sun.max.collect.Sets;
-import com.sun.max.lang.StaticLoophole;
+import jasm.util.Enumerator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -160,7 +159,6 @@ public enum OperandCode implements WrappableSpecification {
     public TestArgumentExclusion excludeExternalTestArguments(Enumerator... argumentEnumerators) {
         final Set<Argument> arguments = new HashSet<Argument>();
         for (Enumerator argumentEnumerator : argumentEnumerators) {
-            @JavacSyntax("type system bug, does not recognize Enumerator<? extends Argument> in loop above")
             final Class<Set<Argument>> type = null;
             final Set<Argument> set = StaticLoophole.cast(type, argumentEnumerator.asSet());
             arguments.addAll(set);

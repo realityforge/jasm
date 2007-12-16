@@ -8,7 +8,6 @@ import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.ArraySequence;
 import com.sun.max.collect.Sequence;
-import jasm.util.StaticFieldName;
 import com.sun.max.util.Predicate;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;

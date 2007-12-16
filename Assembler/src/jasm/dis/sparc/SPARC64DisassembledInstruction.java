@@ -4,11 +4,11 @@
 /*VCSID=537d7b6b-3a9b-4e1a-89a3-529c4c290851*/
 package jasm.dis.sparc;
 
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.Address64Instruction;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.risc.sparc.SPARCTemplate;
-import com.sun.max.collect.Sequence;
 
 /**
  *

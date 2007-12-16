@@ -4,7 +4,6 @@
 /*VCSID=1eead606-423f-4424-ba9b-6c022def0d08*/
 package com.sun.max;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.Sequence;
@@ -40,7 +39,6 @@ public class PackageLoader {
 
     private static final FilenameFilter CLASSFILE_FILTER = new FilenameFilter() {
 
-        @Implement(FilenameFilter.class)
         public boolean accept(File directory, String name) {
             return name.endsWith(Classpath.CLASS_FILE_EXTENSION) && !name.equals("package-info.class");
         }

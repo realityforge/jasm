@@ -9,10 +9,10 @@ import jasm.gen.ImplicitOperand;
 import jasm.gen.InstructionConstraint;
 import jasm.gen.TestArgumentExclusion;
 import jasm.gen.cisc.TemplateNotNeededException;
+import jasm.util.HexByte;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
 import jasm.x86.SegmentRegister;
-import jasm.util.HexByte;
 
 /**
  * Empty default implementations for X86InstructionDescriptionVisitor.

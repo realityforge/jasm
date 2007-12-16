@@ -4,13 +4,13 @@
 /*VCSID=40cde656-db9c-43c7-ba31-80bee57765cb*/
 package jasm.gen.risc.field;
 
+import com.sun.max.collect.Iterables;
+import com.sun.max.program.ProgramError;
 import jasm.Argument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import com.sun.max.collect.Iterables;
-import com.sun.max.program.ProgramError;
 
 /**
  * An input operand is a parameter to an assembler method that does not correspond directly

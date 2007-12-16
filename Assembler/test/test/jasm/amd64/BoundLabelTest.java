@@ -4,6 +4,10 @@
 /*VCSID=a192f364-a188-4ec5-a6d8-0958118cb561*/
 package test.jasm.amd64;
 
+import com.sun.max.collect.ArraySequence;
+import com.sun.max.collect.MutableSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.ide.MaxTestCase;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.Label;
@@ -14,10 +18,6 @@ import jasm.dis.amd64.AMD64Disassembler;
 import jasm.gen.Parameter;
 import jasm.gen.cisc.amd64.AMD64Assembly;
 import jasm.gen.cisc.amd64.AMD64Template;
-import com.sun.max.collect.ArraySequence;
-import com.sun.max.collect.MutableSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.ide.MaxTestCase;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

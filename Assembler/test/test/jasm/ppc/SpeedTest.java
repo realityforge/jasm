@@ -4,6 +4,7 @@
 /*VCSID=e7cccc10-c50f-4c42-bc16-c1b67e57261b*/
 package test.jasm.ppc;
 
+import com.sun.max.ide.MaxTestCase;
 import jasm.AssemblyException;
 import jasm.Label;
 import static jasm.ppc.BranchPredictionBits.NONE;
@@ -17,7 +18,6 @@ import static jasm.ppc.GPR.R30;
 import static jasm.ppc.GPR.R31;
 import static jasm.ppc.GPR.SP;
 import jasm.ppc.PPC32Assembler;
-import com.sun.max.ide.MaxTestCase;
 import java.io.IOException;
 
 /**

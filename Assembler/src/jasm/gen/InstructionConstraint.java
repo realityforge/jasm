@@ -4,11 +4,11 @@
 /*VCSID=0b885364-8e53-4874-a69e-b768cea1532a*/
 package jasm.gen;
 
-import jasm.Argument;
-import jasm.SymbolicArgument;
 import com.sun.max.collect.Sequence;
 import com.sun.max.lang.Arrays;
 import com.sun.max.program.ProgramError;
+import jasm.Argument;
+import jasm.SymbolicArgument;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

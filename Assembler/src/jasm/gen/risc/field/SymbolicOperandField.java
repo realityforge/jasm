@@ -4,10 +4,12 @@
 /*VCSID=7dbc991b-9411-4437-b4bf-231699b5acc6*/
 package jasm.gen.risc.field;
 
+import com.sun.max.collect.Iterables;
+import com.sun.max.collect.Sets;
+import com.sun.max.lang.StaticLoophole;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.SymbolicArgument;
-import jasm.util.Symbolizer;
 import jasm.gen.ArgumentRange;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.Expression;
@@ -16,9 +18,7 @@ import jasm.gen.WrappableSpecification;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import com.sun.max.collect.Iterables;
-import com.sun.max.collect.Sets;
-import com.sun.max.lang.StaticLoophole;
+import jasm.util.Symbolizer;
 
 /**
  * @author Bernd Mathiske

@@ -4,6 +4,11 @@
 /*VCSID=fe64cdcc-bbcf-4903-afe8-c2313d664d38*/
 package jasm.gen.risc;
 
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.program.Problem;
+import com.sun.max.program.ProgramError;
 import jasm.gen.InstructionConstraint;
 import jasm.gen.InstructionDescription;
 import jasm.gen.OffsetParameter;
@@ -13,11 +18,6 @@ import jasm.gen.risc.field.OperandField;
 import jasm.gen.risc.field.OptionField;
 import jasm.gen.risc.field.ReservedField;
 import jasm.gen.risc.field.RiscField;
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.program.Problem;
-import com.sun.max.program.ProgramError;
 
 /**
  * @author Bernd Mathiske

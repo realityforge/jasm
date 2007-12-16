@@ -4,14 +4,14 @@
 /*VCSID=2953c05d-70c7-4e45-a7ad-cde0ced73e86*/
 package jasm.gen.risc;
 
-import jasm.InstructionSet;
-import jasm.dis.risc.OpcodeMaskGroup;
-import jasm.dis.risc.SpecificityGroup;
-import jasm.gen.Assembly;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.IntHashMap;
 import com.sun.max.collect.Sequence;
+import jasm.InstructionSet;
+import jasm.dis.risc.OpcodeMaskGroup;
+import jasm.dis.risc.SpecificityGroup;
+import jasm.gen.Assembly;
 import java.io.PrintStream;
 
 /**

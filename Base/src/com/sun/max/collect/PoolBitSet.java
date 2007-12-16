@@ -4,7 +4,6 @@
 /*VCSID=73fc199f-84ce-41f7-a693-bc2cea2b237e*/
 package com.sun.max.collect;
 
-import com.sun.max.annotate.Implement;
 import java.util.BitSet;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -25,12 +24,10 @@ public class PoolBitSet<PoolObject_Type extends PoolObject> extends BitSet imple
         }
     }
 
-    @Implement(PoolSet.class)
     public Pool<PoolObject_Type> pool() {
         return _pool;
     }
 
-    @Implement(PoolSet.class)
     public void add(PoolObject_Type value) {
         assert _pool.get(value.serial()) == value;
         set(value.serial());
@@ -42,13 +39,11 @@ public class PoolBitSet<PoolObject_Type extends PoolObject> extends BitSet imple
         }
     }
 
-    @Implement(PoolSet.class)
     public boolean contains(PoolObject_Type value) {
         assert _pool.get(value.serial()) == value;
         return get(value.serial());
     }
 
-    @Implement(PoolSet.class)
     public void remove(PoolObject_Type value) {
         assert _pool.get(value.serial()) == value;
         clear(value.serial());
@@ -69,19 +64,16 @@ public class PoolBitSet<PoolObject_Type extends PoolObject> extends BitSet imple
     /**
      * Gets an iterator over all the values in this set.
      */
-    @Implement(Iterable.class)
     public Iterator<PoolObject_Type> iterator() {
         return new Iterator<PoolObject_Type>() {
 
             private int _currentBit = -1;
             private int _nextSetBit = nextSetBit(0);
 
-            @Implement(Iterator.class)
             public boolean hasNext() {
                 return _nextSetBit != -1;
             }
 
-            @Implement(Iterator.class)
             public PoolObject_Type next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
@@ -92,7 +84,6 @@ public class PoolBitSet<PoolObject_Type extends PoolObject> extends BitSet imple
                 return _pool.get(_currentBit);
             }
 
-            @Implement(Iterator.class)
             public void remove() {
                 if (_currentBit == -1) {
                     throw new IllegalStateException();

@@ -4,10 +4,10 @@
 /*VCSID=45696b8e-aa08-46e0-9312-621bff625922*/
 package jasm.sparc;
 
-import jasm.AbstractSymbolicArgument;
-import jasm.util.Symbolizer;
 import com.sun.max.collect.ArraySequence;
 import com.sun.max.collect.Sequence;
+import jasm.AbstractSymbolicArgument;
+import jasm.util.Symbolizer;
 import java.util.Iterator;
 
 /**

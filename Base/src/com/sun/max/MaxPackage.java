@@ -4,7 +4,6 @@
 /*VCSID=400813b4-afcb-4e38-86c1-6f6c19021c2e*/
 package com.sun.max;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.Sequence;
@@ -227,7 +226,6 @@ public abstract class MaxPackage implements Comparable<MaxPackage> {
         return Sets.empty(MaxPackage.class);
     }
 
-    @Implement(Comparable.class)
     public int compareTo(MaxPackage other) {
         final Set<MaxPackage> myPrerequisites = prerequisites();
         final Set<MaxPackage> otherPrerequisites = other.prerequisites();

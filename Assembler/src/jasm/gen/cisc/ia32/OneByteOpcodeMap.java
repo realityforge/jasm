@@ -83,11 +83,6 @@ import static jasm.ia32.IA32GeneralRegister8.CH;
 import static jasm.ia32.IA32GeneralRegister8.CL;
 import static jasm.ia32.IA32GeneralRegister8.DH;
 import static jasm.ia32.IA32GeneralRegister8.DL;
-import static jasm.x86.SegmentRegister.CS;
-import static jasm.x86.SegmentRegister.DS;
-import static jasm.x86.SegmentRegister.ES;
-import static jasm.x86.SegmentRegister.SS;
-import jasm.util.WordWidth;
 import static jasm.util.HexByte._00;
 import static jasm.util.HexByte._01;
 import static jasm.util.HexByte._02;
@@ -281,6 +276,11 @@ import static jasm.util.HexByte._FC;
 import static jasm.util.HexByte._FD;
 import static jasm.util.HexByte._FE;
 import static jasm.util.HexByte._FF;
+import jasm.util.WordWidth;
+import static jasm.x86.SegmentRegister.CS;
+import static jasm.x86.SegmentRegister.DS;
+import static jasm.x86.SegmentRegister.ES;
+import static jasm.x86.SegmentRegister.SS;
 
 /**
  * Representation of the ...

@@ -4,17 +4,6 @@
 /*VCSID=46f154df-dad5-4dbb-82d6-ef1e421cbd47*/
 package jasm.dis.risc;
 
-import jasm.Argument;
-import jasm.Assembler;
-import jasm.AssemblyException;
-import jasm.util.WordWidth;
-import jasm.dis.DisassembledInstruction;
-import jasm.dis.Disassembler;
-import jasm.gen.Assembly;
-import jasm.gen.InstructionConstraint;
-import jasm.gen.risc.RiscAssembly;
-import jasm.gen.risc.RiscTemplate;
-import jasm.gen.risc.field.OperandField;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.Sequence;
@@ -22,6 +11,17 @@ import com.sun.max.lang.Bytes;
 import com.sun.max.lang.Endianness;
 import com.sun.max.lang.StaticLoophole;
 import com.sun.max.program.ProgramWarning;
+import jasm.Argument;
+import jasm.Assembler;
+import jasm.AssemblyException;
+import jasm.dis.DisassembledInstruction;
+import jasm.dis.Disassembler;
+import jasm.gen.Assembly;
+import jasm.gen.InstructionConstraint;
+import jasm.gen.risc.RiscAssembly;
+import jasm.gen.risc.RiscTemplate;
+import jasm.gen.risc.field.OperandField;
+import jasm.util.WordWidth;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.Arrays;

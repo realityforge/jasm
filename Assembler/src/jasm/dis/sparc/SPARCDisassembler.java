@@ -4,11 +4,11 @@
 /*VCSID=296a5002-b096-495c-b022-7a05e7a77948*/
 package jasm.dis.sparc;
 
+import com.sun.max.lang.Endianness;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.risc.RiscDisassembler;
 import jasm.gen.risc.sparc.SPARCAssembly;
 import jasm.gen.risc.sparc.SPARCTemplate;
-import com.sun.max.lang.Endianness;
 import jasm.util.WordWidth;
 
 /**

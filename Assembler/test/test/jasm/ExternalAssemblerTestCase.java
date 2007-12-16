@@ -4,9 +4,9 @@
 /*VCSID=e41a0fef-5a42-49fa-9b28-da61c85178be*/
 package test.jasm;
 
-import jasm.gen.AssemblyTester;
 import com.sun.max.program.option.ProgramArgumentsParser;
 import com.sun.max.program.option.StringProgramOption;
+import jasm.gen.AssemblyTester;
 
 /**
  * Base class for assembler tests that use an external assembler which may

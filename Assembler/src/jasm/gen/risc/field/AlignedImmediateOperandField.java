@@ -4,12 +4,12 @@
 /*VCSID=629a8fdc-ec6e-4188-951b-834cf1b9d6c7*/
 package jasm.gen.risc.field;
 
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.gen.Immediate32Argument;
 import jasm.gen.Template;
 import jasm.gen.risc.bitRange.BitRange;
-import com.sun.max.collect.Sequence;
 
 /**
  * An instruction field whose encoded value does not include bits for

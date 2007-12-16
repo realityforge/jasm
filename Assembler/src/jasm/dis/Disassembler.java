@@ -4,6 +4,12 @@
 /*VCSID=2a1b0ea8-e4a9-49e9-aad8-13bad365e9b1*/
 package jasm.dis;
 
+import com.sun.max.collect.ArraySequence;
+import com.sun.max.collect.MutableSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.Endianness;
+import com.sun.max.lang.Strings;
+import com.sun.max.program.ProgramError;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;
@@ -12,13 +18,7 @@ import jasm.gen.ImmediateArgument;
 import jasm.gen.OffsetParameter;
 import jasm.gen.Parameter;
 import jasm.gen.Template;
-import com.sun.max.collect.ArraySequence;
-import com.sun.max.collect.MutableSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.lang.Endianness;
-import com.sun.max.lang.Strings;
 import jasm.util.WordWidth;
-import com.sun.max.program.ProgramError;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.OutputStream;

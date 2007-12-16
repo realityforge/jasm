@@ -4,11 +4,11 @@
 /*VCSID=a6b089e5-b5a2-41ab-b955-b75503bab669*/
 package jasm.gen.risc;
 
+import com.sun.max.collect.Sequence;
+import com.sun.max.program.ProgramError;
 import jasm.gen.InstructionConstraint;
 import jasm.gen.InstructionDescription;
 import jasm.gen.risc.field.RiscField;
-import com.sun.max.collect.Sequence;
-import com.sun.max.program.ProgramError;
 
 /**
  *

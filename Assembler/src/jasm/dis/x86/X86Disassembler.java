@@ -4,10 +4,16 @@
 /*VCSID=63ebacf6-7aa1-4007-b697-a74444ad33c0*/
 package jasm.dis.x86;
 
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.io.Streams;
+import com.sun.max.lang.Endianness;
+import com.sun.max.program.Trace;
+import com.sun.max.util.Predicate;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;
-import jasm.util.WordWidth;
 import jasm.amd64.AMD64GeneralRegister8;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.Disassembler;
@@ -24,15 +30,9 @@ import jasm.gen.cisc.x86.X86Opcode;
 import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.io.Streams;
-import com.sun.max.lang.Endianness;
-import com.sun.max.program.Trace;
 import jasm.util.Enumerator;
 import jasm.util.HexByte;
-import com.sun.max.util.Predicate;
+import jasm.util.WordWidth;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.Map;

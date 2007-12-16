@@ -4,8 +4,6 @@
 /*VCSID=7bf27cbf-e57b-4654-a576-7fd03238616d*/
 package jasm.gen.risc;
 
-import jasm.gen.InstructionDescription;
-import jasm.gen.risc.field.OptionField;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.MultiMap;
@@ -13,6 +11,8 @@ import com.sun.max.collect.Sequence;
 import com.sun.max.collect.SequenceMultiMap;
 import com.sun.max.lang.StaticLoophole;
 import com.sun.max.program.ProgramError;
+import jasm.gen.InstructionDescription;
+import jasm.gen.risc.field.OptionField;
 import java.util.Iterator;
 
 /**

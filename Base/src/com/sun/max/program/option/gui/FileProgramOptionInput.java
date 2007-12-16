@@ -4,12 +4,10 @@
 /*VCSID=40c950ce-4842-4735-84ab-e408af4c58ae*/
 package com.sun.max.program.option.gui;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.program.option.FileProgramOption;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
@@ -36,7 +34,6 @@ class FileProgramOptionInput extends AssignmentProgramOptionInput<FileProgramOpt
             _value.setText(value.getAbsolutePath());
         }
         _fileChooserButton = new JButton(new AbstractAction("...") {
-            @Implement(Action.class)
             public void actionPerformed(ActionEvent e) {
                 if (_fileChooser == null) {
                     _fileChooser = new JFileChooser(new File("."));

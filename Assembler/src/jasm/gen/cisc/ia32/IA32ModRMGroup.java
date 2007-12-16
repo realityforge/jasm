@@ -4,6 +4,7 @@
 /*VCSID=bbdba5f5-d267-43d4-ad93-e2aec69ac63a*/
 package jasm.gen.cisc.ia32;
 
+import com.sun.max.collect.ArrayListSequence;
 import jasm.gen.ExternalOmission;
 import static jasm.gen.cisc.x86.AddressingMethodCode.M;
 import static jasm.gen.cisc.x86.FloatingPointOperandCode.bytes_14_28;
@@ -48,7 +49,6 @@ import static jasm.ia32.IA32GeneralRegister32.EDX;
 import static jasm.ia32.IA32GeneralRegister32.ESI;
 import static jasm.ia32.IA32GeneralRegister32.ESP;
 import static jasm.ia32.IA32GeneralRegister8.AL;
-import com.sun.max.collect.ArrayListSequence;
 
 /**
  * See A-7 in the book.

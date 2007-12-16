@@ -5,7 +5,6 @@
 package com.sun.max.program.option.gui;
 
 import com.sun.max.MaxPackage;
-import com.sun.max.annotate.Implement;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.Sequence;
@@ -39,7 +38,6 @@ class PackageProgramOptionInput extends AssignmentProgramOptionInput<PackageProg
 
         final MaxPackage[] values = Sequence.Static.toArray(maxPackages, MaxPackage.class);
         Arrays.sort(values, new Comparator<MaxPackage>() {
-            @Implement(Comparator.class)
             public int compare(MaxPackage o1, MaxPackage o2) {
                 return o1.name().compareTo(o2.name());
             }

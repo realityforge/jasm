@@ -4,11 +4,11 @@
 /*VCSID=4cb63353-d0d1-41d7-be56-4c602f46e479*/
 package jasm.gen.risc.sparc;
 
+import com.sun.max.program.Trace;
+import com.sun.max.program.option.ProgramArgumentsParser;
 import jasm.Assembler;
 import jasm.BigEndianAssembler;
 import jasm.gen.risc.RiscAssemblerGenerator;
-import com.sun.max.program.Trace;
-import com.sun.max.program.option.ProgramArgumentsParser;
 
 /**
  *

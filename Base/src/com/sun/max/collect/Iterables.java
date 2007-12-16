@@ -4,7 +4,6 @@
 /*VCSID=4094e727-0d7b-4709-8858-e5a7a856cc7e*/
 package com.sun.max.collect;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.lang.Arrays;
 import com.sun.max.lang.StaticLoophole;
 import java.util.Enumeration;
@@ -41,17 +40,14 @@ public final class Iterables {
             EnumerationIterator() {
             }
 
-            @Implement(Iterator.class)
             public boolean hasNext() {
                 return _enumeration.hasMoreElements();
             }
 
-            @Implement(Iterator.class)
             public Element_Type next() {
                 return _enumeration.nextElement();
             }
 
-            @Implement(Iterator.class)
             public void remove() {
                 throw new UnsupportedOperationException();
             }
@@ -62,7 +58,6 @@ public final class Iterables {
             _enumeration = enumeration;
         }
 
-        @Implement(Iterable.class)
         public Iterator<Element_Type> iterator() {
             return new EnumerationIterator();
         }
@@ -74,7 +69,6 @@ public final class Iterables {
     }
 
     private static final Iterable<Object> EMPTY_ITERABLE = new Iterable<Object>() {
-        @Implement(Iterable.class)
         public Iterator<Object> iterator() {
             return Iterators.empty();
         }
@@ -94,7 +88,6 @@ public final class Iterables {
             _outerIterator = iterable.iterator();
         }
 
-        @Implement(Iterator.class)
         public boolean hasNext() {
             while (_innerIterator == null || !_innerIterator.hasNext()) {
                 if (!_outerIterator.hasNext()) {
@@ -105,7 +98,6 @@ public final class Iterables {
             return true;
         }
 
-        @Implement(Iterator.class)
         public Element_Type next() {
             if (!hasNext()) {
                 return null;
@@ -113,7 +105,6 @@ public final class Iterables {
             return _innerIterator.next();
         }
 
-        @Implement(Iterator.class)
         public void remove() {
             throw new UnsupportedOperationException();
         }
@@ -122,7 +113,6 @@ public final class Iterables {
     public static <Element_Type> Iterable<Element_Type> flatten1(Iterable<Iterable<Element_Type>> iterable) {
         final Iterator<Element_Type> iterator = new Flatten1Iterator<Element_Type>(iterable);
         return new Iterable<Element_Type>() {
-            @Implement(Iterable.class)
             public Iterator<Element_Type> iterator() {
                 return iterator;
             }

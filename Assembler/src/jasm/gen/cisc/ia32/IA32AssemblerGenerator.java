@@ -4,13 +4,13 @@
 /*VCSID=3ccd5459-5604-4e2b-942b-d3feac9ac286*/
 package jasm.gen.cisc.ia32;
 
+import com.sun.max.io.IndentWriter;
 import jasm.gen.cisc.x86.X86AssemblerGenerator;
 import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.ia32.IA32BaseRegister32;
 import jasm.ia32.IA32IndirectRegister16;
 import jasm.ia32.IA32IndirectRegister32;
 import jasm.util.WordWidth;
-import com.sun.max.io.IndentWriter;
 
 /**
  * Run this program to generate the IA32RawAssembler and IA32LabelAssembler classes.

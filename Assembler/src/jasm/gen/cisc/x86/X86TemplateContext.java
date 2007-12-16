@@ -4,8 +4,8 @@
 /*VCSID=244d432e-90ce-461a-8624-7ca5452caeb7*/
 package jasm.gen.cisc.x86;
 
-import jasm.util.WordWidth;
 import com.sun.max.program.ProgramError;
+import jasm.util.WordWidth;
 
 /**
  * A bundle of choices one can make when creating a template.

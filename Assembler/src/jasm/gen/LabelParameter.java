@@ -4,10 +4,10 @@
 /*VCSID=17d2ff05-5070-45f5-b398-8bd296e1b2a6*/
 package jasm.gen;
 
-import jasm.Argument;
-import jasm.Label;
 import com.sun.max.collect.Iterables;
 import com.sun.max.collect.Sets;
+import jasm.Argument;
+import jasm.Label;
 import java.util.Set;
 
 /**

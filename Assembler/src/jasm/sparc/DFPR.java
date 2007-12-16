@@ -5,8 +5,8 @@
 package jasm.sparc;
 
 import jasm.SymbolicArgument;
-import jasm.util.Symbolizer;
 import jasm.util.StaticFieldName;
+import jasm.util.Symbolizer;
 
 /**
  * The double-precision (64-bit) floating-point registers.

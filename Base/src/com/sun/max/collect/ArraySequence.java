@@ -4,7 +4,6 @@
 /*VCSID=c3242493-7af3-4149-be74-2cae04039d72*/
 package com.sun.max.collect;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.lang.Arrays;
 import com.sun.max.lang.StaticLoophole;
 import java.util.Collection;
@@ -41,32 +40,26 @@ public class ArraySequence<Element_Type> implements MutableSequence<Element_Type
         _array = StaticLoophole.cast(arrayType, collection.toArray());
     }
 
-    @Implement(Sequence.class)
     public boolean isEmpty() {
         return _array.length == 0;
     }
 
-    @Implement(Sequence.class)
     public int length() {
         return _array.length;
     }
 
-    @Implement(Sequence.class)
     public Element_Type first() {
         return _array[0];
     }
 
-    @Implement(Sequence.class)
     public Element_Type last() {
         return _array[_array.length - 1];
     }
 
-    @Implement(Sequence.class)
     public Element_Type get(int index) {
         return _array[index];
     }
 
-    @Implement(MutableSequence.class)
     public Element_Type set(int index, Element_Type value) {
         final Element_Type previousValue = _array[index];
         _array[index] = value;
@@ -100,12 +93,10 @@ public class ArraySequence<Element_Type> implements MutableSequence<Element_Type
         return result;
     }
 
-    @Implement(Sequence.class)
     public Iterator<Element_Type> iterator() {
         return Arrays.iterable(_array).iterator();
     }
 
-    @Implement(Sequence.class)
     @Override
     public Sequence<Element_Type> clone() {
         return new ArraySequence<Element_Type>(_array.clone());
@@ -119,7 +110,6 @@ public class ArraySequence<Element_Type> implements MutableSequence<Element_Type
         return to;
     }
 
-    @Implement(Sequence.class)
     public <To_Type> Sequence<To_Type> map(Class<To_Type> toType, MapFunction<Element_Type, To_Type> mapFunction) {
         return map(this, toType, mapFunction);
     }

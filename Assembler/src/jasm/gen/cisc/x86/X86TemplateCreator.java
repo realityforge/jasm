@@ -4,13 +4,13 @@
 /*VCSID=26dd6a28-a386-45f4-bbf1-18d5078e4d6c*/
 package jasm.gen.cisc.x86;
 
-import jasm.gen.InstructionDescription;
-import jasm.gen.InstructionDescriptionCreator;
-import jasm.util.WordWidth;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.Sequence;
 import com.sun.max.program.Trace;
+import jasm.gen.InstructionDescription;
+import jasm.gen.InstructionDescriptionCreator;
+import jasm.util.WordWidth;
 
 /**
  * @author Bernd Mathiske

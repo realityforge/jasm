@@ -4,16 +4,6 @@
 /*VCSID=1611afbc-aa55-4cc9-b557-3f14dc14d1c2*/
 package jasm.gen.cisc.x86;
 
-import jasm.Assembler;
-import jasm.EnumerableArgument;
-import jasm.LabelAddressInstruction;
-import jasm.LabelOffsetInstruction;
-import jasm.LittleEndianAssembler;
-import jasm.util.WordWidth;
-import jasm.gen.AssemblerGenerator;
-import jasm.gen.Assembly;
-import jasm.gen.Parameter;
-import jasm.gen.cisc.amd64.AMD64AssemblerGenerator;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.ArraySequence;
@@ -27,6 +17,16 @@ import com.sun.max.program.ProgramError;
 import com.sun.max.program.Trace;
 import com.sun.max.program.option.BooleanProgramOption;
 import com.sun.max.program.option.ProgramArgumentsParser;
+import jasm.Assembler;
+import jasm.EnumerableArgument;
+import jasm.LabelAddressInstruction;
+import jasm.LabelOffsetInstruction;
+import jasm.LittleEndianAssembler;
+import jasm.gen.AssemblerGenerator;
+import jasm.gen.Assembly;
+import jasm.gen.Parameter;
+import jasm.gen.cisc.amd64.AMD64AssemblerGenerator;
+import jasm.util.WordWidth;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.EnumSet;

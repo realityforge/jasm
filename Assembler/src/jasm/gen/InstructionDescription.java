@@ -4,13 +4,13 @@
 /*VCSID=6bb2987b-e8ef-4213-9d67-491c6e945f3f*/
 package jasm.gen;
 
+import com.sun.max.collect.MutableSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.program.ProgramError;
 import jasm.gen.cisc.x86.X86InstructionDescriptionVisitor;
 import jasm.gen.risc.RiscInstructionDescriptionVisitor;
 import jasm.gen.risc.field.InputOperandField;
 import jasm.util.WordWidth;
-import com.sun.max.collect.MutableSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.program.ProgramError;
 import java.util.Iterator;
 
 /**

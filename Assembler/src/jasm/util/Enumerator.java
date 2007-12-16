@@ -4,11 +4,9 @@
 /*VCSID=c7dc824c-e917-4658-8b28-6781fc05846f*/
 package jasm.util;
 
-import com.sun.max.annotate.Implement;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Set;
-import jasm.util.Symbolizer;
 
 /**
  * @see Enumerable
@@ -31,7 +29,6 @@ public class Enumerator<Enumerable_Type extends Enum<Enumerable_Type> & Enumerab
         _enumSet = enumSet;
     }
 
-    @Implement(Symbolizer.class)
     public Class<Enumerable_Type> type() {
         return _type;
     }
@@ -40,12 +37,10 @@ public class Enumerator<Enumerable_Type extends Enum<Enumerable_Type> & Enumerab
         return _enumSet;
     }
 
-    @Implement(Iterable.class)
     public Iterator<Enumerable_Type> iterator() {
         return _enumSet.iterator();
     }
 
-    @Implement(Symbolizer.class)
     public Enumerable_Type fromValue(int value) {
         for (Enumerable_Type enumerable : this) {
             if (enumerable.value() == value && _enumSet.contains(enumerable)) {

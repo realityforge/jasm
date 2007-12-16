@@ -4,9 +4,9 @@
 /*VCSID=204a4ce5-d0c0-4cd4-af1c-b6187ed8d782*/
 package jasm.gen.risc.field;
 
-import jasm.gen.risc.bitRange.BitRange;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
+import jasm.gen.risc.bitRange.BitRange;
 
 /**
  * @author Bernd Mathiske

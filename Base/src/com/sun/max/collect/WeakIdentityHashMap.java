@@ -4,7 +4,6 @@
 /*VCSID=49a6da43-2915-4347-8fc1-817b639795aa*/
 package com.sun.max.collect;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.program.Problem;
 import java.util.Collection;
 import java.util.Map;
@@ -32,50 +31,41 @@ public class WeakIdentityHashMap<K, V> implements Map<K, V> {
         return new ReferenceWrapper<Object>(key);
     }
 
-    @Implement(Map.class)
     public void clear() {
         _map.clear();
     }
 
-    @Implement(Map.class)
     public boolean containsKey(Object key) {
         return _map.containsKey(wrap(key));
     }
 
-    @Implement(Map.class)
     public boolean containsValue(Object value) {
         return _map.containsValue(value);
     }
 
-    @Implement(Map.class)
     public Set<Map.Entry<K, V>> entrySet() {
         Problem.unimplemented();
         return null;
     }
 
-    @Implement(Map.class)
     public V get(Object key) {
         return _map.get(wrap(key));
     }
 
-    @Implement(Map.class)
     public boolean isEmpty() {
         return _map.isEmpty();
     }
 
-    @Implement(Map.class)
     public Set<K> keySet() {
         Problem.unimplemented();
         return null;
     }
 
-    @Implement(Map.class)
     public V put(K key, V value) {
         _map.put(wrapK(key), value);
         return value;
     }
 
-    @Implement(Map.class)
     public void putAll(Map<? extends K, ? extends V> m) {
         putAll2(m);
     }
@@ -87,17 +77,14 @@ public class WeakIdentityHashMap<K, V> implements Map<K, V> {
         }
     }
 
-    @Implement(Map.class)
     public V remove(Object key) {
         return _map.remove(wrap(key));
     }
 
-    @Implement(Map.class)
     public int size() {
         return _map.size();
     }
 
-    @Implement(Map.class)
     public Collection<V> values() {
         return _map.values();
     }

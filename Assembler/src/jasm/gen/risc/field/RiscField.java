@@ -4,10 +4,10 @@
 /*VCSID=f74662dd-fa12-489e-ba2e-cb58b1a2f993*/
 package jasm.gen.risc.field;
 
-import jasm.gen.risc.bitRange.BitRange;
-import jasm.util.StaticFieldName;
 import com.sun.max.lang.StaticFieldLiteral;
 import com.sun.max.program.ProgramError;
+import jasm.gen.risc.bitRange.BitRange;
+import jasm.util.StaticFieldName;
 
 /**
  * A field describes a bit range and how it relates to an operand.

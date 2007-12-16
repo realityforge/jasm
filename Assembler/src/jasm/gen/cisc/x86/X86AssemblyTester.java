@@ -4,20 +4,20 @@
 /*VCSID=a91978a5-fedd-4a91-a319-ffb277e9e225*/
 package jasm.gen.cisc.x86;
 
+import com.sun.max.collect.MutableQueue;
+import com.sun.max.collect.Sequence;
+import com.sun.max.io.IndentWriter;
+import com.sun.max.lang.StaticLoophole;
 import jasm.Argument;
-import jasm.util.WordWidth;
-import jasm.util.HexByte;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.Assembly;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.AssemblyTester;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.ImplicitOperand;
+import jasm.util.HexByte;
+import jasm.util.WordWidth;
 import jasm.x86.IndirectRegister;
-import com.sun.max.collect.MutableQueue;
-import com.sun.max.collect.Sequence;
-import com.sun.max.io.IndentWriter;
-import com.sun.max.lang.StaticLoophole;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;

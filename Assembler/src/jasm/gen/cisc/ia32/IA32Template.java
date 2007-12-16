@@ -4,6 +4,7 @@
 /*VCSID=27164aab-035e-41db-b67d-2cea49280af2*/
 package jasm.gen.cisc.ia32;
 
+import com.sun.max.program.ProgramError;
 import jasm.gen.ArgumentRange;
 import jasm.gen.ImplicitOperand;
 import jasm.gen.TestArgumentExclusion;
@@ -29,13 +30,12 @@ import jasm.ia32.IA32GeneralRegister8;
 import jasm.ia32.IA32IndexRegister32;
 import jasm.ia32.IA32IndirectRegister16;
 import jasm.ia32.IA32IndirectRegister32;
+import jasm.util.WordWidth;
 import jasm.x86.ControlRegister;
 import jasm.x86.DebugRegister;
 import jasm.x86.MMXRegister;
 import jasm.x86.Scale;
 import jasm.x86.SegmentRegister;
-import jasm.util.WordWidth;
-import com.sun.max.program.ProgramError;
 
 /**
  * @author Bernd Mathiske

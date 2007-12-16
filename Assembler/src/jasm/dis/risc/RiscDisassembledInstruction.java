@@ -4,10 +4,10 @@
 /*VCSID=5c063ef9-9e01-4edf-85ec-aed447b20322*/
 package jasm.dis.risc;
 
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.risc.RiscTemplate;
-import com.sun.max.collect.Sequence;
 
 /**
  *

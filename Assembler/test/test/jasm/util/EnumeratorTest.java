@@ -4,11 +4,9 @@
 /*VCSID=d9fdf10c-6e11-4296-966c-35bc182bd1b0*/
 package test.jasm.util;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.ide.MaxTestCase;
 import jasm.util.Enumerable;
 import jasm.util.Enumerator;
-import jasm.util.Symbol;
 
 /**
  * Tests for jasm.util.Enumerator.
@@ -37,11 +35,9 @@ public class EnumeratorTest extends MaxTestCase {
         private NonSuccessiveEnum(int value) {
             _value = value;
         }
-        @Implement(Symbol.class)
         public int value() {
             return _value;
         }
-        @Implement(Enumerable.class)
         public Enumerator<NonSuccessiveEnum> enumerator() {
             return new NonSuccessiveEnumerator<NonSuccessiveEnum>(NonSuccessiveEnum.class);
         }

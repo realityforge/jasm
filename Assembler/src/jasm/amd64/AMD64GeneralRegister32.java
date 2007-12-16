@@ -4,9 +4,9 @@
 /*VCSID=73bf06af-9f58-4eb9-b200-1b76fd85964b*/
 package jasm.amd64;
 
-import jasm.x86.GeneralRegister;
-import jasm.util.WordWidth;
 import jasm.util.Enumerator;
+import jasm.util.WordWidth;
+import jasm.x86.GeneralRegister;
 
 /**
  * @author Bernd Mathiske

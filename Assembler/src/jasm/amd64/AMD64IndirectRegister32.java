@@ -4,10 +4,10 @@
 /*VCSID=1d8ff817-ec40-4471-9f98-7238c8609b08*/
 package jasm.amd64;
 
+import jasm.util.Enumerator;
+import jasm.util.WordWidth;
 import jasm.x86.GeneralRegister;
 import jasm.x86.IndirectRegister;
-import jasm.util.WordWidth;
-import jasm.util.Enumerator;
 
 /**
  * Aliases for 32-bit AMD64 general registers to be used for indirect addressing.

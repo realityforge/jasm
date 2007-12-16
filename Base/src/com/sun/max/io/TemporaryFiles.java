@@ -4,7 +4,6 @@
 /*VCSID=2a35e90c-b5fc-4d7f-8c76-6a9054c13a92*/
 package com.sun.max.io;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.program.ProgramWarning;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -22,7 +21,6 @@ public final class TemporaryFiles {
             final File tempFile = File.createTempFile(prefix, suffix);
             final File directory = tempFile.getParentFile();
             final FilenameFilter filter = new FilenameFilter() {
-                @Implement(FilenameFilter.class)
                 public boolean accept(File dir, String name) {
                     if (prefix != null && prefix.length() > 0 && !name.startsWith(prefix)) {
                         return false;

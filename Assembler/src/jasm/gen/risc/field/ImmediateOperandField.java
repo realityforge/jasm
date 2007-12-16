@@ -4,6 +4,10 @@
 /*VCSID=a014e877-af4f-4f4d-a506-19635fd58e72*/
 package jasm.gen.risc.field;
 
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.MapFunction;
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.Expression;
@@ -19,10 +23,6 @@ import jasm.gen.risc.bitRange.AscendingBitRange;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
 import jasm.gen.risc.bitRange.DescendingBitRange;
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.MapFunction;
-import com.sun.max.collect.Sequence;
 import java.lang.reflect.Method;
 
 /**

@@ -7,8 +7,6 @@ package jasm.gen.cisc.x86;
 import jasm.gen.Assembly;
 import static jasm.gen.cisc.x86.FloatingPointOperandCode.ST_i;
 import static jasm.ia32.IA32GeneralRegister16.AX;
-import static jasm.x86.FPStackRegister.ST;
-import static jasm.x86.FPStackRegister.ST_0;
 import static jasm.util.HexByte._C0;
 import static jasm.util.HexByte._C8;
 import static jasm.util.HexByte._D0;
@@ -49,6 +47,8 @@ import static jasm.util.HexByte._FC;
 import static jasm.util.HexByte._FD;
 import static jasm.util.HexByte._FE;
 import static jasm.util.HexByte._FF;
+import static jasm.x86.FPStackRegister.ST;
+import static jasm.x86.FPStackRegister.ST_0;
 
 /**
  * @author Bernd Mathiske

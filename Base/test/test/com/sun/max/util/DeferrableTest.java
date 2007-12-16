@@ -4,7 +4,6 @@
 /*VCSID=d0ce656f-84f1-4055-9400-68597dace0b6*/
 package test.com.sun.max.util;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.ide.MaxTestCase;
 import com.sun.max.util.Deferrable;
 
@@ -29,7 +28,6 @@ public class DeferrableTest extends MaxTestCase {
         _counter = 0;
         final Deferrable.Queue queue = Deferrable.createRunning();
         new Deferrable(queue) {
-            @Implement(Runnable.class)
             public void run() {
                 _counter = 19;
             }
@@ -41,12 +39,10 @@ public class DeferrableTest extends MaxTestCase {
         _counter = 0;
         final Deferrable.Queue queue = Deferrable.createRunning();
         new Deferrable.Block(queue) {
-            @Implement(Runnable.class)
             public void run() {
                 assertTrue(_counter == 0);
                 for (int i = 0; i < 100; i++) {
                     new Deferrable(queue) {
-                        @Implement(Runnable.class)
                         public void run() {
                             _counter++;
                         }

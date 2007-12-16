@@ -4,7 +4,6 @@
 /*VCSID=5076f98f-bb62-4b73-ba29-51a72ac4101d*/
 package com.sun.max.collect;
 
-import com.sun.max.annotate.Implement;
 import java.util.List;
 import java.util.Vector;
 
@@ -40,7 +39,6 @@ public class IdentityMapping<Key_Type, Value_Type> implements Mapping<Key_Type, 
         _keyType = keyType;
     }
 
-    @Implement(Mapping.class)
     public synchronized Value_Type put(Key_Type key, Value_Type value) {
         assert key != null;
         assert value != null;
@@ -59,7 +57,6 @@ public class IdentityMapping<Key_Type, Value_Type> implements Mapping<Key_Type, 
         return null;
     }
 
-    @Implement(Mapping.class)
     public synchronized Value_Type get(Key_Type key) {
         assert key != null;
         assert _keys.size() == _values.size();
@@ -79,7 +76,6 @@ public class IdentityMapping<Key_Type, Value_Type> implements Mapping<Key_Type, 
         return result;
     }
 
-    @Implement(Mapping.class)
     public synchronized boolean containsKey(Key_Type key) {
         return get(key) != null;
     }

@@ -4,8 +4,12 @@
 /*VCSID=2d9999b3-5ec5-41c8-87d2-888f1ecd147c*/
 package jasm.gen.cisc.x86;
 
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.program.ProgramError;
+import com.sun.max.program.Trace;
 import jasm.EnumerableArgument;
-import jasm.util.WordWidth;
 import jasm.gen.ArgumentRange;
 import jasm.gen.Immediate8Argument;
 import jasm.gen.ImplicitOperand;
@@ -14,16 +18,12 @@ import jasm.gen.InstructionDescription;
 import jasm.gen.Template;
 import jasm.gen.TestArgumentExclusion;
 import jasm.gen.cisc.TemplateNotNeededException;
+import jasm.util.Enumerator;
+import jasm.util.HexByte;
+import jasm.util.WordWidth;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
 import jasm.x86.SegmentRegister;
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.program.ProgramError;
-import com.sun.max.program.Trace;
-import jasm.util.Enumerator;
-import jasm.util.HexByte;
 
 /**
  * @author Bernd Mathiske

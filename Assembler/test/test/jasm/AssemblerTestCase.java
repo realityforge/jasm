@@ -4,13 +4,13 @@
 /*VCSID=69e97991-b7cc-47a8-aa16-4b50f931c587*/
 package test.jasm;
 
-import jasm.gen.AssemblyTester;
 import com.sun.max.ide.MaxTestCase;
 import com.sun.max.program.Trace;
 import com.sun.max.program.option.BooleanProgramOption;
 import com.sun.max.program.option.IntegerProgramOption;
 import com.sun.max.program.option.ProgramArgumentsParser;
 import com.sun.max.program.option.StringProgramOption;
+import jasm.gen.AssemblyTester;
 
 /**
  * Base class for assembler tests that defines program options common to

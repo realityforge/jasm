@@ -4,8 +4,9 @@
 /*VCSID=e4eb5a08-e8c1-43d1-a1d8-3997a485e4ae*/
 package jasm.gen.cisc.amd64;
 
+import com.sun.max.collect.Sequence;
+import com.sun.max.program.ProgramError;
 import jasm.Argument;
-import jasm.util.WordWidth;
 import jasm.amd64.AMD64BaseRegister32;
 import jasm.amd64.AMD64BaseRegister64;
 import jasm.amd64.AMD64GeneralRegister16;
@@ -36,14 +37,13 @@ import jasm.gen.cisc.x86.X86OffsetParameter;
 import jasm.gen.cisc.x86.X86Operand;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
+import jasm.util.WordWidth;
 import jasm.x86.ControlRegister;
 import jasm.x86.DebugRegister;
 import jasm.x86.GeneralRegister;
 import jasm.x86.MMXRegister;
 import jasm.x86.Scale;
 import jasm.x86.SegmentRegister;
-import com.sun.max.collect.Sequence;
-import com.sun.max.program.ProgramError;
 
 /**
  * @author Bernd Mathiske

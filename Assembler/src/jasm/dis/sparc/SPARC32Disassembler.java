@@ -4,13 +4,13 @@
 /*VCSID=2bffb866-4cc7-49c9-b03d-056b501cfbcf*/
 package jasm.dis.sparc;
 
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.Assembler;
-import jasm.util.WordWidth;
 import jasm.gen.risc.sparc.SPARCAssembly;
 import jasm.gen.risc.sparc.SPARCTemplate;
 import jasm.sparc.SPARC32Assembler;
-import com.sun.max.collect.Sequence;
+import jasm.util.WordWidth;
 
 /**
  *

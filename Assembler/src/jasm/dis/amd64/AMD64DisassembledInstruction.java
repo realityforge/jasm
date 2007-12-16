@@ -4,12 +4,12 @@
 /*VCSID=1ba4ceb4-dcfd-4cfc-9896-54f03e442a4c*/
 package jasm.dis.amd64;
 
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.Address64Instruction;
 import jasm.dis.x86.X86DisassembledInstruction;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.cisc.amd64.AMD64Template;
-import com.sun.max.collect.Sequence;
 
 /**
  * @author Bernd Mathiske

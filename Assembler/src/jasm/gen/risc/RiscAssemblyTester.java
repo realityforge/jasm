@@ -4,14 +4,14 @@
 /*VCSID=d77b5c59-ec27-40c5-a7f9-edbf21609056*/
 package jasm.gen.risc;
 
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
-import jasm.util.WordWidth;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.Assembly;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.AssemblyTester;
 import jasm.gen.InstructionConstraint;
-import com.sun.max.collect.Sequence;
+import jasm.util.WordWidth;
 import java.io.IOException;
 import java.io.PushbackInputStream;
 import java.util.EnumSet;

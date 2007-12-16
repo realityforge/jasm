@@ -4,7 +4,6 @@
 /*VCSID=ee5d4a0b-a1ac-482a-a3bc-bdd4d9485e20*/
 package com.sun.max.collect;
 
-import com.sun.max.annotate.Implement;
 import java.util.Iterator;
 
 /**
@@ -96,7 +95,6 @@ public class IdentitySet<Element_Type> implements Iterable<Element_Type> {
         }
     }
 
-    @Implement(Iterable.class)
     public Iterator<Element_Type> iterator() {
         final Element_Type[] array = com.sun.max.lang.Arrays.create(_elementType, numberOfElements());
         int j = 0;

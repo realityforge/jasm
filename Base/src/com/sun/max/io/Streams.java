@@ -4,7 +4,6 @@
 /*VCSID=a664876e-2d56-4aab-868d-fdb943a5ab96*/
 package com.sun.max.io;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.lang.Bytes;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -85,7 +84,6 @@ public final class Streams {
             _closed = true;
         }
 
-        @Implement(Runnable.class)
         @Override
         public void run() {
             try {

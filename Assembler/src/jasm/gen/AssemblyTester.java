@@ -4,12 +4,6 @@
 /*VCSID=02876449-abda-403f-8d85-aec615e45a57*/
 package jasm.gen;
 
-import jasm.Argument;
-import jasm.Assembler;
-import jasm.AssemblyException;
-import jasm.util.WordWidth;
-import jasm.dis.DisassembledInstruction;
-import jasm.dis.Disassembler;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.ArraySequence;
@@ -28,6 +22,12 @@ import com.sun.max.program.Trace;
 import com.sun.max.util.Predicate;
 import com.sun.max.util.Timer;
 import com.sun.max.util.Timer.ComputationWithException;
+import jasm.Argument;
+import jasm.Assembler;
+import jasm.AssemblyException;
+import jasm.dis.DisassembledInstruction;
+import jasm.dis.Disassembler;
+import jasm.util.WordWidth;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;

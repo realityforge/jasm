@@ -4,7 +4,6 @@
 /*VCSID=1282c4f5-c2fe-4a44-9833-97ab5d449cdc*/
 package com.sun.max.collect;
 
-import com.sun.max.annotate.Implement;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
 
@@ -62,7 +61,6 @@ public class IdentityHashSet<Element_Type> implements Iterable<Element_Type> {
         return iterator.next();
     }
 
-    @Implement(Iterable.class)
     public Iterator<Element_Type> iterator() {
         return _internalMap.keySet().iterator();
     }

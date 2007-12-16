@@ -4,11 +4,11 @@
 /*VCSID=58d4749f-add6-4717-ad12-0111ebae0805*/
 package jasm.gen.risc.sparc;
 
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.DisassembledLabel;
 import jasm.dis.GlobalLabelMapper;
 import jasm.gen.risc.RiscExternalInstruction;
-import com.sun.max.collect.Sequence;
 
 /**
  * Output of SPARC instructions in external assembler format.

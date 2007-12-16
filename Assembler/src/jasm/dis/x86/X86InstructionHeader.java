@@ -4,14 +4,14 @@
 /*VCSID=068c4659-7486-49e8-9943-b208327b1361*/
 package jasm.dis.x86;
 
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
 import jasm.gen.Assembly;
 import jasm.gen.cisc.x86.X86Opcode;
 import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import jasm.util.WordWidth;
 import jasm.util.HexByte;
+import jasm.util.WordWidth;
 import java.util.HashMap;
 import java.util.Map;
 

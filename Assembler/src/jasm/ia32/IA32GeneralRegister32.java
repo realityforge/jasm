@@ -4,9 +4,9 @@
 /*VCSID=cfec39ba-afb6-4363-b049-31d912db2452*/
 package jasm.ia32;
 
-import jasm.x86.GeneralRegister;
-import jasm.util.WordWidth;
 import jasm.util.Enumerator;
+import jasm.util.WordWidth;
+import jasm.x86.GeneralRegister;
 import java.util.EnumSet;
 
 /**

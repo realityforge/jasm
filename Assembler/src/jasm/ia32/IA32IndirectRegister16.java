@@ -4,10 +4,10 @@
 /*VCSID=8745b606-10a3-4384-9415-403bb4e64e1c*/
 package jasm.ia32;
 
+import jasm.util.Enumerator;
+import jasm.util.WordWidth;
 import jasm.x86.GeneralRegister;
 import jasm.x86.IndirectRegister;
-import jasm.util.WordWidth;
-import jasm.util.Enumerator;
 
 /**
  * @author Bernd Mathiske

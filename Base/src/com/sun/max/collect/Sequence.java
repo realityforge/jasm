@@ -4,7 +4,6 @@
 /*VCSID=a278063b-680c-4e6d-bb03-416872fc51aa*/
 package com.sun.max.collect;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.lang.StaticLoophole;
 import com.sun.max.util.Predicate;
 import java.util.ArrayList;
@@ -220,7 +219,6 @@ public interface Sequence<Element_Type> extends Iterable<Element_Type>, Cloneabl
 
         public static <Element_Type> Sequence<Element_Type> filterNonNull(Sequence<Element_Type> sequence) {
             return filter(sequence, new Predicate<Element_Type>() {
-                @Implement(Predicate.class)
                 public boolean evaluate(Element_Type element) {
                     return element != null;
                 }

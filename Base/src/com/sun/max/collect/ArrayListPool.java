@@ -4,7 +4,6 @@
 /*VCSID=f2b96038-8d56-4135-b871-5ea6550bc7e2*/
 package com.sun.max.collect;
 
-import com.sun.max.annotate.Implement;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -27,7 +26,6 @@ public class ArrayListPool<PoolObject_Type extends PoolObject> extends ArrayList
     /**
      * Enforces the precondition for {@link Pool#append(PoolObject)}.
      */
-    @Implement(Pool.class)
     public void append(PoolObject_Type element) {
         assert element.serial() == size();
         super.add(element);

@@ -4,6 +4,7 @@
 /*VCSID=b9db9ea8-5b95-4b73-b367-a54b1df54bcd*/
 package jasm.gen.risc.sparc;
 
+import com.sun.max.lang.StaticFieldLiteral;
 import jasm.gen.Expression;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.field.BranchDisplacementOperandField;
@@ -26,7 +27,6 @@ import jasm.sparc.PrivilegedRegister;
 import jasm.sparc.QFPR;
 import jasm.sparc.SFPR;
 import jasm.sparc.StateRegister;
-import com.sun.max.lang.StaticFieldLiteral;
 import jasm.util.StaticFieldName;
 
 /**

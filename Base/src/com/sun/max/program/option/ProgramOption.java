@@ -4,7 +4,6 @@
 /*VCSID=041bf595-f71d-4939-a3b1-861d9c30e7cb*/
 package com.sun.max.program.option;
 
-import com.sun.max.annotate.Implement;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -71,7 +70,6 @@ public abstract class ProgramOption implements Comparable<ProgramOption> {
         return _prefix.hashCode();
     }
 
-    @Implement(Comparable.class)
     public int compareTo(ProgramOption other) {
         return _prefix.compareTo(other._prefix);
     }

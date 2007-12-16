@@ -4,11 +4,11 @@
 /*VCSID=2747fe26-161e-45ef-a221-7fd1d1a6fa2f*/
 package jasm.gen.risc.ppc;
 
+import com.sun.max.collect.Sequence;
 import jasm.gen.Assembly;
 import jasm.gen.risc.RiscInstructionDescription;
 import jasm.gen.risc.RiscInstructionDescriptionCreator;
 import jasm.gen.risc.RiscInstructionDescriptionModifier;
-import com.sun.max.collect.Sequence;
 
 /**
  *

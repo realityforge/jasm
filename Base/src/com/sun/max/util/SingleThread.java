@@ -4,7 +4,6 @@
 /*VCSID=d84ee2b0-a342-4dd9-82db-ca29accc9d4d*/
 package com.sun.max.util;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.lang.Function;
 import com.sun.max.lang.Function1;
 import com.sun.max.lang.Runnable1;
@@ -83,7 +82,6 @@ public class SingleThread extends Thread {
 
     public static synchronized <Result_Type> Result_Type execute(Class<Result_Type> resultType, final Function<Result_Type> function) {
         final Function1<Result_Type, UnusedException> function1 = new Function1<Result_Type, UnusedException>() {
-            @Implement(Function1.class)
             public Result_Type run() throws UnusedException {
                 return function.run();
             }
@@ -97,7 +95,6 @@ public class SingleThread extends Thread {
 
     public static synchronized <Exception_Type extends Exception> void execute(Class<Exception_Type> exceptionType, final Runnable1<Exception_Type> runnable) throws Exception_Type {
         final Function1<Object, Exception_Type> function1 = new Function1<Object, Exception_Type>() {
-            @Implement(Function1.class)
             public Object run() throws Exception_Type {
                 runnable.run();
                 return null;
@@ -108,7 +105,6 @@ public class SingleThread extends Thread {
 
     public static synchronized void execute(final Runnable runnable) {
         final Function<Void> function1 = new Function<Void>() {
-            @Implement(Function1.class)
             public Void run() {
                 runnable.run();
                 return null;

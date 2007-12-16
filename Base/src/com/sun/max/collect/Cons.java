@@ -4,8 +4,6 @@
 /*VCSID=1bec5c79-a2e9-4bb3-907c-3cad97f03d80*/
 package com.sun.max.collect;
 
-import com.sun.max.annotate.Implement;
-import com.sun.max.annotate.JdtSyntax;
 import com.sun.max.lang.StaticLoophole;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -33,7 +31,6 @@ public class Cons<Element_Type> implements LinearCollection<Element_Type> {
         return _tail;
     }
 
-    @Implement(LinearCollection.class)
     public int length() {
         final Cons<Element_Type> start = this;
         Cons<Element_Type> list = this;
@@ -45,19 +42,15 @@ public class Cons<Element_Type> implements LinearCollection<Element_Type> {
         return n;
     }
 
-    @Implement(Iterable.class)
     public Iterator<Element_Type> iterator() {
-        @JdtSyntax("Workaround for type checker bug:")
         final Class<Cons<Element_Type>> type = null;
         return new Iterator<Element_Type>() {
             private final Cons<Element_Type> _start = StaticLoophole.cast(type, Cons.this);
             private Cons<Element_Type> _list = _start;
 
-            @Implement(Iterator.class)
             public boolean hasNext() {
                 return _list != null;
             }
-            @Implement(Iterator.class)
             public Element_Type next() {
                 if (_list == null) {
                     throw new NoSuchElementException();
@@ -69,7 +62,6 @@ public class Cons<Element_Type> implements LinearCollection<Element_Type> {
                 }
                 return result;
             }
-            @Implement(Iterator.class)
             public void remove() {
                 throw new UnsupportedOperationException();
             }

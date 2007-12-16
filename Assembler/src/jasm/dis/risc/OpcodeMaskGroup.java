@@ -4,11 +4,11 @@
 /*VCSID=0604bcb6-0146-46c6-a99a-ab5f1f2ddf5c*/
 package jasm.dis.risc;
 
-import jasm.gen.risc.RiscTemplate;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.IntHashMap;
 import com.sun.max.collect.Sequence;
+import jasm.gen.risc.RiscTemplate;
 import java.util.HashSet;
 import java.util.Set;
 

@@ -4,12 +4,12 @@
 /*VCSID=9c40620d-d9ad-477a-ac5c-f1e34a750de2*/
 package jasm.gen.cisc.x86;
 
-import jasm.Argument;
-import jasm.EnumerableArgument;
-import jasm.util.Enumerator;
-import jasm.gen.EnumerableParameter;
 import com.sun.max.collect.Iterables;
 import com.sun.max.program.ProgramError;
+import jasm.Argument;
+import jasm.EnumerableArgument;
+import jasm.gen.EnumerableParameter;
+import jasm.util.Enumerator;
 
 /**
  * @author Bernd Mathiske

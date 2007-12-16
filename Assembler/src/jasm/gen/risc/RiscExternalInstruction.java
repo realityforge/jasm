@@ -4,6 +4,9 @@
 /*VCSID=0afa959f-a3ba-439c-b7b1-5b1955c49a32*/
 package jasm.gen.risc;
 
+import com.sun.max.collect.MutableQueue;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.Strings;
 import jasm.Argument;
 import jasm.ExternalMnemonicSuffixArgument;
 import jasm.dis.DisassembledLabel;
@@ -13,9 +16,6 @@ import jasm.gen.InstructionConstraint;
 import jasm.gen.risc.field.BranchDisplacementOperandField;
 import jasm.gen.risc.field.OperandField;
 import jasm.gen.risc.field.RiscField;
-import com.sun.max.collect.MutableQueue;
-import com.sun.max.collect.Sequence;
-import com.sun.max.lang.Strings;
 import java.util.Queue;
 
 /**

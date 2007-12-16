@@ -4,8 +4,6 @@
 /*VCSID=3754ac6e-d5bf-42d7-8881-be201fe91b41*/
 package com.sun.max.collect;
 
-import com.sun.max.annotate.Implement;
-import com.sun.max.annotate.JdtSyntax;
 import com.sun.max.lang.StaticLoophole;
 import java.util.Collection;
 import java.util.HashMap;
@@ -28,18 +26,12 @@ public class SequenceMultiMap<Key_Type, Value_Type> implements MultiMap<Key_Type
     private final Map<Key_Type, AppendableSequence<Value_Type>> _map;
 
     public SequenceMultiMap(boolean sorted) {
-
-        @JdtSyntax("jikes compiler bug (https://bugs.eclipse.org/bugs/show_bug.cgi?id=151153): invalid stackmap generated if this code is replaced by a ternary operator")
-        final Map<Key_Type, AppendableSequence<Value_Type>> map;
-        if (sorted) {
-            map = new TreeMap<Key_Type, AppendableSequence<Value_Type>>();
-        } else {
-            map = new HashMap<Key_Type, AppendableSequence<Value_Type>>();
-        }
-        _map = map;
+        _map =
+            (sorted) ?
+            new TreeMap<Key_Type, AppendableSequence<Value_Type>>() :
+            new HashMap<Key_Type, AppendableSequence<Value_Type>>();
     }
 
-    @Implement(MultiMap.class)
     public Sequence<Value_Type> get(Key_Type key) {
         final Sequence<Value_Type> result = _map.get(key);
         if (result == null) {
@@ -49,7 +41,6 @@ public class SequenceMultiMap<Key_Type, Value_Type> implements MultiMap<Key_Type
         return _map.get(key);
     }
 
-    @Implement(MultiMap.class)
     public boolean containsKey(Key_Type key) {
         return _map.containsKey(key);
     }
@@ -63,22 +54,18 @@ public class SequenceMultiMap<Key_Type, Value_Type> implements MultiMap<Key_Type
         return sequence;
     }
 
-    @Implement(MultiMap.class)
     public void add(Key_Type key, Value_Type value) {
         makeSequence(key).append(value);
     }
 
-    @Implement(MultiMap.class)
     public void addAll(Key_Type key, Sequence<Value_Type> values) {
         AppendableSequence.Static.appendAll(makeSequence(key), values);
     }
 
-    @Implement(MultiMap.class)
     public Set<Key_Type> keys() {
         return _map.keySet();
     }
 
-    @Implement(Iterable.class)
     public Iterator<Value_Type> iterator() {
         final Collection<AppendableSequence<Value_Type>> sequences = _map.values();
         assert Iterable.class.isAssignableFrom(Collection.class);

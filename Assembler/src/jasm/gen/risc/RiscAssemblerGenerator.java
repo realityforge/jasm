@@ -4,10 +4,13 @@
 /*VCSID=9772e265-3722-4fd9-9162-381ff3c1e08b*/
 package jasm.gen.risc;
 
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.io.IndentWriter;
+import com.sun.max.program.ProgramError;
 import jasm.Argument;
 import jasm.LabelOffsetInstruction;
 import jasm.SymbolicArgument;
-import jasm.util.Ints;
 import jasm.gen.AssemblerGenerator;
 import jasm.gen.Assembly;
 import jasm.gen.ImmediateArgument;
@@ -18,10 +21,7 @@ import jasm.gen.Parameter;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.field.InputOperandField;
 import jasm.gen.risc.field.OperandField;
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.io.IndentWriter;
-import com.sun.max.program.ProgramError;
+import jasm.util.Ints;
 
 /**
  *

@@ -4,6 +4,9 @@
 /*VCSID=6e73a029-ec1e-4a1a-936a-73a3cbbb8b36*/
 package jasm.dis.x86;
 
+import com.sun.max.collect.MutableQueue;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.Strings;
 import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.DisassembledLabel;
@@ -19,12 +22,9 @@ import jasm.gen.cisc.x86.X86Operand;
 import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
+import jasm.util.WordWidth;
 import jasm.x86.IndirectRegister;
 import jasm.x86.Scale;
-import com.sun.max.collect.MutableQueue;
-import com.sun.max.collect.Sequence;
-import com.sun.max.lang.Strings;
-import jasm.util.WordWidth;
 import java.util.Queue;
 
 /**

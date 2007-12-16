@@ -5,11 +5,6 @@
 package jasm.gen;
 
 import com.sun.max.MaxPackage;
-import jasm.Argument;
-import jasm.Assembler;
-import jasm.AssemblyException;
-import jasm.ExternalMnemonicSuffixArgument;
-import jasm.Label;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.ArraySequence;
@@ -25,6 +20,11 @@ import com.sun.max.lang.StaticLoophole;
 import com.sun.max.lang.Strings;
 import com.sun.max.program.ProgramError;
 import com.sun.max.program.Trace;
+import jasm.Argument;
+import jasm.Assembler;
+import jasm.AssemblyException;
+import jasm.ExternalMnemonicSuffixArgument;
+import jasm.Label;
 import java.io.BufferedReader;
 import java.io.CharArrayReader;
 import java.io.CharArrayWriter;

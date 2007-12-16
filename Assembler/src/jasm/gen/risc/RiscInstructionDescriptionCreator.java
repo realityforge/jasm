@@ -4,6 +4,13 @@
 /*VCSID=5ac6ab01-58b0-49d4-92d2-bb9dcb1a0e2a*/
 package jasm.gen.risc;
 
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.MutableSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.StaticLoophole;
+import com.sun.max.program.ProgramError;
+import com.sun.max.program.Trace;
 import jasm.gen.Assembly;
 import jasm.gen.InstructionConstraint;
 import jasm.gen.InstructionDescriptionCreator;
@@ -12,13 +19,6 @@ import jasm.gen.risc.bitRange.OmittedBitRange;
 import jasm.gen.risc.field.OperandField;
 import jasm.gen.risc.field.OptionField;
 import jasm.gen.risc.field.RiscField;
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.MutableSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.lang.StaticLoophole;
-import com.sun.max.program.ProgramError;
-import com.sun.max.program.Trace;
 import java.util.Iterator;
 import java.util.List;
 

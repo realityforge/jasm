@@ -4,10 +4,10 @@
 /*VCSID=a7e10cc2-2086-4554-88f8-c6ffcee187bf*/
 package jasm.gen.risc.ppc;
 
+import com.sun.max.collect.Sequence;
 import jasm.InstructionSet;
 import jasm.gen.risc.RiscAssembly;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import com.sun.max.collect.Sequence;
 
 /**
  * @author Doug Simon

@@ -4,6 +4,7 @@
 /*VCSID=4507a0da-6869-4c82-8c16-b10a29e34f74*/
 package test.jasm.sparc;
 
+import com.sun.max.ide.MaxTestCase;
 import jasm.AssemblyException;
 import jasm.Label;
 import jasm.dis.sparc.SPARC32Disassembler;
@@ -28,7 +29,6 @@ import jasm.sparc.SPARC32Assembler;
 import jasm.sparc.SPARC64Assembler;
 import jasm.sparc.SPARCAssembler;
 import jasm.sparc.StateRegister;
-import com.sun.max.ide.MaxTestCase;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

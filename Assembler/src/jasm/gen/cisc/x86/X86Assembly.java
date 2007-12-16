@@ -4,10 +4,10 @@
 /*VCSID=aa916e9d-f2b6-432f-bbf0-596a9046227c*/
 package jasm.gen.cisc.x86;
 
+import com.sun.max.program.ProgramError;
 import jasm.InstructionSet;
 import jasm.gen.Assembly;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import com.sun.max.program.ProgramError;
 
 /**
  * @author Bernd Mathiske

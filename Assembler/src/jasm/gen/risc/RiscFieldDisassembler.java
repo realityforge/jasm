@@ -7,12 +7,12 @@
  */
 package jasm.gen.risc;
 
+import com.sun.max.lang.Strings;
 import jasm.gen.InstructionConstraint;
 import jasm.gen.Template;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.field.OperandField;
 import jasm.gen.risc.field.RiscField;
-import com.sun.max.lang.Strings;
 
 /**
  * Disassembles an assembled RISC instruction to show the value of each field in the instruction as

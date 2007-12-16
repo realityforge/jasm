@@ -5,16 +5,16 @@
 package jasm.gen;
 
 import com.sun.max.MaxPackage;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.program.ProgramError;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;
 import jasm.InstructionSet;
 import jasm.Label;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.program.ProgramError;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 

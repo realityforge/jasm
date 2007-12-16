@@ -4,6 +4,7 @@
 /*VCSID=6f119a9d-8097-4894-87ef-1dd806afc442*/
 package test.jasm.ppc;
 
+import com.sun.max.ide.MaxTestCase;
 import jasm.AssemblyException;
 import jasm.Label;
 import jasm.dis.ppc.PPC32Disassembler;
@@ -19,7 +20,6 @@ import jasm.ppc.PPC32Assembler;
 import jasm.ppc.PPC64Assembler;
 import jasm.ppc.PPCAssembler;
 import static jasm.ppc.Zero.ZERO;
-import com.sun.max.ide.MaxTestCase;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

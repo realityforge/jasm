@@ -4,10 +4,10 @@
 /*VCSID=52c19f16-7bb0-42ce-9b3f-f9c61a9e6cf5*/
 package jasm.gen.cisc.amd64;
 
+import com.sun.max.collect.Sequence;
 import jasm.InstructionSet;
 import jasm.gen.cisc.x86.FloatingPointOpcodeMap;
 import jasm.gen.cisc.x86.X86Assembly;
-import com.sun.max.collect.Sequence;
 
 /**
  * @author Bernd Mathiske

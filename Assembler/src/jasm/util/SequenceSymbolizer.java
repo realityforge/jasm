@@ -4,7 +4,6 @@
 /*VCSID=0b1a9456-e5f5-4814-9e1a-e71e160a2ff7*/
 package jasm.util;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.collect.Sequence;
 import com.sun.max.program.ProgramError;
 import java.util.Iterator;
@@ -26,12 +25,10 @@ final class SequenceSymbolizer<Symbol_Type extends Symbol> implements Symbolizer
         ProgramError.check(!_symbols.isEmpty());
     }
 
-    @Implement(Symbolizer.class)
     public Class<Symbol_Type> type() {
         return _symbolType;
     }
 
-    @Implement(Symbolizer.class)
     public Symbol_Type fromValue(int value) {
         for (Symbol_Type symbol : _symbols) {
             if (symbol.value() == value) {
@@ -41,7 +38,6 @@ final class SequenceSymbolizer<Symbol_Type extends Symbol> implements Symbolizer
         return null;
     }
 
-    @Implement(Iterable.class)
     public Iterator<Symbol_Type> iterator() {
         return _symbols.iterator();
     }

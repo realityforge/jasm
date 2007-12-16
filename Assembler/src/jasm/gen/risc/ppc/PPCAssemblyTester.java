@@ -4,13 +4,13 @@
 /*VCSID=91ecad04-1965-49ce-ba8e-bce4da291b82*/
 package jasm.gen.risc.ppc;
 
+import com.sun.max.collect.Sequence;
+import com.sun.max.io.IndentWriter;
+import com.sun.max.lang.Endianness;
 import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.risc.RiscAssemblyTester;
-import com.sun.max.collect.Sequence;
-import com.sun.max.io.IndentWriter;
-import com.sun.max.lang.Endianness;
 import jasm.util.WordWidth;
 import java.io.IOException;
 import java.io.InputStream;

@@ -4,11 +4,11 @@
 /*VCSID=fcd62ced-709b-4c62-8c19-027c11a1213e*/
 package jasm.gen.cisc.x86;
 
+import com.sun.max.program.ProgramError;
 import jasm.Argument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.Parameter;
 import jasm.gen.TestArgumentExclusion;
-import com.sun.max.program.ProgramError;
 import java.util.HashSet;
 import java.util.Set;
 

@@ -66,9 +66,6 @@ import static jasm.gen.cisc.x86.OperandCode.Wsd;
 import static jasm.gen.cisc.x86.OperandCode.Wss;
 import jasm.gen.cisc.x86.X86InstructionDescriptionCreator;
 import jasm.gen.cisc.x86.X86TemplateContext;
-import static jasm.x86.SegmentRegister.FS;
-import static jasm.x86.SegmentRegister.GS;
-import jasm.util.WordWidth;
 import static jasm.util.HexByte._00;
 import static jasm.util.HexByte._01;
 import static jasm.util.HexByte._02;
@@ -288,6 +285,9 @@ import static jasm.util.HexByte._FB;
 import static jasm.util.HexByte._FC;
 import static jasm.util.HexByte._FD;
 import static jasm.util.HexByte._FE;
+import jasm.util.WordWidth;
+import static jasm.x86.SegmentRegister.FS;
+import static jasm.x86.SegmentRegister.GS;
 
 /**
  * @author Bernd Mathiske

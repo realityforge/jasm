@@ -4,6 +4,9 @@
 /*VCSID=ee2cf78b-0cb7-46fd-8d28-f06010e4e0ff*/
 package jasm.gen.cisc.amd64;
 
+import com.sun.max.io.IndentWriter;
+import com.sun.max.lang.Bytes;
+import com.sun.max.program.ProgramError;
 import jasm.amd64.AMD64BaseRegister32;
 import jasm.amd64.AMD64BaseRegister64;
 import jasm.amd64.AMD64GeneralRegister8;
@@ -16,9 +19,6 @@ import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.util.WordWidth;
-import com.sun.max.io.IndentWriter;
-import com.sun.max.lang.Bytes;
-import com.sun.max.program.ProgramError;
 
 /**
  * Run this program to generate the AMD64RawAssembler and AMD64LabelAssembler classes.

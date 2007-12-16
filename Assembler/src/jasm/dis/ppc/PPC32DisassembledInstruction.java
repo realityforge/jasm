@@ -4,11 +4,11 @@
 /*VCSID=17ae4415-01ba-40b7-8a8f-f6b8e2a64c9b*/
 package jasm.dis.ppc;
 
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.Address32Instruction;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.risc.ppc.PPCTemplate;
-import com.sun.max.collect.Sequence;
 
 /**
  *

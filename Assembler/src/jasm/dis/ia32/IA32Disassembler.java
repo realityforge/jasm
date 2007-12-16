@@ -4,17 +4,17 @@
 /*VCSID=bdd25a69-9d1f-4b4f-85cc-547cbfd7a630*/
 package jasm.dis.ia32;
 
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.Assembler;
-import jasm.util.WordWidth;
 import jasm.dis.x86.X86Disassembler;
 import jasm.dis.x86.X86InstructionHeader;
 import jasm.gen.cisc.ia32.IA32Assembly;
 import jasm.gen.cisc.ia32.IA32Template;
 import jasm.ia32.IA32Assembler;
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.Sequence;
 import jasm.util.HexByte;
+import jasm.util.WordWidth;
 import java.util.Map;
 
 /**

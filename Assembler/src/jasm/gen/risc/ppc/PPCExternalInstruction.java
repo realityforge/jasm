@@ -4,11 +4,11 @@
 /*VCSID=3b559590-3fa8-4f6d-928a-6d0aae092737*/
 package jasm.gen.risc.ppc;
 
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.DisassembledLabel;
 import jasm.dis.GlobalLabelMapper;
 import jasm.gen.risc.RiscExternalInstruction;
-import com.sun.max.collect.Sequence;
 
 /**
  * Output of PowerPC instructions in external assembler format.

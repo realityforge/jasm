@@ -4,7 +4,6 @@
 /*VCSID=f330ef41-93b6-437f-a1e3-2a1cc618aa44*/
 package com.sun.max.io;
 
-import com.sun.max.annotate.Implement;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.Sequence;
@@ -257,7 +256,6 @@ public final class Files {
 
     public static Sequence<File> find(File directory, final String suffix, AppendableSequence<File> listing) {
         final Predicate<File> suffixPredicate = new Predicate<File>() {
-            @Implement(Predicate.class)
             public boolean evaluate(File file) {
                 return file.getName().endsWith(suffix);
             }

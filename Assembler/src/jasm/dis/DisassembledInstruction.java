@@ -4,11 +4,11 @@
 /*VCSID=fe70dae4-a119-4686-b750-d53d4b2f29e8*/
 package jasm.dis;
 
+import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.AssemblyInstruction;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.Template;
-import com.sun.max.collect.Sequence;
 
 /**
  * A assembly instruction in internal format, combined with the bytes that it was disassembled from.
