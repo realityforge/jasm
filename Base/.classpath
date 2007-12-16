@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="eclipse"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="src" path="shell"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="ECLIPSE_RUNTIME"/>
+	<classpathentry kind="var" path="ECLIPSE_JDT"/>
+	<classpathentry kind="var" path="JDK_TOOLS" sourcepath="/JDK_TOOLS_SOURCE"/>
+	<classpathentry kind="var" path="JUNIT_CLASSES"/>
+	<classpathentry kind="var" path="JUNIT_SOURCES"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

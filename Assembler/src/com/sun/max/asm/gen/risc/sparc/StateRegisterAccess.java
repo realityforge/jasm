@@ -1,0 +1,32 @@
+/*
+ * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
+ */
+/*VCSID=1b1a9325-afec-4a74-b5a7-0b2af64a1c55*/
+package com.sun.max.asm.gen.risc.sparc;
+
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.*;
+
+/**
+ * @author Bernd Mathiske
+ */
+public class StateRegisterAccess extends SPARCInstructionDescriptionCreator {
+
+    private void create_A43() {
+        define("rd", op(0x2), op3(0x28), _rs1_state, i(0), _res_12_0, _rd);        
+    }
+
+    private void create_A62() {
+        define("wr", op(0x2), op3(0x30), _rs1, i(0), _res_12_5, _rs2, _rd_state);
+        define("wr", op(0x2), op3(0x30), _rs1, i(1), _simm13, _rd_state);        
+    }
+
+    StateRegisterAccess(SPARCTemplateCreator templateCreator) {
+        super(templateCreator);
+        
+        setCurrentArchitectureManualSection("A.43");
+        create_A43();
+
+        setCurrentArchitectureManualSection("A.62");
+        create_A62();
+    }
+}

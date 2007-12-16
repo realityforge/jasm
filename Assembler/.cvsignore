@@ -1,0 +1,12 @@
+javadoc
+build
+TEST-*
+bin
+build-user.xml
+*.swp
+build.xml
+dist
+junit
+junit*.properties
+manifest.*
+nbproject

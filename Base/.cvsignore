@@ -1,0 +1,11 @@
+.apt_generated
+build.xml
+javadoc
+bin
+build
+TEST-*
+dist
+build-user.xml
+*.log
+manifest*
+nbproject

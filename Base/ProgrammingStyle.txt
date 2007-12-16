@@ -1,0 +1,157 @@
+Programming Style Guidelines for Maxwell Project Software
+---------------------------------------------------------
+
+Write code as if there were only one author.
+
+Do not mix styles!
+
+If you want to change our common style, that is completely acceptable.
+Improvements are welcome.
+Then let's talk about it, let's decide together 
+and then make the appropriate change consistently in all source code altogether.
+
+If that is too much of a burden, though,
+then you must submit to our existing style and stick to it!
+
+Most rules are expressed in our CheckStyle Eclipse plugin configuration.
+See http://eclipse-cs.sourceforge.net/
+
+If using Eclipse, you should also import the code style format profile from
+MaxwellBase/eclipse/JavaSourceCodeFormatting.xml. This is under Window|Preferences|Java|Code Style|Formatter|Import...
+
+We also use FindBugs from time to time,
+but there is no rule to eliminate all of its findings,
+which are replete with false positives.
+See http://findbugs.sourceforge.net/
+
+
+Code Formatting
+---------------
+
+Indentation is 4 spaces.
+
+TAB characters are ABSOLUTELY BANNED.
+
+Opening curly braces appear at the end of the first line of the respective construct, not on the second line.
+Closing curly braces are indented matching the first character of the first line of the respective construct.
+See the correct if-statement below as an example.
+
+"if"-statements ALWAYS use curly braces.
+So do else-clauses etc.
+DO NOT ever write this:
+
+    if (condition) statement;
+    
+or this
+
+    if (condition)
+        statement;
+        
+Instead ALWAYS write this:
+
+    if (condition) {
+        statement;
+    }
+
+When using Eclipse, make sure you have the IDE's code formatting rules 
+defined by importing "MaxwellBase/eclipse/JavaSourceCodeFormattting.xml".
+(When you import an Eclipse project from us, this will automatically be the case.)
+Tip: you can find out more about our formatting rules
+by browsing the corresponding Eclipse dialog boxes.
+
+There is a white space before and after every arithmetic operator ('+', '|', '<<', etc.), 
+comparison operator ('<', '!=', etc.), assignment sign ('='), etc.
+
+Catch variables are named after the catch type.
+Example:
+
+    try {
+        ...
+    } catch (MySortOfException mySortOfException) {
+        ...
+    }
+
+
+Naming conventions
+------------------
+
+Interfaces and classes start with an upper case letter, e.g. MyClass, YourInterface.
+
+Methods start with a lower case letter, e.g. foo, fooBar, yourMethodIsNotCalledFooBar.
+
+Private, protected and non-final public fields start with "_", 
+followed by a lower case letter, e.g. _myField, _offset.
+
+Public final fields are all upper case (with "_" word delimiters), e.g. ALL_UPPER_CASE.
+
+There are certain exceptions, which always have to do with interactions with pre-existing
+structures outside our software (e.g. JNI, assembler syntax).
+
+
+"..._Type" - type parameter, same as classes and interfaces, except for the suffix, 
+             e.g. Element_Type, MethodActor_Type.
+
+"numberOf..." - the number of given things as in counting them
+
+"size" - measure of bytes, referring to a sequential span
+"length" - measure of units of whatever (e.g. integers, floats, boats, yachts), referring to a sequential span
+
+"offset" - measure of bytes, referring to a position
+"index" - measure of units of whatever, referring to a position
+"scale" - unit size in bytes
+
+Concerning pointer/reference/grip/accessor operations:
+
+"read", "write" - access by byte offset
+"get", "set"    - access by index with scale (and displacement)
+
+"load"  - generalization of "read" and "get"
+"store" - generalization of "write" and "set"
+
+
+The use of 'final'
+------------------
+
+Local variables and fields that can be declared final MUST be declared final.
+
+Parameters, run variables in for-loops and exception variables
+should only be declared final if required due to access by an inner class.
+
+CheckStyle has a rule that forbids assignments to parameters.
+We use that rule. This effectively makes all parameters final without requiring us to declare it.
+
+
+Type Casts
+----------
+
+A white space is required after a type cast.
+
+Do not mix casting and operators in expressions.
+For example do not write:
+
+	((Foo) anObject).bar();
+	
+Instead, you must write:
+
+	final Foo foo = (Foo) anObject;
+	foo.bar();
+
+
+Array Declarations
+------------------
+
+No space between the element type and the brackets.
+Example: 
+    
+    byte[] array = new byte[3];
+
+
+Javadoc
+-------
+
+Make sure all program elements use javadoc comment delimiters. That is:
+
+/**
+ * Javadoc comment that conforms with the guidelines at http://java.sun.com/j2se/javadoc/writingdoccomments/
+ */
+

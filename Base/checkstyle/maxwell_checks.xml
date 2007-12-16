@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This configuration file was written by the eclipse-cs plugin configuration editor
+-->
+<!--
+Checkstyle-Configuration: Maxwell Checks
+Description:
+
+-->
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+<module name="Checker">
+    <property name="severity" value="warning"/>
+    <module name="TreeWalker">
+        <property name="tabWidth" value="4"/>
+        <module name="FileContentsHolder"/>
+        <module name="JavadocStyle">
+            <property name="checkHtml" value="false"/>
+        </module>
+        <module name="LocalFinalVariableName"/>
+        <module name="LocalVariableName"/>
+        <module name="MemberName">
+            <property name="format" value="^_[a-z][a-zA-Z0-9]*$"/>
+        </module>
+        <module name="MethodName">
+            <property name="format" value="^[a-z][a-z_A-Z0-9]*$"/>
+        </module>
+        <module name="PackageName"/>
+        <module name="ParameterName"/>
+        <module name="TypeName">
+            <property name="format" value="^[A-Z][_a-zA-Z0-9]*$"/>
+        </module>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+        <module name="LineLength">
+            <property name="max" value="250"/>
+        </module>
+        <module name="MethodParamPad"/>
+        <module name="NoWhitespaceAfter">
+            <property name="tokens" value="ARRAY_INIT,BNOT,DEC,DOT,INC,LNOT,UNARY_MINUS,UNARY_PLUS"/>
+        </module>
+        <module name="NoWhitespaceBefore">
+            <property name="tokens" value="SEMI,DOT,POST_DEC,POST_INC"/>
+        </module>
+        <module name="ParenPad"/>
+        <module name="TypecastParenPad">
+            <property name="tokens" value="RPAREN,TYPECAST"/>
+        </module>
+        <module name="TabCharacter">
+            <property name="severity" value="error"/>
+        </module>
+        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAround">
+            <property name="tokens" value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LE,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,SL,SLIST,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,LITERAL_ASSERT,TYPE_EXTENSION_AND"/>
+        </module>
+        <module name="RedundantModifier"/>
+        <module name="AvoidNestedBlocks">
+            <property name="allowInSwitchCase" value="true"/>
+        </module>
+        <module name="EmptyBlock">
+            <property name="option" value="text"/>
+            <property name="tokens" value="LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_IF,LITERAL_TRY,LITERAL_WHILE,STATIC_INIT"/>
+        </module>
+        <module name="LeftCurly"/>
+        <module name="NeedBraces"/>
+        <module name="RightCurly"/>
+        <module name="DoubleCheckedLocking">
+            <property name="severity" value="error"/>
+        </module>
+        <module name="EmptyStatement"/>
+        <module name="HiddenField"/>
+        <module name="FinalClass"/>
+        <module name="HideUtilityClassConstructor"/>
+        <module name="ArrayTypeStyle"/>
+        <module name="UpperEll"/>
+        <module name="FallThrough"/>
+        <module name="FinalLocalVariable"/>
+        <module name="IllegalType">
+            <property name="tokens" value="METHOD_DEF,PARAMETER_DEF,VARIABLE_DEF"/>
+            <property name="illegalClassNames" value="java.util.GregorianCalendar, java.util.Hashtable, java.util.HashSet, java.util.HashMap, java.util.ArrayList, java.util.LinkedHashMap, java.util.LinkedHashSet, java.util.TreeMap, com.sun.max.collect.ArrayListSequence, com.sun.max.collect.ArraySequence, com.sun.max.collect.SequenceMultiMap, com.sun.max.collect.WeakIdentityHashMap"/>
+            <property name="format" value="^(.*[\.])?Abstract[A-Z].*$"/>
+        </module>
+        <module name="MultipleVariableDeclarations"/>
+        <module name="StringLiteralEquality">
+            <property name="severity" value="error"/>
+        </module>
+        <module name="SuperFinalize"/>
+        <module name="UnnecessaryParentheses"/>
+        <module name="Indentation">
+            <property name="severity" value="ignore"/>
+        </module>
+        <module name="StaticVariableName">
+            <property name="format" value="^_[a-z][a-zA-Z0-9]*$"/>
+        </module>
+        <module name="AnonInnerLength">
+            <property name="max" value="200"/>
+        </module>
+        <module name="EmptyForInitializerPad"/>
+        <module name="EmptyForIteratorPad"/>
+        <module name="ModifierOrder"/>
+        <module name="DefaultComesLast"/>
+        <module name="InnerAssignment"/>
+        <module name="JUnitTestCase"/>
+        <module name="ModifiedControlVariable"/>
+        <module name="MutableException"/>
+        <module name="ParameterAssignment"/>
+    </module>
+    <module name="NewlineAtEndOfFile"/>
+    <module name="Translation"/>
+    <module name="SuppressionCommentFilter">
+        <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Allow non-conforming constant names"/>
+        <property name="offCommentFormat" value="Checkstyle: stop constant name check"/>
+        <property name="onCommentFormat" value="Checkstyle: resume constant name check"/>
+        <property name="checkFormat" value="ConstantNameCheck"/>
+    </module>
+    <module name="SuppressionCommentFilter">
+        <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Disable method name checks"/>
+        <property name="offCommentFormat" value="Checkstyle: stop method name check"/>
+        <property name="onCommentFormat" value="Checkstyle: resume method name check"/>
+        <property name="checkFormat" value="MethodName"/>
+        <property name="checkC" value="false"/>
+    </module>
+    <module name="SuppressionCommentFilter">
+        <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Disable Parameter Assignment"/>
+        <property name="offCommentFormat" value="CheckStyle: stop Parameter Assignment checking"/>
+        <property name="onCommentFormat" value="CheckStyle: resume Parameter Assignemt checking"/>
+        <property name="messageFormat" value="Parameter Assignment"/>
+    </module>
+    <module name="SuppressionCommentFilter">
+        <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Disable final variable checks"/>
+        <property name="offCommentFormat" value="Checkstyle: stop final variable check"/>
+        <property name="onCommentFormat" value="Checkstyle: resume final variable check"/>
+        <property name="checkFormat" value="FinalLocalVariable"/>
+    </module>
+    <module name="SuppressionCommentFilter">
+        <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Disable all checks"/>
+        <property name="offCommentFormat" value="Checkstyle: stop"/>
+        <property name="onCommentFormat" value="Checkstyle: resume"/>
+    </module>
+</module>
