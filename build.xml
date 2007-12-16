@@ -5,12 +5,15 @@
   <property name="assembler.main.src.java" location="Assembler/src"/>
   <property name="assembler.test.src.java" location="Assembler/test"/>
 
+  <property name="main.src.path" value="${base.main.src.java}:${assembler.main.src.java}"/>
+
   <property name="junit.jar" location="lib/junit-4.4.jar"/>
 
   <property name="output.dir" location="target"/>
   <property name="output.main.classes" location="${output.dir}/main-classes"/>
   <property name="output.test.classes" location="${output.dir}/test-classes"/>
   <property name="output.jar" location="${output.dir}/jasm.jar"/>
+  <property name="output.javadocs" location="${output.dir}/javadocs"/>
 
   <target name="clean" description="Clean the output directory">
     <delete dir="target"/>
@@ -18,7 +21,7 @@
 
   <target name="compile" description="Compile the code">
     <mkdir dir="${output.main.classes}"/>
-    <javac srcdir="${base.main.src.java}:${assembler.main.src.java}"
+    <javac srcdir="${main.src.path}"
            destdir="${output.main.classes}"
            debug="true"
            deprecation="true"
@@ -40,5 +43,23 @@
   </target>
 
   <target name="main" depends="package" description="Compile, package and test the code"/>
+
+  <target name="javadoc">
+    <mkdir dir="${output.javadocs}"/>
+    <javadoc access="protected"
+             author="false"
+             destdir="${output.javadocs}"
+             nodeprecated="false"
+             nodeprecatedlist="false"
+             noindex="false"
+             nonavbar="false"
+             notree="false"
+             source="1.5"
+             sourcepath="${main.src.path}"
+             splitindex="true"
+             use="true"
+             version="true">
+    </javadoc>
+  </target>
 
 </project>
