@@ -13,26 +13,25 @@ package jasm;
  */
 public abstract class LittleEndianAssembler extends Assembler {
 
-    protected LittleEndianAssembler() {
-        super();
-    }
+  protected LittleEndianAssembler() {
+    super();
+  }
 
-    @Override
-    protected void emitShort(short shortValue) {
-        emitByte((byte) (shortValue & 0xff));
-        emitByte((byte) (shortValue >> 8));
-    }
+  @Override
+  protected final void emitShort(short shortValue) {
+    emitByte((byte) (shortValue & 0xff));
+    emitByte((byte) (shortValue >> 8));
+  }
 
-    @Override
-    protected void emitInt(int intValue) {
-        emitShort((short) (intValue & 0xffff));
-        emitShort((short) (intValue >> 16));
-    }
+  @Override
+  protected final void emitInt(int intValue) {
+    emitShort((short) (intValue & 0xffff));
+    emitShort((short) (intValue >> 16));
+  }
 
-    @Override
-    protected void emitLong(long longValue) {
-        emitInt((int) (longValue & 0xffffffffL));
-        emitInt((int) (longValue >> 32));
-    }
-
+  @Override
+  protected final void emitLong(long longValue) {
+    emitInt((int) (longValue & 0xffffffffL));
+    emitInt((int) (longValue >> 32));
+  }
 }
