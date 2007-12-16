@@ -106,11 +106,12 @@ public abstract class Assembler {
 
     private void gatherLabels() throws AssemblyException {
         for (LabelInstruction labelInstruction : _labelInstructions) {
-            switch (labelInstruction.label().state()) {
+          final Label label = labelInstruction.label();
+          switch (label.state()) {
                 case UNASSIGNED:
                     throw new AssemblyException("unassigned label");
                 case BOUND:
-                    _boundLabels.add(labelInstruction.label());
+                    _boundLabels.add(label);
                     break;
                 default:
                     break;
@@ -130,20 +131,24 @@ public abstract class Assembler {
         final int newSize = _stream.toByteArray().length;
         instruction.setSize(newSize);
         final int delta = newSize - oldSize;
-        for (Label label : _boundLabels) {
-            if (label.offset() > instruction.startOffset()) {
-                label.adjust(delta);
-            }
-        }
-        for (LabelInstruction labelInstruction : _labelInstructions) {
-            if (labelInstruction.startOffset() > instruction.startOffset()) {
-                labelInstruction.adjust(delta);
-            }
-        }
+        updateSuccessorLabels(instruction, delta);
         return true;
     }
 
-    private void updateSpanDependentLabelInstructions() throws AssemblyException {
+  private void updateSuccessorLabels(final LabelOffsetInstruction instruction, final int delta) throws AssemblyException {
+    for (Label label : _boundLabels) {
+        if (label.offset() > instruction.startOffset()) {
+            label.adjust(delta);
+        }
+    }
+    for (LabelInstruction labelInstruction : _labelInstructions) {
+        if (labelInstruction.startOffset() > instruction.startOffset()) {
+            labelInstruction.adjust(delta);
+        }
+    }
+  }
+
+  private void updateSpanDependentLabelInstructions() throws AssemblyException {
         while (true) {
             boolean updatedAny = false;
             for (LabelOffsetInstruction instruction : _spanDependentLabelInstructions) {
@@ -202,8 +207,7 @@ public abstract class Assembler {
         try {
             output(stream);
             stream.close();
-            final byte[] result = stream.toByteArray();
-            return result;
+          return stream.toByteArray();
         } catch (IOException ioException) {
             ProgramError.unexpected("IOException during output to byte array", ioException);
         }
@@ -236,15 +240,6 @@ public abstract class Assembler {
         if (!passed) {
             throw new IllegalArgumentException(expression);
         }
-    }
-
-    /**
-     * Calculate the difference between two Labels. This works whether the labels
-     * are fixed or bound.
-     * @throws AssemblyException
-     */
-    public int labelOffsetRelative(Label label, Label relativeTo) throws AssemblyException {
-        return labelOffsetRelative(label, 0) - labelOffsetRelative(relativeTo, 0);
     }
 
     /**
