@@ -90,7 +90,7 @@ public class InternalTest extends TestCase {
     return new String(baos.toByteArray());
   }
 
-  public void _test32() throws IOException, AssemblyException {
+  public void test32() throws IOException, AssemblyException {
     final int startAddress = 0x12340000;
     final SPARC32Assembler assembler = new SPARC32Assembler(startAddress);
     final SPARC32Disassembler disassembler = new SPARC32Disassembler(startAddress);
