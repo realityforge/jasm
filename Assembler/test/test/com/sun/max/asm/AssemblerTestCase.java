@@ -64,11 +64,6 @@ public abstract class AssemblerTestCase extends MaxTestCase {
         parseProgramArguments();
     }
 
-    public AssemblerTestCase(String name) {
-        super(name);
-        parseProgramArguments();
-    }
-
     public void run(AssemblyTester tester) {
         tester.setTemplatePattern(_templatePattern.value());
         tester.run(_startTemplateSerial.value().intValue(), _endTemplateSerial.value().intValue(), _onlyCreateExternalSource.value());

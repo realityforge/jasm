@@ -22,35 +22,11 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Iterator;
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * @author Bernd Mathiske
  */
 public class BoundLabelTest extends MaxTestCase {
-
-    public BoundLabelTest() {
-        super();
-
-    }
-
-    public BoundLabelTest(String name) {
-        super(name);
-    }
-
-    public static Test suite() {
-        final TestSuite suite = new TestSuite(BoundLabelTest.class.getName());
-        //$JUnit-BEGIN$
-        suite.addTestSuite(BoundLabelTest.class);
-        //$JUnit-END$
-        return suite;
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(BoundLabelTest.class);
-    }
-
     private static final int LABEL_DELTA = 10;
 
     private int insertInstructions(AMD64Assembler assembler, Label[] labels, int labelIndex) {
@@ -158,5 +134,4 @@ public class BoundLabelTest extends MaxTestCase {
             assertTrue(bytes[label.offset()] == (byte) 0xE8); // is there a call instruction at the label's address?
         }
     }
-
 }

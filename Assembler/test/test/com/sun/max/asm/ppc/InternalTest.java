@@ -23,35 +23,11 @@ import com.sun.max.ide.MaxTestCase;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * @author Bernd Mathiske
  */
 public class InternalTest extends MaxTestCase {
-
-    public InternalTest() {
-        super();
-
-    }
-
-    public InternalTest(String name) {
-        super(name);
-    }
-
-    public static Test suite() {
-        final TestSuite suite = new TestSuite(InternalTest.class.getName());
-        //$JUnit-BEGIN$
-        suite.addTestSuite(InternalTest.class);
-        //$JUnit-END$
-        return suite;
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(InternalTest.class);
-    }
-
     private byte[] assemble(PPCAssembler asm) throws IOException, AssemblyException {
         final Label loop1 = new Label();
         final Label loop2 = new Label();

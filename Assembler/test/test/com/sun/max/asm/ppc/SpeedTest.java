@@ -19,35 +19,11 @@ import static com.sun.max.asm.ppc.GPR.SP;
 import com.sun.max.asm.ppc.PPC32Assembler;
 import com.sun.max.ide.MaxTestCase;
 import java.io.IOException;
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * @author Bernd Mathiske
  */
 public class SpeedTest extends MaxTestCase {
-
-    public SpeedTest() {
-        super();
-
-    }
-
-    public SpeedTest(String name) {
-        super(name);
-    }
-
-    public static Test suite() {
-        final TestSuite suite = new TestSuite(SpeedTest.class.getName());
-        //$JUnit-BEGIN$
-        suite.addTestSuite(SpeedTest.class);
-        //$JUnit-END$
-        return suite;
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(SpeedTest.class);
-    }
-
     public byte[] produce()  throws IOException, AssemblyException {
         final int startAddress = 0x0000ecf0;
         final PPC32Assembler asm = new PPC32Assembler(startAddress);

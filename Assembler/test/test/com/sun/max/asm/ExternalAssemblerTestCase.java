@@ -51,10 +51,6 @@ public abstract class ExternalAssemblerTestCase extends AssemblerTestCase {
         super();
     }
 
-    public ExternalAssemblerTestCase(String name) {
-        super(name);
-    }
-
     @Override
     public void run(AssemblyTester tester) {
         tester.setRemoteUserAndHost(_remoteUserAndHost.value());

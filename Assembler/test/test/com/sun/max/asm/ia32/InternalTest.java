@@ -41,34 +41,11 @@ import com.sun.max.ide.MaxTestCase;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * @author Bernd Mathiske
  */
 public class InternalTest extends MaxTestCase {
-
-    public InternalTest() {
-        super();
-    }
-
-    public InternalTest(String name) {
-        super(name);
-    }
-
-    public static Test suite() {
-        final TestSuite suite = new TestSuite(InternalTest.class.getName());
-        //$JUnit-BEGIN$
-        suite.addTestSuite(InternalTest.class);
-        //$JUnit-END$
-        return suite;
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(InternalTest.class);
-    }
-
     private byte[] assemble(int startAddress) throws IOException, AssemblyException {
         final IA32GeneralRegister32 myGPR = EAX;
         final IA32Assembler asm = new IA32Assembler(startAddress);
@@ -168,5 +145,4 @@ public class InternalTest extends MaxTestCase {
         final byte[] bytes = assemble(startAddress);
         disassemble(startAddress, bytes);
     }
-
 }
