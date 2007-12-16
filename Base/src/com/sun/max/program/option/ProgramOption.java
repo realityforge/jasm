@@ -43,24 +43,12 @@ public abstract class ProgramOption implements Comparable<ProgramOption> {
         return _description;
     }
 
-    public String usageDetail() {
-        return _description;
-    }
-
-    @Override
+  @Override
     public String toString() {
         return prefix();
     }
 
-    /**
-     * Gets the command line argument that reflects the current state of this option. Note that
-     * for certain types of options such as {@link BooleanProgramOption}s, the value returned by
-     * this method may be null which indicates the state of this option reflects an absence of
-     * a command line argument.
-     */
-    public abstract String asCommandLineArgument();
-
-    @Override
+  @Override
     public boolean equals(Object other) {
         if (other == null || !(other instanceof ProgramOption)) {
             return false;
@@ -82,11 +70,7 @@ public abstract class ProgramOption implements Comparable<ProgramOption> {
         return prefix().equals(argument) || (argument.startsWith(prefix()) && argument.charAt(prefix().length()) == '=');
     }
 
-    protected String nextArgument(ProgramArgumentsParser parser) {
-        return parser.nextArgument();
-    }
-
-    private int _parseCount;
+  private int _parseCount;
 
     public int parseCount() {
         return _parseCount;
@@ -105,19 +89,10 @@ public abstract class ProgramOption implements Comparable<ProgramOption> {
         return _isMandatory;
     }
 
-    public ProgramOption beMandatory() {
-        _isMandatory = true;
-        return this;
-    }
-
-    private Set<ProgramOption> _excludedProgramOptions = new HashSet<ProgramOption>();
+  private Set<ProgramOption> _excludedProgramOptions = new HashSet<ProgramOption>();
 
     public Set<ProgramOption> excludedProgramOptions() {
         return _excludedProgramOptions;
     }
 
-    public void excludeMutually(ProgramOption other) {
-        _excludedProgramOptions.add(other);
-        other._excludedProgramOptions.add(this);
-    }
 }

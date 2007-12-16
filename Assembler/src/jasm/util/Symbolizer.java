@@ -12,7 +12,6 @@ import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.ArraySequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.util.Predicate;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 
@@ -71,16 +70,7 @@ public interface Symbolizer<Symbol_Type extends Symbol> extends Iterable<Symbol_
             return new SequenceSymbolizer<Symbol_Type>(symbolType, sequence);
         }
 
-        public static <Symbol_Type extends Symbol> Symbolizer<Symbol_Type> append(Symbolizer<Symbol_Type> symbolizer, Symbol_Type... symbols) {
-            return fromSequence(symbolizer.type(), symbolizer, symbols);
-        }
-
-        public static <Symbol_Type extends Symbol> Symbolizer<Symbol_Type> append(Class<Symbol_Type> symbolType, Symbolizer< ? extends Symbol_Type> symbolizer,
-                        final Symbol_Type... symbols) {
-            return fromSequence(symbolType, symbolizer, symbols);
-        }
-
-        public static <Symbol_Type extends Symbol> Symbolizer<Symbol_Type> initialize(Class staticNameFieldClass, Class<Symbol_Type> symbolType) {
+      public static <Symbol_Type extends Symbol> Symbolizer<Symbol_Type> initialize(Class staticNameFieldClass, Class<Symbol_Type> symbolType) {
             final AppendableSequence<Symbol_Type> sequence = new ArrayListSequence<Symbol_Type>();
             final Sequence<StaticFieldName> staticFieldNames = StaticFieldName.Static.initialize(staticNameFieldClass);
             for (StaticFieldName staticFieldName : staticFieldNames) {
@@ -93,13 +83,6 @@ public interface Symbolizer<Symbol_Type extends Symbol> extends Iterable<Symbol_
 
         public static <Symbol_Type extends Symbol> Symbolizer<Symbol_Type> initialize(Class<Symbol_Type> symbolType) {
             return initialize(symbolType, symbolType);
-        }
-
-        public static <Symbol_Type extends Symbol> Symbolizer<Symbol_Type> fromSymbolizer(Symbolizer<Symbol_Type> symbolizer, Predicate<Symbol_Type> predicate) {
-            if (predicate == null) {
-                return symbolizer;
-            }
-            return fromSequence(symbolizer.type(), Sequence.Static.filter(symbolizer, predicate));
         }
 
     }

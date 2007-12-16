@@ -40,10 +40,6 @@ public enum ControlRegister implements EnumerableArgument<ControlRegister> {
         return name().toLowerCase();
     }
 
-    public Enumerator<ControlRegister> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<ControlRegister> ENUMERATOR = new Enumerator<ControlRegister>(ControlRegister.class);
+  public static final Enumerator<ControlRegister> ENUMERATOR = new Enumerator<ControlRegister>(ControlRegister.class);
 
 }

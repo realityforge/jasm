@@ -40,10 +40,6 @@ public enum DebugRegister implements EnumerableArgument<DebugRegister> {
         return name().toLowerCase();
     }
 
-    public Enumerator<DebugRegister> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<DebugRegister> ENUMERATOR = new Enumerator<DebugRegister>(DebugRegister.class);
+  public static final Enumerator<DebugRegister> ENUMERATOR = new Enumerator<DebugRegister>(DebugRegister.class);
 
 }

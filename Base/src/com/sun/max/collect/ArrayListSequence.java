@@ -59,15 +59,7 @@ public final class ArrayListSequence<Element_Type> extends ArrayList<Element_Typ
         return get(length() - 1);
     }
 
-    public Element_Type removeFirst() {
-        return remove(0);
-    }
-
-    public Element_Type removeLast() {
-        return remove(length() - 1);
-    }
-
-    @Override
+  @Override
     public boolean equals(Object other) {
         if (!(other instanceof Sequence)) {
             return false;

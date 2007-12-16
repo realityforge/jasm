@@ -62,9 +62,5 @@ public enum IA32IndexRegister32 implements GeneralRegister<IA32IndexRegister32> 
         return IA32GeneralRegister32.from(this).disassembledValue();
     }
 
-    public Enumerator<IA32IndexRegister32> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<IA32IndexRegister32> ENUMERATOR = new Enumerator<IA32IndexRegister32>(IA32IndexRegister32.class);
+  public static final Enumerator<IA32IndexRegister32> ENUMERATOR = new Enumerator<IA32IndexRegister32>(IA32IndexRegister32.class);
 }

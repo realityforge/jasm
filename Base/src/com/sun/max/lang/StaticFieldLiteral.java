@@ -14,13 +14,9 @@ import java.lang.reflect.Modifier;
 
 public interface StaticFieldLiteral {
 
-    String literal();
+  void setLiteral(String literal);
 
-    void setLiteral(String literal);
-
-    Class literalClass();
-
-    void setLiteralClass(Class literalClass);
+  void setLiteralClass(Class literalClass);
 
     public static final class Static {
 

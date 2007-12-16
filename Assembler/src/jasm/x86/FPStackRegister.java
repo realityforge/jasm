@@ -57,10 +57,6 @@ public enum FPStackRegister implements EnumerableArgument<FPStackRegister> {
         return "st(" + value() + ")";
     }
 
-    public Enumerator<FPStackRegister> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<FPStackRegister> ENUMERATOR = new Enumerator<FPStackRegister>(FPStackRegister.class);
+  public static final Enumerator<FPStackRegister> ENUMERATOR = new Enumerator<FPStackRegister>(FPStackRegister.class);
 
 }

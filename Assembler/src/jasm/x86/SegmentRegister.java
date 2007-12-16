@@ -39,10 +39,6 @@ public enum SegmentRegister implements EnumerableArgument<SegmentRegister> {
         return name().toLowerCase();
     }
 
-    public Enumerator<SegmentRegister> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<SegmentRegister> ENUMERATOR = new Enumerator<SegmentRegister>(SegmentRegister.class);
+  public static final Enumerator<SegmentRegister> ENUMERATOR = new Enumerator<SegmentRegister>(SegmentRegister.class);
 
 }

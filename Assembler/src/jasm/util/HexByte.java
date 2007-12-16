@@ -34,11 +34,7 @@ public enum HexByte {
         return (byte) ordinal();
     }
 
-    public static HexByte fromByte(byte byteValue) {
-        return HexByte.values()[byteValue & 0xff];
-    }
-
-    @Override
+  @Override
     public String toString() {
         return "0x" + name().substring(1);
     }

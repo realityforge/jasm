@@ -50,21 +50,13 @@ public abstract class RiscField implements Cloneable, StaticFieldName, StaticFie
 
     private String _literal;
 
-    public String literal() {
-        return _literal;
-    }
-
-    public void setLiteral(String literal) {
+  public void setLiteral(String literal) {
         _literal = literal;
     }
 
     private Class _literalClass;
 
-    public Class literalClass() {
-        return _literalClass;
-    }
-
-    public void setLiteralClass(Class literalClass) {
+  public void setLiteralClass(Class literalClass) {
         _literalClass = literalClass;
     }
 

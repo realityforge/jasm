@@ -15,15 +15,8 @@ import junit.framework.TestCase;
  * @author Bernd Mathiske
  */
 public class ArraysTest extends TestCase {
-    private Object[] makeObjectArray(int nElements) {
-        final Object[] array = new Object[nElements];
-        for (int i = 0; i < array.length; i++) {
-            array[i] = new Integer(i);
-        }
-        return array;
-    }
 
-    private Integer[] makeIntegerArray(int nElements) {
+  private Integer[] makeIntegerArray(int nElements) {
         final Integer[] array = new Integer[nElements];
         for (int i = 0; i < array.length; i++) {
             array[i] = new Integer(i);
@@ -34,15 +27,7 @@ public class ArraysTest extends TestCase {
         return array;
     }
 
-    private String[] makeStringArray(int nElements) {
-        final String[] array = new String[nElements];
-        for (int i = 0; i < array.length; i++) {
-            array[i] = "string: " + i;
-        }
-        return array;
-    }
-
-    private void check_subArray(int nElements) {
+  private void check_subArray(int nElements) {
         final Integer[] original = makeIntegerArray(nElements);
         final Integer[] array = makeIntegerArray(nElements);
 

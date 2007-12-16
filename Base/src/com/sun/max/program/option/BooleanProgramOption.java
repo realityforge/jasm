@@ -31,13 +31,4 @@ public class BooleanProgramOption extends ValueProgramOption<Boolean> {
         setValue(true);
     }
 
-    @Override
-    public String asCommandLineArgument() {
-        if (value()) {
-            return prefix();
-        }
-        return null;
-    }
-
-
 }

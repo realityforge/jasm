@@ -34,10 +34,6 @@ public enum Scale implements EnumerableArgument<Scale> {
         return name().substring(name().length() - 1);
     }
 
-    public Enumerator<Scale> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<Scale> ENUMERATOR = new Enumerator<Scale>(Scale.class);
+  public static final Enumerator<Scale> ENUMERATOR = new Enumerator<Scale>(Scale.class);
 
 }

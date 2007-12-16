@@ -62,11 +62,7 @@ public enum IA32GeneralRegister32 implements GeneralRegister<IA32GeneralRegister
         return name().toLowerCase();
     }
 
-    public Enumerator<IA32GeneralRegister32> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<IA32GeneralRegister32> ENUMERATOR = new Enumerator<IA32GeneralRegister32>(IA32GeneralRegister32.class);
+  public static final Enumerator<IA32GeneralRegister32> ENUMERATOR = new Enumerator<IA32GeneralRegister32>(IA32GeneralRegister32.class);
 
     public static final Enumerator<IA32GeneralRegister32> ENUMERATOR_WITHOUT_EBP =
         new Enumerator<IA32GeneralRegister32>(IA32GeneralRegister32.class, EnumSet.complementOf(EnumSet.of(EBP)));

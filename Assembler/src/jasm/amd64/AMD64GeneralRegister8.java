@@ -94,10 +94,6 @@ public enum AMD64GeneralRegister8 implements GeneralRegister<AMD64GeneralRegiste
         return name().toLowerCase();
     }
 
-    public Enumerator<AMD64GeneralRegister8> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<AMD64GeneralRegister8> ENUMERATOR = new Enumerator<AMD64GeneralRegister8>(AMD64GeneralRegister8.class);
+  public static final Enumerator<AMD64GeneralRegister8> ENUMERATOR = new Enumerator<AMD64GeneralRegister8>(AMD64GeneralRegister8.class);
 
 }

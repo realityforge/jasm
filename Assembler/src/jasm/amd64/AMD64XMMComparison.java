@@ -39,10 +39,6 @@ public enum AMD64XMMComparison implements EnumerableArgument<AMD64XMMComparison>
         return name().toLowerCase();
     }
 
-    public Enumerator<AMD64XMMComparison> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<AMD64XMMComparison> ENUMERATOR = new Enumerator<AMD64XMMComparison>(AMD64XMMComparison.class);
+  public static final Enumerator<AMD64XMMComparison> ENUMERATOR = new Enumerator<AMD64XMMComparison>(AMD64XMMComparison.class);
 
 }

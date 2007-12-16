@@ -61,9 +61,5 @@ public enum AMD64GeneralRegister32 implements GeneralRegister<AMD64GeneralRegist
         return name().toLowerCase();
     }
 
-    public Enumerator<AMD64GeneralRegister32> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<AMD64GeneralRegister32> ENUMERATOR = new Enumerator<AMD64GeneralRegister32>(AMD64GeneralRegister32.class);
+  public static final Enumerator<AMD64GeneralRegister32> ENUMERATOR = new Enumerator<AMD64GeneralRegister32>(AMD64GeneralRegister32.class);
 }

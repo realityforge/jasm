@@ -49,9 +49,4 @@ public class StringProgramOption extends AssignmentProgramOption<String> {
         return string;
     }
 
-    @Override
-    public StringProgramOption beMandatory() {
-        return (StringProgramOption) super.beMandatory();
-    }
-
 }

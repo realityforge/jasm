@@ -27,15 +27,7 @@ public class Trace extends PositiveIntegerProgramOption {
 
     private static PrintStream _stream;
 
-    public static PrintStream stream() {
-        return _stream;
-    }
-
-    public static void setStream(PrintStream stream) {
-        _stream = stream;
-    }
-
-    static {
+  static {
         final String traceFileName = System.getProperty("maxwell.trace.file");
         _stream = System.out;
         if (traceFileName != null) {
@@ -74,19 +66,7 @@ public class Trace extends PositiveIntegerProgramOption {
         //Breakpoint.when(level > 1);
     }
 
-    public static void on() {
-        on(Integer.MAX_VALUE);
-    }
-
-    public static void off() {
-        _level = 0;
-    }
-
-    public static int level() {
-        return _level;
-    }
-
-    public static boolean hasLevel(int requiredLevel) {
+  public static boolean hasLevel(int requiredLevel) {
         return _level >= requiredLevel;
     }
 
@@ -114,37 +94,11 @@ public class Trace extends PositiveIntegerProgramOption {
         }
     }
 
-    public static void begin(int requiredLevel, String message) {
-        if (_ENABLED) {
-            if (hasLevel(requiredLevel)) {
-                _stream.println(makePrefix(requiredLevel) + "BEGIN: " + message);
-                _stream.flush();
-                _indentation++;
-            }
-        }
-    }
-
-    public static void end(int requiredLevel, String message) {
-        if (_ENABLED) {
-            if (hasLevel(requiredLevel)) {
-                _indentation--;
-                assert _indentation >= 0;
-                _stream.println(makePrefix(requiredLevel) + "END:   " + message);
-                _stream.flush();
-            }
-        }
-    }
-
-    public Trace() {
+  public Trace() {
         super("-trace", "sets tracing level");
     }
 
-    public Trace(int level) {
-        this();
-        _level = level;
-    }
-
-    @Override
+  @Override
     protected Integer unassignedDefaultValue() {
         return _level;
     }

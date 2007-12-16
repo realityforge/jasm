@@ -70,9 +70,5 @@ public enum IA32IndirectRegister16 implements GeneralRegister<IA32IndirectRegist
         return _disassembledValue;
     }
 
-    public Enumerator<IA32IndirectRegister16> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<IA32IndirectRegister16> ENUMERATOR = new Enumerator<IA32IndirectRegister16>(IA32IndirectRegister16.class);
+  public static final Enumerator<IA32IndirectRegister16> ENUMERATOR = new Enumerator<IA32IndirectRegister16>(IA32IndirectRegister16.class);
 }

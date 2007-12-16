@@ -40,10 +40,6 @@ public enum TestRegister implements EnumerableArgument<TestRegister> {
         return name().toLowerCase();
     }
 
-    public Enumerator<TestRegister> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<TestRegister> ENUMERATOR = new Enumerator<TestRegister>(TestRegister.class);
+  public static final Enumerator<TestRegister> ENUMERATOR = new Enumerator<TestRegister>(TestRegister.class);
 
 }

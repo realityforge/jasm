@@ -65,9 +65,5 @@ public enum AMD64IndirectRegister64 implements GeneralRegister<AMD64IndirectRegi
         return AMD64GeneralRegister64.from(this).disassembledValue();
     }
 
-    public Enumerator<AMD64IndirectRegister64> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<AMD64IndirectRegister64> ENUMERATOR = new Enumerator<AMD64IndirectRegister64>(AMD64IndirectRegister64.class);
+  public static final Enumerator<AMD64IndirectRegister64> ENUMERATOR = new Enumerator<AMD64IndirectRegister64>(AMD64IndirectRegister64.class);
 }

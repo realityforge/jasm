@@ -33,7 +33,7 @@ public class EnumeratorTest extends TestCase {
         public int value() {
             return _value;
         }
-        public Enumerator<NonSuccessiveEnum> enumerator() {
+        private Enumerator<NonSuccessiveEnum> enumerator() {
             return new NonSuccessiveEnumerator<NonSuccessiveEnum>(NonSuccessiveEnum.class);
         }
     }

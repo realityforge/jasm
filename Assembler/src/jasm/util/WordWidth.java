@@ -44,23 +44,11 @@ public enum WordWidth {
         return _canonicalPrimitiveType;
     }
 
-    public long min() {
-        return _min;
-    }
-
-    public long max() {
-        return _max;
-    }
-
-    public boolean lessThan(WordWidth other) {
+  public boolean lessThan(WordWidth other) {
         return numberOfBits() < other.numberOfBits();
     }
 
-    public boolean lessEqual(WordWidth other) {
-        return numberOfBits() <= other.numberOfBits();
-    }
-
-    public boolean greaterThan(WordWidth other) {
+  public boolean greaterThan(WordWidth other) {
         return numberOfBits() > other.numberOfBits();
     }
 

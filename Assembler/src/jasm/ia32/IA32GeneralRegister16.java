@@ -49,10 +49,6 @@ public enum IA32GeneralRegister16 implements GeneralRegister<IA32GeneralRegister
         return name().toLowerCase();
     }
 
-    public Enumerator<IA32GeneralRegister16> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<IA32GeneralRegister16> ENUMERATOR = new Enumerator<IA32GeneralRegister16>(IA32GeneralRegister16.class);
+  public static final Enumerator<IA32GeneralRegister16> ENUMERATOR = new Enumerator<IA32GeneralRegister16>(IA32GeneralRegister16.class);
 
 }

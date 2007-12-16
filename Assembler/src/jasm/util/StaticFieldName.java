@@ -64,11 +64,7 @@ public interface StaticFieldName {
             return initialize(staticNameFieldClass, stringFunction, null);
         }
 
-        public static Sequence<StaticFieldName> initialize(Class staticNameFieldClass, Procedure procedure) {
-            return initialize(staticNameFieldClass, null, procedure);
-        }
-
-        public static Sequence<StaticFieldName> initialize(Class staticNameFieldClass) {
+      public static Sequence<StaticFieldName> initialize(Class staticNameFieldClass) {
             return initialize(staticNameFieldClass, null, null);
         }
     }

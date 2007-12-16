@@ -12,7 +12,6 @@ import com.sun.max.lang.StaticLoophole;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -44,11 +43,7 @@ public class SequenceMultiMap<Key_Type, Value_Type> implements MultiMap<Key_Type
         return _map.get(key);
     }
 
-    public boolean containsKey(Key_Type key) {
-        return _map.containsKey(key);
-    }
-
-    private AppendableSequence<Value_Type> makeSequence(Key_Type key) {
+  private AppendableSequence<Value_Type> makeSequence(Key_Type key) {
         AppendableSequence<Value_Type> sequence = _map.get(key);
         if (sequence == null) {
             sequence = new ArrayListSequence<Value_Type>();
@@ -61,17 +56,7 @@ public class SequenceMultiMap<Key_Type, Value_Type> implements MultiMap<Key_Type
         makeSequence(key).append(value);
     }
 
-    public void addAll(Key_Type key, Sequence<Value_Type> values) {
-      for (Value_Type element : values) {
-          makeSequence(key).append(element);
-      }
-    }
-
-    public Set<Key_Type> keys() {
-        return _map.keySet();
-    }
-
-    public Iterator<Value_Type> iterator() {
+  public Iterator<Value_Type> iterator() {
       final Iterable<Iterable<Value_Type>> iterable = StaticLoophole.cast(_map.values());
         return Iterables.flatten1(iterable).iterator();
     }

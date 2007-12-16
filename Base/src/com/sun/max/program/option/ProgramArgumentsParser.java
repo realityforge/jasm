@@ -32,15 +32,7 @@ public class ProgramArgumentsParser {
 
     private AppendableSequence<ProgramOption> _programOptions = new ArrayListSequence<ProgramOption>();
 
-    public synchronized Sequence<ProgramOption> programOptions() {
-        return _programOptions;
-    }
-
-    public String programName() {
-        return _programName;
-    }
-
-    public void usage(String message) {
+  public void usage(String message) {
         if (message != null) {
             System.err.println();
             System.err.println(message);
@@ -73,28 +65,7 @@ public class ProgramArgumentsParser {
     private String _mainClassName;
     private String[] _mainClassArguments;
 
-    /**
-     * Gets the name of the first non-option string in the arguments {@linkplain #parse(String[]) parsed}
-     * by this parser. An option string is one that starts with {@code '-'}.
-     */
-    public synchronized String getMainClassName() {
-        if (_arguments == null) {
-            throw new IllegalStateException("arguments have not yet been parsed");
-        }
-        return _mainClassName;
-    }
-
-    /**
-     * Gets all the arguments succeeding the {@linkplain #getMainClassName() main class name argument}.
-     */
-    public synchronized String[] getMainClassArguments() {
-        if (_arguments == null) {
-            throw new IllegalStateException("arguments have not yet been parsed");
-        }
-        return _mainClassArguments.clone();
-    }
-
-    String nextArgument() {
+  String nextArgument() {
       return _arguments[_index++];
     }
 

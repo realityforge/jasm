@@ -57,10 +57,6 @@ public enum IA32GeneralRegister8 implements GeneralRegister<IA32GeneralRegister8
         return name().toLowerCase();
     }
 
-    public Enumerator<IA32GeneralRegister8> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<IA32GeneralRegister8> ENUMERATOR = new Enumerator<IA32GeneralRegister8>(IA32GeneralRegister8.class);
+  public static final Enumerator<IA32GeneralRegister8> ENUMERATOR = new Enumerator<IA32GeneralRegister8>(IA32GeneralRegister8.class);
 
 }

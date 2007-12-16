@@ -34,9 +34,5 @@ public enum AMD64XMMRegister implements EnumerableArgument<AMD64XMMRegister> {
         return name().toLowerCase();
     }
 
-    public Enumerator<AMD64XMMRegister> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<AMD64XMMRegister> ENUMERATOR = new Enumerator<AMD64XMMRegister>(AMD64XMMRegister.class);
+  public static final Enumerator<AMD64XMMRegister> ENUMERATOR = new Enumerator<AMD64XMMRegister>(AMD64XMMRegister.class);
 }

@@ -72,9 +72,5 @@ public enum AMD64IndexRegister32 implements GeneralRegister<AMD64IndexRegister32
         return AMD64GeneralRegister32.from(this).disassembledValue();
     }
 
-    public Enumerator<AMD64IndexRegister32> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<AMD64IndexRegister32> ENUMERATOR = new Enumerator<AMD64IndexRegister32>(AMD64IndexRegister32.class);
+  public static final Enumerator<AMD64IndexRegister32> ENUMERATOR = new Enumerator<AMD64IndexRegister32>(AMD64IndexRegister32.class);
 }

@@ -45,11 +45,7 @@ public enum CRF implements EnumerableArgument<CRF> {
         return externalValue();
     }
 
-    public Enumerator<CRF> enumerator() {
-        return ENUMERATOR;
-    }
-
-    /**
+  /**
      * Given the index of a bit within this 4-bit field, returns the index of the same bit
      * in the 32-bit Condition Register.
      *

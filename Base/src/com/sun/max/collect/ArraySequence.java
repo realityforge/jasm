@@ -10,7 +10,6 @@ package com.sun.max.collect;
 
 import com.sun.max.lang.Arrays;
 import com.sun.max.lang.StaticLoophole;
-import java.util.Collection;
 import java.util.Iterator;
 
 /**
@@ -28,21 +27,12 @@ public class ArraySequence<Element_Type> implements MutableSequence<Element_Type
         _array = array;
     }
 
-    public static <T> Sequence<T> of(T... elements) {
-        return new ArraySequence<T>(elements.clone());
-    }
-
-    public ArraySequence(int length) {
+  public ArraySequence(int length) {
         super();
         _array = StaticLoophole.cast(new Object[length]);
     }
 
-    public ArraySequence(Collection<Element_Type> collection) {
-        super();
-        _array = StaticLoophole.cast(collection.toArray());
-    }
-
-    public boolean isEmpty() {
+  public boolean isEmpty() {
         return _array.length == 0;
     }
 

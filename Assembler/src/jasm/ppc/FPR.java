@@ -40,10 +40,6 @@ public enum FPR implements EnumerableArgument<FPR> {
         return externalValue();
     }
 
-    public Enumerator<FPR> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<FPR> ENUMERATOR = new Enumerator<FPR>(FPR.class);
+  public static final Enumerator<FPR> ENUMERATOR = new Enumerator<FPR>(FPR.class);
 
 }

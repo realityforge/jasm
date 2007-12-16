@@ -8,8 +8,6 @@
  */
 package com.sun.max.collect;
 
-import java.util.Set;
-
 /**
  * A mapping of keys to one or more values.
  *
@@ -38,9 +36,4 @@ public interface MultiMap<Key_Type, Value_Type, Collection_Type extends Iterable
      */
     void add(Key_Type key, Value_Type value);
 
-    void addAll(Key_Type key, Collection_Type values);
-
-    boolean containsKey(Key_Type key);
-
-    Set<Key_Type> keys();
 }

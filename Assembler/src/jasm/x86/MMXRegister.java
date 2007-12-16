@@ -34,9 +34,5 @@ public enum MMXRegister implements EnumerableArgument<MMXRegister> {
         return name().toLowerCase();
     }
 
-    public Enumerator<MMXRegister> enumerator() {
-        return ENUMERATOR;
-    }
-
-    public static final Enumerator<MMXRegister> ENUMERATOR = new Enumerator<MMXRegister>(MMXRegister.class);
+  public static final Enumerator<MMXRegister> ENUMERATOR = new Enumerator<MMXRegister>(MMXRegister.class);
 }

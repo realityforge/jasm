@@ -36,15 +36,7 @@ public abstract class AssignmentProgramOption<Value_Type> extends ValueProgramOp
         return null;
     }
 
-    @Override
-    public String asCommandLineArgument() {
-        if (value() != null) {
-            return prefix() + "=" + value();
-        }
-        return null;
-    }
-
-    /**
+  /**
      * Transforms the argument passed to this option to its intended type for further use.
      *
      * @param string the raw form of the option argument
