@@ -8,18 +8,14 @@
  */
 package jasm.gen;
 
-import com.sun.max.MaxPackage;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.ArraySequence;
 import com.sun.max.collect.MutableSequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.ide.JavaProject;
-import com.sun.max.ide.ToolChain;
 import com.sun.max.io.Files;
 import com.sun.max.io.IndentWriter;
 import com.sun.max.io.ReadableSource;
-import com.sun.max.lang.Bytes;
 import com.sun.max.lang.StaticLoophole;
 import com.sun.max.lang.Strings;
 import com.sun.max.program.ProgramError;
@@ -29,6 +25,7 @@ import jasm.Assembler;
 import jasm.AssemblyException;
 import jasm.ExternalMnemonicSuffixArgument;
 import jasm.Label;
+import jasm.util.HexUtil;
 import java.io.BufferedReader;
 import java.io.CharArrayReader;
 import java.io.CharArrayWriter;
@@ -50,7 +47,7 @@ import java.util.Set;
 public abstract class AssemblerGenerator<Template_Type extends Template> {
 
     private final Assembly<Template_Type> _assembly;
-    private final MaxPackage _outputPackage;
+    private final String _outputPackage;
     private final String _rawAssemblerClassSimpleName;
     private final String _labelAssemblerClassSimpleName;
     private final String _rawAssemblerClassName;
@@ -60,11 +57,11 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     protected AssemblerGenerator(Assembly<Template_Type> assembly, boolean sortAssemblerMethods) {
         super();
         _assembly = assembly;
-        _outputPackage = MaxPackage.fromClass(Assembler.class).subPackage(assembly.instructionSet().name().toLowerCase());
+        _outputPackage = Assembler.class.getName() + "." + assembly.instructionSet().name().toLowerCase();
         _rawAssemblerClassSimpleName = assembly.instructionSet().name() + "RawAssembler";
         _labelAssemblerClassSimpleName = assembly.instructionSet().name() + "LabelAssembler";
-        _rawAssemblerClassName = _outputPackage.name() + "." + _rawAssemblerClassSimpleName;
-        _labelAssemblerClassName = _outputPackage.name() + "." + _labelAssemblerClassSimpleName;
+        _rawAssemblerClassName = _outputPackage + "." + _rawAssemblerClassSimpleName;
+        _labelAssemblerClassName = _outputPackage + "." + _labelAssemblerClassSimpleName;
         _sortAssemblerMethods = sortAssemblerMethods;
     }
 
@@ -73,12 +70,17 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     }
 
     private File getFile(String classSimpleName) {
-        final String directory = JavaProject.findSourceDirectory() + File.separator + _outputPackage.name().replace('.', File.separatorChar);
-        return new File(directory, classSimpleName + JavaProject.SOURCE_FILE_EXTENSION);
+        final String directory = findSourceDirectory() + File.separator + _outputPackage.replace('.', File.separatorChar);
+        return new File(directory, classSimpleName + ".java");
     }
 
-    private void printPackageAffiliation(IndentWriter writer) {
-        writer.println("package " + _outputPackage.name() + ";");
+  private String findSourceDirectory() {
+    ProgramError.unimplemented();
+    return null;
+  }
+
+  private void printPackageAffiliation(IndentWriter writer) {
+        writer.println("package " + _outputPackage + ";");
     }
 
     private void printClassHeader(IndentWriter writer) {
@@ -87,21 +89,21 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         writer.println();
     }
 
-    private void printImports(IndentWriter writer, Set<MaxPackage> packages) {
-        final MaxPackage[] array = packages.toArray(new MaxPackage[packages.size()]);
+    private void printImports(IndentWriter writer, Set<String> packages) {
+        final String[] array = packages.toArray(new String[packages.size()]);
         java.util.Arrays.sort(array);
-        for (MaxPackage p : array) {
+        for (String p : array) {
             if (!p.equals(_outputPackage)) {
-                writer.println("import " + p.name() + ".*;");
+                writer.println("import " + p + ".*;");
             }
         }
     }
 
-    protected void printRawImports(IndentWriter writer, Set<MaxPackage> packages) {
+    protected void printRawImports(IndentWriter writer, Set<String> packages) {
         printImports(writer, packages);
     }
 
-    protected void printLabelImports(IndentWriter writer, Set<MaxPackage> packages) {
+    protected void printLabelImports(IndentWriter writer, Set<String> packages) {
         printImports(writer, packages);
     }
 
@@ -119,7 +121,8 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         for (Parameter parameter : parameters) {
             sb.append(sep);
             if (parameter.type().isMemberClass()) {
-                sb.append(parameter.type().getEnclosingClass().getSimpleName() + ".");
+                sb.append(parameter.type().getEnclosingClass().getSimpleName());
+                sb.append(".");
             }
             sb.append(parameter.type().getSimpleName());
             if (!typesOnly) {
@@ -149,13 +152,13 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         return 0;
     }
 
-    protected Set<MaxPackage> getImportPackages(Iterable<Template_Type> templates) {
-        final Set<MaxPackage> packages = new HashSet<MaxPackage>();
+    protected Set<String> getImportPackages(Iterable<Template_Type> templates) {
+        final Set<String> packages = new HashSet<String>();
         for (Template_Type template : templates) {
             for (Parameter parameter : template.parameters()) {
                 final Class type = parameter.type();
                 if (!type.isPrimitive()) {
-                    packages.add(MaxPackage.fromClass(type));
+                    packages.add(type.getName());
                 }
             }
         }
@@ -290,9 +293,9 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         final CharArraySource charArrayWriter = new CharArraySource((int) rawAssemblerFile.length());
         final IndentWriter writer = new IndentWriter(new PrintWriter(charArrayWriter));
         printClassHeader(writer);
-        final Set<MaxPackage> importPackages = getImportPackages(templates());
-        importPackages.add(MaxPackage.fromClass(Assembler.class)); // for the assembler's super class
-        importPackages.add(MaxPackage.fromClass(AssemblyException.class));
+        final Set<String> importPackages = getImportPackages(templates());
+        importPackages.add(Assembler.class.getName()); // for the assembler's super class
+        importPackages.add(AssemblyException.class.getName());
         printRawImports(writer, importPackages);
         writer.println();
         writer.println("public abstract class " + _rawAssemblerClassSimpleName + " extends " + endiannessSpecificAssemblerClass().getSimpleName() + " {");
@@ -341,8 +344,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
      */
     protected Sequence<Parameter> getParameters(Template template) {
         if (!_generatingLabelAssembler || template.labelParameterIndex() == -1) {
-            final Class<Sequence<Parameter>> type = null;
-            return StaticLoophole.cast(type, template.parameters());
+            return StaticLoophole.cast(template.parameters());
         }
         final MutableSequence<Parameter> parameters = new ArrayListSequence<Parameter>(template.parameters());
         parameters.set(template.labelParameterIndex(), new LabelParameter());
@@ -423,8 +425,8 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         final IndentWriter writer = new IndentWriter(new PrintWriter(charArrayWriter));
         printClassHeader(writer);
         final Sequence<Template_Type> labelTemplates = assembly().getLabelTemplates();
-        final Set<MaxPackage> importPackages = getImportPackages(labelTemplates);
-        importPackages.add(MaxPackage.fromClass(Label.class)); // for Label parameters
+        final Set<String> importPackages = getImportPackages(labelTemplates);
+        importPackages.add(Label.class.getName()); // for Label parameters
         printLabelImports(writer, importPackages);
         writer.println();
         writer.println("public abstract class " + _labelAssemblerClassSimpleName + " extends " + _rawAssemblerClassSimpleName + " {");
@@ -454,14 +456,19 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     }
 
     protected void emitByte(IndentWriter writer, byte value) {
-        emitByte(writer, "((byte) " + Bytes.toHexLiteral(value) + ")");
+        emitByte(writer, "((byte) " + HexUtil.toHexLiteral(value) + ")");
     }
+
+  public static boolean compile(String className) throws IOException {
+    ProgramError.unimplemented();
+    return false;
+  }
 
     protected void generate() {
         try {
             if (generateRawAssemblerClass()) {
                 Trace.line(1, "compiling: " + _rawAssemblerClassName);
-                if (!ToolChain.compile(_rawAssemblerClassName)) {
+                if (!compile(_rawAssemblerClassName)) {
                     ProgramError.fatal("compilation failed for: " + _rawAssemblerClassName);
                 }
             } else {
@@ -470,7 +477,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
 
             if (generateLabelAssemblerClass()) {
                 Trace.line(1, "compiling: " + _labelAssemblerClassName);
-                if (!ToolChain.compile(_labelAssemblerClassName)) {
+                if (!compile(_labelAssemblerClassName)) {
                     ProgramError.fatal("compilation failed for: " + _labelAssemblerClassName);
                 }
             } else {

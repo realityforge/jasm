@@ -13,13 +13,16 @@ import java.util.LinkedList;
 /**
  * @author Bernd Mathiske
  */
-public class MutableQueue<Element_Type> extends LinkedList<Element_Type> {
+public final class MutableQueue<Element_Type> extends LinkedList<Element_Type> {
 
-    public MutableQueue(Iterable<Element_Type> elements) {
-        super();
-        for (Element_Type element : elements) {
-            add(element);
-        }
+  public static <QT_Type> MutableQueue<QT_Type> create(Iterable<QT_Type> elements) {
+    final MutableQueue<QT_Type> queue = new MutableQueue<QT_Type>();
+    for (QT_Type element : elements) {
+      queue.add(element);
     }
+    return queue;
+  }
 
+  protected MutableQueue() {
+  }
 }

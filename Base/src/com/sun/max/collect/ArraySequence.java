@@ -34,14 +34,12 @@ public class ArraySequence<Element_Type> implements MutableSequence<Element_Type
 
     public ArraySequence(int length) {
         super();
-        final Class<Element_Type[]> arrayType = null;
-        _array = StaticLoophole.cast(arrayType, new Object[length]);
+        _array = StaticLoophole.cast(new Object[length]);
     }
 
     public ArraySequence(Collection<Element_Type> collection) {
         super();
-        final Class<Element_Type[]> arrayType = null;
-        _array = StaticLoophole.cast(arrayType, collection.toArray());
+        _array = StaticLoophole.cast(collection.toArray());
     }
 
     public boolean isEmpty() {
@@ -98,7 +96,7 @@ public class ArraySequence<Element_Type> implements MutableSequence<Element_Type
     }
 
     public Iterator<Element_Type> iterator() {
-        return Arrays.iterable(_array).iterator();
+      return java.util.Arrays.asList(_array).iterator();
     }
 
     @Override

@@ -20,6 +20,7 @@ import jasm.gen.Template;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
 import java.util.Set;
+import java.util.Collections;
 
 /**
  * An operand field defines an instruction field whose value is given as a parameter in the generated
@@ -87,8 +88,7 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
 
     @Override
     public OperandField<Argument_Type> clone() {
-        final Class<OperandField<Argument_Type>> type = null;
-        return StaticLoophole.cast(type, super.clone());
+        return StaticLoophole.cast(super.clone());
     }
 
     public OperandField<Argument_Type> beSigned() {
@@ -127,9 +127,9 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
         return variableName();
     }
 
-    private Set<Argument> _excludedDisassemblerTestArguments = Sets.empty(Argument.class);
+    private Set<Argument> _excludedDisassemblerTestArguments = Collections.emptySet();
 
-    public OperandField<Argument_Type> withExcludedDisassemblerTestArguments(Set<Argument> arguments) {
+  public OperandField<Argument_Type> withExcludedDisassemblerTestArguments(Set<Argument> arguments) {
         final OperandField<Argument_Type> result = clone();
         result._excludedDisassemblerTestArguments = arguments;
         return result;
@@ -143,9 +143,9 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
         return _excludedDisassemblerTestArguments;
     }
 
-    private Set<Argument> _excludedExternalTestArguments = Sets.empty(Argument.class);
+    private Set<Argument> _excludedExternalTestArguments = Collections.emptySet();
 
-    public OperandField<Argument_Type> withExcludedExternalTestArguments(Set<Argument> arguments) {
+  public OperandField<Argument_Type> withExcludedExternalTestArguments(Set<Argument> arguments) {
         final OperandField<Argument_Type> result = clone();
         result._excludedExternalTestArguments = arguments;
         return result;

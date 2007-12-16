@@ -2,19 +2,20 @@
  *  This file is part of the jasm project (http://code.google.com/p/jasm).
  *
  *  This file is licensed to you under the BSD License; You may not use
- *  this file except in compliance with the License. See the LICENSE.txt
+ *  this file except in compliance with the License. See3 the LICENSE.txt
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
 package test.jasm;
 
-import com.sun.max.ide.MaxTestCase;
 import com.sun.max.program.Trace;
+import com.sun.max.program.ProgramError;
 import com.sun.max.program.option.BooleanProgramOption;
 import com.sun.max.program.option.IntegerProgramOption;
 import com.sun.max.program.option.ProgramArgumentsParser;
 import com.sun.max.program.option.StringProgramOption;
 import jasm.gen.AssemblyTester;
+import junit.framework.TestCase;
 
 /**
  * Base class for assembler tests that defines program options common to
@@ -23,7 +24,7 @@ import jasm.gen.AssemblyTester;
  * @author Doug Simon
  * @author Bernd Mathiske
  */
-public abstract class AssemblerTestCase extends MaxTestCase {
+public abstract class AssemblerTestCase extends TestCase {
 
     private StringProgramOption _templatePattern = new StringProgramOption("-pattern", "test only templates with the substring in their name", "<substring>");
     private IntegerProgramOption _startTemplateSerial = new IntegerProgramOption("-start", "serial number of first template to be tested") {
@@ -63,10 +64,12 @@ public abstract class AssemblerTestCase extends MaxTestCase {
         programArgumentsParser.parse(getProgramArguments());
     }
 
-    public AssemblerTestCase() {
-        super();
-        parseProgramArguments();
-    }
+  public static String[] getProgramArguments() {
+    ProgramError.unimplemented();
+    return null;
+  }
+
+  public AssemblerTestCase() { parseProgramArguments(); }
 
     public void run(AssemblyTester tester) {
         tester.setTemplatePattern(_templatePattern.value());

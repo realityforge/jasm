@@ -8,7 +8,6 @@
  */
 package test.jasm.sparc;
 
-import com.sun.max.ide.MaxTestCase;
 import jasm.AssemblyException;
 import jasm.Label;
 import jasm.dis.sparc.SPARC32Disassembler;
@@ -36,11 +35,12 @@ import jasm.sparc.StateRegister;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import junit.framework.TestCase;
 
 /**
  * @author Bernd Mathiske
  */
-public class InternalTest extends MaxTestCase {
+public class InternalTest extends TestCase {
     private byte[] assemble(SPARCAssembler asm) throws IOException, AssemblyException {
         asm.rd(StateRegister.PC, G1);
 

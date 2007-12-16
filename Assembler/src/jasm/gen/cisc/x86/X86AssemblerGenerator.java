@@ -15,7 +15,6 @@ import com.sun.max.collect.Enums;
 import com.sun.max.collect.MutableSequence;
 import com.sun.max.collect.Sequence;
 import com.sun.max.io.IndentWriter;
-import com.sun.max.lang.Bytes;
 import com.sun.max.lang.StaticLoophole;
 import com.sun.max.program.ProgramError;
 import com.sun.max.program.Trace;
@@ -31,6 +30,7 @@ import jasm.gen.Assembly;
 import jasm.gen.Parameter;
 import jasm.gen.cisc.amd64.AMD64AssemblerGenerator;
 import jasm.util.WordWidth;
+import jasm.util.HexUtil;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.EnumSet;
@@ -59,8 +59,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template> e
 
     @Override
     public X86Assembly<Template_Type> assembly() {
-        final Class<X86Assembly<Template_Type>> type = null;
-        return StaticLoophole.cast(type, super.assembly());
+        return StaticLoophole.cast(super.assembly());
     }
 
     public WordWidth addressWidth() {
@@ -336,7 +335,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template> e
         printModVariants(writer, template);
         printPrefixes(writer, template);
         if (template.opcode2() != null) {
-            emitByte(writer, "(byte) (" + Bytes.toHexLiteral(template.opcode1().byteValue()) + ")");
+            emitByte(writer, "(byte) (" + HexUtil.toHexLiteral(template.opcode1().byteValue()) + ")");
             writer.println(" // " + OPCODE1_VARIABLE_NAME);
             printOpcode(writer, template, OPCODE2_VARIABLE_NAME, ParameterPlace.OPCODE2, ParameterPlace.OPCODE2_REXB);
         } else {
@@ -379,12 +378,12 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template> e
         final String subroutineName = makeSubroutine(template);
         writer.print(subroutineName + "(");
         if (template.opcode2() != null) {
-            writer.print("(byte) " + Bytes.toHexLiteral(template.opcode2().byteValue()));
+            writer.print("(byte) " + HexUtil.toHexLiteral(template.opcode2().byteValue()));
         } else {
-            writer.print("(byte) " + Bytes.toHexLiteral(template.opcode1().byteValue()));
+            writer.print("(byte) " + HexUtil.toHexLiteral(template.opcode1().byteValue()));
         }
         if (template.modRMGroupOpcode() != null) {
-            writer.print(", (byte) " + Bytes.toHexLiteral(template.modRMGroupOpcode().byteValue()));
+            writer.print(", (byte) " + HexUtil.toHexLiteral(template.modRMGroupOpcode().byteValue()));
         }
         for (X86Parameter parameter : template.parameters()) {
             writer.print(", " + parameter.variableName());

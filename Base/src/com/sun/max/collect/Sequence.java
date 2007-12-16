@@ -74,17 +74,11 @@ public interface Sequence<Element_Type> extends Iterable<Element_Type>, Cloneabl
 
     public final class Static {
 
-        private Static() {
-        }
-
-        private static final Sequence<Object> EMPTY = new ArraySequence<Object>(0);
-
         /**
          * Returns a canonical object representing the empty sequence of a given type.
          */
         public static <Element_Type> Sequence<Element_Type> empty(Class<Element_Type> elementType) {
-            final Class<Sequence<Element_Type>> sequenceType = null;
-            return StaticLoophole.cast(sequenceType, EMPTY);
+            return new ArraySequence<Element_Type>(0);
         }
 
         /**
@@ -113,23 +107,6 @@ public interface Sequence<Element_Type> extends Iterable<Element_Type>, Cloneabl
                 }
             }
             return false;
-        }
-
-        /**
-         * Returns the index in {@code sequence} of the first occurrence equal to {@code value}, or -1 if
-         * {@code sequence} does not contain {@code value}. More formally, returns the lowest index
-         * {@code i} such that {@code (value == null ? sequence.get(i) == null : value.equals(sequence.get(i)))},
-         * or -1 if there is no such index.
-         */
-        public static int indexOfEqual(Sequence sequence, Object value) {
-            int i = 0;
-            for (Object element : sequence) {
-                if (element.equals(value)) {
-                    return i;
-                }
-                ++i;
-            }
-            return -1;
         }
 
         /**
@@ -228,44 +205,5 @@ public interface Sequence<Element_Type> extends Iterable<Element_Type>, Cloneabl
                 }
             });
         }
-
-        public static <Element_Type> Sequence<Element_Type> reverse(Sequence<Element_Type> sequence) {
-            int i = sequence.length();
-            final MutableSequence<Element_Type> result = new ArraySequence<Element_Type>(i);
-            for (Element_Type element : sequence) {
-                i--;
-                result.set(i, element);
-            }
-            return result;
-        }
-
-        public static <Element_Type> Sequence<Element_Type> sort(Sequence<Element_Type> sequence, Class<Element_Type> elementType) {
-            final Element_Type[] array = toArray(sequence, elementType);
-            Arrays.sort(array);
-            return new ArraySequence<Element_Type>(array);
-        }
-
-        public static <Element_Type> List<Element_Type> toArrayList(Sequence<Element_Type> sequence) {
-            final List<Element_Type> arrayList = new ArrayList<Element_Type>(sequence.length());
-            for (Element_Type element : sequence) {
-                arrayList.add(element);
-            }
-            return arrayList;
-        }
-
-        public static <Element_Type> Sequence<Element_Type> prepended(Element_Type element, Sequence<Element_Type> sequence) {
-            final MutableSequence<Element_Type> result = new ArraySequence<Element_Type>(1 + sequence.length());
-            MutableSequence.Static.copy(sequence, result, 1);
-            result.set(0, element);
-            return result;
-        }
-
-        public static <Element_Type> Sequence<Element_Type> appended(Sequence<Element_Type> sequence, Element_Type element) {
-            final MutableSequence<Element_Type> result = new ArraySequence<Element_Type>(sequence.length() + 1);
-            MutableSequence.Static.copy(sequence, result);
-            result.set(sequence.length(), element);
-            return result;
-        }
-
     }
 }

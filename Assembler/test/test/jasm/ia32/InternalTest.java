@@ -8,7 +8,6 @@
  */
 package test.jasm.ia32;
 
-import com.sun.max.ide.MaxTestCase;
 import jasm.AssemblyException;
 import jasm.Label;
 import jasm.dis.ia32.IA32Disassembler;
@@ -45,11 +44,12 @@ import static jasm.x86.Scale.SCALE_8;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import junit.framework.TestCase;
 
 /**
  * @author Bernd Mathiske
  */
-public class InternalTest extends MaxTestCase {
+public class InternalTest extends TestCase {
     private byte[] assemble(int startAddress) throws IOException, AssemblyException {
         final IA32GeneralRegister32 myGPR = EAX;
         final IA32Assembler asm = new IA32Assembler(startAddress);

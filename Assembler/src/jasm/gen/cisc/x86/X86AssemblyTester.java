@@ -40,8 +40,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
 
     @Override
     public X86Assembly<Template_Type> assembly() {
-        final Class<X86Assembly<Template_Type>> type = null;
-        return StaticLoophole.cast(type, super.assembly());
+        return StaticLoophole.cast(super.assembly());
     }
 
     private String getSibIndexAndScale(Queue<X86Operand> operands, Queue<Argument> arguments) {
@@ -126,8 +125,8 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
         } else {
             stream.println(".code" + addressWidth().numberOfBits());
         }
-        final Queue<X86Operand> operandQueue = new MutableQueue<X86Operand>(template.operands());
-        final Queue<Argument> argumentQueue = new MutableQueue<Argument>(argumentList);
+        final MutableQueue<X86Operand> operandQueue = MutableQueue.create(template.operands());
+        final MutableQueue<Argument> argumentQueue = MutableQueue.create(argumentList);
         String first = "";
         if (!operandQueue.isEmpty()) {
             first = getOperand(template, operandQueue, argumentQueue, label);

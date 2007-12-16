@@ -40,7 +40,7 @@
     <mkdir dir="${output.test.classes}"/>
     <javac srcdir="${base.test.src.java}:${assembler.test.src.java}"
            destdir="${output.test.classes}"
-           classpath="${junit.jar}"
+           classpath="${junit.jar}:${output.main.classes}"
            debug="true"
            deprecation="true"
            optimize="false"/>
@@ -50,7 +50,7 @@
     <jar jarfile="${output.jar}" basedir="${output.main.classes}"/>
   </target>
 
-  <target name="main" depends="package" description="Compile, package and test the code"/>
+  <target name="main" depends="package, compile-tests" description="Compile, package and test the code"/>
 
   <target name="javadoc">
     <mkdir dir="${output.javadocs}"/>

@@ -24,14 +24,7 @@ public final class Sets {
 
     }
 
-    /**
-     * Gets an immutable empty set.
-     */
-    public static <Element_Type> Set<Element_Type> empty(Class<Element_Type> elementType) {
-        return Collections.emptySet();
-    }
-
-    public static <Element_Type> Set<Element_Type> from(Element_Type... elements) {
+  public static <Element_Type> Set<Element_Type> from(Element_Type... elements) {
         return new HashSet<Element_Type>(java.util.Arrays.asList(elements));
     }
 

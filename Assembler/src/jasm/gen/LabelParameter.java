@@ -9,10 +9,10 @@
 package jasm.gen;
 
 import com.sun.max.collect.Iterables;
-import com.sun.max.collect.Sets;
 import jasm.Argument;
 import jasm.Label;
 import java.util.Set;
+import java.util.Collections;
 
 /**
  * @author Bernd Mathiske
@@ -48,11 +48,11 @@ public class LabelParameter implements Parameter {
     }
 
     public Set<Argument> excludedDisassemblerTestArguments() {
-        return Sets.empty(Argument.class);
+      return Collections.emptySet();
     }
 
     public Set<Argument> excludedExternalTestArguments() {
-        return Sets.empty(Argument.class);
+      return Collections.emptySet();
     }
 
     public int compareTo(Parameter other) {

@@ -12,23 +12,15 @@ import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.ArraySequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.ide.MaxTestCase;
 import java.util.Iterator;
+import junit.framework.TestCase;
 
 /**
  * Tests for {@link ArraySequence}.
  *
  * @author Hiroshi Yamauchi
  */
-public class ArraySequenceTest extends MaxTestCase {
-
-    public ArraySequenceTest(String name) {
-        super(name);
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(ArraySequenceTest.class);
-    }
+public class ArraySequenceTest extends TestCase {
 
     private AppendableSequence<Integer> makeIntegerArraySequence(int nElements) {
         final Integer[] array = new Integer[nElements];

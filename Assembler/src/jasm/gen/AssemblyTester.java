@@ -18,11 +18,10 @@ import com.sun.max.collect.Sequence;
 import com.sun.max.io.IndentWriter;
 import com.sun.max.io.Streams;
 import com.sun.max.io.Streams.Redirector;
-import com.sun.max.io.TemporaryFiles;
-import com.sun.max.lang.Classes;
 import com.sun.max.lang.StaticLoophole;
 import com.sun.max.program.ProgramError;
 import com.sun.max.program.Trace;
+import com.sun.max.program.ProgramWarning;
 import com.sun.max.util.Predicate;
 import com.sun.max.util.Timer;
 import com.sun.max.util.Timer.ComputationWithException;
@@ -44,6 +43,7 @@ import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.PushbackInputStream;
+import java.io.FilenameFilter;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -114,7 +114,32 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
         return _addressWidth;
     }
 
-    enum TestCaseLegality {
+  private static void cleanupTempFiles(final String prefix) {
+      if (prefix == null || prefix.length() == 0) {
+          return;
+      }
+      try {
+          final File tempFile = File.createTempFile(prefix, null);
+          final File directory = tempFile.getParentFile();
+          final FilenameFilter filter = new FilenameFilter() {
+              public boolean accept(File dir, String name) {
+                  if (prefix != null && prefix.length() > 0 && !name.startsWith(prefix)) {
+                      return false;
+                  }
+                  return true;
+              }
+          };
+          for (File file : directory.listFiles(filter)) {
+              if (!file.delete()) {
+                  ProgramWarning.message("could not delete temporary file: " + file.getAbsolutePath());
+              }
+          }
+      } catch (IOException ioException) {
+          ProgramWarning.message("could not delete temporary files");
+      }
+  }
+
+  enum TestCaseLegality {
             LEGAL, ILLEGAL_BY_CONSTRAINT, ILLEGAL_BY_ARGUMENT
     }
 
@@ -163,8 +188,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
             _count = template.parameters().length();
             _arguments = new Argument[_count];
             _next = new ArraySequence<Argument>(_arguments);
-            final Class<Iterator<? extends Argument>[]> type = null;
-            _testArgumentIterators = StaticLoophole.cast(type, new Iterator[_count]);
+            _testArgumentIterators = StaticLoophole.cast(new Iterator[_count]);
             _hasNext = advance();
         }
 
@@ -528,12 +552,16 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
             final Argument argument1 = arguments1.get(i);
             final Argument argument2 = arguments2.get(i);
             if (!argument1.equals(argument2)) {
-                if (!Classes.areRelated(argument1.getClass(), argument2.getClass()) || argument1.asLong() != argument2.asLong()) {
+                if (!areRelated(argument1.getClass(), argument2.getClass()) || argument1.asLong() != argument2.asLong()) {
                     return false;
                 }
             }
         }
         return true;
+    }
+
+  private static boolean areRelated(Class<?> class1, Class<?> class2) {
+        return class1.isAssignableFrom(class2) || class2.isAssignableFrom(class1);
     }
 
     private void createExternalSource(Template_Type template, IndentWriter stream) throws IOException, InterruptedException, AssemblyException {
@@ -597,8 +625,8 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
         File binaryFile = null;
         PushbackInputStream externalInputStream = null;
         if (testingExternally) {
-            TemporaryFiles.cleanup(_tmpFilePrefix);
-            final File sourceFile = _timer.time("src", new Timer.ComputationWithException<File, IOException>(IOException.class) {
+          cleanupTempFiles(_tmpFilePrefix);
+          final File sourceFile = _timer.time("src", new Timer.ComputationWithException<File, IOException>(IOException.class) {
                 @Override
                 public File run() throws IOException {
                     return createExternalSourceFile(template, argumentLists);

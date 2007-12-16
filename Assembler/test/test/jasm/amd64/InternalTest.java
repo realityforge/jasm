@@ -8,7 +8,6 @@
  */
 package test.jasm.amd64;
 
-import com.sun.max.ide.MaxTestCase;
 import jasm.AssemblyException;
 import jasm.Label;
 import jasm.amd64.AMD64Assembler;
@@ -35,11 +34,12 @@ import static jasm.x86.Scale.SCALE_8;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import junit.framework.TestCase;
 
 /**
  * @author Bernd Mathiske
  */
-public class InternalTest extends MaxTestCase {
+public class InternalTest extends TestCase {
     private void disassemble(long startAddress, byte[] bytes) throws IOException, AssemblyException {
         final AMD64Disassembler disassembler = new AMD64Disassembler(startAddress);
         final BufferedInputStream stream = new BufferedInputStream(new ByteArrayInputStream(bytes));

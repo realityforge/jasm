@@ -12,19 +12,7 @@ package com.sun.max.program;
  * @author Bernd Mathiske
  */
 public final class ProgramWarning {
-
-    private ProgramWarning() {
-
-    }
-
     public static void message(String warning) {
         System.err.println("WARNING: " + warning);
     }
-
-    public static void check(boolean condition, String warning) {
-        if (!condition) {
-            message(warning);
-        }
-    }
-
 }

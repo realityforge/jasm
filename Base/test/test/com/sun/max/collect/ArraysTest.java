@@ -8,22 +8,13 @@
  */
 package test.com.sun.max.collect;
 
-import com.sun.max.ide.MaxTestCase;
 import com.sun.max.lang.Arrays;
+import junit.framework.TestCase;
 
 /**
  * @author Bernd Mathiske
  */
-public class ArraysTest extends MaxTestCase {
-
-    public ArraysTest(String name) {
-        super(name);
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(ArraysTest.class);
-    }
-
+public class ArraysTest extends TestCase {
     private Object[] makeObjectArray(int nElements) {
         final Object[] array = new Object[nElements];
         for (int i = 0; i < array.length; i++) {
@@ -51,43 +42,6 @@ public class ArraysTest extends MaxTestCase {
         return array;
     }
 
-    public void test_equals() {
-        Integer[] a = makeIntegerArray(0);
-        Integer[] b = makeIntegerArray(0);
-        assertTrue(Arrays.equals(a, b));
-
-        a = makeIntegerArray(1);
-        b = makeIntegerArray(1);
-        assertTrue(Arrays.equals(a, b));
-        b[0] = new Integer(7);
-        assertFalse(Arrays.equals(a, b)); // different element value
-
-        b = makeIntegerArray(2);
-        assertFalse(Arrays.equals(a, b)); // different length
-
-        a = makeIntegerArray(5);
-        b = makeIntegerArray(5);
-        assertTrue(Arrays.equals(a, b));
-        a[1] = null;
-        assertFalse(Arrays.equals(a, b)); // null value
-        b[1] = null;
-        assertTrue(Arrays.equals(a, b));
-
-        Object[] x = makeObjectArray(5);
-        Object[] y = makeObjectArray(5);
-        assertTrue(Arrays.equals(x, y));
-        x[3] = "Hello";
-        assertFalse(Arrays.equals(x, y)); // totally different value
-
-        x = makeObjectArray(10);
-        y = makeIntegerArray(10);
-        assertFalse(Arrays.equals(x, y)); // y[2] == null
-
-        x = makeIntegerArray(0);
-        y = makeStringArray(0);
-        assertTrue(Arrays.equals(x, y));
-    }
-
     private void check_subArray(int nElements) {
         final Integer[] original = makeIntegerArray(nElements);
         final Integer[] array = makeIntegerArray(nElements);
@@ -100,8 +54,8 @@ public class ArraysTest extends MaxTestCase {
         }
 
         Integer[] result = Arrays.subArray(array, 0);
-        assertTrue(Arrays.equals(array, original));
-        assertTrue(Arrays.equals(result, array));
+        assertTrue(equals(array, original));
+        assertTrue(equals(result, array));
 
         for (int n = 1; n < array.length; n++) {
             result = Arrays.subArray(array, n);
@@ -134,9 +88,11 @@ public class ArraysTest extends MaxTestCase {
     private void check_clone(int nElements) {
         final Integer[] original = makeIntegerArray(nElements);
         final Integer[] array = makeIntegerArray(nElements);
-        final Integer[] result = Arrays.copy(array, new Integer[array.length]);
-        assertTrue(Arrays.equals(array, original));
-        assertTrue(Arrays.equals(result, array));
+      Integer[] dst = new Integer[array.length];
+      System.arraycopy(array, 0, dst, 0, array.length);
+      final Integer[] result = dst;
+        assertTrue(equals(array, original));
+        assertTrue(equals(result, array));
     }
 
     public void test_clone() {
@@ -144,5 +100,21 @@ public class ArraysTest extends MaxTestCase {
         check_clone(1);
         check_clone(8);
     }
+
+  private static <Element_Type> boolean equals(Element_Type[] a, Element_Type[] b) {
+      if (a.length != b.length) {
+          return false;
+      }
+      for (int i = 0; i < a.length; i++) {
+          if (a[i] == null) {
+              if (b[i] != null) {
+                  return false;
+              }
+          } else if (!a[i].equals(b[i])) {
+              return false;
+          }
+      }
+      return true;
+  }
 
 }

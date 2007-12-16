@@ -90,7 +90,6 @@ public class Trace extends PositiveIntegerProgramOption {
         return _level >= requiredLevel;
     }
 
-    private static final int MAX_INDENTATION = 10;
     private static int _indentation;
 
     private static String makePrefix(int requiredLevel) {
@@ -132,14 +131,6 @@ public class Trace extends PositiveIntegerProgramOption {
                 assert _indentation >= 0;
                 _stream.println(makePrefix(requiredLevel) + "END:   " + message);
                 _stream.flush();
-            }
-        }
-    }
-
-    public static void print(int requiredLevel, Traceable traceable, Object... arguments) {
-        if (_ENABLED) {
-            if (hasLevel(requiredLevel)) {
-                traceable.printTrace(_stream, arguments);
             }
         }
     }

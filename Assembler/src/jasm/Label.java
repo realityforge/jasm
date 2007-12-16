@@ -8,7 +8,6 @@
  */
 package jasm;
 
-import com.sun.max.program.Problem;
 import com.sun.max.program.ProgramError;
 
 /**
@@ -147,7 +146,7 @@ public class Label implements Argument {
     }
 
     public long asLong() {
-        Problem.unimplemented();
+        ProgramError.unimplemented();
         return 0L;
     }
 

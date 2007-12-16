@@ -8,7 +8,6 @@
  */
 package test.jasm.ppc;
 
-import com.sun.max.ide.MaxTestCase;
 import jasm.AssemblyException;
 import jasm.Label;
 import static jasm.ppc.BranchPredictionBits.NONE;
@@ -23,11 +22,12 @@ import static jasm.ppc.GPR.R31;
 import static jasm.ppc.GPR.SP;
 import jasm.ppc.PPC32Assembler;
 import java.io.IOException;
+import junit.framework.TestCase;
 
 /**
  * @author Bernd Mathiske
  */
-public class SpeedTest extends MaxTestCase {
+public class SpeedTest extends TestCase {
     public byte[] produce()  throws IOException, AssemblyException {
         final int startAddress = 0x0000ecf0;
         final PPC32Assembler asm = new PPC32Assembler(startAddress);

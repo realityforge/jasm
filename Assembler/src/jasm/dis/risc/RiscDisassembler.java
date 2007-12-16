@@ -11,7 +11,6 @@ package jasm.dis.risc;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.lang.Bytes;
 import com.sun.max.lang.Endianness;
 import com.sun.max.lang.StaticLoophole;
 import com.sun.max.program.ProgramWarning;
@@ -26,6 +25,7 @@ import jasm.gen.risc.RiscAssembly;
 import jasm.gen.risc.RiscTemplate;
 import jasm.gen.risc.field.OperandField;
 import jasm.util.WordWidth;
+import jasm.util.HexUtil;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.Arrays;
@@ -47,8 +47,7 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
 
     @Override
     public RiscAssembly<Template_Type> assembly() {
-        final Class<RiscAssembly<Template_Type>> type = null;
-        return StaticLoophole.cast(type, super.assembly());
+        return StaticLoophole.cast(super.assembly());
     }
 
     private int _currentOffset;
@@ -115,7 +114,7 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
             }
         }
         if (result.isEmpty()) {
-            throw new AssemblyException("instruction could not be disassembled: " + Bytes.toHexLiteral(endianness().toBytes(instruction)));
+            throw new AssemblyException("instruction could not be disassembled: " + HexUtil.toHexLiteral(endianness().toBytes(instruction)));
         }
         _currentOffset += 4;
         return result;

@@ -74,8 +74,7 @@ public class SequenceMultiMap<Key_Type, Value_Type> implements MultiMap<Key_Type
         final Collection<AppendableSequence<Value_Type>> sequences = _map.values();
         assert Iterable.class.isAssignableFrom(Collection.class);
         assert Iterable.class.isAssignableFrom(ArrayListSequence.class);
-        final Class<Iterable<Iterable<Value_Type>>> type = null;
-        final Iterable<Iterable<Value_Type>> iterable = StaticLoophole.cast(type, sequences);
+        final Iterable<Iterable<Value_Type>> iterable = StaticLoophole.cast(sequences);
         return Iterables.flatten1(iterable).iterator();
     }
 

@@ -8,9 +8,7 @@
  */
 package com.sun.max.collect;
 
-import com.sun.max.lang.StaticLoophole;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -20,7 +18,7 @@ import java.util.Collection;
  *
  * @author Bernd Mathiske
  */
-public class ArrayListSequence<Element_Type> extends ArrayList<Element_Type> implements AppendableSequence<Element_Type> {
+public final class ArrayListSequence<Element_Type> extends ArrayList<Element_Type> implements AppendableSequence<Element_Type> {
 
     public ArrayListSequence() {
         super();
@@ -100,46 +98,21 @@ public class ArrayListSequence<Element_Type> extends ArrayList<Element_Type> imp
         add(element);
     }
 
-    public void prepend(Element_Type element) {
-        add(0, element);
-    }
-
-    public void prependAll(Element_Type... elements) {
-        addAll(0, Arrays.asList(elements));
-    }
-
-    public void prependAll(Sequence<? extends Element_Type> elements) {
-        if (elements instanceof ArrayListSequence) {
-            final Class<ArrayListSequence<Element_Type>> type = null;
-            addAll(0, StaticLoophole.cast(type, elements));
-        } else {
-            ensureCapacity(length() + elements.length());
-            int index = 0;
-            for (Element_Type element : elements) {
-                add(index, element);
-                ++index;
-            }
-        }
-    }
-
     @Override
     public Sequence<Element_Type> clone() {
         return new ArrayListSequence<Element_Type>((Sequence<? extends Element_Type>) this);
     }
 
-    public static <From_Type, To_Type> AppendableSequence<To_Type> map(Sequence<From_Type> from, Class<To_Type> toType, MapFunction<From_Type, To_Type> mapFunction) {
-        final AppendableSequence<To_Type> to = new ArrayListSequence<To_Type>();
-        for (From_Type element : from) {
-            to.append(mapFunction.map(element));
-        }
-        return to;
+  public <To_Type> AppendableSequence<To_Type> map(Class<To_Type> toType,
+                                                   MapFunction<Element_Type, To_Type> mapFunction) {
+    final AppendableSequence<To_Type> to = new ArrayListSequence<To_Type>();
+    for (Element_Type element : this) {
+      to.append(mapFunction.map(element));
     }
+    return to;
+  }
 
-    public <To_Type> AppendableSequence<To_Type> map(Class<To_Type> toType, MapFunction<Element_Type, To_Type> mapFunction) {
-        return map(this, toType, mapFunction);
-    }
-
-    @Override
+  @Override
     public String toString() {
         return "<" + Sequence.Static.toString(this, null, ", ") + ">";
     }

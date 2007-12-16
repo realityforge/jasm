@@ -8,7 +8,6 @@
  */
 package jasm.gen;
 
-import com.sun.max.MaxPackage;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.Sequence;
@@ -31,11 +30,6 @@ import java.lang.reflect.Method;
  */
 public abstract class Assembly<Template_Type extends Template> {
 
-    private static MaxPackage instructionSetPackage(InstructionSet instructionSet) {
-        final MaxPackage thisPackage = MaxPackage.fromClass(Assembly.class);
-        return thisPackage.subPackage(instructionSet.category().name().toLowerCase(), instructionSet.name().toLowerCase());
-    }
-
     private final InstructionSet _instructionSet;
     private final Class<Template_Type> _templateType;
 
@@ -50,10 +44,6 @@ public abstract class Assembly<Template_Type extends Template> {
 
     public Class<Template_Type> templateType() {
         return _templateType;
-    }
-
-    public MaxPackage getPackage() {
-        return instructionSetPackage(_instructionSet);
     }
 
     protected abstract Sequence<Template_Type> createTemplates();

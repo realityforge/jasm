@@ -110,8 +110,8 @@ public abstract class RiscInstructionDescriptionCreator extends InstructionDescr
             }
         }
         setFirstString(specifications, name);
-        final Class<MutableSequence<Object>> type = null;
-        return (RiscInstructionDescription) defineInstructionDescription(StaticLoophole.cast(type, specifications)).beSynthetic();
+        final MutableSequence<Object> sequence = StaticLoophole.cast(specifications);
+      return (RiscInstructionDescription) defineInstructionDescription(sequence).beSynthetic();
     }
 
     /**

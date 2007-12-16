@@ -9,7 +9,6 @@
 package jasm.gen.cisc.amd64;
 
 import com.sun.max.io.IndentWriter;
-import com.sun.max.lang.Bytes;
 import com.sun.max.program.ProgramError;
 import jasm.amd64.AMD64BaseRegister32;
 import jasm.amd64.AMD64BaseRegister64;
@@ -23,6 +22,7 @@ import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.util.WordWidth;
+import jasm.util.HexUtil;
 
 /**
  * Run this program to generate the AMD64RawAssembler and AMD64LabelAssembler classes.
@@ -44,9 +44,9 @@ public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template
 
     private String basicRexValue(X86Template template) {
         if (template.operandSizeAttribute() == WordWidth.BITS_64 && template.instructionDescription().defaultOperandSize() != WordWidth.BITS_64) {
-            return Bytes.toHexLiteral((byte) (X86Opcode.REX_MIN.ordinal() + (1 << X86Field.REX_W_BIT_INDEX)));
+            return HexUtil.toHexLiteral((byte) (X86Opcode.REX_MIN.ordinal() + (1 << X86Field.REX_W_BIT_INDEX)));
         }
-        return Bytes.toHexLiteral((byte) X86Opcode.REX_MIN.ordinal());
+        return HexUtil.toHexLiteral((byte) X86Opcode.REX_MIN.ordinal());
     }
 
     private void printUnconditionalRexBit(IndentWriter writer, X86Parameter parameter, int bitIndex) {

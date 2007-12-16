@@ -11,7 +11,6 @@ package jasm.gen.risc;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.program.Problem;
 import com.sun.max.program.ProgramError;
 import jasm.gen.InstructionConstraint;
 import jasm.gen.InstructionDescription;
@@ -185,7 +184,7 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
 
     @Override
     public Sequence<Operand> operands() {
-        Problem.unimplemented();
+        ProgramError.unimplemented();
         return null;
     }
 

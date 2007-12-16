@@ -8,25 +8,16 @@
  */
 package test.jasm.util;
 
-import com.sun.max.ide.MaxTestCase;
 import jasm.util.Enumerable;
 import jasm.util.Enumerator;
+import junit.framework.TestCase;
 
 /**
  * Tests for jasm.util.Enumerator.
  *
  * @author Hiroshi Yamauchi
  */
-public class EnumeratorTest extends MaxTestCase {
-
-    public EnumeratorTest(String name) {
-        super(name);
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(EnumeratorTest.class);
-    }
-
+public class EnumeratorTest extends TestCase {
     private static final class NonSuccessiveEnumerator<E extends Enum<E> & Enumerable<E>> extends Enumerator<E> {
         private NonSuccessiveEnumerator(Class<E> type) {
             super(type);

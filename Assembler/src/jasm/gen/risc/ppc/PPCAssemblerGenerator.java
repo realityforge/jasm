@@ -8,7 +8,6 @@
  */
 package jasm.gen.risc.ppc;
 
-import com.sun.max.MaxPackage;
 import com.sun.max.io.IndentWriter;
 import com.sun.max.program.Trace;
 import com.sun.max.program.option.ProgramArgumentsParser;
@@ -31,7 +30,7 @@ public final class PPCAssemblerGenerator extends RiscAssemblerGenerator<PPCTempl
     }
 
     @Override
-    protected void printRawImports(IndentWriter writer, Set<MaxPackage> packages) {
+    protected void printRawImports(IndentWriter writer, Set<String> packages) {
         super.printRawImports(writer, packages);
         writer.println("import static " + GPR.class.getName() + ".*;");
     }

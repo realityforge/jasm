@@ -8,7 +8,6 @@
  */
 package test.jasm.ppc;
 
-import com.sun.max.ide.MaxTestCase;
 import jasm.AssemblyException;
 import jasm.Label;
 import jasm.dis.ppc.PPC32Disassembler;
@@ -27,11 +26,12 @@ import static jasm.ppc.Zero.ZERO;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import junit.framework.TestCase;
 
 /**
  * @author Bernd Mathiske
  */
-public class InternalTest extends MaxTestCase {
+public class InternalTest extends TestCase {
     private byte[] assemble(PPCAssembler asm) throws IOException, AssemblyException {
         final Label loop1 = new Label();
         final Label loop2 = new Label();

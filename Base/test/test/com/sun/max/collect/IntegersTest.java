@@ -8,23 +8,15 @@
  */
 package test.com.sun.max.collect;
 
-import com.sun.max.ide.MaxTestCase;
 import jasm.util.Ints;
+import junit.framework.TestCase;
 
 /**
- * Tests for {@link Integers}.
+ * Tests for {@link Ints}.
  *
  * @author Hiroshi Yamauchi
  */
-public class IntegersTest extends MaxTestCase {
-
-    public IntegersTest(String name) {
-        super(name);
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(IntegersTest.class);
-    }
+public class IntegersTest extends TestCase {
 
     public void test_roundedUp() {
         assertTrue(Ints.roundedUp(11, 4) == 12);

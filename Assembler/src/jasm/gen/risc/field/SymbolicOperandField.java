@@ -105,8 +105,7 @@ public class SymbolicOperandField<Argument_Type extends SymbolicArgument> extend
 
     @Override
     public SymbolicOperandField<Argument_Type> withExcludedExternalTestArguments(Argument... arguments) {
-        final Class<SymbolicOperandField<Argument_Type>> type = null;
-        return StaticLoophole.cast(type, super.withExcludedExternalTestArguments(arguments));
+        return StaticLoophole.cast(super.withExcludedExternalTestArguments(arguments));
     }
 
     public TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
@@ -115,7 +114,6 @@ public class SymbolicOperandField<Argument_Type extends SymbolicArgument> extend
 
     @Override
     public SymbolicOperandField<Argument_Type> bindTo(Expression expression) {
-        final Class<SymbolicOperandField<Argument_Type>> type = null;
-        return StaticLoophole.cast(type, super.bindTo(expression));
+        return StaticLoophole.cast(super.bindTo(expression));
     }
 }

@@ -8,7 +8,6 @@
  */
 package com.sun.max.lang;
 
-
 /**
  * Static type loophole that prevents "unchecked" compiler warnings but that does not circumvent dynamic type checks.
  *
@@ -17,15 +16,13 @@ package com.sun.max.lang;
  */
 public final class StaticLoophole {
 
-    private StaticLoophole() {
-    }
+  @SuppressWarnings("unchecked")
+  public static <T> T cast(Class<T> type, Object object) {
+    return (T) object;
+  }
 
-    /**
-     * Statically cast an object to an arbitrary Object type WITHOUT eliminating dynamic erasure checks.
-     */
-    @SuppressWarnings("unchecked")
-    public static <T> T cast(Class<T> type, Object object) {
-        return (T) object;
-    }
-
+  @SuppressWarnings("unchecked")
+  public static <T> T cast(Object object) {
+    return (T) object;
+  }
 }

@@ -163,8 +163,7 @@ public enum OperandCode implements WrappableSpecification {
     public TestArgumentExclusion excludeExternalTestArguments(Enumerator... argumentEnumerators) {
         final Set<Argument> arguments = new HashSet<Argument>();
         for (Enumerator argumentEnumerator : argumentEnumerators) {
-            final Class<Set<Argument>> type = null;
-            final Set<Argument> set = StaticLoophole.cast(type, argumentEnumerator.asSet());
+            final Set<Argument> set = StaticLoophole.cast(argumentEnumerator.asSet());
             arguments.addAll(set);
         }
         return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, this, arguments);

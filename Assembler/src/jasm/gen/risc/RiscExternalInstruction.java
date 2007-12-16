@@ -20,7 +20,6 @@ import jasm.gen.InstructionConstraint;
 import jasm.gen.risc.field.BranchDisplacementOperandField;
 import jasm.gen.risc.field.OperandField;
 import jasm.gen.risc.field.RiscField;
-import java.util.Queue;
 
 /**
  * Output of RISC instructions in external assembler format
@@ -47,14 +46,14 @@ import java.util.Queue;
 public abstract class RiscExternalInstruction implements RiscInstructionDescriptionVisitor {
 
     protected final RiscTemplate _template;
-    protected final Queue<Argument> _arguments;
+    protected final MutableQueue<Argument> _arguments;
     protected final int _offset;
     protected final Sequence<DisassembledLabel> _labels;
     protected final GlobalLabelMapper _globalLabelMapper;
 
     public RiscExternalInstruction(RiscTemplate template, Sequence<Argument> arguments) {
         _template = template;
-        _arguments = new MutableQueue<Argument>(arguments);
+        _arguments = MutableQueue.create(arguments);
         _offset = -1;
         _labels = Sequence.Static.empty(DisassembledLabel.class);
         _globalLabelMapper = null;
@@ -62,7 +61,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
 
     public RiscExternalInstruction(RiscTemplate template, Sequence<Argument> arguments, int offset, Sequence<DisassembledLabel> labels) {
         _template = template;
-        _arguments = new MutableQueue<Argument>(arguments);
+        _arguments = MutableQueue.create(arguments);
         _offset = offset;
         _labels = labels;
         _globalLabelMapper = null;
@@ -70,7 +69,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
 
     public RiscExternalInstruction(RiscTemplate template, Sequence<Argument> arguments, int offset, Sequence<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
         _template = template;
-        _arguments = new MutableQueue<Argument>(arguments);
+        _arguments = MutableQueue.create(arguments);
         _offset = offset;
         _labels = labels;
         _globalLabelMapper = globalLabelMapper;
@@ -83,8 +82,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
             _nameString = _template.externalName();
             for (Argument argument : _arguments) {
                 if (argument instanceof ExternalMnemonicSuffixArgument) {
-                    final String suffix = argument.externalValue();
-                    _nameString += suffix;
+                  _nameString += argument.externalValue();
                 }
             }
         }

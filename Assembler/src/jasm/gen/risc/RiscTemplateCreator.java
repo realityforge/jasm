@@ -101,5 +101,4 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
             }
         }
     }
-
 }

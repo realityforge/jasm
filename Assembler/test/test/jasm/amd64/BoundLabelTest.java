@@ -11,7 +11,6 @@ package test.jasm.amd64;
 import com.sun.max.collect.ArraySequence;
 import com.sun.max.collect.MutableSequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.ide.MaxTestCase;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.Label;
@@ -26,11 +25,12 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Iterator;
+import junit.framework.TestCase;
 
 /**
  * @author Bernd Mathiske
  */
-public class BoundLabelTest extends MaxTestCase {
+public class BoundLabelTest extends TestCase {
     private static final int LABEL_DELTA = 10;
 
     private int insertInstructions(AMD64Assembler assembler, Label[] labels, int labelIndex) {

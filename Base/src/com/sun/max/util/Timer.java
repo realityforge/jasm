@@ -109,16 +109,16 @@ public final class Timer<Key_Type> {
         final Long currentTotal = _totalTimes.get(id);
         try {
             if (c instanceof Computation) {
-                final Class<Computation<Result_Type>> type = null;
-                e._result = StaticLoophole.cast(type, c).run();
+                Computation<Result_Type> comp = StaticLoophole.cast(c);
+                e._result = comp.run();
             } else {
-                final Class<ComputationWithException<Result_Type, Exception_Type>> type = null;
-                e._result = StaticLoophole.cast(type, c).run();
+                ComputationWithException<Result_Type, Exception_Type> comp = StaticLoophole.cast(c);
+                e._result = comp.run();
             }
         } catch (Throwable ex) {
             if (c instanceof ComputationWithException) {
-                final Class<ComputationWithException<Result_Type, Exception_Type>> type = null;
-                final Class<? extends Throwable> exceptionType = StaticLoophole.cast(type, c)._exceptionType;
+                ComputationWithException<Result_Type, Exception_Type> comp = StaticLoophole.cast(c);
+                final Class<? extends Throwable> exceptionType = comp._exceptionType;
                 if (ex instanceof Error) {
                     throw (Error) ex;
                 }
@@ -126,8 +126,8 @@ public final class Timer<Key_Type> {
                     throw (RuntimeException) ex;
                 }
                 if (exceptionType.isInstance(ex)) {
-                    final Class<Exception_Type> t = null;
-                    e._exception = StaticLoophole.cast(t, ex);
+                  final Class<Exception_Type> t = null;
+                  e._exception = StaticLoophole.cast(t, ex);
                 } else {
                     throw new RuntimeException("computation threw " + ex.getClass().getName() + ", expected " + exceptionType.getName(), ex);
                 }

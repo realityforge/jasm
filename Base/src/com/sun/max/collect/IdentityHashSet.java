@@ -16,7 +16,7 @@ import java.util.Iterator;
  *
  * @author Hiroshi Yamauchi
  */
-public class IdentityHashSet<Element_Type> implements Iterable<Element_Type> {
+public final class IdentityHashSet<Element_Type> implements Iterable<Element_Type> {
 
     private final IdentityHashMap<Element_Type, Element_Type> _internalMap;
 

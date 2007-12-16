@@ -6,11 +6,18 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package com.sun.max.ide;
+package jasm.util;
 
+public final class HexUtil {
+  public static String toHexLiteral(byte value) {
+      return "0x" + String.format("%02X", value);
+  }
 
-public interface TestProgramArgumentAccess {
-
-    String[] getProgramArguments();
-
+  public static String toHexLiteral(byte[] values) {
+      String s = "0x";
+      for (byte value : values) {
+          s += String.format("%02X", value);
+      }
+      return s;
+  }
 }

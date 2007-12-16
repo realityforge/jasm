@@ -206,8 +206,8 @@ public abstract class X86DisassembledInstruction<Template_Type extends X86Templa
 
     @Override
     public String operandsToString(Sequence<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
-        final Queue<X86Operand> operandQueue = new MutableQueue<X86Operand>(template().operands());
-        final Queue<Argument> argumentQueue = new MutableQueue<Argument>(arguments());
+        final MutableQueue<X86Operand> operandQueue = MutableQueue.create(template().operands());
+        final MutableQueue<Argument> argumentQueue = MutableQueue.create(arguments());
         String result = "";
         String separator = "";
         while (!operandQueue.isEmpty()) {

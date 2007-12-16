@@ -28,34 +28,4 @@ public interface ReadableSource {
      * @return a reader to read the character data represented by this source
      */
     Reader reader(boolean buffered) throws IOException;
-
-    public static final class Static {
-
-        private Static() {
-
-        }
-
-        /**
-         * Creates a ReadableSource to provides readers for the characters in a string.
-         */
-        public static ReadableSource fromString(final String s) {
-            return new ReadableSource() {
-                public Reader reader(boolean buffered) throws IOException {
-                    return buffered ? new BufferedReader(new StringReader(s)) : new StringReader(s);
-                }
-            };
-        }
-
-        /**
-         * Creates a ReadableSource to provides readers for the characters in a file.
-         */
-        public static ReadableSource fromFile(final File file) {
-            return new ReadableSource() {
-                public Reader reader(boolean buffered) throws IOException {
-                    return buffered ? new BufferedReader(new FileReader(file)) : new FileReader(file);
-                }
-            };
-
-        }
-    }
 }
