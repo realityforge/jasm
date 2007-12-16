@@ -1,7 +1,7 @@
-#summary ISA for AMD 64 processors in "64-bit mode"
-#labels isa
+#summary Assembly system for AMD 64 processors in "64-bit mode"
+#labels ISA
 
-= AMD64: support for AMD 64 processors in "64-bit mode" =
+= AMD64 =
 
 The capability to include instructions with 32-bit or 16-bit addressing is present, but by default we don't. 
 
