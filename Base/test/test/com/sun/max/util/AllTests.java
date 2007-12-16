@@ -4,14 +4,15 @@
 /*VCSID=99f6d7b8-88ff-4467-a351-64a72ab45d98*/
 package test.com.sun.max.util;
 
-import junit.framework.*;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
  * @author Hiroshi Yamauchi
  */
 @org.junit.runner.RunWith(org.junit.runners.AllTests.class)
 public final class AllTests {
-    
+
     private AllTests() {
     }
 
@@ -23,7 +24,7 @@ public final class AllTests {
         final TestSuite suite = new TestSuite(AllTests.class.getPackage().getName());
         //$JUnit-BEGIN$
         suite.addTestSuite(DeferrableTest.class);
-        suite.addTestSuite(EnumeratorTest.class);    
+        suite.addTestSuite(EnumeratorTest.class);
         suite.addTestSuite(HexByteTest.class);
         suite.addTestSuite(IdentityHashMappingTest.class);
         suite.addTestSuite(IdentityMappingTest.class);

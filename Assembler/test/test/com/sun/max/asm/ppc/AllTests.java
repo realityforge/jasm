@@ -4,9 +4,9 @@
 /*VCSID=22aada6c-af8a-497c-90bc-6efc3744e195*/
 package test.com.sun.max.asm.ppc;
 
-import junit.framework.*;
-
-import org.junit.runner.*;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
 
 /**
  * @author Bernd Mathiske
@@ -27,5 +27,5 @@ public final class AllTests {
         //$JUnit-END$
         return suite;
     }
-    
+
 }

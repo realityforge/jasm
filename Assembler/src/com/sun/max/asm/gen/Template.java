@@ -4,12 +4,10 @@
 /*VCSID=a1ecb77c-63cf-4fba-a8ef-5f7bde5c0357*/
 package com.sun.max.asm.gen;
 
-import java.lang.reflect.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.collect.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.collect.Sequence;
+import com.sun.max.program.ProgramError;
+import java.lang.reflect.Method;
 
 /**
  * An internal representation of an assembler method.

@@ -4,8 +4,9 @@
 /*VCSID=204a4ce5-d0c0-4cd4-af1c-b6187ed8d782*/
 package com.sun.max.asm.gen.risc.field;
 
-import com.sun.max.asm.gen.risc.bitRange.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.gen.risc.bitRange.BitRange;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
 
 /**
  * @author Bernd Mathiske
@@ -44,7 +45,7 @@ public enum SignDependentOperations {
             return result == null ? new ArrayListSequence<Integer>(new Integer[] {0, grain, max - grain, max }) : result;
         }
     },
-    
+
     SIGNED {
 
         @Override
@@ -61,12 +62,12 @@ public enum SignDependentOperations {
         public int assemble(int signedInt, BitRange bitRange) throws IndexOutOfBoundsException {
             return bitRange.assembleSignedInt(signedInt);
         }
-        
+
         @Override
         public int extract(int instruction, BitRange bitRange) {
             return bitRange.extractSignedInt(instruction);
         }
-        
+
         @Override
         public AppendableSequence<Integer> legalTestArgumentValues(int min, int max, int grain) {
             assert min < 0;
@@ -76,24 +77,24 @@ public enum SignDependentOperations {
             return result == null ? new ArrayListSequence<Integer>(new Integer[] {min, min + grain, -grain, 0, grain, max - grain, max }) : null;
         }
     },
-    
+
     SIGNED_OR_UNSIGNED {
-        
+
         @Override
         public int minArgumentValue(BitRange bitRange) {
             return SIGNED.minArgumentValue(bitRange);
         }
-        
+
         @Override
         public int maxArgumentValue(BitRange bitRange) {
             return UNSIGNED.maxArgumentValue(bitRange);
         }
-        
+
         @Override
         public int assemble(int value, BitRange bitRange) throws IndexOutOfBoundsException {
             return (value >= 0) ? UNSIGNED.assemble(value, bitRange) : SIGNED.assemble(value, bitRange);
         }
-        
+
         @Override
         public int extract(int instruction, BitRange bitRange) {
             return UNSIGNED.extract(instruction, bitRange);
@@ -118,7 +119,7 @@ public enum SignDependentOperations {
      * sequence contains 32 or less items. Otherwise, this method returns null.
      */
     public static AppendableSequence<Integer> smallContiguousRange(int min, int max, int grain) {
-        final long range = (((long) max - (long) min) + 1) / grain; 
+        final long range = (((long) max - (long) min) + 1) / grain;
         if (range > 0 && range <= 32) {
             final AppendableSequence<Integer> result = new ArrayListSequence<Integer>((int) range);
             for (int i = min; i <= max; i += grain * 2) {
@@ -128,7 +129,7 @@ public enum SignDependentOperations {
         }
         return null;
     }
-    
+
     public abstract int minArgumentValue(BitRange bitRange);
 
     public abstract int maxArgumentValue(BitRange bitRange);

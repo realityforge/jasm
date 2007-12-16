@@ -4,34 +4,59 @@
 /*VCSID=c5b6d192-c284-4b63-900e-2415684e1530*/
 package test.com.sun.max.asm.ia32;
 
-import static com.sun.max.asm.ia32.IA32GeneralRegister16.*;
-import static com.sun.max.asm.ia32.IA32GeneralRegister32.*;
-import static com.sun.max.asm.ia32.IA32GeneralRegister8.*;
-import static com.sun.max.asm.x86.Scale.*;
-
-import java.io.*;
-
-import junit.framework.*;
-
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.ia32.*;
-import com.sun.max.asm.ia32.*;
-import com.sun.max.asm.x86.*;
-import com.sun.max.ide.*;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.Label;
+import com.sun.max.asm.dis.ia32.IA32Disassembler;
+import com.sun.max.asm.ia32.IA32Assembler;
+import static com.sun.max.asm.ia32.IA32GeneralRegister16.AX;
+import static com.sun.max.asm.ia32.IA32GeneralRegister16.BP;
+import static com.sun.max.asm.ia32.IA32GeneralRegister16.BX;
+import static com.sun.max.asm.ia32.IA32GeneralRegister16.CX;
+import static com.sun.max.asm.ia32.IA32GeneralRegister16.DX;
+import static com.sun.max.asm.ia32.IA32GeneralRegister16.SI;
+import static com.sun.max.asm.ia32.IA32GeneralRegister16.SP;
+import com.sun.max.asm.ia32.IA32GeneralRegister32;
+import static com.sun.max.asm.ia32.IA32GeneralRegister32.EAX;
+import static com.sun.max.asm.ia32.IA32GeneralRegister32.EBP;
+import static com.sun.max.asm.ia32.IA32GeneralRegister32.EBX;
+import static com.sun.max.asm.ia32.IA32GeneralRegister32.ECX;
+import static com.sun.max.asm.ia32.IA32GeneralRegister32.EDI;
+import static com.sun.max.asm.ia32.IA32GeneralRegister32.EDX;
+import static com.sun.max.asm.ia32.IA32GeneralRegister32.ESI;
+import static com.sun.max.asm.ia32.IA32GeneralRegister32.ESP;
+import static com.sun.max.asm.ia32.IA32GeneralRegister8.AH;
+import static com.sun.max.asm.ia32.IA32GeneralRegister8.AL;
+import static com.sun.max.asm.ia32.IA32GeneralRegister8.BH;
+import static com.sun.max.asm.ia32.IA32GeneralRegister8.BL;
+import static com.sun.max.asm.ia32.IA32GeneralRegister8.CH;
+import static com.sun.max.asm.ia32.IA32GeneralRegister8.CL;
+import static com.sun.max.asm.ia32.IA32GeneralRegister8.DH;
+import static com.sun.max.asm.ia32.IA32GeneralRegister8.DL;
+import com.sun.max.asm.x86.Scale;
+import static com.sun.max.asm.x86.Scale.SCALE_1;
+import static com.sun.max.asm.x86.Scale.SCALE_2;
+import static com.sun.max.asm.x86.Scale.SCALE_4;
+import static com.sun.max.asm.x86.Scale.SCALE_8;
+import com.sun.max.ide.MaxTestCase;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
  * @author Bernd Mathiske
  */
 public class InternalTest extends MaxTestCase {
-    
-    public InternalTest() {        
+
+    public InternalTest() {
         super();
     }
 
-    public InternalTest(String name) {        
+    public InternalTest(String name) {
         super(name);
     }
-    
+
     public static Test suite() {
         final TestSuite suite = new TestSuite(InternalTest.class.getName());
         //$JUnit-BEGIN$
@@ -53,7 +78,7 @@ public class InternalTest extends MaxTestCase {
         final Label label2 = new Label();
         final Label label3 = new Label();
         final Label fixLabel = new Label();
-        
+
         asm.bindLabel(startLabel);
         asm.jmp(label1);
         asm.jmp(startLabel);

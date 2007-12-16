@@ -4,11 +4,20 @@
 /*VCSID=fe64cdcc-bbcf-4903-afe8-c2313d664d38*/
 package com.sun.max.asm.gen.risc;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.field.*;
-import com.sun.max.collect.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.gen.InstructionConstraint;
+import com.sun.max.asm.gen.InstructionDescription;
+import com.sun.max.asm.gen.OffsetParameter;
+import com.sun.max.asm.gen.Operand;
+import com.sun.max.asm.gen.Template;
+import com.sun.max.asm.gen.risc.field.OperandField;
+import com.sun.max.asm.gen.risc.field.OptionField;
+import com.sun.max.asm.gen.risc.field.ReservedField;
+import com.sun.max.asm.gen.risc.field.RiscField;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.program.Problem;
+import com.sun.max.program.ProgramError;
 
 /**
  * @author Bernd Mathiske

@@ -4,11 +4,15 @@
 /*VCSID=de793a74-8609-45fa-8a51-4269793855ef*/
 package com.sun.max.asm.gen.cisc.x86;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.cisc.*;
-import com.sun.max.asm.x86.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.gen.ArgumentRange;
+import com.sun.max.asm.gen.ImplicitOperand;
+import com.sun.max.asm.gen.InstructionConstraint;
+import com.sun.max.asm.gen.TestArgumentExclusion;
+import com.sun.max.asm.gen.cisc.TemplateNotNeededException;
+import com.sun.max.asm.x86.FPStackRegister;
+import com.sun.max.asm.x86.GeneralRegister;
+import com.sun.max.asm.x86.SegmentRegister;
+import com.sun.max.util.HexByte;
 
 /**
  * Empty default implementations for X86InstructionDescriptionVisitor.

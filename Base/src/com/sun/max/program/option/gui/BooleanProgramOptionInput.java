@@ -4,9 +4,9 @@
 /*VCSID=7622db3b-b1b8-436d-a4f2-4c2fec3ca6b0*/
 package com.sun.max.program.option.gui;
 
-import javax.swing.*;
-
-import com.sun.max.program.option.*;
+import com.sun.max.program.option.BooleanProgramOption;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 
 /**
  * The GUI class corresponding to {@link BooleanProgramOption}.
@@ -16,13 +16,13 @@ import com.sun.max.program.option.*;
 class BooleanProgramOptionInput extends ProgramOptionInput<BooleanProgramOption> {
 
     private final JCheckBox _value;
-    
+
     public BooleanProgramOptionInput(BooleanProgramOption programOption) {
         super(programOption);
         _value = new JCheckBox();
         _value.setSelected(programOption.value());
     }
-    
+
     @Override
     public String asCommandLineArgument() {
         if (_value.isSelected()) {

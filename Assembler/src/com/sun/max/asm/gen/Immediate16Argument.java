@@ -4,9 +4,7 @@
 /*VCSID=afea3aff-700a-4ef4-be3d-339ff3dd69a1*/
 package com.sun.max.asm.gen;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.lang.*;
+import com.sun.max.lang.WordWidth;
 
 /**
  * @author Bernd Mathiske

@@ -4,7 +4,7 @@
 /*VCSID=0a0f17cb-4413-4670-bdf6-992e9d86981f*/
 package com.sun.max.ide;
 
-import com.sun.max.*;
+import com.sun.max.Scheme;
 
 /**
  * @author Bernd Mathiske
@@ -12,5 +12,5 @@ import com.sun.max.*;
 public interface TestProgramArgumentScheme extends Scheme {
 
     String[] getProgramArguments();
-    
+
 }

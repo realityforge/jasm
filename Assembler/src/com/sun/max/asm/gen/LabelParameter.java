@@ -4,11 +4,11 @@
 /*VCSID=17d2ff05-5070-45f5-b398-8bd296e1b2a6*/
 package com.sun.max.asm.gen;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.Label;
+import com.sun.max.collect.Iterables;
+import com.sun.max.collect.Sets;
+import java.util.Set;
 
 /**
  * @author Bernd Mathiske

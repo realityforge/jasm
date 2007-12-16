@@ -4,17 +4,16 @@
 /*VCSID=60a3c717-bbb4-480f-a692-e7cb8d85fb95*/
 package com.sun.max.collect;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.lang.*;
-
+import com.sun.max.annotate.Implement;
+import com.sun.max.lang.StaticLoophole;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public final class Iterators {
 
     private Iterators() {
     }
-    
+
     private static final Iterator<Object> EMPTY_ITERATOR = new Iterator<Object>() {
         @Implement(Iterator.class)
         public boolean hasNext() {
@@ -35,5 +34,5 @@ public final class Iterators {
         final Class<Iterator<Element_Type>> type = null;
         return StaticLoophole.cast(type, EMPTY_ITERATOR);
     }
-    
+
 }

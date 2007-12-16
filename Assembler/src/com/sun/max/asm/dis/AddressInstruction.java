@@ -4,7 +4,7 @@
 /*VCSID=6a2c73cb-9eb6-4f30-801d-91f640d8f48f*/
 package com.sun.max.asm.dis;
 
-import com.sun.max.asm.gen.*;
+import com.sun.max.asm.gen.ImmediateArgument;
 
 /**
  * Delegation interface (for lack of multiple class inheritance in the Java(TM) Programming Language).
@@ -14,8 +14,8 @@ import com.sun.max.asm.gen.*;
 public interface AddressInstruction {
 
     int startOffset();
-    
+
     String addressString();
-        
+
     int addressToOffset(ImmediateArgument argument);
 }

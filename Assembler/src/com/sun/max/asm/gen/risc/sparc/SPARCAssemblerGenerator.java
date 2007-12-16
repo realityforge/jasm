@@ -4,13 +4,14 @@
 /*VCSID=4cb63353-d0d1-41d7-be56-4c602f46e479*/
 package com.sun.max.asm.gen.risc.sparc;
 
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.program.*;
-import com.sun.max.program.option.*;
+import com.sun.max.asm.Assembler;
+import com.sun.max.asm.BigEndianAssembler;
+import com.sun.max.asm.gen.risc.RiscAssemblerGenerator;
+import com.sun.max.program.Trace;
+import com.sun.max.program.option.ProgramArgumentsParser;
 
 /**
- * 
+ *
  *
  * @author Bernd Mathiske
  * @author Doug Simon
@@ -20,7 +21,7 @@ public final class SPARCAssemblerGenerator extends RiscAssemblerGenerator<SPARCT
     private SPARCAssemblerGenerator() {
         super(SPARCAssembly.ASSEMBLY);
     }
-    
+
     @Override
     protected Class<? extends Assembler> endiannessSpecificAssemblerClass() {
         return BigEndianAssembler.class;
@@ -31,7 +32,7 @@ public final class SPARCAssemblerGenerator extends RiscAssemblerGenerator<SPARCT
         return "\"<a href=\"http://developers.sun.com/solaris/articles/sparcv9.pdf\">The SPARC Architecture Manual, Version 9</a> - Section " +
             template.instructionDescription().architectureManualSection() + "\"";
     }
-    
+
     public static void main(String[] programArguments) {
         final ProgramArgumentsParser programArgumentsParser = new ProgramArgumentsParser(SPARCAssemblerGenerator.class.getSimpleName());
         programArgumentsParser.addProgramOption(new Trace());

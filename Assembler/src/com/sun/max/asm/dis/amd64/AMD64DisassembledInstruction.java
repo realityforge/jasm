@@ -4,13 +4,12 @@
 /*VCSID=1ba4ceb4-dcfd-4cfc-9896-54f03e442a4c*/
 package com.sun.max.asm.dis.amd64;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.*;
-import com.sun.max.asm.dis.x86.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.cisc.amd64.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.dis.Address64Instruction;
+import com.sun.max.asm.dis.x86.X86DisassembledInstruction;
+import com.sun.max.asm.gen.ImmediateArgument;
+import com.sun.max.asm.gen.cisc.amd64.AMD64Template;
+import com.sun.max.collect.Sequence;
 
 /**
  * @author Bernd Mathiske

@@ -4,16 +4,17 @@
 /*VCSID=a278063b-680c-4e6d-bb03-416872fc51aa*/
 package com.sun.max.collect;
 
-import java.util.*;
+import com.sun.max.annotate.Implement;
+import com.sun.max.lang.StaticLoophole;
+import com.sun.max.util.Predicate;
+import java.util.ArrayList;
 import java.util.Arrays;
-
-import com.sun.max.annotate.*;
-import com.sun.max.lang.*;
-import com.sun.max.util.*;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * A Sequence presents an immutable view of a linear collection.
- * 
+ *
  * @author Bernd Mathiske
  * @author Doug Simon
  */
@@ -31,21 +32,21 @@ public interface Sequence<Element_Type> extends Iterable<Element_Type>, Cloneabl
 
     /**
      * Gets the element from this sequence located at a given index.
-     * 
+     *
      * @throws IndexOutOfBoundsException if {@code 0 < index || index >= length()}
      */
     Element_Type get(int index);
 
     /**
      * Gets the first element from this sequence.
-     * 
+     *
      * @throws IndexOutOfBoundsException if this sequence is {@linkplain #isEmpty() empty}
      */
     Element_Type first();
 
     /**
      * Gets the lasst element from this sequence.
-     * 
+     *
      * @throws IndexOutOfBoundsException if this sequence is {@linkplain #isEmpty() empty}
      */
     Element_Type last();
@@ -61,18 +62,18 @@ public interface Sequence<Element_Type> extends Iterable<Element_Type>, Cloneabl
      * Creates a transformed version of this sequence where each element in the returned sequence
      * is the result of applying a {@linkplain MapFunction transformation} to the corresponding
      * element in this sequence.
-     * 
-     * @param <To_Type>  the type of the elements in the returned sequence 
+     *
+     * @param <To_Type>  the type of the elements in the returned sequence
      * @param toType     the type of the elements in the returned sequence
      * @param mapFunction the trnasformation function to apply to each element of this sequence
      */
     <To_Type> Sequence<To_Type> map(Class<To_Type> toType, MapFunction<Element_Type, To_Type> mapFunction);
 
     public final class Static {
-        
+
         private Static() {
         }
-        
+
         private static final Sequence<Object> EMPTY = new ArraySequence<Object>(0);
 
         /**
@@ -192,20 +193,20 @@ public interface Sequence<Element_Type> extends Iterable<Element_Type>, Cloneabl
             final StringBuilder buf = new StringBuilder();
             while (hasNext) {
                 final Element_Type element = iterator.next();
-                final String string = toStringFunction == null ? String.valueOf(element) : toStringFunction.map(element); 
+                final String string = toStringFunction == null ? String.valueOf(element) : toStringFunction.map(element);
                 buf.append(element == iterable ? "(this Iterable)" : string);
                 hasNext = iterator.hasNext();
                 if (hasNext) {
                     buf.append(separator);
                 }
             }
-            
+
             return buf.toString();
         }
 
         /**
          * Filters an iterable with a given predicate and return a sequence with the elments that matched the predicate.
-         * If the returned sequence will only be iterated over, consider using a {@link FilterIterator} instead. 
+         * If the returned sequence will only be iterated over, consider using a {@link FilterIterator} instead.
          */
         public static <Element_Type> AppendableSequence<Element_Type> filter(Iterable<Element_Type> sequence, Predicate<? super Element_Type> predicate) {
             final AppendableSequence<Element_Type> result = new ArrayListSequence<Element_Type>();
@@ -235,13 +236,13 @@ public interface Sequence<Element_Type> extends Iterable<Element_Type>, Cloneabl
             }
             return result;
         }
-        
+
         public static <Element_Type> Sequence<Element_Type> sort(Sequence<Element_Type> sequence, Class<Element_Type> elementType) {
             final Element_Type[] array = toArray(sequence, elementType);
-            Arrays.sort(array);            
+            Arrays.sort(array);
             return new ArraySequence<Element_Type>(array);
         }
-        
+
         public static <Element_Type> List<Element_Type> toArrayList(Sequence<Element_Type> sequence) {
             final List<Element_Type> arrayList = new ArrayList<Element_Type>(sequence.length());
             for (Element_Type element : sequence) {
@@ -249,14 +250,14 @@ public interface Sequence<Element_Type> extends Iterable<Element_Type>, Cloneabl
             }
             return arrayList;
         }
-        
+
         public static <Element_Type> Sequence<Element_Type> prepended(Element_Type element, Sequence<Element_Type> sequence) {
             final MutableSequence<Element_Type> result = new ArraySequence<Element_Type>(1 + sequence.length());
             MutableSequence.Static.copy(sequence, result, 1);
             result.set(0, element);
             return result;
         }
-        
+
         public static <Element_Type> Sequence<Element_Type> appended(Sequence<Element_Type> sequence, Element_Type element) {
             final MutableSequence<Element_Type> result = new ArraySequence<Element_Type>(sequence.length() + 1);
             MutableSequence.Static.copy(sequence, result);

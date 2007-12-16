@@ -4,16 +4,19 @@
 /*VCSID=994220f5-2d88-475b-98e7-500fdce465f4*/
 package com.sun.max.util;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * @author Bernd Mathiske
  */
 public final class Utf8 {
 
-    private Utf8() {        
+    private Utf8() {
     }
-    
+
     /**
      * @return the length in bytes of the UTF8 representation of the string
      */
@@ -97,7 +100,7 @@ public final class Utf8 {
         }
         return new String(result, 0, index);
     }
-    
+
     private static byte[] readZeroTerminatedBytes(InputStream inputStream) throws IOException {
         final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         while (true) {
@@ -116,7 +119,7 @@ public final class Utf8 {
         final byte[] utf8 = readZeroTerminatedBytes(inputStream);
         return Utf8.utf8ToString(utf8);
     }
-    
+
     public static void writeString(OutputStream outputStream, String string) throws IOException {
         outputStream.write(stringToUtf8(string));
         outputStream.write((byte) 0);

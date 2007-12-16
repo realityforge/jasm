@@ -6,8 +6,13 @@
 
 package com.sun.max.asm.ia32;
 
-import com.sun.max.asm.*;
-import com.sun.max.asm.x86.*;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.Label;
+import com.sun.max.asm.LabelAddressInstruction;
+import com.sun.max.asm.LabelOffsetInstruction;
+import com.sun.max.asm.x86.MMXRegister;
+import com.sun.max.asm.x86.Scale;
+import com.sun.max.asm.x86.SegmentRegister;
 
 public abstract class IA32LabelAssembler extends IA32RawAssembler {
 

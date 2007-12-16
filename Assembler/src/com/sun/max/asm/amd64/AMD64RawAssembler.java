@@ -6,8 +6,13 @@
 
 package com.sun.max.asm.amd64;
 
-import com.sun.max.asm.*;
-import com.sun.max.asm.x86.*;
+import com.sun.max.asm.LittleEndianAssembler;
+import com.sun.max.asm.x86.ControlRegister;
+import com.sun.max.asm.x86.DebugRegister;
+import com.sun.max.asm.x86.FPStackRegister;
+import com.sun.max.asm.x86.MMXRegister;
+import com.sun.max.asm.x86.Scale;
+import com.sun.max.asm.x86.SegmentRegister;
 
 public abstract class AMD64RawAssembler extends LittleEndianAssembler {
 

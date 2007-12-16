@@ -4,11 +4,10 @@
 /*VCSID=519ffd11-07de-4cd5-868c-df3b45e257b6*/
 package com.sun.max.program.option.gui;
 
-import java.text.*;
-
-import javax.swing.*;
-
-import com.sun.max.program.option.*;
+import com.sun.max.program.option.IntegerProgramOption;
+import java.text.NumberFormat;
+import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
 
 /**
  * The GUI class corresponding to {@link IntegerProgramOption}.
@@ -18,7 +17,7 @@ import com.sun.max.program.option.*;
 class IntegerProgramOptionInput extends AssignmentProgramOptionInput<IntegerProgramOption> {
 
     private final JFormattedTextField _value;
-    
+
     public IntegerProgramOptionInput(IntegerProgramOption programOption) {
         super(programOption);
         _value = new JFormattedTextField(NumberFormat.getNumberInstance());
@@ -28,7 +27,7 @@ class IntegerProgramOptionInput extends AssignmentProgramOptionInput<IntegerProg
             _value.setText(value.toString());
         }
     }
-    
+
 
     @Override
     public String value() {

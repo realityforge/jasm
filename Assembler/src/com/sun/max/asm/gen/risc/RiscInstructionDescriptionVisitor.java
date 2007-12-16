@@ -4,30 +4,31 @@
 /*VCSID=a6b089e5-b5a2-41ab-b955-b75503bab669*/
 package com.sun.max.asm.gen.risc;
 
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.field.*;
-import com.sun.max.collect.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.gen.InstructionConstraint;
+import com.sun.max.asm.gen.InstructionDescription;
+import com.sun.max.asm.gen.risc.field.RiscField;
+import com.sun.max.collect.Sequence;
+import com.sun.max.program.ProgramError;
 
 /**
- * 
+ *
  *
  * @author Bernd Mathiske
  */
 public interface RiscInstructionDescriptionVisitor {
 
     void visitField(RiscField field);
-    
+
     void visitConstant(RiscConstant constant);
-    
+
     void visitString(String string);
 
     void visitConstraint(InstructionConstraint constraint);
-    
+
     public static final class Static {
-        private Static() {         
+        private Static() {
         }
-        
+
         private static void visitSpecification(RiscInstructionDescriptionVisitor visitor, Object specification) {
             if (specification instanceof RiscField) {
                 visitor.visitField((RiscField) specification);
@@ -41,16 +42,16 @@ public interface RiscInstructionDescriptionVisitor {
                 ProgramError.unexpected("unknown instructionDescription specification: " + specification);
             }
         }
-        
+
         private static void visitSpecifications(RiscInstructionDescriptionVisitor visitor, Sequence<Object> specifications) {
             for (Object specification : specifications) {
                 visitSpecification(visitor, specification);
             }
         }
-        
+
         public static void visitInstructionDescription(RiscInstructionDescriptionVisitor visitor, InstructionDescription instructionDescription) {
             visitSpecifications(visitor, instructionDescription.specifications());
         }
     }
-    
+
 }

@@ -4,7 +4,7 @@
 /*VCSID=6731a767-fe08-496a-9bc9-74873e86cc13*/
 package com.sun.max.collect;
 
-import java.util.*;
+import java.util.LinkedList;
 
 /**
  * @author Bernd Mathiske
@@ -17,5 +17,5 @@ public class MutableQueue<Element_Type> extends LinkedList<Element_Type> {
             add(element);
         }
     }
-    
+
 }

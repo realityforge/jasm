@@ -4,16 +4,16 @@
 /*VCSID=1b5f71f1-6728-4820-9dad-ce9284d5f953*/
 package com.sun.max.asm.gen.risc;
 
-import com.sun.max.asm.gen.risc.field.*;
+import com.sun.max.asm.gen.risc.field.OptionField;
 
 /**
  * An Option is one of the values that an {@link OptionField optional field} can take.
  * An example is the value of the <i>predict bit</i> for the SPARC Branch on Equal with
  * Prediction instruction that specifies the bit is set. The format of this instruction is:
- * 
+ *
  *    bge_pt(...)  // assembler method
  *    bge,pt ...   // external assembler syntax
- *    
+ *
  * @author Dave Ungar
  * @author Adam Spitz
  * @author Bernd Mathiske
@@ -30,12 +30,12 @@ public class Option {
      * The addition to the external assembler syntax used to specify this option value.
      */
     protected final String _externalName;
-    
+
     /**
      * The value of the option.
      */
     protected final int _value;
-    
+
     /**
      * The field to which this option applies.
      */
@@ -79,17 +79,17 @@ public class Option {
     public OptionField field() {
         return _field;
     }
-    
+
     public boolean isRedundant() {
         return (_field.defaultOption() != null) && (_value == _field.defaultOption()._value) && (!(equals(_field.defaultOption())));
     }
 
-    @Override 
+    @Override
     public boolean equals(Object other) {
         return other instanceof Option && _name.equals(((Option) other)._name);
     }
 
-    @Override 
+    @Override
     public int hashCode() {
         return _name.hashCode();
     }

@@ -4,12 +4,12 @@
 /*VCSID=695b729f-0c34-4e13-bc0a-fb871309d6ab*/
 package com.sun.max.asm.ppc;
 
-import com.sun.max.asm.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.AbstractSymbolicArgument;
+import com.sun.max.util.Symbolizer;
 
 /**
  * Special Purpose Registers.
- * 
+ *
  * @author Bernd Mathiske
  */
 public final class SPR extends AbstractSymbolicArgument {
@@ -19,20 +19,20 @@ public final class SPR extends AbstractSymbolicArgument {
     }
 
     /**
-     * Denotes the Fixed-Point Exception Register. 
+     * Denotes the Fixed-Point Exception Register.
      */
     public static final SPR XER = new SPR(1);
 
     /**
-     * Denotes the Link Register. 
+     * Denotes the Link Register.
      */
     public static final SPR LR = new SPR(8);
 
     /**
-     * Denotes the Count Register. 
+     * Denotes the Count Register.
      */
     public static final SPR CTR = new SPR(9);
-    
+
     public static final Symbolizer<SPR> SYMBOLIZER = Symbolizer.Static.initialize(SPR.class);
-    
+
 }

@@ -4,7 +4,7 @@
 /*VCSID=72833628-82c3-4b92-ade0-6ba388c256ea*/
 package com.sun.max.program;
 
-import com.sun.max.lang.*;
+import com.sun.max.lang.Strings;
 
 /**
  * Utilities to deal with Maxwell naming conventions.
@@ -12,14 +12,14 @@ import com.sun.max.lang.*;
  * @author Bernd Mathiske
  */
 public final class Naming {
-    
-    private Naming() {        
+
+    private Naming() {
     }
-    
+
     public static String toTypeName(String name) {
         return Strings.firstCharToUpperCase(name.startsWith("_") ? name.substring(1) : name);
     }
-    
+
     public static String toFieldName(String name) {
         if (!name.startsWith("_")) {
             return "_" + Strings.firstCharToLowerCase(name);
@@ -30,5 +30,5 @@ public final class Naming {
     public static String toMethodName(String name) {
         return Strings.firstCharToLowerCase(name.startsWith("_") ? name.substring(1) : name);
     }
-    
+
 }

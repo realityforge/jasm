@@ -4,18 +4,39 @@
 /*VCSID=f19f9616-3b7a-4a36-bd59-57fa7c8e0e84*/
 package com.sun.max.asm.gen;
 
-import java.io.*;
-import java.lang.reflect.*;
-import java.util.*;
-
-import com.sun.max.*;
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.collect.*;
-import com.sun.max.ide.*;
-import com.sun.max.io.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.MaxPackage;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.Assembler;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.ExternalMnemonicSuffixArgument;
+import com.sun.max.asm.Label;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.ArraySequence;
+import com.sun.max.collect.MutableSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.ide.JavaProject;
+import com.sun.max.ide.ToolChain;
+import com.sun.max.io.Files;
+import com.sun.max.io.IndentWriter;
+import com.sun.max.io.ReadableSource;
+import com.sun.max.lang.Bytes;
+import com.sun.max.lang.StaticLoophole;
+import com.sun.max.lang.Strings;
+import com.sun.max.program.ProgramError;
+import com.sun.max.program.Trace;
+import java.io.BufferedReader;
+import java.io.CharArrayReader;
+import java.io.CharArrayWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Source code generator for both the raw assembler and the label assembler.

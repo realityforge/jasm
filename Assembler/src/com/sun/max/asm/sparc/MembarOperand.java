@@ -4,12 +4,11 @@
 /*VCSID=45696b8e-aa08-46e0-9312-621bff625922*/
 package com.sun.max.asm.sparc;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.collect.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.AbstractSymbolicArgument;
+import com.sun.max.collect.ArraySequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.util.Symbolizer;
+import java.util.Iterator;
 
 /**
  * The components of the argument to the Memory Barrier (i.e. {@code membar}) instruction.

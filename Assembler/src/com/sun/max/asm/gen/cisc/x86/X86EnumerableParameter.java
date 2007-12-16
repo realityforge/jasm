@@ -4,12 +4,12 @@
 /*VCSID=9c40620d-d9ad-477a-ac5c-f1e34a750de2*/
 package com.sun.max.asm.gen.cisc.x86;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.collect.*;
-import com.sun.max.program.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.EnumerableArgument;
+import com.sun.max.asm.gen.EnumerableParameter;
+import com.sun.max.collect.Iterables;
+import com.sun.max.program.ProgramError;
+import com.sun.max.util.Enumerator;
 
 /**
  * @author Bernd Mathiske

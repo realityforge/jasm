@@ -4,17 +4,25 @@
 /*VCSID=a91978a5-fedd-4a91-a319-ffb277e9e225*/
 package com.sun.max.asm.gen.cisc.x86;
 
-import java.io.*;
-import java.util.*;
-
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.x86.*;
-import com.sun.max.collect.*;
-import com.sun.max.io.*;
-import com.sun.max.lang.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.dis.DisassembledInstruction;
+import com.sun.max.asm.gen.Assembly;
+import com.sun.max.asm.gen.AssemblyTestComponent;
+import com.sun.max.asm.gen.AssemblyTester;
+import com.sun.max.asm.gen.ImmediateArgument;
+import com.sun.max.asm.gen.ImplicitOperand;
+import com.sun.max.asm.x86.IndirectRegister;
+import com.sun.max.collect.MutableQueue;
+import com.sun.max.collect.Sequence;
+import com.sun.max.io.IndentWriter;
+import com.sun.max.lang.StaticLoophole;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.util.HexByte;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PushbackInputStream;
+import java.util.EnumSet;
+import java.util.Queue;
 
 /**
  * @author Bernd Mathiske
@@ -25,22 +33,22 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
     public X86AssemblyTester(Assembly<Template_Type> assembly, WordWidth addressWidth, EnumSet<AssemblyTestComponent> components) {
         super(assembly, addressWidth, components);
     }
-    
+
     @Override
     public X86Assembly<Template_Type> assembly() {
         final Class<X86Assembly<Template_Type>> type = null;
         return StaticLoophole.cast(type, super.assembly());
     }
-    
+
     private String getSibIndexAndScale(Queue<X86Operand> operands, Queue<Argument> arguments) {
         X86Parameter parameter = (X86Parameter) operands.remove();
         assert parameter.place() == ParameterPlace.SIB_INDEX || parameter.place() == ParameterPlace.SIB_INDEX_REXX;
         final String result = arguments.remove().externalValue() + ",";
         parameter = (X86Parameter) operands.remove();
         assert parameter.place() == ParameterPlace.SIB_SCALE;
-        return result + arguments.remove().externalValue() + ")";        
+        return result + arguments.remove().externalValue() + ")";
     }
-    
+
     private String getOperand(X86Template template, Queue<X86Operand> operands, Queue<Argument> arguments, String label) {
         final X86Operand operand = operands.remove();
         if (operand instanceof ImplicitOperand) {
@@ -82,7 +90,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
             if (nextOperand instanceof X86Parameter) {
                 final X86Parameter nextParameter = (X86Parameter) nextOperand;
                 if (nextParameter.place() == ParameterPlace.SIB_INDEX || nextParameter.place() == ParameterPlace.SIB_INDEX_REXX) {
-                    return argument.externalValue() + "(," + getSibIndexAndScale(operands, arguments);                    
+                    return argument.externalValue() + "(," + getSibIndexAndScale(operands, arguments);
                 }
             }
         }
@@ -98,7 +106,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
         }
         return argument.externalValue();
     }
-    
+
     /**
      * Yes, 'X86DisassembledInstruction.toString()' may be similar,
      * but it pertains only to our own private disassembly output style,
@@ -112,7 +120,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
         if (externalCodeSizeAttribute != null) {
             stream.println(".code" + externalCodeSizeAttribute.numberOfBits());
         } else {
-            stream.println(".code" + addressWidth().numberOfBits());            
+            stream.println(".code" + addressWidth().numberOfBits());
         }
         final Queue<X86Operand> operandQueue = new MutableQueue<X86Operand>(template.operands());
         final Queue<Argument> argumentQueue = new MutableQueue<Argument>(argumentList);
@@ -138,7 +146,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
             if (second.length() > 0) {
                 stream.print(second + ",");
             }
-            stream.println(first);            
+            stream.println(first);
         } else {
             if (first.length() > 0) {
                 stream.print(first + ",");
@@ -146,10 +154,10 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
             stream.println(second);
         }
         stream.outdent();
-        stream.println(label + ":"); 
+        stream.println(label + ":");
         stream.indent();
     }
-    
+
     @Override
     protected byte[] readExternalInstruction(PushbackInputStream externalInputStream, Template_Type template, byte[] internalBytes) throws IOException {
         if (X86Opcode.isFloatingPointEscape(template.opcode1())) {
@@ -204,7 +212,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
         final int instruction = stream.read();
         return instruction == 0x90;
     }
-    
+
     @Override
     protected String disassembleFields(Template_Type template, byte[] assembledInstruction) {
         return "<not yet implemented>";

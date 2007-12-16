@@ -4,13 +4,12 @@
 /*VCSID=a53a08f1-7599-4c3f-bd9c-5de6ee70f2b0*/
 package com.sun.max.asm.dis.ia32;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.*;
-import com.sun.max.asm.dis.x86.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.cisc.ia32.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.dis.Address32Instruction;
+import com.sun.max.asm.dis.x86.X86DisassembledInstruction;
+import com.sun.max.asm.gen.ImmediateArgument;
+import com.sun.max.asm.gen.cisc.ia32.IA32Template;
+import com.sun.max.collect.Sequence;
 
 /**
  * @author Bernd Mathiske

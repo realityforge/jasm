@@ -4,9 +4,8 @@
 /*VCSID=6b91e61c-4bed-4e7e-9f5a-14fc8d20898f*/
 package com.sun.max.collect;
 
-import java.util.*;
-
-import com.sun.tools.jdi.*;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * This is an {@link IdentityHashSet} with a predictable iteration order based on the order in which elements are
@@ -16,7 +15,7 @@ import com.sun.tools.jdi.*;
  * Note that {@linkplain #add(Object) insertion} and {@linkplain #iterator() iteration} should have the same performance
  * as for a standard {@code IdentityHashSet}. However, {@linkplain #remove(Object) deletion} is a linear operation due
  * to the linked list use to record insertion order.
- * 
+ *
  * @author Doug Simon
  */
 public class LinkedIdentityHashSet<Element_Type> extends IdentityHashSet<Element_Type> {
@@ -39,7 +38,7 @@ public class LinkedIdentityHashSet<Element_Type> extends IdentityHashSet<Element
     }
 
     /**
-     * Gets an iterator over the elements in the order they were (originally) inserted. 
+     * Gets an iterator over the elements in the order they were (originally) inserted.
      */
     @Override
     public Iterator<Element_Type> iterator() {

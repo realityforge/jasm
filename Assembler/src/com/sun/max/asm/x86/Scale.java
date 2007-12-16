@@ -4,9 +4,8 @@
 /*VCSID=cb558800-7bfc-49d3-beeb-2a64e3451e4c*/
 package com.sun.max.asm.x86;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.EnumerableArgument;
+import com.sun.max.util.Enumerator;
 
 /**
  * @author Bernd Mathiske

@@ -4,15 +4,13 @@
 /*VCSID=0b1a9456-e5f5-4814-9e1a-e71e160a2ff7*/
 package com.sun.max.util;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.collect.*;
-import com.sun.max.program.*;
-
+import com.sun.max.annotate.Implement;
+import com.sun.max.collect.Sequence;
+import com.sun.max.program.ProgramError;
+import java.util.Iterator;
 
 final class SequenceSymbolizer<Symbol_Type extends Symbol> implements Symbolizer<Symbol_Type> {
-    
+
     private final Class<Symbol_Type> _symbolType;
     private final Sequence<Symbol_Type> _symbols;
 
@@ -27,12 +25,12 @@ final class SequenceSymbolizer<Symbol_Type extends Symbol> implements Symbolizer
         _symbols = symbols;
         ProgramError.check(!_symbols.isEmpty());
     }
-    
+
     @Implement(Symbolizer.class)
     public Class<Symbol_Type> type() {
         return _symbolType;
     }
-    
+
     @Implement(Symbolizer.class)
     public Symbol_Type fromValue(int value) {
         for (Symbol_Type symbol : _symbols) {
@@ -42,9 +40,9 @@ final class SequenceSymbolizer<Symbol_Type extends Symbol> implements Symbolizer
         }
         return null;
     }
-    
+
     @Implement(Iterable.class)
     public Iterator<Symbol_Type> iterator() {
         return _symbols.iterator();
-    }            
+    }
 }

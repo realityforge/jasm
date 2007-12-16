@@ -4,32 +4,35 @@
 /*VCSID=7bf27cbf-e57b-4654-a576-7fd03238616d*/
 package com.sun.max.asm.gen.risc;
 
-import java.util.*;
-
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.field.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.gen.InstructionDescription;
+import com.sun.max.asm.gen.risc.field.OptionField;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.MultiMap;
+import com.sun.max.collect.Sequence;
+import com.sun.max.collect.SequenceMultiMap;
+import com.sun.max.lang.StaticLoophole;
+import com.sun.max.program.ProgramError;
+import java.util.Iterator;
 
 /**
- * 
+ *
  *
  * @author Bernd Mathiske
  */
 public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
 
-    protected RiscTemplateCreator() {    
+    protected RiscTemplateCreator() {
     }
-    
+
     private AppendableSequence<Template_Type> _templates = new ArrayListSequence<Template_Type>();
-    
+
     public Sequence<Template_Type> templates() {
         return _templates;
     }
 
     protected abstract Template_Type createTemplate(InstructionDescription instructionDescription);
-    
+
     public Sequence<Template_Type> createOptionTemplates(Sequence<Template_Type> templates, OptionField optionField) {
         final Class<Template_Type> templateType = null;
         final AppendableSequence<Template_Type> newTemplates = new ArrayListSequence<Template_Type>();
@@ -41,7 +44,7 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
             }
             for (Option option : optionField.options()) {
                 if (option.equals(optionField.defaultOption())) {
-                    newTemplates.append(canonicalRepresentative); 
+                    newTemplates.append(canonicalRepresentative);
                 } else {
                     final Template_Type templateWithOption = StaticLoophole.cast(templateType, template.clone());
                     templateWithOption.organizeOption(option, canonicalRepresentative);
@@ -54,11 +57,11 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
 
     private int _serial;
     private MultiMap<String, Template_Type, Sequence<Template_Type>> _nameToTemplates = new SequenceMultiMap<String, Template_Type>(false);
-    
+
     public Sequence<Template_Type> nameToTemplates(String name) {
         return _nameToTemplates.get(name);
     }
-    
+
     public void createTemplates(RiscInstructionDescriptionCreator instructionDescriptionCreator) {
         final AppendableSequence<Template_Type> initialTemplates = new ArrayListSequence<Template_Type>();
         for (InstructionDescription instructionDescription : instructionDescriptionCreator.instructionDescriptions()) {
@@ -76,7 +79,7 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
                 template.setSerial(_serial);
                 _templates.append(template);
                 _nameToTemplates.add(template.internalName(), template);
-                
+
                 // Create the link to the non-synthetic instruction from which a synthetic instruction is derived.
                 if (template.instructionDescription().isSynthetic()) {
                     boolean found = false;
@@ -94,5 +97,5 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
             }
         }
     }
-    
+
 }

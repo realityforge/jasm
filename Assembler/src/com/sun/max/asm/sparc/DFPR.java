@@ -4,9 +4,9 @@
 /*VCSID=7e87ef22-28f2-4a30-8538-cd3675fd1669*/
 package com.sun.max.asm.sparc;
 
-import com.sun.max.asm.*;
-import com.sun.max.lang.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.SymbolicArgument;
+import com.sun.max.lang.StaticFieldName;
+import com.sun.max.util.Symbolizer;
 
 /**
  * The double-precision (64-bit) floating-point registers.
@@ -15,7 +15,7 @@ import com.sun.max.util.*;
  * @author Doug Simon
  */
 public interface DFPR extends SymbolicArgument, StaticFieldName {
-    
+
     DFPR F0 = FPR.F0;
     DFPR F2 = FPR.F2;
     DFPR F4 = FPR.F4;

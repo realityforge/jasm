@@ -4,11 +4,11 @@
 /*VCSID=4094e727-0d7b-4709-8858-e5a7a856cc7e*/
 package com.sun.max.collect;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.lang.*;
+import com.sun.max.annotate.Implement;
 import com.sun.max.lang.Arrays;
+import com.sun.max.lang.StaticLoophole;
+import java.util.Enumeration;
+import java.util.Iterator;
 
 /**
  * @author Bernd Mathiske
@@ -16,13 +16,13 @@ import com.sun.max.lang.Arrays;
 public final class Iterables {
 
     private Iterables() {
-        
+
     }
-    
+
     public static <Element_Type> Iterable<Element_Type> from(Element_Type... elements) {
         return Arrays.iterable(elements);
     }
-    
+
     public static int countIterations(Iterator iterator) {
         int count = 0;
         while (iterator.hasNext()) {
@@ -31,7 +31,7 @@ public final class Iterables {
         }
         return count;
     }
-    
+
     private static final class EnumerationIterable<Element_Type> implements Iterable<Element_Type> {
 
         private final Enumeration<Element_Type> _enumeration;
@@ -68,43 +68,43 @@ public final class Iterables {
         }
 
     }
-        
+
     public static <Element_Type> Iterable<Element_Type> fromEnumeration(Enumeration<Element_Type> enumeration) {
         return new EnumerationIterable<Element_Type>(enumeration);
     }
-        
+
     private static final Iterable<Object> EMPTY_ITERABLE = new Iterable<Object>() {
         @Implement(Iterable.class)
         public Iterator<Object> iterator() {
             return Iterators.empty();
         }
     };
-    
+
     public static <Element_Type> Iterable<Element_Type> empty() {
         final Class<Iterable<Element_Type>> type = null;
         return StaticLoophole.cast(type, EMPTY_ITERABLE);
     }
 
     private static final class Flatten1Iterator<Element_Type> implements Iterator<Element_Type> {
-        
+
         private Iterator<Iterable<Element_Type>> _outerIterator;
         private Iterator<Element_Type> _innerIterator;
-        
+
         private Flatten1Iterator(Iterable<Iterable<Element_Type>> iterable) {
             _outerIterator = iterable.iterator();
         }
-        
+
         @Implement(Iterator.class)
         public boolean hasNext() {
             while (_innerIterator == null || !_innerIterator.hasNext()) {
                 if (!_outerIterator.hasNext()) {
                     return false;
                 }
-                _innerIterator = _outerIterator.next().iterator();               
+                _innerIterator = _outerIterator.next().iterator();
             }
             return true;
         }
-        
+
         @Implement(Iterator.class)
         public Element_Type next() {
             if (!hasNext()) {
@@ -112,13 +112,13 @@ public final class Iterables {
             }
             return _innerIterator.next();
         }
-        
+
         @Implement(Iterator.class)
         public void remove() {
             throw new UnsupportedOperationException();
         }
     }
-    
+
     public static <Element_Type> Iterable<Element_Type> flatten1(Iterable<Iterable<Element_Type>> iterable) {
         final Iterator<Element_Type> iterator = new Flatten1Iterator<Element_Type>(iterable);
         return new Iterable<Element_Type>() {
@@ -128,5 +128,5 @@ public final class Iterables {
             }
         };
     }
-    
+
 }

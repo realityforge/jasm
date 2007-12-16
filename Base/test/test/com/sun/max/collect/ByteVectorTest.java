@@ -4,8 +4,8 @@
 /*VCSID=cf60c43b-8092-4e2d-aa31-007f23b0362c*/
 package test.com.sun.max.collect;
 
-import com.sun.max.collect.*;
-import com.sun.max.ide.*;
+import com.sun.max.collect.ByteVector;
+import com.sun.max.ide.MaxTestCase;
 
 /**
  * Tests for {@link ByteVector}.
@@ -13,11 +13,11 @@ import com.sun.max.ide.*;
  * @author Hiroshi Yamauchi
  */
 public class ByteVectorTest extends MaxTestCase {
- 
+
     public ByteVectorTest(String name) {
         super(name);
     }
-    
+
     public static void main(String[] args) {
         junit.textui.TestRunner.run(ByteVectorTest.class);
     }
@@ -29,7 +29,7 @@ public class ByteVectorTest extends MaxTestCase {
         }
         return new ByteVector(bytes);
     }
-    
+
     public void test_isEmpty() {
         final ByteVector bv1 = new ByteVector();
         final ByteVector bv2 = makeByteVector(100);
@@ -38,7 +38,7 @@ public class ByteVectorTest extends MaxTestCase {
         bv1.add((byte) 0);
         assertTrue(!bv1.isEmpty());
     }
-    
+
     public void test_length() {
         final ByteVector bv1 = new ByteVector();
         final ByteVector bv2 = makeByteVector(100);
@@ -60,7 +60,7 @@ public class ByteVectorTest extends MaxTestCase {
             assertTrue(bv1.get(i) == bv2.get(i));
         }
     }
-    
+
     public void test_get() {
         final ByteVector bv2 = makeByteVector(100000);
         for (int i = 0; i < 100000; i++) {
@@ -73,7 +73,7 @@ public class ByteVectorTest extends MaxTestCase {
             assertTrue(true);
         }
     }
-    
+
     public void test_set() {
         final ByteVector bv2 = makeByteVector(100000);
         for (int i = 0; i < 100000; i++) {
@@ -89,7 +89,7 @@ public class ByteVectorTest extends MaxTestCase {
             assertTrue(true);
         }
     }
-    
+
     public void test_put() {
         final ByteVector bv2 = makeByteVector(0);
         for (int i = 0; i < 100000; i++) {

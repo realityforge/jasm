@@ -4,27 +4,37 @@
 /*VCSID=46f154df-dad5-4dbb-82d6-ef1e421cbd47*/
 package com.sun.max.asm.dis.risc;
 
-import java.io.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.Assembler;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.dis.DisassembledInstruction;
+import com.sun.max.asm.dis.Disassembler;
+import com.sun.max.asm.gen.Assembly;
+import com.sun.max.asm.gen.InstructionConstraint;
+import com.sun.max.asm.gen.risc.RiscAssembly;
+import com.sun.max.asm.gen.risc.RiscTemplate;
+import com.sun.max.asm.gen.risc.field.OperandField;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.Bytes;
+import com.sun.max.lang.Endianness;
+import com.sun.max.lang.StaticLoophole;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.program.ProgramWarning;
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.util.Arrays;
 
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.asm.gen.risc.field.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
-
 /**
- * 
+ *
  *
  * @author Bernd Mathiske
  * @author Doug Simon
  * @author Dave Ungar
  * @author Adam Spitz
  */
-public abstract class RiscDisassembler<Template_Type extends RiscTemplate, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>> 
+public abstract class RiscDisassembler<Template_Type extends RiscTemplate, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
     extends Disassembler<Template_Type, DisassembledInstruction_Type> {
 
     protected RiscDisassembler(Assembly<Template_Type> assembly, WordWidth addressWidth, Endianness endianness) {
@@ -38,11 +48,11 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
     }
 
     private int _currentOffset;
-    
+
     /**
      * Extract the value for each operand of a template from an encoded instruction whose opcode
      * matches that of the template.
-     * 
+     *
      * @param instruction  the encoded instruction
      * @return the decoded arguments for each operand or null if at least one operand has
      *         an invalid value in the encoded instruction
@@ -58,7 +68,7 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
         }
         return arguments;
     }
-    
+
     private boolean isLegalArgumentList(Template_Type template, Sequence<Argument> arguments) {
         final Sequence<InstructionConstraint> constraints = template.instructionDescription().constraints();
         for (InstructionConstraint constraint : constraints) {
@@ -73,7 +83,7 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
         final int instruction = endianness().readInt(stream);
         final AppendableSequence<DisassembledInstruction_Type> result = new ArrayListSequence<DisassembledInstruction_Type>();
         final byte[] instructionBytes = endianness().toBytes(instruction);
-        for (SpecificityGroup<Template_Type> specificityGroup : assembly().specificityGroups()) {            
+        for (SpecificityGroup<Template_Type> specificityGroup : assembly().specificityGroups()) {
             for (OpcodeMaskGroup<Template_Type> opcodeMaskGroup : specificityGroup.opcodeMaskGroups()) {
                 final int opcode = instruction & opcodeMaskGroup.mask();
                 for (Template_Type template : opcodeMaskGroup.templatesFor(opcode)) {
@@ -106,7 +116,7 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
         _currentOffset += 4;
         return result;
     }
-    
+
     @Override
     public Sequence<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException {
         final AppendableSequence<DisassembledInstruction_Type> result = new ArrayListSequence<DisassembledInstruction_Type>();

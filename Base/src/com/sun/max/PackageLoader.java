@@ -4,14 +4,24 @@
 /*VCSID=1eead606-423f-4424-ba9b-6c022def0d08*/
 package com.sun.max;
 
-import java.io.*;
-import java.util.*;
-import java.util.zip.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.annotate.Implement;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.Strings;
+import com.sun.max.program.Classpath;
+import com.sun.max.program.ProgramError;
+import com.sun.max.program.ProgramWarning;
+import com.sun.max.program.Trace;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
 
 /**
  * Loads all the classes in a given package.

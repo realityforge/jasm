@@ -4,10 +4,11 @@
 /*VCSID=2198ad67-ecbb-4139-9ed7-fafc608ac668*/
 package com.sun.max.asm.gen.cisc.x86;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.gen.AssemblyTestComponent;
+import com.sun.max.asm.gen.TestArgumentExclusion;
+import com.sun.max.asm.gen.WrappableSpecification;
+import com.sun.max.collect.Sets;
 
 /**
  * @author Bernd Mathiske

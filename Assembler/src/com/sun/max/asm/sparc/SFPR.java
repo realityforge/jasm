@@ -4,9 +4,9 @@
 /*VCSID=550c9e43-33ba-43eb-8181-768ce0baab6c*/
 package com.sun.max.asm.sparc;
 
-import com.sun.max.asm.*;
-import com.sun.max.lang.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.SymbolicArgument;
+import com.sun.max.lang.StaticFieldName;
+import com.sun.max.util.Symbolizer;
 
 /**
  * The single-precision (32-bit) floating-point registers.

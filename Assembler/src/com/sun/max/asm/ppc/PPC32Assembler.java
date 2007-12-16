@@ -4,9 +4,9 @@
 /*VCSID=e9158016-fa87-41db-b24a-fca8aa4c9846*/
 package com.sun.max.asm.ppc;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-
+import com.sun.max.asm.Assembler32;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.Label;
 
 /**
  * The concrete class for a 32-bit PowerPC assembler.

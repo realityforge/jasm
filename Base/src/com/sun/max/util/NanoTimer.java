@@ -4,7 +4,7 @@
 /*VCSID=0e6a49df-6701-4af5-9706-490becac311f*/
 package com.sun.max.util;
 
-import java.util.*;
+import java.util.Stack;
 
 /**
  * This is a class that provides support for timing computations (at nanosecond granularity),
@@ -13,7 +13,7 @@ import java.util.*;
  *
  * The {@link Timer} class provides similiar functionality but at millisecond
  * granularity with support for flat and total times.
- * 
+ *
  * @author  Bernd Mathiske
  */
 public final class NanoTimer {
@@ -27,9 +27,9 @@ public final class NanoTimer {
 
     private long _mark;
     private long _elapsed;
-    
+
     private NanoTimer() {
-    }    
+    }
 
     private static void start() {
         final long now = System.nanoTime();
@@ -39,9 +39,9 @@ public final class NanoTimer {
         }
         final NanoTimer newTimer = new NanoTimer();
         _timers.get().push(newTimer);
-        newTimer._mark = System.nanoTime();        
+        newTimer._mark = System.nanoTime();
     }
-    
+
     private static long stop() {
         final long now = System.nanoTime();
         final NanoTimer timer = _timers.get().pop();

@@ -4,9 +4,9 @@
 /*VCSID=dd2c0173-926f-4ca3-8d2a-7f81d5b61156*/
 package com.sun.max.asm.amd64;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.lang.*;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.AssemblyInstructionEditor;
+import com.sun.max.lang.WordWidth;
 
 /**
  * Facility to patch AMD64 assembly instructions.

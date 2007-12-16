@@ -4,8 +4,10 @@
 /*VCSID=65f9c573-4904-4d65-99bf-89e5b8158a6a*/
 package com.sun.max.asm;
 
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
+import com.sun.max.collect.Enums;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.Ints;
+import com.sun.max.lang.WordWidth;
 
 /**
  * @author Bernd Mathiske
@@ -14,7 +16,7 @@ import com.sun.max.lang.*;
 public abstract class LabelOffsetInstruction extends LabelInstruction {
 
     private static final Sequence<Sequence<WordWidth>> LABEL_WIDTH_SEQUENCES = Enums.powerSequence(WordWidth.class);
-    
+
     private final Sequence<WordWidth> _labelWidthSequence;
     private int _labelWidthIndex;
 
@@ -37,9 +39,9 @@ public abstract class LabelOffsetInstruction extends LabelInstruction {
 
     void setSize(int nBytes) {
         _size = nBytes;
-    }   
+    }
 
-    
+
     protected WordWidth labelWidth() {
         return _labelWidthSequence.get(_labelWidthIndex);
     }
@@ -53,11 +55,11 @@ public abstract class LabelOffsetInstruction extends LabelInstruction {
         }
         throw new AssemblyException("label instruction cannot accomodate number of argument bits");
     }
-    
+
     private int labelOffset() throws AssemblyException {
         return assembler().labelOffsetInstructionRelative(label(), this);
     }
-    
+
     WordWidth requiredLabelWidth() throws AssemblyException {
         return WordWidth.signedEffective(labelOffset());
     }
@@ -68,22 +70,22 @@ public abstract class LabelOffsetInstruction extends LabelInstruction {
         }
         final int result = labelOffset();
         if (Ints.numberOfEffectiveSignedBits(result) > 8) {
-            throw new AssemblyException("label out of 8-bit range");            
+            throw new AssemblyException("label out of 8-bit range");
         }
         return (byte) result;
     }
-    
+
     protected short labelOffsetAsShort() throws AssemblyException {
         if (assembler().selectingLabelInstructions()) {
             return (short) 0;
         }
         final int result = labelOffset();
         if (Ints.numberOfEffectiveSignedBits(result) > 16) {
-            throw new AssemblyException("label out of 16-bit range");            
+            throw new AssemblyException("label out of 16-bit range");
         }
         return (short) result;
     }
-    
+
     protected int labelOffsetAsInt() throws AssemblyException {
         if (assembler().selectingLabelInstructions()) {
             return 0;

@@ -4,9 +4,35 @@
 /*VCSID=8191ded4-c7db-4493-9e82-e063f3909e30*/
 package com.sun.max.asm.gen.risc.sparc;
 
-import static com.sun.max.asm.gen.risc.sparc.SPARCFields.*;
-
-import com.sun.max.asm.gen.risc.field.*;
+import com.sun.max.asm.gen.risc.field.RiscField;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._dfrd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._dfrs2;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._fmovfcc;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._fmovicc;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._movfcc;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._movicc;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._qfrd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._qfrs2;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_10_5;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_9_5;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rs1;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rs2;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._sfrd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._sfrs2;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._simm10;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._simm11;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.bits_13_13;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.bits_18_18;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.cond_17_14;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.fmovTypeBit;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.i;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.movTypeBit;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.op;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.op3;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.opfLow_10_5;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.opfLow_9_5;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.rcond_12_10;
 
 /**
  * @author Bernd Mathiske
@@ -99,7 +125,7 @@ class ConditionalMove extends SPARCInstructionDescriptionCreator {
 
     ConditionalMove(SPARCTemplateCreator templateCreator) {
         super(templateCreator);
-        
+
         create_A34_A36();
         create_A33_A35();
     }

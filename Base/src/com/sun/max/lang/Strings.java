@@ -4,19 +4,23 @@
 /*VCSID=db4282d7-285b-421e-8418-7567031e7a10*/
 package com.sun.max.lang;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Additional String-related operations.
- * 
+ *
  * @author Bernd Mathiske
  */
 public final class Strings {
 
-    private Strings() {        
+    private Strings() {
     }
-    
+
     /**
      * @param stream
      *            the input stream to be read in its entirety and then closed
@@ -32,10 +36,10 @@ public final class Strings {
             final String line = reader.readLine();
             if (line == null) {
                 stream.close();
-                return result.toString();                
+                return result.toString();
             }
             result.append(line);
-            result.append(lineSeparator);            
+            result.append(lineSeparator);
         }
     }
 
@@ -45,14 +49,14 @@ public final class Strings {
         }
         return s.substring(0, 1).toLowerCase() + s.substring(1);
     }
-    
+
     public static String firstCharToUpperCase(String s) {
         if (s == null || s.length() == 0) {
             return s;
         }
         return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
-    
+
     public static String times(char ch, int nTimes) {
         if (nTimes <= 0) {
             return "";
@@ -63,27 +67,27 @@ public final class Strings {
         }
         return new String(chars);
     }
-    
+
     private static final char[] SPACES;
     static {
         SPACES = new char[200];
         java.util.Arrays.fill(SPACES, ' ');
     }
-    
+
     public static String spaces(int nSpaces) {
         if (nSpaces <= SPACES.length) {
             return new String(SPACES, 0, nSpaces);
         }
         return times(' ', nSpaces);
     }
-    
+
     public static String padLengthWithSpaces(String s, int length) {
         if (s.length() >= length) {
             return s;
         }
         return s + spaces(length - s.length());
     }
-    
+
     public static String padLengthWithSpaces(int length, String s) {
         if (s.length() >= length) {
             return s;
@@ -94,7 +98,7 @@ public final class Strings {
     /**
      * Finds the index of the first non-escaped instance of {@code c} in {@code s} starting at {@code fromIndex}.
      * The search takes into account that the escape char (i.e. {@code '\'}) may itself be escaped.
-     * 
+     *
      * @return -1 if the char could not be found
      */
     public static int indexOfNonEscapedChar(char c, String s, int fromIndex) {
@@ -107,7 +111,7 @@ public final class Strings {
         }
         return -1;
     }
-    
+
     /**
      * Parses a command line into a string array appropriate for calling {@link Runtime#exec(String[])}.
      * The given command line is tokenized around {@link Character#isWhitespace(char) whitespaces}
@@ -116,13 +120,13 @@ public final class Strings {
      */
     public static String[] splitCommand(String command) {
         final List<String> parts = new ArrayList<String>();
-        
+
         boolean escapedChar = false;
         boolean insideQuotes = false;
-        
+
         final char[] buffer = new char[command.length()];
         int pos = 0;
-        
+
         for (int index = 0; index < command.length(); ++index) {
             final char ch = command.charAt(index);
             if (escapedChar) {
@@ -146,7 +150,7 @@ public final class Strings {
                                 pos = 0;
                             }
                             continue;
-                            
+
                         }
                     }
                 }
@@ -165,7 +169,7 @@ public final class Strings {
         }
         return parts.toArray(new String[parts.size()]);
     }
-    
+
     public static String truncate(String s, int maxLength) {
         if (maxLength < 0) {
             throw new IllegalArgumentException();
@@ -178,7 +182,7 @@ public final class Strings {
 
     /**
      * Chops the last {@code count} from a given string.
-     * 
+     *
      * @param s      the string to chop
      * @param count  the number of characters to chop from the end of {@code s}
      * @return the chopped string
@@ -187,7 +191,7 @@ public final class Strings {
     public static String chopSuffix(String s, int count) {
         return s.substring(0, s.length() - count);
     }
-    
+
     /**
      * Chops the last {@code suffix.length()} from a given string. Calling this method is
      * equivalent to {@link #chopSuffix(String, int) chop(s, suffix.length())}.
@@ -195,7 +199,7 @@ public final class Strings {
     public static String chopSuffix(String s, String suffix) {
         return chopSuffix(s, suffix.length());
     }
-    
+
     /**
      * Without any checkcast or instanceof.
      */

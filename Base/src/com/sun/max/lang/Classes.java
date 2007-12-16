@@ -4,7 +4,8 @@
 /*VCSID=5bbc9ca1-8d94-4829-9767-462dd8a55104*/
 package com.sun.max.lang;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 
 /**
  * Methods that might be members of java.lang.Class.
@@ -13,13 +14,13 @@ import java.lang.reflect.*;
  */
 public final class Classes {
 
-    private Classes() {        
+    private Classes() {
     }
-    
+
     public static boolean areRelated(Class<?> class1, Class<?> class2) {
         return class1.isAssignableFrom(class2) || class2.isAssignableFrom(class1);
     }
-    
+
     public static boolean areAssignableFrom(Class<?>[] superTypes, Class<?>... subTypes) {
         if (superTypes.length != subTypes.length) {
             return false;
@@ -35,7 +36,7 @@ public final class Classes {
     /**
      * Extends the functionality of {@link Class#getConstructor(Class...)} to find a constructor whose formal parameter
      * types are assignable from the types of a list of arguments.
-     * 
+     *
      * @param javaClass
      *                the class to search in
      * @param arguments
@@ -58,11 +59,11 @@ public final class Classes {
         }
         return null;
     }
-    
+
     /**
      * Extends the functionality of {@link Class#getMethod(String, Class...)} to find a method whose formal parameter
      * types are assignable from the types of a list of arguments.
-     * 
+     *
      * @param javaClass
      *                the class to search in
      * @param name
@@ -87,11 +88,11 @@ public final class Classes {
         }
         return null;
     }
-    
+
     /**
      * Extends the functionality of {@link Class#getDeclaredMethod(String, Class...)} to find a method whose formal parameter
      * types are assignable from the types of a list of arguments.
-     * 
+     *
      * @param javaClass
      *                the class to search in
      * @param name

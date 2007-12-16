@@ -4,15 +4,17 @@
 /*VCSID=f63924d4-6f98-4cca-b27a-16200d740db0*/
 package com.sun.max.program.option.gui;
 
-import java.util.*;
-
-import javax.swing.*;
-
-import com.sun.max.*;
-import com.sun.max.annotate.*;
-import com.sun.max.collect.*;
-import com.sun.max.program.*;
-import com.sun.max.program.option.*;
+import com.sun.max.MaxPackage;
+import com.sun.max.annotate.Implement;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.program.Classpath;
+import com.sun.max.program.option.PackageProgramOption;
+import java.util.Arrays;
+import java.util.Comparator;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
 
 /**
  * The GUI class corresponding to {@link PackageProgramOption}.

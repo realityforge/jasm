@@ -4,13 +4,16 @@
 /*VCSID=068c4659-7486-49e8-9943-b208327b1361*/
 package com.sun.max.asm.dis.x86;
 
-import java.util.*;
-
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.cisc.x86.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.gen.Assembly;
+import com.sun.max.asm.gen.cisc.x86.X86Opcode;
+import com.sun.max.asm.gen.cisc.x86.X86Parameter;
+import com.sun.max.asm.gen.cisc.x86.X86Template;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.util.HexByte;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Info about the first few bytes of an x86 instruction,
@@ -19,16 +22,16 @@ import com.sun.max.util.*;
  * @author Bernd Mathiske
  */
 public class X86InstructionHeader {
-    
+
     protected boolean _hasAddressSizePrefix;
     protected HexByte _rexPrefix;
     protected HexByte _instructionSelectionPrefix;
     protected HexByte _opcode1;
     protected HexByte _opcode2;
-    
-    X86InstructionHeader() {            
+
+    X86InstructionHeader() {
     }
-    
+
     private X86InstructionHeader(WordWidth addressWidth, X86Template template) {
         _hasAddressSizePrefix = template.addressSizeAttribute() != addressWidth;
         _instructionSelectionPrefix = template.instructionSelectionPrefix();
@@ -39,18 +42,18 @@ public class X86InstructionHeader {
         _opcode1 = template.opcode1();
         _opcode2 = template.opcode2();
     }
-    
-    @Override 
+
+    @Override
     public boolean equals(Object other) {
         if (other instanceof X86InstructionHeader) {
             final X86InstructionHeader header = (X86InstructionHeader) other;
-            return _hasAddressSizePrefix == header._hasAddressSizePrefix && 
+            return _hasAddressSizePrefix == header._hasAddressSizePrefix &&
                 _instructionSelectionPrefix == header._instructionSelectionPrefix && _opcode1 == header._opcode1 && _opcode2 == header._opcode2;
         }
         return false;
     }
 
-    @Override 
+    @Override
     public int hashCode() {
         int result = _hasAddressSizePrefix ? -1 : 1;
         if (_instructionSelectionPrefix != null) {
@@ -91,7 +94,7 @@ public class X86InstructionHeader {
                         for (int i = 0; i < 8; i++) {
                             header = new X86InstructionHeader(addressWidth, template);
                             header._opcode1 = HexByte.values()[header._opcode1.ordinal() + i];
-                            result.put(header, matchingTemplates);                                
+                            result.put(header, matchingTemplates);
                         }
                         break;
                     case OPCODE2_REXB:
@@ -99,15 +102,15 @@ public class X86InstructionHeader {
                         for (int i = 0; i < 8; i++) {
                             header = new X86InstructionHeader(addressWidth, template);
                             header._opcode2 = HexByte.values()[header._opcode2.ordinal() + i];
-                            result.put(header, matchingTemplates);                                
+                            result.put(header, matchingTemplates);
                         }
                         break;
-                    default: 
+                    default:
                         break;
                 }
             }
         }
         return result;
     }
-        
+
 }

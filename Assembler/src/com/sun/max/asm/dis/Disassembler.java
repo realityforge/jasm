@@ -4,13 +4,25 @@
 /*VCSID=2a1b0ea8-e4a9-49e9-aad8-13bad365e9b1*/
 package com.sun.max.asm.dis;
 
-import java.io.*;
-
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.Assembler;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.gen.Assembly;
+import com.sun.max.asm.gen.ImmediateArgument;
+import com.sun.max.asm.gen.OffsetParameter;
+import com.sun.max.asm.gen.Parameter;
+import com.sun.max.asm.gen.Template;
+import com.sun.max.collect.ArraySequence;
+import com.sun.max.collect.MutableSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.Endianness;
+import com.sun.max.lang.Strings;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.program.ProgramError;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 /**
  * Disassemblers scan machine code, discern and decode individual instructions
@@ -27,37 +39,37 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
     private final Assembly<Template_Type> _assembly;
     private final WordWidth _addressWidth;
     private final Endianness _endianness;
-    
+
     protected Disassembler(Assembly<Template_Type> assembly, WordWidth addressWidth, Endianness endianness) {
         super();
         _assembly = assembly;
         _addressWidth = addressWidth;
         _endianness = endianness;
     }
-    
+
     public Assembly<Template_Type> assembly() {
         return _assembly;
     }
-    
+
     public WordWidth addressWidth() {
         return _addressWidth;
     }
-        
+
     public Endianness endianness() {
         return _endianness;
     }
-    
+
     protected abstract DisassembledInstruction_Type createDisassembledInstruction(int offset, byte[] bytes, Template_Type template, Sequence<Argument> arguments);
-    
+
     protected abstract Assembler createAssembler(int offset);
 
     /**
      * Scans an instruction stream and disassembles the first encoded instruction.
      * <p>
-     * @return the disassembled forms that match the first encoded instruction in {@code stream} 
+     * @return the disassembled forms that match the first encoded instruction in {@code stream}
      */
     public abstract Sequence<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream) throws IOException, AssemblyException;
-    
+
     /**
      * Scans an instruction stream and disassembles the encoded instructions. If an encoded instruction has
      * more than one matching disassembled form, an abitrary choice of one of the disassembled forms is
@@ -78,10 +90,10 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
         }
         return -1;
     }
-    
+
     /**
      * A label map is a sequence of labels that matches a sequence of disassembled instructions,
-     * containing either a label or null at the index of each instruction. 
+     * containing either a label or null at the index of each instruction.
      */
     public Sequence<DisassembledLabel> createLabelMap(Sequence<DisassembledInstruction_Type> disassembledInstructions) {
         final MutableSequence<DisassembledLabel> labels = new ArraySequence<DisassembledLabel>(disassembledInstructions.length());
@@ -91,8 +103,8 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
             if (parameterIndex >= 0) {
                 final ImmediateArgument immediateArgument = (ImmediateArgument) disassembledInstruction.arguments().get(parameterIndex);
                 final Parameter parameter = template.parameters().get(parameterIndex);
-                final int offset = (parameter instanceof OffsetParameter) ? 
-                                (int) immediateArgument.asLong() + disassembledInstruction.offsetForRelativeAddressing() : 
+                final int offset = (parameter instanceof OffsetParameter) ?
+                                (int) immediateArgument.asLong() + disassembledInstruction.offsetForRelativeAddressing() :
                                 disassembledInstruction.addressToOffset(immediateArgument);
                 final int targetInstructionIndex = findTargetInstructionIndex(offset, disassembledInstructions);
                 if (targetInstructionIndex >= 0 && labels.get(targetInstructionIndex) == null) {
@@ -102,7 +114,7 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
         }
         return labels;
     }
-    
+
     /**
      * Assigns serial numbers to these labels and calculates the maximum number of chars needed to print any one of these labels.
      */
@@ -119,10 +131,10 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
         }
         return result;
     }
-    
+
     private static final String SPACE = "   ";
     private static final int NUMBER_OF_INSTRUCTION_CHARS = 48;
-    
+
     private void printHeading(PrintStream stream, int nOffsetChars, int nLabelChars)  {
         String s = Strings.padLengthWithSpaces("Address", (addressWidth().numberOfBytes() * 2) + 2) + SPACE;
         s += Strings.padLengthWithSpaces("+", nOffsetChars) + SPACE;
@@ -132,9 +144,9 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
         stream.println(s);
         stream.println(Strings.times('-', s.length()));
     }
-    
+
     private boolean _isHeadingEnabled;
-    
+
     public void enableHeading() {
         _isHeadingEnabled = true;
     }
@@ -147,7 +159,7 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
         final PrintStream stream = new PrintStream(outputStream);
         final int nOffsetChars = Integer.toString(disassembledInstructions.last().startOffset()).length();
         final Sequence<DisassembledLabel> labelMap = createLabelMap(disassembledInstructions);
-        final Sequence<DisassembledLabel> labels = Sequence.Static.filterNonNull(labelMap);        
+        final Sequence<DisassembledLabel> labels = Sequence.Static.filterNonNull(labelMap);
         final int nLabelChars = updateLabels(labels, disassembledInstructions);
         if (_isHeadingEnabled) {
             printHeading(stream, nOffsetChars, nLabelChars);
@@ -170,11 +182,11 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
             stream.println();
         }
     }
-    
+
     public void print(OutputStream outputStream, Sequence<DisassembledInstruction_Type> disassembledInstructions) throws IOException {
         print(outputStream, disassembledInstructions, null);
     }
-    
+
     public void scanAndPrint(BufferedInputStream bufferedInputStream, OutputStream outputStream, GlobalLabelMapper globalLabelMapper) throws IOException, AssemblyException {
         final Sequence<DisassembledInstruction_Type> disassembledInstructions = scan(bufferedInputStream);
         print(outputStream, disassembledInstructions, globalLabelMapper);
@@ -183,27 +195,27 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
     public void scanAndPrint(BufferedInputStream bufferedInputStream, OutputStream outputStream) throws IOException, AssemblyException {
         scanAndPrint(bufferedInputStream, outputStream, null);
     }
-    
+
     public enum AbstractionPreference {
         RAW, SYNTHETIC;
     }
-    
+
     private AbstractionPreference _abstractionPreference = AbstractionPreference.SYNTHETIC;
-    
+
     protected AbstractionPreference abstractionPreference() {
         return _abstractionPreference;
     }
-    
+
     public void setAbstractionPreference(AbstractionPreference abstractionPreference) {
         _abstractionPreference = abstractionPreference;
     }
 
     private int _expectedNumberOfArguments = -1;
-    
+
     protected int expectedNumberOfArguments() {
         return _expectedNumberOfArguments;
     }
-    
+
     public void setExpectedNumberOfArguments(int expectedNumberOfArguments) {
         _expectedNumberOfArguments = expectedNumberOfArguments;
     }

@@ -4,16 +4,16 @@
 /*VCSID=2a35e90c-b5fc-4d7f-8c76-6a9054c13a92*/
 package com.sun.max.io;
 
-import java.io.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.program.*;
-
+import com.sun.max.annotate.Implement;
+import com.sun.max.program.ProgramWarning;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
 
 public final class TemporaryFiles {
-    private TemporaryFiles() {        
+    private TemporaryFiles() {
     }
-    
+
     public static void cleanup(final String prefix, final String suffix) {
         if ((prefix == null || prefix.length() == 0) && (suffix == null || suffix.length() == 0)) {
             return;
@@ -42,7 +42,7 @@ public final class TemporaryFiles {
             ProgramWarning.message("could not delete temporary files");
         }
     }
-    
+
     public static void cleanup(String prefix) {
         cleanup(prefix, null);
     }

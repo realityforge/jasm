@@ -4,14 +4,21 @@
 /*VCSID=7dbc991b-9411-4437-b4bf-231699b5acc6*/
 package com.sun.max.asm.gen.risc.field;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.asm.gen.risc.bitRange.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.SymbolicArgument;
+import com.sun.max.asm.gen.ArgumentRange;
+import com.sun.max.asm.gen.AssemblyTestComponent;
+import com.sun.max.asm.gen.Expression;
+import com.sun.max.asm.gen.TestArgumentExclusion;
+import com.sun.max.asm.gen.WrappableSpecification;
+import com.sun.max.asm.gen.risc.RiscConstant;
+import com.sun.max.asm.gen.risc.bitRange.BitRange;
+import com.sun.max.asm.gen.risc.bitRange.BitRangeOrder;
+import com.sun.max.collect.Iterables;
+import com.sun.max.collect.Sets;
+import com.sun.max.lang.StaticLoophole;
+import com.sun.max.util.Symbolizer;
 
 /**
  * @author Bernd Mathiske

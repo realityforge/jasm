@@ -4,13 +4,17 @@
 /*VCSID=e07099c7-82fa-45f5-8659-02754b8e6d4c*/
 package com.sun.max.asm.gen.cisc.x86;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.cisc.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.gen.Immediate16Argument;
+import com.sun.max.asm.gen.Immediate32Argument;
+import com.sun.max.asm.gen.Immediate64Argument;
+import com.sun.max.asm.gen.Immediate8Argument;
+import com.sun.max.asm.gen.ImmediateArgument;
+import com.sun.max.asm.gen.ImmediateParameter;
+import com.sun.max.asm.gen.cisc.AppendedParameter;
+import com.sun.max.collect.Iterables;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.program.ProgramError;
 
 /**
  * @author Bernd Mathiske

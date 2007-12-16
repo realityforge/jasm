@@ -4,16 +4,19 @@
 /*VCSID=d725708d-f679-4023-a578-460de18e0bfa*/
 package com.sun.max.asm.dis.amd64;
 
-import java.util.*;
-
-import com.sun.max.asm.*;
-import com.sun.max.asm.amd64.*;
-import com.sun.max.asm.dis.x86.*;
-import com.sun.max.asm.gen.cisc.amd64.*;
-import com.sun.max.asm.gen.cisc.x86.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.Assembler;
+import com.sun.max.asm.amd64.AMD64Assembler;
+import com.sun.max.asm.dis.x86.X86Disassembler;
+import com.sun.max.asm.dis.x86.X86InstructionHeader;
+import com.sun.max.asm.gen.cisc.amd64.AMD64Assembly;
+import com.sun.max.asm.gen.cisc.amd64.AMD64Template;
+import com.sun.max.asm.gen.cisc.x86.X86Opcode;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.util.HexByte;
+import java.util.Map;
 
 /**
  * Instantiate this class to disassemble AMD64 instruction streams.
@@ -24,11 +27,11 @@ public class AMD64Disassembler extends X86Disassembler<AMD64Template, AMD64Disas
 
     private final long _startAddress;
 
-    public AMD64Disassembler(long startAddress) {   
+    public AMD64Disassembler(long startAddress) {
         super(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);
         _startAddress = startAddress;
     }
-       
+
     @Override
     protected boolean isRexPrefix(HexByte opcode) {
         return X86Opcode.isRexPrefix(opcode);
@@ -43,7 +46,7 @@ public class AMD64Disassembler extends X86Disassembler<AMD64Template, AMD64Disas
     protected Assembler createAssembler(int offset) {
         return new AMD64Assembler(_startAddress + offset);
     }
-    
+
     private static Map<X86InstructionHeader, AppendableSequence<AMD64Template>> _headerToTemplates = X86InstructionHeader.createMapping(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);
 
     @Override

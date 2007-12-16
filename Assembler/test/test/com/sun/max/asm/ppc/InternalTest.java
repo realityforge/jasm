@@ -4,35 +4,42 @@
 /*VCSID=6f119a9d-8097-4894-87ef-1dd806afc442*/
 package test.com.sun.max.asm.ppc;
 
-import static com.sun.max.asm.ppc.GPR.*;
-import static com.sun.max.asm.ppc.Zero.*;
-import static com.sun.max.asm.ppc.CRF.*;
-import static com.sun.max.asm.ppc.BranchPredictionBits.*;
-
-
-import java.io.*;
-
-import junit.framework.*;
-
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.ppc.*;
-import com.sun.max.asm.ppc.*;
-import com.sun.max.ide.*;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.Label;
+import com.sun.max.asm.dis.ppc.PPC32Disassembler;
+import com.sun.max.asm.dis.ppc.PPC64Disassembler;
+import com.sun.max.asm.dis.ppc.PPCDisassembler;
+import static com.sun.max.asm.ppc.BranchPredictionBits.PN;
+import static com.sun.max.asm.ppc.CRF.CR0;
+import static com.sun.max.asm.ppc.GPR.R3;
+import static com.sun.max.asm.ppc.GPR.R4;
+import static com.sun.max.asm.ppc.GPR.R5;
+import static com.sun.max.asm.ppc.GPR.RTOC;
+import com.sun.max.asm.ppc.PPC32Assembler;
+import com.sun.max.asm.ppc.PPC64Assembler;
+import com.sun.max.asm.ppc.PPCAssembler;
+import static com.sun.max.asm.ppc.Zero.ZERO;
+import com.sun.max.ide.MaxTestCase;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
  * @author Bernd Mathiske
  */
 public class InternalTest extends MaxTestCase {
-    
-    public InternalTest() {        
+
+    public InternalTest() {
         super();
 
     }
 
-    public InternalTest(String name) {        
+    public InternalTest(String name) {
         super(name);
     }
-    
+
     public static Test suite() {
         final TestSuite suite = new TestSuite(InternalTest.class.getName());
         //$JUnit-BEGIN$
@@ -49,9 +56,9 @@ public class InternalTest extends MaxTestCase {
         final Label loop1 = new Label();
         final Label loop2 = new Label();
 
-        // Example code from B.3 [Book 2] for list insertion 
+        // Example code from B.3 [Book 2] for list insertion
         asm.lwz(RTOC, 0, R3);      // get next pointer
-        asm.bindLabel(loop1); 
+        asm.bindLabel(loop1);
         asm.mr(R5, RTOC);          // keep a copy
         asm.stw(RTOC, 0, R4);      // store in new element
         asm.sync();                // order stw before stwcx. and before lwarx

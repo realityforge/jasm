@@ -4,35 +4,41 @@
 /*VCSID=a192f364-a188-4ec5-a6d8-0958118cb561*/
 package test.com.sun.max.asm.amd64;
 
-import static com.sun.max.asm.amd64.AMD64GeneralRegister64.*;
-
-import java.io.*;
-import java.util.*;
-
-import junit.framework.*;
-
-import com.sun.max.asm.*;
-import com.sun.max.asm.amd64.*;
-import com.sun.max.asm.dis.amd64.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.cisc.amd64.*;
-import com.sun.max.collect.*;
-import com.sun.max.ide.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.Label;
+import com.sun.max.asm.amd64.AMD64Assembler;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister64.RAX;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister64.RBX;
+import com.sun.max.asm.dis.amd64.AMD64Disassembler;
+import com.sun.max.asm.gen.Parameter;
+import com.sun.max.asm.gen.cisc.amd64.AMD64Assembly;
+import com.sun.max.asm.gen.cisc.amd64.AMD64Template;
+import com.sun.max.collect.ArraySequence;
+import com.sun.max.collect.MutableSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.ide.MaxTestCase;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.Iterator;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
  * @author Bernd Mathiske
  */
 public class BoundLabelTest extends MaxTestCase {
-    
-    public BoundLabelTest() {        
+
+    public BoundLabelTest() {
         super();
 
     }
 
-    public BoundLabelTest(String name) {        
+    public BoundLabelTest(String name) {
         super(name);
     }
-    
+
     public static Test suite() {
         final TestSuite suite = new TestSuite(BoundLabelTest.class.getName());
         //$JUnit-BEGIN$
@@ -46,7 +52,7 @@ public class BoundLabelTest extends MaxTestCase {
     }
 
     private static final int LABEL_DELTA = 10;
-    
+
     private int insertInstructions(AMD64Assembler assembler, Label[] labels, int labelIndex) {
         int index = labelIndex;
         for (int i = 0; i < LABEL_DELTA; i++) {
@@ -56,7 +62,7 @@ public class BoundLabelTest extends MaxTestCase {
         }
         return index;
     }
-    
+
     private byte[] assemble(long startAddress, int labelDelta) throws IOException, AssemblyException {
         final AMD64Assembler assembler = new AMD64Assembler(startAddress);
         final Sequence<AMD64Template> labelTemplates = AMD64Assembly.ASSEMBLY.getLabelTemplates();
@@ -87,7 +93,7 @@ public class BoundLabelTest extends MaxTestCase {
                             argument = testArguments.next();
                         }
                     }
-                    arguments.set(parameterIndex, argument);                    
+                    arguments.set(parameterIndex, argument);
                 }
             }
             AMD64Assembly.ASSEMBLY.assemble(assembler, template, arguments);
@@ -112,20 +118,20 @@ public class BoundLabelTest extends MaxTestCase {
 
     public void notest_allLabelInstructions() throws IOException, AssemblyException {
         final long startAddress = 0x0L;
-        
+
         byte[] bytes = assemble(startAddress, 0);
         disassemble(startAddress, bytes);
-        
+
         bytes = assemble(startAddress, LABEL_DELTA);
         disassemble(startAddress, bytes);
-        
+
         bytes = assemble(startAddress, -LABEL_DELTA);
         disassemble(startAddress, bytes);
     }
-    
+
     public void test_effectOfVariableInstructionLengthOnLabel() throws IOException, AssemblyException {
         // Repeat with different assembled sizes of the 'jnz' instruction below:
-        for (int n = 4; n < 2000; n += 128) { 
+        for (int n = 4; n < 2000; n += 128) {
             final long startAddress = 0x0L;
             final Label label = new Label();
             final Label target = new Label();

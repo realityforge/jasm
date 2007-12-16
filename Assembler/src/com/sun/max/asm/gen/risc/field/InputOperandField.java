@@ -4,12 +4,13 @@
 /*VCSID=40cde656-db9c-43c7-ba31-80bee57765cb*/
 package com.sun.max.asm.gen.risc.field;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.bitRange.*;
-import com.sun.max.collect.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.gen.ArgumentRange;
+import com.sun.max.asm.gen.ImmediateArgument;
+import com.sun.max.asm.gen.risc.bitRange.BitRange;
+import com.sun.max.asm.gen.risc.bitRange.BitRangeOrder;
+import com.sun.max.collect.Iterables;
+import com.sun.max.program.ProgramError;
 
 /**
  * An input operand is a parameter to an assembler method that does not correspond directly

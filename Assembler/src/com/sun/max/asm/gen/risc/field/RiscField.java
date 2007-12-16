@@ -4,10 +4,10 @@
 /*VCSID=f74662dd-fa12-489e-ba2e-cb58b1a2f993*/
 package com.sun.max.asm.gen.risc.field;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.gen.risc.bitRange.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.gen.risc.bitRange.BitRange;
+import com.sun.max.lang.StaticFieldLiteral;
+import com.sun.max.lang.StaticFieldName;
+import com.sun.max.program.ProgramError;
 
 /**
  * A field describes a bit range and how it relates to an operand.

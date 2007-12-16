@@ -4,15 +4,18 @@
 /*VCSID=69e97991-b7cc-47a8-aa16-4b50f931c587*/
 package test.com.sun.max.asm;
 
-import com.sun.max.asm.gen.*;
-import com.sun.max.ide.*;
-import com.sun.max.program.*;
-import com.sun.max.program.option.*;
+import com.sun.max.asm.gen.AssemblyTester;
+import com.sun.max.ide.MaxTestCase;
+import com.sun.max.program.Trace;
+import com.sun.max.program.option.BooleanProgramOption;
+import com.sun.max.program.option.IntegerProgramOption;
+import com.sun.max.program.option.ProgramArgumentsParser;
+import com.sun.max.program.option.StringProgramOption;
 
 /**
  * Base class for assembler tests that defines program options common to
- * all assembler test harnesses. 
- * 
+ * all assembler test harnesses.
+ *
  * @author Doug Simon
  * @author Bernd Mathiske
  */
@@ -32,19 +35,19 @@ public abstract class AssemblerTestCase extends MaxTestCase {
         }
     };
     private BooleanProgramOption _onlyCreateExternalSource = new BooleanProgramOption("-only-make-asm-source", "creates assembler source file with tests for each template (no tests are run)");
-    
-    
+
+
     /**
      * Subclasses can override this to add extra program arguments.
      * <p>
      * <b>Note: this method is invoked while in a constructor of this class so
      *          subclasses cannot rely on their fields having been initialized</b>
-     * 
+     *
      * @param programArgumentsParser
      */
     protected void addExtraProgramArguments(ProgramArgumentsParser programArgumentsParser) {
     }
-    
+
     private void parseProgramArguments() {
         final ProgramArgumentsParser programArgumentsParser = new ProgramArgumentsParser(getClass().getSimpleName());
         programArgumentsParser.addProgramOption(new Trace());

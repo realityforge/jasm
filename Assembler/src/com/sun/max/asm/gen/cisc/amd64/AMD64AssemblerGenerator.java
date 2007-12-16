@@ -4,15 +4,25 @@
 /*VCSID=ee2cf78b-0cb7-46fd-8d28-f06010e4e0ff*/
 package com.sun.max.asm.gen.cisc.amd64;
 
-import com.sun.max.asm.amd64.*;
-import com.sun.max.asm.gen.cisc.x86.*;
-import com.sun.max.io.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.amd64.AMD64BaseRegister32;
+import com.sun.max.asm.amd64.AMD64BaseRegister64;
+import com.sun.max.asm.amd64.AMD64GeneralRegister8;
+import com.sun.max.asm.amd64.AMD64IndirectRegister32;
+import com.sun.max.asm.amd64.AMD64IndirectRegister64;
+import com.sun.max.asm.gen.cisc.x86.X86AssemblerGenerator;
+import com.sun.max.asm.gen.cisc.x86.X86Field;
+import com.sun.max.asm.gen.cisc.x86.X86Opcode;
+import com.sun.max.asm.gen.cisc.x86.X86Parameter;
+import com.sun.max.asm.gen.cisc.x86.X86Template;
+import com.sun.max.asm.gen.cisc.x86.X86TemplateContext;
+import com.sun.max.io.IndentWriter;
+import com.sun.max.lang.Bytes;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.program.ProgramError;
 
 /**
  * Run this program to generate the AMD64RawAssembler and AMD64LabelAssembler classes.
- * 
+ *
  * @author Bernd Mathiske
  */
 public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template> {
@@ -25,33 +35,33 @@ public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template
         final AMD64AssemblerGenerator generator = new AMD64AssemblerGenerator(programArguments);
         generator.generate();
     }
-    
+
     private static final String REX_BYTE_NAME = "rex";
-        
+
     private String basicRexValue(X86Template template) {
         if (template.operandSizeAttribute() == WordWidth.BITS_64 && template.instructionDescription().defaultOperandSize() != WordWidth.BITS_64) {
             return Bytes.toHexLiteral((byte) (X86Opcode.REX_MIN.ordinal() + (1 << X86Field.REX_W_BIT_INDEX)));
         }
         return Bytes.toHexLiteral((byte) X86Opcode.REX_MIN.ordinal());
     }
-    
+
     private void printUnconditionalRexBit(IndentWriter writer, X86Parameter parameter, int bitIndex) {
-        writer.print(REX_BYTE_NAME + " |= (" + parameter.valueString() + " & 8) >> " + (3 - bitIndex) + ";");        
+        writer.print(REX_BYTE_NAME + " |= (" + parameter.valueString() + " & 8) >> " + (3 - bitIndex) + ";");
         writer.println(" // " + parameter.place().comment());
     }
-    
+
     private void checkGeneralRegister8Values(IndentWriter writer, X86Template template) {
         for (X86Parameter parameter : template.parameters()) {
             if (parameter.type() == AMD64GeneralRegister8.class) {
                 writer.println("if (" + parameter.variableName() + ".isHighByte()) {");
                 writer.indent();
-                writer.println("throw new IllegalArgumentException(\"Cannot encode \" + " + parameter.variableName() + ".name() + \" in the presence of a REX prefix\");");                            
+                writer.println("throw new IllegalArgumentException(\"Cannot encode \" + " + parameter.variableName() + ".name() + \" in the presence of a REX prefix\");");
                 writer.outdent();
-                writer.println("}");                
+                writer.println("}");
             }
-        }        
+        }
     }
-    
+
     private void printUnconditionalRexPrefix(IndentWriter writer, X86Template template) {
         writer.println("byte " + REX_BYTE_NAME + " = (byte) " + basicRexValue(template) + ";");
         for (X86Parameter parameter : template.parameters()) {
@@ -74,30 +84,30 @@ public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template
         }
         checkGeneralRegister8Values(writer, template);
         emitByte(writer, REX_BYTE_NAME);
-        writer.println();        
+        writer.println();
     }
-    
+
     private void printConditionalRexBit(IndentWriter writer, X86Template template, X86Parameter parameter, int bitIndex) {
         if (parameter.type() == AMD64GeneralRegister8.class) {
             writer.println("if (" + parameter.variableName() + ".requiresRexPrefix()) {");
             writer.indent();
             writer.println(REX_BYTE_NAME + " |= " + basicRexValue(template) + ";");
-            writer.println("if (" + parameter.valueString() + " >= 8) {");                        
+            writer.println("if (" + parameter.valueString() + " >= 8) {");
             writer.indent();
             writer.println(REX_BYTE_NAME + " |= 1 << " + bitIndex + "; // " + parameter.place().comment());
             writer.outdent();
             writer.println("}");
             writer.outdent();
-            writer.println("}");            
+            writer.println("}");
         } else {
-            writer.println("if (" + parameter.valueString() + " >= 8) {");                        
+            writer.println("if (" + parameter.valueString() + " >= 8) {");
             writer.indent();
             writer.println(REX_BYTE_NAME + " |= (1 << " + bitIndex + ") + " + basicRexValue(template) + "; // " + parameter.place().comment());
             writer.outdent();
             writer.println("}");
         }
     }
-    
+
     private void printConditionalRexPrefix(IndentWriter writer, X86Template template) {
         writer.println("byte " + REX_BYTE_NAME + " = (byte) 0;");
         for (X86Parameter parameter : template.parameters()) {
@@ -122,11 +132,11 @@ public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template
         writer.indent();
         checkGeneralRegister8Values(writer, template);
         emitByte(writer, REX_BYTE_NAME);
-        writer.println();        
+        writer.println();
         writer.outdent();
         writer.println("}");
     }
-    
+
     @Override
     protected void printPrefixes(IndentWriter writer, AMD64Template template) {
         super.printPrefixes(writer, template);
@@ -146,7 +156,7 @@ public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template
                     default:
                         break;
                 }
-            }        
+            }
         }
     }
 
@@ -185,7 +195,7 @@ public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template
                                 break;
                         }
                         break;
-                    default: 
+                    default:
                         break;
                 }
                 break;
@@ -197,14 +207,14 @@ public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template
     }
 
     @Override
-    protected void printSibVariants(IndentWriter writer, AMD64Template template) {        
-        if (template.parameters().length() == 0 || 
+    protected void printSibVariants(IndentWriter writer, AMD64Template template) {
+        if (template.parameters().length() == 0 ||
                         template.modCase() == null || template.modCase() == X86TemplateContext.ModCase.MOD_3 ||
                 template.rmCase() != X86TemplateContext.RMCase.NORMAL) {
             return;
         }
         switch (template.modCase()) {
-            case MOD_0: 
+            case MOD_0:
             case MOD_1:
             case MOD_2: {
                 switch (template.addressSizeAttribute()) {
@@ -224,5 +234,5 @@ public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template
                 break;
             }
         }
-    }   
+    }
 }

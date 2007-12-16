@@ -4,9 +4,11 @@
 /*VCSID=d9fdf10c-6e11-4296-966c-35bc182bd1b0*/
 package test.com.sun.max.util;
 
-import com.sun.max.annotate.*;
-import com.sun.max.ide.*;
-import com.sun.max.util.*;
+import com.sun.max.annotate.Implement;
+import com.sun.max.ide.MaxTestCase;
+import com.sun.max.util.Enumerable;
+import com.sun.max.util.Enumerator;
+import com.sun.max.util.Symbol;
 
 /**
  * Tests for com.sun.max.util.Enumerator.
@@ -14,23 +16,23 @@ import com.sun.max.util.*;
  * @author Hiroshi Yamauchi
  */
 public class EnumeratorTest extends MaxTestCase {
- 
+
     public EnumeratorTest(String name) {
         super(name);
     }
-    
+
     public static void main(String[] args) {
         junit.textui.TestRunner.run(EnumeratorTest.class);
     }
 
     private static final class NonSuccessiveEnumerator<E extends Enum<E> & Enumerable<E>> extends Enumerator<E> {
-        private NonSuccessiveEnumerator(Class<E> type) { 
+        private NonSuccessiveEnumerator(Class<E> type) {
             super(type);
         }
     }
     private static enum NonSuccessiveEnum implements Enumerable<NonSuccessiveEnum> {
         E0(0), E100(100), E1000(1000);
-        
+
         private final int _value;
         private NonSuccessiveEnum(int value) {
             _value = value;
@@ -44,7 +46,7 @@ public class EnumeratorTest extends MaxTestCase {
             return new NonSuccessiveEnumerator<NonSuccessiveEnum>(NonSuccessiveEnum.class);
         }
     }
-    
+
     public void test_value() {
         assertTrue(NonSuccessiveEnum.E0.ordinal() == 0);
         assertTrue(NonSuccessiveEnum.E100.ordinal() == 1);
@@ -53,7 +55,7 @@ public class EnumeratorTest extends MaxTestCase {
         assertTrue(NonSuccessiveEnum.E100.value() == 100);
         assertTrue(NonSuccessiveEnum.E1000.value() == 1000);
     }
-    
+
     public void test_enumerator() {
         final Enumerator<NonSuccessiveEnum> enumerator = NonSuccessiveEnum.E0.enumerator();
         assertTrue(enumerator.type() == NonSuccessiveEnum.class);

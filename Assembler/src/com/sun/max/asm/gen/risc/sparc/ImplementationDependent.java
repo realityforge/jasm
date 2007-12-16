@@ -4,7 +4,9 @@
 /*VCSID=f49743b0-2b20-41a5-86cf-30236142e371*/
 package com.sun.max.asm.gen.risc.sparc;
 
-import static com.sun.max.asm.gen.risc.sparc.SPARCFields.*;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._impl_dep;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.op;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.op3;
 
 /**
  * @author Bernd Mathiske
@@ -20,7 +22,7 @@ public class ImplementationDependent extends SPARCInstructionDescriptionCreator 
 
     ImplementationDependent(SPARCTemplateCreator templateCreator) {
         super(templateCreator);
-        
+
         setCurrentArchitectureManualSection("A.23");
         create_A23();
     }

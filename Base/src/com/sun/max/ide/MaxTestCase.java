@@ -4,15 +4,16 @@
 /*VCSID=301fea75-ad97-4567-8e71-c7963a2dfcdd*/
 package com.sun.max.ide;
 
-import java.io.*;
-import java.lang.reflect.*;
-
-import junit.framework.*;
-
-import com.sun.max.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
-
+import com.sun.max.MaxPackage;
+import com.sun.max.PackageLoader;
+import com.sun.max.lang.StaticLoophole;
+import com.sun.max.program.Classpath;
+import com.sun.max.program.ProgramError;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 public class MaxTestCase extends TestCase {
 
@@ -20,11 +21,11 @@ public class MaxTestCase extends TestCase {
         this(null);
         setName(getClass().getName());
     }
-    
+
     public MaxTestCase(String name) {
         super(name);
     }
-    
+
     private static TestProgramArgumentScheme _access;
 
     private static TestProgramArgumentScheme programArgumentAccess() {
@@ -38,7 +39,7 @@ public class MaxTestCase extends TestCase {
     public static String[] getProgramArguments() {
         return programArgumentAccess().getProgramArguments();
     }
-    
+
     public Throwable getCause(InvocationTargetException invocationTargetException) {
         Throwable cause = invocationTargetException.getCause();
         if (cause == null) {
@@ -46,7 +47,7 @@ public class MaxTestCase extends TestCase {
         }
         return cause;
     }
-    
+
     /**
      * Creates a JUnit test suite for a given package and populates it with all the classes
      * in that package that subclass {@link TestCase} if {@code addClasses == true}.
@@ -58,7 +59,7 @@ public class MaxTestCase extends TestCase {
         }
         return suite;
     }
-    
+
     /**
      * Adds all the classes in {@code javaPackage} that subclass {@link TestCase} to {@code suite}.
      */

@@ -4,18 +4,36 @@
 /*VCSID=df07c4d9-c082-4204-bfd1-f6d16f874c1c*/
 package com.sun.max.asm.gen.risc.sparc;
 
-import static com.sun.max.asm.gen.InstructionConstraint.Static.*;
-import static com.sun.max.asm.gen.risc.sparc.SPARCFields.*;
-import static com.sun.max.asm.sparc.AnnulBit.*;
-import static com.sun.max.asm.sparc.BranchPredictionBit.*;
-import static com.sun.max.asm.sparc.GPR.*;
-import static com.sun.max.asm.sparc.ICCOperand.*;
-
-import com.sun.max.asm.sparc.*;
+import static com.sun.max.asm.gen.InstructionConstraint.Static.getPredicateMethod;
+import static com.sun.max.asm.gen.InstructionConstraint.Static.makePredicate;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rd_state;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rs1;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rs1_state;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rs2;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._simm13;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.a;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.cc;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.i;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.imm22;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.immAsi;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.p;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.rd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.rs1;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.rs2;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.simm13;
+import static com.sun.max.asm.sparc.AnnulBit.A;
+import static com.sun.max.asm.sparc.BranchPredictionBit.PT;
+import static com.sun.max.asm.sparc.GPR.G0;
+import static com.sun.max.asm.sparc.GPR.I7;
+import static com.sun.max.asm.sparc.GPR.O7;
+import static com.sun.max.asm.sparc.ICCOperand.XCC;
+import com.sun.max.asm.sparc.SPARCAssembler;
+import com.sun.max.asm.sparc.StateRegister;
 
 /**
  * Simple synthetic SPARC instructions.
- * 
+ *
  * @see SPARCAssembler
  *
  * @author Bernd Mathiske
@@ -26,7 +44,7 @@ class SyntheticInstructions extends SPARCInstructionDescriptionCreator {
     private void create_A39() {
         synthesize("nop", "sethi", imm22(0), rd(G0));
     }
-    
+
     private static final int ASI_P = 0x80;
     private static final int ASI_P_L = 0x88;
 
@@ -73,15 +91,15 @@ class SyntheticInstructions extends SPARCInstructionDescriptionCreator {
         synthesize("mov", "rd", makePredicate(getPredicateMethod(StateRegister.class, "isYorASR"), _rs1_state));
         synthesize("mov", "wr", rs1(G0), makePredicate(getPredicateMethod(StateRegister.class, "isYorASR"), _rd_state));
     }
-    
+
     SyntheticInstructions(SPARCTemplateCreator creator) {
         super(creator);
-        
+
         setCurrentArchitectureManualSection("A.39");
         create_A39();
 
         setCurrentArchitectureManualSection("G.3");
         create_G3();
     }
-    
+
 }

@@ -4,23 +4,23 @@
 /*VCSID=4d107203-692e-4171-a6ee-bdb631fa12b3*/
 package com.sun.max.asm.gen.risc.ppc;
 
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.*;
+import com.sun.max.asm.gen.InstructionDescription;
+import com.sun.max.asm.gen.risc.RiscTemplateCreator;
 
 /**
- * 
+ *
  *
  * @author Bernd Mathiske
  */
-public class PPCTemplateCreator extends RiscTemplateCreator<PPCTemplate> {    
+public class PPCTemplateCreator extends RiscTemplateCreator<PPCTemplate> {
 
     PPCTemplateCreator() {
         super();
     }
-    
+
     @Override
     protected PPCTemplate createTemplate(InstructionDescription instructionDescription) {
         return new PPCTemplate(instructionDescription);
     }
-    
+
 }

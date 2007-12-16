@@ -4,25 +4,25 @@
 /*VCSID=b2b6661e-e005-41b0-bcde-5aa43f61ff63*/
 package test.com.sun.max.asm.amd64;
 
-import java.io.*;
-import java.util.*;
-
-import junit.framework.*;
-import test.com.sun.max.asm.*;
-
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.cisc.amd64.*;
+import com.sun.max.asm.gen.AssemblyTestComponent;
+import com.sun.max.asm.gen.cisc.amd64.AMD64AssemblyTester;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.EnumSet;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import test.com.sun.max.asm.ExternalAssemblerTestCase;
 
 /**
  * JUnit harness for testing the generated AMD64 assembler against an external
  * assembler. The assembler is also tested by ensuring that its output
  * can be disassembled.
- * 
+ *
  * @author Bernd Mathiske
  * @author Doug Simon
  */
 public class RawDisassemblerAndExternalTest extends ExternalAssemblerTestCase {
-    
+
     public RawDisassemblerAndExternalTest() {
         super();
     }

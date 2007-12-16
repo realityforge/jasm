@@ -4,8 +4,8 @@
 /*VCSID=e98abb6a-8c56-413e-8974-7aa3969f220c*/
 package com.sun.max.asm.sparc;
 
-import com.sun.max.asm.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.AbstractSymbolicArgument;
+import com.sun.max.util.Symbolizer;
 
 /**
  * The argument to a Branch on Floating-Point Condition Code with Prediction instruction specifying
@@ -19,11 +19,11 @@ public final class FCCOperand extends AbstractSymbolicArgument implements Condit
     private FCCOperand(int value) {
         super(value);
     }
-    
+
     public static final FCCOperand FCC0 = new FCCOperand(0);
     public static final FCCOperand FCC1 = new FCCOperand(1);
     public static final FCCOperand FCC2 = new FCCOperand(2);
     public static final FCCOperand FCC3 = new FCCOperand(3);
-    
+
     public static final Symbolizer<FCCOperand> SYMBOLIZER = Symbolizer.Static.initialize(FCCOperand.class);
 }

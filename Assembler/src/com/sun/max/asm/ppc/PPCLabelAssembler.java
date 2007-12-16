@@ -6,7 +6,9 @@
 
 package com.sun.max.asm.ppc;
 
-import com.sun.max.asm.*;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.Label;
+import com.sun.max.asm.LabelOffsetInstruction;
 
 public abstract class PPCLabelAssembler extends PPCRawAssembler {
 

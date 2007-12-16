@@ -4,8 +4,8 @@
 /*VCSID=7d24f766-685c-4324-bf89-5c3838f4de80*/
 package com.sun.max.asm.gen.cisc.x86;
 
-import com.sun.max.asm.gen.*;
-import com.sun.max.lang.*;
+import com.sun.max.asm.gen.OffsetParameter;
+import com.sun.max.lang.WordWidth;
 
 /**
  * @author Bernd Mathiske

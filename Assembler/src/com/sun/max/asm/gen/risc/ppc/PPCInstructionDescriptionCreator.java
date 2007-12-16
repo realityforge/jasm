@@ -4,13 +4,15 @@
 /*VCSID=2747fe26-161e-45ef-a221-7fd1d1a6fa2f*/
 package com.sun.max.asm.gen.risc.ppc;
 
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.gen.Assembly;
+import com.sun.max.asm.gen.risc.RiscInstructionDescription;
+import com.sun.max.asm.gen.risc.RiscInstructionDescriptionCreator;
+import com.sun.max.asm.gen.risc.RiscInstructionDescriptionModifier;
+import com.sun.max.collect.Sequence;
 
 /**
- * 
- * 
+ *
+ *
  * @author Doug Simon
  */
 public abstract class PPCInstructionDescriptionCreator extends RiscInstructionDescriptionCreator {
@@ -18,7 +20,7 @@ public abstract class PPCInstructionDescriptionCreator extends RiscInstructionDe
     protected PPCInstructionDescriptionCreator(PPCTemplateCreator templateCreator) {
         super(PPCAssembly.ASSEMBLY, templateCreator);
     }
-    
+
     @Override
     public PPCAssembly assembly() {
         final Assembly assembly = super.assembly();

@@ -4,11 +4,10 @@
 /*VCSID=a6a72968-a716-4b0b-80f9-a52ed7aed04a*/
 package test.com.sun.max.collect;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.collect.*;
-import com.sun.max.ide.*;
+import com.sun.max.annotate.Implement;
+import com.sun.max.collect.Iterables;
+import com.sun.max.ide.MaxTestCase;
+import java.util.Enumeration;
 
 /**
  * Tests for com.sun.max.util.Iterables.
@@ -16,11 +15,11 @@ import com.sun.max.ide.*;
  * @author Hiroshi Yamauchi
  */
 public class IterablesTest extends MaxTestCase {
- 
+
     public IterablesTest(String name) {
         super(name);
     }
-    
+
     public static void main(String[] args) {
         junit.textui.TestRunner.run(IterablesTest.class);
     }
@@ -33,16 +32,16 @@ public class IterablesTest extends MaxTestCase {
         }
         assertTrue(sum == 3);
     }
-    
+
     private static final class StringEnumeration implements Enumeration<String> {
         private String[] _strings;
         private int _index;
-        
+
         private StringEnumeration(String... strings) {
             _strings = strings;
             _index = 0;
         }
-        
+
         @Implement(Enumeration.class)
         public boolean hasMoreElements() {
             if (_index < _strings.length) {
@@ -50,13 +49,13 @@ public class IterablesTest extends MaxTestCase {
             }
             return false;
         }
-        
+
         @Implement(Enumeration.class)
         public String nextElement() {
             return _strings[_index++];
         }
     }
-    
+
     public void test_fromEnumeration() {
         final StringEnumeration enumeration = new StringEnumeration(new String[] {"I", "am", "a", "cat"});
         final Iterable<String> iterable = Iterables.fromEnumeration(enumeration);
@@ -66,7 +65,7 @@ public class IterablesTest extends MaxTestCase {
         }
         assertTrue(concat.equals("Iamacat"));
     }
-    
+
     public void test_empty() {
         final Iterable<String> iterable = Iterables.empty();
         int counter = 0;
@@ -77,5 +76,5 @@ public class IterablesTest extends MaxTestCase {
         }
         assertTrue(counter == 0);
     }
-    
+
 }

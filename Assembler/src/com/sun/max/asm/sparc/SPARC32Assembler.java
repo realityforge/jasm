@@ -4,9 +4,9 @@
 /*VCSID=d50a56b5-3cd4-4d2f-862c-d3ea05e743a7*/
 package com.sun.max.asm.sparc;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-
+import com.sun.max.asm.Assembler32;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.Label;
 
 /**
  * The concrete class for a 32-bit SPARC assembler.

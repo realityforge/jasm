@@ -4,18 +4,18 @@
 /*VCSID=21e0b5a1-30f0-44ac-9e9c-bd35eddf807e*/
 package test.com.sun.max.asm.ppc;
 
-import java.io.*;
-import java.util.*;
-
-import junit.framework.*;
-import test.com.sun.max.asm.*;
-
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.ppc.*;
+import com.sun.max.asm.gen.AssemblyTestComponent;
+import com.sun.max.asm.gen.risc.ppc.PPC32AssemblyTester;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.EnumSet;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import test.com.sun.max.asm.AssemblerTestCase;
 
 /**
  * JUnit harness for testing the generated PowerPC assembler against a disassembler.
- * 
+ *
  * @author Bernd Mathiske
  * @author Doug Simon
  */

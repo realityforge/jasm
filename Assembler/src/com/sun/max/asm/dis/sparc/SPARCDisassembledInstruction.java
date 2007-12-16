@@ -4,11 +4,13 @@
 /*VCSID=8e2d1eca-ccb0-4736-af94-639e121892e0*/
 package com.sun.max.asm.dis.sparc;
 
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.*;
-import com.sun.max.asm.dis.risc.*;
-import com.sun.max.asm.gen.risc.sparc.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.dis.DisassembledLabel;
+import com.sun.max.asm.dis.GlobalLabelMapper;
+import com.sun.max.asm.dis.risc.RiscDisassembledInstruction;
+import com.sun.max.asm.gen.risc.sparc.SPARCExternalInstruction;
+import com.sun.max.asm.gen.risc.sparc.SPARCTemplate;
+import com.sun.max.collect.Sequence;
 
 /**
  * @author Bernd Mathiske
@@ -18,7 +20,7 @@ public abstract class SPARCDisassembledInstruction extends RiscDisassembledInstr
     SPARCDisassembledInstruction(int offset, byte[] bytes, SPARCTemplate template, Sequence<Argument> arguments) {
         super(offset, bytes, template, arguments);
     }
-    
+
     @Override
     public String externalName() {
         final SPARCExternalInstruction instruction = new SPARCExternalInstruction(template(), arguments(), startOffset(), null, null);
@@ -36,5 +38,5 @@ public abstract class SPARCDisassembledInstruction extends RiscDisassembledInstr
         final SPARCExternalInstruction instruction = new SPARCExternalInstruction(template(), arguments(), startOffset(), labels, globalLabelMapper);
         return instruction.toString();
     }
-    
+
 }

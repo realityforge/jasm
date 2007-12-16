@@ -4,17 +4,19 @@
 /*VCSID=629a8fdc-ec6e-4188-951b-834cf1b9d6c7*/
 package com.sun.max.asm.gen.risc.field;
 
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.bitRange.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.gen.Immediate32Argument;
+import com.sun.max.asm.gen.Template;
+import com.sun.max.asm.gen.risc.bitRange.BitRange;
+import com.sun.max.collect.Sequence;
 
 /**
  * An instruction field whose encoded value does not include bits for
  * the low-order 0 bits of the aligned values that the field represents.
  * This class can convert between the field's <i>argument</i> (i.e.
- * the represented value) and it's <i>operand</i> (i.e. the encoded value).     
- * 
+ * the represented value) and it's <i>operand</i> (i.e. the encoded value).
+ *
  * @author Dave Ungar
  * @author Bernd Mathiske
  * @author Adam Spitz
@@ -43,18 +45,18 @@ public class AlignedImmediateOperandField extends ImmediateOperandField {
         final long value = template.bindingFor(this, arguments).asLong();
         return (value % grain()) == 0;
     }
-    
-    @Override 
+
+    @Override
     public int maxArgumentValue() {
         return super.maxArgumentValue() << zeroes();
     }
 
-    @Override 
+    @Override
     public int minArgumentValue() {
         return super.minArgumentValue() << zeroes();
     }
 
-    @Override 
+    @Override
     public int zeroes() {
         return _zeroes;
     }

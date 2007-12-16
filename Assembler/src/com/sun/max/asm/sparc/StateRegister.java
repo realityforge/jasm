@@ -4,8 +4,8 @@
 /*VCSID=a2cdfdf2-a62e-4ea1-b247-4c567d8be3d8*/
 package com.sun.max.asm.sparc;
 
-import com.sun.max.asm.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.AbstractSymbolicArgument;
+import com.sun.max.util.Symbolizer;
 
 /**
  * The argument to the Write State Register and Read State Register instructions.
@@ -22,16 +22,16 @@ public class StateRegister extends AbstractSymbolicArgument {
     public static final class Writable extends StateRegister {
         private Writable(int value) {
             super(value);
-        }        
+        }
     }
 
     /**
      * @return true if this is the Y register or an Ancillary State register
      */
     public boolean isYorASR() {
-        return this == Y || value() >= 16 && value() <= 31; 
+        return this == Y || value() >= 16 && value() <= 31;
     }
-    
+
     public static final Writable Y = new Writable(0);
     public static final Writable CCR = new Writable(2);
     public static final Writable ASI = new Writable(3);
@@ -54,7 +54,7 @@ public class StateRegister extends AbstractSymbolicArgument {
     public static final Writable ASR29 = new Writable(29);
     public static final Writable ASR30 = new Writable(30);
     public static final Writable ASR31 = new Writable(31);
-       
+
     public static final Symbolizer<StateRegister> SYMBOLIZER = Symbolizer.Static.initialize(StateRegister.class);
     public static final Symbolizer<Writable> WRITE_ONLY_SYMBOLIZER = Symbolizer.Static.initialize(StateRegister.class, Writable.class);
 }

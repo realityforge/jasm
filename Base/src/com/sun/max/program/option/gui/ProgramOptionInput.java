@@ -4,11 +4,9 @@
 /*VCSID=edefff78-cd4b-4022-87a9-1df67f355b77*/
 package com.sun.max.program.option.gui;
 
-import java.awt.*;
-
-import javax.swing.*;
-
-import com.sun.max.program.option.*;
+import com.sun.max.program.option.ProgramOption;
+import java.awt.Container;
+import javax.swing.JComponent;
 
 /**
  * The root class in a hierarchy of GUI classes mirroring the {@link ProgramOption} class hierachy.
@@ -48,7 +46,7 @@ abstract class ProgramOptionInput<ProgramOption_Type extends ProgramOption> {
      * @param enabled the new state
      */
     protected abstract void setEnabled(boolean enabled);
-    
+
     public abstract void restoreFrom(String value);
     public abstract String saveTo();
 }

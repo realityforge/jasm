@@ -4,23 +4,23 @@
 /*VCSID=7812f40e-328f-40b4-b7ee-af76ed0d40e4*/
 package com.sun.max.asm.gen.risc.sparc;
 
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.*;
+import com.sun.max.asm.gen.InstructionDescription;
+import com.sun.max.asm.gen.risc.RiscTemplateCreator;
 
 /**
- * 
+ *
  *
  * @author Bernd Mathiske
  */
-public class SPARCTemplateCreator extends RiscTemplateCreator<SPARCTemplate> {    
+public class SPARCTemplateCreator extends RiscTemplateCreator<SPARCTemplate> {
 
     SPARCTemplateCreator() {
         super();
     }
-    
+
     @Override
     protected SPARCTemplate createTemplate(InstructionDescription instructionDescription) {
         return new SPARCTemplate(instructionDescription);
     }
-    
+
 }

@@ -3,17 +3,29 @@
  */
 /*VCSID=f0f777f5-3e04-4652-af37-6b2533436317*/
 package com.sun.max.annotate;
-import java.io.*;
-import java.lang.annotation.*;
-import java.util.jar.*;
 
-import com.sun.max.*;
-import com.sun.max.collect.*;
-import com.sun.max.ide.*;
-import com.sun.max.io.*;
-import com.sun.max.program.*;
-import com.sun.max.program.option.*;
-import com.sun.mirror.apt.*;
+import com.sun.max.MaxPackage;
+import com.sun.max.PackageLoader;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.ide.JavaProject;
+import com.sun.max.io.Streams;
+import com.sun.max.program.Classpath;
+import com.sun.max.program.ProgramError;
+import com.sun.max.program.Trace;
+import com.sun.max.program.option.FileProgramOption;
+import com.sun.max.program.option.ProgramArgumentsParser;
+import com.sun.mirror.apt.AnnotationProcessorFactory;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.util.jar.JarEntry;
+import java.util.jar.JarOutputStream;
 
 /**
  * Indicates that a class is part of an annotation processor.

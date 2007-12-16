@@ -4,7 +4,7 @@
 /*VCSID=a22df1ab-a902-44b8-ab10-5b684eb3572c*/
 package com.sun.max.program.option;
 
-import java.io.*;
+import java.io.File;
 
 /**
  * An assignment option that expects a file or directory path.

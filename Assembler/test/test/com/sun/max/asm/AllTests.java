@@ -4,9 +4,9 @@
 /*VCSID=7a11c3c3-ed2d-4179-abfe-5d108b1f2476*/
 package test.com.sun.max.asm;
 
-import junit.framework.*;
-
-import org.junit.runner.*;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
 
 /**
  * @author Bernd Mathiske
@@ -16,7 +16,7 @@ public final class AllTests {
 
     private AllTests() {
     }
-    
+
     public static void main(String[] args) {
         junit.textui.TestRunner.run(AllTests.suite());
     }
@@ -36,5 +36,5 @@ public final class AllTests {
         //$JUnit-END$
         return suite;
     }
-    
+
 }

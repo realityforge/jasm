@@ -4,10 +4,13 @@
 /*VCSID=3771fdf6-4c77-4ac0-a8b6-543d87193b68*/
 package com.sun.max.program.option;
 
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
-import com.sun.max.program.option.gui.*;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.Arrays;
+import com.sun.max.lang.Strings;
+import com.sun.max.program.ProgramError;
+import com.sun.max.program.option.gui.ProgramOptionDialog;
 
 /**
  * A facility for parsing program options. The options may be supplied on the command line

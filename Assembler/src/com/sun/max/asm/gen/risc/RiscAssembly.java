@@ -4,12 +4,15 @@
 /*VCSID=2953c05d-70c7-4e45-a7ad-cde0ced73e86*/
 package com.sun.max.asm.gen.risc;
 
-import java.io.*;
-
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.risc.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.InstructionSet;
+import com.sun.max.asm.dis.risc.OpcodeMaskGroup;
+import com.sun.max.asm.dis.risc.SpecificityGroup;
+import com.sun.max.asm.gen.Assembly;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.IntHashMap;
+import com.sun.max.collect.Sequence;
+import java.io.PrintStream;
 
 /**
  * @author Bernd Mathiske
@@ -21,9 +24,9 @@ public abstract class RiscAssembly<Template_Type extends RiscTemplate> extends A
     protected RiscAssembly(InstructionSet instructionSet, Class<Template_Type> templateType) {
         super(instructionSet, templateType);
     }
-    
+
     private AppendableSequence<SpecificityGroup<Template_Type>> _specificityGroups;
-    
+
     private void initialize() {
         final IntHashMap<IntHashMap<OpcodeMaskGroup<Template_Type>>> specificityTable = new IntHashMap<IntHashMap<OpcodeMaskGroup<Template_Type>>>();
         for (Template_Type template : templates()) {
@@ -52,7 +55,7 @@ public abstract class RiscAssembly<Template_Type extends RiscTemplate> extends A
             }
         }
     }
-    
+
     public void printSpecificityGroups(PrintStream out) {
         for (SpecificityGroup<Template_Type> specificityGroup : _specificityGroups) {
             out.println("Specificity group " + specificityGroup.specificity());

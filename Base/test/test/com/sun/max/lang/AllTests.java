@@ -4,16 +4,16 @@
 /*VCSID=f7793bf2-570d-4f42-9abc-3be664d4a65b*/
 package test.com.sun.max.lang;
 
-import junit.framework.*;
-
-import org.junit.runner.*;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
 
 /**
  * @author Bernd Mathiske
  */
 @RunWith(org.junit.runners.AllTests.class)
 public final class AllTests {
-    
+
     private AllTests() {
     }
 
@@ -31,6 +31,6 @@ public final class AllTests {
         //$JUnit-END$
         return suite;
     }
-    
-    
+
+
 }

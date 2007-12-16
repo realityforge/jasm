@@ -4,10 +4,10 @@
 /*VCSID=59b102d2-1868-4b7f-b120-d794bc3ecf54*/
 package com.sun.max.asm;
 
-import com.sun.max.program.*;
+import com.sun.max.program.ProgramError;
 
 /**
- * 
+ *
  *
  * @author Bernd Mathiske
  */
@@ -17,7 +17,7 @@ public abstract class LabelAddressInstruction extends LabelInstruction {
         super(assembler, startOffset, endOffset, label);
         assembler.addFixedLengthLabelInstruction(this);
     }
-    
+
     public int labelAddressAsInt() throws AssemblyException {
         final Assembler32 assembler = (Assembler32) assembler();
         switch (label().state()) {

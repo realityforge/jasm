@@ -4,7 +4,21 @@
 /*VCSID=b641de9d-0457-493d-8ae8-f6e9f9528d70*/
 package com.sun.max.asm.gen.risc.sparc;
 
-import static com.sun.max.asm.gen.risc.sparc.SPARCFields.*;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._dfrd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._dfrs1;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._dfrs2;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._fcc_26_25;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._qfrd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._qfrs1;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._qfrs2;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_18_14;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._sfrd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._sfrs1;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._sfrs2;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.bits_29_27;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.op;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.op3;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.opf;
 
 /**
  * @author Bernd Mathiske
@@ -117,7 +131,7 @@ public class FloatingPointOperate extends SPARCInstructionDescriptionCreator {
 
     FloatingPointOperate(SPARCTemplateCreator templateCreator) {
         super(templateCreator);
-        
+
         final Object[] head1 = {op(0x2), op3(0x34)};
         final Object[] head2 = {_res_18_14, head1};
 
@@ -138,10 +152,10 @@ public class FloatingPointOperate extends SPARCInstructionDescriptionCreator {
 
         setCurrentArchitectureManualSection("A.17");
         create_A17(head2);
-        
+
         setCurrentArchitectureManualSection("A.18");
         create_A18(head1);
-        
+
         setCurrentArchitectureManualSection("A.19");
         create_A19(head2);
     }

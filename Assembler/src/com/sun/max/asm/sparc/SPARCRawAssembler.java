@@ -6,7 +6,7 @@
 
 package com.sun.max.asm.sparc;
 
-import com.sun.max.asm.*;
+import com.sun.max.asm.BigEndianAssembler;
 
 public abstract class SPARCRawAssembler extends BigEndianAssembler {
 

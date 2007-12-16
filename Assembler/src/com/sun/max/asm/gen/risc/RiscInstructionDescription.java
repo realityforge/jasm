@@ -4,13 +4,14 @@
 /*VCSID=ebbd66fb-3dfb-474b-88e0-f020954a5147*/
 package com.sun.max.asm.gen.risc;
 
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.field.*;
-import com.sun.max.collect.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.gen.InstructionDescription;
+import com.sun.max.asm.gen.risc.field.InputOperandField;
+import com.sun.max.asm.gen.risc.field.RiscField;
+import com.sun.max.collect.MutableSequence;
+import com.sun.max.program.ProgramError;
 
 /**
- * 
+ *
  *
  * @author Bernd Mathiske
  */
@@ -18,7 +19,7 @@ public final class RiscInstructionDescription extends InstructionDescription {
 
     RiscInstructionDescription(MutableSequence<Object> specifications) {
         super(specifications);
-        
+
         int bits = 0;
         int mask = 0;
         for (Object specification : specifications) {
@@ -42,22 +43,22 @@ public final class RiscInstructionDescription extends InstructionDescription {
             }
             mask |= fieldMask;
         }
-        
+
         if (bits != 32) {
             ProgramError.unexpected("RISC instruction description describes " + bits + " instruction field bits: " + specifications);
         }
     }
-    
+
     private boolean _synthetic;
-    
+
     public InstructionDescription beSynthetic() {
         _synthetic = true;
         return this;
     }
-    
+
     @Override
     public boolean isSynthetic() {
         return _synthetic;
-    }    
-    
+    }
+
 }

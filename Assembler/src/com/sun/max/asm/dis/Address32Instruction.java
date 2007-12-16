@@ -4,8 +4,7 @@
 /*VCSID=88d6bb90-c720-4bd2-89ae-5fa13ef0d31f*/
 package com.sun.max.asm.dis;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.gen.*;
+import com.sun.max.asm.gen.ImmediateArgument;
 
 /**
  * Mixin delegation style (for lack of multiple class inheritance in the Java(TM) Programming Language).

@@ -4,10 +4,11 @@
 /*VCSID=fe70dae4-a119-4686-b750-d53d4b2f29e8*/
 package com.sun.max.asm.dis;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.AssemblyInstruction;
+import com.sun.max.asm.gen.ImmediateArgument;
+import com.sun.max.asm.gen.Template;
+import com.sun.max.collect.Sequence;
 
 /**
  * A assembly instruction in internal format, combined with the bytes that it was disassembled from.

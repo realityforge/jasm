@@ -4,11 +4,10 @@
 /*VCSID=0e7e66f3-3af7-44ee-9c3e-6899f3d8b4ef*/
 package com.sun.max.asm.sparc;
 
-import com.sun.max.asm.*;
-
+import com.sun.max.asm.AbstractSymbolicArgument;
 
 /**
- * The class defining the symbolic identifiers for the floating-point registers. 
+ * The class defining the symbolic identifiers for the floating-point registers.
  *
  * @author Bernd Mathiske
  * @author Doug Simon
@@ -18,7 +17,7 @@ class FPR extends AbstractSymbolicArgument {
     FPR(int value) {
         super(value);
     }
-    
+
     public static final class Single extends FPR implements SFPR {
         private Single(int value) {
             super(value);
@@ -48,7 +47,7 @@ class FPR extends AbstractSymbolicArgument {
             super(value);
         }
     }
-    
+
     public static final SingleDoubleQuadruple  F0 = new SingleDoubleQuadruple(0);
     public static final Single                 F1 = new Single(1);
     public static final SingleDouble           F2 = new SingleDouble(2);

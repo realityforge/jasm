@@ -4,34 +4,41 @@
 /*VCSID=6cd1c949-bf4d-4e87-9a64-e56a2b138729*/
 package test.com.sun.max.annotate;
 
-import java.io.*;
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.annotate.processor.*;
-import com.sun.max.collect.*;
-import com.sun.max.ide.*;
-import com.sun.max.io.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
-import com.sun.mirror.apt.*;
+import com.sun.max.annotate.Implement;
+import com.sun.max.annotate.processor.MaxwellBaseAnnotationProcessor;
+import com.sun.max.annotate.processor.MaxwellBaseAnnotationProcessorFactory;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.ide.JavaProject;
+import com.sun.max.ide.MaxTestCase;
+import com.sun.max.io.Files;
+import com.sun.max.lang.Strings;
+import com.sun.max.program.Classpath;
+import com.sun.max.program.ProgramError;
+import com.sun.max.program.Trace;
+import com.sun.mirror.apt.AnnotationProcessorFactory;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Uses the <a href="http://java.sun.com/j2se/1.5.0/docs/guide/apt/GettingStarted.html">apt</a> tool
  * to validate the usage of compile-time only Maxwell specific annotations such as the {@link Implement}
  * annotation.
- * 
+ *
  * @author Doug Simon
- * 
+ *
  * @see MaxwellBaseAnnotationProcessor
  * @see MaxwellBaseAnnotationProcessorFactory
  */
 public class MethodAnnotationsTest extends MaxTestCase {
-    
+
     public MethodAnnotationsTest(String name) {
         super(name);
     }
-    
+
     public static void main(String[] args) {
         junit.textui.TestRunner.run(MethodAnnotationsTest.class);
     }
@@ -43,17 +50,17 @@ public class MethodAnnotationsTest extends MaxTestCase {
     public void addProcessorOptions(AppendableSequence<String> args) {
         AppendableSequence.Static.appendAll(args, "-AreportToConsole=true", "-AreportToMessager=true");
     }
-    
+
     public AnnotationProcessorFactory annotationProcessorFactory() {
         return new MaxwellBaseAnnotationProcessorFactory();
     }
-    
+
     private int runProcessor(Sequence<String> sources) {
         final AppendableSequence<String> args = new ArrayListSequence<String>();
         addProcessorOptions(args);
         AppendableSequence.Static.appendAll(args, /*"-XListDeclarations", */"-nocompile", "-cp", Classpath.fromSystem().toString());
         AppendableSequence.Static.appendAll(args, sources);
-        
+
         final AnnotationProcessorFactory factory = annotationProcessorFactory();
         final File argsFile = new File(getClass().getSimpleName() + ".args");
         try {
@@ -65,9 +72,9 @@ public class MethodAnnotationsTest extends MaxTestCase {
         } finally {
             argsFile.delete();
         }
-        
+
     }
-    
+
     public void test_annotations() {
         Trace.on(1);
         final Classpath sourcePath = JavaProject.getSourcePath(false);
@@ -78,7 +85,7 @@ public class MethodAnnotationsTest extends MaxTestCase {
             if (pathFile.isDirectory()) {
                 for (File file : Files.find(pathFile, ".java", null)) {
                     final String source = file.getPath().substring(pathFile.getPath().length());
-                    
+
                     // Skip SCCS files
                     if (file.getParentFile().getName().equals("SCCS")) {
                         final String className = Strings.chopSuffix(file.getName(), ".java");
@@ -86,7 +93,7 @@ public class MethodAnnotationsTest extends MaxTestCase {
                             continue;
                         }
                     }
-                    
+
                     final boolean alreadyAdded = !seenSources.add(source);
                     if (!alreadyAdded) {
                         Trace.line(1, "Adding source: " + source);
@@ -97,7 +104,7 @@ public class MethodAnnotationsTest extends MaxTestCase {
                 }
             }
         }
-        
+
         assertTrue(runProcessor(sources) == 0);
     }
 }

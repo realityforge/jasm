@@ -4,7 +4,8 @@
 /*VCSID=7f204dde-a229-4abc-bb03-9eaf09601f8c*/
 package com.sun.max.asm.gen.risc;
 
-import com.sun.max.collect.*;
+import com.sun.max.collect.MutableSequence;
+import com.sun.max.collect.Sequence;
 
 /**
  * This class provides a mechanism for making modifications to a set of RISC instruction descriptions.
@@ -14,14 +15,14 @@ import com.sun.max.collect.*;
 public class RiscInstructionDescriptionModifier {
 
     private final Sequence<RiscInstructionDescription> _instructionDescriptions;
-    
+
     public RiscInstructionDescriptionModifier(Sequence<RiscInstructionDescription> instructionDescriptions) {
         _instructionDescriptions = instructionDescriptions;
     }
- 
+
     /**
      * Replaces a specification in the set of instruction descriptions.
-     * 
+     *
      * @param before  the specification to be replaced (matched with {@link Object#equals})
      * @param after   the replacement value
      */
@@ -36,8 +37,8 @@ public class RiscInstructionDescriptionModifier {
         }
         return this;
     }
-    
-    
+
+
     public RiscInstructionDescriptionModifier swap(Object a, Object b) {
         for (RiscInstructionDescription instructionDescription : _instructionDescriptions) {
             final MutableSequence<Object> specifications = instructionDescription.specifications();
@@ -50,7 +51,7 @@ public class RiscInstructionDescriptionModifier {
         }
         return this;
     }
-    
+
     public RiscInstructionDescriptionModifier setExternalName(String externalName) {
         for (RiscInstructionDescription instructionDescription : _instructionDescriptions) {
             instructionDescription.setExternalName(externalName);

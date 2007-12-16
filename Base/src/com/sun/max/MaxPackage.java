@@ -4,15 +4,27 @@
 /*VCSID=400813b4-afcb-4e38-86c1-6f6c19021c2e*/
 package com.sun.max;
 
-import java.io.*;
-import java.lang.reflect.*;
-import java.util.*;
-import java.util.zip.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.annotate.Implement;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.collect.Sets;
+import com.sun.max.lang.Classes;
+import com.sun.max.lang.Strings;
+import com.sun.max.program.Classpath;
+import com.sun.max.program.ProgramError;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.IdentityHashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
 
 /**
  * Describes a package in the com.sun.max project,
@@ -175,7 +187,7 @@ public abstract class MaxPackage implements Comparable<MaxPackage> {
     }
 
     private Map<Class<? extends Scheme>, Class<? extends Scheme>> _schemeTypeToImplementation;
-    
+
     public synchronized <Scheme_Type extends Scheme> void registerScheme(Class<Scheme_Type> schemeType, Class<? extends Scheme_Type> schemeImplementation) {
         assert schemeType.isInterface() || Modifier.isAbstract(schemeType.getModifiers());
         assert schemeImplementation.getPackage().getName().equals(name());
@@ -184,10 +196,10 @@ public abstract class MaxPackage implements Comparable<MaxPackage> {
         }
         _schemeTypeToImplementation.put(schemeType, schemeImplementation);
     }
-    
+
     /**
      * Gets the class within this package implementing a given scheme type (represented as an as abstract class or interface).
-     * 
+     *
      * @return the class directly within this package that implements {@code scheme} or null if no such class
      *         exists
      */
@@ -197,7 +209,7 @@ public abstract class MaxPackage implements Comparable<MaxPackage> {
         }
         return _schemeTypeToImplementation.get(schemeType).asSubclass(schemeType);
     }
-    
+
     @Override
     public boolean equals(Object other) {
         if (other instanceof MaxPackage) {
@@ -256,7 +268,7 @@ public abstract class MaxPackage implements Comparable<MaxPackage> {
 
     /**
      * Instantiates the scheme implementation class in this package implementing a given scheme type.
-     * 
+     *
      * @param schemeType
      *                the interface or abstract class defining a scheme type
      * @param arguments

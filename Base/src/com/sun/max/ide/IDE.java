@@ -4,9 +4,8 @@
 /*VCSID=50cef10d-99e4-4527-b775-829f2739721b*/
 package com.sun.max.ide;
 
-import java.io.*;
-
-import com.sun.max.*;
+import com.sun.max.MaxPackage;
+import java.io.File;
 
 /**
  * @author Bernd Mathiske
@@ -44,21 +43,21 @@ public enum IDE {
             return null;
         }
     };
-    
+
     private IDE() {
     }
-    
+
     public String idePackageName() {
         final MaxPackage thisPackage = MaxPackage.fromClass(IDE.class);
         return thisPackage.name() + "." + name().toLowerCase();
     }
-    
+
     public abstract File findProjectDirectoryFromClasses(File classesDirectory);
-    
+
     private boolean isInUse() {
         return MaxPackage.fromName(idePackageName()) != null;
     }
-    
+
     public static IDE current() {
         for (IDE ide : IDE.values()) {
             if (ide.isInUse()) {

@@ -4,15 +4,19 @@
 /*VCSID=0afa959f-a3ba-439c-b7b1-5b1955c49a32*/
 package com.sun.max.asm.gen.risc;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.field.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.ExternalMnemonicSuffixArgument;
+import com.sun.max.asm.dis.DisassembledLabel;
+import com.sun.max.asm.dis.GlobalLabelMapper;
+import com.sun.max.asm.gen.ImmediateArgument;
+import com.sun.max.asm.gen.InstructionConstraint;
+import com.sun.max.asm.gen.risc.field.BranchDisplacementOperandField;
+import com.sun.max.asm.gen.risc.field.OperandField;
+import com.sun.max.asm.gen.risc.field.RiscField;
+import com.sun.max.collect.MutableQueue;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.Strings;
+import java.util.Queue;
 
 /**
  * Output of RISC instructions in external assembler format

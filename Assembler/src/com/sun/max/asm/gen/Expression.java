@@ -4,9 +4,8 @@
 /*VCSID=1a630d30-3a55-47b6-8647-c434f7c9eb9d*/
 package com.sun.max.asm.gen;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.collect.Sequence;
 
 /**
  * An expression can provide the value of an operand field. This enables synthetic instructions to be

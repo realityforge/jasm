@@ -4,20 +4,20 @@
 /*VCSID=c782b878-1965-4cf1-aff9-35a649349582*/
 package com.sun.max.asm.ppc;
 
-import com.sun.max.asm.*;
+import com.sun.max.asm.InstructionSet;
 
 /**
  * The base class for the 32-bit and 64-bit PowerPC assemblers. This class also defines
  * the more complex synthetic PowerPC instructions.
- * 
+ *
  * @author Bernd Mathiske
  * @author Doug Simon
  */
 public abstract class PPCAssembler extends PPCLabelAssembler {
-    
+
     @Override
     public final InstructionSet instructionSet() {
         return InstructionSet.PPC;
     }
-    
+
 }

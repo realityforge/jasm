@@ -4,14 +4,69 @@
 /*VCSID=0d108985-2ede-4303-a50b-da0d7bf6f3e6*/
 package com.sun.max.asm.gen.risc.ppc;
 
-import static com.sun.max.asm.gen.Expression.Static.*;
-import static com.sun.max.asm.gen.InstructionConstraint.Static.*;
-import static com.sun.max.asm.gen.risc.ppc.PPCFields.*;
-import static com.sun.max.asm.ppc.BOOperand.*;
-
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.asm.gen.risc.field.*;
-import com.sun.max.asm.ppc.*;
+import static com.sun.max.asm.gen.Expression.Static.add;
+import static com.sun.max.asm.gen.Expression.Static.neg;
+import static com.sun.max.asm.gen.Expression.Static.sub;
+import static com.sun.max.asm.gen.InstructionConstraint.Static.gt;
+import static com.sun.max.asm.gen.InstructionConstraint.Static.le;
+import static com.sun.max.asm.gen.InstructionConstraint.Static.lt;
+import com.sun.max.asm.gen.risc.RiscInstructionDescription;
+import com.sun.max.asm.gen.risc.field.InputOperandField;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._aa;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._b;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._b64;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._ba;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._bd;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._bi;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._bo_CR;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._bo_CR_prediction;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._bo_CTR;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._bo_CTR_and_CR;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._bo_CTR_prediction;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._br_crf;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._branch_conds;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._lk;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._n;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._n64;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._put_ctr_in_name;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._put_i_in_name;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._put_lr_in_name;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._ra;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._ra0_notR0;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._rb;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._res_16_18;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._rt;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._si;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._spr_option;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._to_option;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._value;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.bb;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.bf;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.bh;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.bi;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.bo;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.bt;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.fxm;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.l;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.mb;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.mb64;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.me;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.me64;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.opcd;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.ra;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.ra0;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.rb;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.rs;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.sh;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.sh64;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.si;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.to;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.ui;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.xo_21_30;
+import static com.sun.max.asm.ppc.BOOperand.Always;
+import com.sun.max.asm.ppc.CRF;
+import com.sun.max.asm.ppc.GPR;
+import com.sun.max.asm.ppc.Zero;
 
 /**
  * The definitions of the synthetic PowerPC instructions.
@@ -24,7 +79,7 @@ import com.sun.max.asm.ppc.*;
  * disassembly would require support for solving simultaneous equations. Given that the
  * external Mac OS X 'otool' disassembler does not disassemble these instructions into their
  * extended mnemonic form either, no one should be too upset with this limited functionality.
- * 
+ *
  * @author Doug Simon
  */
 class SyntheticInstructions extends PPCInstructionDescriptionCreator {
@@ -33,27 +88,27 @@ class SyntheticInstructions extends PPCInstructionDescriptionCreator {
     protected RiscInstructionDescription define(Object... specifications) {
         return (RiscInstructionDescription) super.define(specifications).beSynthetic();
     }
-    
+
     SyntheticInstructions(PPCTemplateCreator creator) {
         super(creator);
-        
+
         setCurrentArchitectureManualSection("B.2.2");
 
         // Derived from "bc", "bca", "bcl" and "bcla" raw instructions
         define("b", opcd(16), _bo_CR, _bi,  _bd, _lk, _aa, _bo_CR_prediction);
         define("b", opcd(16), _bo_CTR, bi(0), _bd, _lk, _aa, _bo_CTR_prediction);
         define("b", opcd(16), _bo_CTR_and_CR, _bi,  _bd, _lk, _aa);
-        
+
         // Derived from "bclr" and "bclrl" raw instructions
         define("blr", opcd(19), bo(Always), bi(0), _res_16_18, bh(0), xo_21_30(16), _lk);
         define("b", opcd(19), _bo_CR, _bi, _res_16_18, bh(0), xo_21_30(16), _put_lr_in_name, _lk, _bo_CR_prediction);
         define("b", opcd(19), _bo_CTR, bi(0), _res_16_18, bh(0), xo_21_30(16), _put_lr_in_name, _lk, _bo_CTR_prediction);
         define("b", opcd(19), _bo_CTR_and_CR, _bi, _res_16_18, bh(0), xo_21_30(16), _put_lr_in_name, _lk);
-        
+
         // Derived from "bcctr" and "bcctrl" raw instructions
         define("bctr", opcd(19), bo(Always), bi(0), _res_16_18, bh(0), xo_21_30(528), _lk);
         define("b", opcd(19), _bo_CR, _bi, _res_16_18, bh(0), xo_21_30(528), _put_ctr_in_name, _lk, _bo_CR_prediction);
-        
+
         setCurrentArchitectureManualSection("B.2.3");
 
         // Derived from "bc", "bca", "bcl" and "bcla" raw instructions
@@ -62,26 +117,26 @@ class SyntheticInstructions extends PPCInstructionDescriptionCreator {
         define("b", opcd(19), "cr", _br_crf, _branch_conds, _res_16_18, bh(0), xo_21_30(528), _put_ctr_in_name, _lk, _bo_CR_prediction);
 
         setCurrentArchitectureManualSection("B.3");
-        
+
         synthesize("crset", "creqv", bt(_ba), bb(_ba));
         synthesize("crclr", "crxor", bt(_ba), bb(_ba));
         synthesize("crmove", "cror", bb(_ba));
         synthesize("crnot", "crnor", bb(_ba));
-        
+
         setCurrentArchitectureManualSection("B.4.1");
-        
+
         synthesize("subi", "addi", si(neg(_value)), _value);
         synthesize("subis", "addis", si(neg(_value)), _value);
         synthesize("subic", "addic", si(neg(_value)), _value);
         synthesize("subic_", "addic_", si(neg(_value)), _value).setExternalName("subic.");
-        
+
         setCurrentArchitectureManualSection("B.4.2");
-        
+
         synthesize("sub", "subf", _rt).swap(_ra, _rb);
         synthesize("subc", "subfc", _rt).swap(_ra, _rb);
 
         setCurrentArchitectureManualSection("B.5.1");
-        
+
         synthesize("cmpdi", "cmpi", l(1));
         synthesize("cmpdi", "cmpi", bf(CRF.CR0), l(1));
         synthesize("cmpd", "cmp", l(1));
@@ -90,9 +145,9 @@ class SyntheticInstructions extends PPCInstructionDescriptionCreator {
         synthesize("cmpldi", "cmpli", bf(CRF.CR0), l(1));
         synthesize("cmpld", "cmpl", l(1));
         synthesize("cmpld", "cmpl", bf(CRF.CR0), l(1));
-        
+
         setCurrentArchitectureManualSection("B.5.2");
-        
+
         synthesize("cmpwi", "cmpi", l(0));
         synthesize("cmpwi", "cmpi", bf(CRF.CR0), l(0));
         synthesize("cmpw", "cmp", l(0));
@@ -103,7 +158,7 @@ class SyntheticInstructions extends PPCInstructionDescriptionCreator {
         synthesize("cmplw", "cmpl", bf(CRF.CR0), l(0));
 
         setCurrentArchitectureManualSection("B.6");
-        
+
         synthesize("tw", "twi", _to_option, _put_i_in_name);
         synthesize("tw", "tw", _to_option);
         synthesize("trap", "tw", to(31), ra(GPR.R0), rb(GPR.R0));
@@ -123,9 +178,9 @@ class SyntheticInstructions extends PPCInstructionDescriptionCreator {
         synthesize("clrldi", "rldicl", sh64(0), mb64(_n64), _n64);
         synthesize("clrrdi", "rldicr", sh64(0), me64(sub(63, _n64)), _n64);
         synthesize("clrlsldi", "rldic", sh64(_n64), mb64(sub(_b64, _n64)), _b64, _n64);
-        
+
         setCurrentArchitectureManualSection("B.7.2");
-        
+
         synthesize("extlwi", "rlwinm", sh(_b), mb(0), me(sub(_n, 1)), _n, _b, gt(_n, 0));
         synthesize("extrwi", "rlwinm", sh(add(_b, _n)), mb(sub(32, _n)), me(31), _n, _b, gt(_n, 0));
         synthesize("inslwi", "rlwimi", sh(sub(32, _b)), mb(_b), me(sub(add(_b, _n), 1)), _n, _b, gt(_n, 0));
@@ -140,12 +195,12 @@ class SyntheticInstructions extends PPCInstructionDescriptionCreator {
         synthesize("clrlslwi", "rlwinm", sh(_n), mb(sub(_b, _n)), me(sub(31, _n)), _b, _n, le(_n, _b), lt(_b, 32));
 
         setCurrentArchitectureManualSection("B.8");
-        
+
         synthesize("mt", "mtspr", _spr_option);
         synthesize("mf", "mfspr", _spr_option);
-        
+
         setCurrentArchitectureManualSection("B.9");
-        
+
         synthesize("nop", "ori", ra0(Zero.ZERO), rs(GPR.R0), ui(0));
         synthesize("li", "addi", ra0(Zero.ZERO));
         synthesize("lis", "addis", ra0(Zero.ZERO));

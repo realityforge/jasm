@@ -4,8 +4,8 @@
 /*VCSID=884fd455-1443-490a-96b8-43dcc19b099a*/
 package com.sun.max.asm;
 
-import com.sun.max.annotate.*;
-import com.sun.max.program.*;
+import com.sun.max.program.Problem;
+import com.sun.max.program.ProgramError;
 
 /**
  * Assembler labels for symbolic addressing.

@@ -4,8 +4,9 @@
 /*VCSID=f1f8c87f-b06b-49a5-917c-509fd75eb9fa*/
 package com.sun.max.asm.sparc;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
+import com.sun.max.asm.Assembler64;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.Label;
 
 /**
  * The concrete class for a 64-bit SPARC assembler.

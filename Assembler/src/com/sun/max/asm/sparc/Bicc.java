@@ -4,9 +4,8 @@
 /*VCSID=2366e26d-3152-4a4b-a568-15e1e9c35d01*/
 package com.sun.max.asm.sparc;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.NameSuffixSymbolicArgument;
+import com.sun.max.util.Symbolizer;
 
 /**
  * The argument to a Branch on Integer Condition Code instruction specifying

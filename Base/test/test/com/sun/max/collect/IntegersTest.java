@@ -4,8 +4,8 @@
 /*VCSID=c5ae3dc5-b2ec-4c80-86b8-0ee248848d05*/
 package test.com.sun.max.collect;
 
-import com.sun.max.ide.*;
-import com.sun.max.lang.*;
+import com.sun.max.ide.MaxTestCase;
+import com.sun.max.lang.Ints;
 
 /**
  * Tests for {@link Integers}.
@@ -13,11 +13,11 @@ import com.sun.max.lang.*;
  * @author Hiroshi Yamauchi
  */
 public class IntegersTest extends MaxTestCase {
- 
+
     public IntegersTest(String name) {
         super(name);
     }
-    
+
     public static void main(String[] args) {
         junit.textui.TestRunner.run(IntegersTest.class);
     }
@@ -33,7 +33,7 @@ public class IntegersTest extends MaxTestCase {
         } catch (ArithmeticException arithmeticException) {
         }
     }
-    
+
     public void test_contains() {
         final int[] array = new int[10000];
         for (int i = 0; i < array.length; i++) {
@@ -45,7 +45,7 @@ public class IntegersTest extends MaxTestCase {
         assertTrue(!Ints.contains(array, 10000));
         assertTrue(!Ints.contains(array, Integer.MAX_VALUE));
     }
-    
+
     public void test_append() {
         int[] array = new int[0];
         for (int i = 0; i < array.length; i++) {
@@ -55,7 +55,7 @@ public class IntegersTest extends MaxTestCase {
             assertTrue(array[i] == i);
         }
     }
-    
+
     public void test_createRange() {
         final int[] array = Ints.createRange(0, 1000);
         assertTrue(array.length == 1001);
@@ -64,7 +64,7 @@ public class IntegersTest extends MaxTestCase {
         for (int i = 0; i < array.length; i++) {
             assertTrue(array[i] == i);
         }
-        
+
         final int[] array2 = Ints.createRange(-1000, 1000);
         assertTrue(array2.length == 2001);
         assertTrue(array2[0] == -1000);
@@ -72,7 +72,7 @@ public class IntegersTest extends MaxTestCase {
         for (int i = 0; i < array2.length; i++) {
             assertTrue(array2[i] == i - 1000);
         }
-        
+
         final int[] array3 = Ints.createRange(100, 1000);
         assertTrue(array3.length == 901);
         assertTrue(array3[0] == 100);
@@ -80,7 +80,7 @@ public class IntegersTest extends MaxTestCase {
         for (int i = 0; i < array3.length; i++) {
             assertTrue(array3[i] == i + 100);
         }
-        
+
         final int[] array4 = Ints.createRange(-1000, -100);
         assertTrue(array4.length == 901);
         assertTrue(array4[0] == -1000);
@@ -88,7 +88,7 @@ public class IntegersTest extends MaxTestCase {
         for (int i = 0; i < array4.length; i++) {
             assertTrue(array4[i] == i - 1000);
         }
-        
+
         try {
             Ints.createRange(100, 0);
             assertTrue(false);

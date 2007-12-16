@@ -4,10 +4,13 @@
 /*VCSID=0604bcb6-0146-46c6-a99a-ab5f1f2ddf5c*/
 package com.sun.max.asm.dis.risc;
 
-import java.util.*;
-
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.gen.risc.RiscTemplate;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.IntHashMap;
+import com.sun.max.collect.Sequence;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * An opcode mask group is a collection of templates that share the same opcode mask.
@@ -19,20 +22,20 @@ import com.sun.max.collect.*;
 public class OpcodeMaskGroup<Template_Type extends RiscTemplate> {
 
     private final int _mask;
-    
-    public OpcodeMaskGroup(int mask) {     
+
+    public OpcodeMaskGroup(int mask) {
         _mask = mask;
     }
-    
+
     public int mask() {
         return _mask;
     }
-    
+
     private final Set<Template_Type> _templates = new HashSet<Template_Type>();
-    
+
     private final IntHashMap<AppendableSequence<Template_Type>> _templatesForOpcodes = new IntHashMap<AppendableSequence<Template_Type>>();
     private final Sequence<Template_Type> _empty = new ArrayListSequence<Template_Type>();
-    
+
     public void add(Template_Type template) {
         assert template.opcodeMask() == _mask;
         _templates.add(template);
@@ -51,7 +54,7 @@ public class OpcodeMaskGroup<Template_Type extends RiscTemplate> {
         }
         return result;
     }
- 
+
     public Sequence<Template_Type> templates() {
         return new ArrayListSequence<Template_Type>(_templates);
     }

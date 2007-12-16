@@ -4,9 +4,9 @@
 /*VCSID=f2b96038-8d56-4135-b871-5ea6550bc7e2*/
 package com.sun.max.collect;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
+import com.sun.max.annotate.Implement;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * An implementation of a pool based on {@link ArrayList}.
@@ -18,12 +18,12 @@ public class ArrayListPool<PoolObject_Type extends PoolObject> extends ArrayList
     public ArrayListPool() {
         super();
     }
-    
+
     public ArrayListPool(PoolObject_Type[] elements) {
         super();
         Collections.addAll(this, elements);
     }
-    
+
     /**
      * Enforces the precondition for {@link Pool#append(PoolObject)}.
      */

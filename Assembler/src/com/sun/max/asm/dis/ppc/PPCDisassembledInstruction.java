@@ -4,11 +4,13 @@
 /*VCSID=af58e9d8-0ed6-493b-a45b-6cb554be8952*/
 package com.sun.max.asm.dis.ppc;
 
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.*;
-import com.sun.max.asm.dis.risc.*;
-import com.sun.max.asm.gen.risc.ppc.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.dis.DisassembledLabel;
+import com.sun.max.asm.dis.GlobalLabelMapper;
+import com.sun.max.asm.dis.risc.RiscDisassembledInstruction;
+import com.sun.max.asm.gen.risc.ppc.PPCExternalInstruction;
+import com.sun.max.asm.gen.risc.ppc.PPCTemplate;
+import com.sun.max.collect.Sequence;
 
 /**
  * @author Bernd Mathiske
@@ -18,7 +20,7 @@ public abstract class PPCDisassembledInstruction extends RiscDisassembledInstruc
     PPCDisassembledInstruction(int offset, byte[] bytes, PPCTemplate template, Sequence<Argument> arguments) {
         super(offset, bytes, template, arguments);
     }
-    
+
     @Override
     public String externalName() {
         final PPCExternalInstruction instruction = new PPCExternalInstruction(template(), arguments(), startOffset(), null, null);

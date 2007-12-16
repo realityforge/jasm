@@ -4,8 +4,9 @@
 /*VCSID=3f054089-84d1-409f-8bee-f799b66de069*/
 package com.sun.max.asm.gen.risc.field;
 
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.bitRange.*;
+import com.sun.max.asm.gen.OffsetParameter;
+import com.sun.max.asm.gen.risc.bitRange.BitRange;
+import com.sun.max.asm.gen.risc.bitRange.BitRangeOrder;
 
 /**
  * @author Dave Ungar
@@ -22,7 +23,7 @@ public class BranchDisplacementOperandField extends AlignedImmediateOperandField
     public static BranchDisplacementOperandField createAscendingBranchDisplacementOperandField(int... bits) {
         final BitRange bitRange = BitRange.create(bits, BitRangeOrder.ASCENDING);
         return new BranchDisplacementOperandField(bitRange);
-    }    
+    }
 
     public static BranchDisplacementOperandField createDescendingBranchDisplacementOperandField(int... bits) {
         final BitRange bitRange = BitRange.create(bits, BitRangeOrder.DESCENDING);
@@ -30,5 +31,5 @@ public class BranchDisplacementOperandField extends AlignedImmediateOperandField
         field.setVariableName("label");
         return field;
     }
-    
+
 }

@@ -4,35 +4,50 @@
 /*VCSID=e1b0785f-ad8d-4368-8de6-52ed6cb6078e*/
 package test.com.sun.max.asm.amd64;
 
-import static com.sun.max.asm.amd64.AMD64GeneralRegister32.*;
-import static com.sun.max.asm.amd64.AMD64GeneralRegister64.*;
-import static com.sun.max.asm.amd64.AMD64GeneralRegister8.*;
-import static com.sun.max.asm.amd64.AMD64IndexRegister64.*;
-import static com.sun.max.asm.x86.Scale.*;
-
-import java.io.*;
-
-import junit.framework.*;
-
-import com.sun.max.asm.*;
-import com.sun.max.asm.amd64.*;
-import com.sun.max.asm.dis.amd64.*;
-import com.sun.max.ide.*;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.Label;
+import com.sun.max.asm.amd64.AMD64Assembler;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister32.EBX;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister32.ECX;
+import com.sun.max.asm.amd64.AMD64GeneralRegister64;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister64.RAX;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister64.RBP;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister64.RBX;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister64.RCX;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister64.RDI;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister64.RDX;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister64.RSP;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister8.AH;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister8.BH;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister8.BL;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister8.CL;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister8.DL;
+import static com.sun.max.asm.amd64.AMD64IndexRegister64.RBX_INDEX;
+import com.sun.max.asm.dis.amd64.AMD64Disassembler;
+import static com.sun.max.asm.x86.Scale.SCALE_1;
+import static com.sun.max.asm.x86.Scale.SCALE_2;
+import static com.sun.max.asm.x86.Scale.SCALE_8;
+import com.sun.max.ide.MaxTestCase;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
  * @author Bernd Mathiske
  */
 public class InternalTest extends MaxTestCase {
-    
-    public InternalTest() {        
+
+    public InternalTest() {
         super();
 
     }
 
-    public InternalTest(String name) {        
+    public InternalTest(String name) {
         super(name);
     }
-    
+
     public static Test suite() {
         final TestSuite suite = new TestSuite(InternalTest.class.getName());
         //$JUnit-BEGIN$
@@ -60,7 +75,7 @@ public class InternalTest extends MaxTestCase {
         final Label label2 = new Label();
         final Label label3 = new Label();
         final Label fixLabel = new Label();
-        
+
         asm.bindLabel(startLabel);
         asm.jmp(label1);
         asm.jmp(startLabel);
@@ -99,22 +114,22 @@ public class InternalTest extends MaxTestCase {
     }
 
     private byte[] assemble2(long startAddress) throws IOException, AssemblyException {
-        final AMD64Assembler asm = new AMD64Assembler(startAddress); 
-    
+        final AMD64Assembler asm = new AMD64Assembler(startAddress);
+
         final Label loop = new Label();
         final Label subroutine = new Label();
         asm.fixLabel(subroutine, 0x234L);
-             
+
         asm.mov(RDX, 12, RSP.indirect());
         asm.bindLabel(loop);
         asm.call(subroutine);
         asm.sub(RDX, RAX);
         asm.cmpq(RDX, 0);
         asm.jnz(loop);
-            
+
         asm.mov(20, RCX.base(), RDI.index(),
                 SCALE_8, RDX);
-            
+
         return asm.toByteArray();
     }
 

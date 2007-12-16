@@ -4,7 +4,7 @@
 /*VCSID=18a17901-9f1d-4893-bc12-63faed18b7b5*/
 package com.sun.max.collect;
 
-import java.util.*;
+import java.util.EnumSet;
 
 /**
  * Additional dealings with Enum types.
@@ -13,13 +13,13 @@ import java.util.*;
  */
 public final class Enums {
 
-    private Enums() {        
+    private Enums() {
     }
 
     public static String fullName(Enum e) {
         return e.getClass().getCanonicalName() + "." + e.name();
     }
-    
+
     public static <Enum_Type extends Enum<Enum_Type>> Enum_Type fromString(final Class<Enum_Type> enumClass, String name) {
         for (Enum_Type enumConstant : enumClass.getEnumConstants()) {
             if (enumConstant.name().equals(name)) {
@@ -28,17 +28,17 @@ public final class Enums {
         }
         return null;
     }
-    
+
     /**
      * A "power sequence" is like a "power set" (the set of all possible subsets),
      * but with Set replaced by Sequence, using "natural" ordering.
      * Each sequence representing a subset is ordered according to ascending enum ordinals.
      * The sequence of sequences is ordered as if sorting an array of integers derived from enum bit sets.
-     * 
+     *
      * For example, "powerSequence(Enum_Type.class).get(11)",
      * i.e. querying a power sequence with index 11 (having bits 1, 2 and 8 set)
      * will return the sequence containing the enum values with the ordinals 1, 2 and 8, in that order.
-     * 
+     *
      * @see #powerSequenceIndex(Enum)
      */
     public static <Enum_Type extends Enum<Enum_Type>> Sequence<Sequence<Enum_Type>> powerSequence(Class<Enum_Type> enumType) {
@@ -61,7 +61,7 @@ public final class Enums {
 
     /**
      * @return the index into the "power sequence" of the enum set's Enum type that corresponds to the given enum set
-     * 
+     *
      * @see #powerSequence(Class)
      */
     public static <Enum_Type extends Enum<Enum_Type>> int powerSequenceIndex(EnumSet<Enum_Type> enumSet) {
@@ -75,7 +75,7 @@ public final class Enums {
     public static int powerSequenceIndex(Enum value) {
         return 1 << value.ordinal();
     }
-    
+
     /**
      * Test whether the given constant is among the allowed constants.
      * If so, return the given constant, otherwise return the first allowed constant.

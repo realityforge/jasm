@@ -4,18 +4,17 @@
 /*VCSID=37c5e8ff-bcf3-4882-88c8-1a33c7c061f9*/
 package com.sun.max.lang;
 
-import java.lang.reflect.*;
-
-import com.sun.max.program.*;
+import com.sun.max.program.ProgramError;
+import java.lang.reflect.Method;
 
 /**
  * @author Bernd Mathiske
  */
 public final class Methods {
 
-    private Methods() {        
+    private Methods() {
     }
-    
+
     public static Method getDeclared(Class<?> clazz, String name, Class... parameterTypes) {
         try {
             return clazz.getDeclaredMethod(name, parameterTypes);

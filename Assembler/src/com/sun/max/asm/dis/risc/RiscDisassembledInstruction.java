@@ -4,23 +4,23 @@
 /*VCSID=5c063ef9-9e01-4edf-85ec-aed447b20322*/
 package com.sun.max.asm.dis.risc;
 
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.*;
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.dis.DisassembledInstruction;
+import com.sun.max.asm.gen.risc.RiscTemplate;
+import com.sun.max.collect.Sequence;
 
 /**
- * 
+ *
  *
  * @author Bernd Mathiske
  * @author Greg Wright
  */
 public abstract class RiscDisassembledInstruction<Template_Type extends RiscTemplate> extends DisassembledInstruction<Template_Type> {
-    
+
     protected RiscDisassembledInstruction(int offset, byte[] bytes, Template_Type template, Sequence<Argument> arguments) {
         super(offset, bytes, template, arguments);
     }
-    
+
     @Override
     public int offsetForRelativeAddressing() {
         return startOffset();

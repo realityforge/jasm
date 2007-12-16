@@ -4,14 +4,16 @@
 /*VCSID=3ebb6291-1727-41dd-9b94-fbf6528aa07d*/
 package com.sun.max.asm.gen.cisc.x86;
 
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.cisc.*;
+import com.sun.max.asm.gen.ArgumentRange;
+import com.sun.max.asm.gen.ImplicitOperand;
+import com.sun.max.asm.gen.TestArgumentExclusion;
+import com.sun.max.asm.gen.cisc.TemplateNotNeededException;
 
 /**
  * Used when pre-scanning instruction descriptions to assess variants within the respective instruction family.
  *
  * @see InstructionAssessment
- * 
+ *
  * @author Bernd Mathiske
  */
 public class OpcodeAssessor extends X86InstructionDescriptionAdapter {
@@ -47,7 +49,7 @@ public class OpcodeAssessor extends X86InstructionDescriptionAdapter {
                 _instructionFamily.haveAddressSizeVariants();
                 break;
             default:
-                break;            
+                break;
         }
         switch (operandCode.addressingMethodCode()) {
             case C:
@@ -80,12 +82,12 @@ public class OpcodeAssessor extends X86InstructionDescriptionAdapter {
     public void visitModRMGroup(ModRMGroup modRMGroup) {
         _instructionFamily.setModRMGroup(modRMGroup);
     }
-    
+
     @Override
     public void visitModCase(X86TemplateContext.ModCase modCase) throws TemplateNotNeededException {
-        _instructionFamily.haveModRMByte();        
+        _instructionFamily.haveModRMByte();
     }
-    
+
     @Override
     public void visitString(String s) {
         if (s.startsWith("J") || s.startsWith("j")) {

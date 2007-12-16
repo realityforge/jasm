@@ -4,9 +4,10 @@
 /*VCSID=109e8ba4-a131-45f6-9002-d6d962ab9602*/
 package com.sun.max.lang;
 
-import java.io.*;
-
-import com.sun.max.io.*;
+import com.sun.max.io.Streams;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Byte array operations.
@@ -17,12 +18,12 @@ public final class Bytes {
 
     private Bytes() {
     }
-    
+
     public static int zeroExtendedToInt(byte b) {
         final char ch = (char) b;
         return ch;
     }
-    
+
     public static boolean equals(byte[] array1, byte[] array2, int length) {
         if (array1.length < length || array2.length < length) {
             return false;
@@ -42,42 +43,42 @@ public final class Bytes {
         return equals(array1, array2, array1.length);
     }
 
-    public static void copy(byte[] fromArray, int fromStartIndex, byte[] toArray, 
+    public static void copy(byte[] fromArray, int fromStartIndex, byte[] toArray,
                             final int toStartIndex, int nBytes) {
         for (int i = 0; i < nBytes; i++) {
             toArray[toStartIndex + i] = fromArray[fromStartIndex + i];
         }
     }
-    
+
     public static void copy(byte[] fromArray, byte[] toArray, int nBytes) {
         copy(fromArray, 0, toArray, 0, nBytes);
     }
-    
+
     public static void copyAll(byte[] fromArray, byte[] toArray, int toStartIndex) {
         copy(fromArray, 0 , toArray, toStartIndex, fromArray.length);
     }
-    
+
     public static void copyAll(byte[] fromArray, byte[] toArray) {
         copy(fromArray, 0 , toArray, 0, fromArray.length);
     }
-    
+
     public static byte[] getSection(byte[] fromArray, int startIndex, int endIndex) {
         final int length = endIndex - startIndex;
         final byte[] result = new byte[length];
         copy(fromArray, startIndex, result, 0, length);
         return result;
     }
-    
+
     public static void clear(final byte[] array) {
         for (int i = 0; i < array.length; i++) {
             array[i] = (byte) 0;
         }
     }
-    
+
     public static String toHexLiteral(byte value) {
         return "0x" + String.format("%02X", value);
     }
-    
+
     public static String toHexLiteral(byte[] values) {
         String s = "0x";
         for (byte value : values) {
@@ -103,15 +104,15 @@ public final class Bytes {
         if (array.length == 0) {
             return "";
         }
- 
+
         final StringBuilder buf = new StringBuilder();
         buf.append(array[0]);
- 
+
         for (int i = 1; i < array.length; i++) {
             buf.append(separator);
             buf.append(array[i]);
         }
- 
+
         return buf.toString();
     }
 
@@ -119,6 +120,6 @@ public final class Bytes {
         final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Streams.copy(inputStream, outputStream);
         return outputStream.toByteArray();
-    }    
+    }
 
 }

@@ -4,16 +4,16 @@
 /*VCSID=12f99a3a-4e5f-432a-837b-27f886f6b862*/
 package com.sun.max.asm.gen.risc.sparc;
 
-import java.util.*;
-
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.sparc.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.sparc.*;
-import com.sun.max.lang.*;
+import com.sun.max.asm.Assembler;
+import com.sun.max.asm.dis.sparc.SPARC64DisassembledInstruction;
+import com.sun.max.asm.dis.sparc.SPARC64Disassembler;
+import com.sun.max.asm.gen.AssemblyTestComponent;
+import com.sun.max.asm.sparc.SPARC64Assembler;
+import com.sun.max.lang.WordWidth;
+import java.util.EnumSet;
 
 /**
- * 
+ *
  *
  * @author Bernd Mathiske
  */
@@ -27,10 +27,10 @@ public class SPARC64AssemblyTester extends SPARCAssemblyTester<SPARC64Disassembl
     protected Assembler createTestAssembler() {
         return new SPARC64Assembler(0L);
     }
-    
+
     @Override
     protected SPARC64Disassembler createTestDisassembler() {
         return new SPARC64Disassembler(0L);
     }
-    
+
 }

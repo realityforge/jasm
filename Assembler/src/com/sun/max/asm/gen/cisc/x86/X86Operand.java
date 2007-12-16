@@ -4,11 +4,11 @@
 /*VCSID=ca6bb6c4-f83f-4b4c-ae15-a1f3dd91e525*/
 package com.sun.max.asm.gen.cisc.x86;
 
-import com.sun.max.asm.gen.*;
+import com.sun.max.asm.gen.Operand;
 
 /**
  * Description of an assembly instruction operand.
- * 
+ *
  * @author Bernd Mathiske
  */
 public abstract class X86Operand implements Operand {
@@ -18,7 +18,7 @@ public abstract class X86Operand implements Operand {
     }
 
     private Designation _designation;
-    
+
     protected X86Operand(Designation designation) {
         _designation = designation;
     }
@@ -26,5 +26,5 @@ public abstract class X86Operand implements Operand {
     public Designation designation() {
         return _designation;
     }
-    
+
 }

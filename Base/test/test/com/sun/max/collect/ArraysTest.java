@@ -4,8 +4,8 @@
 /*VCSID=170f7032-abc1-4e07-9584-6989c2d93053*/
 package test.com.sun.max.collect;
 
-import com.sun.max.ide.*;
-import com.sun.max.lang.*;
+import com.sun.max.ide.MaxTestCase;
+import com.sun.max.lang.Arrays;
 
 /**
  * @author Bernd Mathiske

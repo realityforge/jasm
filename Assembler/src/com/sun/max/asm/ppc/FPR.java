@@ -4,9 +4,8 @@
 /*VCSID=992403a2-0745-4cdb-86b9-20c25da0ff90*/
 package com.sun.max.asm.ppc;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.EnumerableArgument;
+import com.sun.max.util.Enumerator;
 
 /**
  * The floating point registers.

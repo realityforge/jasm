@@ -4,9 +4,8 @@
 /*VCSID=2bde5eb8-a51b-4c73-b37c-1b07a2b9a079*/
 package com.sun.max.asm.gen;
 
-import com.sun.max.asm.*;
-import com.sun.max.lang.*;
-
+import com.sun.max.asm.Argument;
+import com.sun.max.lang.WordWidth;
 
 /**
  * @author Bernd Mathiske
@@ -14,7 +13,7 @@ import com.sun.max.lang.*;
 public abstract class ImmediateArgument implements Argument {
 
     public abstract WordWidth width();
-    
+
     public abstract String signedExternalValue();
 
     public abstract Object boxedJavaValue();
@@ -23,5 +22,5 @@ public abstract class ImmediateArgument implements Argument {
     public final String toString() {
         return "<" + getClass().getSimpleName() + ": " + externalValue() + ">";
     }
-    
+
 }

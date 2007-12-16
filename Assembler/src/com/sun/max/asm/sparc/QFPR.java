@@ -4,8 +4,8 @@
 /*VCSID=8a5759a4-1aa6-4ecd-ab31-db69dda6baa4*/
 package com.sun.max.asm.sparc;
 
-import com.sun.max.lang.*;
-import com.sun.max.util.*;
+import com.sun.max.lang.StaticFieldName;
+import com.sun.max.util.Symbolizer;
 
 /**
  * The quad-precision (128-bit) floating-point registers.

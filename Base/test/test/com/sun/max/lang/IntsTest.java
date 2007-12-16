@@ -4,9 +4,8 @@
 /*VCSID=6da9cd72-c8d6-4c34-a0f0-014071ef8a96*/
 package test.com.sun.max.lang;
 
-import junit.framework.*;
-
-import com.sun.max.lang.*;
+import com.sun.max.lang.Ints;
+import junit.framework.TestCase;
 
 /**
  * Tests for {@link Ints}.
@@ -14,11 +13,11 @@ import com.sun.max.lang.*;
  * @author Bernd Mathiske
  */
 public class IntsTest extends TestCase {
- 
+
     public IntsTest(String name) {
         super(name);
     }
-    
+
     public static void main(String[] args) {
         junit.textui.TestRunner.run(IntsTest.class);
     }
@@ -38,7 +37,7 @@ public class IntsTest extends TestCase {
         assertTrue(Ints.numberOfEffectiveUnsignedBits(256) == 9);
         assertTrue(Ints.numberOfEffectiveUnsignedBits(257) == 9);
     }
-    
+
     public void test_numberOfEffectiveSignedBits() {
         for (int i = 0; i < 257; i++) {
             assertTrue(Ints.numberOfEffectiveSignedBits(i) == Ints.numberOfEffectiveUnsignedBits(i) + 1);

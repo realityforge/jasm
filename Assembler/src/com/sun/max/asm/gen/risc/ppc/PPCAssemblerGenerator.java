@@ -4,19 +4,18 @@
 /*VCSID=ee472d09-6e29-47e7-bb42-173e45a4b5a4*/
 package com.sun.max.asm.gen.risc.ppc;
 
-
-import java.util.*;
-
-import com.sun.max.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.asm.ppc.*;
-import com.sun.max.io.*;
-import com.sun.max.program.*;
-import com.sun.max.program.option.*;
+import com.sun.max.MaxPackage;
+import com.sun.max.asm.Assembler;
+import com.sun.max.asm.BigEndianAssembler;
+import com.sun.max.asm.gen.risc.RiscAssemblerGenerator;
+import com.sun.max.asm.ppc.GPR;
+import com.sun.max.io.IndentWriter;
+import com.sun.max.program.Trace;
+import com.sun.max.program.option.ProgramArgumentsParser;
+import java.util.Set;
 
 /**
- * The program entry point for the PowerPC assembler generator. 
+ * The program entry point for the PowerPC assembler generator.
  *
  * @author Bernd Mathiske
  * @author Doug Simon
@@ -26,7 +25,7 @@ public final class PPCAssemblerGenerator extends RiscAssemblerGenerator<PPCTempl
     private PPCAssemblerGenerator() {
         super(PPCAssembly.ASSEMBLY);
     }
-    
+
     @Override
     protected void printRawImports(IndentWriter writer, Set<MaxPackage> packages) {
         super.printRawImports(writer, packages);

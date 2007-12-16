@@ -4,22 +4,24 @@
 /*VCSID=d84ee2b0-a342-4dd9-82db-ca29accc9d4d*/
 package com.sun.max.util;
 
-import com.sun.max.annotate.*;
-import com.sun.max.lang.*;
+import com.sun.max.annotate.Implement;
+import com.sun.max.lang.Function;
+import com.sun.max.lang.Function1;
+import com.sun.max.lang.Runnable1;
 
 /**
  * Compute given functions in always one and the same single thread.
- * 
- * This is for example necessary in Linux where one and 
+ *
+ * This is for example necessary in Linux where one and
  * the same thread needs to be reused to represent the whole process in certain contexts,
  * e.g. when using the ptrace interface.
- * 
+ *
  * @author Bernd Mathiske
  */
 public class SingleThread extends Thread {
 
     private static final class Worker extends Thread {
-        
+
         private Function1 _function = null;
         private Object _result = null;
         private Throwable _throwable = null;
@@ -50,9 +52,9 @@ public class SingleThread extends Thread {
             }
         }
     }
-    
+
     private static Worker _worker;
-    
+
     public static synchronized <Result_Type, Exception_Type extends Exception> Result_Type execute(Class<Result_Type> resultType, Class<Exception_Type> exceptionType, Function1<Result_Type, Exception_Type> function) throws Exception_Type {
         if (_worker == null) {
             _worker = new Worker();
@@ -76,9 +78,9 @@ public class SingleThread extends Thread {
         }
     }
 
-    private static final class UnusedException extends Exception {        
+    private static final class UnusedException extends Exception {
     }
-    
+
     public static synchronized <Result_Type> Result_Type execute(Class<Result_Type> resultType, final Function<Result_Type> function) {
         final Function1<Result_Type, UnusedException> function1 = new Function1<Result_Type, UnusedException>() {
             @Implement(Function1.class)

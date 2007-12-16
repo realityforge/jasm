@@ -6,8 +6,12 @@
 
 package com.sun.max.asm.amd64;
 
-import com.sun.max.asm.*;
-import com.sun.max.asm.x86.*;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.Label;
+import com.sun.max.asm.LabelAddressInstruction;
+import com.sun.max.asm.LabelOffsetInstruction;
+import com.sun.max.asm.x86.MMXRegister;
+import com.sun.max.asm.x86.SegmentRegister;
 
 public abstract class AMD64LabelAssembler extends AMD64RawAssembler {
 

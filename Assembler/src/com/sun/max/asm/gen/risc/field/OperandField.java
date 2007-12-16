@@ -4,15 +4,18 @@
 /*VCSID=b60ee7c6-a89d-42fb-985d-d77214edbb06*/
 package com.sun.max.asm.gen.risc.field;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.asm.gen.risc.bitRange.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.ExternalMnemonicSuffixArgument;
+import com.sun.max.asm.gen.Expression;
+import com.sun.max.asm.gen.Parameter;
+import com.sun.max.asm.gen.Template;
+import com.sun.max.asm.gen.risc.RiscConstant;
+import com.sun.max.asm.gen.risc.bitRange.BitRange;
+import com.sun.max.collect.Sequence;
+import com.sun.max.collect.Sets;
+import com.sun.max.lang.StaticLoophole;
+import java.util.Set;
 
 /**
  * An operand field defines an instruction field whose value is given as a parameter in the generated

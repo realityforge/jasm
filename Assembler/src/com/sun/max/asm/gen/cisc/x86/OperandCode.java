@@ -4,17 +4,54 @@
 /*VCSID=048f6b6a-4a54-4241-9a33-2eedcbbfdc2d*/
 package com.sun.max.asm.gen.cisc.x86;
 
-import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.*;
-import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.*;
-
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.util.*;
+import com.sun.max.annotate.JavacSyntax;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.gen.ArgumentRange;
+import com.sun.max.asm.gen.AssemblyTestComponent;
+import com.sun.max.asm.gen.TestArgumentExclusion;
+import com.sun.max.asm.gen.WrappableSpecification;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.A;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.C;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.D;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.E;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.F;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.G;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.I;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.IC;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.J;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.M;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.N;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.O;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.P;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.PR;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.Q;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.R;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.S;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.V;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.VR;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.W;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.X;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.Y;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.a;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.b;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.d;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.d_q;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.dq;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.p;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.pd;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.ps;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.q;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.s;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.sd;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.ss;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.v;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.w;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.z;
+import com.sun.max.collect.Sets;
+import com.sun.max.lang.StaticLoophole;
+import com.sun.max.util.Enumerator;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Bernd Mathiske

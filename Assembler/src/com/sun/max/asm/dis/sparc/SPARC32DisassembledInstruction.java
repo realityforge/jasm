@@ -4,12 +4,11 @@
 /*VCSID=89240249-cf00-4034-9b9b-275822113142*/
 package com.sun.max.asm.dis.sparc;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.sparc.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.dis.Address32Instruction;
+import com.sun.max.asm.gen.ImmediateArgument;
+import com.sun.max.asm.gen.risc.sparc.SPARCTemplate;
+import com.sun.max.collect.Sequence;
 
 /**
  *

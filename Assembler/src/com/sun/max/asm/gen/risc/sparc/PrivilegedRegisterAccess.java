@@ -4,7 +4,17 @@
 /*VCSID=666c0c57-19ee-4c3a-9d72-2883d7a01f92*/
 package com.sun.max.asm.gen.risc.sparc;
 
-import static com.sun.max.asm.gen.risc.sparc.SPARCFields.*;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rdPrivReg;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_12_5;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_13_0;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rs1;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rs1PrivReg;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rs2;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._simm13;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.i;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.op;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.op3;
 
 /**
  * @author Bernd Mathiske

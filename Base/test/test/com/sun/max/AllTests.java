@@ -4,20 +4,20 @@
 /*VCSID=e6360a20-9fbb-4f64-977f-e17ed56f30b6*/
 package test.com.sun.max;
 
-import junit.framework.*;
-
-import org.junit.runner.*;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
 
 /**
  * @author Bernd Mathiske
  */
 @RunWith(org.junit.runners.AllTests.class)
 public final class AllTests {
-    
+
     private AllTests() {
-        
+
     }
-    
+
     public static void main(String[] args) {
         junit.textui.TestRunner.run(AllTests.suite());
     }
@@ -32,5 +32,5 @@ public final class AllTests {
         suite.addTest(test.com.sun.max.io.AllTests.suite());
         //$JUnit-END$
         return suite;
-    }    
+    }
 }

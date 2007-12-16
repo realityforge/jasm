@@ -4,9 +4,10 @@
 /*VCSID=d144abef-5476-4086-a86b-f38f9c2f9303*/
 package com.sun.max.asm.gen.risc.field;
 
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.asm.gen.risc.bitRange.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.gen.risc.RiscConstant;
+import com.sun.max.asm.gen.risc.bitRange.BitRange;
+import com.sun.max.asm.gen.risc.bitRange.BitRangeOrder;
 
 /**
  * @author Dave Ungar
@@ -27,11 +28,11 @@ public class ConstantField extends RiscField {
     public RiscConstant constant(Argument argument) {
         return new RiscConstant(this, argument);
     }
-    
+
     public RiscConstant constant(int value) {
         return new RiscConstant(this, value);
-    }    
-    
+    }
+
     public static ConstantField createAscending(int... bits) {
         final BitRange bitRange = BitRange.create(bits, BitRangeOrder.ASCENDING);
         return new ConstantField(bitRange);

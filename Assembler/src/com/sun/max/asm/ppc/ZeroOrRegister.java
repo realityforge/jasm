@@ -4,11 +4,11 @@
 /*VCSID=d50a6f6a-05fd-48e3-895c-ffb0b9cd8f74*/
 package com.sun.max.asm.ppc;
 
-import com.sun.max.asm.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.AbstractSymbolicArgument;
+import com.sun.max.util.Symbolizer;
 
 /**
- * The super type of all the {@link GPR General Purpose Registers} and the constant {@link Zero#ZERO}. 
+ * The super type of all the {@link GPR General Purpose Registers} and the constant {@link Zero#ZERO}.
  *
  * @author Doug Simon
  */
@@ -40,9 +40,9 @@ public abstract class ZeroOrRegister extends AbstractSymbolicArgument {
             _symbolizer = Symbolizer.Static.fromSequence(ZeroOrRegister.class, GPR.GPR_SYMBOLIZER, Zero.ZERO);
         }
         return _symbolizer;
-    } 
-    
-    // This must be lazily constructed to avoid dependency on the GPR class initializer 
+    }
+
+    // This must be lazily constructed to avoid dependency on the GPR class initializer
     private static Symbolizer<ZeroOrRegister> _symbolizer;
-    
+
 }

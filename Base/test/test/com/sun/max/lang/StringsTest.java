@@ -4,17 +4,16 @@
 /*VCSID=a3c6a619-d2bc-4ce0-ad88-571ef9130e68*/
 package test.com.sun.max.lang;
 
-import junit.framework.*;
-
-import com.sun.max.lang.*;
-
+import com.sun.max.lang.Arrays;
+import com.sun.max.lang.Strings;
+import junit.framework.TestCase;
 
 public class StringsTest extends TestCase {
 
     public StringsTest(String name) {
         super(name);
     }
-    
+
     public static void main(String[] args) {
         junit.textui.TestRunner.run(StringsTest.class);
     }
@@ -42,7 +41,7 @@ public class StringsTest extends TestCase {
         } catch (IllegalArgumentException iae) {
         }
     }
-    
+
     public void test_splitCommand() {
         assertSplitCommandEquals("cmd \"arg1_with_quote\\\"\" arg2 arg3", "cmd", "arg1_with_quote\\\"", "arg2", "arg3");
         assertSplitCommandEquals("cmd arg1 arg2 arg3", "cmd", "arg1", "arg2", "arg3");

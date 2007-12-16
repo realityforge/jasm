@@ -4,7 +4,22 @@
 /*VCSID=776be073-e302-4110-aeb5-e1b4f99c6c5c*/
 package com.sun.max.asm.gen.risc.sparc;
 
-import static com.sun.max.asm.gen.risc.sparc.SPARCFields.*;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._dfrd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._fcn;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._immAsi;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._qfrd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rd_even;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_12_5;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_29_25;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rs1;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rs2;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._sfrd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._simm13;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.i;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.op;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.op3;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.rd;
 
 /**
  * @author Bernd Mathiske
@@ -202,5 +217,5 @@ class MemoryAccess extends SPARCInstructionDescriptionCreator {
         setCurrentArchitectureManualSection("A.54");
         create_A54();
     }
-    
+
 }

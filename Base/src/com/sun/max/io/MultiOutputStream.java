@@ -4,17 +4,18 @@
 /*VCSID=8d6477ca-a513-400c-9385-e2df01e59814*/
 package com.sun.max.io;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * Writes the same output to several streams.
- * 
+ *
  * @author Bernd Mathiske
  */
 public class MultiOutputStream extends OutputStream {
 
     private OutputStream[] _streams;
-    
+
     public MultiOutputStream(OutputStream... streams) {
         _streams = streams;
     }
@@ -44,13 +45,13 @@ public class MultiOutputStream extends OutputStream {
     public void flush() throws IOException {
         for (OutputStream stream : _streams) {
             stream.flush();
-        }        
+        }
     }
 
     @Override
     public void close() throws IOException {
         for (OutputStream stream : _streams) {
             stream.close();
-        }        
+        }
     }
 }

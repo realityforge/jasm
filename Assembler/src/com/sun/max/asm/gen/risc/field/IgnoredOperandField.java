@@ -4,11 +4,12 @@
 /*VCSID=843d21b5-13e4-447a-ae7c-5922a8cd79a5*/
 package com.sun.max.asm.gen.risc.field;
 
-import com.sun.max.asm.gen.risc.bitRange.*;
+import com.sun.max.asm.gen.risc.bitRange.BitRange;
+import com.sun.max.asm.gen.risc.bitRange.BitRangeOrder;
 
 /**
  * A field that contains an immediate value that is ignored by the hardware.
- * 
+ *
  * @author Bernd Mathiske
  * @author Dave Ungar
  * @author Adam Spitz

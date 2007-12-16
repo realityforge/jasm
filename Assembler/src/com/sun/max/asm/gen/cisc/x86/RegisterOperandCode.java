@@ -4,7 +4,7 @@
 /*VCSID=ed33c02b-e880-4e6d-b240-28d71f085858*/
 package com.sun.max.asm.gen.cisc.x86;
 
-import com.sun.max.asm.gen.*;
+import com.sun.max.asm.gen.ExternalOmission;
 
 /**
  * @author Bernd Mathiske
@@ -13,13 +13,13 @@ public enum RegisterOperandCode {
 
     eAX, eCX, eDX, eBX, eSP, eBP, eSI, eDI,
     rAX, rCX, rDX, rBX, rSP, rBP, rSI, rDI;
-    
+
     public int id() {
         return ordinal() % 8;
     }
-    
+
     public ExternalOmission omitExternally() {
         return new ExternalOmission(this);
     }
-    
+
 }

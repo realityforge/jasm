@@ -4,9 +4,8 @@
 /*VCSID=7e838375-4368-4880-aaf4-5ff0ef06b9bd*/
 package com.sun.max.asm.ppc;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.EnumerableArgument;
+import com.sun.max.util.Enumerator;
 
 /**
  * The constants denoting the eight 4-bit fields into which the 32-bit Condition Register

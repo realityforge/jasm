@@ -4,19 +4,20 @@
 /*VCSID=73fc199f-84ce-41f7-a693-bc2cea2b237e*/
 package com.sun.max.collect;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
+import com.sun.max.annotate.Implement;
+import java.util.BitSet;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * A compact and efficient implementation of a {@link PoolSet} based on bit sets.
- * 
+ *
  * @author Doug Simon
  */
 public class PoolBitSet<PoolObject_Type extends PoolObject> extends BitSet implements PoolSet<PoolObject_Type> {
-    
+
     private final Pool<PoolObject_Type> _pool;
-    
+
     public PoolBitSet(Pool<PoolObject_Type> pool, PoolObject_Type... elements) {
         _pool = pool;
         for (PoolObject_Type element : elements) {
@@ -28,7 +29,7 @@ public class PoolBitSet<PoolObject_Type extends PoolObject> extends BitSet imple
     public Pool<PoolObject_Type> pool() {
         return _pool;
     }
-    
+
     @Implement(PoolSet.class)
     public void add(PoolObject_Type value) {
         assert _pool.get(value.serial()) == value;
@@ -40,7 +41,7 @@ public class PoolBitSet<PoolObject_Type extends PoolObject> extends BitSet imple
             add(element);
         }
     }
-    
+
     @Implement(PoolSet.class)
     public boolean contains(PoolObject_Type value) {
         assert _pool.get(value.serial()) == value;
@@ -64,7 +65,7 @@ public class PoolBitSet<PoolObject_Type extends PoolObject> extends BitSet imple
         s += "}";
         return s;
     }
-    
+
     /**
      * Gets an iterator over all the values in this set.
      */
@@ -74,7 +75,7 @@ public class PoolBitSet<PoolObject_Type extends PoolObject> extends BitSet imple
 
             private int _currentBit = -1;
             private int _nextSetBit = nextSetBit(0);
-            
+
             @Implement(Iterator.class)
             public boolean hasNext() {
                 return _nextSetBit != -1;
@@ -85,7 +86,7 @@ public class PoolBitSet<PoolObject_Type extends PoolObject> extends BitSet imple
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                
+
                 _currentBit = _nextSetBit;
                 _nextSetBit = nextSetBit(_nextSetBit + 1);
                 return _pool.get(_currentBit);

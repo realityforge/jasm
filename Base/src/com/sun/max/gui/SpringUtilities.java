@@ -4,25 +4,27 @@
 /*VCSID=def6a784-75ff-4271-8fdb-8dbf811bce3e*/
 package com.sun.max.gui;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Container;
+import javax.swing.Spring;
+import javax.swing.SpringLayout;
 
-import javax.swing.*;
 /**
  * Partially copied from the "Swing Tutorial".
  * Minor changes to comply with our CheckStyle settings.
- * 
+ *
  * A 1.4 file that provides utility methods for
  * creating form- or grid-style layouts with SpringLayout.
  * These utilities are used by several programs, such as
  * SpringBox and SpringCompactGrid.
- * 
+ *
  * @author original SpringUtilities author
  * @author Bernd Mathiske
  */
 public final class SpringUtilities {
-    private SpringUtilities() {        
+    private SpringUtilities() {
     }
-    
+
     /**
      * A debugging utility that prints to stdout the component's
      * minimum, preferred, and maximum sizes.
@@ -198,9 +200,9 @@ public final class SpringUtilities {
         pCons.setConstraint(SpringLayout.SOUTH, y);
         pCons.setConstraint(SpringLayout.EAST, x);
     }
-    
+
     public static void makeCompactGrid(Container parent, int numberOfColumns) {
         makeCompactGrid(parent, parent.getComponentCount() / numberOfColumns, numberOfColumns, 0, 0, 3, 3);
     }
-    
+
 }

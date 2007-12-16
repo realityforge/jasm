@@ -4,10 +4,10 @@
 /*VCSID=80b233f6-d397-4768-9a2c-40c747df056f*/
 package com.sun.max.asm;
 
-import com.sun.max.util.*;
+import com.sun.max.util.Symbol;
 
 /**
- * An argument that is a symbol. 
+ * An argument that is a symbol.
  *
  * @author Bernd Mathiske
  */

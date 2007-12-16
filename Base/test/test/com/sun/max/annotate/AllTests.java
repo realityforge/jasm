@@ -4,16 +4,16 @@
 /*VCSID=67efedfd-6e24-4e4b-9b72-27a8b39f6b95*/
 package test.com.sun.max.annotate;
 
-import junit.framework.*;
-
-import org.junit.runner.*;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
 
 /**
  * @author Bernd Mathiske
  */
 @RunWith(org.junit.runners.AllTests.class)
 public final class AllTests {
-    
+
     private AllTests() {
     }
 
@@ -28,6 +28,6 @@ public final class AllTests {
         //$JUnit-END$
         return suite;
     }
-    
-    
+
+
 }

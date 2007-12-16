@@ -4,8 +4,10 @@
 /*VCSID=2fcd891c-dc01-4031-a59e-e5c84bd7314c*/
 package com.sun.max.asm.amd64;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
+import com.sun.max.asm.Assembler64;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.InstructionSet;
+import com.sun.max.asm.Label;
 
 /**
  * Instantiate this class to assemble AMD64 instructions.

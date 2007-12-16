@@ -4,16 +4,18 @@
 /*VCSID=91ecad04-1965-49ce-ba8e-bce4da291b82*/
 package com.sun.max.asm.gen.risc.ppc;
 
-import java.io.*;
-import java.util.*;
-
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.collect.*;
-import com.sun.max.io.*;
-import com.sun.max.lang.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.dis.DisassembledInstruction;
+import com.sun.max.asm.gen.AssemblyTestComponent;
+import com.sun.max.asm.gen.risc.RiscAssemblyTester;
+import com.sun.max.collect.Sequence;
+import com.sun.max.io.IndentWriter;
+import com.sun.max.lang.Endianness;
+import com.sun.max.lang.WordWidth;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PushbackInputStream;
+import java.util.EnumSet;
 
 /**
  * @author Bernd Mathiske
@@ -24,17 +26,17 @@ public abstract class PPCAssemblyTester<DisassembledInstruction_Type extends Dis
     public PPCAssemblyTester(PPCAssembly assembly, WordWidth addressWidth, EnumSet<AssemblyTestComponent> components) {
         super(assembly, addressWidth, components);
     }
-    
+
     @Override
     public PPCAssembly assembly() {
         return (PPCAssembly) super.assembly();
     }
-    
+
     @Override
     protected String assemblerCommand() {
         return "as -force_cpusubtype_ALL";
     }
-    
+
     @Override
     protected void assembleExternally(IndentWriter writer, PPCTemplate template, Sequence<Argument> argumentList, String label) {
         final PPCExternalInstruction instruction = new PPCExternalInstruction(template, argumentList);
@@ -46,11 +48,11 @@ public abstract class PPCAssemblyTester<DisassembledInstruction_Type extends Dis
         final int instruction = Endianness.BIG.readInt(stream);
         return instruction == 0x60000000;
     }
-     
+
     @Override
     protected byte[] readExternalInstruction(PushbackInputStream externalInputStream, PPCTemplate template, byte[] internalBytes) throws IOException {
         final byte[] result = super.readExternalInstruction(externalInputStream, template, internalBytes);
-        
+
         // Work-around for bug in Apple's version of the GNU 'as' assembler (see javadoc for 'isExternalMTCRFEncodingBroken' for more details)
         if (assembly().isExternalMTCRFEncodingBroken()) {
             if (template.externalName().equals("mtcrf")) {

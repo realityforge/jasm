@@ -4,9 +4,9 @@
 /*VCSID=1b5e687b-dc13-4007-8ca2-a10129ff77c0*/
 package com.sun.max.program.option.gui;
 
-import javax.swing.*;
-
-import com.sun.max.program.option.*;
+import com.sun.max.program.option.EnumProgramOption;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
 
 /**
  * The GUI class corresponding to {@link EnumProgramOption}.
@@ -16,13 +16,13 @@ import com.sun.max.program.option.*;
 class EnumProgramOptionInput extends AssignmentProgramOptionInput<EnumProgramOption> {
 
     private final JComboBox _values;
-    
+
     public EnumProgramOptionInput(EnumProgramOption programOption) {
         super(programOption);
         _values = new JComboBox(programOption.values());
         _values.setSelectedItem(programOption.value());
     }
-    
+
 
     @Override
     public String value() {

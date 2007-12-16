@@ -4,21 +4,247 @@
 /*VCSID=ffa48a7c-4a41-4b0c-bf5e-2e1a7419dd91*/
 package com.sun.max.asm.gen.cisc.amd64;
 
-import static com.sun.max.asm.amd64.AMD64GeneralRegister16.*;
-import static com.sun.max.asm.amd64.AMD64GeneralRegister32.*;
-import static com.sun.max.asm.amd64.AMD64GeneralRegister64.*;
-import static com.sun.max.asm.amd64.AMD64GeneralRegister8.*;
-import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.*;
-import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.*;
-import static com.sun.max.asm.gen.cisc.x86.OperandCode.*;
-import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.*;
-import static com.sun.max.asm.gen.cisc.x86.RegisterOperandCode.*;
-import static com.sun.max.asm.gen.cisc.x86.X86Opcode.*;
-import static com.sun.max.util.HexByte.*;
-
-import com.sun.max.asm.amd64.*;
-import com.sun.max.asm.gen.cisc.x86.*;
-import com.sun.max.lang.*;
+import com.sun.max.asm.amd64.AMD64GeneralRegister16;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister16.AX;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister16.BP;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister16.BX;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister16.CX;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister16.DI;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister16.DX;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister16.SI;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister16.SP;
+import com.sun.max.asm.amd64.AMD64GeneralRegister32;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister32.EAX;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister64.RAX;
+import com.sun.max.asm.amd64.AMD64GeneralRegister8;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister8.AL;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister8.CL;
+import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.FP_D8;
+import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.FP_D9;
+import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.FP_DA;
+import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.FP_DB;
+import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.FP_DC;
+import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.FP_DD;
+import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.FP_DE;
+import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.FP_DF;
+import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.GROUP_1;
+import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.GROUP_2;
+import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.GROUP_3b;
+import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.GROUP_3v;
+import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.GROUP_4;
+import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.GROUP_5a;
+import static com.sun.max.asm.gen.cisc.amd64.AMD64ModRMGroup.GROUP_5b;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.M;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Eb;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Ed;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Ev;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Ew;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Fv;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Gb;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Gq;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Gv;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Ib;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Iv;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Iw;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Iz;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Jb;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Jz;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Nb;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Nv;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Ob;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Ov;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Sw;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Xb;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Xv;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Xz;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Yb;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Yv;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Yz;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.b;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.v;
+import static com.sun.max.asm.gen.cisc.x86.RegisterOperandCode.eAX;
+import static com.sun.max.asm.gen.cisc.x86.RegisterOperandCode.rAX;
+import com.sun.max.asm.gen.cisc.x86.X86InstructionDescriptionCreator;
+import static com.sun.max.asm.gen.cisc.x86.X86Opcode.ADDRESS_SIZE;
+import static com.sun.max.asm.gen.cisc.x86.X86Opcode.FWAIT;
+import static com.sun.max.asm.gen.cisc.x86.X86Opcode.LOCK;
+import static com.sun.max.asm.gen.cisc.x86.X86Opcode.OPERAND_SIZE;
+import static com.sun.max.asm.gen.cisc.x86.X86Opcode.REPE;
+import static com.sun.max.asm.gen.cisc.x86.X86Opcode.REPNE;
+import static com.sun.max.asm.gen.cisc.x86.X86Opcode.SEG_CS;
+import static com.sun.max.asm.gen.cisc.x86.X86Opcode.SEG_FS;
+import static com.sun.max.asm.gen.cisc.x86.X86Opcode.SEG_GS;
+import com.sun.max.lang.WordWidth;
+import static com.sun.max.util.HexByte._00;
+import static com.sun.max.util.HexByte._01;
+import static com.sun.max.util.HexByte._02;
+import static com.sun.max.util.HexByte._03;
+import static com.sun.max.util.HexByte._04;
+import static com.sun.max.util.HexByte._05;
+import static com.sun.max.util.HexByte._08;
+import static com.sun.max.util.HexByte._09;
+import static com.sun.max.util.HexByte._0A;
+import static com.sun.max.util.HexByte._0B;
+import static com.sun.max.util.HexByte._0C;
+import static com.sun.max.util.HexByte._0D;
+import static com.sun.max.util.HexByte._10;
+import static com.sun.max.util.HexByte._11;
+import static com.sun.max.util.HexByte._12;
+import static com.sun.max.util.HexByte._13;
+import static com.sun.max.util.HexByte._14;
+import static com.sun.max.util.HexByte._15;
+import static com.sun.max.util.HexByte._18;
+import static com.sun.max.util.HexByte._19;
+import static com.sun.max.util.HexByte._1A;
+import static com.sun.max.util.HexByte._1B;
+import static com.sun.max.util.HexByte._1C;
+import static com.sun.max.util.HexByte._1D;
+import static com.sun.max.util.HexByte._20;
+import static com.sun.max.util.HexByte._21;
+import static com.sun.max.util.HexByte._22;
+import static com.sun.max.util.HexByte._23;
+import static com.sun.max.util.HexByte._24;
+import static com.sun.max.util.HexByte._25;
+import static com.sun.max.util.HexByte._28;
+import static com.sun.max.util.HexByte._29;
+import static com.sun.max.util.HexByte._2A;
+import static com.sun.max.util.HexByte._2B;
+import static com.sun.max.util.HexByte._2C;
+import static com.sun.max.util.HexByte._2D;
+import static com.sun.max.util.HexByte._2F;
+import static com.sun.max.util.HexByte._30;
+import static com.sun.max.util.HexByte._31;
+import static com.sun.max.util.HexByte._32;
+import static com.sun.max.util.HexByte._33;
+import static com.sun.max.util.HexByte._34;
+import static com.sun.max.util.HexByte._35;
+import static com.sun.max.util.HexByte._38;
+import static com.sun.max.util.HexByte._39;
+import static com.sun.max.util.HexByte._3A;
+import static com.sun.max.util.HexByte._3B;
+import static com.sun.max.util.HexByte._3C;
+import static com.sun.max.util.HexByte._3D;
+import static com.sun.max.util.HexByte._50;
+import static com.sun.max.util.HexByte._58;
+import static com.sun.max.util.HexByte._63;
+import static com.sun.max.util.HexByte._68;
+import static com.sun.max.util.HexByte._69;
+import static com.sun.max.util.HexByte._6A;
+import static com.sun.max.util.HexByte._6B;
+import static com.sun.max.util.HexByte._6C;
+import static com.sun.max.util.HexByte._6D;
+import static com.sun.max.util.HexByte._6E;
+import static com.sun.max.util.HexByte._6F;
+import static com.sun.max.util.HexByte._70;
+import static com.sun.max.util.HexByte._71;
+import static com.sun.max.util.HexByte._72;
+import static com.sun.max.util.HexByte._73;
+import static com.sun.max.util.HexByte._74;
+import static com.sun.max.util.HexByte._75;
+import static com.sun.max.util.HexByte._76;
+import static com.sun.max.util.HexByte._77;
+import static com.sun.max.util.HexByte._78;
+import static com.sun.max.util.HexByte._79;
+import static com.sun.max.util.HexByte._7A;
+import static com.sun.max.util.HexByte._7B;
+import static com.sun.max.util.HexByte._7C;
+import static com.sun.max.util.HexByte._7D;
+import static com.sun.max.util.HexByte._7E;
+import static com.sun.max.util.HexByte._7F;
+import static com.sun.max.util.HexByte._80;
+import static com.sun.max.util.HexByte._81;
+import static com.sun.max.util.HexByte._83;
+import static com.sun.max.util.HexByte._84;
+import static com.sun.max.util.HexByte._85;
+import static com.sun.max.util.HexByte._86;
+import static com.sun.max.util.HexByte._87;
+import static com.sun.max.util.HexByte._88;
+import static com.sun.max.util.HexByte._89;
+import static com.sun.max.util.HexByte._8A;
+import static com.sun.max.util.HexByte._8B;
+import static com.sun.max.util.HexByte._8C;
+import static com.sun.max.util.HexByte._8D;
+import static com.sun.max.util.HexByte._8E;
+import static com.sun.max.util.HexByte._8F;
+import static com.sun.max.util.HexByte._90;
+import static com.sun.max.util.HexByte._98;
+import static com.sun.max.util.HexByte._99;
+import static com.sun.max.util.HexByte._9C;
+import static com.sun.max.util.HexByte._9D;
+import static com.sun.max.util.HexByte._9E;
+import static com.sun.max.util.HexByte._9F;
+import static com.sun.max.util.HexByte._A0;
+import static com.sun.max.util.HexByte._A1;
+import static com.sun.max.util.HexByte._A2;
+import static com.sun.max.util.HexByte._A3;
+import static com.sun.max.util.HexByte._A4;
+import static com.sun.max.util.HexByte._A5;
+import static com.sun.max.util.HexByte._A6;
+import static com.sun.max.util.HexByte._A7;
+import static com.sun.max.util.HexByte._A8;
+import static com.sun.max.util.HexByte._A9;
+import static com.sun.max.util.HexByte._AA;
+import static com.sun.max.util.HexByte._AB;
+import static com.sun.max.util.HexByte._AC;
+import static com.sun.max.util.HexByte._AD;
+import static com.sun.max.util.HexByte._AE;
+import static com.sun.max.util.HexByte._AF;
+import static com.sun.max.util.HexByte._B0;
+import static com.sun.max.util.HexByte._B8;
+import static com.sun.max.util.HexByte._C0;
+import static com.sun.max.util.HexByte._C1;
+import static com.sun.max.util.HexByte._C2;
+import static com.sun.max.util.HexByte._C3;
+import static com.sun.max.util.HexByte._C6;
+import static com.sun.max.util.HexByte._C7;
+import static com.sun.max.util.HexByte._C8;
+import static com.sun.max.util.HexByte._C9;
+import static com.sun.max.util.HexByte._CA;
+import static com.sun.max.util.HexByte._CB;
+import static com.sun.max.util.HexByte._CC;
+import static com.sun.max.util.HexByte._CD;
+import static com.sun.max.util.HexByte._CF;
+import static com.sun.max.util.HexByte._D0;
+import static com.sun.max.util.HexByte._D1;
+import static com.sun.max.util.HexByte._D2;
+import static com.sun.max.util.HexByte._D3;
+import static com.sun.max.util.HexByte._D7;
+import static com.sun.max.util.HexByte._D8;
+import static com.sun.max.util.HexByte._D9;
+import static com.sun.max.util.HexByte._DA;
+import static com.sun.max.util.HexByte._DB;
+import static com.sun.max.util.HexByte._DC;
+import static com.sun.max.util.HexByte._DD;
+import static com.sun.max.util.HexByte._DE;
+import static com.sun.max.util.HexByte._DF;
+import static com.sun.max.util.HexByte._E0;
+import static com.sun.max.util.HexByte._E1;
+import static com.sun.max.util.HexByte._E2;
+import static com.sun.max.util.HexByte._E3;
+import static com.sun.max.util.HexByte._E4;
+import static com.sun.max.util.HexByte._E5;
+import static com.sun.max.util.HexByte._E6;
+import static com.sun.max.util.HexByte._E7;
+import static com.sun.max.util.HexByte._E8;
+import static com.sun.max.util.HexByte._E9;
+import static com.sun.max.util.HexByte._EB;
+import static com.sun.max.util.HexByte._EC;
+import static com.sun.max.util.HexByte._ED;
+import static com.sun.max.util.HexByte._EE;
+import static com.sun.max.util.HexByte._EF;
+import static com.sun.max.util.HexByte._F1;
+import static com.sun.max.util.HexByte._F4;
+import static com.sun.max.util.HexByte._F5;
+import static com.sun.max.util.HexByte._F6;
+import static com.sun.max.util.HexByte._F7;
+import static com.sun.max.util.HexByte._F8;
+import static com.sun.max.util.HexByte._F9;
+import static com.sun.max.util.HexByte._FA;
+import static com.sun.max.util.HexByte._FB;
+import static com.sun.max.util.HexByte._FC;
+import static com.sun.max.util.HexByte._FD;
+import static com.sun.max.util.HexByte._FE;
+import static com.sun.max.util.HexByte._FF;
 
 /**
  * @author Bernd Mathiske
@@ -32,38 +258,38 @@ public class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
         define(_03, "ADD", Gv, Ev);
         define(_04, "ADD", AL, Ib);
         define(_05, "ADD", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
-        
+
         define(_10, "ADC", Eb, Gb);
         define(_11, "ADC", Ev, Gv);
         define(_12, "ADC", Gb, Eb);
         define(_13, "ADC", Gv, Ev);
         define(_14, "ADC", AL, Ib);
         define(_15, "ADC", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
-        
+
         define(_20, "AND", Eb, Gb);
         define(_21, "AND", Ev, Gv);
         define(_22, "AND", Gb, Eb);
         define(_23, "AND", Gv, Ev);
         define(_24, "AND", AL, Ib);
         define(_25, "AND", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
-        
+
         define(_30, "XOR", Eb, Gb);
         define(_31, "XOR", Ev, Gv);
         define(_32, "XOR", Gb, Eb);
         define(_33, "XOR", Gv, Ev);
         define(_34, "XOR", AL, Ib);
         define(_35, "XOR", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
-        
+
         define(_50, "PUSH", Nv).setDefaultOperandSize(WordWidth.BITS_64);
 
         define(_63, "MOVSXD", Gq, Ed).requireOperandSize(WordWidth.BITS_64).beNotExternallyTestable(); // REX.W == 1, gas does not seem to know it
         define(_63, "MOVZXD", Gq, Ed).requireOperandSize(WordWidth.BITS_32).beNotExternallyTestable(); // REX.W == 0, we made this extra mnemonic up
-        
+
         define(SEG_FS, "SEG_FS").beNotExternallyTestable(); // prefix
         define(SEG_GS, "SEG_GS").beNotExternallyTestable(); // prefix
         define(OPERAND_SIZE, "OPERAND_SIZE").beNotDisassemblable().beNotExternallyTestable(); // prefix
         define(ADDRESS_SIZE, "ADDRESS_SIZE").beNotDisassemblable().beNotExternallyTestable(); // prefix
-        
+
         define(_70, "JO", Jb).setDefaultOperandSize(WordWidth.BITS_64);
         define(_71, "JNO", Jb).setDefaultOperandSize(WordWidth.BITS_64);
         define(_72, "JB", Jb).setDefaultOperandSize(WordWidth.BITS_64);
@@ -87,7 +313,7 @@ public class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
         define(_A0, "MOV", AL, Ob).beNotExternallyTestable();
         define(_A1, "MOV", rAX, Ov).beNotExternallyTestable();
         define(_A2, "MOV", Ob, AL).beNotExternallyTestable();
-        define(_A3, "MOV", Ov, rAX).beNotExternallyTestable(); 
+        define(_A3, "MOV", Ov, rAX).beNotExternallyTestable();
         define(_A4, "MOVS", Yb, Xb);
         define(_A5, "MOVS", Yv, Xv);
         define(_A6, "CMPS", Yb, Xb);
@@ -127,7 +353,7 @@ public class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
         define(_F6, GROUP_3b, b);
         define(_F7, GROUP_3v, v);
     }
-    
+
     private void create_high() {
         define(_08, "OR", Eb, Gb);
         define(_09, "OR", Ev, Gv);
@@ -135,14 +361,14 @@ public class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
         define(_0B, "OR", Gv, Ev);
         define(_0C, "OR", AL, Ib);
         define(_0D, "OR", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
-        
+
         define(_18, "SBB", Eb, Gb);
         define(_19, "SBB", Ev, Gv);
         define(_1A, "SBB", Gb, Eb);
         define(_1B, "SBB", Gv, Ev);
         define(_1C, "SBB", AL, Ib);
         define(_1D, "SBB", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
-        
+
         define(_28, "SUB", Eb, Gb);
         define(_29, "SUB", Ev, Gv);
         define(_2A, "SUB", Gb, Eb);
@@ -158,7 +384,7 @@ public class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
         define(_3B, "CMP", Gv, Ev);
         define(_3C, "CMP", AL, Ib);
         define(_3D, "CMP", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
-        
+
         define(_58, "POP", Nv).setDefaultOperandSize(WordWidth.BITS_64);
 
         define(_68, "PUSH", Iz.externalRange(Short.MAX_VALUE + 1, Integer.MAX_VALUE)).setDefaultOperandSize(WordWidth.BITS_64); // cannot test 16-bit version, because gas does not generate it
@@ -228,7 +454,7 @@ public class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
 
         // We found out that '_66 _E8 ...' is NOT supported by our Opteron CPUs, despite footnote 6 on page 418 of the General Purpose Instruction Manual for AMD64:
         define(_E8, "CALL", Jz).setDefaultOperandSize(WordWidth.BITS_64).requireOperandSize(WordWidth.BITS_64); // disabling 0x66 prefix
-        
+
         define(_E9, "JMP", Jz).setDefaultOperandSize(WordWidth.BITS_64);
         define(_EB, "JMP", Jb).setDefaultOperandSize(WordWidth.BITS_64);
         define(_EC, "IN", AL, DX);
@@ -246,7 +472,7 @@ public class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
         define(_FF, GROUP_5a);
         define(_FF, GROUP_5b).setDefaultOperandSize(WordWidth.BITS_64);
     }
-    
+
     OneByteOpcodeMap() {
         super(AMD64Assembly.ASSEMBLY);
         create_low();

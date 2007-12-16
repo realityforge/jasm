@@ -4,11 +4,16 @@
 /*VCSID=bdabe898-1657-46ee-90cb-2f2ae6682aea*/
 package com.sun.max.ide;
 
-import java.io.*;
-
-import com.sun.max.*;
-import com.sun.max.collect.*;
-import com.sun.max.program.*;
+import com.sun.max.MaxPackage;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.program.Classpath;
+import com.sun.max.program.ProgramError;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 /**
  * Software project-dependent configuration. This is all derived from the
@@ -27,18 +32,18 @@ import com.sun.max.program.*;
 public final class JavaProject {
 
     private JavaProject() {
-        
+
     }
-    
+
     public static final String SOURCE_FILE_EXTENSION = ".java";
 
     public static final String SOURCE_DIRECTORY_NAME = "src";
 
     public static final String TEST_SOURCE_DIRECTORY_NAME = "test";
-    
+
     /**
      * Gets the paths on which all the class files produced by the current Java project can be found.
-     * 
+     *
      * @param includeDependencies  if true, the returned path includes the location of the
      *                             class files produced by each of the projects that the current
      *                             project depends upon
@@ -72,7 +77,7 @@ public final class JavaProject {
 
     /**
      * Gets the paths on which all the Java source files for the current Java project can be found.
-     * 
+     *
      * @param includeDependencies  if true, the returned path includes the location of the
      *                             Java source files for each of the projects that the current
      *                             project depends upon
@@ -83,7 +88,7 @@ public final class JavaProject {
         for (String path : classPath.paths()) {
             final File classesDirectory = new File(path);
             final File projectDirectory = IDE.current().findProjectDirectoryFromClasses(classesDirectory);
-            
+
             if (projectDirectory != null) {
                 final File srcDirectory = new File(projectDirectory, SOURCE_DIRECTORY_NAME);
                 if (srcDirectory.exists() && srcDirectory.isDirectory()) {
@@ -92,7 +97,7 @@ public final class JavaProject {
                         break;
                     }
                 }
-                
+
                 final File testDirectory = new File(projectDirectory, TEST_SOURCE_DIRECTORY_NAME);
                 if (testDirectory.exists() && testDirectory.isDirectory()) {
                     sourceDirectories.append(testDirectory.getPath());
@@ -102,7 +107,7 @@ public final class JavaProject {
         ProgramError.check(!sourceDirectories.isEmpty(), "could not find path to Java project sources");
         return new Classpath(sourceDirectories);
     }
-    
+
     public static File findSourceDirectory() {
         return new File(getSourcePath(false).paths().first());
     }
@@ -114,7 +119,7 @@ public final class JavaProject {
         }
         return path;
     }
-    
+
     public static InputStream findJavaSourceFile(String className) throws FileNotFoundException {
         return new FileInputStream(findSourceDirectory() + File.separator + className.replace('.', File.separatorChar) + SOURCE_FILE_EXTENSION);
     }

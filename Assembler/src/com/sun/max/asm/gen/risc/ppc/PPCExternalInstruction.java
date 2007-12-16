@@ -4,19 +4,20 @@
 /*VCSID=3b559590-3fa8-4f6d-928a-6d0aae092737*/
 package com.sun.max.asm.gen.risc.ppc;
 
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.*;
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.dis.DisassembledLabel;
+import com.sun.max.asm.dis.GlobalLabelMapper;
+import com.sun.max.asm.gen.risc.RiscExternalInstruction;
+import com.sun.max.collect.Sequence;
 
 /**
  * Output of PowerPC instructions in external assembler format.
- * 
+ *
  * @author Bernd Mathiske
  * @author Doug Simon
  */
 public class PPCExternalInstruction extends RiscExternalInstruction {
-    
+
     PPCExternalInstruction(PPCTemplate template, Sequence<Argument> arguments) {
         super(template, arguments);
     }
@@ -28,7 +29,7 @@ public class PPCExternalInstruction extends RiscExternalInstruction {
     public PPCExternalInstruction(PPCTemplate template, Sequence<Argument> arguments, int offset, Sequence<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
         super(template, arguments, offset, labels, globalLabelMapper);
     }
-    
+
     @Override
     public boolean isAbsoluteBranch() {
         // An absolute branch instruction in PowerPC has an AA field with its bit set

@@ -4,13 +4,13 @@
 /*VCSID=c83bfbb7-79e4-480a-b01d-c6071078362b*/
 package com.sun.max.asm.sparc;
 
-import com.sun.max.asm.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.AbstractSymbolicArgument;
+import com.sun.max.util.Symbolizer;
 
 /**
  * The class defining the symbolic identifiers for the privileged registers
  * accessed by the Read Privileged Register and Write Privileged Register
- * instructions. 
+ * instructions.
  *
  * @author Bernd Mathiske
  * @author Doug Simon
@@ -20,13 +20,13 @@ public class PrivilegedRegister extends AbstractSymbolicArgument {
     PrivilegedRegister(int value) {
         super(value);
     }
-    
+
     public static class Writable extends PrivilegedRegister {
         Writable(int value) {
             super(value);
-        }        
+        }
     }
-    
+
     public static final Writable TPC = new Writable(0);
     public static final Writable TNPC = new Writable(1);
     public static final Writable TSTATE = new Writable(2);
@@ -49,7 +49,7 @@ public class PrivilegedRegister extends AbstractSymbolicArgument {
     public static final Writable WSTATE = new Writable(14);
     public static final PrivilegedRegister FQ = new PrivilegedRegister(15);
     public static final PrivilegedRegister VER = new PrivilegedRegister(31);
-    
+
     public static final Symbolizer<PrivilegedRegister> SYMBOLIZER = Symbolizer.Static.initialize(PrivilegedRegister.class);
     public static final Symbolizer<Writable> WRITE_ONLY_SYMBOLIZER = Symbolizer.Static.initialize(PrivilegedRegister.class, Writable.class);
 }

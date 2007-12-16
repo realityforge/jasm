@@ -4,9 +4,9 @@
 /*VCSID=a5052f13-0522-4cab-9ed1-a7f87c28262e*/
 package test.com.sun.max.asm.ia32;
 
-import junit.framework.*;
-
-import org.junit.runner.*;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
 
 /**
  * @author Bernd Mathiske
@@ -29,5 +29,5 @@ public final class AllTests {
         //$JUnit-END$
         return suite;
     }
-    
+
 }

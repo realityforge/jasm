@@ -4,10 +4,14 @@
 /*VCSID=2c19481b-f940-40b0-bb90-27288678f475*/
 package com.sun.max.program;
 
-import java.io.*;
-
-import com.sun.max.io.*;
-import com.sun.max.program.option.*;
+import com.sun.max.io.MultiOutputStream;
+import com.sun.max.program.option.PositiveIntegerProgramOption;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 /**
  * Tracing output for debugging purposes. No performance impact when disabled. Some performance impact when active, even
@@ -18,7 +22,7 @@ import com.sun.max.program.option.*;
 public class Trace extends PositiveIntegerProgramOption {
 
     private static PrintStream _stream;
-    
+
     public static PrintStream stream() {
         return _stream;
     }

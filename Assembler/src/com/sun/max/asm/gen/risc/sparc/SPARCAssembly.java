@@ -4,10 +4,10 @@
 /*VCSID=4141c816-6402-47a8-b6da-c1d3131bb9bb*/
 package com.sun.max.asm.gen.risc.sparc;
 
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.asm.gen.risc.bitRange.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.InstructionSet;
+import com.sun.max.asm.gen.risc.RiscAssembly;
+import com.sun.max.asm.gen.risc.bitRange.BitRangeOrder;
+import com.sun.max.collect.Sequence;
 
 /**
  * @author Bernd Mathiske
@@ -17,12 +17,12 @@ import com.sun.max.collect.*;
 public final class SPARCAssembly extends RiscAssembly<SPARCTemplate> {
 
     private static final boolean GENERATING_DEPRECATED_INSTRUCTIONS = true;
-    private static final boolean GENERATING_V9_INSTRUCTIONS = true;    
-    
+    private static final boolean GENERATING_V9_INSTRUCTIONS = true;
+
     private SPARCAssembly() {
         super(InstructionSet.SPARC, SPARCTemplate.class);
     }
-    
+
     public boolean generatingDeprecatedInstructions() {
         return GENERATING_DEPRECATED_INSTRUCTIONS;
     }
@@ -31,7 +31,7 @@ public final class SPARCAssembly extends RiscAssembly<SPARCTemplate> {
         return GENERATING_V9_INSTRUCTIONS;
     }
 
-    @Override 
+    @Override
     public BitRangeOrder bitRangeEndianness() {
         return BitRangeOrder.DESCENDING;
     }
@@ -52,6 +52,6 @@ public final class SPARCAssembly extends RiscAssembly<SPARCTemplate> {
         creator.createTemplates(new SyntheticInstructions(creator));
         return creator.templates();
     }
-    
+
     public static final SPARCAssembly ASSEMBLY = new SPARCAssembly();
 }

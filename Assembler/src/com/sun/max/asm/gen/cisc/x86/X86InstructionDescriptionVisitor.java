@@ -4,11 +4,18 @@
 /*VCSID=e4fca323-e4e2-46ae-aea5-8e95699e0cfa*/
 package com.sun.max.asm.gen.cisc.x86;
 
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.cisc.*;
-import com.sun.max.asm.x86.*;
-import com.sun.max.program.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.gen.ArgumentRange;
+import com.sun.max.asm.gen.ExternalOmission;
+import com.sun.max.asm.gen.ImplicitOperand;
+import com.sun.max.asm.gen.InstructionConstraint;
+import com.sun.max.asm.gen.InstructionDescription;
+import com.sun.max.asm.gen.TestArgumentExclusion;
+import com.sun.max.asm.gen.cisc.TemplateNotNeededException;
+import com.sun.max.asm.x86.FPStackRegister;
+import com.sun.max.asm.x86.GeneralRegister;
+import com.sun.max.asm.x86.SegmentRegister;
+import com.sun.max.program.ProgramError;
+import com.sun.max.util.HexByte;
 
 /**
  * Almost like the visitor pattern.
@@ -21,7 +28,7 @@ public interface X86InstructionDescriptionVisitor {
     void visitOperandCode(OperandCode operandCode, X86Operand.Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) throws TemplateNotNeededException;
 
     void visitAddressingMethodCode(AddressingMethodCode addressingMethodCode, X86Operand.Designation designation) throws TemplateNotNeededException;
-    
+
     void visitOperandTypeCode(OperandTypeCode operandTypeCode) throws TemplateNotNeededException;
 
     void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, X86Operand.Designation designation, ImplicitOperand.ExternalPresence externalPresence);
@@ -33,36 +40,36 @@ public interface X86InstructionDescriptionVisitor {
     void visitModRMGroup(ModRMGroup modRMGroup) throws TemplateNotNeededException;
 
     void visitModCase(X86TemplateContext.ModCase modCase) throws TemplateNotNeededException;
-    
+
     void visitFloatingPointOperandCode(FloatingPointOperandCode floatingPointOperandCode, X86Operand.Designation designation, TestArgumentExclusion testArgumentExclusion) throws TemplateNotNeededException;
-    
+
     void visitFPStackRegister(FPStackRegister fpStackRegister, X86Operand.Designation designation);
-    
+
     void visitString(String string);
 
     void visitInteger(Integer integer, X86Operand.Designation designation);
 
-    void visitHexByte(HexByte hexByte) throws TemplateNotNeededException;        
-    
+    void visitHexByte(HexByte hexByte) throws TemplateNotNeededException;
+
     void visitInstructionConstraint(InstructionConstraint constraint);
-    
+
     public static final class Static {
-        private Static() {         
+        private Static() {
         }
-        
+
         /**
          * @return whether the specification constitutes an operand
          * @throws TemplateNotNeededException
          */
-        private static boolean visitSpecification(X86InstructionDescriptionVisitor visitor, Object specification, 
-                                                  final X86Operand.Designation designation, ArgumentRange argumentRange, 
+        private static boolean visitSpecification(X86InstructionDescriptionVisitor visitor, Object specification,
+                                                  final X86Operand.Designation designation, ArgumentRange argumentRange,
                                                   final TestArgumentExclusion testArgumentExclusion, ImplicitOperand.ExternalPresence externalPresence) throws TemplateNotNeededException {
             if (specification instanceof OperandCode) {
                 visitor.visitOperandCode((OperandCode) specification, designation, argumentRange, testArgumentExclusion);
                 return true;
             } else if (specification instanceof AddressingMethodCode) {
                 visitor.visitAddressingMethodCode((AddressingMethodCode) specification, designation);
-                return true;                
+                return true;
             } else if (specification instanceof OperandTypeCode) {
                 visitor.visitOperandTypeCode((OperandTypeCode) specification);
                 return false;
@@ -110,7 +117,7 @@ public interface X86InstructionDescriptionVisitor {
                 return false;
             }
         }
-                
+
         /**
          * @return whether this instruction description is to be used to create a template in the given context
          */
@@ -119,7 +126,7 @@ public interface X86InstructionDescriptionVisitor {
                 int designationIndex = 0;
                 for (Object specification : instructionDescription) {
                     final X86Operand.Designation designation = X86Operand.Designation.values()[designationIndex];
-                    if (visitSpecification(visitor, specification, designation, ArgumentRange.UNSPECIFIED, TestArgumentExclusion.NONE, ImplicitOperand.ExternalPresence.EXPLICIT)) {                        
+                    if (visitSpecification(visitor, specification, designation, ArgumentRange.UNSPECIFIED, TestArgumentExclusion.NONE, ImplicitOperand.ExternalPresence.EXPLICIT)) {
                         designationIndex++;
                     }
                 }

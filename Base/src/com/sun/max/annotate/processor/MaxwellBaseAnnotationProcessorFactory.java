@@ -4,14 +4,19 @@
 /*VCSID=4be9c1ab-eaf8-4251-8c60-c17b635e1331*/
 package com.sun.max.annotate.processor;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.mirror.apt.*;
-import com.sun.mirror.declaration.*;
+import com.sun.max.annotate.AnnotationProcessorComponent;
+import com.sun.max.annotate.Implement;
+import com.sun.mirror.apt.AnnotationProcessor;
+import com.sun.mirror.apt.AnnotationProcessorEnvironment;
+import com.sun.mirror.apt.AnnotationProcessorFactory;
+import com.sun.mirror.apt.AnnotationProcessors;
+import com.sun.mirror.declaration.AnnotationTypeDeclaration;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Set;
 
 /**
- * Factory for creating processors of annotations defined in the MaxwellBase project. 
+ * Factory for creating processors of annotations defined in the MaxwellBase project.
  *
  * @author Doug Simon
  */
@@ -25,7 +30,7 @@ public class MaxwellBaseAnnotationProcessorFactory implements AnnotationProcesso
         }
         return new MaxwellBaseAnnotationProcessor(environment);
     }
-    
+
     @Implement(AnnotationProcessorFactory.class)
     public Collection<String> supportedAnnotationTypes() {
         return Arrays.asList("com.sun.max.annotate.*");

@@ -4,9 +4,6 @@
 /*VCSID=aea8a06b-7a48-4e67-b889-f0320bbe0717*/
 package com.sun.max.asm;
 
-import com.sun.max.annotate.*;
-
-
 /**
  * An argument that corresponds to an optional mnemonic suffix in the external assembler syntax.
  *

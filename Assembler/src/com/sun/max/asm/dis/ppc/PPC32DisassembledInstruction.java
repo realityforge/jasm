@@ -4,12 +4,11 @@
 /*VCSID=17ae4415-01ba-40b7-8a8f-f6b8e2a64c9b*/
 package com.sun.max.asm.dis.ppc;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.ppc.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.dis.Address32Instruction;
+import com.sun.max.asm.gen.ImmediateArgument;
+import com.sun.max.asm.gen.risc.ppc.PPCTemplate;
+import com.sun.max.collect.Sequence;
 
 /**
  *

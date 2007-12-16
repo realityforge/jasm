@@ -4,13 +4,14 @@
 /*VCSID=0b885364-8e53-4874-a69e-b768cea1532a*/
 package com.sun.max.asm.gen;
 
-import java.lang.reflect.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.SymbolicArgument;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.Arrays;
+import com.sun.max.program.ProgramError;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 /**
  * An instruction constraint can be specified as part of an {@link InstructionDescription} to specify a constraint on one

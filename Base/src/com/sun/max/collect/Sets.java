@@ -4,9 +4,10 @@
 /*VCSID=89fb4b21-d209-49a8-98ce-ed07ffe4a64f*/
 package com.sun.max.collect;
 
-import java.util.*;
-
-import com.sun.max.util.*;
+import com.sun.max.util.Predicate;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Set operations that one could expect in java.util.
@@ -16,9 +17,9 @@ import com.sun.max.util.*;
 public final class Sets {
 
     private Sets() {
-        
+
     }
-    
+
     /**
      * Gets an immutable empty set.
      */
@@ -55,7 +56,7 @@ public final class Sets {
         }
         return result;
     }
-    
+
     public static <From_Type, To_Type> Set<To_Type> map(Set<From_Type> from, Class<To_Type> toType, MapFunction<From_Type, To_Type> mapFunction) {
         final Set<To_Type> to = new HashSet<To_Type>();
         for (From_Type element : from) {

@@ -4,58 +4,58 @@
 /*VCSID=c3242493-7af3-4149-be74-2cae04039d72*/
 package com.sun.max.collect;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.lang.*;
+import com.sun.max.annotate.Implement;
 import com.sun.max.lang.Arrays;
+import com.sun.max.lang.StaticLoophole;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * A sequence that wraps a generic array.
  * Thus instantiation does not require any type cast quirks.
- * 
+ *
  * @author Bernd Mathiske
  */
 public class ArraySequence<Element_Type> implements MutableSequence<Element_Type> {
 
     private final Element_Type[] _array;
-    
-    public ArraySequence(Element_Type... array) {    
+
+    public ArraySequence(Element_Type... array) {
         super();
         _array = array;
     }
-    
+
     public static <T> Sequence<T> of(T... elements) {
         return new ArraySequence<T>(elements.clone());
     }
-    
-    public ArraySequence(int length) {    
+
+    public ArraySequence(int length) {
         super();
         final Class<Element_Type[]> arrayType = null;
         _array = StaticLoophole.cast(arrayType, new Object[length]);
     }
-    
-    public ArraySequence(Collection<Element_Type> collection) {    
+
+    public ArraySequence(Collection<Element_Type> collection) {
         super();
         final Class<Element_Type[]> arrayType = null;
         _array = StaticLoophole.cast(arrayType, collection.toArray());
     }
-    
+
     @Implement(Sequence.class)
     public boolean isEmpty() {
         return _array.length == 0;
     }
-    
+
     @Implement(Sequence.class)
     public int length() {
         return _array.length;
     }
-    
+
     @Implement(Sequence.class)
     public Element_Type first() {
         return _array[0];
     }
-    
+
     @Implement(Sequence.class)
     public Element_Type last() {
         return _array[_array.length - 1];
@@ -65,14 +65,14 @@ public class ArraySequence<Element_Type> implements MutableSequence<Element_Type
     public Element_Type get(int index) {
         return _array[index];
     }
-    
+
     @Implement(MutableSequence.class)
     public Element_Type set(int index, Element_Type value) {
         final Element_Type previousValue = _array[index];
         _array[index] = value;
         return previousValue;
     }
-    
+
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof Sequence)) {
@@ -99,12 +99,12 @@ public class ArraySequence<Element_Type> implements MutableSequence<Element_Type
         }
         return result;
     }
-        
+
     @Implement(Sequence.class)
     public Iterator<Element_Type> iterator() {
         return Arrays.iterable(_array).iterator();
     }
-    
+
     @Implement(Sequence.class)
     @Override
     public Sequence<Element_Type> clone() {
@@ -123,9 +123,9 @@ public class ArraySequence<Element_Type> implements MutableSequence<Element_Type
     public <To_Type> Sequence<To_Type> map(Class<To_Type> toType, MapFunction<Element_Type, To_Type> mapFunction) {
         return map(this, toType, mapFunction);
     }
-        
+
     @Override
     public String toString() {
         return Arrays.toString(_array, ", ");
-    }    
+    }
 }

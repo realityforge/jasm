@@ -4,12 +4,16 @@
 /*VCSID=42206d76-2a94-46d3-ba28-0cfebfe18bcc*/
 package com.sun.max.asm.gen;
 
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.ArraySequence;
+import com.sun.max.collect.MutableSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.Arrays;
 
 /**
  * Wraps mere object arrays into instruction descriptions.
- * 
+ *
  * @author Bernd Mathiske
  * @author Doug Simon
  */
@@ -44,7 +48,7 @@ public abstract class InstructionDescriptionCreator<InstructionDescription_Type 
 
     /**
      * Sets the name of the architecture manual section for which instruction descriptions are
-     * currently being {@link #define defined}. 
+     * currently being {@link #define defined}.
      */
     public void setCurrentArchitectureManualSection(String section) {
         _currentArchitectureManualSection = section;

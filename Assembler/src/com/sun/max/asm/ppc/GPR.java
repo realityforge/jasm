@@ -4,7 +4,7 @@
 /*VCSID=110cdbb7-648e-4032-88d3-b908891b5b06*/
 package com.sun.max.asm.ppc;
 
-import com.sun.max.util.*;
+import com.sun.max.util.Symbolizer;
 
 /**
  * The general purpose registers.
@@ -56,6 +56,6 @@ public final class GPR extends ZeroOrRegister {
     public static final GPR R30 = new GPR("R30", 30);
     public static final GPR R31 = new GPR("R31", 31);
 
-    public static final Symbolizer<GPR> GPR_SYMBOLIZER = Symbolizer.Static.from(GPR.class, R0, SP, RTOC, R3, R4, R5, R6, R7, R8, R9, R10, 
+    public static final Symbolizer<GPR> GPR_SYMBOLIZER = Symbolizer.Static.from(GPR.class, R0, SP, RTOC, R3, R4, R5, R6, R7, R8, R9, R10,
                     R11, R12, R13, R14, R15, R16, R17, R18, R20, R21, R22, R23, R24, R25, R26, R27, R28, R29, R30, R31);
 }

@@ -4,15 +4,14 @@
 /*VCSID=6bb2987b-e8ef-4213-9d67-491c6e945f3f*/
 package com.sun.max.asm.gen;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.asm.gen.cisc.x86.*;
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.asm.gen.risc.field.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.gen.cisc.x86.X86InstructionDescriptionVisitor;
+import com.sun.max.asm.gen.risc.RiscInstructionDescriptionVisitor;
+import com.sun.max.asm.gen.risc.field.InputOperandField;
+import com.sun.max.collect.MutableSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.program.ProgramError;
+import java.util.Iterator;
 
 /**
  * A sequence of objects that describe group of closely related instructions. An

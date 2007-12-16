@@ -4,21 +4,23 @@
 /*VCSID=c92e02c5-d313-4d0e-92d3-280c74196848*/
 package com.sun.max.lang;
 
-import java.lang.reflect.*;
-
-import com.sun.max.collect.*;
-import com.sun.max.program.*;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.program.ProgramError;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 public interface StaticFieldName {
 
     String name();
 
     void setName(String name);
-    
+
     public interface StringFunction {
         String function(String string);
     }
-    
+
     public interface Procedure {
         void procedure(StaticFieldName staticFieldName);
     }

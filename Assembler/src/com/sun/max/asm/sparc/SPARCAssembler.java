@@ -4,14 +4,14 @@
 /*VCSID=1bb4e20a-3421-427b-9702-faaff0849fd9*/
 package com.sun.max.asm.sparc;
 
-import static com.sun.max.asm.sparc.GPR.*;
-
-import com.sun.max.asm.*;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.InstructionSet;
+import static com.sun.max.asm.sparc.GPR.G0;
 
 /**
  * The base class for the 32-bit and 64-bit SPARC assemblers. This class also defines
  * the more complex synthetic SPARC instructions.
- * 
+ *
  * @author Bernd Mathiske
  * @author Dave Ungar
  * @author Adam Spitz
@@ -23,9 +23,9 @@ public abstract class SPARCAssembler extends SPARCLabelAssembler {
     public final InstructionSet instructionSet() {
         return InstructionSet.SPARC;
     }
-    
+
     // Utilities:
-    
+
     private int hi(int i) {
         return (i & 0xfffffc00) >> 10;
     }
@@ -49,9 +49,9 @@ public abstract class SPARCAssembler extends SPARCLabelAssembler {
     private int ulo(long i) {
         return lo((int) (i >> 32));
     }
-    
+
     // Complex synthetic instructions according to appendix G3 of the SPARC Architecture Manual V9:
-    
+
     public void setuw(int imm, GPR rd) throws AssemblyException {
         if (lo(imm) == 0) {
             sethi(hi(imm), rd);

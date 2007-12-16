@@ -4,14 +4,17 @@
 /*VCSID=3ccd5459-5604-4e2b-942b-d3feac9ac286*/
 package com.sun.max.asm.gen.cisc.ia32;
 
-import com.sun.max.asm.gen.cisc.x86.*;
-import com.sun.max.asm.ia32.*;
-import com.sun.max.io.*;
-import com.sun.max.lang.*;
+import com.sun.max.asm.gen.cisc.x86.X86AssemblerGenerator;
+import com.sun.max.asm.gen.cisc.x86.X86TemplateContext;
+import com.sun.max.asm.ia32.IA32BaseRegister32;
+import com.sun.max.asm.ia32.IA32IndirectRegister16;
+import com.sun.max.asm.ia32.IA32IndirectRegister32;
+import com.sun.max.io.IndentWriter;
+import com.sun.max.lang.WordWidth;
 
 /**
  * Run this program to generate the IA32RawAssembler and IA32LabelAssembler classes.
- * 
+ *
  * @author Bernd Mathiske
  */
 public class IA32AssemblerGenerator extends X86AssemblerGenerator<IA32Template> {
@@ -45,9 +48,9 @@ public class IA32AssemblerGenerator extends X86AssemblerGenerator<IA32Template> 
             case SIB: {
                 switch (template.sibBaseCase()) {
                     case GENERAL_REGISTER:
-                        printModVariant(stream, template, IA32BaseRegister32.EBP_BASE);     
+                        printModVariant(stream, template, IA32BaseRegister32.EBP_BASE);
                         break;
-                    default: 
+                    default:
                         break;
                 }
                 break;
@@ -59,7 +62,7 @@ public class IA32AssemblerGenerator extends X86AssemblerGenerator<IA32Template> 
     }
 
     @Override
-    protected void printSibVariants(IndentWriter stream, IA32Template template) {        
+    protected void printSibVariants(IndentWriter stream, IA32Template template) {
         if (template.modCase() != null && template.modCase() != X86TemplateContext.ModCase.MOD_3 &&
                                           template.rmCase() == X86TemplateContext.RMCase.NORMAL &&
                                           template.addressSizeAttribute() == WordWidth.BITS_32) {

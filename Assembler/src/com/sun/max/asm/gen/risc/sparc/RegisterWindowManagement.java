@@ -4,7 +4,19 @@
 /*VCSID=3ae8cc88-e204-49be-9e7a-ecda1f52dcbb*/
 package com.sun.max.asm.gen.risc.sparc;
 
-import static com.sun.max.asm.gen.risc.sparc.SPARCFields.*;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_12_0;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_12_5;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_18_0;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_18_14;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_29_25;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rs1;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rs2;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._simm13;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.fcnc;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.i;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.op;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.op3;
 
 /**
  * @author Bernd Mathiske
@@ -34,7 +46,7 @@ public class RegisterWindowManagement extends SPARCInstructionDescriptionCreator
 
     RegisterWindowManagement(SPARCTemplateCreator templateCreator) {
         super(templateCreator);
-        
+
         setCurrentArchitectureManualSection("A.21");
         create_A21();
 

@@ -4,8 +4,9 @@
 /*VCSID=0214ac12-bedd-4991-8634-cfc2ed4db004*/
 package com.sun.max.asm.ppc;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
+import com.sun.max.asm.Assembler64;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.Label;
 
 /**
  * The concrete class for a 64-bit PowerPC assembler.

@@ -4,8 +4,9 @@
 /*VCSID=59620cd0-4825-403f-9ad0-9d1ad0379bd8*/
 package com.sun.max.program.option;
 
-import com.sun.max.*;
-import com.sun.max.program.*;
+import com.sun.max.MaxPackage;
+import com.sun.max.Scheme;
+import com.sun.max.program.ProgramError;
 
 /**
  * An assignment option that expects a package name for a value.
@@ -36,7 +37,7 @@ public abstract class PackageProgramOption<Package_Type extends MaxPackage> exte
     public Class<? extends Scheme> schemeType() {
         return _schemeType;
     }
-    
+
     @Override
     public String usage() {
         return prefix() + "=<package>";

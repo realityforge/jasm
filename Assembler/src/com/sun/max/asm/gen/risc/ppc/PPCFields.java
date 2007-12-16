@@ -4,16 +4,38 @@
 /*VCSID=996b28c2-9e0c-4566-9efa-9f5de5e445aa*/
 package com.sun.max.asm.gen.risc.ppc;
 
-import static com.sun.max.asm.gen.InstructionConstraint.Static.*;
-import static com.sun.max.asm.ppc.BOOperand.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.asm.gen.risc.bitRange.*;
-import com.sun.max.asm.gen.risc.field.*;
-import com.sun.max.asm.ppc.*;
-import com.sun.max.lang.*;
+import com.sun.max.asm.gen.Expression;
+import com.sun.max.asm.gen.ImmediateArgument;
+import com.sun.max.asm.gen.InstructionConstraint;
+import static com.sun.max.asm.gen.InstructionConstraint.Static.lt;
+import static com.sun.max.asm.gen.InstructionConstraint.Static.ne;
+import com.sun.max.asm.gen.risc.RiscConstant;
+import com.sun.max.asm.gen.risc.bitRange.AscendingBitRange;
+import com.sun.max.asm.gen.risc.field.AlignedImmediateOperandField;
+import com.sun.max.asm.gen.risc.field.BranchDisplacementOperandField;
+import com.sun.max.asm.gen.risc.field.ConstantField;
+import com.sun.max.asm.gen.risc.field.ImmediateOperandField;
+import com.sun.max.asm.gen.risc.field.InputOperandField;
+import com.sun.max.asm.gen.risc.field.OperandField;
+import com.sun.max.asm.gen.risc.field.OptionField;
+import com.sun.max.asm.gen.risc.field.ReservedField;
+import com.sun.max.asm.gen.risc.field.SymbolicOperandField;
+import com.sun.max.asm.ppc.BOOperand;
+import static com.sun.max.asm.ppc.BOOperand.CRFalse;
+import static com.sun.max.asm.ppc.BOOperand.CRTrue;
+import static com.sun.max.asm.ppc.BOOperand.CTRNonZero;
+import static com.sun.max.asm.ppc.BOOperand.CTRNonZero_CRFalse;
+import static com.sun.max.asm.ppc.BOOperand.CTRNonZero_CRTrue;
+import static com.sun.max.asm.ppc.BOOperand.CTRZero;
+import static com.sun.max.asm.ppc.BOOperand.CTRZero_CRFalse;
+import static com.sun.max.asm.ppc.BOOperand.CTRZero_CRTrue;
+import com.sun.max.asm.ppc.BranchPredictionBits;
+import com.sun.max.asm.ppc.CRF;
+import com.sun.max.asm.ppc.FPR;
+import com.sun.max.asm.ppc.GPR;
+import com.sun.max.asm.ppc.SPR;
+import com.sun.max.asm.ppc.ZeroOrRegister;
+import com.sun.max.lang.StaticFieldName;
 
 /**
  * The fields used in defining the PowerPC instruction templates.

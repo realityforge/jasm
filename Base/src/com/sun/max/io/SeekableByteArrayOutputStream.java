@@ -4,25 +4,25 @@
 /*VCSID=0104d7bb-4b4f-44c4-ba4a-3efcfb7c7bbd*/
 package com.sun.max.io;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
 
 /**
  * A {@link ByteArrayOutputStream} that can have its write position {@linkplain #seek(int) updated}.
- * 
+ *
  * @author Doug Simon
  */
 public class SeekableByteArrayOutputStream extends ByteArrayOutputStream {
-    
+
     private int _highestCount;
-    
+
     /**
-     * @see ByteArrayOutputStream#ByteArrayOutputStream() 
+     * @see ByteArrayOutputStream#ByteArrayOutputStream()
      */
     public SeekableByteArrayOutputStream() {
     }
 
     /**
-     * @see ByteArrayOutputStream#ByteArrayOutputStream(int) 
+     * @see ByteArrayOutputStream#ByteArrayOutputStream(int)
      */
     public SeekableByteArrayOutputStream(int size) {
         super(size);
@@ -31,7 +31,7 @@ public class SeekableByteArrayOutputStream extends ByteArrayOutputStream {
     /**
      * Updates the write position of this stream. The stream can only be repositioned between 0 and
      * the {@linkplain #endOfStream() end of the stream}.
-     * 
+     *
      * @param index
      *            the index to which the write position of this stream will be set
      * @throws IllegalArgumentException
@@ -53,7 +53,7 @@ public class SeekableByteArrayOutputStream extends ByteArrayOutputStream {
         }
         return _highestCount;
     }
-    
+
     @Override
     public void reset() {
         super.reset();

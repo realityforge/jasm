@@ -4,15 +4,20 @@
 /*VCSID=1a31fe07-4ce2-428b-ac77-2d9fa199cd80*/
 package com.sun.max.asm;
 
-import java.io.*;
-
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.IdentityHashSet;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.Longs;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.program.ProgramError;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * Super class of generated assemblers.
- * 
+ *
  * @author Bernd Mathiske
  * @author Greg Wright
  */
@@ -22,7 +27,7 @@ public abstract class Assembler {
     }
 
     public abstract InstructionSet instructionSet();
-    
+
     private int _currentOffset; // address of current instruction
 
     protected int currentOffset() {
@@ -34,7 +39,7 @@ public abstract class Assembler {
     protected ByteArrayOutputStream stream() {
         return _stream;
     }
-    
+
     protected void emitByte(byte byteValue) {
         _stream.write(byteValue);
         _currentOffset++;
@@ -57,15 +62,15 @@ public abstract class Assembler {
     protected IdentityHashSet<Label> boundLabels() {
         return _boundLabels;
     }
-    
+
     /**
      * Binds a given label to the address in the assembler's instruction stream of the start of the next instruction.
      * The assembler may update the address if any emitted instructions change lengths, so that this label keeps
      * addressing the same logical instruction.
-     * 
+     *
      * @param label
      *            the label that is to be bound to the address of the next instruction
-     * 
+     *
      * @see Label#fix32
      */
     public final void bindLabel(Label label) {
@@ -85,7 +90,7 @@ public abstract class Assembler {
     public Sequence<LabelInstruction> labelInstructions() {
         return _labelInstructions;
     }
-    
+
     void addFixedLengthLabelInstruction(LabelInstruction fixedLengthLabelInstruction) {
         _labelInstructions.append(fixedLengthLabelInstruction);
     }
@@ -164,7 +169,7 @@ public abstract class Assembler {
 
     /**
      * Writes the object code assembled so far to a given output stream.
-     * 
+     *
      * @throws AssemblyException
      *             if there any problem with binding labels to addresses
      */
@@ -178,13 +183,13 @@ public abstract class Assembler {
     public int upperLimitForCurrentOutputSize() {
         // A span-dependent instruction's offset operand can potentially grow from 8 bits to 32 bits.
         // Also, some instructions need an extra byte for encoding when not using an 8-bit operand.
-        // Together, this might enlarge every span-dependent instruction by maximally 4 bytes. 
+        // Together, this might enlarge every span-dependent instruction by maximally 4 bytes.
         return currentOffset() + (_spanDependentLabelInstructions.length() * 4);
     }
 
     /**
      * Returns the object code assembled so far in a byte array.
-     * 
+     *
      * @throws AssemblyException
      *             if there any problem with binding labels to addresses
      */
@@ -228,7 +233,7 @@ public abstract class Assembler {
             throw new IllegalArgumentException(expression);
         }
     }
-    
+
     /**
      * Calculate the difference between two Labels. This works whether the labels
      * are fixed or bound.
@@ -237,7 +242,7 @@ public abstract class Assembler {
     public int labelOffsetRelative(Label label, Label relativeTo) throws AssemblyException {
         return labelOffsetRelative(label, 0) - labelOffsetRelative(relativeTo, 0);
     }
-    
+
     /**
      * Calculate the difference between a Label and an offset within our assembled code.
      * @throws AssemblyException
@@ -264,7 +269,7 @@ public abstract class Assembler {
             }
         }
     }
-    
+
     /**
      * Calculate the difference between a Label and an instruction.
      * Different CPUs have different conventions for which end of an

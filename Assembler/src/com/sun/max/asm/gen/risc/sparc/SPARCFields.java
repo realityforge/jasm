@@ -4,12 +4,30 @@
 /*VCSID=b9db9ea8-5b95-4b73-b367-a54b1df54bcd*/
 package com.sun.max.asm.gen.risc.sparc;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.asm.gen.risc.field.*;
-import com.sun.max.asm.sparc.*;
-import com.sun.max.lang.*;
+import com.sun.max.asm.gen.Expression;
+import com.sun.max.asm.gen.risc.RiscConstant;
+import com.sun.max.asm.gen.risc.field.BranchDisplacementOperandField;
+import com.sun.max.asm.gen.risc.field.ConstantField;
+import com.sun.max.asm.gen.risc.field.IgnoredOperandField;
+import com.sun.max.asm.gen.risc.field.ImmediateOperandField;
+import com.sun.max.asm.gen.risc.field.ReservedField;
+import com.sun.max.asm.gen.risc.field.SymbolicOperandField;
+import com.sun.max.asm.sparc.AnnulBit;
+import com.sun.max.asm.sparc.BPr;
+import com.sun.max.asm.sparc.Bicc;
+import com.sun.max.asm.sparc.BranchPredictionBit;
+import com.sun.max.asm.sparc.DFPR;
+import com.sun.max.asm.sparc.FBfcc;
+import com.sun.max.asm.sparc.FCCOperand;
+import com.sun.max.asm.sparc.GPR;
+import com.sun.max.asm.sparc.ICCOperand;
+import com.sun.max.asm.sparc.MembarOperand;
+import com.sun.max.asm.sparc.PrivilegedRegister;
+import com.sun.max.asm.sparc.QFPR;
+import com.sun.max.asm.sparc.SFPR;
+import com.sun.max.asm.sparc.StateRegister;
+import com.sun.max.lang.StaticFieldLiteral;
+import com.sun.max.lang.StaticFieldName;
 
 /**
  * The fields used in defining the SPARC instruction templates.

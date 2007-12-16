@@ -4,17 +4,35 @@
 /*VCSID=100b41e1-ee40-4deb-91d6-ef2253278237*/
 package com.sun.max.annotate.processor;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.mirror.apt.*;
-import com.sun.mirror.declaration.*;
-import com.sun.mirror.type.*;
-import com.sun.mirror.util.*;
+import com.sun.max.annotate.AnnotationProcessorComponent;
+import com.sun.max.annotate.Implement;
+import com.sun.mirror.apt.AnnotationProcessor;
+import com.sun.mirror.apt.AnnotationProcessorEnvironment;
+import com.sun.mirror.apt.Messager;
+import com.sun.mirror.declaration.AnnotationMirror;
+import com.sun.mirror.declaration.AnnotationTypeDeclaration;
+import com.sun.mirror.declaration.AnnotationTypeElementDeclaration;
+import com.sun.mirror.declaration.AnnotationValue;
+import com.sun.mirror.declaration.Declaration;
+import com.sun.mirror.declaration.ExecutableDeclaration;
+import com.sun.mirror.declaration.InterfaceDeclaration;
+import com.sun.mirror.declaration.MemberDeclaration;
+import com.sun.mirror.declaration.MethodDeclaration;
+import com.sun.mirror.declaration.Modifier;
+import com.sun.mirror.declaration.ParameterDeclaration;
+import com.sun.mirror.declaration.TypeDeclaration;
+import com.sun.mirror.type.ClassType;
+import com.sun.mirror.type.DeclaredType;
+import com.sun.mirror.type.InterfaceType;
+import com.sun.mirror.type.TypeMirror;
+import com.sun.mirror.util.Declarations;
+import com.sun.mirror.util.Types;
+import java.util.Collection;
+import java.util.Map;
 
 /**
  * An annotation processor that validates the use of the compile-time annotations
- * in the MaxwellBase project such as the {@link Implement} annotation. 
+ * in the MaxwellBase project such as the {@link Implement} annotation.
  *
  * @author Doug Simon
  */
@@ -27,11 +45,11 @@ public class MaxwellBaseAnnotationProcessor implements AnnotationProcessor {
     private final Declarations _declarationUtils;
     private final AnnotationTypeDeclaration _overrideAnnotationDeclaration;
     private final AnnotationTypeDeclaration _implementAnnotationDeclaration;
-    
+
     private boolean _reportAsWarning;
     private boolean _reportToConsole;
     private boolean _reportToMessager = true;
-    
+
     public MaxwellBaseAnnotationProcessor(AnnotationProcessorEnvironment environment) {
         _environment = environment;
         _messager = _environment.getMessager();
@@ -39,7 +57,7 @@ public class MaxwellBaseAnnotationProcessor implements AnnotationProcessor {
         _declarationUtils = _environment.getDeclarationUtils();
         _overrideAnnotationDeclaration = (AnnotationTypeDeclaration) _environment.getTypeDeclaration("java.lang.Override");
         _implementAnnotationDeclaration = (AnnotationTypeDeclaration) _environment.getTypeDeclaration("com.sun.max.annotate.Implement");
-        
+
         // The current state of 'apt' is a little strange in that -A options are not parsed.
         // For example, specifying "-AreportToConsole=true" on the apt command line will
         // result in an entry with key "-AreportToConsole=true" and a null value in the
@@ -63,7 +81,7 @@ public class MaxwellBaseAnnotationProcessor implements AnnotationProcessor {
     protected void log(String message) {
 //        System.err.println(message);
     }
-    
+
     protected AnnotationProcessorEnvironment environment() {
         return _environment;
     }
@@ -104,7 +122,7 @@ public class MaxwellBaseAnnotationProcessor implements AnnotationProcessor {
             _messager.printError(declaration.getPosition(), message);
         }
     }
-    
+
     protected void problem(Declaration declaration, String message) {
         if (_reportAsWarning) {
             warning(declaration, message);
@@ -119,12 +137,12 @@ public class MaxwellBaseAnnotationProcessor implements AnnotationProcessor {
             super(declaredType.toString());
             _declaredType = declaredType;
         }
-        
+
         public DeclaredType declaredType() {
             return _declaredType;
         }
     }
-    
+
     protected static TypeDeclaration getDeclaration(DeclaredType declaredType) {
         final TypeDeclaration typeDeclaration = declaredType.getDeclaration();
         if (typeDeclaration == null) {
@@ -132,7 +150,7 @@ public class MaxwellBaseAnnotationProcessor implements AnnotationProcessor {
         }
         return typeDeclaration;
     }
-    
+
     /**
      * Searches for a method in {@code typeDeclaration} that is overridden by {@code overridingMethod}.
      */
@@ -144,7 +162,7 @@ public class MaxwellBaseAnnotationProcessor implements AnnotationProcessor {
         }
         return null;
     }
-    
+
     private MethodDeclaration getOverriddenMethod(MethodDeclaration subMethod) {
         final DeclaredType declaredType = _typeUtils.getDeclaredType(subMethod.getDeclaringType());
         if (!(declaredType instanceof ClassType)) {
@@ -241,7 +259,7 @@ public class MaxwellBaseAnnotationProcessor implements AnnotationProcessor {
         }
         return null;
     }
-    
+
     private TypeMirror getImplementedType(AnnotationMirror implementAnnotation) {
         if (implementAnnotation != null) {
             final AnnotationValue element = elementValue(implementAnnotation, "value", TypeMirror.class);
@@ -251,7 +269,7 @@ public class MaxwellBaseAnnotationProcessor implements AnnotationProcessor {
         }
         return null;
     }
-    
+
     private void checkImplementAnnotation(MethodDeclaration method, MethodDeclaration overriddenMethod, MethodDeclaration implementedMethod, TypeMirror implementedType) {
         if (implementedType != null) {
             if (!(implementedType instanceof InterfaceType)) {
@@ -294,8 +312,8 @@ public class MaxwellBaseAnnotationProcessor implements AnnotationProcessor {
         final Collection<TypeDeclaration> typeDeclarations = _environment.getTypeDeclarations();
         for (TypeDeclaration typeDecl : typeDeclarations) {
 //            if (typeDecl != null) {
-            
-                /* 
+
+                /*
                  * This is a workaround for a bug in the Eclipse implementation of APT which is explained by the following extract
                  * from an email exchange with Walter Harley, one of the JDP-APT implementors:
                  *
@@ -316,7 +334,7 @@ public class MaxwellBaseAnnotationProcessor implements AnnotationProcessor {
 //                    continue;
 //                }
 //                final TypeDeclaration typeDeclaration = declaredType.getDeclaration();
-            
+
                 final TypeDeclaration typeDeclaration = typeDecl;
 
                 log("checking methods in " + typeDeclaration.getQualifiedName());
@@ -327,12 +345,12 @@ public class MaxwellBaseAnnotationProcessor implements AnnotationProcessor {
                             final MethodDeclaration implementedMethod = getImplementedMethod(method);
                             final AnnotationMirror implementAnnotation = getAnnotation(method, _implementAnnotationDeclaration);
                             final TypeMirror implementedType = getImplementedType(implementAnnotation);
-                            
+
                             log("    checking " + method);
                             log("        overriddenMethod: " + overriddenMethod);
                             log("        implementedMethod: " + implementedMethod);
                             log("        implementAnnotation: " + implementAnnotation);
-                            
+
                             checkImplementAnnotation(method, overriddenMethod, implementedMethod, implementedType);
                         } catch (UnknownDeclaration e) {
                             warning(method, "Could not resolve declaration for type '" + e.declaredType() + "' [usually caused by incomplete classpath]");

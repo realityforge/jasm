@@ -4,8 +4,8 @@
 /*VCSID=6d58b1f2-0190-4290-b932-01ad25b65692*/
 package test.com.sun.max.collect;
 
-import com.sun.max.ide.*;
-import com.sun.max.lang.*;
+import com.sun.max.ide.MaxTestCase;
+import com.sun.max.lang.Bytes;
 
 /**
  * Tests for com.sun.max.util.Bytes.
@@ -17,7 +17,7 @@ public class BytesTest extends MaxTestCase {
     public BytesTest(String name) {
         super(name);
     }
-    
+
     public static void main(String[] args) {
         junit.textui.TestRunner.run(BytesTest.class);
     }
@@ -29,9 +29,9 @@ public class BytesTest extends MaxTestCase {
         }
         return bytes;
     }
-    
+
     public static final int TEST_LENGTH = 98;
-    
+
     public void test_copy() {
         final byte[] bytes1 = makeByteArray(TEST_LENGTH);
         final byte[] bytes2 = new byte[TEST_LENGTH];
@@ -50,7 +50,7 @@ public class BytesTest extends MaxTestCase {
             assertTrue(bytes1[i] == bytes4[i]);
         }
     }
-    
+
     public void test_copyAll() {
         final byte[] bytes1 = makeByteArray(TEST_LENGTH);
         final byte[] bytes2 = new byte[TEST_LENGTH];
@@ -62,18 +62,18 @@ public class BytesTest extends MaxTestCase {
         Bytes.copyAll(bytes1, bytes3, 100);
         for (int i = 0; i < TEST_LENGTH; i++) {
             assertTrue(bytes1[i] == bytes3[i + 100]);
-        }       
+        }
     }
-    
+
     public void test_getSection() {
         final byte[] bytes1 = makeByteArray(TEST_LENGTH);
         final byte[] bytes2 = Bytes.getSection(bytes1, 0, TEST_LENGTH);
         for (int i = 0; i < TEST_LENGTH; i++) {
             assertTrue(bytes1[i] == bytes2[i]);
-        }    
+        }
         final byte[] bytes3 = Bytes.getSection(bytes1, TEST_LENGTH / 8, 2 * TEST_LENGTH / 3);
         for (int i = 0; i < (13 * TEST_LENGTH) / 24; i++) {
             assertTrue(bytes1[i + TEST_LENGTH / 8] == bytes3[i]);
-        }  
+        }
     }
 }

@@ -4,13 +4,17 @@
 /*VCSID=40c950ce-4842-4735-84ab-e408af4c58ae*/
 package com.sun.max.program.option.gui;
 
-import java.awt.event.*;
-import java.io.*;
-
-import javax.swing.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.program.option.*;
+import com.sun.max.annotate.Implement;
+import com.sun.max.program.option.FileProgramOption;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * The GUI class corresponding to {@link FileProgramOption}.

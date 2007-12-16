@@ -4,11 +4,12 @@
 /*VCSID=f5d16422-f78a-4a5c-8f55-8f9c9369b313*/
 package com.sun.max.lang;
 
-import com.sun.max.*;
+import com.sun.max.BasePackage;
+import com.sun.max.MaxPackage;
 
 /**
  * @see MaxPackage
- * 
+ *
  * @author Bernd Mathiske
  */
 public class Package extends BasePackage {

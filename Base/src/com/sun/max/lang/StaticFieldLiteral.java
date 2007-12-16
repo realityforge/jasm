@@ -4,26 +4,25 @@
 /*VCSID=420ad3c6-93ab-402e-b7f8-6135a685fb47*/
 package com.sun.max.lang;
 
-import java.lang.reflect.*;
-
-import com.sun.max.program.*;
-
+import com.sun.max.program.ProgramError;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 public interface StaticFieldLiteral {
 
     String literal();
-    
+
     void setLiteral(String literal);
-    
+
     Class literalClass();
-    
+
     void setLiteralClass(Class literalClass);
-    
+
     public static final class Static {
-        
+
         private Static() {
         }
-        
+
         public static void initialize(Class staticFieldLiteralClass) {
             for (Field field : staticFieldLiteralClass.getDeclaredFields()) {
                 if ((field.getModifiers() & Modifier.STATIC) != 0 && StaticFieldLiteral.class.isAssignableFrom(field.getType())) {
@@ -39,5 +38,5 @@ public interface StaticFieldLiteral {
             }
         }
     }
-    
+
 }

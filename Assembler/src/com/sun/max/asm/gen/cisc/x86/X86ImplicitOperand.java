@@ -4,9 +4,9 @@
 /*VCSID=02328611-f711-4b03-b3b4-2ed882d6a2ae*/
 package com.sun.max.asm.gen.cisc.x86;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.gen.Immediate8Argument;
+import com.sun.max.asm.gen.ImplicitOperand;
 
 /**
  * An operand that is already implicit in the machine instruction,

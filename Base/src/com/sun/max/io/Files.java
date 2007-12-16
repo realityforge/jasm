@@ -4,12 +4,27 @@
 /*VCSID=f330ef41-93b6-437f-a1e3-2a1cc618aa44*/
 package com.sun.max.io;
 
-import java.io.*;
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.collect.*;
-import com.sun.max.util.*;
+import com.sun.max.annotate.Implement;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.util.Predicate;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.Closeable;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.util.Iterator;
 
 public final class Files {
 
@@ -32,7 +47,7 @@ public final class Files {
             }
         }
     }
-    
+
     public static boolean equals(File file1, File file2) throws FileNotFoundException, IOException {
         InputStream inputStream1 = null;
         InputStream inputStream2 = null;
@@ -67,7 +82,7 @@ public final class Files {
         }
         return !lines.hasNext();
     }
-    
+
     public static byte[] toBytes(File file) throws IOException {
         if (file.length() > Integer.MAX_VALUE) {
             throw new IOException("file is too big to read into an array: " + file);
@@ -91,7 +106,7 @@ public final class Files {
             bufferedWriter.close();
         }
     }
-    
+
     /**
      * Creates/overwrites a file from a reader.
      */
@@ -117,7 +132,7 @@ public final class Files {
             final char[] chars = Streams.readFully(fileReader, new char[length]);
             return chars;
         } finally {
-            fileReader.close();            
+            fileReader.close();
         }
     }
 
@@ -128,11 +143,11 @@ public final class Files {
      * if it is different. If the file does not exist, a new file is created with {@code content} surrounded
      * by the specified delimiters. If the file exists and does not currently have the specified delimiters, an
      * IOException is thrown.
-     * 
+     *
      * @return true if the file was modified or created
      */
     public static boolean updateGeneratedContent(File file, ReadableSource content, String start, String end) throws IOException {
-        
+
         if (!file.exists()) {
             final PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(file)));
             try {
@@ -166,14 +181,14 @@ public final class Files {
                     break;
                 }
             }
-            
+
             if (line == null) {
                 throw new IOException("generated content starting delimiter not found in existing file: " + file);
             }
-            
+
             boolean changed = false;
             boolean seenEnd = false;
-            
+
             // Copy new content, noting if it differs from existing generated content
             while ((line = contentReader.readLine()) != null) {
                 if (!seenEnd) {
@@ -189,7 +204,7 @@ public final class Files {
                 }
                 printWriter.println(line);
             }
-            
+
             // Find the generated content closing delimiter
             if (!seenEnd) {
                 while ((line = existingFileReader.readLine()) != null) {
@@ -202,19 +217,19 @@ public final class Files {
                 if (!seenEnd) {
                     throw new IOException("generated content ending delimiter not found in existing file: " + file);
                 }
-            } 
+            }
             printWriter.println(end);
-            
+
             // Copy existing file after generated content closing delimiter
             while ((line = existingFileReader.readLine()) != null) {
                 printWriter.println(line);
             }
-            
+
             printWriter.close();
             printWriter = null;
             existingFileReader.close();
             existingFileReader = null;
-            
+
             if (changed) {
                 copy(tempFile, file);
                 return true;
@@ -237,20 +252,20 @@ public final class Files {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }            
+        }
     }
-    
+
     public static Sequence<File> find(File directory, final String suffix, AppendableSequence<File> listing) {
         final Predicate<File> suffixPredicate = new Predicate<File>() {
             @Implement(Predicate.class)
             public boolean evaluate(File file) {
                 return file.getName().endsWith(suffix);
             }
-            
+
         };
         return find(directory, suffixPredicate, listing);
     }
-    
+
     public static Sequence<File> find(File directory, Predicate<File> filter, AppendableSequence<File> listing) {
         assert directory.isDirectory();
         return find(directory, listing == null ? new ArrayListSequence<File>() : listing, filter);
@@ -272,6 +287,6 @@ public final class Files {
         }
         return listing;
     }
-    
+
 }
 

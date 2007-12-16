@@ -4,20 +4,23 @@
 /*VCSID=fc5924bd-d948-43fe-bd87-62aa0e5d8914*/
 package com.sun.max.util;
 
-import java.lang.reflect.*;
-
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.ArraySequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.StaticFieldName;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 
 /**
  * A symbolizer is used to group a set of {@link Symbol symbols}. The members of the
  * group can be iterated and the symbol corresponding to a given value can be
  * retrieved from the group.
- * 
+ *
  * This class is similiar to the semantics of {@code enum}s in Java but adds
  * the ability to have a set of predefined symbols whose primitive values are not
  * necessarily contiguous and starting at 0.
- * 
+ *
  * @author Bernd Mathiske
  */
 public interface Symbolizer<Symbol_Type extends Symbol> extends Iterable<Symbol_Type> {
@@ -26,21 +29,21 @@ public interface Symbolizer<Symbol_Type extends Symbol> extends Iterable<Symbol_
      * @return the concrete type of the symbols in the group
      */
     Class<Symbol_Type> type();
-    
+
     /**
      * Gets the symbol in the group whose primitive value equals {@code value}.
-     *  
+     *
      * @param value  the search key
      * @return the found symbol or {@code null} if no symbol is found for {@code value}
      */
     Symbol_Type fromValue(int value);
-    
+
     public static final class Static {
 
         private Static() {
-            
+
         }
-        
+
         public static boolean hasPackageExternalAccessibleConstructors(Class type) {
             final int publicOrProtected = Modifier.PUBLIC | Modifier.PROTECTED;
             for (Constructor constructor : type.getConstructors()) {
@@ -50,11 +53,11 @@ public interface Symbolizer<Symbol_Type extends Symbol> extends Iterable<Symbol_
             }
             return false;
         }
-        
+
         public static <Symbol_Type extends Symbol> Symbolizer<Symbol_Type> from(Class<Symbol_Type> symbolType, Symbol_Type... symbols) {
-            return new SequenceSymbolizer<Symbol_Type>(symbolType, new ArraySequence<Symbol_Type>(symbols));            
+            return new SequenceSymbolizer<Symbol_Type>(symbolType, new ArraySequence<Symbol_Type>(symbols));
         }
-        
+
         public static <Symbol_Type extends Symbol> Symbolizer<Symbol_Type> fromSequence(Class<Symbol_Type> symbolType, Iterable< ? extends Symbol_Type> symbols,
                         final Symbol_Type... additionalSymbols) {
             final AppendableSequence<Symbol_Type> sequence = new ArrayListSequence<Symbol_Type>(additionalSymbols);
@@ -63,16 +66,16 @@ public interface Symbolizer<Symbol_Type extends Symbol> extends Iterable<Symbol_
             }
             return new SequenceSymbolizer<Symbol_Type>(symbolType, sequence);
         }
-        
+
         public static <Symbol_Type extends Symbol> Symbolizer<Symbol_Type> append(Symbolizer<Symbol_Type> symbolizer, Symbol_Type... symbols) {
-            return fromSequence(symbolizer.type(), symbolizer, symbols);            
+            return fromSequence(symbolizer.type(), symbolizer, symbols);
         }
 
         public static <Symbol_Type extends Symbol> Symbolizer<Symbol_Type> append(Class<Symbol_Type> symbolType, Symbolizer< ? extends Symbol_Type> symbolizer,
                         final Symbol_Type... symbols) {
-            return fromSequence(symbolType, symbolizer, symbols);            
+            return fromSequence(symbolType, symbolizer, symbols);
         }
-        
+
         public static <Symbol_Type extends Symbol> Symbolizer<Symbol_Type> initialize(Class staticNameFieldClass, Class<Symbol_Type> symbolType) {
             final AppendableSequence<Symbol_Type> sequence = new ArrayListSequence<Symbol_Type>();
             final Sequence<StaticFieldName> staticFieldNames = StaticFieldName.Static.initialize(staticNameFieldClass);
@@ -94,6 +97,6 @@ public interface Symbolizer<Symbol_Type extends Symbol> extends Iterable<Symbol_
             }
             return fromSequence(symbolizer.type(), Sequence.Static.filter(symbolizer, predicate));
         }
-    
+
     }
 }

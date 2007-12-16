@@ -4,9 +4,9 @@
 /*VCSID=9e8dc196-52cd-4128-aabc-343f575f2c8a*/
 package com.sun.max.program.option.gui;
 
-import javax.swing.*;
-
-import com.sun.max.program.option.*;
+import com.sun.max.program.option.StringProgramOption;
+import javax.swing.JComponent;
+import javax.swing.JTextField;
 
 /**
  * The GUI class corresponding to {@link StringProgramOption}.
@@ -16,7 +16,7 @@ import com.sun.max.program.option.*;
 class StringProgramOptionInput extends AssignmentProgramOptionInput<StringProgramOption> {
 
     private final JTextField _value;
-    
+
     public StringProgramOptionInput(StringProgramOption programOption) {
         super(programOption);
         _value = new JTextField(TEXT_FIELD_COLUMNS);
@@ -25,7 +25,7 @@ class StringProgramOptionInput extends AssignmentProgramOptionInput<StringProgra
             _value.setText(value);
         }
     }
-    
+
 
     @Override
     public String value() {

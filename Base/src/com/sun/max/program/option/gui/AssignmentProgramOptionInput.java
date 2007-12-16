@@ -4,7 +4,7 @@
 /*VCSID=ff991ed8-c1b1-47e6-91ff-1cfed3e09048*/
 package com.sun.max.program.option.gui;
 
-import com.sun.max.program.option.*;
+import com.sun.max.program.option.AssignmentProgramOption;
 
 /**
  * The GUI class corresponding to {@link AssignmentProgramOption}.
@@ -16,7 +16,7 @@ public abstract class AssignmentProgramOptionInput<AssignmentProgramOption_Type 
         super(programOption);
         programOption.update();
     }
-    
+
     @Override
     public String asCommandLineArgument() {
         final String value = value();
@@ -25,6 +25,6 @@ public abstract class AssignmentProgramOptionInput<AssignmentProgramOption_Type 
         }
         return programOption().prefix() + "=" + value;
     }
-    
+
     public abstract String value();
 }

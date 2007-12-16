@@ -4,17 +4,19 @@
 /*VCSID=e89be4a7-dcd9-4af2-b606-d8a6b9e4c684*/
 package com.sun.max.asm.gen.risc.sparc;
 
-import java.io.*;
-import java.util.*;
-
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.*;
-import com.sun.max.collect.*;
-import com.sun.max.io.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.dis.DisassembledInstruction;
+import com.sun.max.asm.gen.AssemblyTestComponent;
+import com.sun.max.asm.gen.risc.RiscAssemblyTester;
+import com.sun.max.collect.Sequence;
+import com.sun.max.io.IndentWriter;
+import com.sun.max.lang.Endianness;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.program.ProgramError;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PushbackInputStream;
+import java.util.EnumSet;
 
 /**
  * @author Bernd Mathiske
@@ -25,22 +27,22 @@ public abstract class SPARCAssemblyTester<DisassembledInstruction_Type extends D
     public SPARCAssemblyTester(SPARCAssembly assembly, WordWidth addressWidth, EnumSet<AssemblyTestComponent> components) {
         super(assembly, addressWidth, components);
     }
-    
+
     @Override
     public SPARCAssembly assembly() {
         return (SPARCAssembly) super.assembly();
     }
-    
+
     @Override
     protected String assemblerCommand() {
         return "as -xarch=v9a";
     }
-    
+
     private SPARCTemplate _lastTemplate;
-    
+
     @Override
     protected void assembleExternally(IndentWriter writer, SPARCTemplate template, Sequence<Argument> argumentList, String label) {
-        
+
         // This is a workaround for SPARC V9 ABI compliance checks: http://developers.sun.com/solaris/articles/sparcv9abi.html
         if (_lastTemplate == null || template != _lastTemplate) {
             writer.println(".register %g2,#scratch");
@@ -59,7 +61,7 @@ public abstract class SPARCAssemblyTester<DisassembledInstruction_Type extends D
         final int instruction = Endianness.BIG.readInt(stream);
         return instruction == 0x01000000;
     }
-     
+
     @Override
     protected byte[] readExternalInstruction(PushbackInputStream externalInputStream, SPARCTemplate template, byte[] internalBytes) throws IOException {
         final byte[] result = super.readExternalInstruction(externalInputStream, template, internalBytes);

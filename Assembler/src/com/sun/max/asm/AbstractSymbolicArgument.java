@@ -4,9 +4,7 @@
 /*VCSID=61c465be-328d-4985-a4d0-3ab5b361c84d*/
 package com.sun.max.asm;
 
-import com.sun.max.annotate.*;
-import com.sun.max.lang.*;
-import com.sun.max.util.*;
+import com.sun.max.lang.StaticFieldName;
 
 /**
  * This class provides a skeletal implementation of the {@link SymbolicArgument} interface, to minimize the

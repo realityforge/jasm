@@ -4,16 +4,46 @@
 /*VCSID=e4eb5a08-e8c1-43d1-a1d8-3997a485e4ae*/
 package com.sun.max.asm.gen.cisc.amd64;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.amd64.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.cisc.*;
-import com.sun.max.asm.gen.cisc.x86.*;
-import com.sun.max.asm.x86.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.amd64.AMD64BaseRegister32;
+import com.sun.max.asm.amd64.AMD64BaseRegister64;
+import com.sun.max.asm.amd64.AMD64GeneralRegister16;
+import com.sun.max.asm.amd64.AMD64GeneralRegister32;
+import com.sun.max.asm.amd64.AMD64GeneralRegister64;
+import com.sun.max.asm.amd64.AMD64GeneralRegister8;
+import com.sun.max.asm.amd64.AMD64IndexRegister32;
+import com.sun.max.asm.amd64.AMD64IndexRegister64;
+import com.sun.max.asm.amd64.AMD64IndirectRegister32;
+import com.sun.max.asm.amd64.AMD64IndirectRegister64;
+import com.sun.max.asm.amd64.AMD64XMMComparison;
+import com.sun.max.asm.amd64.AMD64XMMRegister;
+import com.sun.max.asm.gen.ArgumentRange;
+import com.sun.max.asm.gen.ImplicitOperand;
+import com.sun.max.asm.gen.TestArgumentExclusion;
+import com.sun.max.asm.gen.cisc.TemplateNotNeededException;
+import com.sun.max.asm.gen.cisc.x86.InstructionAssessment;
+import com.sun.max.asm.gen.cisc.x86.OperandCode;
+import com.sun.max.asm.gen.cisc.x86.ParameterPlace;
+import com.sun.max.asm.gen.cisc.x86.RegisterOperandCode;
+import com.sun.max.asm.gen.cisc.x86.X86AddressParameter;
+import com.sun.max.asm.gen.cisc.x86.X86DisplacementParameter;
+import com.sun.max.asm.gen.cisc.x86.X86EnumerableParameter;
+import com.sun.max.asm.gen.cisc.x86.X86ImmediateParameter;
+import com.sun.max.asm.gen.cisc.x86.X86ImplicitOperand;
+import com.sun.max.asm.gen.cisc.x86.X86InstructionDescription;
+import com.sun.max.asm.gen.cisc.x86.X86OffsetParameter;
+import com.sun.max.asm.gen.cisc.x86.X86Operand;
+import com.sun.max.asm.gen.cisc.x86.X86Template;
+import com.sun.max.asm.gen.cisc.x86.X86TemplateContext;
+import com.sun.max.asm.x86.ControlRegister;
+import com.sun.max.asm.x86.DebugRegister;
+import com.sun.max.asm.x86.GeneralRegister;
+import com.sun.max.asm.x86.MMXRegister;
+import com.sun.max.asm.x86.Scale;
+import com.sun.max.asm.x86.SegmentRegister;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.program.ProgramError;
 
 /**
  * @author Bernd Mathiske

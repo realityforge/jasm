@@ -4,9 +4,9 @@
 /*VCSID=d0ce656f-84f1-4055-9400-68597dace0b6*/
 package test.com.sun.max.util;
 
-import com.sun.max.annotate.*;
-import com.sun.max.ide.*;
-import com.sun.max.util.*;
+import com.sun.max.annotate.Implement;
+import com.sun.max.ide.MaxTestCase;
+import com.sun.max.util.Deferrable;
 
 /**
  * Tests for {@link Deferrable}.
@@ -14,17 +14,17 @@ import com.sun.max.util.*;
  * @author Hiroshi Yamauchi
  */
 public class DeferrableTest extends MaxTestCase {
- 
+
     public DeferrableTest(String name) {
         super(name);
     }
-    
+
     public static void main(String[] args) {
         junit.textui.TestRunner.run(DeferrableTest.class);
     }
 
     private int _counter;
-    
+
     public void test_immediate_run() {
         _counter = 0;
         final Deferrable.Queue queue = Deferrable.createRunning();
@@ -36,7 +36,7 @@ public class DeferrableTest extends MaxTestCase {
         };
         assertTrue(_counter == 19);
     }
-    
+
     public void test_deferred_run() {
         _counter = 0;
         final Deferrable.Queue queue = Deferrable.createRunning();

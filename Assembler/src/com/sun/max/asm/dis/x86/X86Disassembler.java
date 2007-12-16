@@ -4,20 +4,38 @@
 /*VCSID=63ebacf6-7aa1-4007-b697-a74444ad33c0*/
 package com.sun.max.asm.dis.x86;
 
-import java.io.*;
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.amd64.*;
-import com.sun.max.asm.dis.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.cisc.x86.*;
-import com.sun.max.collect.*;
-import com.sun.max.io.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.Assembler;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.amd64.AMD64GeneralRegister8;
+import com.sun.max.asm.dis.DisassembledInstruction;
+import com.sun.max.asm.dis.Disassembler;
+import com.sun.max.asm.gen.Assembly;
+import com.sun.max.asm.gen.Immediate16Argument;
+import com.sun.max.asm.gen.Immediate32Argument;
+import com.sun.max.asm.gen.Immediate64Argument;
+import com.sun.max.asm.gen.Immediate8Argument;
+import com.sun.max.asm.gen.cisc.x86.X86Assembly;
+import com.sun.max.asm.gen.cisc.x86.X86EnumerableParameter;
+import com.sun.max.asm.gen.cisc.x86.X86Field;
+import com.sun.max.asm.gen.cisc.x86.X86NumericalParameter;
+import com.sun.max.asm.gen.cisc.x86.X86Opcode;
+import com.sun.max.asm.gen.cisc.x86.X86Parameter;
+import com.sun.max.asm.gen.cisc.x86.X86Template;
+import com.sun.max.asm.gen.cisc.x86.X86TemplateContext;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.io.Streams;
+import com.sun.max.lang.Endianness;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.program.Trace;
+import com.sun.max.util.Enumerator;
+import com.sun.max.util.HexByte;
+import com.sun.max.util.Predicate;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.util.Map;
 
 /**
  * A disassembler for x86 instructions.

@@ -4,26 +4,28 @@
 /*VCSID=2bffb866-4cc7-49c9-b03d-056b501cfbcf*/
 package com.sun.max.asm.dis.sparc;
 
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.risc.sparc.*;
-import com.sun.max.asm.sparc.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.Assembler;
+import com.sun.max.asm.gen.risc.sparc.SPARCAssembly;
+import com.sun.max.asm.gen.risc.sparc.SPARCTemplate;
+import com.sun.max.asm.sparc.SPARC32Assembler;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.WordWidth;
 
 /**
- * 
+ *
  *
  * @author Bernd Mathiske
  */
 public class SPARC32Disassembler extends SPARCDisassembler<SPARC32DisassembledInstruction> {
 
     private final int _startAddress;
-    
+
     public SPARC32Disassembler(int startAddress) {
         super(SPARCAssembly.ASSEMBLY, WordWidth.BITS_32);
         _startAddress = startAddress;
     }
-    
+
     @Override
     protected SPARC32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, SPARCTemplate template, Sequence<Argument> arguments) {
         return new SPARC32DisassembledInstruction(_startAddress, offset, bytes, template, arguments);

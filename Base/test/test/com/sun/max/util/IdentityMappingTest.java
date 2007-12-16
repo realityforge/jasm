@@ -4,12 +4,12 @@
 /*VCSID=003bfdff-7294-494d-ac51-7fd12c5fba0b*/
 package test.com.sun.max.util;
 
-import com.sun.max.collect.*;
-import com.sun.max.ide.*;
+import com.sun.max.collect.IdentityMapping;
+import com.sun.max.ide.MaxTestCase;
 
 /**
  * Tests for com.sun.max.util.IdentityMapping.
- * 
+ *
  * @author Hiroshi Yamauchi
  */
 public class IdentityMappingTest extends MaxTestCase {

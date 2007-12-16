@@ -4,8 +4,8 @@
 /*VCSID=6306ad80-1588-479f-86a8-731a35bb91c5*/
 package com.sun.max.asm.sparc;
 
-import com.sun.max.asm.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.OptionSuffixSymbolicArgument;
+import com.sun.max.util.Symbolizer;
 
 /**
  * An optional (suffix) argument to a branch assembler instruction specifying
@@ -20,7 +20,7 @@ public final class AnnulBit extends OptionSuffixSymbolicArgument {
     private AnnulBit(int value, String externalMnemonicSuffix) {
         super(value, externalMnemonicSuffix);
     }
-    
+
     /**
      * The annul bit is not set.
      */
@@ -30,7 +30,7 @@ public final class AnnulBit extends OptionSuffixSymbolicArgument {
      * The annul bit is set.
      */
     public static final AnnulBit A = new AnnulBit(1, ",a");
-    
+
     public static final Symbolizer<AnnulBit> SYMBOLIZER = Symbolizer.Static.initialize(AnnulBit.class);
 
 }

@@ -4,12 +4,18 @@
 /*VCSID=2bb80cb5-a008-4a2a-8664-dbe2ae1d312f*/
 package com.sun.max.program;
 
-import java.io.*;
-import java.util.zip.*;
-
-import com.sun.max.collect.*;
-import com.sun.max.ide.*;
-import com.sun.max.util.*;
+import com.sun.max.collect.ArraySequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.ide.JavaProject;
+import com.sun.max.util.Predicate;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 /**
  * @author Bernd Mathiske
@@ -36,7 +42,7 @@ public class Classpath {
     public Classpath prepend(String path) {
         return new Classpath(Sequence.Static.prepended(path, _paths));
     }
-    
+
     public Classpath filter(Predicate<String> predicate) {
         return new Classpath(Sequence.Static.filter(_paths, predicate));
     }

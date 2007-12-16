@@ -4,16 +4,19 @@
 /*VCSID=68197fc6-00c2-49e6-b142-aefda19175a1*/
 package com.sun.max.asm.gen.cisc.amd64;
 
-import java.util.*;
-
-import com.sun.max.asm.*;
-import com.sun.max.asm.amd64.*;
-import com.sun.max.asm.dis.amd64.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.cisc.x86.*;
-import com.sun.max.asm.x86.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.Assembler;
+import com.sun.max.asm.amd64.AMD64Assembler;
+import com.sun.max.asm.amd64.AMD64GeneralRegister8;
+import com.sun.max.asm.amd64.AMD64XMMRegister;
+import com.sun.max.asm.dis.amd64.AMD64DisassembledInstruction;
+import com.sun.max.asm.dis.amd64.AMD64Disassembler;
+import com.sun.max.asm.gen.AssemblyTestComponent;
+import com.sun.max.asm.gen.cisc.x86.X86AssemblyTester;
+import com.sun.max.asm.x86.GeneralRegister;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.WordWidth;
+import java.util.EnumSet;
 
 /**
  * @author Bernd Mathiske
@@ -33,12 +36,12 @@ public class AMD64AssemblyTester extends X86AssemblyTester<AMD64Template, AMD64D
     protected Assembler createTestAssembler() {
         return new AMD64Assembler(0L);
     }
-    
+
     @Override
     protected AMD64Disassembler createTestDisassembler() {
         return new AMD64Disassembler(0L);
     }
-    
+
     @Override
     protected boolean isLegalArgumentList(AMD64Template template, Sequence<Argument> arguments) {
         final WordWidth externalCodeSizeAttribute = template.externalCodeSizeAttribute();
@@ -58,7 +61,7 @@ public class AMD64AssemblyTester extends X86AssemblyTester<AMD64Template, AMD64D
                     final GeneralRegister generalRegister = (GeneralRegister) argument;
                     if ((generalRegister.value() >= 8) || (generalRegister.width() == WordWidth.BITS_64)) {
                         return false;
-                    } 
+                    }
                 } else if (argument instanceof AMD64XMMRegister) {
                     final AMD64XMMRegister xmmRegister = (AMD64XMMRegister) argument;
                     if (xmmRegister.value() >= 8) {

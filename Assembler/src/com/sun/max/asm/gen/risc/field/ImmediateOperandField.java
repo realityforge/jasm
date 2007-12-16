@@ -4,13 +4,26 @@
 /*VCSID=a014e877-af4f-4f4d-a506-19635fd58e72*/
 package com.sun.max.asm.gen.risc.field;
 
-import java.lang.reflect.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.bitRange.*;
-import com.sun.max.collect.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.gen.ArgumentRange;
+import com.sun.max.asm.gen.Expression;
+import com.sun.max.asm.gen.Immediate32Argument;
+import com.sun.max.asm.gen.ImmediateArgument;
+import com.sun.max.asm.gen.ImmediateParameter;
+import com.sun.max.asm.gen.InstructionConstraint;
+import com.sun.max.asm.gen.Parameter;
+import com.sun.max.asm.gen.Template;
+import com.sun.max.asm.gen.TestArgumentExclusion;
+import com.sun.max.asm.gen.WrappableSpecification;
+import com.sun.max.asm.gen.risc.bitRange.AscendingBitRange;
+import com.sun.max.asm.gen.risc.bitRange.BitRange;
+import com.sun.max.asm.gen.risc.bitRange.BitRangeOrder;
+import com.sun.max.asm.gen.risc.bitRange.DescendingBitRange;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.MapFunction;
+import com.sun.max.collect.Sequence;
+import java.lang.reflect.Method;
 
 /**
  * A field that contains an immediate value.

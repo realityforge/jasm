@@ -4,13 +4,82 @@
 /*VCSID=f6f3f1a7-2284-4a70-88c9-ee9f09494c29*/
 package com.sun.max.asm.gen.risc.ppc;
 
-import static com.sun.max.asm.gen.InstructionConstraint.Static.*;
-import static com.sun.max.asm.gen.risc.ppc.PPCFields.*;
-
-import java.lang.reflect.*;
-
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.ppc.*;
+import com.sun.max.asm.gen.InstructionConstraint;
+import static com.sun.max.asm.gen.InstructionConstraint.Static.ne;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._aa;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._ba;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._bb;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._bd;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._bf;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._bfa;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._bh;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._bi;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._bo;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._bt;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._d;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._ds;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._flm;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._fra;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._frb;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._frc;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._frs;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._frt;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._fxm;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._l;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._li;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._lk;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._mb;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._mb64;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._me;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._me64;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._nb;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._oe;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._ra;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._ra0;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._ra0_notR0;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._ra0_notR0_ltRT;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._ra_notR0;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._ra_notR0_notRT;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._rb;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._rc;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._res_11_15;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._res_12_20;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._res_14_15;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._res_15;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._res_16_18;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._res_16_20;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._res_20;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._res_21;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._res_21_25;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._res_31;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._res_6;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._res_6_10;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._res_9;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._res_9_10;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._rs;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._rt;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._sh;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._sh64;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._si;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._sis;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._spr;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._to;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._u;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields._ui;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.bit_11;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.bit_31;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.opcd;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.xo_21_29;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.xo_21_30;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.xo_22_30;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.xo_26_30;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.xo_27_29;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.xo_27_30;
+import static com.sun.max.asm.gen.risc.ppc.PPCFields.xo_30_31;
+import com.sun.max.asm.ppc.CRF;
+import com.sun.max.asm.ppc.GPR;
+import com.sun.max.asm.ppc.ZeroOrRegister;
+import java.lang.reflect.Method;
 
 /**
  * The definitions of the raw (i.e. non-synthetic) PowerPC instructions.
@@ -27,7 +96,7 @@ public final class RawInstructions extends PPCInstructionDescriptionCreator {
 
         setCurrentArchitectureManualSection("2.4.3");
         generateConditionRegisterLogicals();
-        
+
         setCurrentArchitectureManualSection("2.4.4");
         generateConditionRegisterFields();
 
@@ -51,7 +120,7 @@ public final class RawInstructions extends PPCInstructionDescriptionCreator {
 
         setCurrentArchitectureManualSection("3.3.9");
         generateFixedPointCompares();
-        
+
         setCurrentArchitectureManualSection("3.3.10");
         generateFixedPointTraps();
 
@@ -63,10 +132,10 @@ public final class RawInstructions extends PPCInstructionDescriptionCreator {
 
         setCurrentArchitectureManualSection("3.3.12.2");
         generateFixedPointShifts();
-        
+
         setCurrentArchitectureManualSection("3.3.13");
         generateMoveToFromSystemRegisters();
-        
+
         setCurrentArchitectureManualSection("4.6.2");
         generateFloatingPointLoads();
 
@@ -96,7 +165,7 @@ public final class RawInstructions extends PPCInstructionDescriptionCreator {
 
         setCurrentArchitectureManualSection("5.2.2");
         generateFloatingPointSelectOptional();
-        
+
         setCurrentArchitectureManualSection("6.1");
         generateDeprecated();
 
@@ -108,7 +177,7 @@ public final class RawInstructions extends PPCInstructionDescriptionCreator {
 
         setCurrentArchitectureManualSection("3.3.1 [Book 2]");
         generateInstructionSynchronization();
-        
+
         setCurrentArchitectureManualSection("3.3.2 [Book 2]");
         generateAtomicUpdates();
 
@@ -141,31 +210,31 @@ public final class RawInstructions extends PPCInstructionDescriptionCreator {
     }
 
     private void generateLoads() {
-    
+
         define("lbz", opcd(34), _rt, _d, "(", _ra0_notR0, ")");
         define("lbzu", opcd(35), _rt, _d, "(", _ra_notR0_notRT, ")");
         define("lbzx", opcd(31), _rt, _ra0_notR0, _rb, xo_21_30(87), _res_31);
         define("lbzux", opcd(31), _rt, _ra_notR0_notRT, _rb, xo_21_30(119), _res_31);
-    
+
         define("lhz", opcd(40), _rt, _d, "(", _ra0_notR0, ")");
         define("lhzu", opcd(41), _rt, _d, "(", _ra_notR0_notRT, ")");
         define("lhzx", opcd(31), _rt, _ra0_notR0, _rb, xo_21_30(279), _res_31);
         define("lhzux", opcd(31), _rt, _ra_notR0_notRT, _rb, xo_21_30(311), _res_31);
-    
+
         define("lha", opcd(42), _rt, _d, "(", _ra0_notR0, ")");
         define("lhau", opcd(43), _rt, _d, "(", _ra_notR0_notRT, ")");
         define("lhax", opcd(31), _rt, _ra0_notR0, _rb, xo_21_30(343), _res_31);
         define("lhaux", opcd(31), _rt, _ra_notR0_notRT, _rb, xo_21_30(375), _res_31);
-    
+
         define("lwz", opcd(32), _rt, _d, "(", _ra0_notR0, ")");
         define("lwzu", opcd(33), _rt, _d, "(", _ra_notR0_notRT, ")");
         define("lwzx", opcd(31), _rt, _ra0_notR0, _rb, xo_21_30(23), _res_31);
         define("lwzux", opcd(31), _rt, _ra_notR0_notRT, _rb, xo_21_30(55), _res_31);
-    
+
         define64("lwa", opcd(58), _rt, _ds, "(", _ra0_notR0, ")", xo_30_31(2));
         define64("lwax", opcd(31), _rt, _ra0_notR0, _rb, xo_21_30(341), _res_31);
         define64("lwaux", opcd(31), _rt, _ra_notR0_notRT, _rb, xo_21_30(373), _res_31);
-    
+
         define64("ld", opcd(58), _rt, _ds, "(", _ra0_notR0, ")", xo_30_31(0));
         define64("ldu", opcd(58), _rt, _ds, "(", _ra_notR0_notRT, ")", xo_30_31(1));
         define64("ldx", opcd(31), _rt, _ra0_notR0, _rb, xo_21_30(21), _res_31);
@@ -173,22 +242,22 @@ public final class RawInstructions extends PPCInstructionDescriptionCreator {
     }
 
     private void generateStores() {
-    
+
         define("stb", opcd(38), _rs, _d, "(", _ra0_notR0, ")");
         define("stbu", opcd(39), _rs, _d, "(", _ra_notR0, ")");
         define("stbx", opcd(31), _rs, _ra0_notR0, _rb, xo_21_30(215), _res_31);
         define("stbux", opcd(31), _rs, _ra_notR0, _rb, xo_21_30(247), _res_31);
-    
+
         define("sth", opcd(44), _rs, _d, "(", _ra0_notR0, ")");
         define("sthu", opcd(45), _rs, _d, "(", _ra_notR0, ")");
         define("sthx", opcd(31), _rs, _ra0_notR0, _rb, xo_21_30(407), _res_31);
         define("sthux", opcd(31), _rs, _ra_notR0, _rb, xo_21_30(439), _res_31);
-    
+
         define("stw", opcd(36), _rs, _d, "(", _ra0_notR0, ")");
         define("stwu", opcd(37), _rs, _d, "(", _ra_notR0, ")");
         define("stwx", opcd(31), _rs, _ra0_notR0, _rb, xo_21_30(151), _res_31);
         define("stwux", opcd(31), _rs, _ra_notR0, _rb, xo_21_30(183), _res_31);
-    
+
         define64("std", opcd(62), _rs, _ds, "(", _ra0_notR0, ")", xo_30_31(0));
         define64("stdu", opcd(62), _rs, _ds, "(", _ra_notR0, ")", xo_30_31(1));
         define64("stdx", opcd(31), _rs, _ra0_notR0, _rb, xo_21_30(149), _res_31);
@@ -302,7 +371,7 @@ public final class RawInstructions extends PPCInstructionDescriptionCreator {
         define64("rldimi", opcd(30), _ra, _rs, _sh64, _mb64, xo_27_29(3), _rc);
         define("rlwimi", opcd(20), _ra, _rs, _sh, _mb, _me, _rc);
     }
-    
+
     private void generateFixedPointShifts() {
         define64("sld", opcd(31), _ra, _rs, _rb, xo_21_30(27), _rc);
         define("slw", opcd(31), _ra, _rs, _rb, xo_21_30(24), _rc);

@@ -4,8 +4,8 @@
 /*VCSID=3f10dcd7-9003-44bd-b97e-06f5127f643e*/
 package com.sun.max.asm.ppc;
 
-import com.sun.max.asm.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.AbstractSymbolicArgument;
+import com.sun.max.util.Symbolizer;
 
 /**
  * The argument to a Branch Conditional instruction specifying the conditions
@@ -18,7 +18,7 @@ public final class BOOperand extends AbstractSymbolicArgument {
     private BOOperand(String value, String predictionBitsMask) {
         this(value, null, null, predictionBitsMask);
     }
-    
+
     private BOOperand(String value) {
         this(value, null, null, null);
     }
@@ -27,10 +27,10 @@ public final class BOOperand extends AbstractSymbolicArgument {
         super(Integer.parseInt(value, 2));
         assert value.length() == 5;
         assert predictionBitsMask == null || predictionBitsMask.length() == value.length();
-        
+
         _taken = taken;
         _notTaken = notTaken;
-        
+
         if (predictionBitsMask == null) {
             _valueWithoutPredictionBits = Integer.MAX_VALUE;
         } else {
@@ -58,15 +58,15 @@ public final class BOOperand extends AbstractSymbolicArgument {
     public String externalValue() {
         return Integer.toString(value());
     }
-    
+
     private final BOOperand _taken;
     private final BOOperand _notTaken;
     private final int _valueWithoutPredictionBits;
-    
+
     /**
      * @return the version of this branch condition operand that has the relevant bits set to indicate to the hardware that the branch is very likely not to be taken
-     * 
-     * @throws IllegalArgumentException if prediction bits cannot be set for this operand  
+     *
+     * @throws IllegalArgumentException if prediction bits cannot be set for this operand
      */
     public BOOperand taken() {
         if (_taken == null) {
@@ -74,11 +74,11 @@ public final class BOOperand extends AbstractSymbolicArgument {
         }
         return _taken;
     }
-    
+
     /**
      * @return the version of this branch condition operand that has the relevant bits set to indicate to the hardware that the branch is very likely not to be taken
-     * 
-     * @throws IllegalArgumentException if prediction bits cannot be set for this operand  
+     *
+     * @throws IllegalArgumentException if prediction bits cannot be set for this operand
      */
     public BOOperand notTaken() {
         if (_notTaken == null) {
@@ -89,19 +89,19 @@ public final class BOOperand extends AbstractSymbolicArgument {
 
     /**
      * @return the mask to apply to this branch condition operand to extract the branch prediction bits
-     * 
-     * @throws IllegalArgumentException if this branch condition operand does not support branch prediction  
+     *
+     * @throws IllegalArgumentException if this branch condition operand does not support branch prediction
      */
     public int valueWithoutPredictionBits() {
         if (_valueWithoutPredictionBits == Integer.MAX_VALUE) {
             throw new IllegalArgumentException("branch condition " + this + " does not support branch prediction");
         }
-        
+
         return _valueWithoutPredictionBits;
     }
-    
+
     // Checkstyle: stop constant name check
-    
+
     /**
      * Decrement the Counter Register, then branch if the decremented value is not 0 and
      * the bit in the Condition Register selected by the BI field is not set.
@@ -113,7 +113,7 @@ public final class BOOperand extends AbstractSymbolicArgument {
      * the bit in the Condition Register selected by the BI field is not set.
      */
     public static final BOOperand CTRZero_CRFalse = new BOOperand("00010");
-    
+
     /**
      * Branch if the bit in the Condition Register selected by the BI field is not set
      * and indicate that the branch is very likely to be taken.
@@ -130,7 +130,7 @@ public final class BOOperand extends AbstractSymbolicArgument {
      * Branch if the bit in the Condition Register selected by the BI field is not set.
      */
     public static final BOOperand CRFalse = new BOOperand("00100", CRFalse_PredictTaken, CRFalse_PredictNotTaken, "00011");
-    
+
     /**
      * Decrement the Counter Register, then branch if the decremented value is not 0 and
      * the bit in the Condition Register selected by the BI field is set.
@@ -142,8 +142,8 @@ public final class BOOperand extends AbstractSymbolicArgument {
      * the bit in the Condition Register selected by the BI field is set.
      */
     public static final BOOperand CTRZero_CRTrue = new BOOperand("01010");
-    
-    
+
+
     /**
      * Branch if the bit in the Condition Register selected by the BI field is set
      * and indicate that the branch is very likely to be taken.
@@ -155,12 +155,12 @@ public final class BOOperand extends AbstractSymbolicArgument {
      * and indicate that the branch is very likely not to be taken.
      */
     public static final BOOperand CRTrue_PredictNotTaken = new BOOperand("01110", "00011");
-    
+
     /**
      * Branch if the bit in the Condition Register selected by the BI field is set.
      */
     public static final BOOperand CRTrue = new BOOperand("01100", CRTrue_PredictTaken, CRTrue_PredictNotTaken, "00011");
-    
+
     /**
      * Decrement the Counter Register, then branch if the decremented value is 0
      * and indicate that the branch is very likely to be taken.
@@ -177,7 +177,7 @@ public final class BOOperand extends AbstractSymbolicArgument {
      * Decrement the Counter Register, then branch if the decremented value is 0.
      */
     public static final BOOperand CTRNonZero = new BOOperand("10000", CTRNonZero_PredictTaken, CTRNonZero_PredictNotTaken, "01001");
-    
+
     /**
      * Decrement the Counter Register, then branch if the decremented value is 0
      * and indicate that the branch is very likely to be taken.
@@ -194,13 +194,13 @@ public final class BOOperand extends AbstractSymbolicArgument {
      * Decrement the Counter Register, then branch if the decremented value is 0.
      */
     public static final BOOperand CTRZero = new BOOperand("10010", CTRZero_PredictTaken, CTRZero_PredictNotTaken, "01001");
-    
+
     /**
      * Branch always.
      */
     public static final BOOperand Always = new BOOperand("10100");
-    
+
     // Checkstyle: resume constant name check
-    
+
     public static final Symbolizer<BOOperand> SYMBOLIZER = Symbolizer.Static.initialize(BOOperand.class);
 }

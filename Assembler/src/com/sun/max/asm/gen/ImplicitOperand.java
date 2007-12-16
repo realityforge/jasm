@@ -4,8 +4,7 @@
 /*VCSID=bb1334d6-3028-472a-bfcb-80bbe7d89154*/
 package com.sun.max.asm.gen;
 
-import com.sun.max.asm.*;
-
+import com.sun.max.asm.Argument;
 
 /**
  * An operand that does not correspond to a parameter.
@@ -15,7 +14,7 @@ import com.sun.max.asm.*;
 public interface ImplicitOperand extends Operand {
 
     Argument argument();
-    
+
     /**
      * Determines whether the operand is to be omitted or explicitly stated in external syntax.
      *
@@ -24,6 +23,6 @@ public interface ImplicitOperand extends Operand {
     public enum ExternalPresence {
         OMITTED, EXPLICIT;
     }
-    
+
     ExternalPresence externalPresence();
 }

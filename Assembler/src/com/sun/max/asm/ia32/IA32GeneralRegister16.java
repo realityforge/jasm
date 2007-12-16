@@ -4,11 +4,9 @@
 /*VCSID=37f19731-66ec-4a29-8d68-1bd64e295ece*/
 package com.sun.max.asm.ia32;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.x86.*;
-import com.sun.max.lang.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.x86.GeneralRegister;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.util.Enumerator;
 
 /**
  * @author Bernd Mathiske

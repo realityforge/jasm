@@ -4,12 +4,11 @@
 /*VCSID=09e5bfba-866f-49ca-8398-c4e017d22478*/
 package com.sun.max.asm.gen;
 
-import java.lang.reflect.*;
-
-import com.sun.max.collect.*;
-
-
-
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author Bernd Mathiske
@@ -17,10 +16,10 @@ import com.sun.max.collect.*;
 public interface ImmediateParameter extends Parameter {
 
     public static final class Static {
-        
+
         private Static() {
         }
-        
+
         public static <Element_Type extends ImmediateArgument, Argument_Type> Sequence<Element_Type> createSequence(Class<Element_Type> elementType,
                         final Class<Argument_Type> argumentType, Argument_Type... values) throws NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
             final AppendableSequence<Element_Type> result = new ArrayListSequence<Element_Type>();
@@ -31,5 +30,5 @@ public interface ImmediateParameter extends Parameter {
             return result;
         }
     }
-    
+
 }

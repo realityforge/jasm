@@ -6,8 +6,8 @@
 
 package com.sun.max.asm.ppc;
 
-import com.sun.max.asm.*;
-import static com.sun.max.asm.ppc.GPR.*;
+import com.sun.max.asm.BigEndianAssembler;
+import static com.sun.max.asm.ppc.GPR.R0;
 
 public abstract class PPCRawAssembler extends BigEndianAssembler {
 

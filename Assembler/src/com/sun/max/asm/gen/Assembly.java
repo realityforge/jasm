@@ -4,13 +4,19 @@
 /*VCSID=af5aeb5a-2d60-4842-8124-09b832cc1da9*/
 package com.sun.max.asm.gen;
 
-import java.lang.reflect.*;
-
-import com.sun.max.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.risc.bitRange.*;
-import com.sun.max.collect.*;
-import com.sun.max.program.*;
+import com.sun.max.MaxPackage;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.Assembler;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.InstructionSet;
+import com.sun.max.asm.Label;
+import com.sun.max.asm.gen.risc.bitRange.BitRangeOrder;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.program.ProgramError;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * An assembly framework, instantiated once per instruction set.
@@ -28,28 +34,28 @@ public abstract class Assembly<Template_Type extends Template> {
 
     private final InstructionSet _instructionSet;
     private final Class<Template_Type> _templateType;
-    
+
     protected Assembly(InstructionSet instructionSet, Class<Template_Type> templateType) {
         _instructionSet = instructionSet;
         _templateType = templateType;
     }
-    
+
     public InstructionSet instructionSet() {
         return _instructionSet;
     }
-    
+
     public Class<Template_Type> templateType() {
         return _templateType;
     }
-    
+
     public MaxPackage getPackage() {
         return instructionSetPackage(_instructionSet);
     }
-    
+
     protected abstract Sequence<Template_Type> createTemplates();
-    
+
     private Sequence<Template_Type> _templates;
-    
+
     public Sequence<Template_Type> templates() {
         if (_templates == null) {
             _templates = createTemplates();
@@ -66,7 +72,7 @@ public abstract class Assembly<Template_Type extends Template> {
         }
         return result;
     }
-    
+
     public abstract BitRangeOrder bitRangeEndianness();
 
     private Object getBoxedJavaValue(Argument argument) {
@@ -76,12 +82,12 @@ public abstract class Assembly<Template_Type extends Template> {
         }
         return argument;
     }
-    
+
     public final String createMethodCallString(Template_Type template, Sequence<Argument> argumentList) {
         assert argumentList.length() == template.parameters().length();
         String call = template.assemblerMethodName() + "(";
         for (int i = 0; i < argumentList.length(); i++) {
-            call += ((i == 0) ? "" : ", ") + getBoxedJavaValue(argumentList.get(i));            
+            call += ((i == 0) ? "" : ", ") + getBoxedJavaValue(argumentList.get(i));
         }
         return call + ")";
     }
@@ -94,7 +100,7 @@ public abstract class Assembly<Template_Type extends Template> {
         }
         return null;
     }
-    
+
     private Method getAssemblerMethod(Assembler assembler, Template_Type template, Sequence<Argument> arguments) {
         final Class[] parameterTypes = template.parameterTypes();
         final int index = template.labelParameterIndex();
@@ -107,7 +113,7 @@ public abstract class Assembly<Template_Type extends Template> {
         }
         return template._assemblerMethod;
     }
-    
+
     public void assemble(Assembler assembler, Template_Type template, Sequence<Argument> arguments) throws AssemblyException {
         assert arguments.length() == template.parameters().length();
         final Method assemblerMethod = getAssemblerMethod(assembler, template, arguments);
@@ -132,5 +138,5 @@ public abstract class Assembly<Template_Type extends Template> {
             ProgramError.unexpected(invocationTargetException);
         }
     }
-    
+
 }

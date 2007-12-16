@@ -4,10 +4,9 @@
 /*VCSID=041bf595-f71d-4939-a3b1-861d9c30e7cb*/
 package com.sun.max.program.option;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
-
+import com.sun.max.annotate.Implement;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A command line option.

@@ -4,11 +4,11 @@
 /*VCSID=d156d556-26b2-4abb-9fcc-bb0881baa868*/
 package com.sun.max.annotate.processor;
 
-import com.sun.max.*;
+import com.sun.max.MaxPackage;
 
 /**
  * @see MaxPackage
- * 
+ *
  * @author Bernd Mathiske
  */
 public class Package extends MaxPackage {

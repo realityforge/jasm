@@ -4,11 +4,49 @@
 /*VCSID=bded1a33-b301-4df7-8eb5-7fadb98e8afa*/
 package com.sun.max.asm.gen.risc.sparc;
 
-import static com.sun.max.asm.gen.risc.sparc.SPARCFields.*;
-import static com.sun.max.asm.sparc.AnnulBit.*;
-import static com.sun.max.asm.sparc.BranchPredictionBit.*;
-
-import com.sun.max.asm.sparc.*;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._a;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._cc;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._const22;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._d16;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._disp19;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._disp22;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._disp30;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._fcc_21_20;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._fcond_28_25;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._icond_28_25;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._p;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rcond_27_25;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rd;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_10_5;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_10_7;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_12_5;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_18_0;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_29_25;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._res_29_29;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rs1;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._rs2;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._simm13;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._swTrapNumber;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields._tcc;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.a;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.bits_18_14;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.bits_24_22;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.bits_28_28;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.fcnc;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.fcond_28_25;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.i;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.icond_28_25;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.op;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.op2;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.op3;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.p;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.rcond_27_25;
+import static com.sun.max.asm.gen.risc.sparc.SPARCFields.rd;
+import static com.sun.max.asm.sparc.AnnulBit.NO_A;
+import com.sun.max.asm.sparc.BPr;
+import com.sun.max.asm.sparc.Bicc;
+import static com.sun.max.asm.sparc.BranchPredictionBit.PT;
+import com.sun.max.asm.sparc.FBfcc;
 
 /**
  * @author Bernd Mathiske
@@ -19,7 +57,7 @@ class ControlTransfer extends SPARCInstructionDescriptionCreator {
 
     private void createBPr(String prefix, Object... objects) {
         for (BPr condition : BPr.SYMBOLIZER) {
-            define(prefix + condition.name().toLowerCase(), objects, rcond_27_25(condition));            
+            define(prefix + condition.name().toLowerCase(), objects, rcond_27_25(condition));
         }
     }
 
@@ -31,7 +69,7 @@ class ControlTransfer extends SPARCInstructionDescriptionCreator {
 
     private void createFBfcc(String prefix, Object... objects) {
         for (FBfcc condition : FBfcc.SYMBOLIZER) {
-            define(prefix + condition.name().toLowerCase(), objects, fcond_28_25(condition));            
+            define(prefix + condition.name().toLowerCase(), objects, fcond_28_25(condition));
         }
     }
 
@@ -45,15 +83,15 @@ class ControlTransfer extends SPARCInstructionDescriptionCreator {
 
     private void create_A5() {
         if (assembly().generatingV9Instructions()) {
-            createFBfcc("fb", op(0x0), _a, _p, bits_24_22(0x5), _fcc_21_20, _disp19);   
-            createFBfcc("fb", op(0x0), a(NO_A), p(PT), bits_24_22(0x5), _fcc_21_20, _disp19);   
+            createFBfcc("fb", op(0x0), _a, _p, bits_24_22(0x5), _fcc_21_20, _disp19);
+            createFBfcc("fb", op(0x0), a(NO_A), p(PT), bits_24_22(0x5), _fcc_21_20, _disp19);
             define("fb", op(0x0), _fcond_28_25, _a, _p, bits_24_22(0x5), _fcc_21_20, _disp19);
         }
     }
 
     private void createBicc(String prefix, Object... objects) {
         for (Bicc condition : Bicc.SYMBOLIZER) {
-            define(prefix + condition.name().toLowerCase(), objects, icond_28_25(condition));            
+            define(prefix + condition.name().toLowerCase(), objects, icond_28_25(condition));
         }
     }
 
@@ -112,10 +150,10 @@ class ControlTransfer extends SPARCInstructionDescriptionCreator {
 
     ControlTransfer(SPARCTemplateCreator templateCreator) {
         super(templateCreator);
-        
+
         setCurrentArchitectureManualSection("A.3");
         create_A3();
-        
+
         setCurrentArchitectureManualSection("A.4");
         create_A4();
 

@@ -4,32 +4,38 @@
 /*VCSID=e7cccc10-c50f-4c42-bc16-c1b67e57261b*/
 package test.com.sun.max.asm.ppc;
 
-import static com.sun.max.asm.ppc.BranchPredictionBits.*;
-import static com.sun.max.asm.ppc.CRF.*;
-import static com.sun.max.asm.ppc.GPR.*;
-
-import java.io.*;
-
-import junit.framework.*;
-
-import com.sun.max.asm.*;
-import com.sun.max.asm.ppc.*;
-import com.sun.max.ide.*;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.Label;
+import static com.sun.max.asm.ppc.BranchPredictionBits.NONE;
+import static com.sun.max.asm.ppc.CRF.CR0;
+import static com.sun.max.asm.ppc.GPR.R0;
+import static com.sun.max.asm.ppc.GPR.R23;
+import static com.sun.max.asm.ppc.GPR.R24;
+import static com.sun.max.asm.ppc.GPR.R29;
+import static com.sun.max.asm.ppc.GPR.R3;
+import static com.sun.max.asm.ppc.GPR.R30;
+import static com.sun.max.asm.ppc.GPR.R31;
+import static com.sun.max.asm.ppc.GPR.SP;
+import com.sun.max.asm.ppc.PPC32Assembler;
+import com.sun.max.ide.MaxTestCase;
+import java.io.IOException;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
  * @author Bernd Mathiske
  */
 public class SpeedTest extends MaxTestCase {
-    
-    public SpeedTest() {        
+
+    public SpeedTest() {
         super();
 
     }
 
-    public SpeedTest(String name) {        
+    public SpeedTest(String name) {
         super(name);
     }
-    
+
     public static Test suite() {
         final TestSuite suite = new TestSuite(SpeedTest.class.getName());
         //$JUnit-BEGIN$
@@ -46,7 +52,7 @@ public class SpeedTest extends MaxTestCase {
         final int startAddress = 0x0000ecf0;
         final PPC32Assembler asm = new PPC32Assembler(startAddress);
         final Label label1 = new Label();
-        
+
         asm.mflr(R0);
         asm.stwu(SP, -96, SP);
         asm.stmw(R23, 60, SP);
@@ -84,9 +90,9 @@ public class SpeedTest extends MaxTestCase {
         asm.lmw(R23, 60, SP);
         asm.addi(SP, SP, 96);
         asm.blr();
-        return asm.toByteArray();        
+        return asm.toByteArray();
     }
-    
+
     public void test_speed() throws IOException, AssemblyException {
         System.out.println("start");
         for (int i = 0; i < 10000000; i++) {

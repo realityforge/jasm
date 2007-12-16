@@ -4,8 +4,8 @@
 /*VCSID=143d13e4-ffa8-4512-b640-03f799b5b92f*/
 package com.sun.max.asm.sparc;
 
-import com.sun.max.asm.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.AbstractSymbolicArgument;
+import com.sun.max.util.Symbolizer;
 
 /**
  * The argument to a Branch on Integer Condition Code with Prediction instruction specifying
@@ -19,9 +19,9 @@ public final class ICCOperand extends AbstractSymbolicArgument implements Condit
     private ICCOperand(int value) {
         super(value);
     }
-    
+
     public static final ICCOperand ICC = new ICCOperand(0);
     public static final ICCOperand XCC = new ICCOperand(2);
-    
+
     public static final Symbolizer<ICCOperand> SYMBOLIZER = Symbolizer.Static.initialize(ICCOperand.class);
 }

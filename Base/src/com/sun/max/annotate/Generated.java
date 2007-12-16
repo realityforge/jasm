@@ -3,7 +3,9 @@
  */
 /*VCSID=d7e5848e-d370-4323-8be5-c9d9f452271f*/
 package com.sun.max.annotate;
-import java.lang.annotation.*;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 
@@ -11,5 +13,5 @@ import java.lang.annotation.*;
  * Indicates that a class' source code has been generated, not manually written.
  */
 public @interface Generated {
-    Class value();    
+    Class value();
 }

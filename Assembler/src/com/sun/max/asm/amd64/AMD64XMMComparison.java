@@ -4,10 +4,8 @@
 /*VCSID=3dd92b01-a78c-47d8-9279-5968dd59ff02*/
 package com.sun.max.asm.amd64;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.util.*;
-
+import com.sun.max.asm.EnumerableArgument;
+import com.sun.max.util.Enumerator;
 
 public enum AMD64XMMComparison implements EnumerableArgument<AMD64XMMComparison> {
 

@@ -4,14 +4,23 @@
 /*VCSID=5ac6ab01-58b0-49d4-92d2-bb9dcb1a0e2a*/
 package com.sun.max.asm.gen.risc;
 
-import java.util.*;
-
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.bitRange.*;
-import com.sun.max.asm.gen.risc.field.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.gen.Assembly;
+import com.sun.max.asm.gen.InstructionConstraint;
+import com.sun.max.asm.gen.InstructionDescriptionCreator;
+import com.sun.max.asm.gen.Parameter;
+import com.sun.max.asm.gen.risc.bitRange.OmittedBitRange;
+import com.sun.max.asm.gen.risc.field.OperandField;
+import com.sun.max.asm.gen.risc.field.OptionField;
+import com.sun.max.asm.gen.risc.field.RiscField;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.MutableSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.StaticLoophole;
+import com.sun.max.program.ProgramError;
+import com.sun.max.program.Trace;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -20,17 +29,17 @@ import com.sun.max.program.*;
 public abstract class RiscInstructionDescriptionCreator extends InstructionDescriptionCreator<RiscInstructionDescription> {
 
     protected final RiscTemplateCreator<? extends RiscTemplate> _templateCreator;
-    
+
     protected RiscInstructionDescriptionCreator(Assembly assembly, RiscTemplateCreator<? extends RiscTemplate> templateCreator) {
         super(assembly);
         _templateCreator = templateCreator;
     }
- 
+
     @Override
     protected RiscInstructionDescription createInstructionDescription(MutableSequence<Object> specifications) {
         return new RiscInstructionDescription(specifications);
     }
-    
+
     private int firstStringIndex(List<Object> specifications) {
         for (int i = 0; i < specifications.size(); i++) {
             if (specifications.get(i) instanceof String) {
@@ -40,7 +49,7 @@ public abstract class RiscInstructionDescriptionCreator extends InstructionDescr
         ProgramError.unexpected("template instruction description without name");
         return -1;
     }
-    
+
     private void setFirstString(List<Object> specifications, String value) {
         specifications.set(firstStringIndex(specifications), value);
     }
@@ -86,7 +95,7 @@ public abstract class RiscInstructionDescriptionCreator extends InstructionDescr
         }
         return false;
     }
-    
+
     private RiscInstructionDescription createSyntheticInstructionDescription(String name, RiscTemplate template, Object[] patterns) {
         final List<Object> specifications = new ArrayListSequence<Object>(template.instructionDescription().specifications());
         for (Object pattern : patterns) {
@@ -104,7 +113,7 @@ public abstract class RiscInstructionDescriptionCreator extends InstructionDescr
     /**
      * Creates a synthetic instruction from a previously defined (raw or synthetic) instruction
      * by replacing one or more parameters of the instruction with a constant or alternative parameter.
-     * 
+     *
      * @param name          the internal (base) name of the new synthetic instruction
      * @param templateName  the internal name of the original instruction on which the synthetic instruction is based
      * @param patterns      the replacements for one or more parameters of the original instruction

@@ -4,9 +4,7 @@
 /*VCSID=24a4b40a-a8ca-490c-bd75-67209d02e72b*/
 package com.sun.max.asm.gen;
 
-import com.sun.max.asm.*;
-
-
+import com.sun.max.asm.Argument;
 
 /**
  * @author Bernd Mathiske
@@ -14,5 +12,5 @@ import com.sun.max.asm.*;
 public interface WrappableSpecification {
 
     TestArgumentExclusion excludeExternalTestArguments(Argument... arguments);
-    
+
 }

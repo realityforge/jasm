@@ -4,8 +4,10 @@
 /*VCSID=e19286e4-b44f-4071-ab3c-ce1a4961889b*/
 package com.sun.max.asm.ia32;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
+import com.sun.max.asm.Assembler32;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.InstructionSet;
+import com.sun.max.asm.Label;
 
 /**
  * Instatiate this class to assemble IA32 instructions.

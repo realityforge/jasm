@@ -4,7 +4,7 @@
 /*VCSID=069ff522-d989-42a9-93bf-be7e246f383f*/
 package com.sun.max.program;
 
-import java.io.*;
+import java.io.PrintStream;
 
 /**
  * @author Bernd Mathiske
@@ -12,5 +12,5 @@ import java.io.*;
 public interface Traceable {
 
     void printTrace(PrintStream stream, Object... arguments);
-    
+
 }

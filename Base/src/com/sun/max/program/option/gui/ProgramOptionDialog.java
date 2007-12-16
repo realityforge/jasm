@@ -4,21 +4,46 @@
 /*VCSID=680dc262-0a16-467f-8f1c-2121ab61505c*/
 package com.sun.max.program.option.gui;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.lang.reflect.*;
-import java.util.*;
-
-import javax.swing.*;
-import javax.swing.event.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.collect.*;
-import com.sun.max.gui.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
-import com.sun.max.program.option.*;
+import com.sun.max.annotate.Implement;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.gui.SpringUtilities;
+import com.sun.max.lang.Classes;
+import com.sun.max.program.ProgramError;
+import com.sun.max.program.ProgramWarning;
+import com.sun.max.program.option.ProgramArgumentsParser;
+import com.sun.max.program.option.ProgramOption;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
+import java.util.Enumeration;
+import java.util.LinkedHashSet;
+import java.util.Properties;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SpringLayout;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  * A dialog used to present the {@linkplain ProgramOption options} defined by a {@link ProgramArgumentsParser}.

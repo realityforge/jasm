@@ -4,28 +4,33 @@
 /*VCSID=5070ed91-5e42-46c1-a73e-35a3d5f05f01*/
 package com.sun.max.io;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
 
 /**
- * A readable source is a character data source that provides a Reader to read the data. 
+ * A readable source is a character data source that provides a Reader to read the data.
  *
  * @author Doug Simon
  */
 public interface ReadableSource {
-    
+
     /**
      * @param buffered if true, the returned reader is guaranteed to be a BufferedReader
-     * 
+     *
      * @return a reader to read the character data represented by this source
      */
     Reader reader(boolean buffered) throws IOException;
-    
+
     public static final class Static {
-        
+
         private Static() {
-            
+
         }
-        
+
         /**
          * Creates a ReadableSource to provides readers for the characters in a string.
          */
@@ -46,7 +51,7 @@ public interface ReadableSource {
                     return buffered ? new BufferedReader(new FileReader(file)) : new FileReader(file);
                 }
             };
-            
+
         }
     }
 }

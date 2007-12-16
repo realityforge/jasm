@@ -4,11 +4,9 @@
 /*VCSID=fa29398f-c171-4bd5-891e-9ea6860b9ca4*/
 package com.sun.max.asm.amd64;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.x86.*;
-import com.sun.max.lang.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.x86.GeneralRegister;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.util.Enumerator;
 
 /**
  * Aliases for 32-bit AMD64 general registers to be used as base registers.

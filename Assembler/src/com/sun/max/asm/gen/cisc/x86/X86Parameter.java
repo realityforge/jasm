@@ -4,12 +4,13 @@
 /*VCSID=fcd62ced-709b-4c62-8c19-027c11a1213e*/
 package com.sun.max.asm.gen.cisc.x86;
 
-import java.util.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.gen.ArgumentRange;
+import com.sun.max.asm.gen.Parameter;
+import com.sun.max.asm.gen.TestArgumentExclusion;
+import com.sun.max.program.ProgramError;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * An explicit operand, specifying an assembler method parameter.

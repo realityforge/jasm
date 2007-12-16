@@ -4,22 +4,49 @@
 /*VCSID=02876449-abda-403f-8d85-aec615e45a57*/
 package com.sun.max.asm.gen;
 
-import java.io.*;
-import java.util.*;
-import java.util.Arrays;
-import java.util.Map.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.*;
-import com.sun.max.collect.*;
-import com.sun.max.io.*;
-import com.sun.max.io.Streams.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.Assembler;
+import com.sun.max.asm.AssemblyException;
+import com.sun.max.asm.dis.DisassembledInstruction;
+import com.sun.max.asm.dis.Disassembler;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.ArraySequence;
+import com.sun.max.collect.FilterIterator;
+import com.sun.max.collect.Iterables;
+import com.sun.max.collect.MapFunction;
+import com.sun.max.collect.Sequence;
+import com.sun.max.io.IndentWriter;
+import com.sun.max.io.Streams;
+import com.sun.max.io.Streams.Redirector;
+import com.sun.max.io.TemporaryFiles;
+import com.sun.max.lang.Classes;
+import com.sun.max.lang.StaticLoophole;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.program.ProgramError;
+import com.sun.max.program.Trace;
+import com.sun.max.util.Predicate;
 import com.sun.max.util.Timer;
-import com.sun.max.util.Timer.*;
+import com.sun.max.util.Timer.ComputationWithException;
+import java.io.BufferedInputStream;
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InterruptedIOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.PushbackInputStream;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
 /**
  * A test framework for assemblers and disassemblers.

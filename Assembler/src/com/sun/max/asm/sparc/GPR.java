@@ -4,11 +4,11 @@
 /*VCSID=a2cdcd79-04d8-42e2-b4f6-28c6d1da7cb5*/
 package com.sun.max.asm.sparc;
 
-import com.sun.max.asm.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.AbstractSymbolicArgument;
+import com.sun.max.util.Symbolizer;
 
 /**
- * The class defining the symbolic identifiers for the general purpose registers. 
+ * The class defining the symbolic identifiers for the general purpose registers.
  *
  * @author Bernd Mathiske
  * @author Doug Simon
@@ -24,7 +24,7 @@ public class GPR extends AbstractSymbolicArgument {
             super(value);
         }
     }
-    
+
     public static final Even G0 = new Even(0);
     public static final  GPR G1 = new  GPR(1);
     public static final Even G2 = new Even(2);
@@ -57,7 +57,7 @@ public class GPR extends AbstractSymbolicArgument {
     public static final  GPR I5 = new  GPR(29);
     public static final Even I6 = new Even(30);
     public static final  GPR I7 = new  GPR(31);
-    
+
     public static final Symbolizer<GPR> SYMBOLIZER = Symbolizer.Static.initialize(GPR.class);
     public static final Symbolizer<Even> EVEN_SYMBOLIZER = Symbolizer.Static.initialize(GPR.class, Even.class);
 }

@@ -4,14 +4,38 @@
 /*VCSID=27164aab-035e-41db-b67d-2cea49280af2*/
 package com.sun.max.asm.gen.cisc.ia32;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.cisc.*;
-import com.sun.max.asm.gen.cisc.x86.*;
-import com.sun.max.asm.ia32.*;
-import com.sun.max.asm.x86.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.gen.ArgumentRange;
+import com.sun.max.asm.gen.ImplicitOperand;
+import com.sun.max.asm.gen.TestArgumentExclusion;
+import com.sun.max.asm.gen.cisc.TemplateNotNeededException;
+import com.sun.max.asm.gen.cisc.x86.InstructionAssessment;
+import com.sun.max.asm.gen.cisc.x86.OperandCode;
+import com.sun.max.asm.gen.cisc.x86.ParameterPlace;
+import com.sun.max.asm.gen.cisc.x86.RegisterOperandCode;
+import com.sun.max.asm.gen.cisc.x86.X86AddressParameter;
+import com.sun.max.asm.gen.cisc.x86.X86DisplacementParameter;
+import com.sun.max.asm.gen.cisc.x86.X86EnumerableParameter;
+import com.sun.max.asm.gen.cisc.x86.X86ImmediateParameter;
+import com.sun.max.asm.gen.cisc.x86.X86ImplicitOperand;
+import com.sun.max.asm.gen.cisc.x86.X86InstructionDescription;
+import com.sun.max.asm.gen.cisc.x86.X86OffsetParameter;
+import com.sun.max.asm.gen.cisc.x86.X86Operand;
+import com.sun.max.asm.gen.cisc.x86.X86Template;
+import com.sun.max.asm.gen.cisc.x86.X86TemplateContext;
+import com.sun.max.asm.ia32.IA32BaseRegister32;
+import com.sun.max.asm.ia32.IA32GeneralRegister16;
+import com.sun.max.asm.ia32.IA32GeneralRegister32;
+import com.sun.max.asm.ia32.IA32GeneralRegister8;
+import com.sun.max.asm.ia32.IA32IndexRegister32;
+import com.sun.max.asm.ia32.IA32IndirectRegister16;
+import com.sun.max.asm.ia32.IA32IndirectRegister32;
+import com.sun.max.asm.x86.ControlRegister;
+import com.sun.max.asm.x86.DebugRegister;
+import com.sun.max.asm.x86.MMXRegister;
+import com.sun.max.asm.x86.Scale;
+import com.sun.max.asm.x86.SegmentRegister;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.program.ProgramError;
 
 /**
  * @author Bernd Mathiske

@@ -4,11 +4,18 @@
 /*VCSID=0dd00894-cf4f-4480-953f-bc8dc9d6abc1*/
 package com.sun.max.lang;
 
-import java.lang.reflect.*;
-import java.util.*;
-
-import com.sun.max.collect.*;
-import com.sun.max.util.*;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.MapFunction;
+import com.sun.max.util.Predicate;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Dictionary;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
 /**
  * Additonal methods that one could expect in java.util.Arrays.

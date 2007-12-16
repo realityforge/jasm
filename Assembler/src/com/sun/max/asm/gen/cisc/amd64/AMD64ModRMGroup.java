@@ -4,21 +4,44 @@
 /*VCSID=f67ae68b-b194-43fe-b196-cccfbca057fa*/
 package com.sun.max.asm.gen.cisc.amd64;
 
-import static com.sun.max.asm.amd64.AMD64GeneralRegister16.*;
-import static com.sun.max.asm.amd64.AMD64GeneralRegister32.*;
-import static com.sun.max.asm.amd64.AMD64GeneralRegister64.*;
-import static com.sun.max.asm.amd64.AMD64GeneralRegister8.*;
-import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.*;
-import static com.sun.max.asm.gen.cisc.x86.FloatingPointOperandCode.*;
-import static com.sun.max.asm.gen.cisc.x86.OperandCode.*;
-import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.asm.amd64.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.cisc.x86.*;
-import com.sun.max.collect.*;
-
+import com.sun.max.asm.amd64.AMD64GeneralRegister16;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister16.AX;
+import com.sun.max.asm.amd64.AMD64GeneralRegister32;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister32.EAX;
+import com.sun.max.asm.amd64.AMD64GeneralRegister64;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister64.RAX;
+import static com.sun.max.asm.amd64.AMD64GeneralRegister8.AL;
+import com.sun.max.asm.gen.ExternalOmission;
+import static com.sun.max.asm.gen.cisc.x86.AddressingMethodCode.M;
+import static com.sun.max.asm.gen.cisc.x86.FloatingPointOperandCode.bytes_14_28;
+import static com.sun.max.asm.gen.cisc.x86.FloatingPointOperandCode.bytes_2;
+import static com.sun.max.asm.gen.cisc.x86.FloatingPointOperandCode.bytes_98_108;
+import static com.sun.max.asm.gen.cisc.x86.FloatingPointOperandCode.double_real;
+import static com.sun.max.asm.gen.cisc.x86.FloatingPointOperandCode.extended_real;
+import static com.sun.max.asm.gen.cisc.x86.FloatingPointOperandCode.long_integer;
+import static com.sun.max.asm.gen.cisc.x86.FloatingPointOperandCode.packed_bcd;
+import static com.sun.max.asm.gen.cisc.x86.FloatingPointOperandCode.short_integer;
+import static com.sun.max.asm.gen.cisc.x86.FloatingPointOperandCode.single_real;
+import static com.sun.max.asm.gen.cisc.x86.FloatingPointOperandCode.word_integer;
+import com.sun.max.asm.gen.cisc.x86.ModRMDescription;
+import com.sun.max.asm.gen.cisc.x86.ModRMGroup;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Eb;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Ev;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Ew;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Ib;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Iz;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Mb;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Md;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Mdq;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Mq;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Ms;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Mw;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.PRq;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.Rv;
+import static com.sun.max.asm.gen.cisc.x86.OperandCode.VRdq;
+import static com.sun.max.asm.gen.cisc.x86.OperandTypeCode.v;
+import com.sun.max.asm.gen.cisc.x86.X86TemplateContext;
+import com.sun.max.collect.ArrayListSequence;
 
 /**
  * See A-7 in the book.

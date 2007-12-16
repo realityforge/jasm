@@ -4,15 +4,26 @@
 /*VCSID=2d9999b3-5ec5-41c8-87d2-888f1ecd147c*/
 package com.sun.max.asm.gen.cisc.x86;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.cisc.*;
-import com.sun.max.asm.x86.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
-import com.sun.max.util.*;
+import com.sun.max.asm.EnumerableArgument;
+import com.sun.max.asm.gen.ArgumentRange;
+import com.sun.max.asm.gen.Immediate8Argument;
+import com.sun.max.asm.gen.ImplicitOperand;
+import com.sun.max.asm.gen.InstructionConstraint;
+import com.sun.max.asm.gen.InstructionDescription;
+import com.sun.max.asm.gen.Template;
+import com.sun.max.asm.gen.TestArgumentExclusion;
+import com.sun.max.asm.gen.cisc.TemplateNotNeededException;
+import com.sun.max.asm.x86.FPStackRegister;
+import com.sun.max.asm.x86.GeneralRegister;
+import com.sun.max.asm.x86.SegmentRegister;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.program.ProgramError;
+import com.sun.max.program.Trace;
+import com.sun.max.util.Enumerator;
+import com.sun.max.util.HexByte;
 
 /**
  * @author Bernd Mathiske

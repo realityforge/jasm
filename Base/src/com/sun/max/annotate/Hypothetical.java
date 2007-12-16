@@ -4,7 +4,8 @@
 /*VCSID=4f1e5e6a-1a97-43b7-9190-202f469b409c*/
 package com.sun.max.annotate;
 
-import java.lang.annotation.*;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
 
 @Target(ElementType.PACKAGE)
 

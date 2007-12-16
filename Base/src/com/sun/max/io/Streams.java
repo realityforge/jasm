@@ -4,10 +4,17 @@
 /*VCSID=a664876e-2d56-4aab-868d-fdb943a5ab96*/
 package com.sun.max.io;
 
-import java.io.*;
-
-import com.sun.max.annotate.*;
-import com.sun.max.lang.*;
+import com.sun.max.annotate.Implement;
+import com.sun.max.lang.Bytes;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.DataInput;
+import java.io.EOFException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.Writer;
 
 /**
  * Supplementary java.io utils.
@@ -94,7 +101,7 @@ public final class Streams {
                             Thread.yield();
                             continue;
                         }
-                        
+
                         final int b = _inputStream.read();
                         if (b < 0) {
                             return;
@@ -146,7 +153,7 @@ public final class Streams {
      * Scans a given buffered input stream for a given sequence of bytes. If the sequence is found, then the read
      * position of the stream is immediately after the sequence. Otherwise, the read position is at the end of the
      * stream.
-     * 
+     *
      * @param stream
      *            the stream to search
      * @param bytes
@@ -178,7 +185,7 @@ public final class Streams {
      * Scans a given buffered reader for a given sequence of characters. If the sequence is found, then the read
      * position of the reader is immediately after the sequence. Otherwise, the read position is at the end of the
      * reader.
-     * 
+     *
      * @param reader
      *            the reader to search
      * @param chars
@@ -220,7 +227,7 @@ public final class Streams {
         bufferedInputStream.reset();
         return false;
     }
-    
+
     public static boolean startsWith(BufferedReader bufferedReader, char[] chars) throws IOException {
         final char[] data = new char[chars.length];
         bufferedReader.mark(chars.length);
@@ -260,14 +267,14 @@ public final class Streams {
         }
         return buffer;
     }
-    
+
     /**
      * The analogous operation as {@link DataInput#readFully(byte[])} for {@link Reader}s.
      */
     public static char[] readFully(Reader reader, char[] buffer) throws IOException {
         return readFully(reader, buffer, 0, buffer.length);
     }
-    
+
     /**
      * The analogous operation as {@link DataInput#readFully(byte[], int, int)} for {@link Reader}s.
      */

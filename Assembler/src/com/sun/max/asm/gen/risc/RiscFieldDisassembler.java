@@ -7,11 +7,12 @@
  */
 package com.sun.max.asm.gen.risc;
 
-import com.sun.max.annotate.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.bitRange.*;
-import com.sun.max.asm.gen.risc.field.*;
-import com.sun.max.lang.*;
+import com.sun.max.asm.gen.InstructionConstraint;
+import com.sun.max.asm.gen.Template;
+import com.sun.max.asm.gen.risc.bitRange.BitRange;
+import com.sun.max.asm.gen.risc.field.OperandField;
+import com.sun.max.asm.gen.risc.field.RiscField;
+import com.sun.max.lang.Strings;
 
 /**
  * Disassembles an assembled RISC instruction to show the value of each field in the instruction as

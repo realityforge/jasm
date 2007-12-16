@@ -4,7 +4,7 @@
 /*VCSID=acf76553-19d2-42b9-aa09-54e4a2afc68d*/
 package com.sun.max.collect;
 
-import java.util.*;
+import java.util.Map;
 
 /**
  * Miscellaneous operations on {@link Map}s.
@@ -14,9 +14,9 @@ import java.util.*;
 public final class Maps {
 
     private Maps() {
-        
+
     }
-    
+
     /**
      * Gets the first key in a given map that is mapped to a given value. Given that many
      * keys can map to the same value, the key returned is the first encountered when

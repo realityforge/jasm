@@ -4,17 +4,27 @@
 /*VCSID=9772e265-3722-4fd9-9162-381ff3c1e08b*/
 package com.sun.max.asm.gen.risc;
 
-import com.sun.max.asm.*;
-import com.sun.max.asm.gen.*;
-import com.sun.max.asm.gen.risc.bitRange.*;
-import com.sun.max.asm.gen.risc.field.*;
-import com.sun.max.collect.*;
-import com.sun.max.io.*;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.LabelOffsetInstruction;
+import com.sun.max.asm.SymbolicArgument;
+import com.sun.max.asm.gen.AssemblerGenerator;
+import com.sun.max.asm.gen.Assembly;
+import com.sun.max.asm.gen.ImmediateArgument;
+import com.sun.max.asm.gen.InstructionConstraint;
+import com.sun.max.asm.gen.LabelParameter;
+import com.sun.max.asm.gen.OffsetParameter;
+import com.sun.max.asm.gen.Parameter;
+import com.sun.max.asm.gen.risc.bitRange.BitRange;
+import com.sun.max.asm.gen.risc.field.InputOperandField;
+import com.sun.max.asm.gen.risc.field.OperandField;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.io.IndentWriter;
+import com.sun.max.lang.Ints;
+import com.sun.max.program.ProgramError;
 
 /**
- * 
+ *
  *
  * @author Bernd Mathiske
  * @author Doug Simon
@@ -24,7 +34,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
     protected RiscAssemblerGenerator(Assembly<Template_Type> assembly) {
         super(assembly, false);
     }
-    
+
     private String encode(OperandField operandField, String val) {
         String value = val;
         // Convert the argument value to the operand value
@@ -33,12 +43,12 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
         }
         return operandField.bitRange().encodingString(value, operandField.isSigned(), false);
     }
-    
+
     @Override
     protected int printMethod(IndentWriter writer, Template_Type template) {
         final int startLineCount = writer.lineCount();
         writer.print("public void ");
-        writer.print(template.assemblerMethodName() + "(");   
+        writer.print(template.assemblerMethodName() + "(");
         writer.print(formatParameterList("final ", template.parameters(), false));
         writer.println(") {");
         writer.indent();
@@ -50,14 +60,14 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
             final String constraintExpr = constraint.asJavaExpression();
             writer.println("checkConstraint(" + constraintExpr + ", \"" + constraintExpr + "\");");
         }
-        
+
         for (OperandField operandField : template.operandFields()) {
             if (operandField instanceof InputOperandField) {
                 continue;
             }
             writer.println("instruction |= " + encode(operandField, operandField.valueString()) + ";");
         }
-        
+
         writer.println("emitInt(instruction);");
         writer.outdent();
         writer.println("}");
@@ -68,7 +78,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
         final Sequence<Parameter> parameters = printLabelMethodHead(writer, template);
         writer.println("emitInt(0); // instruction place holder");
         writer.print("new " + LabelOffsetInstruction.class.getSimpleName());
-        writer.println("(this, " + parameters.get(template.labelParameterIndex()).variableName() + ") {");            
+        writer.println("(this, " + parameters.get(template.labelParameterIndex()).variableName() + ") {");
         writer.indent();
         writer.println("@Override");
         writer.println("protected int templateSerial() { return " + template.serial() + "; }");
@@ -84,7 +94,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
         writer.println("}");
         writer.println();
     }
-    
+
     @Override
     protected int printLabelMethod(IndentWriter writer, Template_Type labelTemplate, Sequence<Template_Type> labelTemplates) {
         final int startLineCount = writer.lineCount();
@@ -114,15 +124,15 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
                 writer.print(getRawOperandReplacement(syntheticTemplate, rawTemplate, rawOperand));
                 firstOperand = false;
             }
-            
+
             writer.println(")}");
         }
     }
-    
+
     /**
      * Gets the expression in terms of the parameters and opcode of a synthetic instruction that replaces a parameter of
      * the raw instruction from which the synthetic operand was derived.
-     * 
+     *
      * @param syntheticTemplate
      *                the synthetic instruction
      * @param rawTemplate
@@ -137,7 +147,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
             }
             return rawOperand.variableName();
         }
-        
+
         final int rawOperandMask = rawOperand.bitRange().instructionMask();
         String expression = null;
         if ((syntheticTemplate.opcodeMask() & rawOperandMask) != 0) {
@@ -157,7 +167,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
         if ((syntheticTemplate.opcodeMask() & rawOperandMask) != rawOperandMask) {
             // Some or all bits of the raw operand are given as a parameter of the synthetic instruction
             for (OperandField syntheticOperand : syntheticTemplate.operandFields()) {
-                final int syntheticOperandMask = syntheticOperand.bitRange().instructionMask(); 
+                final int syntheticOperandMask = syntheticOperand.bitRange().instructionMask();
                 if ((syntheticOperandMask & rawOperandMask) != 0) {
                     final String term;
                     if (syntheticOperand.boundTo() != null) {
@@ -170,12 +180,12 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
                         final String value = syntheticOperand.variableName();
                         final String assembledSubField = subFieldRange.encodingString(value, syntheticOperand.isSigned(), true);
                         if (shift != 0) {
-                            term = "(" + assembledSubField + " * " + (1 << shift) + ")"; 
+                            term = "(" + assembledSubField + " * " + (1 << shift) + ")";
                         } else {
                             term = assembledSubField;
                         }
                     }
-                    
+
                     if (expression != null && !expression.equals("0")) {
                         expression += " | " + term;
                     } else {

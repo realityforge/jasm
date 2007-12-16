@@ -4,12 +4,14 @@
 /*VCSID=c3ee7fcb-60fe-4505-930f-8051f66bfbf6*/
 package com.sun.max.util;
 
-import java.io.*;
-import java.util.*;
-import java.util.Map.*;
-
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
+import com.sun.max.lang.StaticLoophole;
+import com.sun.max.program.ProgramError;
+import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Stack;
 
 /**
  * This is a class that provides support for timing computations (at millisecond granularity),
@@ -18,7 +20,7 @@ import com.sun.max.program.*;
  *
  * The {@link NanoTimer} class provides similiar functionality but at nanosecond
  * granularity and no support for total times.
- * 
+ *
  * @author  Doug Simon
  */
 public final class Timer<Key_Type> {
@@ -39,13 +41,13 @@ public final class Timer<Key_Type> {
      * A computation to be timed that throws an exception.
      */
     public abstract static class ComputationWithException<Result_Type, Exception_Type extends Throwable> {
-        
+
         protected final Class<? extends Throwable> _exceptionType;
-        
+
         public ComputationWithException(Class<? extends Throwable> exceptionType) {
             _exceptionType = exceptionType;
         }
-        
+
         /**
          * Performs the computation that will be timed.
          *

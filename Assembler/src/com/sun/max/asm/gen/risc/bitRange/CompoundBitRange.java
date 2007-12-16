@@ -4,13 +4,14 @@
 /*VCSID=3aa1199b-7b32-4421-b0c3-18b3377a309c*/
 package com.sun.max.asm.gen.risc.bitRange;
 
-import java.util.*;
-
-import com.sun.max.collect.*;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.ArrayListSequence;
+import com.sun.max.collect.Sequence;
+import java.util.Iterator;
 
 /**
  * A range of bits that is composed of several disjoint subranges.
- * 
+ *
  * @author Bernd Mathiske
  * @author Dave Ungar
  * @author Adam Spitz
@@ -27,11 +28,11 @@ public class CompoundBitRange extends BitRange {
     public Sequence<ContiguousBitRange> contiguousBitRanges() {
         return _contiguousBitRanges;
     }
-    
+
     public void add(ContiguousBitRange contiguousBitRange) {
         _contiguousBitRanges.append(contiguousBitRange);
     }
-    
+
     @Override
     public CompoundBitRange move(boolean left, int bits) {
         final CompoundBitRange movedRange = new CompoundBitRange();
@@ -41,7 +42,7 @@ public class CompoundBitRange extends BitRange {
         return movedRange;
     }
 
-    @Override 
+    @Override
     public int width() {
         int result = 0;
         for (ContiguousBitRange contiguousBitRange : _contiguousBitRanges) {
@@ -50,7 +51,7 @@ public class CompoundBitRange extends BitRange {
         return result;
     }
 
-    @Override 
+    @Override
     public int encodedWidth() {
         int result = 0;
         for (ContiguousBitRange contiguousBitRange : _contiguousBitRanges) {
@@ -59,7 +60,7 @@ public class CompoundBitRange extends BitRange {
         return result;
     }
 
-    @Override 
+    @Override
     public int instructionMask() {
         int mask = 0;
         for (ContiguousBitRange contiguousBitRange : _contiguousBitRanges) {
@@ -68,7 +69,7 @@ public class CompoundBitRange extends BitRange {
         return mask;
     }
 
-    @Override 
+    @Override
     public int numberOfLessSignificantBits() {
         int result = 32;
         for (ContiguousBitRange contiguousBitRange : _contiguousBitRanges) {
@@ -80,7 +81,7 @@ public class CompoundBitRange extends BitRange {
         return result;
     }
 
-    @Override 
+    @Override
     public boolean equals(Object other) {
         if (!(other instanceof CompoundBitRange)) {
             return false;
@@ -89,7 +90,7 @@ public class CompoundBitRange extends BitRange {
         return _contiguousBitRanges.equals(compoundBitRange._contiguousBitRanges);
     }
 
-    @Override 
+    @Override
     public int hashCode() {
         return _contiguousBitRanges.hashCode();
     }
@@ -106,10 +107,10 @@ public class CompoundBitRange extends BitRange {
         }
         return result;
     }
-    
+
     /* Extracting */
 
-    @Override 
+    @Override
     public int extractSignedInt(int instruction) {
         final Iterator<ContiguousBitRange> iterator = _contiguousBitRanges.iterator();
         final ContiguousBitRange firstBitRange = iterator.next();
@@ -122,7 +123,7 @@ public class CompoundBitRange extends BitRange {
         return signedInt;
     }
 
-    @Override 
+    @Override
     public int extractUnsignedInt(int instruction) {
         int unsignedInt = 0;
         for (ContiguousBitRange contiguousBitRange : _contiguousBitRanges) {
@@ -134,7 +135,7 @@ public class CompoundBitRange extends BitRange {
 
     /* Inserting */
 
-    @Override 
+    @Override
     public int assembleUncheckedSignedInt(int signedInt) throws IndexOutOfBoundsException {
         int value = signedInt;
         int result = 0;
@@ -146,7 +147,7 @@ public class CompoundBitRange extends BitRange {
         return result;
     }
 
-    @Override 
+    @Override
     public int assembleUncheckedUnsignedInt(int unsignedInt) throws IndexOutOfBoundsException {
         int value = unsignedInt;
         int result = 0;
@@ -158,7 +159,7 @@ public class CompoundBitRange extends BitRange {
         return result;
     }
 
-    @Override 
+    @Override
     public String encodingString(String value, boolean signed, boolean checked) {
         final StringBuilder sb = new StringBuilder();
         int shift = 0;

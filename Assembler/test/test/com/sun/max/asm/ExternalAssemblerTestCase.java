@@ -4,14 +4,15 @@
 /*VCSID=e41a0fef-5a42-49fa-9b28-da61c85178be*/
 package test.com.sun.max.asm;
 
-import com.sun.max.asm.gen.*;
-import com.sun.max.program.option.*;
+import com.sun.max.asm.gen.AssemblyTester;
+import com.sun.max.program.option.ProgramArgumentsParser;
+import com.sun.max.program.option.StringProgramOption;
 
 /**
  * Base class for assembler tests that use an external assembler which may
  * be executed remotely on another machine by using the '-remote=user@host'
- * program option. 
- * 
+ * program option.
+ *
  * @author Doug Simon
  * @author Bernd Mathiske
  */
@@ -19,7 +20,7 @@ public abstract class ExternalAssemblerTestCase extends AssemblerTestCase {
 
     private StringProgramOption _remoteUserAndHost;
     private StringProgramOption _remoteAssemblerPath;
-    
+
     /**
      * @return the option specifying the user and host for executing the external assembler on another machine
      */
@@ -39,7 +40,7 @@ public abstract class ExternalAssemblerTestCase extends AssemblerTestCase {
         }
         return _remoteAssemblerPath;
     }
-    
+
     @Override
     protected void addExtraProgramArguments(ProgramArgumentsParser programArgumentsParser) {
         programArgumentsParser.addProgramOption(remoteUserAndHost());

@@ -4,16 +4,18 @@
 /*VCSID=bdd25a69-9d1f-4b4f-85cc-547cbfd7a630*/
 package com.sun.max.asm.dis.ia32;
 
-import java.util.*;
-
-import com.sun.max.asm.*;
-import com.sun.max.asm.dis.x86.*;
-import com.sun.max.asm.gen.cisc.ia32.*;
-import com.sun.max.asm.ia32.*;
-import com.sun.max.collect.*;
-import com.sun.max.lang.*;
-import com.sun.max.util.*;
-
+import com.sun.max.asm.Argument;
+import com.sun.max.asm.Assembler;
+import com.sun.max.asm.dis.x86.X86Disassembler;
+import com.sun.max.asm.dis.x86.X86InstructionHeader;
+import com.sun.max.asm.gen.cisc.ia32.IA32Assembly;
+import com.sun.max.asm.gen.cisc.ia32.IA32Template;
+import com.sun.max.asm.ia32.IA32Assembler;
+import com.sun.max.collect.AppendableSequence;
+import com.sun.max.collect.Sequence;
+import com.sun.max.lang.WordWidth;
+import com.sun.max.util.HexByte;
+import java.util.Map;
 
 /**
  * Instantiate this class to disassemble IA32 instruction streams.
@@ -24,7 +26,7 @@ public class IA32Disassembler extends X86Disassembler<IA32Template, IA32Disassem
 
     private final int _startAddress;
 
-    public IA32Disassembler(int startAddress) {   
+    public IA32Disassembler(int startAddress) {
         super(IA32Assembly.ASSEMBLY, WordWidth.BITS_32);
         _startAddress = startAddress;
     }
@@ -33,7 +35,7 @@ public class IA32Disassembler extends X86Disassembler<IA32Template, IA32Disassem
     protected boolean isRexPrefix(HexByte opcode) {
         return false;
     }
-    
+
     @Override
     protected IA32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, IA32Template template, Sequence<Argument> arguments) {
         return new IA32DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
@@ -50,5 +52,5 @@ public class IA32Disassembler extends X86Disassembler<IA32Template, IA32Disassem
     protected Map<X86InstructionHeader, AppendableSequence<IA32Template>> headerToTemplates() {
         return _headerToTemplates;
     }
-    
+
 }
