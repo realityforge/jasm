@@ -1,6 +1,11 @@
 The jasm software is free, open source software, distributed and freely
 redistributable under the BSD License.
 
+The jasm software was initially developed by Sun Microsystems, Inc. Other
+contributions are copyright the various contributors. More precise details
+on the copyright status of a particular file can only be accurately determined
+by examining the history of the file in question.
+
 -------- The following is the legal text of the BSD License ---------
 Copyright (c) 2003 Sun Microsystems, Inc.
 All rights reserved.

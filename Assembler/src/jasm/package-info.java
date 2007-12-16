@@ -3,16 +3,15 @@
  *
  *  This file is licensed to you under the BSD License; You may not use
  *  this file except in compliance with the License. See the LICENSE.txt
- *  file distributed with this work for a copy of the License.
- *
- *  See the COPYRIGHT.txt file distributed with this work for information
+ *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
 
 /**
- * The Maxwell assembler framework,
- * which started out by copying the Java version of the Klein assembly framework,
- * which is based on the original Self version of the Klein assembly framework.
+ * The jasm assembler framework which started out by copying the Maxwell assembler
+ * framework, which in turn started out by copying the Java version of the Klein
+ * assembly framework, which is based on the original Self version of the Klein assembly
+ * framework.
  *
  * @author Bernd Mathiske
  * @author Dave Ungar

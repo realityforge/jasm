@@ -3,11 +3,10 @@
  *
  *  This file is licensed to you under the BSD License; You may not use
  *  this file except in compliance with the License. See the LICENSE.txt
- *  file distributed with this work for a copy of the License.
- *
- *  See the COPYRIGHT.txt file distributed with this work for information
+ *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
+
 /**
  * An assembly system for AMD 64 processors in "64-bit mode".
  *
