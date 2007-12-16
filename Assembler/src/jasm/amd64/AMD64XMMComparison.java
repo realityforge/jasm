@@ -5,7 +5,7 @@
 package jasm.amd64;
 
 import jasm.EnumerableArgument;
-import com.sun.max.util.Enumerator;
+import jasm.util.Enumerator;
 
 public enum AMD64XMMComparison implements EnumerableArgument<AMD64XMMComparison> {
 

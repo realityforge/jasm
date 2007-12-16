@@ -6,6 +6,7 @@ package jasm.gen.cisc.x86;
 
 import jasm.Argument;
 import jasm.util.WordWidth;
+import jasm.util.HexByte;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.Assembly;
 import jasm.gen.AssemblyTestComponent;
@@ -17,7 +18,6 @@ import com.sun.max.collect.MutableQueue;
 import com.sun.max.collect.Sequence;
 import com.sun.max.io.IndentWriter;
 import com.sun.max.lang.StaticLoophole;
-import com.sun.max.util.HexByte;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;

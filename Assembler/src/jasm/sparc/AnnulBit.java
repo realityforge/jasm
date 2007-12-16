@@ -5,7 +5,7 @@
 package jasm.sparc;
 
 import jasm.OptionSuffixSymbolicArgument;
-import com.sun.max.util.Symbolizer;
+import jasm.util.Symbolizer;
 
 /**
  * An optional (suffix) argument to a branch assembler instruction specifying

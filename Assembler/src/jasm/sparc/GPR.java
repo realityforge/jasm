@@ -5,7 +5,7 @@
 package jasm.sparc;
 
 import jasm.AbstractSymbolicArgument;
-import com.sun.max.util.Symbolizer;
+import jasm.util.Symbolizer;
 
 /**
  * The class defining the symbolic identifiers for the general purpose registers.

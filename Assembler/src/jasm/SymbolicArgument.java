@@ -4,7 +4,7 @@
 /*VCSID=80b233f6-d397-4768-9a2c-40c747df056f*/
 package jasm;
 
-import com.sun.max.util.Symbol;
+import jasm.util.Symbol;
 
 /**
  * An argument that is a symbol.

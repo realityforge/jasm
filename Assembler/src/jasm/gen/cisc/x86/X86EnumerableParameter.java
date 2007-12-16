@@ -6,10 +6,10 @@ package jasm.gen.cisc.x86;
 
 import jasm.Argument;
 import jasm.EnumerableArgument;
+import jasm.util.Enumerator;
 import jasm.gen.EnumerableParameter;
 import com.sun.max.collect.Iterables;
 import com.sun.max.program.ProgramError;
-import com.sun.max.util.Enumerator;
 
 /**
  * @author Bernd Mathiske

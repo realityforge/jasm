@@ -27,7 +27,7 @@ import jasm.sparc.QFPR;
 import jasm.sparc.SFPR;
 import jasm.sparc.StateRegister;
 import com.sun.max.lang.StaticFieldLiteral;
-import com.sun.max.lang.StaticFieldName;
+import jasm.util.StaticFieldName;
 
 /**
  * The fields used in defining the SPARC instruction templates.

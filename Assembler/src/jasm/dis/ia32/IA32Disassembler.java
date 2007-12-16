@@ -14,7 +14,7 @@ import jasm.gen.cisc.ia32.IA32Template;
 import jasm.ia32.IA32Assembler;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.util.HexByte;
+import jasm.util.HexByte;
 import java.util.Map;
 
 /**

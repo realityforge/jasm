@@ -5,8 +5,8 @@
 package jasm.gen.risc.field;
 
 import jasm.gen.risc.bitRange.BitRange;
+import jasm.util.StaticFieldName;
 import com.sun.max.lang.StaticFieldLiteral;
-import com.sun.max.lang.StaticFieldName;
 import com.sun.max.program.ProgramError;
 
 /**

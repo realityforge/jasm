@@ -4,13 +4,14 @@
 /*VCSID=70754259-0f29-4d28-b285-b890b2eafa2b*/
 package jasm;
 
-import com.sun.max.util.Enumerable;
+import jasm.util.Enumerable;
 
 /**
  *
  *
  * @author Bernd Mathiske
  */
-public interface EnumerableArgument<Argument_Type extends Enum<Argument_Type> & EnumerableArgument<Argument_Type>> extends Enumerable<Argument_Type>, SymbolicArgument {
+public interface EnumerableArgument<Argument_Type extends Enum<Argument_Type> & EnumerableArgument<Argument_Type>> extends
+                                                                                                                   Enumerable<Argument_Type>, SymbolicArgument {
 
 }

@@ -2,7 +2,7 @@
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
 /*VCSID=c92e02c5-d313-4d0e-92d3-280c74196848*/
-package com.sun.max.lang;
+package jasm.util;
 
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;

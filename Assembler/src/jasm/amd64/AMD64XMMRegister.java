@@ -5,7 +5,7 @@
 package jasm.amd64;
 
 import jasm.EnumerableArgument;
-import com.sun.max.util.Enumerator;
+import jasm.util.Enumerator;
 
 /**
  * @author Bernd Mathiske

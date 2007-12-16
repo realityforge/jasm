@@ -2,12 +2,13 @@
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
 /*VCSID=c7dc824c-e917-4658-8b28-6781fc05846f*/
-package com.sun.max.util;
+package jasm.util;
 
 import com.sun.max.annotate.Implement;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Set;
+import jasm.util.Symbolizer;
 
 /**
  * @see Enumerable

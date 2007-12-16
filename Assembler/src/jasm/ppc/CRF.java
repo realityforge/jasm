@@ -5,7 +5,7 @@
 package jasm.ppc;
 
 import jasm.EnumerableArgument;
-import com.sun.max.util.Enumerator;
+import jasm.util.Enumerator;
 
 /**
  * The constants denoting the eight 4-bit fields into which the 32-bit Condition Register

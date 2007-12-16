@@ -12,7 +12,7 @@ import jasm.gen.cisc.TemplateNotNeededException;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
 import jasm.x86.SegmentRegister;
-import com.sun.max.util.HexByte;
+import jasm.util.HexByte;
 
 /**
  * Empty default implementations for X86InstructionDescriptionVisitor.

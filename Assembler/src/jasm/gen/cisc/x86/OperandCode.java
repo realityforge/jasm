@@ -6,6 +6,7 @@ package jasm.gen.cisc.x86;
 
 import com.sun.max.annotate.JavacSyntax;
 import jasm.Argument;
+import jasm.util.Enumerator;
 import jasm.gen.ArgumentRange;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.TestArgumentExclusion;
@@ -49,7 +50,6 @@ import static jasm.gen.cisc.x86.OperandTypeCode.w;
 import static jasm.gen.cisc.x86.OperandTypeCode.z;
 import com.sun.max.collect.Sets;
 import com.sun.max.lang.StaticLoophole;
-import com.sun.max.util.Enumerator;
 import java.util.HashSet;
 import java.util.Set;
 

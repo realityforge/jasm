@@ -5,7 +5,7 @@
 package jasm.sparc;
 
 import jasm.NameSuffixSymbolicArgument;
-import com.sun.max.util.Symbolizer;
+import jasm.util.Symbolizer;
 
 /**
  * The argument to a Branch on Integer Condition Code instruction specifying

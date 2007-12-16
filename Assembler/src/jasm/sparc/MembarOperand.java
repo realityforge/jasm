@@ -5,9 +5,9 @@
 package jasm.sparc;
 
 import jasm.AbstractSymbolicArgument;
+import jasm.util.Symbolizer;
 import com.sun.max.collect.ArraySequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.util.Symbolizer;
 import java.util.Iterator;
 
 /**

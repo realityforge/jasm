@@ -4,29 +4,29 @@
 /*VCSID=27b78613-7cfc-4064-9b64-72e9761fb92c*/
 package jasm.gen.cisc.x86;
 
-import com.sun.max.util.HexByte;
-import static com.sun.max.util.HexByte._26;
-import static com.sun.max.util.HexByte._2E;
-import static com.sun.max.util.HexByte._36;
-import static com.sun.max.util.HexByte._3E;
-import static com.sun.max.util.HexByte._40;
-import static com.sun.max.util.HexByte._4F;
-import static com.sun.max.util.HexByte._64;
-import static com.sun.max.util.HexByte._65;
-import static com.sun.max.util.HexByte._66;
-import static com.sun.max.util.HexByte._67;
-import static com.sun.max.util.HexByte._9B;
-import static com.sun.max.util.HexByte._D8;
-import static com.sun.max.util.HexByte._D9;
-import static com.sun.max.util.HexByte._DA;
-import static com.sun.max.util.HexByte._DB;
-import static com.sun.max.util.HexByte._DC;
-import static com.sun.max.util.HexByte._DD;
-import static com.sun.max.util.HexByte._DE;
-import static com.sun.max.util.HexByte._DF;
-import static com.sun.max.util.HexByte._F0;
-import static com.sun.max.util.HexByte._F2;
-import static com.sun.max.util.HexByte._F3;
+import jasm.util.HexByte;
+import static jasm.util.HexByte._26;
+import static jasm.util.HexByte._2E;
+import static jasm.util.HexByte._36;
+import static jasm.util.HexByte._3E;
+import static jasm.util.HexByte._40;
+import static jasm.util.HexByte._4F;
+import static jasm.util.HexByte._64;
+import static jasm.util.HexByte._65;
+import static jasm.util.HexByte._66;
+import static jasm.util.HexByte._67;
+import static jasm.util.HexByte._9B;
+import static jasm.util.HexByte._D8;
+import static jasm.util.HexByte._D9;
+import static jasm.util.HexByte._DA;
+import static jasm.util.HexByte._DB;
+import static jasm.util.HexByte._DC;
+import static jasm.util.HexByte._DD;
+import static jasm.util.HexByte._DE;
+import static jasm.util.HexByte._DF;
+import static jasm.util.HexByte._F0;
+import static jasm.util.HexByte._F2;
+import static jasm.util.HexByte._F3;
 import java.util.EnumSet;
 
 /**

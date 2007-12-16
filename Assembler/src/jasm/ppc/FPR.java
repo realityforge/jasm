@@ -5,7 +5,7 @@
 package jasm.ppc;
 
 import jasm.EnumerableArgument;
-import com.sun.max.util.Enumerator;
+import jasm.util.Enumerator;
 
 /**
  * The floating point registers.

@@ -15,7 +15,7 @@ import jasm.gen.cisc.amd64.AMD64Template;
 import jasm.gen.cisc.x86.X86Opcode;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.util.HexByte;
+import jasm.util.HexByte;
 import java.util.Map;
 
 /**

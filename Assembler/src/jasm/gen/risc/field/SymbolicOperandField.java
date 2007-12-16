@@ -7,6 +7,7 @@ package jasm.gen.risc.field;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.SymbolicArgument;
+import jasm.util.Symbolizer;
 import jasm.gen.ArgumentRange;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.Expression;
@@ -18,7 +19,6 @@ import jasm.gen.risc.bitRange.BitRangeOrder;
 import com.sun.max.collect.Iterables;
 import com.sun.max.collect.Sets;
 import com.sun.max.lang.StaticLoophole;
-import com.sun.max.util.Symbolizer;
 
 /**
  * @author Bernd Mathiske
@@ -36,7 +36,8 @@ public class SymbolicOperandField<Argument_Type extends SymbolicArgument> extend
         _symbolizer = symbolizer;
     }
 
-    public static <Argument_Type extends SymbolicArgument> SymbolicOperandField<Argument_Type> createAscending(Symbolizer<Argument_Type> symbolizer, int... bits) {
+    public static <Argument_Type extends SymbolicArgument> SymbolicOperandField<Argument_Type> createAscending(
+        Symbolizer<Argument_Type> symbolizer, int... bits) {
         final BitRange bitRange = BitRange.create(bits, BitRangeOrder.ASCENDING);
         return new SymbolicOperandField<Argument_Type>(bitRange, symbolizer);
     }

@@ -22,8 +22,8 @@ import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.Sequence;
 import com.sun.max.program.ProgramError;
 import com.sun.max.program.Trace;
-import com.sun.max.util.Enumerator;
-import com.sun.max.util.HexByte;
+import jasm.util.Enumerator;
+import jasm.util.HexByte;
 
 /**
  * @author Bernd Mathiske

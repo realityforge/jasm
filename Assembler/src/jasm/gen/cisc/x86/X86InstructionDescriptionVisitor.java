@@ -14,8 +14,8 @@ import jasm.gen.cisc.TemplateNotNeededException;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
 import jasm.x86.SegmentRegister;
+import jasm.util.HexByte;
 import com.sun.max.program.ProgramError;
-import com.sun.max.util.HexByte;
 
 /**
  * Almost like the visitor pattern.

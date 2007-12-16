@@ -5,7 +5,7 @@
 package jasm.ppc;
 
 import jasm.AbstractSymbolicArgument;
-import com.sun.max.util.Symbolizer;
+import jasm.util.Symbolizer;
 
 /**
  * The argument to a Branch Conditional instruction specifying the conditions

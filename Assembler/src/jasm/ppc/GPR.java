@@ -4,7 +4,7 @@
 /*VCSID=110cdbb7-648e-4032-88d3-b908891b5b06*/
 package jasm.ppc;
 
-import com.sun.max.util.Symbolizer;
+import jasm.util.Symbolizer;
 
 /**
  * The general purpose registers.

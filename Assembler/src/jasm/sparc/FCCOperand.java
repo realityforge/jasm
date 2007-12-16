@@ -5,7 +5,7 @@
 package jasm.sparc;
 
 import jasm.AbstractSymbolicArgument;
-import com.sun.max.util.Symbolizer;
+import jasm.util.Symbolizer;
 
 /**
  * The argument to a Branch on Floating-Point Condition Code with Prediction instruction specifying

@@ -2,13 +2,14 @@
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
 /*VCSID=fc5924bd-d948-43fe-bd87-62aa0e5d8914*/
-package com.sun.max.util;
+package jasm.util;
 
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.ArraySequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.lang.StaticFieldName;
+import jasm.util.StaticFieldName;
+import com.sun.max.util.Predicate;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 

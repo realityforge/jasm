@@ -5,8 +5,8 @@
 package jasm.sparc;
 
 import jasm.SymbolicArgument;
-import com.sun.max.lang.StaticFieldName;
-import com.sun.max.util.Symbolizer;
+import jasm.util.Symbolizer;
+import jasm.util.StaticFieldName;
 
 /**
  * The single-precision (32-bit) floating-point registers.

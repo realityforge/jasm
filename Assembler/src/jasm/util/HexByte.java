@@ -2,11 +2,11 @@
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
 /*VCSID=8815ef96-49dc-4fc0-a81a-71dcf8ae7655*/
-package com.sun.max.util;
+package jasm.util;
 
 /**
  * Finally: byte literals!
- * 
+ *
  * @author Bernd Mathiske
  */
 public enum HexByte {
@@ -29,11 +29,11 @@ public enum HexByte {
     public byte byteValue() {
         return (byte) ordinal();
     }
-    
+
     public static HexByte fromByte(byte byteValue) {
         return HexByte.values()[byteValue & 0xff];
     }
-    
+
     @Override
     public String toString() {
         return "0x" + name().substring(1);

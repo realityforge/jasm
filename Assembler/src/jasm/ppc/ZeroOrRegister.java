@@ -5,7 +5,7 @@
 package jasm.ppc;
 
 import jasm.AbstractSymbolicArgument;
-import com.sun.max.util.Symbolizer;
+import jasm.util.Symbolizer;
 
 /**
  * The super type of all the {@link GPR General Purpose Registers} and the constant {@link Zero#ZERO}.

@@ -4,7 +4,7 @@
 /*VCSID=61c465be-328d-4985-a4d0-3ab5b361c84d*/
 package jasm;
 
-import com.sun.max.lang.StaticFieldName;
+import jasm.util.StaticFieldName;
 
 /**
  * This class provides a skeletal implementation of the {@link SymbolicArgument} interface, to minimize the

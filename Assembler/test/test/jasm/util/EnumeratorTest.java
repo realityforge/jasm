@@ -2,16 +2,16 @@
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved. Use is subject to license terms.
  */
 /*VCSID=d9fdf10c-6e11-4296-966c-35bc182bd1b0*/
-package test.com.sun.max.util;
+package test.jasm.util;
 
 import com.sun.max.annotate.Implement;
 import com.sun.max.ide.MaxTestCase;
-import com.sun.max.util.Enumerable;
-import com.sun.max.util.Enumerator;
-import com.sun.max.util.Symbol;
+import jasm.util.Enumerable;
+import jasm.util.Enumerator;
+import jasm.util.Symbol;
 
 /**
- * Tests for com.sun.max.util.Enumerator.
+ * Tests for jasm.util.Enumerator.
  *
  * @author Hiroshi Yamauchi
  */

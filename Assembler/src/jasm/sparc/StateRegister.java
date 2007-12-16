@@ -5,7 +5,7 @@
 package jasm.sparc;
 
 import jasm.AbstractSymbolicArgument;
-import com.sun.max.util.Symbolizer;
+import jasm.util.Symbolizer;
 
 /**
  * The argument to the Write State Register and Read State Register instructions.

@@ -6,7 +6,7 @@ package jasm.ia32;
 
 import jasm.x86.GeneralRegister;
 import jasm.util.WordWidth;
-import com.sun.max.util.Enumerator;
+import jasm.util.Enumerator;
 
 /**
  * @author Bernd Mathiske

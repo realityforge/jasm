@@ -6,7 +6,7 @@ package jasm.amd64;
 
 import jasm.x86.GeneralRegister;
 import jasm.util.WordWidth;
-import com.sun.max.util.Enumerator;
+import jasm.util.Enumerator;
 
 /**
  * Aliases for 32-bit AMD64 general registers to be used as base registers.

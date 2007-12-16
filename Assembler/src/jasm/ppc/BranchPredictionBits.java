@@ -5,7 +5,7 @@
 package jasm.ppc;
 
 import jasm.OptionSuffixSymbolicArgument;
-import com.sun.max.util.Symbolizer;
+import jasm.util.Symbolizer;
 
 /**
  * The branch prediction values for the conditional branches whose encoding includes

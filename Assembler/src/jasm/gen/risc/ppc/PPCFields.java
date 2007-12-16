@@ -35,7 +35,7 @@ import jasm.ppc.FPR;
 import jasm.ppc.GPR;
 import jasm.ppc.SPR;
 import jasm.ppc.ZeroOrRegister;
-import com.sun.max.lang.StaticFieldName;
+import jasm.util.StaticFieldName;
 
 /**
  * The fields used in defining the PowerPC instruction templates.
