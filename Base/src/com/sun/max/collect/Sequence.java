@@ -77,7 +77,7 @@ public interface Sequence<Element_Type> extends Iterable<Element_Type>, Cloneabl
         /**
          * Returns a canonical object representing the empty sequence of a given type.
          */
-        public static <Element_Type> Sequence<Element_Type> empty(Class<Element_Type> elementType) {
+        public static <Element_Type> Sequence<Element_Type> empty() {
             return new ArraySequence<Element_Type>(0);
         }
 

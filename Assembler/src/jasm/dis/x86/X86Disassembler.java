@@ -303,7 +303,9 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
             final Sequence<Template_Type> prefixTemplates = headerToTemplates().get(prefixHeader);
             final Template_Type template = prefixTemplates.first();
             final byte[] bytes = new byte[]{header._instructionSelectionPrefix.byteValue()};
-            final DisassembledInstruction_Type disassembledInstruction = createDisassembledInstruction(_currentOffset, bytes, template, Sequence.Static.empty(Argument.class));
+          final Sequence<Argument> arguments = Sequence.Static.empty();
+          final DisassembledInstruction_Type disassembledInstruction =
+              createDisassembledInstruction(_currentOffset, bytes, template, arguments);
             _currentOffset++;
             return disassembledInstruction;
         }

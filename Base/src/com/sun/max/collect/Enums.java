@@ -16,23 +16,6 @@ import java.util.EnumSet;
  * @author Bernd Mathiske
  */
 public final class Enums {
-
-    private Enums() {
-    }
-
-    public static String fullName(Enum e) {
-        return e.getClass().getCanonicalName() + "." + e.name();
-    }
-
-    public static <Enum_Type extends Enum<Enum_Type>> Enum_Type fromString(final Class<Enum_Type> enumClass, String name) {
-        for (Enum_Type enumConstant : enumClass.getEnumConstants()) {
-            if (enumConstant.name().equals(name)) {
-                return enumConstant;
-            }
-        }
-        return null;
-    }
-
     /**
      * A "power sequence" is like a "power set" (the set of all possible subsets),
      * but with Set replaced by Sequence, using "natural" ordering.
@@ -42,8 +25,6 @@ public final class Enums {
      * For example, "powerSequence(Enum_Type.class).get(11)",
      * i.e. querying a power sequence with index 11 (having bits 1, 2 and 8 set)
      * will return the sequence containing the enum values with the ordinals 1, 2 and 8, in that order.
-     *
-     * @see #powerSequenceIndex(Enum)
      */
     public static <Enum_Type extends Enum<Enum_Type>> Sequence<Sequence<Enum_Type>> powerSequence(Class<Enum_Type> enumType) {
         final EnumSet<Enum_Type> values = EnumSet.allOf(enumType);
@@ -74,26 +55,5 @@ public final class Enums {
             result |= 1 << value.ordinal();
         }
         return result;
-    }
-
-    public static int powerSequenceIndex(Enum value) {
-        return 1 << value.ordinal();
-    }
-
-    /**
-     * Test whether the given constant is among the allowed constants.
-     * If so, return the given constant, otherwise return the first allowed constant.
-     * If no constant is allowed return null.
-     */
-    public static <Enum_Type extends Enum<Enum_Type>> Enum_Type constrain(Enum_Type constant, Enum_Type... allowedConstants) {
-        if (allowedConstants.length == 0) {
-            return null;
-        }
-        for (Enum_Type e : allowedConstants) {
-            if (e == constant) {
-                return constant;
-            }
-        }
-        return allowedConstants[0];
     }
 }

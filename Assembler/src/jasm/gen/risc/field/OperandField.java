@@ -107,8 +107,6 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
         return _signDependentOperations == SignDependentOperations.SIGNED;
     }
 
-    public abstract Class type();
-
     private String _variableName;
 
     public String variableName() {

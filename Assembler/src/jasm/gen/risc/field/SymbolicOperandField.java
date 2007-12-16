@@ -64,7 +64,6 @@ public class SymbolicOperandField<Argument_Type extends SymbolicArgument> extend
         return new RiscConstant(new ConstantField(name(), bitRange()), argument);
     }
 
-    @Override
     public Class type() {
         return _symbolizer.type();
     }

@@ -59,10 +59,6 @@ public class ProgramArgumentsParser {
         _programOptions.append(programOption);
     }
 
-    public synchronized void addProgramOptions(ProgramOption... programOptions) {
-        AppendableSequence.Static.appendAll(_programOptions, programOptions);
-    }
-
     private ProgramOption matchProgramOption(String argument) {
         for (ProgramOption programOption : _programOptions) {
             if (programOption.matches(argument)) {
@@ -99,8 +95,7 @@ public class ProgramArgumentsParser {
     }
 
     String nextArgument() {
-        final String result = _arguments[_index++];
-        return result;
+      return _arguments[_index++];
     }
 
     private void updateOptions() {

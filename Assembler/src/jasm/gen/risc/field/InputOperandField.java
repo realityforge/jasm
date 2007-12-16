@@ -44,7 +44,6 @@ public class InputOperandField extends OperandField<ImmediateArgument> {
         return null;
     }
 
-    @Override
     public Class type() {
         return int.class;
     }

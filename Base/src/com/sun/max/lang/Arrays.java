@@ -10,14 +10,7 @@ package com.sun.max.lang;
 
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.MapFunction;
-import com.sun.max.util.Predicate;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -37,15 +30,7 @@ public final class Arrays {
         return StaticLoophole.cast(array);
     }
 
-    private static <Element_Type> Element_Type[] from(Class<Element_Type> elementType, Iterable<Element_Type> elements) {
-        final List<Element_Type> vector = new Vector<Element_Type>();
-        for (Element_Type element : elements) {
-            vector.add(element);
-        }
-        return vector.toArray(create(elementType, vector.size()));
-    }
-
-    /**
+  /**
      * Creates a new array containing a subrange of the given array.
      *
      * @param array The array to copy from
@@ -112,6 +97,10 @@ public final class Arrays {
                 sequence.append(outer);
             }
         }
-        return from(Object.class, sequence);
+      final List<Object> vector = new Vector<Object>();
+      for (Object element : sequence) {
+          vector.add(element);
+      }
+      return vector.toArray(create(Object.class, vector.size()));
     }
 }

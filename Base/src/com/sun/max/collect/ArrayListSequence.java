@@ -89,12 +89,7 @@ public final class ArrayListSequence<Element_Type> extends ArrayList<Element_Typ
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    public void append(Element_Type element) {
+  public void append(Element_Type element) {
         add(element);
     }
 

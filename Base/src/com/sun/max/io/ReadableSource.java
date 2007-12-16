@@ -23,9 +23,7 @@ import java.io.StringReader;
 public interface ReadableSource {
 
     /**
-     * @param buffered if true, the returned reader is guaranteed to be a BufferedReader
-     *
      * @return a reader to read the character data represented by this source
      */
-    Reader reader(boolean buffered) throws IOException;
+    Reader reader() throws IOException;
 }

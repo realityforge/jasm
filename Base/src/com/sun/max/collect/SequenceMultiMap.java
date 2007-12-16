@@ -9,7 +9,6 @@
 package com.sun.max.collect;
 
 import com.sun.max.lang.StaticLoophole;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -40,7 +39,7 @@ public class SequenceMultiMap<Key_Type, Value_Type> implements MultiMap<Key_Type
         final Sequence<Value_Type> result = _map.get(key);
         if (result == null) {
             final Class<Value_Type> type = null;
-            return Sequence.Static.empty(type);
+            return Sequence.Static.empty();
         }
         return _map.get(key);
     }
@@ -63,7 +62,9 @@ public class SequenceMultiMap<Key_Type, Value_Type> implements MultiMap<Key_Type
     }
 
     public void addAll(Key_Type key, Sequence<Value_Type> values) {
-        AppendableSequence.Static.appendAll(makeSequence(key), values);
+      for (Value_Type element : values) {
+          makeSequence(key).append(element);
+      }
     }
 
     public Set<Key_Type> keys() {
@@ -71,10 +72,7 @@ public class SequenceMultiMap<Key_Type, Value_Type> implements MultiMap<Key_Type
     }
 
     public Iterator<Value_Type> iterator() {
-        final Collection<AppendableSequence<Value_Type>> sequences = _map.values();
-        assert Iterable.class.isAssignableFrom(Collection.class);
-        assert Iterable.class.isAssignableFrom(ArrayListSequence.class);
-        final Iterable<Iterable<Value_Type>> iterable = StaticLoophole.cast(sequences);
+      final Iterable<Iterable<Value_Type>> iterable = StaticLoophole.cast(_map.values());
         return Iterables.flatten1(iterable).iterator();
     }
 

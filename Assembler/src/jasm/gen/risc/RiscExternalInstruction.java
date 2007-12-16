@@ -55,7 +55,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
         _template = template;
         _arguments = MutableQueue.create(arguments);
         _offset = -1;
-        _labels = Sequence.Static.empty(DisassembledLabel.class);
+        _labels = Sequence.Static.empty();
         _globalLabelMapper = null;
     }
 

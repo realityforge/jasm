@@ -121,7 +121,7 @@ public final class Streams {
     return false;
   }
 
-  private static byte[] readFully(InputStream stream, byte[] buffer, int offset, int len) throws IOException {
+  private static void readFully(InputStream stream, byte[] buffer, int offset, int len) throws IOException {
     if (len < 0) {
       throw new IndexOutOfBoundsException();
     }
@@ -133,6 +133,5 @@ public final class Streams {
       }
       n += count;
     }
-    return buffer;
   }
 }

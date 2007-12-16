@@ -9,7 +9,6 @@
 package com.sun.max.collect;
 
 import com.sun.max.util.Predicate;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,15 +19,7 @@ import java.util.Set;
  */
 public final class Sets {
 
-    private Sets() {
-
-    }
-
-  public static <Element_Type> Set<Element_Type> from(Element_Type... elements) {
-        return new HashSet<Element_Type>(java.util.Arrays.asList(elements));
-    }
-
-    public static <Element_Type> Set<Element_Type> from(Class<Element_Type> elementType, Element_Type... elements) {
+    public static <Element_Type> Set<Element_Type> from(Element_Type... elements) {
         return new HashSet<Element_Type>(java.util.Arrays.asList(elements));
     }
 
@@ -54,7 +45,7 @@ public final class Sets {
         return result;
     }
 
-    public static <From_Type, To_Type> Set<To_Type> map(Set<From_Type> from, Class<To_Type> toType, MapFunction<From_Type, To_Type> mapFunction) {
+    public static <From_Type, To_Type> Set<To_Type> map(Set<From_Type> from, MapFunction<From_Type, To_Type> mapFunction) {
         final Set<To_Type> to = new HashSet<To_Type>();
         for (From_Type element : from) {
             to.add(mapFunction.map(element));

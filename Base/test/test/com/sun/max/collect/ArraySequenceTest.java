@@ -80,7 +80,6 @@ public class ArraySequenceTest extends TestCase {
             seq2.append(new Integer(i));
             assertTrue(seq1.equals(seq2));
         }
-        AppendableSequence.Static.appendAll(seq1, new Integer(95), new Integer(96), new Integer(97), new Integer(98));
         assertTrue(seq1.equals(seq3));
     }
 

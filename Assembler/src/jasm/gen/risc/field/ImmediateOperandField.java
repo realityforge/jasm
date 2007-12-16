@@ -74,7 +74,6 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
         return new ImmediateOperandField(bitRange);
     }
 
-    @Override
     public Class type() {
         return int.class;
     }

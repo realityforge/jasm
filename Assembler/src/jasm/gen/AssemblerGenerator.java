@@ -335,7 +335,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
                         ", instruction templates=" + templates().length() + ", max templates per description=" + maxTemplatesPerDescription +
                         "]");
 
-        return Files.updateGeneratedContent(rawAssemblerFile, charArrayWriter, "// START GENERATED CONTENT", "// END GENERATED CONTENT");
+        return Files.markGeneratedContent(rawAssemblerFile, charArrayWriter);
     }
 
     /**
@@ -406,13 +406,15 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         return _generatingLabelAssembler;
     }
 
-    static class CharArraySource extends CharArrayWriter implements ReadableSource {
+    static class CharArraySource
+        extends CharArrayWriter
+        implements ReadableSource {
         CharArraySource(int initialSize) {
             super(initialSize);
         }
-        public Reader reader(boolean buffered) {
+        public Reader reader() {
             final Reader reader = new CharArrayReader(buf, 0, count);
-            return buffered ? new BufferedReader(reader) : reader;
+            return new BufferedReader(reader);
         }
 
     }
@@ -448,7 +450,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         Trace.line(1, "Generated label assembler: " + _labelAssemblerClassSimpleName + " [code line count=" + codeLineCount + ", total line count=" +
                         writer.lineCount() + ", method count=" + templates().length() + ")");
 
-        return Files.updateGeneratedContent(labelAssemblerFile, charArrayWriter, "// START GENERATED CONTENT", "// END GENERATED CONTENT");
+        return Files.markGeneratedContent(labelAssemblerFile, charArrayWriter);
     }
 
     protected void emitByte(IndentWriter writer, String byteValue) {

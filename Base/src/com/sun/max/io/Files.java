@@ -51,13 +51,13 @@ public final class Files {
    *
    * @return true if the file was modified or created
    */
-  public static boolean updateGeneratedContent(File file, ReadableSource content, String start, String end)
-      throws IOException {
-
+  public static boolean markGeneratedContent(File file, ReadableSource content) throws IOException {
+    final String start = "// START GENERATED CONTENT";
+    final String end = "// END GENERATED CONTENT";
     if (!file.exists()) {
       final PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(file)));
       try {
-        final Reader reader = content.reader(true);
+        final Reader reader = content.reader();
         try {
           copy(reader, printWriter);
           printWriter.println(end);
@@ -76,7 +76,7 @@ public final class Files {
     BufferedReader existingFileReader = null;
     try {
       printWriter = new PrintWriter(new BufferedWriter(new FileWriter(tempFile)));
-      contentReader = (BufferedReader) content.reader(true);
+      contentReader = (BufferedReader) content.reader();
       existingFileReader = new BufferedReader(new FileReader(file));
 
       // Copy existing file up to generated content opening delimiter

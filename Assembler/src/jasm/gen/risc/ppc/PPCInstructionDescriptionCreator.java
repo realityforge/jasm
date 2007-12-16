@@ -40,6 +40,11 @@ public abstract class PPCInstructionDescriptionCreator extends RiscInstructionDe
     }
 
     protected RiscInstructionDescriptionModifier synthesize64(String name, String templateName, Object... patterns) {
-        return (assembly().generating64BitInstructions()) ? synthesize(name, templateName, patterns) : new RiscInstructionDescriptionModifier(Sequence.Static.empty(RiscInstructionDescription.class));
+      if ((assembly().generating64BitInstructions())) {
+        return synthesize(name, templateName, patterns);
+      } else {
+        final Sequence<RiscInstructionDescription> sequence = Sequence.Static.empty();
+        return new RiscInstructionDescriptionModifier(sequence);
+      }
     }
 }
