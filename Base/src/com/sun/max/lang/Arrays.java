@@ -63,12 +63,11 @@ public final class Arrays {
      * converted to strings as by <tt>String.valueOf(int)</tt>.
      *
      * @param array     the array whose string representation to return
-     * @param separator the separator to use
      * @return a string representation of <tt>array</tt>
      * @throws NullPointerException if {@code array} or {@code separator} is null
      */
-    public static <Element_Type> String toString(Element_Type[] array, String separator) {
-        if (array == null || separator == null) {
+    public static <Element_Type> String toString(Element_Type[] array) {
+        if (array == null) {
             throw new NullPointerException();
         }
         if (array.length == 0) {
@@ -79,7 +78,7 @@ public final class Arrays {
         buf.append(array[0]);
 
         for (int i = 1; i < array.length; i++) {
-            buf.append(separator);
+            buf.append(", ");
             buf.append(array[i]);
         }
 

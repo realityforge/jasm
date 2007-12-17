@@ -8,7 +8,7 @@
  */
 package jasm.gen.cisc.x86;
 
-import com.sun.max.collect.Sets;
+import jasm.util.Sets;
 import jasm.Argument;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.TestArgumentExclusion;

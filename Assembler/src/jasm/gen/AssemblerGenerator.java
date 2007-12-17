@@ -13,7 +13,6 @@ import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.ArraySequence;
 import com.sun.max.collect.MutableSequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.io.Files;
 import com.sun.max.io.IndentWriter;
 import com.sun.max.io.ReadableSource;
 import com.sun.max.lang.StaticLoophole;
@@ -335,7 +334,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
                         ", instruction templates=" + templates().length() + ", max templates per description=" + maxTemplatesPerDescription +
                         "]");
 
-        return Files.markGeneratedContent(rawAssemblerFile, charArrayWriter);
+        return AssemblyTester.markGeneratedContent(rawAssemblerFile, charArrayWriter);
     }
 
     /**
@@ -450,7 +449,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         Trace.line(1, "Generated label assembler: " + _labelAssemblerClassSimpleName + " [code line count=" + codeLineCount + ", total line count=" +
                         writer.lineCount() + ", method count=" + templates().length() + ")");
 
-        return Files.markGeneratedContent(labelAssemblerFile, charArrayWriter);
+        return AssemblyTester.markGeneratedContent(labelAssemblerFile, charArrayWriter);
     }
 
     protected void emitByte(IndentWriter writer, String byteValue) {

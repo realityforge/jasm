@@ -249,7 +249,7 @@ public interface InstructionConstraint {
             try {
                 return declaringClass.getDeclaredMethod(methodName, parameterTypes);
             } catch (NoSuchMethodException e) {
-                ProgramError.unexpected("constraint method not found: " + declaringClass + "." + methodName + "(" + Arrays.toString(parameterTypes, ", ") + ")");
+                ProgramError.unexpected("constraint method not found: " + declaringClass + "." + methodName + "(" + Arrays.toString(parameterTypes) + ")");
                 return null;
             }
         }

@@ -9,7 +9,7 @@
 package jasm.gen.risc.field;
 
 import com.sun.max.collect.Sequence;
-import com.sun.max.collect.Sets;
+import jasm.util.Sets;
 import com.sun.max.lang.StaticLoophole;
 import jasm.Argument;
 import jasm.AssemblyException;

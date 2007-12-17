@@ -8,7 +8,7 @@
  */
 package jasm.dis.x86;
 
-import com.sun.max.collect.MutableQueue;
+import jasm.util.MutableQueue;
 import com.sun.max.collect.Sequence;
 import com.sun.max.lang.Strings;
 import jasm.Argument;

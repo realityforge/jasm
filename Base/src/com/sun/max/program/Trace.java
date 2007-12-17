@@ -9,7 +9,6 @@
 package com.sun.max.program;
 
 import com.sun.max.program.option.PositiveIntegerProgramOption;
-import java.io.PrintStream;
 
 /**
  * Tracing output for debugging purposes. No performance impact when disabled. Some performance impact when active, even
@@ -18,19 +17,7 @@ import java.io.PrintStream;
  * @author Bernd Mathiske
  */
 public class Trace extends PositiveIntegerProgramOption {
-
-    private static final PrintStream _stream = System.out;
-
-    /**
-     * Static master switch. Set by source code editing only (for now).
-     *
-     * Set '_enabled' to 'true' to enable tracing output, according to your other trace-related settings.
-     *
-     * Set '_enabled' to 'false' to prevent any tracing. All tracing routines will thus become dead code. The optimizing
-     * compiler should then be able to eliminate the runtime overhead.
-     */
     private static final boolean _ENABLED = true;
-
     /**
      * This dynamic master throttle for tracing is in effect iff the static switch '_enabled' is set to 'true'.
      */
@@ -52,15 +39,15 @@ public class Trace extends PositiveIntegerProgramOption {
 
     public static void line(int requiredLevel) {
         if (_ENABLED && hasLevel(requiredLevel)) {
-            _stream.println();
-            _stream.flush();
+            System.out.println();
+            System.out.flush();
         }
     }
 
     public static void line(int requiredLevel, String message) {
         if (_ENABLED && hasLevel(requiredLevel)) {
-            _stream.println(makePrefix(requiredLevel) + message);
-            _stream.flush();
+            System.out.println(makePrefix(requiredLevel) + message);
+            System.out.flush();
         }
     }
 

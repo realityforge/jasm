@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package com.sun.max.collect;
+package jasm.util;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,9 +17,7 @@ import java.util.Set;
  * @author Bernd Mathiske
  */
 public final class Sets {
-
     public static <Element_Type> Set<Element_Type> from(Element_Type... elements) {
         return new HashSet<Element_Type>(java.util.Arrays.asList(elements));
     }
-
 }

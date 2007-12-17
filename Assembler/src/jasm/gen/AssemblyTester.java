@@ -14,14 +14,12 @@ import com.sun.max.collect.ArraySequence;
 import com.sun.max.collect.FilterIterator;
 import com.sun.max.collect.Sequence;
 import com.sun.max.io.IndentWriter;
-import com.sun.max.io.Streams;
-import com.sun.max.io.Streams.Redirector;
+import com.sun.max.io.ReadableSource;
 import com.sun.max.lang.StaticLoophole;
 import com.sun.max.program.ProgramError;
 import com.sun.max.program.ProgramWarning;
 import com.sun.max.program.Trace;
-import com.sun.max.util.Timer;
-import com.sun.max.util.Timer.ComputationWithException;
+import jasm.util.SimpleTimer;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;
@@ -41,6 +39,12 @@ import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.PushbackInputStream;
+import java.io.FileOutputStream;
+import java.io.Reader;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.Writer;
+import java.io.Closeable;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -131,6 +135,170 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
       } catch (IOException ioException) {
           ProgramWarning.message("could not delete temporary files");
       }
+  }
+
+  static void copy(File from, File to) throws IOException {
+    InputStream inputStream = null;
+    OutputStream outputStream = null;
+    try {
+      inputStream = new FileInputStream(from);
+      outputStream = new FileOutputStream(to);
+      copy(inputStream, outputStream);
+    } finally {
+      if (inputStream != null) {
+        inputStream.close();
+      }
+      if (outputStream != null) {
+        outputStream.close();
+      }
+    }
+  }
+
+  /**
+   * Updates the generated content part of a file. A generated content part is delimited by a line containing
+   * only {@code start} and a line containing only {@code end}. If the given file already exists and
+   * has these delimiters, the content between these lines is compared with {@code content} and replaced
+   * if it is different. If the file does not exist, a new file is created with {@code content} surrounded
+   * by the specified delimiters. If the file exists and does not currently have the specified delimiters, an
+   * IOException is thrown.
+   *
+   * @return true if the file was modified or created
+   */
+  public static boolean markGeneratedContent(File file, ReadableSource content) throws IOException {
+    final String start = "// START GENERATED CONTENT";
+    final String end = "// END GENERATED CONTENT";
+    if (!file.exists()) {
+      final PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(file)));
+      try {
+        final Reader reader = content.reader();
+        try {
+          copy(reader, printWriter);
+          printWriter.println(end);
+        } finally {
+          reader.close();
+        }
+      } finally {
+        printWriter.close();
+      }
+      return true;
+    }
+
+    final File tempFile = File.createTempFile(file.getName() + ".", null);
+    PrintWriter printWriter = null;
+    BufferedReader contentReader = null;
+    BufferedReader existingFileReader = null;
+    try {
+      printWriter = new PrintWriter(new BufferedWriter(new FileWriter(tempFile)));
+      contentReader = (BufferedReader) content.reader();
+      existingFileReader = new BufferedReader(new FileReader(file));
+
+      // Copy existing file up to generated content opening delimiter
+      String line;
+      while ((line = existingFileReader.readLine()) != null) {
+        printWriter.println(line);
+        if (line.equals(start)) {
+          break;
+        }
+      }
+
+      if (line == null) {
+        throw new IOException("generated content starting delimiter not found in existing file: " + file);
+      }
+
+      boolean changed = false;
+      boolean seenEnd = false;
+
+      // Copy new content, noting if it differs from existing generated content
+      while ((line = contentReader.readLine()) != null) {
+        if (!seenEnd) {
+          final String existingLine = existingFileReader.readLine();
+          if (existingLine != null) {
+            if (end.equals(existingLine)) {
+              seenEnd = true;
+              changed = true;
+            } else {
+              changed = changed || !line.equals(existingLine);
+            }
+          }
+        }
+        printWriter.println(line);
+      }
+
+      // Find the generated content closing delimiter
+      if (!seenEnd) {
+        while ((line = existingFileReader.readLine()) != null) {
+          if (line.equals(end)) {
+            seenEnd = true;
+            break;
+          }
+          changed = true;
+        }
+        if (!seenEnd) {
+          throw new IOException("generated content ending delimiter not found in existing file: " + file);
+        }
+      }
+      printWriter.println(end);
+
+      // Copy existing file after generated content closing delimiter
+      while ((line = existingFileReader.readLine()) != null) {
+        printWriter.println(line);
+      }
+
+      printWriter.close();
+      printWriter = null;
+      existingFileReader.close();
+      existingFileReader = null;
+
+      if (changed) {
+        copy(tempFile, file);
+        return true;
+      }
+      return false;
+    } finally {
+      quietClose(printWriter);
+      quietClose(contentReader);
+      quietClose(existingFileReader);
+      if (!tempFile.delete()) {
+        throw new IOException("could not delete file for update: " + file);
+      }
+    }
+  }
+
+  static void copy(Reader reader, Writer writer) throws IOException {
+    final char[] buffer = new char[8192];
+    int count;
+    while ((count = reader.read(buffer, 0, buffer.length)) > 0) {
+      writer.write(buffer, 0, count);
+    }
+    writer.flush();
+  }
+
+  static void quietClose(Closeable closeable) {
+    if (closeable != null) {
+      try {
+        closeable.close();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  static void copy(InputStream inputStream, OutputStream outputStream) throws IOException {
+    final byte[] buffer = new byte[8192];
+    int count;
+    while ((count = inputStream.read(buffer, 0, buffer.length)) > 0) {
+      outputStream.write(buffer, 0, count);
+    }
+    outputStream.flush();
+  }
+
+  public static Redirector redirect(Process process, InputStream inputStream, OutputStream outputStream, String name,
+                                    int maxLines) {
+    return new Redirector(process, inputStream, outputStream, name, maxLines);
+  }
+
+  public static Redirector redirect(Process process, InputStream inputStream, OutputStream outputStream, String name) {
+    return redirect(process, inputStream, outputStream, name, Integer.MAX_VALUE);
   }
 
   enum TestCaseLegality {
@@ -454,9 +622,9 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     private void exec(String command, OutputStream out, OutputStream err, InputStream in) throws IOException, InterruptedException {
         final Process process = Runtime.getRuntime().exec(command);
         try {
-            final Redirector stderr = Streams.redirect(process, process.getErrorStream(), err, command + " [stderr]", 50);
-            final Redirector stdout = Streams.redirect(process, process.getInputStream(), out, command + " [stdout]");
-            final Redirector stdin = Streams.redirect(process, in, process.getOutputStream(), command + " [stdin]");
+            final Redirector stderr = redirect(process, process.getErrorStream(), err, command + " [stderr]", 50);
+            final Redirector stdout = redirect(process, process.getInputStream(), out, command + " [stdout]");
+            final Redirector stdin = redirect(process, in, process.getOutputStream(), command + " [stdin]");
             final int exitValue = process.waitFor();
             stderr.close();
             stdout.close();
@@ -603,7 +771,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
         disassemblyStream.close();
     }
 
-    private final Timer<String> _timer = new Timer<String>();
+    private final SimpleTimer _timer = new SimpleTimer();
 
     private void testTemplate(final Template_Type template) throws IOException, InterruptedException, AssemblyException {
         final boolean testingExternally = _components.contains(AssemblyTestComponent.EXTERNAL_ASSEMBLER) && template.isExternallyTestable();
@@ -616,18 +784,19 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
         PushbackInputStream externalInputStream = null;
         if (testingExternally) {
           cleanupTempFiles(_tmpFilePrefix);
-          final File sourceFile = _timer.time("src", new Timer.ComputationWithException<File, IOException>(IOException.class) {
-                @Override
-                public File run() throws IOException {
-                    return createExternalSourceFile(template, argumentLists);
-                }
-            });
-            binaryFile = _timer.time("gas", new Timer.ComputationWithException<File, IOException>(IOException.class) {
-                @Override
-                public File run() throws IOException {
-                    return createExternalBinaryFile(sourceFile);
-                }
-            });
+          final File sourceFile;
+          try {
+            _timer.start("src");
+            sourceFile = createExternalSourceFile(template, argumentLists);
+          } finally {
+            _timer.stop();
+          }
+          try {
+            _timer.start("gas");
+            binaryFile = createExternalBinaryFile(sourceFile);
+          } finally {
+            _timer.stop();
+          }
             externalInputStream = new PushbackInputStream(new BufferedInputStream(new FileInputStream(binaryFile)));
             if (!findStart(externalInputStream)) {
                 ProgramError.unexpected("could not find start sequence in: " + binaryFile.getAbsolutePath());
@@ -638,30 +807,33 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
         for (final ArgumentListIterator iterator = new ArgumentListIterator(template, TestCaseLegality.LEGAL); iterator.hasNext();) {
             final Sequence<Argument> argumentList = iterator.next();
             final Assembler assembler = createTestAssembler();
-            final byte[] internalResult = _timer.time("asm", new Timer.ComputationWithException<byte[], AssemblyException>(AssemblyException.class) {
-                @Override
-                public byte[] run() throws AssemblyException {
-                    assembly().assemble(assembler, template, argumentList);
-                    return assembler.toByteArray();
-                }
-            });
+
+            final byte[] internalResult;
+            try {
+              _timer.start("asm");
+              assembly().assemble(assembler, template, argumentList);
+              internalResult = assembler.toByteArray();
+            } finally {
+              _timer.stop();
+            }
+
             Trace.line(3, "assembleInternally: " + assembly().createMethodCallString(template, argumentList) + " = " + DisassembledInstruction.toHexString(internalResult));
             if (_components.contains(AssemblyTestComponent.DISASSEMBLER) && template.isDisassemblable() &&
                     !findExcludedDisassemblerTestArgument(template.parameters(), argumentList)) {
-                _timer.time("dis", new ComputationWithException<Object, AssemblyException>(AssemblyException.class) {
-                    @Override
-                    public byte[] run() throws AssemblyException {
-                        try {
-                            testDisassembler(template, argumentList, internalResult);
-                        } catch (IOException e) {
-                            throw new AssemblyException(e.toString());
-                        }
-                        return new byte[0];
-                    }
-                });
+
+              try {
+                _timer.start("dis");
+                try {
+                  testDisassembler(template, argumentList, internalResult);
+                } catch (IOException e) {
+                  throw new AssemblyException(e.toString());
+                }
+              } finally {
+                _timer.stop();
+              }
             }
 
-            if (testingExternally && !findExcludedExternalTestArgument(template.parameters(), argumentList)) {
+              if (testingExternally && !findExcludedExternalTestArgument(template.parameters(), argumentList)) {
                 final byte[] externalResult = readExternalInstruction(externalInputStream, template, internalResult);
                 for (int i = 0; i < externalResult.length; i++) {
                     if (internalResult[i] != externalResult[i]) {
@@ -799,4 +971,80 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     public void run() {
         run(0);
     }
+
+  public static final class Redirector extends Thread {
+
+    private final InputStream _inputStream;
+    private final OutputStream _outputStream;
+    private final String _name;
+    private final int _maxLines;
+    private final Process _process;
+    private boolean _closed;
+
+    private Redirector(Process process, InputStream inputStream, OutputStream outputStream, String name, int maxLines) {
+      _inputStream = inputStream;
+      _outputStream = outputStream;
+      _name = name;
+      _maxLines = maxLines;
+      _process = process;
+      start();
+    }
+
+    public void close() {
+      _closed = true;
+    }
+
+    @Override
+    public void run() {
+      try {
+        try {
+          int line = 1;
+          while (!_closed) {
+            if (_inputStream.available() == 0) {
+              // A busy yielding loop is used so that this thread can be
+              // stopped via a call to close() by another thread. Otherwise,
+              // this thread could be blocked forever on an input stream
+              // that is not closed and does not have any available data.
+              // The prime example of course is System.in.
+              Thread.yield();
+              continue;
+            }
+
+            final int b = _inputStream.read();
+            if (b < 0) {
+              return;
+            }
+            if (line <= _maxLines) {
+              _outputStream.write(b);
+            }
+            if (b == '\n') {
+              if (line == _maxLines) {
+                _outputStream.write(("<redirected stream concatenated after " +
+                                     _maxLines +
+                                     " lines>" +
+                                     System.getProperty("line.separator", "\n")).getBytes());
+              }
+              ++line;
+            }
+          }
+          _outputStream.flush();
+        } catch (IOException ioe) {
+          try {
+            _process.exitValue();
+
+            // This just means the process was terminated and the relevant pipe no longer exists
+          } catch (IllegalThreadStateException e) {
+            // Some other unexpected IO error occurred -> rethrow
+            throw e;
+          }
+        }
+      } catch (Throwable throwable) {
+        if (_name != null) {
+          System.err.println("Error while redirecting sub-process stream for \"" + _name + "\"");
+        }
+        throwable.printStackTrace();
+      }
+    }
+
+  }
 }

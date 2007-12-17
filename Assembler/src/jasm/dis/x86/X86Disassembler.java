@@ -11,7 +11,6 @@ package jasm.dis.x86;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.Sequence;
-import com.sun.max.io.Streams;
 import com.sun.max.lang.Endianness;
 import com.sun.max.program.Trace;
 import jasm.Argument;
@@ -38,6 +37,7 @@ import jasm.util.HexByte;
 import jasm.util.WordWidth;
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.EOFException;
 import java.util.Map;
 
 /**
@@ -292,7 +292,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
               assembly().assemble(assembler, template, arguments);
               final byte[] bytes = assembler.toByteArray();
               stream.reset();
-              if (Streams.startsWith(stream, bytes)) {
+              if (startsWith(stream, bytes)) {
                 final DisassembledInstruction_Type disassembledInstruction =
                     createDisassembledInstruction(_currentOffset, bytes, template, arguments);
                 _currentOffset += bytes.length;
@@ -346,4 +346,25 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
         }
     }
 
+  private static boolean startsWith(BufferedInputStream bufferedInputStream, byte[] bytes) throws IOException {
+    final byte[] data = new byte[bytes.length];
+    bufferedInputStream.mark(bytes.length);
+    try {
+      int n = 0;
+      while (n < data.length) {
+        final int count = bufferedInputStream.read(data, n, data.length - n);
+        if (count < 0) {
+          throw new EOFException((data.length - n) + " of " + data.length + " bytes unread");
+        }
+        n += count;
+      }
+      if (java.util.Arrays.equals(data, bytes)) {
+        return true;
+      }
+    } catch (IOException ioException) {
+      // This is OK
+    }
+    bufferedInputStream.reset();
+    return false;
+  }
 }

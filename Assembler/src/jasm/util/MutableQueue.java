@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package com.sun.max.collect;
+package jasm.util;
 
 import java.util.LinkedList;
 

@@ -11,7 +11,7 @@ package jasm.gen.cisc.x86;
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.ArraySequence;
-import com.sun.max.collect.Enums;
+import jasm.util.Enums;
 import com.sun.max.collect.MutableSequence;
 import com.sun.max.collect.Sequence;
 import com.sun.max.io.IndentWriter;

@@ -8,7 +8,7 @@
  */
 package jasm.gen.cisc.x86;
 
-import com.sun.max.collect.MutableQueue;
+import jasm.util.MutableQueue;
 import com.sun.max.collect.Sequence;
 import com.sun.max.io.IndentWriter;
 import com.sun.max.lang.StaticLoophole;

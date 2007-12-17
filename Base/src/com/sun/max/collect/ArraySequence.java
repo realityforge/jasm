@@ -96,6 +96,6 @@ public class ArraySequence<Element_Type> implements MutableSequence<Element_Type
 
     @Override
     public String toString() {
-        return Arrays.toString(_array, ", ");
+        return Arrays.toString(_array);
     }
 }
