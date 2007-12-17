@@ -8,7 +8,6 @@
  */
 package jasm.gen.risc.field;
 
-import com.sun.max.lang.StaticFieldLiteral;
 import com.sun.max.program.ProgramError;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.util.StaticFieldName;
@@ -20,7 +19,7 @@ import jasm.util.StaticFieldName;
  * @author Dave Ungar
  * @author Adam Spitz
  */
-public abstract class RiscField implements Cloneable, StaticFieldName, StaticFieldLiteral {
+public abstract class RiscField implements Cloneable, StaticFieldName {
 
     private final BitRange _bitRange;
 
@@ -48,16 +47,7 @@ public abstract class RiscField implements Cloneable, StaticFieldName, StaticFie
         _name = name;
     }
 
-    private String _literal;
-
-  public void setLiteral(String literal) {
-        _literal = literal;
-    }
-
-    private Class _literalClass;
-
   public void setLiteralClass(Class literalClass) {
-        _literalClass = literalClass;
     }
 
     public BitRange bitRange() {

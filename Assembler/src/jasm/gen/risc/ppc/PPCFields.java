@@ -470,6 +470,5 @@ final class PPCFields {
                 return name;
             }
         });
-//        StaticFieldLiteral.Static.initialize(PPCFields.class);
     }
 }

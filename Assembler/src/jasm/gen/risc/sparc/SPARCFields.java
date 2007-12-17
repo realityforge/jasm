@@ -8,7 +8,6 @@
  */
 package jasm.gen.risc.sparc;
 
-import com.sun.max.lang.StaticFieldLiteral;
 import jasm.gen.Expression;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.field.BranchDisplacementOperandField;
@@ -345,6 +344,5 @@ public final class SPARCFields {
                 return name;
             }
         });
-        StaticFieldLiteral.Static.initialize(SPARCFields.class);
     }
 }
