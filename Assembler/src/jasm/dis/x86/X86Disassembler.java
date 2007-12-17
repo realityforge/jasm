@@ -14,7 +14,6 @@ import com.sun.max.collect.Sequence;
 import com.sun.max.io.Streams;
 import com.sun.max.lang.Endianness;
 import com.sun.max.program.Trace;
-import com.sun.max.util.Predicate;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;
@@ -280,11 +279,13 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
 
               // Remove the mod variant argument
               final Argument modVariantArgument = arguments.get(modVariantParameterIndex);
-              arguments = Sequence.Static.filter(arguments, new Predicate<Argument>() {
-                public boolean evaluate(Argument argument) {
-                  return modVariantArgument != argument;
-                }
-              });
+              final AppendableSequence<Argument> result = new ArrayListSequence<Argument>();
+              for (Argument element : arguments) {
+                  if (modVariantArgument != element) {
+                      result.append(element);
+                  }
+              }
+              arguments = result;
             }
             if (!Sequence.Static.containsIdentical(arguments, null)) {
               final Assembler assembler = createAssembler(_currentOffset);

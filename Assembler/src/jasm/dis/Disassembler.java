@@ -8,6 +8,7 @@
  */
 package jasm.dis;
 
+import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.ArraySequence;
 import com.sun.max.collect.MutableSequence;
 import com.sun.max.collect.Sequence;
@@ -163,8 +164,15 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
         final PrintStream stream = new PrintStream(outputStream);
         final int nOffsetChars = Integer.toString(disassembledInstructions.last().startOffset()).length();
         final Sequence<DisassembledLabel> labelMap = createLabelMap(disassembledInstructions);
-        final Sequence<DisassembledLabel> labels = Sequence.Static.filterNonNull(labelMap);
-        final int nLabelChars = updateLabels(labels, disassembledInstructions);
+
+        final ArrayListSequence<DisassembledLabel> labels = new ArrayListSequence<DisassembledLabel>();
+        for (DisassembledLabel element : labelMap) {
+          if (element != null) {
+            labels.append(element);
+          }
+        }
+
+      final int nLabelChars = updateLabels(labels, disassembledInstructions);
         if (_isHeadingEnabled) {
             printHeading(stream, nOffsetChars, nLabelChars);
         }

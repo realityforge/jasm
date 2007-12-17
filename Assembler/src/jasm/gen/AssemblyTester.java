@@ -18,9 +18,8 @@ import com.sun.max.io.Streams;
 import com.sun.max.io.Streams.Redirector;
 import com.sun.max.lang.StaticLoophole;
 import com.sun.max.program.ProgramError;
-import com.sun.max.program.Trace;
 import com.sun.max.program.ProgramWarning;
-import com.sun.max.util.Predicate;
+import com.sun.max.program.Trace;
 import com.sun.max.util.Timer;
 import com.sun.max.util.Timer.ComputationWithException;
 import jasm.Argument;
@@ -35,13 +34,13 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.PushbackInputStream;
-import java.io.FilenameFilter;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -263,7 +262,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
                     if (argumentRange == null || !argumentRange.appliesInternally()) {
                         _testArgumentIterators[i] = arguments.iterator();
                     } else {
-                        _testArgumentIterators[i] = new FilterIterator<Argument>(arguments.iterator(), new Predicate<Argument>() {
+                        _testArgumentIterators[i] = new FilterIterator<Argument>(arguments.iterator(), new FilterIterator.Predicate<Argument>() {
                             public boolean evaluate(Argument argument) {
                                 return argumentRange.includes(argument);
                             }

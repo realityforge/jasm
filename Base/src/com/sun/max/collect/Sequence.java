@@ -8,7 +8,6 @@
  */
 package com.sun.max.collect;
 
-import com.sun.max.util.Predicate;
 import java.util.Iterator;
 
 /**
@@ -130,28 +129,6 @@ public interface Sequence<Element_Type> extends Iterable<Element_Type>, Cloneabl
                 }
             }
             return result;
-        }
-
-      /**
-         * Filters an iterable with a given predicate and return a sequence with the elments that matched the predicate.
-         * If the returned sequence will only be iterated over, consider using a {@link FilterIterator} instead.
-         */
-        public static <Element_Type> AppendableSequence<Element_Type> filter(Iterable<Element_Type> sequence, Predicate<? super Element_Type> predicate) {
-            final AppendableSequence<Element_Type> result = new ArrayListSequence<Element_Type>();
-            for (Element_Type element : sequence) {
-                if (predicate.evaluate(element)) {
-                    result.append(element);
-                }
-            }
-            return result;
-        }
-
-        public static <Element_Type> Sequence<Element_Type> filterNonNull(Sequence<Element_Type> sequence) {
-            return filter(sequence, new Predicate<Element_Type>() {
-                public boolean evaluate(Element_Type element) {
-                    return element != null;
-                }
-            });
         }
     }
 }

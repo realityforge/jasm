@@ -8,7 +8,6 @@
  */
 package com.sun.max.collect;
 
-import com.sun.max.util.Predicate;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -19,6 +18,9 @@ import java.util.NoSuchElementException;
  */
 public class FilterIterator<Element_Type> implements Iterator<Element_Type> {
 
+  public interface Predicate<Element_Type> {
+    boolean evaluate(Element_Type object);
+}
     private final Iterator<? extends Element_Type> _iterator;
     private final Predicate<Element_Type> _predicate;
     private Element_Type _next;
