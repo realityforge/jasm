@@ -64,7 +64,9 @@
       </batchtest>
       <batchtest todir="${output.unit.test.reports}">
         <fileset dir="${assembler.test.src.java}">
-          <include name="**/InternalTest.java"/>
+          <exclude name="**/Raw*Test.java"/>
+          <exclude name="**/SpeedTest.java"/>
+          <include name="**/*Test.java"/>
         </fileset>
       </batchtest>
     </junit>
