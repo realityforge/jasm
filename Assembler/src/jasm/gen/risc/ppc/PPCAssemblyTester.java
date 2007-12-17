@@ -8,9 +8,9 @@
  */
 package jasm.gen.risc.ppc;
 
-import com.sun.max.collect.Sequence;
-import com.sun.max.io.IndentWriter;
-import com.sun.max.lang.Endianness;
+import jasm.util.collect.Sequence;
+import jasm.util.io.IndentWriter;
+import jasm.util.lang.Endianness;
 import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.AssemblyTestComponent;

@@ -8,7 +8,7 @@
  */
 package jasm.gen.cisc.amd64;
 
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.Sequence;
 import jasm.InstructionSet;
 import jasm.gen.cisc.x86.FloatingPointOpcodeMap;
 import jasm.gen.cisc.x86.X86Assembly;

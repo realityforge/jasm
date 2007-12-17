@@ -8,9 +8,9 @@
  */
 package jasm.gen.risc.field;
 
-import com.sun.max.collect.Iterables;
+import jasm.util.collect.Iterables;
 import jasm.util.Sets;
-import com.sun.max.lang.StaticLoophole;
+import jasm.util.lang.StaticLoophole;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.SymbolicArgument;

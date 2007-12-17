@@ -8,18 +8,18 @@
  */
 package jasm.gen.cisc.x86;
 
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.ArraySequence;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.ArraySequence;
 import jasm.util.Enums;
-import com.sun.max.collect.MutableSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.io.IndentWriter;
-import com.sun.max.lang.StaticLoophole;
-import com.sun.max.program.ProgramError;
-import com.sun.max.program.Trace;
-import com.sun.max.program.option.BooleanProgramOption;
-import com.sun.max.program.option.ProgramArgumentsParser;
+import jasm.util.collect.MutableSequence;
+import jasm.util.collect.Sequence;
+import jasm.util.io.IndentWriter;
+import jasm.util.lang.StaticLoophole;
+import jasm.util.program.ProgramError;
+import jasm.util.program.Trace;
+import jasm.util.program.option.BooleanProgramOption;
+import jasm.util.program.option.ProgramArgumentsParser;
 import jasm.Assembler;
 import jasm.EnumerableArgument;
 import jasm.LabelAddressInstruction;

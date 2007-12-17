@@ -8,11 +8,11 @@
  */
 package jasm.dis.x86;
 
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.lang.Endianness;
-import com.sun.max.program.Trace;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.Sequence;
+import jasm.util.lang.Endianness;
+import jasm.util.program.Trace;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;

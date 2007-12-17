@@ -8,8 +8,8 @@
  */
 package jasm.util;
 
-import com.sun.max.collect.Sequence;
-import com.sun.max.program.ProgramError;
+import jasm.util.collect.Sequence;
+import jasm.util.program.ProgramError;
 import java.util.Iterator;
 
 final class SequenceSymbolizer<Symbol_Type extends Symbol> implements Symbolizer<Symbol_Type> {

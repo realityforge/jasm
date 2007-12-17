@@ -8,17 +8,17 @@
  */
 package jasm.gen;
 
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.ArraySequence;
-import com.sun.max.collect.MutableSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.io.IndentWriter;
-import com.sun.max.io.ReadableSource;
-import com.sun.max.lang.StaticLoophole;
-import com.sun.max.lang.Strings;
-import com.sun.max.program.ProgramError;
-import com.sun.max.program.Trace;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.ArraySequence;
+import jasm.util.collect.MutableSequence;
+import jasm.util.collect.Sequence;
+import jasm.util.io.IndentWriter;
+import jasm.util.io.ReadableSource;
+import jasm.util.lang.StaticLoophole;
+import jasm.util.lang.Strings;
+import jasm.util.program.ProgramError;
+import jasm.util.program.Trace;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;

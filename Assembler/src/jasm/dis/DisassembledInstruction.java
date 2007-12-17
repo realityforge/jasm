@@ -8,7 +8,7 @@
  */
 package jasm.dis;
 
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.AssemblyInstruction;
 import jasm.gen.ImmediateArgument;

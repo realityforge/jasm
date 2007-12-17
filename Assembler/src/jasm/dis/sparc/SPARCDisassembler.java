@@ -8,7 +8,7 @@
  */
 package jasm.dis.sparc;
 
-import com.sun.max.lang.Endianness;
+import jasm.util.lang.Endianness;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.risc.RiscDisassembler;
 import jasm.gen.risc.sparc.SPARCAssembly;

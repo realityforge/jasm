@@ -8,11 +8,11 @@
  */
 package jasm.gen.risc.field;
 
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.ArraySequence;
-import com.sun.max.collect.MutableSequence;
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.ArraySequence;
+import jasm.util.collect.MutableSequence;
+import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.Expression;

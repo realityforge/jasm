@@ -8,7 +8,7 @@
  */
 package jasm.gen.cisc.ia32;
 
-import com.sun.max.collect.ArrayListSequence;
+import jasm.util.collect.ArrayListSequence;
 import jasm.gen.ExternalOmission;
 import static jasm.gen.cisc.x86.AddressingMethodCode.M;
 import static jasm.gen.cisc.x86.FloatingPointOperandCode.bytes_14_28;

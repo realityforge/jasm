@@ -8,7 +8,7 @@
  */
 package jasm.gen.risc;
 
-import com.sun.max.lang.Strings;
+import jasm.util.lang.Strings;
 import jasm.gen.InstructionConstraint;
 import jasm.gen.Template;
 import jasm.gen.risc.bitRange.BitRange;

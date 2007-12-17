@@ -8,8 +8,8 @@
  */
 package jasm.gen;
 
-import com.sun.max.collect.Sequence;
-import com.sun.max.program.ProgramError;
+import jasm.util.collect.Sequence;
+import jasm.util.program.ProgramError;
 import jasm.Argument;
 import java.lang.reflect.Method;
 

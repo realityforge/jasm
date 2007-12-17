@@ -8,7 +8,7 @@
  */
 package jasm.dis.ppc;
 
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.Address32Instruction;
 import jasm.gen.ImmediateArgument;

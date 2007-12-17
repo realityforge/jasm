@@ -9,7 +9,7 @@
 package jasm;
 
 import jasm.util.Enums;
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.Sequence;
 import jasm.util.Ints;
 import jasm.util.WordWidth;
 

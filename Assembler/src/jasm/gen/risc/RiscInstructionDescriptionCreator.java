@@ -8,13 +8,13 @@
  */
 package jasm.gen.risc;
 
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.MutableSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.lang.StaticLoophole;
-import com.sun.max.program.ProgramError;
-import com.sun.max.program.Trace;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.MutableSequence;
+import jasm.util.collect.Sequence;
+import jasm.util.lang.StaticLoophole;
+import jasm.util.program.ProgramError;
+import jasm.util.program.Trace;
 import jasm.gen.Assembly;
 import jasm.gen.InstructionConstraint;
 import jasm.gen.InstructionDescriptionCreator;

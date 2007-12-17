@@ -8,7 +8,7 @@
  */
 package jasm;
 
-import com.sun.max.program.ProgramError;
+import jasm.util.program.ProgramError;
 
 /**
  *

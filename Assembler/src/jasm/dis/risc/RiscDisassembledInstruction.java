@@ -8,7 +8,7 @@
  */
 package jasm.dis.risc;
 
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.risc.RiscTemplate;

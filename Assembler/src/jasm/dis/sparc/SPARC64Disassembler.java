@@ -8,7 +8,7 @@
  */
 package jasm.dis.sparc;
 
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.gen.risc.sparc.SPARCAssembly;

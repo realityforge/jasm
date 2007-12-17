@@ -8,9 +8,9 @@
  */
 package jasm.gen.risc.field;
 
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.Sequence;
 import jasm.util.Sets;
-import com.sun.max.lang.StaticLoophole;
+import jasm.util.lang.StaticLoophole;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.ExternalMnemonicSuffixArgument;

@@ -8,10 +8,10 @@
  */
 package jasm.gen.risc;
 
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.io.IndentWriter;
-import com.sun.max.program.ProgramError;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.Sequence;
+import jasm.util.io.IndentWriter;
+import jasm.util.program.ProgramError;
 import jasm.Argument;
 import jasm.LabelOffsetInstruction;
 import jasm.SymbolicArgument;

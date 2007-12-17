@@ -8,7 +8,7 @@
  */
 package jasm.gen.cisc.ia32;
 
-import com.sun.max.io.IndentWriter;
+import jasm.util.io.IndentWriter;
 import jasm.gen.cisc.x86.X86AssemblerGenerator;
 import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.ia32.IA32BaseRegister32;

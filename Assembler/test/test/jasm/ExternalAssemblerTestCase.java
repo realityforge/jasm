@@ -8,8 +8,8 @@
  */
 package test.jasm;
 
-import com.sun.max.program.option.ProgramArgumentsParser;
-import com.sun.max.program.option.StringProgramOption;
+import jasm.util.program.option.ProgramArgumentsParser;
+import jasm.util.program.option.StringProgramOption;
 import jasm.gen.AssemblyTester;
 
 /**

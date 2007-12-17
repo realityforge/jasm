@@ -8,10 +8,10 @@
  */
 package jasm.gen.cisc.x86;
 
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.program.Trace;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.Sequence;
+import jasm.util.program.Trace;
 import jasm.gen.InstructionDescription;
 import jasm.gen.InstructionDescriptionCreator;
 import jasm.util.WordWidth;

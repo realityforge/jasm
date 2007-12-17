@@ -8,8 +8,8 @@
  */
 package jasm.sparc;
 
-import com.sun.max.collect.ArraySequence;
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.ArraySequence;
+import jasm.util.collect.Sequence;
 import jasm.AbstractSymbolicArgument;
 import jasm.util.Symbolizer;
 import java.util.Iterator;

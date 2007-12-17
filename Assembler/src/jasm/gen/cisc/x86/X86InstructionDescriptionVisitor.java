@@ -8,7 +8,7 @@
  */
 package jasm.gen.cisc.x86;
 
-import com.sun.max.program.ProgramError;
+import jasm.util.program.ProgramError;
 import jasm.gen.ArgumentRange;
 import jasm.gen.ExternalOmission;
 import jasm.gen.ImplicitOperand;

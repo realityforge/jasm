@@ -8,8 +8,8 @@
  */
 package jasm.dis.x86;
 
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
 import jasm.gen.Assembly;
 import jasm.gen.cisc.x86.X86Opcode;
 import jasm.gen.cisc.x86.X86Parameter;

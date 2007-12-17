@@ -8,9 +8,9 @@
  */
 package jasm.gen;
 
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.Sequence;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 

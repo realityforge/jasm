@@ -8,8 +8,8 @@
  */
 package jasm.gen.risc;
 
-import com.sun.max.collect.Sequence;
-import com.sun.max.program.ProgramError;
+import jasm.util.collect.Sequence;
+import jasm.util.program.ProgramError;
 import jasm.gen.InstructionConstraint;
 import jasm.gen.InstructionDescription;
 import jasm.gen.risc.field.RiscField;

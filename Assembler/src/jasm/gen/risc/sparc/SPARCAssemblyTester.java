@@ -8,10 +8,10 @@
  */
 package jasm.gen.risc.sparc;
 
-import com.sun.max.collect.Sequence;
-import com.sun.max.io.IndentWriter;
-import com.sun.max.lang.Endianness;
-import com.sun.max.program.ProgramError;
+import jasm.util.collect.Sequence;
+import jasm.util.io.IndentWriter;
+import jasm.util.lang.Endianness;
+import jasm.util.program.ProgramError;
 import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.AssemblyTestComponent;

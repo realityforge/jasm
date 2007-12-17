@@ -8,7 +8,7 @@
  */
 package jasm.gen;
 
-import com.sun.max.lang.StaticLoophole;
+import jasm.util.lang.StaticLoophole;
 import jasm.Argument;
 import java.util.Collections;
 import java.util.Set;

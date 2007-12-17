@@ -8,10 +8,10 @@
  */
 package jasm.dis.risc;
 
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.IntHashMap;
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.IntHashMap;
+import jasm.util.collect.Sequence;
 import jasm.gen.risc.RiscTemplate;
 import java.util.HashSet;
 import java.util.Set;

@@ -8,8 +8,8 @@
  */
 package jasm.gen.risc.field;
 
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
 import jasm.gen.risc.bitRange.BitRange;
 
 /**

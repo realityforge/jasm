@@ -8,8 +8,8 @@
  */
 package jasm.gen.risc.field;
 
-import com.sun.max.collect.Iterables;
-import com.sun.max.program.ProgramError;
+import jasm.util.collect.Iterables;
+import jasm.util.program.ProgramError;
 import jasm.Argument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.ImmediateArgument;

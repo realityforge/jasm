@@ -8,7 +8,7 @@
  */
 package jasm.gen;
 
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.Sequence;
 import jasm.Argument;
 
 /**

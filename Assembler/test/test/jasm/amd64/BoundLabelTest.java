@@ -8,9 +8,9 @@
  */
 package test.jasm.amd64;
 
-import com.sun.max.collect.ArraySequence;
-import com.sun.max.collect.MutableSequence;
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.ArraySequence;
+import jasm.util.collect.MutableSequence;
+import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.Label;

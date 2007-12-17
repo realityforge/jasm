@@ -8,13 +8,13 @@
  */
 package jasm.dis;
 
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.ArraySequence;
-import com.sun.max.collect.MutableSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.lang.Endianness;
-import com.sun.max.lang.Strings;
-import com.sun.max.program.ProgramError;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.ArraySequence;
+import jasm.util.collect.MutableSequence;
+import jasm.util.collect.Sequence;
+import jasm.util.lang.Endianness;
+import jasm.util.lang.Strings;
+import jasm.util.program.ProgramError;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;

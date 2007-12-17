@@ -8,7 +8,7 @@
  */
 package jasm.gen.risc.field;
 
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.gen.Immediate32Argument;

@@ -9,9 +9,9 @@
 package jasm.gen.cisc.x86;
 
 import jasm.util.MutableQueue;
-import com.sun.max.collect.Sequence;
-import com.sun.max.io.IndentWriter;
-import com.sun.max.lang.StaticLoophole;
+import jasm.util.collect.Sequence;
+import jasm.util.io.IndentWriter;
+import jasm.util.lang.StaticLoophole;
 import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.Assembly;

@@ -8,7 +8,7 @@
  */
 package jasm.dis.amd64;
 
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.Address64Instruction;
 import jasm.dis.x86.X86DisassembledInstruction;

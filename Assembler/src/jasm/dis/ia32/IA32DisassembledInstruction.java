@@ -8,7 +8,7 @@
  */
 package jasm.dis.ia32;
 
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.Address32Instruction;
 import jasm.dis.x86.X86DisassembledInstruction;

@@ -8,8 +8,8 @@
  */
 package jasm.gen.cisc.amd64;
 
-import com.sun.max.io.IndentWriter;
-import com.sun.max.program.ProgramError;
+import jasm.util.io.IndentWriter;
+import jasm.util.program.ProgramError;
 import jasm.amd64.AMD64BaseRegister32;
 import jasm.amd64.AMD64BaseRegister64;
 import jasm.amd64.AMD64GeneralRegister8;

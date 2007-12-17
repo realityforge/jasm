@@ -8,12 +8,8 @@
  -->
 <project name="jasm" default="main" basedir=".">
 
-  <property name="base.main.src.java" location="Base/src"/>
-  <property name="base.test.src.java" location="Base/test"/>
-  <property name="assembler.main.src.java" location="Assembler/src"/>
-  <property name="assembler.test.src.java" location="Assembler/test"/>
-
-  <property name="main.src.path" value="${base.main.src.java}:${assembler.main.src.java}"/>
+  <property name="main.src.java" location="Assembler/src"/>
+  <property name="test.src.java" location="Assembler/test"/>
 
   <property name="junit.jar" location="lib/junit-4.4.jar"/>
 
@@ -30,7 +26,7 @@
 
   <target name="compile" description="Compile the code">
     <mkdir dir="${output.main.classes}"/>
-    <javac srcdir="${main.src.path}"
+    <javac srcdir="${main.src.java}"
            destdir="${output.main.classes}"
            debug="true"
            deprecation="true"
@@ -39,7 +35,7 @@
 
   <target name="compile-tests" depends="compile" description="Compile the code">
     <mkdir dir="${output.test.classes}"/>
-    <javac srcdir="${base.test.src.java}:${assembler.test.src.java}"
+    <javac srcdir="${test.src.java}"
            destdir="${output.test.classes}"
            classpath="${junit.jar}:${output.main.classes}"
            debug="true"
@@ -58,12 +54,7 @@
         <pathelement location="${output.test.classes}"/>
       </classpath>
       <batchtest todir="${output.unit.test.reports}">
-        <fileset dir="${base.test.src.java}">
-          <include name="**/*Test.java"/>
-        </fileset>
-      </batchtest>
-      <batchtest todir="${output.unit.test.reports}">
-        <fileset dir="${assembler.test.src.java}">
+        <fileset dir="${test.src.java}">
           <exclude name="**/Raw*Test.java"/>
           <exclude name="**/SpeedTest.java"/>
           <include name="**/*Test.java"/>
@@ -90,7 +81,7 @@
              nonavbar="false"
              notree="false"
              source="1.5"
-             sourcepath="${assembler.main.src.java}"
+             sourcepath="${main.src.java}"
              splitindex="true"
              use="true"
              version="true">

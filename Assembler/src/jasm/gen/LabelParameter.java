@@ -8,7 +8,7 @@
  */
 package jasm.gen;
 
-import com.sun.max.collect.Iterables;
+import jasm.util.collect.Iterables;
 import jasm.Argument;
 import jasm.Label;
 import java.util.Set;

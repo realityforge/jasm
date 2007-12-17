@@ -8,7 +8,7 @@
  */
 package jasm.gen.cisc.amd64;
 
-import com.sun.max.collect.ArrayListSequence;
+import jasm.util.collect.ArrayListSequence;
 import jasm.amd64.AMD64GeneralRegister16;
 import static jasm.amd64.AMD64GeneralRegister16.AX;
 import jasm.amd64.AMD64GeneralRegister32;

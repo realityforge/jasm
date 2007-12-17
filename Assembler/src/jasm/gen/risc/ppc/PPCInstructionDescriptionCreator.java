@@ -8,7 +8,7 @@
  */
 package jasm.gen.risc.ppc;
 
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.Sequence;
 import jasm.gen.Assembly;
 import jasm.gen.risc.RiscInstructionDescription;
 import jasm.gen.risc.RiscInstructionDescriptionCreator;

@@ -8,12 +8,12 @@
  */
 package test.jasm;
 
-import com.sun.max.program.Trace;
-import com.sun.max.program.ProgramError;
-import com.sun.max.program.option.BooleanProgramOption;
-import com.sun.max.program.option.IntegerProgramOption;
-import com.sun.max.program.option.ProgramArgumentsParser;
-import com.sun.max.program.option.StringProgramOption;
+import jasm.util.program.Trace;
+import jasm.util.program.ProgramError;
+import jasm.util.program.option.BooleanProgramOption;
+import jasm.util.program.option.IntegerProgramOption;
+import jasm.util.program.option.ProgramArgumentsParser;
+import jasm.util.program.option.StringProgramOption;
 import jasm.gen.AssemblyTester;
 import junit.framework.TestCase;
 

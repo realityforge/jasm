@@ -9,9 +9,9 @@
 package jasm.util;
 
 import java.util.EnumSet;
-import com.sun.max.collect.Sequence;
-import com.sun.max.collect.MutableSequence;
-import com.sun.max.collect.ArraySequence;
+import jasm.util.collect.Sequence;
+import jasm.util.collect.MutableSequence;
+import jasm.util.collect.ArraySequence;
 
 /**
  * Additional dealings with Enum types.

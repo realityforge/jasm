@@ -8,8 +8,8 @@
  */
 package jasm.gen.risc;
 
-import com.sun.max.collect.MutableSequence;
-import com.sun.max.program.ProgramError;
+import jasm.util.collect.MutableSequence;
+import jasm.util.program.ProgramError;
 import jasm.gen.InstructionDescription;
 import jasm.gen.risc.field.InputOperandField;
 import jasm.gen.risc.field.RiscField;

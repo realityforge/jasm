@@ -8,9 +8,9 @@
  */
 package jasm.gen.risc.ppc;
 
-import com.sun.max.io.IndentWriter;
-import com.sun.max.program.Trace;
-import com.sun.max.program.option.ProgramArgumentsParser;
+import jasm.util.io.IndentWriter;
+import jasm.util.program.Trace;
+import jasm.util.program.option.ProgramArgumentsParser;
 import jasm.Assembler;
 import jasm.BigEndianAssembler;
 import jasm.gen.risc.RiscAssemblerGenerator;

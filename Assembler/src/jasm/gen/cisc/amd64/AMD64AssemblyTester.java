@@ -8,7 +8,7 @@
  */
 package jasm.gen.cisc.amd64;
 
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.amd64.AMD64Assembler;

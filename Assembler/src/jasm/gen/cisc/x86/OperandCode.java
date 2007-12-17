@@ -9,7 +9,7 @@
 package jasm.gen.cisc.x86;
 
 import jasm.util.Sets;
-import com.sun.max.lang.StaticLoophole;
+import jasm.util.lang.StaticLoophole;
 import jasm.Argument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.AssemblyTestComponent;

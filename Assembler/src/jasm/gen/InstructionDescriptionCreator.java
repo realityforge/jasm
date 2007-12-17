@@ -8,12 +8,12 @@
  */
 package jasm.gen;
 
-import com.sun.max.collect.AppendableSequence;
-import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.ArraySequence;
-import com.sun.max.collect.MutableSequence;
-import com.sun.max.collect.Sequence;
-import com.sun.max.lang.Arrays;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.ArraySequence;
+import jasm.util.collect.MutableSequence;
+import jasm.util.collect.Sequence;
+import jasm.util.lang.Arrays;
 
 /**
  * Wraps mere object arrays into instruction descriptions.

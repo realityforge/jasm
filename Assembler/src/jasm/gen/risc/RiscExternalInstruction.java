@@ -9,8 +9,8 @@
 package jasm.gen.risc;
 
 import jasm.util.MutableQueue;
-import com.sun.max.collect.Sequence;
-import com.sun.max.lang.Strings;
+import jasm.util.collect.Sequence;
+import jasm.util.lang.Strings;
 import jasm.Argument;
 import jasm.ExternalMnemonicSuffixArgument;
 import jasm.dis.DisassembledLabel;

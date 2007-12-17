@@ -8,8 +8,8 @@
  */
 package jasm.gen.risc;
 
-import com.sun.max.collect.MutableSequence;
-import com.sun.max.collect.Sequence;
+import jasm.util.collect.MutableSequence;
+import jasm.util.collect.Sequence;
 
 /**
  * This class provides a mechanism for making modifications to a set of RISC instruction descriptions.

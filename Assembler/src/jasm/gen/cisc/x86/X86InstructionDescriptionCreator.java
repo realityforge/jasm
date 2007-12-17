@@ -8,7 +8,7 @@
  */
 package jasm.gen.cisc.x86;
 
-import com.sun.max.collect.MutableSequence;
+import jasm.util.collect.MutableSequence;
 import jasm.gen.Assembly;
 import jasm.gen.InstructionDescriptionCreator;
 
