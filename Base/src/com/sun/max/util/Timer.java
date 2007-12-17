@@ -10,9 +10,7 @@ package com.sun.max.util;
 
 import com.sun.max.lang.StaticLoophole;
 import com.sun.max.program.ProgramError;
-import java.io.PrintStream;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Stack;
@@ -25,19 +23,6 @@ import java.util.Stack;
  * @author  Doug Simon
  */
 public final class Timer<Key_Type> {
-
-    /**
-     * A computation to be timed that does not throw a checked exception.
-     */
-    public abstract static class Computation<Result_Type> {
-        /**
-         * Performs the computation that will be timed.
-         *
-         * @return   the result of the computation
-         */
-        public abstract Result_Type run();
-    }
-
     /**
      * A computation to be timed that throws an exception.
      */
@@ -108,13 +93,8 @@ public final class Timer<Key_Type> {
         _executions.push(e);
         final Long currentTotal = _totalTimes.get(id);
         try {
-            if (c instanceof Computation) {
-                Computation<Result_Type> comp = StaticLoophole.cast(c);
-                e._result = comp.run();
-            } else {
-                ComputationWithException<Result_Type, Exception_Type> comp = StaticLoophole.cast(c);
-                e._result = comp.run();
-            }
+          ComputationWithException<Result_Type, Exception_Type> comp = StaticLoophole.cast(c);
+          e._result = comp.run();
         } catch (Throwable ex) {
             if (c instanceof ComputationWithException) {
                 ComputationWithException<Result_Type, Exception_Type> comp = StaticLoophole.cast(c);
@@ -160,28 +140,7 @@ public final class Timer<Key_Type> {
         return e;
     }
 
-    /**
-     * Time a specified computation denoted by a specified identifier. The
-     * time taken to perform the computation is added to the accumulative
-     * time to perform all computations with the same identifier.
-     *
-     * @param   id           the identifier for the computation
-     * @param   computation  the computation to be performed and timed
-     * @return  the result of the computation
-     */
-    public <Result_Type> Result_Type time(Key_Type id, Computation<Result_Type> computation) {
-        final Execution<Result_Type, Throwable> e = execute(id, computation);
-        if (e._exception != null) {
-            if (e._exception instanceof RuntimeException) {
-                throw (RuntimeException) e._exception;
-            }
-            assert e._exception instanceof Error;
-            throw (Error) e._exception;
-        }
-        return e._result;
-    }
-
-    /**
+  /**
      * Time a specified computation denoted by a specified identifier. The
      * time taken to perform the computation is added to the accumulative
      * time to perform all computations with the same identifier.
@@ -198,18 +157,7 @@ public final class Timer<Key_Type> {
         return e._result;
     }
 
-    /**
-     * Gets an iterator over the identifiers of computations for which
-     * times were collected.
-     *
-     * @return  an iterator over the identifiers of computations for which
-     *          times were collected
-     */
-    public Iterable<Key_Type> computations() {
-        return _flatTimes.keySet();
-    }
-
-    /**
+  /**
      * Gets an iterator over the collected flat times.
      *
      * @return  an iterator over the collected flat times
@@ -218,16 +166,7 @@ public final class Timer<Key_Type> {
         return _flatTimes.entrySet();
     }
 
-    /**
-     * Gets an iterator over the collected accumulative times.
-     *
-     * @return  an iterator over the collected accumulative times
-     */
-    public Iterable<Entry<Key_Type, Long>> totalTimes() {
-        return _totalTimes.entrySet();
-    }
-
-    /**
+  /**
      * Resets all the data gathered by the timer.
      *
      * @throws IllegalStateException if there is an execution currently being timed
@@ -238,44 +177,5 @@ public final class Timer<Key_Type> {
         }
         _flatTimes.clear();
         _totalTimes.clear();
-    }
-
-    /**
-     * Returns a string representation of the times accumulated by the timer
-     * in the form of a set of entries, enclosed in braces and separated
-     * by the ASCII characters ", " (comma and space). Each entry is rendered
-     * as the computation identifier, a colon sign ':', the total time
-     * associated with the computation, a colon sign ':' and the flat time
-     * associated with the computation.
-     *
-     * @return a string representation of the collected times
-     */
-    public String timesAsString() {
-        final StringBuilder sb = new StringBuilder("{ ");
-        final Iterator<Key_Type> keys = _flatTimes.keySet().iterator();
-        final Iterator<Long> ftimes = _flatTimes.values().iterator();
-        final Iterator<Long> ttimes = _totalTimes.values().iterator();
-        while (keys.hasNext()) {
-            sb.append(keys.next()).append(":").append(ttimes.next()).append(":").append(ftimes.next());
-            if (keys.hasNext()) {
-                sb.append(", ");
-            }
-        }
-        return sb.append(" }").toString();
-    }
-
-    /**
-     * Print a summary of the times.
-     *
-     * @param out PrintStream
-     */
-    public void dump(PrintStream out) {
-        out.println("Times: flat | total | computation");
-        final Iterator<Key_Type> keys = _flatTimes.keySet().iterator();
-        final Iterator<Long> ftimes = _flatTimes.values().iterator();
-        final Iterator<Long> ttimes = _totalTimes.values().iterator();
-        while (keys.hasNext()) {
-            out.println("" + ftimes.next() + '\t' + ttimes.next() + '\t' + keys.next());
-        }
     }
 }

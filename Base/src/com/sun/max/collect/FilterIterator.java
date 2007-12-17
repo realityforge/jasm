@@ -30,10 +30,7 @@ public class FilterIterator<Element_Type> implements Iterator<Element_Type> {
     }
 
     public boolean hasNext() {
-        if (_advanced) {
-            return true;
-        }
-        return advance();
+      return _advanced || advance();
     }
 
     public Element_Type next() {

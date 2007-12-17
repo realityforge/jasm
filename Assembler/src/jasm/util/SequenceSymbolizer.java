@@ -18,7 +18,7 @@ final class SequenceSymbolizer<Symbol_Type extends Symbol> implements Symbolizer
     private final Sequence<Symbol_Type> _symbols;
 
     SequenceSymbolizer(Class<Symbol_Type> symbolType, Sequence<Symbol_Type> symbols) {
-        if (symbolType.getName().startsWith("com.sun.max.asm") && Symbolizer.Static.hasPackageExternalAccessibleConstructors(symbolType)) {
+        if (symbolType.getName().startsWith("jasm") && Symbolizer.Static.hasPackageExternalAccessibleConstructors(symbolType)) {
             // This test ensures that values passed for symbolic parameters of methods in the
             // generated assemblers are guaranteed to be legal (assuming client code does not
             // inject its own classes into the package where the symbol classes are defined).

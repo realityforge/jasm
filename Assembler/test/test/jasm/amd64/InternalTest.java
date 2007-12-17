@@ -49,7 +49,7 @@ public class InternalTest extends TestCase {
     return new String(baos.toByteArray());
   }
 
-  private byte[] assemble1(long startAddress) throws IOException, AssemblyException {
+  private byte[] assemble1(long startAddress) throws AssemblyException {
     final AMD64GeneralRegister64 myGPR = RAX;
     final AMD64Assembler asm = new AMD64Assembler(startAddress);
     final Label startLabel = new Label();
@@ -118,7 +118,7 @@ public class InternalTest extends TestCase {
     assertEquals(expected, output);
   }
 
-  private byte[] assemble2(long startAddress) throws IOException, AssemblyException {
+  private byte[] assemble2(long startAddress) throws AssemblyException {
     final AMD64Assembler asm = new AMD64Assembler(startAddress);
 
     final Label loop = new Label();

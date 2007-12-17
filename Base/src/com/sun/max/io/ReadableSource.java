@@ -21,5 +21,5 @@ public interface ReadableSource {
     /**
      * @return a reader to read the character data represented by this source
      */
-    Reader reader() throws IOException;
+    Reader reader();
 }

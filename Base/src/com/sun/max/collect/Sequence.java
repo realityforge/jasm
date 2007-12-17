@@ -57,17 +57,6 @@ public interface Sequence<Element_Type> extends Iterable<Element_Type>, Cloneabl
 
     Sequence<Element_Type> clone();
 
-    /**
-     * Creates a transformed version of this sequence where each element in the returned sequence
-     * is the result of applying a {@linkplain MapFunction transformation} to the corresponding
-     * element in this sequence.
-     *
-     * @param <To_Type>  the type of the elements in the returned sequence
-     * @param toType     the type of the elements in the returned sequence
-     * @param mapFunction the trnasformation function to apply to each element of this sequence
-     */
-    <To_Type> Sequence<To_Type> map(Class<To_Type> toType, MapFunction<Element_Type, To_Type> mapFunction);
-
     public final class Static {
 
         /**
@@ -143,44 +132,7 @@ public interface Sequence<Element_Type> extends Iterable<Element_Type>, Cloneabl
             return result;
         }
 
-        /**
-         * Returns a string representation of the contents of the specified iterable.
-         * Adjacent elements are separated by the specified separator. Elements are
-         * converted to strings by {@link String#valueOf(Object)}.
-         *
-         * @param iterable   the iterable whose string representation to return
-         * @param separator  the separator to use
-         * @param toStringFunction function that converts {@code Element_Type} to {@code String}. If
-         *                   this parameter is {@code null}, then the {@link Object#toString} method
-         *                   will be used
-         * @return a string representation of {@code sequence}
-         * @throws NullPointerException if {@code sequence} or {@code separator} is null
-         */
-        public static <Element_Type> String toString(Iterable<? extends Element_Type> iterable, MapFunction<Element_Type, String> toStringFunction, String separator) {
-            if (iterable == null || separator == null) {
-                throw new NullPointerException();
-            }
-
-            final Iterator<? extends Element_Type> iterator = iterable.iterator();
-            if (!iterator.hasNext()) {
-                return "";
-            }
-            boolean hasNext = iterator.hasNext();
-            final StringBuilder buf = new StringBuilder();
-            while (hasNext) {
-                final Element_Type element = iterator.next();
-                final String string = toStringFunction == null ? String.valueOf(element) : toStringFunction.map(element);
-                buf.append(element == iterable ? "(this Iterable)" : string);
-                hasNext = iterator.hasNext();
-                if (hasNext) {
-                    buf.append(separator);
-                }
-            }
-
-            return buf.toString();
-        }
-
-        /**
+      /**
          * Filters an iterable with a given predicate and return a sequence with the elments that matched the predicate.
          * If the returned sequence will only be iterated over, consider using a {@link FilterIterator} instead.
          */

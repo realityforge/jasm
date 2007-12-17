@@ -22,7 +22,7 @@ import test.jasm.ExternalAssemblerTestCase;
  * @author Doug Simon
  */
 public class RawExternalTest extends ExternalAssemblerTestCase {
-  public void test_assemble() throws FileNotFoundException, IOException {
+  public void test_assemble() throws IOException {
     run(new AMD64AssemblyTester(EnumSet.of(AssemblyTestComponent.EXTERNAL_ASSEMBLER)));
   }
 }

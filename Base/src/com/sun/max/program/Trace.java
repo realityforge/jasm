@@ -8,13 +8,7 @@
  */
 package com.sun.max.program;
 
-import com.sun.max.io.MultiOutputStream;
 import com.sun.max.program.option.PositiveIntegerProgramOption;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintStream;
 
 /**
@@ -25,25 +19,7 @@ import java.io.PrintStream;
  */
 public class Trace extends PositiveIntegerProgramOption {
 
-    private static PrintStream _stream;
-
-  static {
-        final String traceFileName = System.getProperty("maxwell.trace.file");
-        _stream = System.out;
-        if (traceFileName != null) {
-            final File traceFile = new File(traceFileName);
-            try {
-                final OutputStream fileStream = new BufferedOutputStream(new FileOutputStream(traceFile));
-                if (System.getProperty("maxwell.trace.noconsole") != null) {
-                    _stream = new PrintStream(fileStream);
-                } else {
-                    _stream = new PrintStream(new MultiOutputStream(fileStream, System.out));
-                }
-            } catch (IOException ioException) {
-                System.err.println("Could not open file for trace output: " + traceFile.getAbsolutePath());
-            }
-        }
-    }
+    private static final PrintStream _stream = System.out;
 
     /**
      * Static master switch. Set by source code editing only (for now).
@@ -70,14 +46,8 @@ public class Trace extends PositiveIntegerProgramOption {
         return _level >= requiredLevel;
     }
 
-    private static int _indentation;
-
     private static String makePrefix(int requiredLevel) {
-        String result = "";
-        for (int i = 0; i < _indentation; i++) {
-            result += " ";
-        }
-        return "<Trace " + requiredLevel + "> " + result;
+        return "<Trace " + requiredLevel + "> ";
     }
 
     public static void line(int requiredLevel) {

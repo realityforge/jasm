@@ -10,7 +10,8 @@ package jasm.gen.risc.field;
 
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.MapFunction;
+import com.sun.max.collect.ArraySequence;
+import com.sun.max.collect.MutableSequence;
 import com.sun.max.collect.Sequence;
 import jasm.Argument;
 import jasm.gen.ArgumentRange;
@@ -118,17 +119,16 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
     private Iterable<? extends Argument> _testArguments;
     private Iterable<? extends Argument> _illegalTestArguments;
 
-    private static final MapFunction<Integer, Immediate32Argument> ARGUMENT_WRAPPER = new MapFunction<Integer, Immediate32Argument>() {
-        public Immediate32Argument map(Integer integer) {
-            return new Immediate32Argument(integer);
-        }
-    };
-
     public Iterable<? extends Argument> getLegalTestArguments() {
-        if (_testArguments == null) {
-            final Sequence<Integer> integers = signDependentOperations().legalTestArgumentValues(minArgumentValue(), maxArgumentValue(), grain());
-            _testArguments = integers.map(Immediate32Argument.class, ARGUMENT_WRAPPER);
+      if (_testArguments == null) {
+        final Sequence<Integer> integers =
+            signDependentOperations().legalTestArgumentValues(minArgumentValue(), maxArgumentValue(), grain());
+        final MutableSequence<Immediate32Argument> to = new ArraySequence<Immediate32Argument>(integers.length());
+        for (int i = 0; i < integers.length(); i++) {
+          to.set(i, new Immediate32Argument(integers.get(i)));
         }
+        _testArguments = to;
+      }
         return _testArguments;
     }
 

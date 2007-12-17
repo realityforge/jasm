@@ -43,7 +43,7 @@ public class BoundLabelTest extends TestCase {
         return index;
     }
 
-    private byte[] assemble(long startAddress, int labelDelta) throws IOException, AssemblyException {
+    private byte[] assemble(long startAddress, int labelDelta) throws AssemblyException {
         final AMD64Assembler assembler = new AMD64Assembler(startAddress);
         final Sequence<AMD64Template> labelTemplates = AMD64Assembly.ASSEMBLY.getLabelTemplates();
         final Label[] labels = new Label[labelTemplates.length() + LABEL_DELTA];

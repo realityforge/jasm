@@ -57,11 +57,7 @@ public class Option {
         return _value;
     }
 
-    public Option() {
-        this("");
-    }
-
-    public Option(String name) {
+  public Option(String name) {
         this(name, 0);
     }
 

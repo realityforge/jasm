@@ -201,7 +201,7 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
     }
 
     public enum AbstractionPreference {
-        RAW, SYNTHETIC;
+        RAW, SYNTHETIC
     }
 
     private AbstractionPreference _abstractionPreference = AbstractionPreference.SYNTHETIC;

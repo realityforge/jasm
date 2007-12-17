@@ -42,7 +42,7 @@ import junit.framework.TestCase;
  * @author Bernd Mathiske
  */
 public class InternalTest extends TestCase {
-  private byte[] assemble(SPARCAssembler asm) throws IOException, AssemblyException {
+  private byte[] assemble(SPARCAssembler asm) throws AssemblyException {
     asm.rd(StateRegister.PC, G1);
 
     asm.add(G0, I1, O2);

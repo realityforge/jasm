@@ -15,16 +15,7 @@ import java.util.Iterator;
  */
 public final class Iterables {
 
-    public static int countIterations(Iterator iterator) {
-        int count = 0;
-        while (iterator.hasNext()) {
-            ++count;
-            iterator.next();
-        }
-        return count;
-    }
-
-    public static <Element_Type> Iterable<Element_Type> empty() {
+  public static <Element_Type> Iterable<Element_Type> empty() {
       return new Iterable<Element_Type>() {
         public Iterator<Element_Type> iterator() {
           return Iterators.empty();
@@ -63,13 +54,8 @@ public final class Iterables {
         }
     }
 
-    public static <Element_Type> Iterable<Element_Type> flatten1(Iterable<Iterable<Element_Type>> iterable) {
-        final Iterator<Element_Type> iterator = new Flatten1Iterator<Element_Type>(iterable);
-        return new Iterable<Element_Type>() {
-            public Iterator<Element_Type> iterator() {
-                return iterator;
-            }
-        };
+    public static <Element_Type> Iterator<Element_Type> flatten1(Iterable<Iterable<Element_Type>> iterable) {
+        return new Flatten1Iterator<Element_Type>(iterable);
     }
 
 }

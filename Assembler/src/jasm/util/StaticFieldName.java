@@ -25,16 +25,9 @@ public interface StaticFieldName {
         String function(String string);
     }
 
-    public interface Procedure {
-        void procedure(StaticFieldName staticFieldName);
-    }
-
     public static final class Static {
 
-        private Static() {
-        }
-
-        public static Sequence<StaticFieldName> initialize(Class staticNameFieldClass, StringFunction stringFunction, Procedure procedure) {
+        public static Sequence<StaticFieldName> initialize(Class staticNameFieldClass, StringFunction stringFunction) {
             final AppendableSequence<StaticFieldName> sequence = new ArrayListSequence<StaticFieldName>();
             for (Field field : staticNameFieldClass.getDeclaredFields()) {
                 if ((field.getModifiers() & Modifier.STATIC) != 0 && StaticFieldName.class.isAssignableFrom(field.getType())) {
@@ -48,9 +41,6 @@ public interface StaticFieldName {
                             }
                             value.setName(name);
                         }
-                        if (procedure != null) {
-                            procedure.procedure(value);
-                        }
                         sequence.append(value);
                     } catch (IllegalAccessException illegalAccessException) {
                         ProgramError.unexpected("could not name value of field: " + field);
@@ -58,14 +48,6 @@ public interface StaticFieldName {
                 }
             }
             return sequence;
-        }
-
-        public static Sequence<StaticFieldName> initialize(Class staticNameFieldClass, StringFunction stringFunction) {
-            return initialize(staticNameFieldClass, stringFunction, null);
-        }
-
-      public static Sequence<StaticFieldName> initialize(Class staticNameFieldClass) {
-            return initialize(staticNameFieldClass, null, null);
         }
     }
 

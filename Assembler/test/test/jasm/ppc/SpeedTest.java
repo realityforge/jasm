@@ -28,7 +28,7 @@ import junit.framework.TestCase;
  * @author Bernd Mathiske
  */
 public class SpeedTest extends TestCase {
-    public byte[] produce()  throws IOException, AssemblyException {
+    public byte[] produce()  throws AssemblyException {
         final int startAddress = 0x0000ecf0;
         final PPC32Assembler asm = new PPC32Assembler(startAddress);
         final Label label1 = new Label();

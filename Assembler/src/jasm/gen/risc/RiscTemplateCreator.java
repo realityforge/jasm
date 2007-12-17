@@ -10,7 +10,6 @@ package jasm.gen.risc;
 
 import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
-import com.sun.max.collect.MultiMap;
 import com.sun.max.collect.Sequence;
 import com.sun.max.collect.SequenceMultiMap;
 import com.sun.max.lang.StaticLoophole;
@@ -60,7 +59,7 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
     }
 
     private int _serial;
-    private MultiMap<String, Template_Type, Sequence<Template_Type>> _nameToTemplates = new SequenceMultiMap<String, Template_Type>(false);
+    private final SequenceMultiMap<String, Template_Type> _nameToTemplates = new SequenceMultiMap<String, Template_Type>();
 
     public Sequence<Template_Type> nameToTemplates(String name) {
         return _nameToTemplates.get(name);

@@ -72,7 +72,7 @@ public interface Symbolizer<Symbol_Type extends Symbol> extends Iterable<Symbol_
 
       public static <Symbol_Type extends Symbol> Symbolizer<Symbol_Type> initialize(Class staticNameFieldClass, Class<Symbol_Type> symbolType) {
             final AppendableSequence<Symbol_Type> sequence = new ArrayListSequence<Symbol_Type>();
-            final Sequence<StaticFieldName> staticFieldNames = StaticFieldName.Static.initialize(staticNameFieldClass);
+        final Sequence<StaticFieldName> staticFieldNames = StaticFieldName.Static.initialize(staticNameFieldClass, null);
             for (StaticFieldName staticFieldName : staticFieldNames) {
                 if (symbolType.isInstance(staticFieldName)) {
                     sequence.append(symbolType.cast(staticFieldName));

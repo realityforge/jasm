@@ -12,8 +12,6 @@ import com.sun.max.collect.AppendableSequence;
 import com.sun.max.collect.ArrayListSequence;
 import com.sun.max.collect.ArraySequence;
 import com.sun.max.collect.FilterIterator;
-import com.sun.max.collect.Iterables;
-import com.sun.max.collect.MapFunction;
 import com.sun.max.collect.Sequence;
 import com.sun.max.io.IndentWriter;
 import com.sun.max.io.Streams;
@@ -123,10 +121,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
           final File directory = tempFile.getParentFile();
           final FilenameFilter filter = new FilenameFilter() {
               public boolean accept(File dir, String name) {
-                  if (prefix != null && prefix.length() > 0 && !name.startsWith(prefix)) {
-                      return false;
-                  }
-                  return true;
+                return !(prefix != null && prefix.length() > 0 && !name.startsWith(prefix));
               }
           };
           for (File file : directory.listFiles(filter)) {
@@ -171,15 +166,6 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
 
         /**
          * Creates an iterator over a set of test cases for a given template.
-         *
-         * @param template
-         * @param legalCases
-         *            if true, only legal test cases are returned by this iterator otherwise only illegal test cases are
-         *            returned
-         * @param legalArguments
-         *            if {@code legalCases == true}, then this parameter is ignored. Otherwise, if true,
-         *            then all the arguments in a returned test case are {@link Parameter#getLegalTestArguments legal}
-         *            otherwise at least one argument in a returned test case will be {@link Parameter#getIllegalTestArguments illegal}
          */
         ArgumentListIterator(Template_Type template, TestCaseLegality testCaseLegality) {
             _testCaseLegality  = testCaseLegality;
@@ -201,7 +187,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
 
         public boolean hasNext() {
             if (_count == 0) {
-                return _testCaseLegality == TestCaseLegality.LEGAL ? (_iterations == 0) : false;
+                return _testCaseLegality == TestCaseLegality.LEGAL && _iterations == 0;
             }
             if (!_advanced) {
                 _hasNext = advance();
@@ -294,7 +280,12 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
                         // the last legal value is used. This involves retrieving the iterator twice but
                         // that's much cheaper than many more redundant iterations.
                         iterator = parameter.getLegalTestArguments().iterator();
-                        int n = Iterables.countIterations(iterator);
+                      int count = 0;
+                      while (iterator.hasNext()) {
+                          ++count;
+                          ((Iterator) iterator).next();
+                      }
+                      int n = count;
                         iterator = parameter.getLegalTestArguments().iterator();
                         while (n-- > 1) {
                             iterator.next();
@@ -711,14 +702,9 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
             }
         }
 
-        final MapFunction<Entry<String, Long>, String> f = new MapFunction<Entry<String, Long>, String>() {
-            public String map(Entry<String, Long> from) {
-                return from.getKey() + "=" + from.getValue() + "ms";
-            }
-
-        };
-        Trace.line(2, "template: " + template + "  [" + testCaseNumber + " test cases, timings: " + Sequence.Static.toString(_timer.flatTimes(), f, ", ") +
-                        ", " + illegalTestCaseNumber + " illegal test cases]");
+      Trace.line(2, "template: " + template + "  [" + testCaseNumber + " test cases, " +
+                      "timings: " + getTimingString() + ", " +
+                      illegalTestCaseNumber + " illegal test cases]");
         for (String message : uniqueExceptionMessages) {
             Trace.line(2, "    caught expected IllegalArgumentException: " + message);
         }
@@ -732,7 +718,23 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
         }
     }
 
-    private String _templatePattern;
+  private StringBuilder getTimingString() {
+    final Iterator<Entry<String, Long>> iterator = _timer.flatTimes().iterator();
+    boolean hasNext = iterator.hasNext();
+    final StringBuilder buf = new StringBuilder();
+    while (hasNext) {
+      final Entry<String, Long> element = iterator.next();
+      final String string = element.getKey() + "=" + element.getValue() + "ms";
+      buf.append(string);
+      hasNext = iterator.hasNext();
+      if (hasNext) {
+        buf.append(", ");
+      }
+    }
+    return buf;
+  }
+
+  private String _templatePattern;
 
     /**
      * Sets the pattern that restricts which templates are tested.

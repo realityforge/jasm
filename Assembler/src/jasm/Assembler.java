@@ -40,10 +40,6 @@ public abstract class Assembler {
 
     private ByteArrayOutputStream _stream = new ByteArrayOutputStream();
 
-    protected ByteArrayOutputStream stream() {
-        return _stream;
-    }
-
     protected void emitByte(byte byteValue) {
         _stream.write(byteValue);
         _currentOffset++;
@@ -62,10 +58,6 @@ public abstract class Assembler {
     }
 
     private final IdentityHashSet<Label> _boundLabels = new IdentityHashSet<Label>();
-
-    protected IdentityHashSet<Label> boundLabels() {
-        return _boundLabels;
-    }
 
     /**
      * Binds a given label to the address in the assembler's instruction stream of the start of the next instruction.
@@ -189,13 +181,6 @@ public abstract class Assembler {
         writeOutput(outputStream, initialBytes);
     }
 
-    public int upperLimitForCurrentOutputSize() {
-        // A span-dependent instruction's offset operand can potentially grow from 8 bits to 32 bits.
-        // Also, some instructions need an extra byte for encoding when not using an 8-bit operand.
-        // Together, this might enlarge every span-dependent instruction by maximally 4 bytes.
-        return currentOffset() + (_spanDependentLabelInstructions.length() * 4);
-    }
-
     /**
      * Returns the object code assembled so far in a byte array.
      *
@@ -214,16 +199,10 @@ public abstract class Assembler {
         return new byte[0];
     }
 
-    /**
-     * @see Label#fix32(int)
-     */
     protected void fixLabel32(Label label, int address32) {
         label.fix32(address32);
     }
 
-    /**
-     * @see Label#fix64(long)
-     */
     protected void fixLabel64(Label label, long address64) {
         label.fix64(address64);
     }

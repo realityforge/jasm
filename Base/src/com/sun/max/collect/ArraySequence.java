@@ -94,18 +94,6 @@ public class ArraySequence<Element_Type> implements MutableSequence<Element_Type
         return new ArraySequence<Element_Type>(_array.clone());
     }
 
-    public static <From_Type, To_Type> Sequence<To_Type> map(Sequence<From_Type> from, MapFunction<From_Type, To_Type> mapFunction) {
-        final MutableSequence<To_Type> to = new ArraySequence<To_Type>(from.length());
-        for (int i = 0; i < from.length(); i++) {
-            to.set(i, mapFunction.map(from.get(i)));
-        }
-        return to;
-    }
-
-    public <To_Type> Sequence<To_Type> map(Class<To_Type> toType, MapFunction<Element_Type, To_Type> mapFunction) {
-        return map(this, mapFunction);
-    }
-
     @Override
     public String toString() {
         return Arrays.toString(_array, ", ");

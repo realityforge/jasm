@@ -33,7 +33,7 @@ import junit.framework.TestCase;
  * @author Bernd Mathiske
  */
 public class InternalTest extends TestCase {
-  private byte[] assemble(PPCAssembler asm) throws IOException, AssemblyException {
+  private byte[] assemble(PPCAssembler asm) throws AssemblyException {
     final Label loop1 = new Label();
     final Label loop2 = new Label();
 

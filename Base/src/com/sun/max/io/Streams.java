@@ -110,7 +110,14 @@ public final class Streams {
     final byte[] data = new byte[bytes.length];
     bufferedInputStream.mark(bytes.length);
     try {
-      readFully(bufferedInputStream, data, 0, data.length);
+      int n = 0;
+      while (n < data.length) {
+        final int count = bufferedInputStream.read(data, n, data.length - n);
+        if (count < 0) {
+          throw new EOFException((data.length - n) + " of " + data.length + " bytes unread");
+        }
+        n += count;
+      }
       if (java.util.Arrays.equals(data, bytes)) {
         return true;
       }
@@ -121,17 +128,4 @@ public final class Streams {
     return false;
   }
 
-  private static void readFully(InputStream stream, byte[] buffer, int offset, int len) throws IOException {
-    if (len < 0) {
-      throw new IndexOutOfBoundsException();
-    }
-    int n = 0;
-    while (n < len) {
-      final int count = stream.read(buffer, offset + n, len - n);
-      if (count < 0) {
-        throw new EOFException((len - n) + " of " + len + " bytes unread");
-      }
-      n += count;
-    }
-  }
 }
