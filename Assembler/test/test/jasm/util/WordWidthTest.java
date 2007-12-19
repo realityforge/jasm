@@ -17,15 +17,6 @@ import junit.framework.TestCase;
  * @author Hiroshi Yamauchi
  */
 public class WordWidthTest extends TestCase {
-
-    public WordWidthTest(String name) {
-        super(name);
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(WordWidthTest.class);
-    }
-
     public void test_fromInt() {
         assertTrue(WordWidth.fromInt(-1000) == WordWidth.BITS_8);
         assertTrue(WordWidth.fromInt(-1) == WordWidth.BITS_8);
