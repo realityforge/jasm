@@ -13,6 +13,7 @@ import jasm.gen.cisc.ia32.IA32AssemblyTester;
 import java.io.IOException;
 import java.util.EnumSet;
 import test.jasm.AssemblerTestCase;
+import test.jasm.util.WordWidthTest;
 
 /**
  * JUnit harness for testing the generated IA32 assembler against a disassembler.
@@ -23,5 +24,9 @@ import test.jasm.AssemblerTestCase;
 public class RawDisassemblerTest extends AssemblerTestCase {
     public void test_disassembler() throws IOException {
         run(new IA32AssemblyTester(EnumSet.of(AssemblyTestComponent.DISASSEMBLER)));
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(RawDisassemblerTest.class);
     }
 }
