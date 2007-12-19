@@ -25,5 +25,5 @@ public enum AssemblyTestComponent {
      * Tests that the output of the assembler matches that of the platform specific
      * external assembler (e.g. the GNU 'gas' assembler).
      */
-    EXTERNAL_ASSEMBLER;
+    EXTERNAL_ASSEMBLER
 }
