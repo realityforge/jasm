@@ -12,7 +12,7 @@ import jasm.gen.AssemblyTestComponent;
 import jasm.gen.cisc.ia32.IA32AssemblyTester;
 import java.io.IOException;
 import java.util.EnumSet;
-import test.jasm.ExternalAssemblerTestCase;
+import test.jasm.AssemblerTestCase;
 
 /**
  * JUnit harness for testing the generated IA32 assembler against an external
@@ -22,7 +22,7 @@ import test.jasm.ExternalAssemblerTestCase;
  * @author Doug Simon
  * @author Bernd Mathiske
  */
-public class RawDisassemblerAndExternalTest extends ExternalAssemblerTestCase {
+public class RawDisassemblerAndExternalTest extends AssemblerTestCase {
     public void test_disassemblerAndExternalAssembler() throws IOException {
         run(new IA32AssemblyTester(EnumSet.of(AssemblyTestComponent.DISASSEMBLER, AssemblyTestComponent.EXTERNAL_ASSEMBLER)));
     }

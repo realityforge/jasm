@@ -8,9 +8,6 @@
  */
 package test.jasm.amd64;
 
-import jasm.util.collect.ArraySequence;
-import jasm.util.collect.MutableSequence;
-import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.Label;
@@ -21,6 +18,9 @@ import jasm.dis.amd64.AMD64Disassembler;
 import jasm.gen.Parameter;
 import jasm.gen.cisc.amd64.AMD64Assembly;
 import jasm.gen.cisc.amd64.AMD64Template;
+import jasm.util.collect.ArraySequence;
+import jasm.util.collect.MutableSequence;
+import jasm.util.collect.Sequence;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
