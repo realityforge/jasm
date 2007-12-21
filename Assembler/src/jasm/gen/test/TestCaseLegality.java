@@ -9,5 +9,5 @@
 package jasm.gen.test;
 
 enum TestCaseLegality {
-          LEGAL, ILLEGAL_BY_CONSTRAINT, ILLEGAL_BY_ARGUMENT
+  LEGAL, ILLEGAL_BY_CONSTRAINT, ILLEGAL_BY_ARGUMENT
 }
