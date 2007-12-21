@@ -41,7 +41,7 @@ public final class Main {
                            GEN_SOURCE_OPT,
                            "generates source file for each template"),
       new OptionDescriptor("pattern",
-                           OptionDescriptor.ARGUMENT_DISALLOWED,
+                           OptionDescriptor.ARGUMENT_REQUIRED,
                            PATTERN_OPT,
                            "only test templates with the substring in their name"),
       new OptionDescriptor("start",
