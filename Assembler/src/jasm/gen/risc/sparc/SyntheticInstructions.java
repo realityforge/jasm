@@ -32,13 +32,10 @@ import static jasm.sparc.GPR.G0;
 import static jasm.sparc.GPR.I7;
 import static jasm.sparc.GPR.O7;
 import static jasm.sparc.ICCOperand.XCC;
-import jasm.sparc.SPARCAssembler;
 import jasm.sparc.StateRegister;
 
 /**
  * Simple synthetic SPARC instructions.
- *
- * @see SPARCAssembler
  *
  * @author Bernd Mathiske
  * @author Doug Simon

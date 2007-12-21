@@ -8,15 +8,13 @@
  */
 package jasm.gen;
 
-import jasm.util.program.option.PositiveIntegerProgramOption;
-
 /**
  * Tracing output for debugging purposes. No performance impact when disabled. Some performance impact when active, even
  * without output. Possibly significant performance impact when producing a lot of output.
  *
  * @author Bernd Mathiske
  */
-public class Trace extends PositiveIntegerProgramOption {
+public class Trace {
   private static final boolean _ENABLED = true;
   private static int _level;
 
@@ -45,24 +43,5 @@ public class Trace extends PositiveIntegerProgramOption {
       System.out.println(makePrefix(requiredLevel) + message);
       System.out.flush();
     }
-  }
-
-  public Trace() {
-    super("-trace", "sets tracing level");
-  }
-
-  @Override
-  protected Integer unassignedDefaultValue() {
-    return _level;
-  }
-
-  @Override
-  public void useValue(Integer value) {
-    on(value);
-  }
-
-  @Override
-  protected Integer assignedDefaultValue() {
-    return Integer.MAX_VALUE;
   }
 }

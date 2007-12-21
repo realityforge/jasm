@@ -8,18 +8,6 @@
  */
 package jasm.gen.cisc.x86;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.ArraySequence;
-import jasm.util.Enums;
-import jasm.util.collect.MutableSequence;
-import jasm.util.collect.Sequence;
-import jasm.util.io.IndentWriter;
-import jasm.util.lang.StaticLoophole;
-import jasm.util.program.ProgramError;
-import jasm.gen.Trace;
-import jasm.util.program.option.BooleanProgramOption;
-import jasm.util.program.option.ProgramArgumentsParser;
 import jasm.Assembler;
 import jasm.EnumerableArgument;
 import jasm.LabelAddressInstruction;
@@ -28,9 +16,17 @@ import jasm.LittleEndianAssembler;
 import jasm.gen.AssemblerGenerator;
 import jasm.gen.Assembly;
 import jasm.gen.Parameter;
-import jasm.gen.cisc.amd64.AMD64AssemblerGenerator;
-import jasm.util.WordWidth;
+import jasm.util.Enums;
 import jasm.util.HexUtil;
+import jasm.util.WordWidth;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.ArraySequence;
+import jasm.util.collect.MutableSequence;
+import jasm.util.collect.Sequence;
+import jasm.util.io.IndentWriter;
+import jasm.util.lang.StaticLoophole;
+import jasm.util.program.ProgramError;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.EnumSet;
@@ -41,20 +37,14 @@ import java.util.Set;
 /**
  * @author Bernd Mathiske
  */
-public abstract class X86AssemblerGenerator<Template_Type extends X86Template> extends AssemblerGenerator<Template_Type> {
-
-    private final BooleanProgramOption _support16BitAddressesOption = new BooleanProgramOption("-a16", "enables 16 bit addressing");
-    private final BooleanProgramOption _support16BitOffsetOption = new BooleanProgramOption("-d16", "enables 16 bit offsets");
+public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
+    extends AssemblerGenerator<Template_Type> {
 
     private final WordWidth _addressWidth;
 
-    protected X86AssemblerGenerator(Assembly<Template_Type> assembly, WordWidth addressWidth, String[] programArguments) {
+    protected X86AssemblerGenerator(Assembly<Template_Type> assembly, WordWidth addressWidth) {
         super(assembly, true);
         _addressWidth = addressWidth;
-        final ProgramArgumentsParser programArgumentsParser = new ProgramArgumentsParser(AMD64AssemblerGenerator.class.getSimpleName());
-        programArgumentsParser.addProgramOption(new Trace());
-        programArgumentsParser.addProgramOption(_support16BitAddressesOption);
-        programArgumentsParser.parse(programArguments);
     }
 
     @Override
@@ -69,17 +59,6 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template> e
     @Override
     protected Class<? extends Assembler> endiannessSpecificAssemblerClass() {
         return LittleEndianAssembler.class;
-    }
-
-    @Override
-    protected void generate() {
-        if (_support16BitAddressesOption.value() != null && _support16BitAddressesOption.value()) {
-            X86Assembly.support16BitAddresses();
-        }
-        if (_support16BitOffsetOption.value() != null && _support16BitOffsetOption.value()) {
-            X86Assembly.support16BitOffsets();
-        }
-        super.generate();
     }
 
     protected X86Parameter getParameter(Template_Type template, Class parameterType) {

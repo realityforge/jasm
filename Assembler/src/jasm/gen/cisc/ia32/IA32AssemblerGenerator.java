@@ -21,15 +21,11 @@ import jasm.util.WordWidth;
  *
  * @author Bernd Mathiske
  */
-public class IA32AssemblerGenerator extends X86AssemblerGenerator<IA32Template> {
+public class IA32AssemblerGenerator
+    extends X86AssemblerGenerator<IA32Template> {
 
-    public IA32AssemblerGenerator(String[] programArguments) {
-        super(IA32Assembly.ASSEMBLY, WordWidth.BITS_32, programArguments);
-    }
-
-    public static void main(String[] programArguments) {
-        final IA32AssemblerGenerator generator = new IA32AssemblerGenerator(programArguments);
-        generator.generate();
+    public IA32AssemblerGenerator() {
+        super(IA32Assembly.ASSEMBLY, WordWidth.BITS_32);
     }
 
     @Override

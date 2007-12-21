@@ -8,6 +8,12 @@
  */
 package jasm.gen;
 
+import jasm.Argument;
+import jasm.Assembler;
+import jasm.AssemblyException;
+import jasm.ExternalMnemonicSuffixArgument;
+import jasm.Label;
+import jasm.util.HexUtil;
 import jasm.util.collect.AppendableSequence;
 import jasm.util.collect.ArrayListSequence;
 import jasm.util.collect.ArraySequence;
@@ -17,30 +23,22 @@ import jasm.util.io.IndentWriter;
 import jasm.util.io.ReadableSource;
 import jasm.util.lang.StaticLoophole;
 import jasm.util.lang.Strings;
-import jasm.util.program.ProgramError;
-import jasm.gen.Trace;
-import jasm.Argument;
-import jasm.Assembler;
-import jasm.AssemblyException;
-import jasm.ExternalMnemonicSuffixArgument;
-import jasm.Label;
-import jasm.util.HexUtil;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.CharArrayReader;
 import java.io.CharArrayWriter;
+import java.io.Closeable;
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Reader;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.Reader;
 import java.io.Writer;
-import java.io.Closeable;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -61,11 +59,13 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     private final String _rawAssemblerClassName;
     private final String _labelAssemblerClassName;
     private final boolean _sortAssemblerMethods;
+    private File _sourceDirectory;
 
-    protected AssemblerGenerator(Assembly<Template_Type> assembly, boolean sortAssemblerMethods) {
+  protected AssemblerGenerator(Assembly<Template_Type> assembly, boolean sortAssemblerMethods) {
         super();
         _assembly = assembly;
-        _outputPackage = Assembler.class.getName() + "." + assembly.instructionSet().name().toLowerCase();
+        _sourceDirectory = new File(".");
+        _outputPackage = Assembler.class.getPackage().getName() + "." + assembly.instructionSet().name().toLowerCase();
         _rawAssemblerClassSimpleName = assembly.instructionSet().name() + "RawAssembler";
         _labelAssemblerClassSimpleName = assembly.instructionSet().name() + "LabelAssembler";
         _rawAssemblerClassName = _outputPackage + "." + _rawAssemblerClassSimpleName;
@@ -77,14 +77,17 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         return _assembly;
     }
 
-    private File getFile(String classSimpleName) {
-        final String directory = findSourceDirectory() + File.separator + _outputPackage.replace('.', File.separatorChar);
-        return new File(directory, classSimpleName + ".java");
-    }
+  private File getFile(String classSimpleName) {
+    final String directory = findSourceDirectory() + File.separator + _outputPackage.replace('.', File.separatorChar);
+    return new File(directory, classSimpleName + ".java");
+  }
 
-  private String findSourceDirectory() {
-    ProgramError.unimplemented();
-    return null;
+  public void setSourceDirectory(final File sourceDirectory) {
+    _sourceDirectory = sourceDirectory;
+  }
+
+  private File findSourceDirectory() {
+    return _sourceDirectory;
   }
 
   private void printPackageAffiliation(IndentWriter writer) {
@@ -166,7 +169,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
             for (Parameter parameter : template.parameters()) {
                 final Class type = parameter.type();
                 if (!type.isPrimitive()) {
-                    packages.add(type.getName());
+                    packages.add(type.getPackage().getName());
                 }
             }
         }
@@ -302,8 +305,8 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         final IndentWriter writer = new IndentWriter(new PrintWriter(charArrayWriter));
         printClassHeader(writer);
         final Set<String> importPackages = getImportPackages(templates());
-        importPackages.add(Assembler.class.getName()); // for the assembler's super class
-        importPackages.add(AssemblyException.class.getName());
+        importPackages.add(Assembler.class.getPackage().getName()); // for the assembler's super class
+        importPackages.add(AssemblyException.class.getPackage().getName());
         printRawImports(writer, importPackages);
         writer.println();
         writer.println("public abstract class " + _rawAssemblerClassSimpleName + " extends " + endiannessSpecificAssemblerClass().getSimpleName() + " {");
@@ -536,7 +539,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
       quietClose(contentReader);
       quietClose(existingFileReader);
       if (!tempFile.delete()) {
-        throw new IOException("could not delete file for update: " + file);
+        tempFile.deleteOnExit();
       }
     }
   }
@@ -591,7 +594,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         printClassHeader(writer);
         final Sequence<Template_Type> labelTemplates = assembly().getLabelTemplates();
         final Set<String> importPackages = getImportPackages(labelTemplates);
-        importPackages.add(Label.class.getName()); // for Label parameters
+        importPackages.add(Label.class.getPackage().getName()); // for Label parameters
         printLabelImports(writer, importPackages);
         writer.println();
         writer.println("public abstract class " + _labelAssemblerClassSimpleName + " extends " + _rawAssemblerClassSimpleName + " {");
@@ -624,28 +627,13 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         emitByte(writer, "((byte) " + HexUtil.toHexLiteral(value) + ")");
     }
 
-  public static boolean compile(String className) throws IOException {
-    ProgramError.unimplemented();
-    return false;
-  }
-
     protected void generate() {
         try {
-            if (generateRawAssemblerClass()) {
-                Trace.line(1, "compiling: " + _rawAssemblerClassName);
-                if (!compile(_rawAssemblerClassName)) {
-                    ProgramError.fatal("compilation failed for: " + _rawAssemblerClassName);
-                }
-            } else {
+            if (!generateRawAssemblerClass()) {
                 Trace.line(1, "unmodified: " + _rawAssemblerClassName);
             }
 
-            if (generateLabelAssemblerClass()) {
-                Trace.line(1, "compiling: " + _labelAssemblerClassName);
-                if (!compile(_labelAssemblerClassName)) {
-                    ProgramError.fatal("compilation failed for: " + _labelAssemblerClassName);
-                }
-            } else {
+            if (!generateLabelAssemblerClass()) {
                 Trace.line(1, "unmodified: " + _labelAssemblerClassName);
             }
 

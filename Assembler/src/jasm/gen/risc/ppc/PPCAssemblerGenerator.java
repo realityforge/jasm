@@ -8,13 +8,11 @@
  */
 package jasm.gen.risc.ppc;
 
-import jasm.util.io.IndentWriter;
-import jasm.gen.Trace;
-import jasm.util.program.option.ProgramArgumentsParser;
 import jasm.Assembler;
 import jasm.BigEndianAssembler;
 import jasm.gen.risc.RiscAssemblerGenerator;
 import jasm.ppc.GPR;
+import jasm.util.io.IndentWriter;
 import java.util.Set;
 
 /**
@@ -23,9 +21,10 @@ import java.util.Set;
  * @author Bernd Mathiske
  * @author Doug Simon
  */
-public final class PPCAssemblerGenerator extends RiscAssemblerGenerator<PPCTemplate> {
+public final class PPCAssemblerGenerator
+    extends RiscAssemblerGenerator<PPCTemplate> {
 
-    private PPCAssemblerGenerator() {
+    public PPCAssemblerGenerator() {
         super(PPCAssembly.ASSEMBLY);
     }
 
@@ -48,13 +47,4 @@ public final class PPCAssemblerGenerator extends RiscAssemblerGenerator<PPCTempl
         }
         return "\"<a href=\"http://www.ibm.com/developerworks/eserver/library/es-archguide-v2.html\">PowerPC Architecture Book, Version 2.02</a> - Section " + section + "\"";
     }
-
-    public static void main(String[] programArguments) {
-        final ProgramArgumentsParser programArgumentsParser = new ProgramArgumentsParser(PPCAssemblerGenerator.class.getSimpleName());
-        programArgumentsParser.addProgramOption(new Trace());
-        programArgumentsParser.parse(programArguments);
-        final PPCAssemblerGenerator generator = new PPCAssemblerGenerator();
-        generator.generate();
-    }
-
 }

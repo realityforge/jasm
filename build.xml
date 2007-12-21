@@ -14,6 +14,9 @@
   <property name="junit.jar" location="lib/junit-4.4.jar"/>
   <property name="cli.jar" location="lib/cli-1.0.jar"/>
 
+  <property name="generated.dir" location="generated"/>
+  <property name="generated.java" location="${generated.dir}/java"/>
+
   <property name="output.dir" location="target"/>
   <property name="output.main.classes" location="${output.dir}/main-classes"/>
   <property name="output.test.classes" location="${output.dir}/test-classes"/>
@@ -21,18 +24,65 @@
   <property name="output.jar" location="${output.dir}/jasm.jar"/>
   <property name="output.javadocs" location="${output.dir}/javadocs"/>
 
-  <target name="clean" description="Clean the output directory">
-    <delete dir="target"/>
+  <target name="clobber" depends="clean" description="Remove all generated artifacts.">
+    <delete dir="${generated.dir}"/>
   </target>
 
-  <target name="compile" description="Compile the code">
+  <target name="clean" description="Clean the output directory">
+    <delete dir="${output.dir}"/>
+  </target>
+
+  <macrodef name="gen-asm">
+    <attribute name="isa"/>
+    <sequential>
+      <delete dir="${generated.java}/jasm/@{isa}"/>
+      <mkdir dir="${generated.java}/jasm/@{isa}"/>
+      <java classname="jasm.gen.Main" classpath="${output.main.classes}:${cli.jar}">
+        <arg line="-d ${generated.java} --isa @{isa}"/>
+      </java>
+    </sequential>
+  </macrodef>
+
+  <target name="compile-generators">
     <mkdir dir="${output.main.classes}"/>
     <javac srcdir="${main.src.java}"
            destdir="${output.main.classes}"
            classpath="${cli.jar}"
            debug="true"
            deprecation="true"
-           optimize="false"/>
+           optimize="false">
+      <include name="jasm/gen/**"/>
+      <exclude name="jasm/gen/test/**"/>
+      <exclude name="jasm/gen/**/*AssemblyTester.java"/>
+    </javac>
+  </target>
+
+  <target name="check-generated">
+    <!-- Check by looking to see if last file was generated -->
+    <available property="assemblers.generated"
+               file="${generated.java}/jasm/sparc/SPARCLabelAssembler.java"/>
+  </target>
+
+  <target name="generate-assemblers"
+          description="Generate the assemblers"
+          depends="check-generated, compile-generators"
+          unless="assemblers.generated">
+    <gen-asm isa="amd64"/>
+    <gen-asm isa="ia32"/>
+    <gen-asm isa="ppc"/>
+    <gen-asm isa="sparc"/>
+  </target>
+
+  <target name="compile" description="Compile the code" depends="generate-assemblers">
+    <mkdir dir="${output.main.classes}"/>
+    <javac srcdir="${generated.java}:${main.src.java}"
+           destdir="${output.main.classes}"
+           classpath="${cli.jar}"
+           debug="true"
+           deprecation="true"
+           optimize="false">
+
+      </javac>
   </target>
 
   <target name="compile-tests" depends="compile" description="Compile the code">

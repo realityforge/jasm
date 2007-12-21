@@ -31,13 +31,8 @@ import jasm.util.HexUtil;
  */
 public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template> {
 
-    public AMD64AssemblerGenerator(String[] programArguments) {
-        super(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64, programArguments);
-    }
-
-    public static void main(String[] programArguments) {
-        final AMD64AssemblerGenerator generator = new AMD64AssemblerGenerator(programArguments);
-        generator.generate();
+    public AMD64AssemblerGenerator() {
+        super(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);
     }
 
     private static final String REX_BYTE_NAME = "rex";
