@@ -26,7 +26,7 @@ import jasm.util.collect.Sequence;
 import jasm.util.io.IndentWriter;
 import jasm.util.program.ProgramError;
 import jasm.util.program.ProgramWarning;
-import jasm.util.program.Trace;
+import jasm.gen.Trace;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;

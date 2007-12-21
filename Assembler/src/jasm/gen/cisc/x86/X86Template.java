@@ -12,7 +12,7 @@ import jasm.util.collect.AppendableSequence;
 import jasm.util.collect.ArrayListSequence;
 import jasm.util.collect.Sequence;
 import jasm.util.program.ProgramError;
-import jasm.util.program.Trace;
+import jasm.gen.Trace;
 import jasm.EnumerableArgument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.Immediate8Argument;

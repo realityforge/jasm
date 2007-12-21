@@ -9,7 +9,7 @@
 package test.jasm;
 
 import jasm.gen.test.AssemblyTester;
-import jasm.util.program.Trace;
+import jasm.gen.Trace;
 import jasm.util.program.option.BooleanProgramOption;
 import jasm.util.program.option.IntegerProgramOption;
 import jasm.util.program.option.ProgramArgumentsParser;
@@ -49,7 +49,6 @@ public abstract class AssemblerTestCase extends TestCase {
 
   public AssemblerTestCase(final String[] args) {
     final ProgramArgumentsParser programArgumentsParser = new ProgramArgumentsParser(getClass().getSimpleName());
-    programArgumentsParser.addProgramOption(new Trace());
     programArgumentsParser.addProgramOption(_templatePattern);
     programArgumentsParser.addProgramOption(_startTemplateSerial);
     programArgumentsParser.addProgramOption(_endTemplateSerial);

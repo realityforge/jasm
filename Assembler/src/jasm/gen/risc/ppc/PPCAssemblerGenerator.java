@@ -9,7 +9,7 @@
 package jasm.gen.risc.ppc;
 
 import jasm.util.io.IndentWriter;
-import jasm.util.program.Trace;
+import jasm.gen.Trace;
 import jasm.util.program.option.ProgramArgumentsParser;
 import jasm.Assembler;
 import jasm.BigEndianAssembler;

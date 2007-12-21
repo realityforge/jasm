@@ -18,7 +18,7 @@ import jasm.util.io.ReadableSource;
 import jasm.util.lang.StaticLoophole;
 import jasm.util.lang.Strings;
 import jasm.util.program.ProgramError;
-import jasm.util.program.Trace;
+import jasm.gen.Trace;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;

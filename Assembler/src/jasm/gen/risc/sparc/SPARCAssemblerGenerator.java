@@ -8,7 +8,7 @@
  */
 package jasm.gen.risc.sparc;
 
-import jasm.util.program.Trace;
+import jasm.gen.Trace;
 import jasm.util.program.option.ProgramArgumentsParser;
 import jasm.Assembler;
 import jasm.BigEndianAssembler;

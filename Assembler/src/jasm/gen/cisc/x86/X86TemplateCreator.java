@@ -11,7 +11,7 @@ package jasm.gen.cisc.x86;
 import jasm.util.collect.AppendableSequence;
 import jasm.util.collect.ArrayListSequence;
 import jasm.util.collect.Sequence;
-import jasm.util.program.Trace;
+import jasm.gen.Trace;
 import jasm.gen.InstructionDescription;
 import jasm.gen.InstructionDescriptionCreator;
 import jasm.util.WordWidth;

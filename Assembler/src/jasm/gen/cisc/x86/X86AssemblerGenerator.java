@@ -17,7 +17,7 @@ import jasm.util.collect.Sequence;
 import jasm.util.io.IndentWriter;
 import jasm.util.lang.StaticLoophole;
 import jasm.util.program.ProgramError;
-import jasm.util.program.Trace;
+import jasm.gen.Trace;
 import jasm.util.program.option.BooleanProgramOption;
 import jasm.util.program.option.ProgramArgumentsParser;
 import jasm.Assembler;

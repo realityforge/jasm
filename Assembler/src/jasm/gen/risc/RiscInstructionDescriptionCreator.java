@@ -14,7 +14,7 @@ import jasm.util.collect.MutableSequence;
 import jasm.util.collect.Sequence;
 import jasm.util.lang.StaticLoophole;
 import jasm.util.program.ProgramError;
-import jasm.util.program.Trace;
+import jasm.gen.Trace;
 import jasm.gen.Assembly;
 import jasm.gen.InstructionConstraint;
 import jasm.gen.InstructionDescriptionCreator;
