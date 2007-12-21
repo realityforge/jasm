@@ -8,7 +8,7 @@
  */
 package jasm.gen.test;
 
-import jasm.AssemblerDef;
+import jasm.gen.test.AssemblerDef;
 import jasm.gen.AssemblyTestComponent;
 import java.lang.reflect.Constructor;
 import java.util.EnumSet;
