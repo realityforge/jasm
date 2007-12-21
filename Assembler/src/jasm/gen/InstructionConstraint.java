@@ -22,7 +22,7 @@ import java.lang.reflect.Modifier;
  * or more parameters of the assembler method that will be generated from the instruction description.
  * <p>
  * An instruction constraint implements a predicate on a complete assembler instruction and it's used by the
- * {@link AssemblyTester test framework} in concert with {@link Parameter#getLegalTestArguments()} to generate test
+ * {@link jasm.gen.test.AssemblyTester test framework} in concert with {@link Parameter#getLegalTestArguments()} to generate test
  * cases.
  *
  * @author Doug Simon

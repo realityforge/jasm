@@ -10,6 +10,7 @@ package jasm.gen;
 
 import jasm.util.lang.StaticLoophole;
 import jasm.Argument;
+import jasm.gen.AssemblyTestComponent;
 import java.util.Collections;
 import java.util.Set;
 

@@ -16,7 +16,7 @@ import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.Assembly;
 import jasm.gen.AssemblyTestComponent;
-import jasm.gen.AssemblyTester;
+import jasm.gen.test.AssemblyTester;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.ImplicitOperand;
 import jasm.util.HexByte;

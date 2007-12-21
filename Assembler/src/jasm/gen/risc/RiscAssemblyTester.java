@@ -13,7 +13,7 @@ import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.Assembly;
 import jasm.gen.AssemblyTestComponent;
-import jasm.gen.AssemblyTester;
+import jasm.gen.test.AssemblyTester;
 import jasm.gen.InstructionConstraint;
 import jasm.util.WordWidth;
 import java.io.IOException;
