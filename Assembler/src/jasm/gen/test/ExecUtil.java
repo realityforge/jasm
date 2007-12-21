@@ -37,21 +37,24 @@ final class ExecUtil {
   private static void exec(String command, OutputStream out, OutputStream err, InputStream in)
       throws IOException, InterruptedException {
     final Process process = Runtime.getRuntime().exec(command);
+    Redirector stderr = null;
+    Redirector stdout = null;
+    Redirector stdin = null;
     try {
-      final Redirector stderr =
+      stderr =
           new Redirector(process, process.getErrorStream(), err, command + " [stderr]", 50);
-      final Redirector stdout =
+      stdout =
           new Redirector(process, process.getInputStream(), out, command + " [stdout]", Integer.MAX_VALUE);
-      final Redirector stdin =
+      stdin =
           new Redirector(process, in, process.getOutputStream(), command + " [stdin]", Integer.MAX_VALUE);
       final int exitValue = process.waitFor();
-      stderr.close();
-      stdout.close();
-      stdin.close();
       if (exitValue != 0) {
         ProgramError.unexpected("execution of command failed: " + command + " [exit code = " + exitValue + "]");
       }
     } finally {
+      if( null != stderr ) stderr.close();
+      if( null != stdout ) stdout.close();
+      if( null != stdin ) stdin.close();
       process.destroy();
     }
   }
@@ -129,6 +132,5 @@ final class ExecUtil {
         throwable.printStackTrace();
       }
     }
-
   }
 }
