@@ -8,8 +8,8 @@
  -->
 <project name="jasm" default="main" basedir=".">
 
-  <property name="main.src.java" location="Assembler/src"/>
-  <property name="test.src.java" location="Assembler/test"/>
+  <property name="main.src.java" location="src/main/java"/>
+  <property name="test.src.java" location="src/test/java"/>
 
   <property name="junit.jar" location="lib/junit-4.4.jar"/>
   <property name="cli.jar" location="lib/cli-1.0.jar"/>
