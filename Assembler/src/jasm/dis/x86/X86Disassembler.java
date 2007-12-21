@@ -12,7 +12,6 @@ import jasm.util.collect.AppendableSequence;
 import jasm.util.collect.ArrayListSequence;
 import jasm.util.collect.Sequence;
 import jasm.util.lang.Endianness;
-import jasm.util.program.Trace;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;
@@ -228,12 +227,8 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
 
     protected abstract Map<X86InstructionHeader, AppendableSequence<Template_Type>> headerToTemplates();
 
-    private static int _serial;
-
   public DisassembledInstruction_Type scanInstruction(BufferedInputStream stream, X86InstructionHeader header)
       throws IOException, AssemblyException {
-    _serial++;
-    Trace.line(3, "instruction: " + _serial);
     boolean isFloatingPointEscape = false;
     if (X86Opcode.isFloatingPointEscape(header._opcode1)) {
       final int byte2 = stream.read();
