@@ -8,8 +8,8 @@
  */
 package test.jasm.util;
 
-import jasm.util.Enumerable;
 import jasm.util.Enumerator;
+import jasm.util.Symbol;
 import junit.framework.TestCase;
 
 /**
@@ -18,12 +18,12 @@ import junit.framework.TestCase;
  * @author Hiroshi Yamauchi
  */
 public class EnumeratorTest extends TestCase {
-    private static final class NonSuccessiveEnumerator<E extends Enum<E> & Enumerable<E>> extends Enumerator<E> {
+    private static final class NonSuccessiveEnumerator<E extends Enum<E> & Symbol> extends Enumerator<E> {
         private NonSuccessiveEnumerator(Class<E> type) {
             super(type);
         }
     }
-    private static enum NonSuccessiveEnum implements Enumerable<NonSuccessiveEnum> {
+    private static enum NonSuccessiveEnum implements Symbol {
         E0(0), E100(100), E1000(1000);
 
         private final int _value;

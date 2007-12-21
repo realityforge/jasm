@@ -17,7 +17,7 @@ import jasm.x86.GeneralRegister;
  *
  * @author Bernd Mathiske
  */
-public enum AMD64BaseRegister64 implements GeneralRegister<AMD64BaseRegister64> {
+public enum AMD64BaseRegister64 implements GeneralRegister {
 
     RAX_BASE,
     RCX_BASE,

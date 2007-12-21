@@ -14,7 +14,7 @@ import jasm.util.Enumerator;
 /**
  * @author Bernd Mathiske
  */
-public enum FPStackRegister implements EnumerableArgument<FPStackRegister> {
+public enum FPStackRegister implements EnumerableArgument {
 
     ST_0(0),
     ST_1(1),

@@ -14,7 +14,7 @@ import jasm.util.Enumerator;
 /**
  * @author Bernd Mathiske
  */
-public enum TestRegister implements EnumerableArgument<TestRegister> {
+public enum TestRegister implements EnumerableArgument {
 
     TR3(3), TR4(4), TR5(5), TR6(6), TR7(7);
 

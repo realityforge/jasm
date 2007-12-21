@@ -17,7 +17,7 @@ import jasm.x86.GeneralRegister;
  *
  * @author Bernd Mathiske
  */
-public enum AMD64IndexRegister64 implements GeneralRegister<AMD64IndexRegister64> {
+public enum AMD64IndexRegister64 implements GeneralRegister {
 
     RAX_INDEX,
     RCX_INDEX,

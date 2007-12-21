@@ -14,7 +14,7 @@ import jasm.util.Enumerator;
 /**
  * @author Bernd Mathiske
  */
-public enum MMXRegister implements EnumerableArgument<MMXRegister> {
+public enum MMXRegister implements EnumerableArgument {
 
     MM0, MM1, MM2, MM3, MM4, MM5, MM6, MM7;
 

@@ -18,7 +18,7 @@ import jasm.util.Enumerator;
  * @author Bernd Mathiske
  * @author Doug Simon
  */
-public enum CRF implements EnumerableArgument<CRF> {
+public enum CRF implements EnumerableArgument {
 
     CR0, CR1, CR2, CR3, CR4, CR5, CR6, CR7;
 

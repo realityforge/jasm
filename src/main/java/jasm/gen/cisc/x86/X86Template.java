@@ -223,7 +223,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
         parameter.excludeTestArguments(testArgumentExclusion);
     }
 
-    protected <EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument<EnumerableArgument_Type>> X86Parameter addEnumerableParameter(X86Operand.Designation designation, ParameterPlace parameterPlace,
+    protected <EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument> X86Parameter addEnumerableParameter(X86Operand.Designation designation, ParameterPlace parameterPlace,
                                             final Enumerator<EnumerableArgument_Type> enumerator) {
         return addParameter(new X86EnumerableParameter<EnumerableArgument_Type>(designation, parameterPlace, enumerator));
     }
@@ -346,7 +346,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
 
     protected abstract void organize_M(X86Operand.Designation designation) throws TemplateNotNeededException;
 
-    protected <EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument<EnumerableArgument_Type>> void organize_E(X86Operand.Designation designation, ParameterPlace place,
+    protected <EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument> void organize_E(X86Operand.Designation designation, ParameterPlace place,
                     final Enumerator<EnumerableArgument_Type> registerEnumerator, TestArgumentExclusion testArgumentExclusion) throws TemplateNotNeededException {
         if (context().modCase() == X86TemplateContext.ModCase.MOD_3) {
             switch (context().rmCase()) {

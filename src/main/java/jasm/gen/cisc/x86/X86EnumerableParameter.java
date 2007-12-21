@@ -18,7 +18,7 @@ import jasm.util.Enumerator;
 /**
  * @author Bernd Mathiske
  */
-public class X86EnumerableParameter<EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument<EnumerableArgument_Type>> extends X86Parameter implements EnumerableParameter {
+public class X86EnumerableParameter<EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument> extends X86Parameter implements EnumerableParameter {
 
     private final Enumerator<EnumerableArgument_Type> _enumerator;
 

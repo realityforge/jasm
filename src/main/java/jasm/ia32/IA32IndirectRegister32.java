@@ -16,7 +16,7 @@ import jasm.x86.IndirectRegister;
 /**
  * @author Bernd Mathiske
  */
-public enum IA32IndirectRegister32 implements GeneralRegister<IA32IndirectRegister32>, IndirectRegister {
+public enum IA32IndirectRegister32 implements GeneralRegister, IndirectRegister {
 
     EAX_INDIRECT,
     ECX_INDIRECT,

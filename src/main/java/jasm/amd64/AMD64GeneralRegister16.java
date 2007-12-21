@@ -15,7 +15,7 @@ import jasm.x86.GeneralRegister;
 /**
  * @author Bernd Mathiske
  */
-public enum AMD64GeneralRegister16 implements GeneralRegister<AMD64GeneralRegister16> {
+public enum AMD64GeneralRegister16 implements GeneralRegister {
 
     // Note: keep the order such that 'value()' can rely on ordinals:
 

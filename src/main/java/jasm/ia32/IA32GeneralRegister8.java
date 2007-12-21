@@ -15,7 +15,7 @@ import jasm.x86.GeneralRegister;
 /**
  * @author Bernd Mathiske
  */
-public enum IA32GeneralRegister8 implements GeneralRegister<IA32GeneralRegister8> {
+public enum IA32GeneralRegister8 implements GeneralRegister {
 
     // Note: keep the order such that 'value()' can rely on ordinals:
 

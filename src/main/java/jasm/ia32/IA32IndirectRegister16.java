@@ -16,7 +16,7 @@ import jasm.x86.IndirectRegister;
 /**
  * @author Bernd Mathiske
  */
-public enum IA32IndirectRegister16 implements GeneralRegister<IA32IndirectRegister16>, IndirectRegister {
+public enum IA32IndirectRegister16 implements GeneralRegister, IndirectRegister {
 
     BX_PLUS_SI_INDIRECT(INVALID_ID, "%bx,%si", "bx + si"),
     BX_PLUS_DI_INDIRECT(INVALID_ID, "%bx,%di", "bx + si"),

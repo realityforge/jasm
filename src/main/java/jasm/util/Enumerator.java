@@ -13,11 +13,9 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- * @see Enumerable
- *
  * @author Bernd Mathiske
  */
-public class Enumerator<Enumerable_Type extends Enum<Enumerable_Type> & Enumerable<Enumerable_Type>>
+public class Enumerator<Enumerable_Type extends Enum<Enumerable_Type> & Symbol>
     implements Symbolizer<Enumerable_Type> {
 
     private final Class<Enumerable_Type> _type;

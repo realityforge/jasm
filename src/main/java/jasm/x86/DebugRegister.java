@@ -14,7 +14,7 @@ import jasm.util.Enumerator;
 /**
  * @author Bernd Mathiske
  */
-public enum DebugRegister implements EnumerableArgument<DebugRegister> {
+public enum DebugRegister implements EnumerableArgument {
 
     DR0(0), DR1(1), DR2(2), DR3(3), DR6(6), DR7(7);
 

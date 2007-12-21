@@ -17,7 +17,7 @@ import jasm.util.Enumerator;
  * @author Bernd Mathiske
  * @author Doug Simon
  */
-public enum FPR implements EnumerableArgument<FPR> {
+public enum FPR implements EnumerableArgument {
 
     F0,   F1,  F2,  F3,  F4,  F5,  F6,  F7,
     F8,   F9,  F10, F11, F12, F13, F14, F15,

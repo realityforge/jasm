@@ -14,7 +14,7 @@ import jasm.util.Enumerator;
 /**
  * @author Bernd Mathiske
  */
-public enum Scale implements EnumerableArgument<Scale> {
+public enum Scale implements EnumerableArgument {
 
     SCALE_1, SCALE_2, SCALE_4, SCALE_8;
 

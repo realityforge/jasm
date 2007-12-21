@@ -14,7 +14,7 @@ import jasm.util.Enumerator;
 /**
  * @author Bernd Mathiske
  */
-public enum ControlRegister implements EnumerableArgument<ControlRegister> {
+public enum ControlRegister implements EnumerableArgument {
 
     CR0(0), CR2(2), CR3(3);
 

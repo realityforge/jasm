@@ -8,14 +8,12 @@
  */
 package jasm;
 
-import jasm.util.Enumerable;
+import jasm.util.Symbol;
 
 /**
- *
- *
  * @author Bernd Mathiske
  */
-public interface EnumerableArgument<Argument_Type extends Enum<Argument_Type> & EnumerableArgument<Argument_Type>> extends
-                                                                                                                   Enumerable<Argument_Type>, SymbolicArgument {
+public interface EnumerableArgument
+    extends Symbol, SymbolicArgument {
 
 }

@@ -14,8 +14,8 @@ import jasm.util.WordWidth;
 /**
  * @author Bernd Mathiske
  */
-public interface GeneralRegister<GeneralRegister_Type extends Enum<GeneralRegister_Type> & GeneralRegister<GeneralRegister_Type>>
-    extends EnumerableArgument<GeneralRegister_Type> {
+public interface GeneralRegister
+    extends EnumerableArgument {
 
     WordWidth width();
 

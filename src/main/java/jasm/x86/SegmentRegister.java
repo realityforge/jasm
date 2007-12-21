@@ -14,7 +14,7 @@ import jasm.util.Enumerator;
 /**
  * @author Bernd Mathiske
  */
-public enum SegmentRegister implements EnumerableArgument<SegmentRegister> {
+public enum SegmentRegister implements EnumerableArgument {
 
     ES,
     CS,

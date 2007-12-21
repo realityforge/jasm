@@ -11,7 +11,7 @@ package jasm.amd64;
 import jasm.EnumerableArgument;
 import jasm.util.Enumerator;
 
-public enum AMD64XMMComparison implements EnumerableArgument<AMD64XMMComparison> {
+public enum AMD64XMMComparison implements EnumerableArgument {
 
     EQUAL,
     LESS_THAN,

@@ -18,7 +18,7 @@ import jasm.x86.IndirectRegister;
  *
  * @author Bernd Mathiske
  */
-public enum AMD64IndirectRegister64 implements GeneralRegister<AMD64IndirectRegister64>, IndirectRegister {
+public enum AMD64IndirectRegister64 implements GeneralRegister, IndirectRegister {
 
     RAX_INDIRECT,
     RCX_INDIRECT,
