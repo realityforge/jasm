@@ -18,7 +18,6 @@ import jasm.gen.Assembly;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.Parameter;
 import jasm.gen.Template;
-import jasm.gen.Trace;
 import jasm.util.WordWidth;
 import jasm.util.collect.AppendableSequence;
 import jasm.util.collect.ArrayListSequence;
@@ -90,7 +89,8 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
   private final WordWidth _addressWidth;
   private final EnumSet<AssemblyTestComponent> _components;
   private final ExternalAssembler _externalAssembler = new ExternalAssembler();
-  private String _templatePattern;
+  private final TemplateSelector<Template_Type> _selector = new TemplateSelector<Template_Type>();
+  private boolean _createExternalSource;
 
   protected AssemblyTester(Assembly<Template_Type> assembly, WordWidth addressWidth,
                            EnumSet<AssemblyTestComponent> components) {
@@ -100,18 +100,16 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     _tmpFilePrefix = _assembly.instructionSet().name().toLowerCase() + "-asmTest-";
   }
 
+  public void setCreateExternalSource(final boolean createExternalSource) {
+    _createExternalSource = createExternalSource;
+  }
+
   public ExternalAssembler getExternalAssembler() {
     return _externalAssembler;
   }
 
-  /**
-   * Sets the pattern that restricts which templates are tested.
-   *
-   * @param pattern if non-null, only templates whose {@link Template#internalName() name} contains
-   *                {@code pattern} as a substring are tested
-   */
-  public void setTemplatePattern(String pattern) {
-    _templatePattern = pattern;
+  public TemplateSelector<Template_Type> getSelector() {
+    return _selector;
   }
 
   public Assembly<Template_Type> assembly() {
@@ -315,7 +313,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
       }
     }
 
-    int testCaseNumber = 0;
+    int testCaseCount = 0;
     for (final ArgumentListIterator<Template_Type> iterator =
         new ArgumentListIterator<Template_Type>(this, template, TestCaseLegality.LEGAL); iterator.hasNext();) {
       final Sequence<Argument> argumentList = iterator.next();
@@ -325,11 +323,6 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
       assembly().assemble(assembler, template, argumentList);
       internalResult = assembler.toByteArray();
 
-      Trace.line(3,
-                 "assembleInternally: " +
-                 assembly().createMethodCallString(template, argumentList) +
-                 " = " +
-                 DisassembledInstruction.toHexString(internalResult));
       if (_components.contains(AssemblyTestComponent.DISASSEMBLER) &&
           template.isDisassemblable() &&
           !findExcludedDisassemblerTestArgument(template.parameters(), argumentList)) {
@@ -345,7 +338,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
         final byte[] externalResult = readExternalInstruction(externalInputStream, template, internalResult);
         for (int i = 0; i < externalResult.length; i++) {
           if (internalResult[i] != externalResult[i]) {
-            System.err.println("external assembler test case " + testCaseNumber + " failed for template: " + template);
+            System.err.println("external assembler test case " + testCaseCount + " failed for template: " + template);
             System.err.println("arguments: " + argumentList);
             System.err.println("internal result: " + DisassembledInstruction.toHexString(internalResult));
             System.err.println("external result: " + DisassembledInstruction.toHexString(externalResult));
@@ -355,50 +348,17 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
           }
         }
       }
-      ++testCaseNumber;
+      ++testCaseCount;
     }
 
     // Process illegal test cases
-    int illegalTestCaseNumber = 0;
     final Set<String> uniqueExceptionMessages = new HashSet<String>();
-    for (TestCaseLegality testCaseLegality : new TestCaseLegality[]{TestCaseLegality.ILLEGAL_BY_CONSTRAINT,
-                                                                    TestCaseLegality.ILLEGAL_BY_ARGUMENT}) {
-      for (final ArgumentListIterator<Template_Type> iterator =
-          new ArgumentListIterator<Template_Type>(this, template, testCaseLegality); iterator.hasNext();) {
-        final Sequence<Argument> argumentList = iterator.next();
-        final Assembler assembler = createTestAssembler();
-        try {
-          assembly().assemble(assembler, template, argumentList);
-        } catch (IllegalArgumentException e) {
-          final String exceptionMessage = e.getMessage();
-          uniqueExceptionMessages.add(exceptionMessage);
-          ++illegalTestCaseNumber;
-          continue;
-        }
+    final int illegalTestCaseCount = testIllegalCases(template, uniqueExceptionMessages);
 
-        final String msg =
-            "illegal assembler test case " +
-            illegalTestCaseNumber +
-            " did not throw an exception for template: " +
-            template;
-        System.err.println(msg);
-        System.err.println("arguments: " + argumentList);
-        ProgramError.unexpected("failed illegal test case");
-        ++illegalTestCaseNumber;
-      }
-    }
-
-    final String msg =
-        "template: " +
-        template +
-        "  [" +
-        testCaseNumber +
-        " test cases, " +
-        illegalTestCaseNumber +
-        " illegal test cases]";
-    Trace.line(2, msg);
+    final String msg = "[" + testCaseCount + " test cases, " + illegalTestCaseCount + " illegal test cases]";
+    notice(template, msg);
     for (String message : uniqueExceptionMessages) {
-      Trace.line(2, "    caught expected IllegalArgumentException: " + message);
+      notice(template, "Caught expected IllegalArgumentException: " + message);
     }
     if (testingExternally) {
       for (int i = 0; i < NOOP_COUNT; i++) {
@@ -410,42 +370,68 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     }
   }
 
-  public void run(int startTemplateSerial, int endTemplateSerial, boolean onlyCreateExternalSource) {
-    File sourceFile = null;
+  private void notice(final Template_Type template, final String msg) {
+    System.err.println("template: " + template + " " + msg);
+  }
+
+  private int testIllegalCases(final Template_Type template, final Set<String> uniqueExceptionMessages)
+      throws AssemblyException {
+    int illegalTestCaseNumber = 0;
+    for (TestCaseLegality legality : new TestCaseLegality[]{TestCaseLegality.ILLEGAL_BY_CONSTRAINT,
+                                                            TestCaseLegality.ILLEGAL_BY_ARGUMENT}) {
+      final ArgumentListIterator<Template_Type> iterator =
+          new ArgumentListIterator<Template_Type>(this, template, legality);
+      while (iterator.hasNext()) {
+        final Sequence<Argument> argumentList = iterator.next();
+        ++illegalTestCaseNumber;
+        final Assembler assembler = createTestAssembler();
+        try {
+          assembly().assemble(assembler, template, argumentList);
+        } catch (IllegalArgumentException e) {
+          final String exceptionMessage = e.getMessage();
+          uniqueExceptionMessages.add(exceptionMessage);
+          continue;
+        }
+
+        final int tcn = illegalTestCaseNumber - 1;
+        final String msg = "illegal test case " + tcn + " did not throw an exception. arguments: " + argumentList;
+        notice(template, msg);
+        ProgramError.unexpected("failed illegal test case");
+      }
+    }
+    return illegalTestCaseNumber;
+  }
+
+  public void run() throws IOException {
     IndentWriter stream = null;
+
+    File sourceFile;
+    if (_createExternalSource) {
+      sourceFile = new File(_tmpFilePrefix + "all" + ExternalAssembler.SOURCE_EXTENSION);
+      stream = new IndentWriter(new PrintWriter(new BufferedWriter(new FileWriter(sourceFile))));
+      stream.indent();
+    }
+
     final AppendableSequence<Template_Type> errors = new ArrayListSequence<Template_Type>();
 
-    try {
-      for (Template_Type template : assembly().templates()) {
-        if (template.serial() > endTemplateSerial) {
-          break;
+    for (Template_Type template : assembly().templates()) {
+      final TemplateSelector.State state = _selector.select(template);
+      if (state == TemplateSelector.State.DONE) { break; }
+      if (state == TemplateSelector.State.SKIP) { continue; }
+      try {
+        if (_createExternalSource) {
+          createExternalSource(template, stream);
         }
-        Trace.on(2);
-        try {
-          if (template.serial() >= startTemplateSerial) {
-            if (_templatePattern == null || template.internalName().contains(_templatePattern)) {
-              if (onlyCreateExternalSource) {
-                if (sourceFile == null) {
-                  sourceFile = new File(_tmpFilePrefix + "all" + ExternalAssembler.SOURCE_EXTENSION);
-                  stream = new IndentWriter(new PrintWriter(new BufferedWriter(new FileWriter(sourceFile))));
-                  stream.indent();
-                }
-                createExternalSource(template, stream);
-              } else {
-                testTemplate(template);
-              }
-            }
-          }
-        } catch (Throwable throwable) {
-          Trace.line(2, "template: " + template + "  failed testing");
-          throwable.printStackTrace();
-          errors.append(template);
-        }
+        testTemplate(template);
+      } catch (Throwable throwable) {
+        notice(template, "Failed tests.");
+        throwable.printStackTrace();
+        errors.append(template);
       }
-    } finally {
-      if (onlyCreateExternalSource && stream != null) {
-        stream.close();
-      }
+    }
+
+    if (_createExternalSource) {
+      stream.close();
     }
 
     if (!errors.isEmpty()) {
@@ -463,7 +449,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
       final ArgumentListIterator<Template_Type> argumentLists =
           new ArgumentListIterator<Template_Type>(this, template, TestCaseLegality.LEGAL);
       createExternalSource(template, argumentLists, stream);
-      Trace.line(2, "template: " + template + "  [" + argumentLists.iterations() + " test cases]");
+      notice(template, "[" + argumentLists.iterations() + " test cases]");
     }
   }
 }

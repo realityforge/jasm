@@ -12,6 +12,7 @@
   <property name="test.src.java" location="Assembler/test"/>
 
   <property name="junit.jar" location="lib/junit-4.4.jar"/>
+  <property name="cli.jar" location="lib/cli-1.0.jar"/>
 
   <property name="output.dir" location="target"/>
   <property name="output.main.classes" location="${output.dir}/main-classes"/>
@@ -28,6 +29,7 @@
     <mkdir dir="${output.main.classes}"/>
     <javac srcdir="${main.src.java}"
            destdir="${output.main.classes}"
+           classpath="${cli.jar}"
            debug="true"
            deprecation="true"
            optimize="false"/>
@@ -55,7 +57,6 @@
       </classpath>
       <batchtest todir="${output.unit.test.reports}">
         <fileset dir="${test.src.java}">
-          <exclude name="**/Raw*Test.java"/>
           <exclude name="**/SpeedTest.java"/>
           <include name="**/*Test.java"/>
         </fileset>
@@ -64,7 +65,7 @@
     <fail if="tests.failed" message="Tests failed."/>
   </target>
 
-  <target name="package" depends="unit-tests, compile" description="Package the code">
+  <target name="package" depends="unit-tests, compile" description="Package the code" unless="skip.tests">
     <jar jarfile="${output.jar}" basedir="${output.main.classes}"/>
   </target>
 
