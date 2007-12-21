@@ -18,7 +18,7 @@ import jasm.gen.Assembly;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.Parameter;
 import jasm.gen.Template;
-import jasm.util.SimpleTimer;
+import jasm.gen.Trace;
 import jasm.util.WordWidth;
 import jasm.util.collect.AppendableSequence;
 import jasm.util.collect.ArrayListSequence;
@@ -26,7 +26,6 @@ import jasm.util.collect.Sequence;
 import jasm.util.io.IndentWriter;
 import jasm.util.program.ProgramError;
 import jasm.util.program.ProgramWarning;
-import jasm.gen.Trace;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
@@ -43,7 +42,6 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map.Entry;
 import java.util.Set;
 
 /**
@@ -88,24 +86,67 @@ import java.util.Set;
  */
 public abstract class AssemblyTester<Template_Type extends Template, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>> {
 
-    private final Assembly<Template_Type> _assembly;
-    private final WordWidth _addressWidth;
-    private final EnumSet<AssemblyTestComponent> _components;
+  private static final String SOURCE_EXTENSION = ".s";
+  private static final String BINARY_EXTENSION = ".o";
+  private static final int NOOP_COUNT = 10;
 
-    protected AssemblyTester(Assembly<Template_Type> assembly, WordWidth addressWidth, EnumSet<AssemblyTestComponent> components) {
-        _assembly = assembly;
-        _addressWidth = addressWidth;
-        _components = components;
-        _tmpFilePrefix = _assembly.instructionSet().name().toLowerCase() + "-asmTest-";
-    }
+  private final String _tmpFilePrefix;
+  private final Assembly<Template_Type> _assembly;
+  private final WordWidth _addressWidth;
+  private final EnumSet<AssemblyTestComponent> _components;
+  private String _remoteAssemblerPath = "";
+  private String _remoteUserAndHost;
+  private String _templatePattern;
 
-    public Assembly<Template_Type> assembly() {
-        return _assembly;
-    }
+  protected AssemblyTester(Assembly<Template_Type> assembly, WordWidth addressWidth,
+                           EnumSet<AssemblyTestComponent> components) {
+    _assembly = assembly;
+    _addressWidth = addressWidth;
+    _components = components;
+    _tmpFilePrefix = _assembly.instructionSet().name().toLowerCase() + "-asmTest-";
+  }
 
-    public WordWidth addressWidth() {
-        return _addressWidth;
-    }
+  /**
+   * Sets the path of the directory on a remote machine containing the
+   * {@link #assemblerCommand assembler command}.
+   *
+   * @param path the absolute path to the directory containing the assembler executable (must not be null)
+   */
+  public void setRemoteAssemblerPath(String path) {
+    assert path != null;
+    _remoteAssemblerPath = path;
+  }
+
+  /**
+   * Sets the {@code user@host} string that will be used to execute the external
+   * assembler on a remote host via SSH. If this value is not set or set to null, the
+   * external assembler will be executed on the local machine. Requires the presence
+   * of ssh+scp commands configured to connect to specified host.
+   *
+   * @param remoteUserAndHost a {@code user@host} value denoting a machine that
+   *        supports remote execution via SSH2 using public key authentication
+   */
+  public void setRemoteUserAndHost(String remoteUserAndHost) {
+    _remoteUserAndHost = remoteUserAndHost;
+  }
+
+  /**
+   * Sets the pattern that restricts which templates are tested.
+   *
+   * @param pattern if non-null, only templates whose {@link Template#internalName() name} contains
+   *                {@code pattern} as a substring are tested
+   */
+  public void setTemplatePattern(String pattern) {
+    _templatePattern = pattern;
+  }
+
+  public Assembly<Template_Type> assembly() {
+    return _assembly;
+  }
+
+  public WordWidth addressWidth() {
+    return _addressWidth;
+  }
 
   private static void cleanupTempFiles(final String prefix) {
       if (prefix == null || prefix.length() == 0) {
@@ -136,10 +177,6 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
 
     protected abstract void assembleExternally(IndentWriter stream, Template_Type template, Sequence<Argument> argumentList, String label);
 
-    private final String _tmpFilePrefix;
-    private static final String SOURCE_EXTENSION = ".s";
-    private static final String BINARY_EXTENSION = ".o";
-
     private boolean findExcludedDisassemblerTestArgument(Sequence<? extends Parameter> parameters, Sequence<Argument> arguments) {
         for (int i = 0; i < parameters.length(); i++) {
             if (parameters.get(i).excludedDisassemblerTestArguments().contains(arguments.get(i))) {
@@ -163,17 +200,15 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
         return false;
     }
 
-    protected final int _nNOPs = 10;
-
     private File createExternalSourceFile(Template_Type template, Iterator<Sequence<Argument>> argumentLists) throws IOException {
         final File sourceFile = File.createTempFile(_tmpFilePrefix + template.internalName(), SOURCE_EXTENSION);
         final IndentWriter stream = new IndentWriter(new PrintWriter(new BufferedWriter(new FileWriter(sourceFile))));
         stream.indent();
-        for (int i = 0; i < _nNOPs; i++) {
+        for (int i = 0; i < NOOP_COUNT; i++) {
             stream.println("nop");
         }
         createExternalSource(template, argumentLists, stream);
-        for (int i = 0; i < _nNOPs; i++) {
+        for (int i = 0; i < NOOP_COUNT; i++) {
             stream.println("nop");
         }
         stream.outdent();
@@ -195,64 +230,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
 
     protected abstract String assemblerCommand();
 
-    private String _remoteAssemblerPath = "";
 
-    /**
-     * Sets the path of the directory on a remote machine containing the
-     * {@link #assemblerCommand assembler command}. This is required as
-     * some SSH installations only provide a very minimal environment
-     * for remotely executed commands.
-     *
-     * @param path the absolute path to the directory containing the assembler executable (must not be null)
-     */
-    public void setRemoteAssemblerPath(String path) {
-        assert path != null;
-        _remoteAssemblerPath = path;
-    }
-
-    private String _remoteUserAndHost;
-
-    /**
-     * Sets the {@code user@host} string that will be used to execute the external
-     * assembler on a remote host via SSH. If this value is not set or set to null, the
-     * external assembler will be executed on the local machine.
-     * <p>
-     * Execution on a remote machine is performed via the use of the 'ssh' and 'scp'
-     * native executables. As such, these executables must be on the user's path.
-     * <p>
-     * The SSH layer authenticates with the remote machine via public key authentication.
-     * Configuring the local and remote machines for this authentication is described in
-     * the ssh man page.
-     * <p>
-     * Here's the console output
-     * captured while configuring user {@code dsimon} on machine {@code local}
-     * to be able to remotely execute via SSH as user {@code dsimon} on machine
-     * {@code remote}:
-     * <p>
-     * <table border="1" cellspacing="0" cellpadding="5" width="100%" bgcolor="#CCCCCC"><tr><td><pre><code>
-     * [dsimon@local:~]$ <b>ssh-keygen -t dsa</b>
-     * Generating public/private dsa key pair.
-     * Enter file in which to save the key (/home/dsimon/.ssh/id_dsa):
-     * Enter passphrase (empty for no passphrase):
-     * Enter same passphrase again:
-     * Your identification has been saved in /home/dsimon/.ssh/id_dsa.
-     * Your public key has been saved in /home/dsimon/.ssh/id_dsa.pub.
-     * The key fingerprint is:
-     * 88:ec:17:53:7a:e1:35:bd:cf:cc:0a:bb:dd:ec:99:8d dsimon@local
-     * [dsimon@local:~]$ <b>scp /home/dsimon/.ssh/id_dsa.pub dsimon@remote:</b>
-     * Password:
-     * id_dsa.pub                                                                    100%  617     0.6KB/s   00:00
-     * [dsimon@local:~]$ ssh dsimon@remote
-     * Password:
-     * [dsimon@remote:~]$ <b>{@literal cat id_dsa.pub << .ssh/authorized_keys2}</b>
-     * </code></pre></td></tr></table>
-     *
-     * @param remoteUserAndHost a {@code user@host} value denoting a machine that
-     *        supports remote execution via SSH2 using public key authentication
-     */
-    public void setRemoteUserAndHost(String remoteUserAndHost) {
-        _remoteUserAndHost = remoteUserAndHost;
-    }
 
   private File createExternalBinaryFile(File sourceFile) throws IOException {
         try {
@@ -285,7 +263,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
         while (stream.available() > 0) {
             if (readNop(stream)) {
                 boolean found = true;
-                for (int i = 1; i < _nNOPs; i++) {
+                for (int i = 1; i < NOOP_COUNT; i++) {
                     if (!readNop(stream)) {
                         found = false;
                         break;
@@ -327,19 +305,18 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
             final Argument argument1 = arguments1.get(i);
             final Argument argument2 = arguments2.get(i);
             if (!argument1.equals(argument2)) {
-                if (!areRelated(argument1.getClass(), argument2.getClass()) || argument1.asLong() != argument2.asLong()) {
-                    return false;
-                }
+              Class<?> class1 = argument1.getClass();
+              Class<?> class2 = argument2.getClass();
+              if (!(class1.isAssignableFrom(class2) || class2.isAssignableFrom(class1)) ||
+                  argument1.asLong() != argument2.asLong()) {
+                return false;
+              }
             }
         }
         return true;
     }
 
-  private static boolean areRelated(Class<?> class1, Class<?> class2) {
-        return class1.isAssignableFrom(class2) || class2.isAssignableFrom(class1);
-    }
-
-    private void createExternalSource(Template_Type template, IndentWriter stream) throws IOException, InterruptedException, AssemblyException {
+  private void createExternalSource(Template_Type template, IndentWriter stream) throws IOException, InterruptedException, AssemblyException {
         if (template.isExternallyTestable()) {
             final ArgumentListIterator<Template_Type> argumentLists = new ArgumentListIterator<Template_Type>(this, template, TestCaseLegality.LEGAL);
             createExternalSource(template, argumentLists, stream);
@@ -388,8 +365,6 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
         disassemblyStream.close();
     }
 
-    private final SimpleTimer _timer = new SimpleTimer();
-
     private void testTemplate(final Template_Type template) throws IOException, InterruptedException, AssemblyException {
         final boolean testingExternally = _components.contains(AssemblyTestComponent.EXTERNAL_ASSEMBLER) && template.isExternallyTestable();
 
@@ -397,24 +372,12 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
         final ArgumentListIterator<Template_Type> argumentLists =
             new ArgumentListIterator<Template_Type>(this, template, TestCaseLegality.LEGAL);
         ProgramError.check(argumentLists.hasNext(), "no test cases were generated for template: " + template);
-        _timer.reset();
         File binaryFile = null;
         PushbackInputStream externalInputStream = null;
         if (testingExternally) {
           cleanupTempFiles(_tmpFilePrefix);
-          final File sourceFile;
-          try {
-            _timer.start("src");
-            sourceFile = createExternalSourceFile(template, argumentLists);
-          } finally {
-            _timer.stop();
-          }
-          try {
-            _timer.start("gas");
+          final File sourceFile = createExternalSourceFile(template, argumentLists);
             binaryFile = createExternalBinaryFile(sourceFile);
-          } finally {
-            _timer.stop();
-          }
             externalInputStream = new PushbackInputStream(new BufferedInputStream(new FileInputStream(binaryFile)));
             if (!findStart(externalInputStream)) {
                 ProgramError.unexpected("could not find start sequence in: " + binaryFile.getAbsolutePath());
@@ -428,28 +391,18 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
             final Assembler assembler = createTestAssembler();
 
             final byte[] internalResult;
-            try {
-              _timer.start("asm");
               assembly().assemble(assembler, template, argumentList);
               internalResult = assembler.toByteArray();
-            } finally {
-              _timer.stop();
-            }
 
             Trace.line(3, "assembleInternally: " + assembly().createMethodCallString(template, argumentList) + " = " + DisassembledInstruction.toHexString(internalResult));
             if (_components.contains(AssemblyTestComponent.DISASSEMBLER) && template.isDisassemblable() &&
                     !findExcludedDisassemblerTestArgument(template.parameters(), argumentList)) {
 
-              try {
-                _timer.start("dis");
                 try {
                   testDisassembler(template, argumentList, internalResult);
                 } catch (IOException e) {
                   throw new AssemblyException(e.toString());
                 }
-              } finally {
-                _timer.stop();
-              }
             }
 
               if (testingExternally && !findExcludedExternalTestArgument(template.parameters(), argumentList)) {
@@ -493,47 +446,18 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
         }
 
       Trace.line(2, "template: " + template + "  [" + testCaseNumber + " test cases, " +
-                      "timings: " + getTimingString() + ", " +
                       illegalTestCaseNumber + " illegal test cases]");
         for (String message : uniqueExceptionMessages) {
             Trace.line(2, "    caught expected IllegalArgumentException: " + message);
         }
         if (testingExternally) {
-            for (int i = 0; i < _nNOPs; i++) {
+            for (int i = 0; i < NOOP_COUNT; i++) {
                 if (!readNop(externalInputStream)) {
                     ProgramError.unexpected("end pattern missing in: " + binaryFile.getAbsolutePath());
                 }
             }
             externalInputStream.close();
         }
-    }
-
-  private StringBuilder getTimingString() {
-    final Iterator<Entry<String, Long>> iterator = _timer.flatTimes().iterator();
-    boolean hasNext = iterator.hasNext();
-    final StringBuilder buf = new StringBuilder();
-    while (hasNext) {
-      final Entry<String, Long> element = iterator.next();
-      final String string = element.getKey() + "=" + element.getValue() + "ms";
-      buf.append(string);
-      hasNext = iterator.hasNext();
-      if (hasNext) {
-        buf.append(", ");
-      }
-    }
-    return buf;
-  }
-
-  private String _templatePattern;
-
-    /**
-     * Sets the pattern that restricts which templates are tested.
-     *
-     * @param pattern if non-null, only templates whose {@link Template#internalName() name} contains
-     *                {@code pattern} as a substring are tested
-     */
-    public void setTemplatePattern(String pattern) {
-        _templatePattern = pattern;
     }
 
     public void run(int startTemplateSerial, int endTemplateSerial, boolean onlyCreateExternalSource) {
