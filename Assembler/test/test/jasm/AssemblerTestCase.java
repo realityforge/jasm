@@ -9,7 +9,6 @@
 package test.jasm;
 
 import jasm.gen.test.AssemblyTester;
-import jasm.gen.Trace;
 import jasm.util.program.option.BooleanProgramOption;
 import jasm.util.program.option.IntegerProgramOption;
 import jasm.util.program.option.ProgramArgumentsParser;
