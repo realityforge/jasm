@@ -24,9 +24,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;
 import java.util.EnumSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.LinkedList;
 
 /**
  * @author Bernd Mathiske

@@ -8,8 +8,8 @@
  */
 package jasm.gen.cisc.x86;
 
-import jasm.gen.InstructionDescription;
 import jasm.WordWidth;
+import jasm.gen.InstructionDescription;
 import java.util.List;
 
 /**

@@ -20,18 +20,18 @@ import jasm.gen.Parameter;
 import jasm.util.Enums;
 import jasm.util.HexUtil;
 import jasm.util.io.IndentWriter;
-import jasm.util.lang.StaticLoophole;
 import jasm.util.lang.ArrayUtil;
+import jasm.util.lang.StaticLoophole;
 import jasm.util.program.ProgramError;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Arrays;
 
 /**
  * @author Bernd Mathiske

@@ -8,8 +8,8 @@
  */
 package jasm.gen.cisc.x86;
 
-import jasm.gen.AddressParameter;
 import jasm.WordWidth;
+import jasm.gen.AddressParameter;
 
 /**
  * @author Bernd Mathiske
