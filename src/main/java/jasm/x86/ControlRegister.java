@@ -16,30 +16,29 @@ import jasm.util.SymbolSet;
  */
 public enum ControlRegister implements EnumerableArgument {
 
-    CR0(0), CR2(2), CR3(3);
+  CR0(0), CR2(2), CR3(3);
 
-    private final int _number;
+  private final int _number;
 
-    private ControlRegister(int number) {
-        _number = number;
-    }
+  private ControlRegister(int number) {
+    _number = number;
+  }
 
-    public int value() {
-        return _number;
-    }
+  public int value() {
+    return _number;
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return "%" + name().toLowerCase();
-    }
+  public String externalValue() {
+    return "%" + name().toLowerCase();
+  }
 
-    public String disassembledValue() {
-        return name().toLowerCase();
-    }
+  public String disassembledValue() {
+    return name().toLowerCase();
+  }
 
   public static final SymbolSet<ControlRegister> SYMBOLS = SymbolSet.fromEnum(ControlRegister.class);
-
 }

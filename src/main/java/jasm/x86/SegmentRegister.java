@@ -16,29 +16,28 @@ import jasm.util.SymbolSet;
  */
 public enum SegmentRegister implements EnumerableArgument {
 
-    ES,
-    CS,
-    SS,
-    DS,
-    FS,
-    GS;
+  ES,
+  CS,
+  SS,
+  DS,
+  FS,
+  GS;
 
-    public int value() {
-        return ordinal();
-    }
+  public int value() {
+    return ordinal();
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return "%" + name().toLowerCase();
-    }
+  public String externalValue() {
+    return "%" + name().toLowerCase();
+  }
 
-    public String disassembledValue() {
-        return name().toLowerCase();
-    }
+  public String disassembledValue() {
+    return name().toLowerCase();
+  }
 
   public static final SymbolSet<SegmentRegister> SYMBOLS = SymbolSet.fromEnum(SegmentRegister.class);
-
 }

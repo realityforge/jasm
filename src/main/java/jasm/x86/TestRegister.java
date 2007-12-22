@@ -16,30 +16,29 @@ import jasm.util.SymbolSet;
  */
 public enum TestRegister implements EnumerableArgument {
 
-    TR3(3), TR4(4), TR5(5), TR6(6), TR7(7);
+  TR3(3), TR4(4), TR5(5), TR6(6), TR7(7);
 
-    private final int _number;
+  private final int _number;
 
-    private TestRegister(int number) {
-        _number = number;
-    }
+  private TestRegister(int number) {
+    _number = number;
+  }
 
-    public int value() {
-        return _number;
-    }
+  public int value() {
+    return _number;
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return "%" + name().toLowerCase();
-    }
+  public String externalValue() {
+    return "%" + name().toLowerCase();
+  }
 
-    public String disassembledValue() {
-        return name().toLowerCase();
-    }
+  public String disassembledValue() {
+    return name().toLowerCase();
+  }
 
   public static final SymbolSet<TestRegister> SYMBOLS = SymbolSet.fromEnum(TestRegister.class);
-
 }

@@ -16,30 +16,29 @@ import jasm.util.SymbolSet;
  */
 public enum DebugRegister implements EnumerableArgument {
 
-    DR0(0), DR1(1), DR2(2), DR3(3), DR6(6), DR7(7);
+  DR0(0), DR1(1), DR2(2), DR3(3), DR6(6), DR7(7);
 
-    private final int _number;
+  private final int _number;
 
-    private DebugRegister(int number) {
-        _number = number;
-    }
+  private DebugRegister(int number) {
+    _number = number;
+  }
 
-    public int value() {
-        return _number;
-    }
+  public int value() {
+    return _number;
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return "%" + name().toLowerCase();
-    }
+  public String externalValue() {
+    return "%" + name().toLowerCase();
+  }
 
-    public String disassembledValue() {
-        return name().toLowerCase();
-    }
+  public String disassembledValue() {
+    return name().toLowerCase();
+  }
 
   public static final SymbolSet<DebugRegister> SYMBOLS = SymbolSet.fromEnum(DebugRegister.class);
-
 }

@@ -16,23 +16,23 @@ import jasm.util.SymbolSet;
  */
 public enum MMXRegister implements EnumerableArgument {
 
-    MM0, MM1, MM2, MM3, MM4, MM5, MM6, MM7;
+  MM0, MM1, MM2, MM3, MM4, MM5, MM6, MM7;
 
-    public int value() {
-        return ordinal();
-    }
+  public int value() {
+    return ordinal();
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return "%" + name().toLowerCase();
-    }
+  public String externalValue() {
+    return "%" + name().toLowerCase();
+  }
 
-    public String disassembledValue() {
-        return name().toLowerCase();
-    }
+  public String disassembledValue() {
+    return name().toLowerCase();
+  }
 
   public static final SymbolSet<MMXRegister> SYMBOLS = SymbolSet.fromEnum(MMXRegister.class);
 }

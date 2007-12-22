@@ -16,24 +16,23 @@ import jasm.util.SymbolSet;
  */
 public enum Scale implements EnumerableArgument {
 
-    SCALE_1, SCALE_2, SCALE_4, SCALE_8;
+  SCALE_1, SCALE_2, SCALE_4, SCALE_8;
 
-    public int value() {
-        return ordinal();
-    }
+  public int value() {
+    return ordinal();
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return name().substring(name().length() - 1);
-    }
+  public String externalValue() {
+    return name().substring(name().length() - 1);
+  }
 
-    public String disassembledValue() {
-        return name().substring(name().length() - 1);
-    }
+  public String disassembledValue() {
+    return name().substring(name().length() - 1);
+  }
 
   public static final SymbolSet<Scale> SYMBOLS = SymbolSet.fromEnum(Scale.class);
-
 }
