@@ -12,7 +12,7 @@ import jasm.Argument;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.TestArgumentExclusion;
 import jasm.gen.WrappableSpecification;
-import jasm.util.Sets;
+import jasm.util.collect.CollectionUtil;
 
 /**
  * @author Bernd Mathiske
@@ -41,6 +41,6 @@ public enum FloatingPointOperandCode implements WrappableSpecification {
     }
 
     public TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
-        return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, this, Sets.from(arguments));
+        return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, this, CollectionUtil.hashSetFrom(arguments));
     }
 }

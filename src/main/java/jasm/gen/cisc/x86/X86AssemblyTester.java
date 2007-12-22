@@ -16,7 +16,6 @@ import jasm.gen.ImmediateArgument;
 import jasm.gen.ImplicitOperand;
 import jasm.gen.test.AssemblyTester;
 import jasm.util.HexByte;
-import jasm.util.MutableQueue;
 import jasm.util.WordWidth;
 import jasm.util.io.IndentWriter;
 import jasm.util.lang.StaticLoophole;
@@ -27,6 +26,7 @@ import java.io.PushbackInputStream;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Queue;
+import java.util.LinkedList;
 
 /**
  * @author Bernd Mathiske
@@ -125,8 +125,8 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
         } else {
             stream.println(".code" + addressWidth().numberOfBits());
         }
-        final MutableQueue<X86Operand> operandQueue = MutableQueue.create(template.operands());
-        final MutableQueue<Argument> argumentQueue = MutableQueue.create(argumentList);
+        final LinkedList<X86Operand> operandQueue = new LinkedList<X86Operand>(template.operands());
+        final LinkedList<Argument> argumentQueue = new LinkedList<Argument>(argumentList);
         String first = "";
         if (!operandQueue.isEmpty()) {
             first = getOperand(template, operandQueue, argumentQueue, label);

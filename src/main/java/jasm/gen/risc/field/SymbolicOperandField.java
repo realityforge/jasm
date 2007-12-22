@@ -19,9 +19,9 @@ import jasm.gen.WrappableSpecification;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import jasm.util.Sets;
 import jasm.util.Symbolizer;
 import jasm.util.collect.Iterables;
+import jasm.util.collect.CollectionUtil;
 import jasm.util.lang.StaticLoophole;
 
 /**
@@ -108,7 +108,7 @@ public class SymbolicOperandField<Argument_Type extends SymbolicArgument> extend
     }
 
     public TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
-        return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, this, Sets.from(arguments));
+        return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, this, CollectionUtil.hashSetFrom(arguments));
     }
 
     @Override

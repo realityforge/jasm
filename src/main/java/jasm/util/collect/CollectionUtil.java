@@ -2,6 +2,9 @@ package jasm.util.collect;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Arrays;
 import jasm.util.lang.ArrayUtil;
 import jasm.util.lang.StaticLoophole;
 
@@ -71,5 +74,9 @@ public class CollectionUtil {
           }
       }
       return result;
+  }
+
+  public static <Element_Type> Set<Element_Type> hashSetFrom(Element_Type... elements) {
+      return new HashSet<Element_Type>(Arrays.asList(elements));
   }
 }

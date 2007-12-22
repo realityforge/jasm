@@ -17,9 +17,9 @@ import jasm.gen.InstructionConstraint;
 import jasm.gen.risc.field.BranchDisplacementOperandField;
 import jasm.gen.risc.field.OperandField;
 import jasm.gen.risc.field.RiscField;
-import jasm.util.MutableQueue;
 import jasm.util.lang.Strings;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -47,14 +47,14 @@ import java.util.List;
 public abstract class RiscExternalInstruction implements RiscInstructionDescriptionVisitor {
 
     protected final RiscTemplate _template;
-    protected final MutableQueue<Argument> _arguments;
+    protected final LinkedList<Argument> _arguments;
     protected final int _offset;
     protected final List<DisassembledLabel> _labels;
     protected final GlobalLabelMapper _globalLabelMapper;
 
     public RiscExternalInstruction(RiscTemplate template, List<Argument> arguments) {
         _template = template;
-        _arguments = MutableQueue.create(arguments);
+        _arguments = new LinkedList<Argument>(arguments);
         _offset = -1;
         _labels = Collections.emptyList();
         _globalLabelMapper = null;
@@ -62,7 +62,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
 
     public RiscExternalInstruction(RiscTemplate template, List<Argument> arguments, int offset, List<DisassembledLabel> labels) {
         _template = template;
-        _arguments = MutableQueue.create(arguments);
+        _arguments = new LinkedList<Argument>(arguments);
         _offset = offset;
         _labels = labels;
         _globalLabelMapper = null;
@@ -70,7 +70,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
 
     public RiscExternalInstruction(RiscTemplate template, List<Argument> arguments, int offset, List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
         _template = template;
-        _arguments = MutableQueue.create(arguments);
+        _arguments = new LinkedList<Argument>(arguments);
         _offset = offset;
         _labels = labels;
         _globalLabelMapper = globalLabelMapper;

@@ -23,13 +23,13 @@ import jasm.gen.cisc.x86.X86Operand;
 import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
-import jasm.util.MutableQueue;
 import jasm.util.WordWidth;
 import jasm.util.lang.Strings;
 import jasm.x86.IndirectRegister;
 import jasm.x86.Scale;
 import java.util.List;
 import java.util.Queue;
+import java.util.LinkedList;
 
 /**
  * An x86 instruction, given as an x86 template and a sequence of arguments.
@@ -206,8 +206,8 @@ public abstract class X86DisassembledInstruction<Template_Type extends X86Templa
 
     @Override
     public String operandsToString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
-        final MutableQueue<X86Operand> operandQueue = MutableQueue.create(template().operands());
-        final MutableQueue<Argument> argumentQueue = MutableQueue.create(arguments());
+        final LinkedList<X86Operand> operandQueue = new LinkedList<X86Operand>(template().operands());
+        final LinkedList<Argument> argumentQueue = new LinkedList<Argument>(arguments());
         String result = "";
         String separator = "";
         while (!operandQueue.isEmpty()) {

@@ -51,7 +51,7 @@ import static jasm.gen.cisc.x86.OperandTypeCode.v;
 import static jasm.gen.cisc.x86.OperandTypeCode.w;
 import static jasm.gen.cisc.x86.OperandTypeCode.z;
 import jasm.util.Enumerator;
-import jasm.util.Sets;
+import jasm.util.collect.CollectionUtil;
 import jasm.util.lang.StaticLoophole;
 import java.util.HashSet;
 import java.util.Set;
@@ -153,11 +153,11 @@ public enum OperandCode implements WrappableSpecification {
     }
 
     public TestArgumentExclusion excludeDisassemblerTestArguments(Argument... arguments) {
-        return new TestArgumentExclusion(AssemblyTestComponent.DISASSEMBLER, this, Sets.from(arguments));
+        return new TestArgumentExclusion(AssemblyTestComponent.DISASSEMBLER, this, CollectionUtil.hashSetFrom(arguments));
     }
 
     public TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
-        return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, this, Sets.from(arguments));
+        return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, this, CollectionUtil.hashSetFrom(arguments));
     }
 
     public TestArgumentExclusion excludeExternalTestArguments(Enumerator... argumentEnumerators) {

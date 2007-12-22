@@ -16,7 +16,7 @@ import jasm.gen.Parameter;
 import jasm.gen.Template;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
-import jasm.util.Sets;
+import jasm.util.collect.CollectionUtil;
 import jasm.util.lang.StaticLoophole;
 import java.util.Collections;
 import java.util.Set;
@@ -134,7 +134,7 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
     }
 
     public OperandField<Argument_Type> withExcludedDisassemblerTestArguments(Argument... arguments) {
-        return withExcludedDisassemblerTestArguments(Sets.from(arguments));
+        return withExcludedDisassemblerTestArguments(CollectionUtil.hashSetFrom(arguments));
     }
 
     public Set<Argument> excludedDisassemblerTestArguments() {
@@ -150,7 +150,7 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
     }
 
     public OperandField<Argument_Type> withExcludedExternalTestArguments(Argument... arguments) {
-        return withExcludedExternalTestArguments(Sets.from(arguments));
+        return withExcludedExternalTestArguments(CollectionUtil.hashSetFrom(arguments));
     }
 
     public Set<Argument> excludedExternalTestArguments() {
