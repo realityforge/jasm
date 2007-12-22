@@ -8,12 +8,12 @@
  */
 package jasm.dis.x86;
 
+import jasm.WordWidth;
 import jasm.gen.Assembly;
 import jasm.gen.cisc.x86.X86Opcode;
 import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.util.HexByte;
-import jasm.WordWidth;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
