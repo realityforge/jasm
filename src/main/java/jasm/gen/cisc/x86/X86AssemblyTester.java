@@ -8,19 +8,19 @@
  */
 package jasm.gen.cisc.x86;
 
-import jasm.util.MutableQueue;
-import jasm.util.collect.Sequence;
-import jasm.util.io.IndentWriter;
-import jasm.util.lang.StaticLoophole;
 import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.Assembly;
 import jasm.gen.AssemblyTestComponent;
-import jasm.gen.test.AssemblyTester;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.ImplicitOperand;
+import jasm.gen.test.AssemblyTester;
 import jasm.util.HexByte;
+import jasm.util.MutableQueue;
 import jasm.util.WordWidth;
+import jasm.util.collect.Sequence;
+import jasm.util.io.IndentWriter;
+import jasm.util.lang.StaticLoophole;
 import jasm.x86.IndirectRegister;
 import java.io.IOException;
 import java.io.InputStream;

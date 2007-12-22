@@ -8,13 +8,13 @@
  */
 package jasm.gen;
 
+import jasm.gen.cisc.x86.X86Assembly;
 import java.io.File;
 import java.util.List;
 import org.realityforge.cli.ArgsParser;
 import org.realityforge.cli.CLUtil;
 import org.realityforge.cli.Option;
 import org.realityforge.cli.OptionDescriptor;
-import jasm.gen.cisc.x86.X86Assembly;
 
 public class Main {
   private static final int HELP_OPT = 'h';

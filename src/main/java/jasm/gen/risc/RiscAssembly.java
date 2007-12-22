@@ -8,14 +8,14 @@
  */
 package jasm.gen.risc;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.IntHashMap;
-import jasm.util.collect.Sequence;
 import jasm.InstructionSet;
 import jasm.dis.risc.OpcodeMaskGroup;
 import jasm.dis.risc.SpecificityGroup;
 import jasm.gen.Assembly;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.IntHashMap;
+import jasm.util.collect.Sequence;
 import java.io.PrintStream;
 
 /**

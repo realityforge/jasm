@@ -8,10 +8,10 @@
  */
 package jasm.gen.cisc.x86;
 
-import jasm.util.program.ProgramError;
 import jasm.InstructionSet;
 import jasm.gen.Assembly;
 import jasm.gen.risc.bitRange.BitRangeOrder;
+import jasm.util.program.ProgramError;
 
 /**
  * @author Bernd Mathiske

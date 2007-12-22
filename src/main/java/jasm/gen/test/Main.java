@@ -8,12 +8,11 @@
  */
 package jasm.gen.test;
 
-import jasm.gen.test.AssemblerDef;
 import jasm.gen.AssemblyTestComponent;
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.ArrayList;
 import org.realityforge.cli.ArgsParser;
 import org.realityforge.cli.CLUtil;
 import org.realityforge.cli.Option;

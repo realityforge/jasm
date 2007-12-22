@@ -8,8 +8,6 @@
  */
 package jasm.dis.amd64;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.amd64.AMD64Assembler;
@@ -20,6 +18,8 @@ import jasm.gen.cisc.amd64.AMD64Template;
 import jasm.gen.cisc.x86.X86Opcode;
 import jasm.util.HexByte;
 import jasm.util.WordWidth;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.Sequence;
 import java.util.Map;
 
 /**

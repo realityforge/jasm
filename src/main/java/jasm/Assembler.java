@@ -8,13 +8,13 @@
  */
 package jasm;
 
+import jasm.util.Longs;
+import jasm.util.WordWidth;
 import jasm.util.collect.AppendableSequence;
 import jasm.util.collect.ArrayListSequence;
 import jasm.util.collect.IdentityHashSet;
 import jasm.util.collect.Sequence;
 import jasm.util.program.ProgramError;
-import jasm.util.Longs;
-import jasm.util.WordWidth;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;

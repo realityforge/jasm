@@ -8,14 +8,14 @@
  */
 package jasm.dis.x86;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
 import jasm.gen.Assembly;
 import jasm.gen.cisc.x86.X86Opcode;
 import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.util.HexByte;
 import jasm.util.WordWidth;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -8,11 +8,11 @@
  */
 package jasm.gen;
 
+import jasm.Argument;
+import jasm.SymbolicArgument;
 import jasm.util.collect.Sequence;
 import jasm.util.lang.Arrays;
 import jasm.util.program.ProgramError;
-import jasm.Argument;
-import jasm.SymbolicArgument;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

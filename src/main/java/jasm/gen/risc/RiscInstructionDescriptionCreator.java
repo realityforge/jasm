@@ -8,21 +8,21 @@
  */
 package jasm.gen.risc;
 
+import jasm.gen.Assembly;
+import jasm.gen.InstructionConstraint;
+import jasm.gen.InstructionDescriptionCreator;
+import jasm.gen.Parameter;
+import jasm.gen.Trace;
+import jasm.gen.risc.bitRange.OmittedBitRange;
+import jasm.gen.risc.field.OperandField;
+import jasm.gen.risc.field.OptionField;
+import jasm.gen.risc.field.RiscField;
 import jasm.util.collect.AppendableSequence;
 import jasm.util.collect.ArrayListSequence;
 import jasm.util.collect.MutableSequence;
 import jasm.util.collect.Sequence;
 import jasm.util.lang.StaticLoophole;
 import jasm.util.program.ProgramError;
-import jasm.gen.Trace;
-import jasm.gen.Assembly;
-import jasm.gen.InstructionConstraint;
-import jasm.gen.InstructionDescriptionCreator;
-import jasm.gen.Parameter;
-import jasm.gen.risc.bitRange.OmittedBitRange;
-import jasm.gen.risc.field.OperandField;
-import jasm.gen.risc.field.OptionField;
-import jasm.gen.risc.field.RiscField;
 import java.util.Iterator;
 import java.util.List;
 

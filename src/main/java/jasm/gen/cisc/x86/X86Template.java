@@ -8,11 +8,6 @@
  */
 package jasm.gen.cisc.x86;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.Sequence;
-import jasm.util.program.ProgramError;
-import jasm.gen.Trace;
 import jasm.EnumerableArgument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.Immediate8Argument;
@@ -21,10 +16,15 @@ import jasm.gen.InstructionConstraint;
 import jasm.gen.InstructionDescription;
 import jasm.gen.Template;
 import jasm.gen.TestArgumentExclusion;
+import jasm.gen.Trace;
 import jasm.gen.cisc.TemplateNotNeededException;
 import jasm.util.Enumerator;
 import jasm.util.HexByte;
 import jasm.util.WordWidth;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.Sequence;
+import jasm.util.program.ProgramError;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
 import jasm.x86.SegmentRegister;

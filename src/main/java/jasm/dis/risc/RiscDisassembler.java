@@ -8,12 +8,6 @@
  */
 package jasm.dis.risc;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.Sequence;
-import jasm.util.lang.Endianness;
-import jasm.util.lang.StaticLoophole;
-import jasm.util.program.ProgramWarning;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;
@@ -24,8 +18,14 @@ import jasm.gen.InstructionConstraint;
 import jasm.gen.risc.RiscAssembly;
 import jasm.gen.risc.RiscTemplate;
 import jasm.gen.risc.field.OperandField;
-import jasm.util.WordWidth;
 import jasm.util.HexUtil;
+import jasm.util.WordWidth;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.Sequence;
+import jasm.util.lang.Endianness;
+import jasm.util.lang.StaticLoophole;
+import jasm.util.program.ProgramWarning;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.Arrays;

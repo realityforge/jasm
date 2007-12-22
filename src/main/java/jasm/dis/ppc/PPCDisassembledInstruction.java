@@ -8,13 +8,13 @@
  */
 package jasm.dis.ppc;
 
-import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.DisassembledLabel;
 import jasm.dis.GlobalLabelMapper;
 import jasm.dis.risc.RiscDisassembledInstruction;
 import jasm.gen.risc.ppc.PPCExternalInstruction;
 import jasm.gen.risc.ppc.PPCTemplate;
+import jasm.util.collect.Sequence;
 
 /**
  * @author Bernd Mathiske

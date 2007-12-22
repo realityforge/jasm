@@ -8,13 +8,13 @@
  */
 package jasm.dis.sparc;
 
-import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.DisassembledLabel;
 import jasm.dis.GlobalLabelMapper;
 import jasm.dis.risc.RiscDisassembledInstruction;
 import jasm.gen.risc.sparc.SPARCExternalInstruction;
 import jasm.gen.risc.sparc.SPARCTemplate;
+import jasm.util.collect.Sequence;
 
 /**
  * @author Bernd Mathiske

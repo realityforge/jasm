@@ -8,12 +8,12 @@
  */
 package jasm.dis.ia32;
 
-import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.Address32Instruction;
 import jasm.dis.x86.X86DisassembledInstruction;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.cisc.ia32.IA32Template;
+import jasm.util.collect.Sequence;
 
 /**
  * @author Bernd Mathiske

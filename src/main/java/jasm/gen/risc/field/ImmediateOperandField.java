@@ -8,11 +8,6 @@
  */
 package jasm.gen.risc.field;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.ArraySequence;
-import jasm.util.collect.MutableSequence;
-import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.Expression;
@@ -28,6 +23,11 @@ import jasm.gen.risc.bitRange.AscendingBitRange;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
 import jasm.gen.risc.bitRange.DescendingBitRange;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.ArraySequence;
+import jasm.util.collect.MutableSequence;
+import jasm.util.collect.Sequence;
 import java.lang.reflect.Method;
 
 /**

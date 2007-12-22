@@ -8,8 +8,6 @@
  */
 package jasm.gen.cisc.amd64;
 
-import jasm.util.io.IndentWriter;
-import jasm.util.program.ProgramError;
 import jasm.amd64.AMD64BaseRegister32;
 import jasm.amd64.AMD64BaseRegister64;
 import jasm.amd64.AMD64GeneralRegister8;
@@ -21,8 +19,10 @@ import jasm.gen.cisc.x86.X86Opcode;
 import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
-import jasm.util.WordWidth;
 import jasm.util.HexUtil;
+import jasm.util.WordWidth;
+import jasm.util.io.IndentWriter;
+import jasm.util.program.ProgramError;
 
 /**
  * Run this program to generate the AMD64RawAssembler and AMD64LabelAssembler classes.

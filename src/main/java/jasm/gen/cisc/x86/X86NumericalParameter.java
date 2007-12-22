@@ -8,8 +8,6 @@
  */
 package jasm.gen.cisc.x86;
 
-import jasm.util.collect.Iterables;
-import jasm.util.program.ProgramError;
 import jasm.Argument;
 import jasm.gen.Immediate16Argument;
 import jasm.gen.Immediate32Argument;
@@ -19,6 +17,8 @@ import jasm.gen.ImmediateArgument;
 import jasm.gen.ImmediateParameter;
 import jasm.gen.cisc.AppendedParameter;
 import jasm.util.WordWidth;
+import jasm.util.collect.Iterables;
+import jasm.util.program.ProgramError;
 
 /**
  * @author Bernd Mathiske

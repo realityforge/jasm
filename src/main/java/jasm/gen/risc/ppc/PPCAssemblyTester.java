@@ -8,14 +8,14 @@
  */
 package jasm.gen.risc.ppc;
 
-import jasm.util.collect.Sequence;
-import jasm.util.io.IndentWriter;
-import jasm.util.lang.Endianness;
 import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.risc.RiscAssemblyTester;
 import jasm.util.WordWidth;
+import jasm.util.collect.Sequence;
+import jasm.util.io.IndentWriter;
+import jasm.util.lang.Endianness;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;

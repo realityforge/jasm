@@ -8,12 +8,12 @@
  */
 package jasm.dis.amd64;
 
-import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.Address64Instruction;
 import jasm.dis.x86.X86DisassembledInstruction;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.cisc.amd64.AMD64Template;
+import jasm.util.collect.Sequence;
 
 /**
  * @author Bernd Mathiske

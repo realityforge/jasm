@@ -8,13 +8,13 @@
  */
 package jasm.dis.ppc;
 
-import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.gen.risc.ppc.PPCAssembly;
 import jasm.gen.risc.ppc.PPCTemplate;
 import jasm.ppc.PPC64Assembler;
 import jasm.util.WordWidth;
+import jasm.util.collect.Sequence;
 
 /**
  *

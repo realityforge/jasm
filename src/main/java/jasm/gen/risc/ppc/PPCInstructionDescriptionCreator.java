@@ -8,11 +8,11 @@
  */
 package jasm.gen.risc.ppc;
 
-import jasm.util.collect.Sequence;
 import jasm.gen.Assembly;
 import jasm.gen.risc.RiscInstructionDescription;
 import jasm.gen.risc.RiscInstructionDescriptionCreator;
 import jasm.gen.risc.RiscInstructionDescriptionModifier;
+import jasm.util.collect.Sequence;
 
 /**
  *

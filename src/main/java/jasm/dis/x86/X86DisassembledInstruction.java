@@ -8,9 +8,6 @@
  */
 package jasm.dis.x86;
 
-import jasm.util.MutableQueue;
-import jasm.util.collect.Sequence;
-import jasm.util.lang.Strings;
 import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.DisassembledLabel;
@@ -26,7 +23,10 @@ import jasm.gen.cisc.x86.X86Operand;
 import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
+import jasm.util.MutableQueue;
 import jasm.util.WordWidth;
+import jasm.util.collect.Sequence;
+import jasm.util.lang.Strings;
 import jasm.x86.IndirectRegister;
 import jasm.x86.Scale;
 import java.util.Queue;

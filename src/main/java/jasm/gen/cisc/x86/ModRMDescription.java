@@ -8,8 +8,8 @@
  */
 package jasm.gen.cisc.x86;
 
-import jasm.util.collect.MutableSequence;
 import jasm.gen.InstructionDescription;
+import jasm.util.collect.MutableSequence;
 
 /**
  * @author Bernd Mathiske

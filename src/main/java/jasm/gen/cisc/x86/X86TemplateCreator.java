@@ -8,13 +8,13 @@
  */
 package jasm.gen.cisc.x86;
 
+import jasm.gen.InstructionDescription;
+import jasm.gen.InstructionDescriptionCreator;
+import jasm.gen.Trace;
+import jasm.util.WordWidth;
 import jasm.util.collect.AppendableSequence;
 import jasm.util.collect.ArrayListSequence;
 import jasm.util.collect.Sequence;
-import jasm.gen.Trace;
-import jasm.gen.InstructionDescription;
-import jasm.gen.InstructionDescriptionCreator;
-import jasm.util.WordWidth;
 
 /**
  * @author Bernd Mathiske

@@ -8,13 +8,13 @@
  */
 package jasm.gen.risc.field;
 
-import jasm.util.collect.Iterables;
-import jasm.util.program.ProgramError;
 import jasm.Argument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
+import jasm.util.collect.Iterables;
+import jasm.util.program.ProgramError;
 
 /**
  * An input operand is a parameter to an assembler method that does not correspond directly

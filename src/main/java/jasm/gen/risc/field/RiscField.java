@@ -8,9 +8,9 @@
  */
 package jasm.gen.risc.field;
 
-import jasm.util.program.ProgramError;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.util.StaticFieldName;
+import jasm.util.program.ProgramError;
 
 /**
  * A field describes a bit range and how it relates to an operand.

@@ -8,11 +8,11 @@
  */
 package jasm.dis.risc;
 
+import jasm.gen.risc.RiscTemplate;
 import jasm.util.collect.AppendableSequence;
 import jasm.util.collect.ArrayListSequence;
 import jasm.util.collect.IntHashMap;
 import jasm.util.collect.Sequence;
-import jasm.gen.risc.RiscTemplate;
 import java.util.HashSet;
 import java.util.Set;
 

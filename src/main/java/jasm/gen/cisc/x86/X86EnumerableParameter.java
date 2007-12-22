@@ -8,12 +8,12 @@
  */
 package jasm.gen.cisc.x86;
 
-import jasm.util.collect.Iterables;
-import jasm.util.program.ProgramError;
 import jasm.Argument;
 import jasm.EnumerableArgument;
 import jasm.gen.EnumerableParameter;
 import jasm.util.Enumerator;
+import jasm.util.collect.Iterables;
+import jasm.util.program.ProgramError;
 
 /**
  * @author Bernd Mathiske

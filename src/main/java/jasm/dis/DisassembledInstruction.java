@@ -8,11 +8,11 @@
  */
 package jasm.dis;
 
-import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.AssemblyInstruction;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.Template;
+import jasm.util.collect.Sequence;
 
 /**
  * A assembly instruction in internal format, combined with the bytes that it was disassembled from.

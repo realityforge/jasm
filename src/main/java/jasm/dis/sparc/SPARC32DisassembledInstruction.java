@@ -8,11 +8,11 @@
  */
 package jasm.dis.sparc;
 
-import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.Address32Instruction;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.risc.sparc.SPARCTemplate;
+import jasm.util.collect.Sequence;
 
 /**
  *

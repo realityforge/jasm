@@ -8,15 +8,15 @@
  */
 package jasm.gen.risc.field;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.program.ProgramError;
 import jasm.ExternalMnemonicSuffixArgument;
 import jasm.SymbolicArgument;
 import jasm.gen.risc.Option;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.program.ProgramError;
 
 /**
  * An OptionField is a field whose value is specified as an optional part of the assembler

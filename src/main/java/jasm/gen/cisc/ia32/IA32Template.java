@@ -8,7 +8,6 @@
  */
 package jasm.gen.cisc.ia32;
 
-import jasm.util.program.ProgramError;
 import jasm.gen.ArgumentRange;
 import jasm.gen.ImplicitOperand;
 import jasm.gen.TestArgumentExclusion;
@@ -35,6 +34,7 @@ import jasm.ia32.IA32IndexRegister32;
 import jasm.ia32.IA32IndirectRegister16;
 import jasm.ia32.IA32IndirectRegister32;
 import jasm.util.WordWidth;
+import jasm.util.program.ProgramError;
 import jasm.x86.ControlRegister;
 import jasm.x86.DebugRegister;
 import jasm.x86.MMXRegister;

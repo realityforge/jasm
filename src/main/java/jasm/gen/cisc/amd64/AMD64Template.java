@@ -8,8 +8,6 @@
  */
 package jasm.gen.cisc.amd64;
 
-import jasm.util.collect.Sequence;
-import jasm.util.program.ProgramError;
 import jasm.Argument;
 import jasm.amd64.AMD64BaseRegister32;
 import jasm.amd64.AMD64BaseRegister64;
@@ -42,6 +40,8 @@ import jasm.gen.cisc.x86.X86Operand;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.util.WordWidth;
+import jasm.util.collect.Sequence;
+import jasm.util.program.ProgramError;
 import jasm.x86.ControlRegister;
 import jasm.x86.DebugRegister;
 import jasm.x86.GeneralRegister;

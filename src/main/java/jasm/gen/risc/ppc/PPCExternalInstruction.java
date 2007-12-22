@@ -8,11 +8,11 @@
  */
 package jasm.gen.risc.ppc;
 
-import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.DisassembledLabel;
 import jasm.dis.GlobalLabelMapper;
 import jasm.gen.risc.RiscExternalInstruction;
+import jasm.util.collect.Sequence;
 
 /**
  * Output of PowerPC instructions in external assembler format.

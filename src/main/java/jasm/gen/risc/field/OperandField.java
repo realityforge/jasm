@@ -8,9 +8,6 @@
  */
 package jasm.gen.risc.field;
 
-import jasm.util.collect.Sequence;
-import jasm.util.Sets;
-import jasm.util.lang.StaticLoophole;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.ExternalMnemonicSuffixArgument;
@@ -19,8 +16,11 @@ import jasm.gen.Parameter;
 import jasm.gen.Template;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
-import java.util.Set;
+import jasm.util.Sets;
+import jasm.util.collect.Sequence;
+import jasm.util.lang.StaticLoophole;
 import java.util.Collections;
+import java.util.Set;
 
 /**
  * An operand field defines an instruction field whose value is given as a parameter in the generated

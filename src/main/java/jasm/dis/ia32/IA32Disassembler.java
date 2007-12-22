@@ -8,8 +8,6 @@
  */
 package jasm.dis.ia32;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.dis.x86.X86Disassembler;
@@ -19,6 +17,8 @@ import jasm.gen.cisc.ia32.IA32Template;
 import jasm.ia32.IA32Assembler;
 import jasm.util.HexByte;
 import jasm.util.WordWidth;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.Sequence;
 import java.util.Map;
 
 /**

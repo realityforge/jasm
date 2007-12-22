@@ -8,10 +8,6 @@
  */
 package jasm.dis.x86;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.Sequence;
-import jasm.util.lang.Endianness;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;
@@ -34,9 +30,13 @@ import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.util.Enumerator;
 import jasm.util.HexByte;
 import jasm.util.WordWidth;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.Sequence;
+import jasm.util.lang.Endianness;
 import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.EOFException;
+import java.io.IOException;
 import java.util.Map;
 
 /**

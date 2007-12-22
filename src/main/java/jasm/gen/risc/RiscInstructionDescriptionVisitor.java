@@ -8,11 +8,11 @@
  */
 package jasm.gen.risc;
 
-import jasm.util.collect.Sequence;
-import jasm.util.program.ProgramError;
 import jasm.gen.InstructionConstraint;
 import jasm.gen.InstructionDescription;
 import jasm.gen.risc.field.RiscField;
+import jasm.util.collect.Sequence;
+import jasm.util.program.ProgramError;
 
 /**
  *

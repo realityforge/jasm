@@ -8,14 +8,14 @@
  */
 package jasm.gen.risc;
 
+import jasm.gen.InstructionDescription;
+import jasm.gen.risc.field.OptionField;
 import jasm.util.collect.AppendableSequence;
 import jasm.util.collect.ArrayListSequence;
 import jasm.util.collect.Sequence;
 import jasm.util.collect.SequenceMultiMap;
 import jasm.util.lang.StaticLoophole;
 import jasm.util.program.ProgramError;
-import jasm.gen.InstructionDescription;
-import jasm.gen.risc.field.OptionField;
 import java.util.Iterator;
 
 /**

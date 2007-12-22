@@ -8,7 +8,6 @@
  */
 package jasm.util.io;
 
-import java.io.IOException;
 import java.io.Reader;
 
 /**

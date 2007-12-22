@@ -8,9 +8,9 @@
  */
 package jasm.gen;
 
+import jasm.Argument;
 import jasm.util.collect.Sequence;
 import jasm.util.program.ProgramError;
-import jasm.Argument;
 import java.lang.reflect.Method;
 
 /**

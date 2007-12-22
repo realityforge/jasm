@@ -8,10 +8,10 @@
  */
 package jasm.dis.risc;
 
-import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.risc.RiscTemplate;
+import jasm.util.collect.Sequence;
 
 /**
  *

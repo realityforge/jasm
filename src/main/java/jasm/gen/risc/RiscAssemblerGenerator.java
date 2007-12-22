@@ -8,10 +8,6 @@
  */
 package jasm.gen.risc;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.Sequence;
-import jasm.util.io.IndentWriter;
-import jasm.util.program.ProgramError;
 import jasm.Argument;
 import jasm.LabelOffsetInstruction;
 import jasm.SymbolicArgument;
@@ -26,6 +22,10 @@ import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.field.InputOperandField;
 import jasm.gen.risc.field.OperandField;
 import jasm.util.Ints;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.Sequence;
+import jasm.util.io.IndentWriter;
+import jasm.util.program.ProgramError;
 
 /**
  *

@@ -8,10 +8,6 @@
  */
 package jasm.gen.risc;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.Sequence;
-import jasm.util.program.ProgramError;
 import jasm.gen.InstructionConstraint;
 import jasm.gen.InstructionDescription;
 import jasm.gen.OffsetParameter;
@@ -21,6 +17,10 @@ import jasm.gen.risc.field.OperandField;
 import jasm.gen.risc.field.OptionField;
 import jasm.gen.risc.field.ReservedField;
 import jasm.gen.risc.field.RiscField;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.Sequence;
+import jasm.util.program.ProgramError;
 
 /**
  * @author Bernd Mathiske

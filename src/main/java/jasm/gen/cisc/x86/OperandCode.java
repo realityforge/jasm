@@ -8,8 +8,6 @@
  */
 package jasm.gen.cisc.x86;
 
-import jasm.util.Sets;
-import jasm.util.lang.StaticLoophole;
 import jasm.Argument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.AssemblyTestComponent;
@@ -53,6 +51,8 @@ import static jasm.gen.cisc.x86.OperandTypeCode.v;
 import static jasm.gen.cisc.x86.OperandTypeCode.w;
 import static jasm.gen.cisc.x86.OperandTypeCode.z;
 import jasm.util.Enumerator;
+import jasm.util.Sets;
+import jasm.util.lang.StaticLoophole;
 import java.util.HashSet;
 import java.util.Set;
 

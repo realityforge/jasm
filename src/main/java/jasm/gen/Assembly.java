@@ -8,16 +8,16 @@
  */
 package jasm.gen;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.Sequence;
-import jasm.util.program.ProgramError;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;
 import jasm.InstructionSet;
 import jasm.Label;
 import jasm.gen.risc.bitRange.BitRangeOrder;
+import jasm.util.collect.AppendableSequence;
+import jasm.util.collect.ArrayListSequence;
+import jasm.util.collect.Sequence;
+import jasm.util.program.ProgramError;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 

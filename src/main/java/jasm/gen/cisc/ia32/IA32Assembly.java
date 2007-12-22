@@ -8,10 +8,10 @@
  */
 package jasm.gen.cisc.ia32;
 
-import jasm.util.collect.Sequence;
 import jasm.InstructionSet;
 import jasm.gen.cisc.x86.FloatingPointOpcodeMap;
 import jasm.gen.cisc.x86.X86Assembly;
+import jasm.util.collect.Sequence;
 
 /**
  * @author Bernd Mathiske

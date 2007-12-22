@@ -8,9 +8,9 @@
  */
 package jasm.gen.risc.field;
 
+import jasm.gen.risc.bitRange.BitRange;
 import jasm.util.collect.AppendableSequence;
 import jasm.util.collect.ArrayListSequence;
-import jasm.gen.risc.bitRange.BitRange;
 
 /**
  * @author Bernd Mathiske

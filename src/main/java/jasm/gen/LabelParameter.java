@@ -8,11 +8,11 @@
  */
 package jasm.gen;
 
-import jasm.util.collect.Iterables;
 import jasm.Argument;
 import jasm.Label;
-import java.util.Set;
+import jasm.util.collect.Iterables;
 import java.util.Collections;
+import java.util.Set;
 
 /**
  * @author Bernd Mathiske

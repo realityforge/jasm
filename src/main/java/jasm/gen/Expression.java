@@ -8,8 +8,8 @@
  */
 package jasm.gen;
 
-import jasm.util.collect.Sequence;
 import jasm.Argument;
+import jasm.util.collect.Sequence;
 
 /**
  * An expression can provide the value of an operand field. This enables synthetic instructions to be

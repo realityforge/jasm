@@ -8,11 +8,11 @@
  */
 package jasm.dis.ppc;
 
-import jasm.util.collect.Sequence;
 import jasm.Argument;
 import jasm.dis.Address64Instruction;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.risc.ppc.PPCTemplate;
+import jasm.util.collect.Sequence;
 
 /**
  *

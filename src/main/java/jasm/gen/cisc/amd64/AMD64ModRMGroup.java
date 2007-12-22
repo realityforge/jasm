@@ -8,7 +8,6 @@
  */
 package jasm.gen.cisc.amd64;
 
-import jasm.util.collect.ArrayListSequence;
 import jasm.amd64.AMD64GeneralRegister16;
 import static jasm.amd64.AMD64GeneralRegister16.AX;
 import jasm.amd64.AMD64GeneralRegister32;
@@ -46,6 +45,7 @@ import static jasm.gen.cisc.x86.OperandCode.Rv;
 import static jasm.gen.cisc.x86.OperandCode.VRdq;
 import static jasm.gen.cisc.x86.OperandTypeCode.v;
 import jasm.gen.cisc.x86.X86TemplateContext;
+import jasm.util.collect.ArrayListSequence;
 
 /**
  * See A-7 in the book.

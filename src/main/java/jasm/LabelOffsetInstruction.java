@@ -9,9 +9,9 @@
 package jasm;
 
 import jasm.util.Enums;
-import jasm.util.collect.Sequence;
 import jasm.util.Ints;
 import jasm.util.WordWidth;
+import jasm.util.collect.Sequence;
 
 /**
  * @author Bernd Mathiske

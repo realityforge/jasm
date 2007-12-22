@@ -8,12 +8,12 @@
  */
 package jasm.dis.ppc;
 
-import jasm.util.lang.Endianness;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.risc.RiscDisassembler;
 import jasm.gen.risc.ppc.PPCAssembly;
 import jasm.gen.risc.ppc.PPCTemplate;
 import jasm.util.WordWidth;
+import jasm.util.lang.Endianness;
 
 /**
  *

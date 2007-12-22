@@ -8,9 +8,6 @@
  */
 package jasm.gen.risc.field;
 
-import jasm.util.collect.Iterables;
-import jasm.util.Sets;
-import jasm.util.lang.StaticLoophole;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.SymbolicArgument;
@@ -22,7 +19,10 @@ import jasm.gen.WrappableSpecification;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
+import jasm.util.Sets;
 import jasm.util.Symbolizer;
+import jasm.util.collect.Iterables;
+import jasm.util.lang.StaticLoophole;
 
 /**
  * @author Bernd Mathiske

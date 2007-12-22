@@ -8,10 +8,10 @@
  */
 package jasm.util;
 
-import java.util.EnumSet;
-import jasm.util.collect.Sequence;
-import jasm.util.collect.MutableSequence;
 import jasm.util.collect.ArraySequence;
+import jasm.util.collect.MutableSequence;
+import jasm.util.collect.Sequence;
+import java.util.EnumSet;
 
 /**
  * Additional dealings with Enum types.

@@ -8,10 +8,10 @@
  */
 package jasm.gen.risc.sparc;
 
-import jasm.util.collect.Sequence;
 import jasm.InstructionSet;
 import jasm.gen.risc.RiscAssembly;
 import jasm.gen.risc.bitRange.BitRangeOrder;
+import jasm.util.collect.Sequence;
 
 /**
  * @author Bernd Mathiske

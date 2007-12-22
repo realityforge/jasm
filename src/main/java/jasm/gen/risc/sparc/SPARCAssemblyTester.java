@@ -8,15 +8,15 @@
  */
 package jasm.gen.risc.sparc;
 
-import jasm.util.collect.Sequence;
-import jasm.util.io.IndentWriter;
-import jasm.util.lang.Endianness;
-import jasm.util.program.ProgramError;
 import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.risc.RiscAssemblyTester;
 import jasm.util.WordWidth;
+import jasm.util.collect.Sequence;
+import jasm.util.io.IndentWriter;
+import jasm.util.lang.Endianness;
+import jasm.util.program.ProgramError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;

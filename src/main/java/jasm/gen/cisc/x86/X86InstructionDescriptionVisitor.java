@@ -8,7 +8,6 @@
  */
 package jasm.gen.cisc.x86;
 
-import jasm.util.program.ProgramError;
 import jasm.gen.ArgumentRange;
 import jasm.gen.ExternalOmission;
 import jasm.gen.ImplicitOperand;
@@ -17,6 +16,7 @@ import jasm.gen.InstructionDescription;
 import jasm.gen.TestArgumentExclusion;
 import jasm.gen.cisc.TemplateNotNeededException;
 import jasm.util.HexByte;
+import jasm.util.program.ProgramError;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
 import jasm.x86.SegmentRegister;

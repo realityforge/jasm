@@ -8,9 +8,6 @@
  */
 package jasm.gen.risc;
 
-import jasm.util.MutableQueue;
-import jasm.util.collect.Sequence;
-import jasm.util.lang.Strings;
 import jasm.Argument;
 import jasm.ExternalMnemonicSuffixArgument;
 import jasm.dis.DisassembledLabel;
@@ -20,6 +17,9 @@ import jasm.gen.InstructionConstraint;
 import jasm.gen.risc.field.BranchDisplacementOperandField;
 import jasm.gen.risc.field.OperandField;
 import jasm.gen.risc.field.RiscField;
+import jasm.util.MutableQueue;
+import jasm.util.collect.Sequence;
+import jasm.util.lang.Strings;
 
 /**
  * Output of RISC instructions in external assembler format
