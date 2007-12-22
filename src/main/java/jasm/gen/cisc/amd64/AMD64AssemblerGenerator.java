@@ -29,7 +29,7 @@ import jasm.util.program.ProgramError;
  *
  * @author Bernd Mathiske
  */
-public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template> {
+public final class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template> {
 
     public AMD64AssemblerGenerator() {
         super(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);
@@ -138,7 +138,7 @@ public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template
     }
 
     @Override
-    protected void printPrefixes(IndentWriter writer, AMD64Template template) {
+    protected final void printPrefixes(IndentWriter writer, AMD64Template template) {
         super.printPrefixes(writer, template);
         if (template.operandSizeAttribute() == WordWidth.BITS_64 && template.instructionDescription().defaultOperandSize() != WordWidth.BITS_64) {
             printUnconditionalRexPrefix(writer, template);
@@ -161,7 +161,7 @@ public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template
     }
 
     @Override
-    protected void printModVariants(IndentWriter writer, AMD64Template template) {
+    protected final void printModVariants(IndentWriter writer, AMD64Template template) {
         if (template.modCase() != X86TemplateContext.ModCase.MOD_0 || template.parameters().size() == 0) {
             return;
         }
@@ -207,7 +207,7 @@ public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template
     }
 
     @Override
-    protected void printSibVariants(IndentWriter writer, AMD64Template template) {
+    protected final void printSibVariants(IndentWriter writer, AMD64Template template) {
         if (template.parameters().size() == 0 ||
                         template.modCase() == null || template.modCase() == X86TemplateContext.ModCase.MOD_3 ||
                 template.rmCase() != X86TemplateContext.RMCase.NORMAL) {

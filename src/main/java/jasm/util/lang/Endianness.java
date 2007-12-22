@@ -94,11 +94,11 @@ public enum Endianness {
     };
 
     @Override
-    public String toString() {
+    public final String toString() {
         return name().toLowerCase();
     }
 
-    public byte readByte(InputStream stream) throws IOException {
+    public final byte readByte(InputStream stream) throws IOException {
         final int result = stream.read();
         if (result < 0) {
             throw new IOException();

@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author Bernd Mathiske
  */
-public class SPARC32Disassembler extends SPARCDisassembler<SPARC32DisassembledInstruction> {
+public final class SPARC32Disassembler extends SPARCDisassembler<SPARC32DisassembledInstruction> {
 
     private final int _startAddress;
 
@@ -31,12 +31,12 @@ public class SPARC32Disassembler extends SPARCDisassembler<SPARC32DisassembledIn
     }
 
     @Override
-    protected SPARC32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, SPARCTemplate template, List<Argument> arguments) {
+    protected final SPARC32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, SPARCTemplate template, List<Argument> arguments) {
         return new SPARC32DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
     }
 
     @Override
-    protected Assembler createAssembler(int offset) {
+    protected final Assembler createAssembler(int offset) {
         return new SPARC32Assembler(_startAddress + offset);
     }
 

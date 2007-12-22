@@ -17,7 +17,7 @@ import static jasm.gen.risc.sparc.SPARCFields.op3;
  * @author Dave Ungar
  * @author Adam Spitz
  */
-public class ImplementationDependent extends SPARCInstructionDescriptionCreator {
+public final class ImplementationDependent extends SPARCInstructionDescriptionCreator {
 
     private void create_A23() {
         define("impdep1", op(0x2), op3(0x36), _impl_dep);

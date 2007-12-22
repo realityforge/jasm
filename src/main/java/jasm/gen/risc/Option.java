@@ -23,7 +23,7 @@ import jasm.gen.risc.field.OptionField;
  * @author Bernd Mathiske
  * @author Doug Simon
  */
-public class Option {
+public final class Option {
 
     /**
      * The addition to the assembler method's name used to specify this option value.
@@ -45,15 +45,15 @@ public class Option {
      */
     private final OptionField _field;
 
-    public String name() {
+    public final String name() {
         return _name;
     }
 
-    public String externalName() {
+    public final String externalName() {
         return _externalName;
     }
 
-    public int value() {
+    public final int value() {
         return _value;
     }
 
@@ -64,21 +64,21 @@ public class Option {
         _field = field;
     }
 
-    public OptionField field() {
+    public final OptionField field() {
         return _field;
     }
 
-    public boolean isRedundant() {
+    public final boolean isRedundant() {
         return (_field.defaultOption() != null) && (_value == _field.defaultOption()._value) && (!(equals(_field.defaultOption())));
     }
 
     @Override
-    public boolean equals(Object other) {
+    public final boolean equals(Object other) {
         return other instanceof Option && _name.equals(((Option) other)._name);
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return _name.hashCode();
     }
 }

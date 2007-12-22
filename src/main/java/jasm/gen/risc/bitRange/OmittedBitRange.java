@@ -20,7 +20,7 @@ package jasm.gen.risc.bitRange;
  * @author Dave Ungar
  * @author Adam Spitz
  */
-public class OmittedBitRange extends ContiguousBitRange {
+public final class OmittedBitRange extends ContiguousBitRange {
 
     private int _width;
 
@@ -31,34 +31,34 @@ public class OmittedBitRange extends ContiguousBitRange {
     }
 
     @Override
-    public int width() {
+    public final int width() {
         return _width;
     }
 
     @Override
-    public int encodedWidth() {
+    public final int encodedWidth() {
         return 0;
     }
 
     @Override
-    public BitRange move(boolean left, int bits) {
+    public final BitRange move(boolean left, int bits) {
         return this;
     }
 
     /* Accessing */
 
     @Override
-    public int instructionMask() {
+    public final int instructionMask() {
         return 0;
     }
 
     @Override
-    public int numberOfLessSignificantBits() {
+    public final int numberOfLessSignificantBits() {
         return 32;
     }
 
     @Override
-    public boolean equals(Object other) {
+    public final boolean equals(Object other) {
         if (!(other instanceof OmittedBitRange)) {
             throw new Error("Invalid argument type\n");
         }
@@ -67,39 +67,39 @@ public class OmittedBitRange extends ContiguousBitRange {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return _width;
     }
 
     /* Extracting */
     @Override
-    public int extractSignedInt(int syllable) {
+    public final int extractSignedInt(int syllable) {
         return 0;
     }
 
     @Override
-    public int extractUnsignedInt(int syllable) {
+    public final int extractUnsignedInt(int syllable) {
         return 0;
     }
 
     /* Inserting */
     @Override
-    public int assembleUncheckedSignedInt(int signedInt) {
+    public final int assembleUncheckedSignedInt(int signedInt) {
         return 0;
     }
 
     @Override
-    public int assembleUncheckedUnsignedInt(int unsignedInt) {
+    public final int assembleUncheckedUnsignedInt(int unsignedInt) {
         return 0;
     }
 
     @Override
-    public String encodingString(String value, boolean signed, boolean checked) {
+    public final String encodingString(String value, boolean signed, boolean checked) {
         return "";
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return "omit" + _width;
     }
 }

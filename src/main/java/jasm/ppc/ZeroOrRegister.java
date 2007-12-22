@@ -27,7 +27,7 @@ public abstract class ZeroOrRegister extends AbstractSymbolicArgument {
      * {@code [target .. target+n]} where the range
      * wraps at 32.
      */
-    public boolean isOutsideRegisterRange(GPR target, int n) {
+    public final boolean isOutsideRegisterRange(GPR target, int n) {
         final int rt = target.value();
         final int ra = value();
         final int numRegs = (n + 3) / 4;

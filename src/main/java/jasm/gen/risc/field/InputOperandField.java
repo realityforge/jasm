@@ -23,7 +23,7 @@ import java.util.Collections;
  *
  * @author Doug Simon
  */
-public class InputOperandField extends OperandField<ImmediateArgument> {
+public final class InputOperandField extends OperandField<ImmediateArgument> {
 
     private final Iterable< ? extends Argument> _testArguments;
     private final ArgumentRange _argumentRange;
@@ -39,34 +39,34 @@ public class InputOperandField extends OperandField<ImmediateArgument> {
     }
 
     @Override
-    public ImmediateArgument disassemble(int instruction) {
+    public final ImmediateArgument disassemble(int instruction) {
         ProgramError.unexpected();
         return null;
     }
 
-    public Class type() {
+    public final Class type() {
         return int.class;
     }
 
-    public String valueString() {
+    public final String valueString() {
         return variableName();
     }
 
     @Override
-    public InputOperandField setVariableName(String name) {
+    public final InputOperandField setVariableName(String name) {
         super.setVariableName(name);
         return this;
     }
 
-    public Iterable< ? extends Argument> getLegalTestArguments() {
+    public final Iterable< ? extends Argument> getLegalTestArguments() {
         return _testArguments;
     }
 
-    public Iterable<? extends Argument> getIllegalTestArguments() {
+    public final Iterable<? extends Argument> getIllegalTestArguments() {
       return Collections.emptySet();
     }
 
-    public ArgumentRange argumentRange() {
+    public final ArgumentRange argumentRange() {
         return _argumentRange;
     }
 

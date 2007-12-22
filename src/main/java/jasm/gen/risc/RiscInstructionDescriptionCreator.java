@@ -37,7 +37,7 @@ public abstract class RiscInstructionDescriptionCreator extends InstructionDescr
     }
 
     @Override
-    protected RiscInstructionDescription createInstructionDescription(List<Object> specifications) {
+    protected final RiscInstructionDescription createInstructionDescription(List<Object> specifications) {
         return new RiscInstructionDescription(specifications);
     }
 
@@ -121,7 +121,7 @@ public abstract class RiscInstructionDescriptionCreator extends InstructionDescr
      * @param patterns      the replacements for one or more parameters of the original instruction
      * @return the newly created instruction descriptions resulting from the substitution wrapped in a RiscInstructionDescriptionModifier
      */
-    protected RiscInstructionDescriptionModifier synthesize(String name, String templateName, Object... patterns) {
+    protected final RiscInstructionDescriptionModifier synthesize(String name, String templateName, Object... patterns) {
         final ArrayList<RiscInstructionDescription> instructionDescriptions = new ArrayList<RiscInstructionDescription>();
         // Creating a new VariableSequence here prevents iterator comodification below:
         final List<? extends RiscTemplate> nameTemplates = _templateCreator.nameToTemplates(templateName);

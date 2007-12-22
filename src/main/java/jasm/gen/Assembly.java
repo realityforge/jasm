@@ -13,7 +13,6 @@ import jasm.Assembler;
 import jasm.AssemblyException;
 import jasm.InstructionSet;
 import jasm.Label;
-import jasm.gen.risc.bitRange.BitRangeOrder;
 import jasm.util.program.ProgramError;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -37,11 +36,11 @@ public abstract class Assembly<Template_Type extends Template> {
         _templateType = templateType;
     }
 
-    public InstructionSet instructionSet() {
+    public final InstructionSet instructionSet() {
         return _instructionSet;
     }
 
-    public Class<Template_Type> templateType() {
+    public final Class<Template_Type> templateType() {
         return _templateType;
     }
 
@@ -49,14 +48,14 @@ public abstract class Assembly<Template_Type extends Template> {
 
     private List<Template_Type> _templates;
 
-    public List<Template_Type> templates() {
+    public final List<Template_Type> templates() {
         if (_templates == null) {
             _templates = createTemplates();
         }
         return _templates;
     }
 
-    public List<Template_Type> getLabelTemplates() {
+    public final List<Template_Type> getLabelTemplates() {
         final ArrayList<Template_Type> result = new ArrayList<Template_Type>();
         for (Template_Type template : templates()) {
             if (template.labelParameterIndex() >= 0) {
@@ -96,7 +95,7 @@ public abstract class Assembly<Template_Type extends Template> {
         return template._assemblerMethod;
     }
 
-    public void assemble(Assembler assembler, Template_Type template, List<Argument> arguments) throws AssemblyException {
+    public final void assemble(Assembler assembler, Template_Type template, List<Argument> arguments) throws AssemblyException {
         assert arguments.size() == template.parameters().size();
         final Method assemblerMethod = getAssemblerMethod(assembler, template, arguments);
         final Object[] objects = new Object[arguments.size()];

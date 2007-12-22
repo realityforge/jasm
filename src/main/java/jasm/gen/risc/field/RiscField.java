@@ -39,15 +39,15 @@ public abstract class RiscField implements Cloneable, StaticFieldName {
 
     private String _name;
 
-    public String name() {
+    public final String name() {
         return _name;
     }
 
-    public void setName(String name) {
+    public final void setName(String name) {
         _name = name;
     }
 
-  public BitRange bitRange() {
+  public final BitRange bitRange() {
         return _bitRange;
     }
 
@@ -56,7 +56,7 @@ public abstract class RiscField implements Cloneable, StaticFieldName {
      * (i.e. their bit ranges are equal).
      */
     @Override
-    public boolean equals(Object other) {
+    public final boolean equals(Object other) {
         if (other instanceof RiscField) {
             final RiscField riscField = (RiscField) other;
             return bitRange().equals(riscField.bitRange());
@@ -65,7 +65,7 @@ public abstract class RiscField implements Cloneable, StaticFieldName {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int result = _bitRange.hashCode();
         if (_name != null) {
             result ^= _name.hashCode();
@@ -74,7 +74,7 @@ public abstract class RiscField implements Cloneable, StaticFieldName {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return name();
     }
 

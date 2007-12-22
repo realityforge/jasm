@@ -27,20 +27,20 @@ public abstract class PPCInstructionDescriptionCreator extends RiscInstructionDe
     }
 
     @Override
-    public PPCAssembly assembly() {
+    public final PPCAssembly assembly() {
         final Assembly assembly = super.assembly();
         return (PPCAssembly) assembly;
     }
 
-    protected RiscInstructionDescription define64(Object... specifications) {
+    protected final RiscInstructionDescription define64(Object... specifications) {
         return (assembly().generating64BitInstructions()) ? define(specifications) : null;
     }
 
-    protected RiscInstructionDescription defineP5(Object... specifications) {
+    protected final RiscInstructionDescription defineP5(Object... specifications) {
         return (assembly().generatingPower5Instructions()) ? define(specifications) : null;
     }
 
-    protected RiscInstructionDescriptionModifier synthesize64(String name, String templateName, Object... patterns) {
+    protected final RiscInstructionDescriptionModifier synthesize64(String name, String templateName, Object... patterns) {
       if ((assembly().generating64BitInstructions())) {
         return synthesize(name, templateName, patterns);
       } else {

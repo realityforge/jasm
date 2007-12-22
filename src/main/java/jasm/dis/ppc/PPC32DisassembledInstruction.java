@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @author Bernd Mathiske
  */
-public class PPC32DisassembledInstruction extends PPCDisassembledInstruction implements Address32Instruction {
+public final class PPC32DisassembledInstruction extends PPCDisassembledInstruction implements Address32Instruction {
 
     private final Address32Instruction.Mixin _addressInstruction;
 
@@ -26,15 +26,15 @@ public class PPC32DisassembledInstruction extends PPCDisassembledInstruction imp
         _addressInstruction = new Address32Instruction.Mixin(this, startAddress);
     }
 
-    public int address() {
+    public final int address() {
         return _addressInstruction.address();
     }
 
-    public String addressString() {
+    public final String addressString() {
         return _addressInstruction.addressString();
     }
 
-    public int addressToOffset(ImmediateArgument argument) {
+    public final int addressToOffset(ImmediateArgument argument) {
         return _addressInstruction.addressToOffset(argument);
     }
 }

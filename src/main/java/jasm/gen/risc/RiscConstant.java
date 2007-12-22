@@ -16,7 +16,7 @@ import jasm.gen.risc.field.RiscField;
  *
  * @author Bernd Mathiske
  */
-public class RiscConstant {
+public final class RiscConstant {
 
     private final RiscField _field;
     private final int _value;
@@ -31,16 +31,16 @@ public class RiscConstant {
         _value = value;
     }
 
-    public RiscField field() {
+    public final RiscField field() {
         return _field;
     }
 
-    public int value() {
+    public final int value() {
         return _value;
     }
 
     @Override
-    public boolean equals(Object other) {
+    public final boolean equals(Object other) {
         if (other instanceof RiscConstant) {
             final RiscConstant riscConstant = (RiscConstant) other;
             return _field.equals(riscConstant._field) && _value == riscConstant._value;
@@ -49,12 +49,12 @@ public class RiscConstant {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return _field.hashCode() ^ _value;
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return _field.toString() + "(" + _value + ")";
     }
 }

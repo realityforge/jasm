@@ -12,7 +12,6 @@ import jasm.InstructionSet;
 import jasm.dis.risc.OpcodeMaskGroup;
 import jasm.dis.risc.SpecificityGroup;
 import jasm.gen.Assembly;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -60,7 +59,7 @@ public abstract class RiscAssembly<Template_Type extends RiscTemplate> extends A
         }
     }
 
-  public List<SpecificityGroup<Template_Type>> specificityGroups() {
+  public final List<SpecificityGroup<Template_Type>> specificityGroups() {
         if (_specificityGroups == null) {
             initialize();
         }

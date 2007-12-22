@@ -27,7 +27,7 @@ import static jasm.gen.risc.sparc.SPARCFields.op3;
  * @author Dave Ungar
  * @author Adam Spitz
  */
-public class RegisterWindowManagement extends SPARCInstructionDescriptionCreator {
+public final class RegisterWindowManagement extends SPARCInstructionDescriptionCreator {
 
     private void createSaveOrRestore(String name, int op3Contents) {
         define(name, op(0x2), _rs1, op3(op3Contents), i(0), _res_12_5, _rs2, _rd);

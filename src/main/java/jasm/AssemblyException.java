@@ -14,7 +14,7 @@ package jasm;
  * @author Bernd Mathiske
  * @author Doug Simon
  */
-public class AssemblyException extends Exception {
+public final class AssemblyException extends Exception {
 
     public AssemblyException(String message) {
         super(message);

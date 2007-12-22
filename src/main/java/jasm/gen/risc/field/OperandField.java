@@ -15,7 +15,6 @@ import jasm.gen.Parameter;
 import jasm.gen.Template;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
-import jasm.util.collect.CollectionUtil;
 import jasm.util.lang.StaticLoophole;
 import java.util.Collections;
 import java.util.Set;
@@ -41,15 +40,15 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
         _signDependentOperations = SignDependentOperations.UNSIGNED;
     }
 
-    public RiscConstant constant(int value) {
+    public final RiscConstant constant(int value) {
         return new RiscConstant(new ConstantField(name(), bitRange()), value);
     }
 
-    protected SignDependentOperations signDependentOperations() {
+    protected final SignDependentOperations signDependentOperations() {
         return _signDependentOperations;
     }
 
-    protected void setSignDependentOperations(SignDependentOperations signDependentOperations) {
+    protected final void setSignDependentOperations(SignDependentOperations signDependentOperations) {
         _signDependentOperations = signDependentOperations;
     }
 
@@ -61,7 +60,7 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
         return _signDependentOperations.minArgumentValue(bitRange());
     }
 
-  public int extract(int instruction) {
+  public final int extract(int instruction) {
         return _signDependentOperations.extract(instruction, bitRange());
     }
 
@@ -70,7 +69,7 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
     /**
      * @return the minimal difference between any two potential operands
      */
-    public int grain() {
+    public final int grain() {
         return 1 << zeroes();
     }
 
@@ -82,7 +81,7 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
     }
 
     @Override
-    public OperandField<Argument_Type> clone() {
+    public final OperandField<Argument_Type> clone() {
         return StaticLoophole.cast(super.clone());
     }
 
@@ -98,13 +97,13 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
         return result;
     }
 
-    public boolean isSigned() {
+    public final boolean isSigned() {
         return _signDependentOperations == SignDependentOperations.SIGNED;
     }
 
     private String _variableName;
 
-    public String variableName() {
+    public final String variableName() {
         if (_variableName != null) {
             return _variableName;
         }
@@ -118,21 +117,21 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
 
   private Set<Argument> _excludedDisassemblerTestArguments = Collections.emptySet();
 
-  public Set<Argument> excludedDisassemblerTestArguments() {
+  public final Set<Argument> excludedDisassemblerTestArguments() {
         return _excludedDisassemblerTestArguments;
     }
 
     private Set<Argument> _excludedExternalTestArguments = Collections.emptySet();
 
-  public Set<Argument> excludedExternalTestArguments() {
+  public final Set<Argument> excludedExternalTestArguments() {
         return _excludedExternalTestArguments;
     }
 
-    public int compareTo(Parameter other) {
+    public final int compareTo(Parameter other) {
         return type().getName().compareTo(other.type().getName());
     }
 
-    public long evaluate(Template template, List<Argument> arguments) {
+    public final long evaluate(Template template, List<Argument> arguments) {
         if (boundTo() != null) {
             return boundTo().evaluate(template, arguments);
         }
@@ -147,7 +146,7 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
         return result;
     }
 
-    public Expression boundTo() {
+    public final Expression boundTo() {
         return _expression;
     }
 }

@@ -16,8 +16,8 @@ import junit.framework.TestCase;
  *
  * @author Bernd Mathiske
  */
-public class LongsTest extends TestCase {
-  public void test_numberOfEffectiveUnsignedBits() {
+public final class LongsTest extends TestCase {
+  public final void test_numberOfEffectiveUnsignedBits() {
     assertTrue(Longs.numberOfEffectiveUnsignedBits(0L) == 0);
     assertTrue(Longs.numberOfEffectiveUnsignedBits(1L) == 1);
     assertTrue(Longs.numberOfEffectiveUnsignedBits(2L) == 2);
@@ -32,7 +32,7 @@ public class LongsTest extends TestCase {
     assertTrue(Longs.numberOfEffectiveUnsignedBits(257L) == 9);
   }
 
-  public void test_numberOfEffectiveSignedBits() {
+  public final void test_numberOfEffectiveSignedBits() {
     for (long i = 0; i < 257L; i++) {
       assertTrue(Longs.numberOfEffectiveSignedBits(i) == Longs.numberOfEffectiveUnsignedBits(i) + 1L);
     }

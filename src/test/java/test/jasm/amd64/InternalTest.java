@@ -40,7 +40,7 @@ import junit.framework.TestCase;
 /**
  * @author Bernd Mathiske
  */
-public class InternalTest extends TestCase {
+public final class InternalTest extends TestCase {
   private String disassemble(long startAddress, byte[] bytes) throws IOException, AssemblyException {
     final AMD64Disassembler disassembler = new AMD64Disassembler(startAddress);
     final BufferedInputStream stream = new BufferedInputStream(new ByteArrayInputStream(bytes));
@@ -90,7 +90,7 @@ public class InternalTest extends TestCase {
     return asm.toByteArray();
   }
 
-  public void test1() throws Exception {
+  public final void test1() throws Exception {
     final long startAddress = 0x12345678abcdef00L;
     final byte[] bytes = assemble1(startAddress);
     final String output = disassemble(startAddress, bytes);
@@ -137,7 +137,7 @@ public class InternalTest extends TestCase {
     return asm.toByteArray();
   }
 
-  public void test2() throws Exception {
+  public final void test2() throws Exception {
     final long startAddress = 0x12345678L;
     final byte[] bytes = assemble2(startAddress);
     final String output = disassemble(startAddress, bytes);

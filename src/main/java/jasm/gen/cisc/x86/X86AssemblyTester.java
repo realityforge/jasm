@@ -39,7 +39,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
     }
 
     @Override
-    public X86Assembly<Template_Type> assembly() {
+    public final X86Assembly<Template_Type> assembly() {
         return StaticLoophole.cast(super.assembly());
     }
 
@@ -118,7 +118,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
      * we want to keep the code in this file here stable.
      */
     @Override
-    protected void assembleExternally(IndentWriter stream, Template_Type template, List<Argument> argumentList, String label) {
+    protected final void assembleExternally(IndentWriter stream, Template_Type template, List<Argument> argumentList, String label) {
         final WordWidth externalCodeSizeAttribute = template.externalCodeSizeAttribute();
         if (externalCodeSizeAttribute != null) {
             stream.println(".code" + externalCodeSizeAttribute.numberOfBits());
@@ -162,7 +162,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
     }
 
     @Override
-    protected byte[] readExternalInstruction(PushbackInputStream externalInputStream, Template_Type template, byte[] internalBytes) throws IOException {
+    protected final byte[] readExternalInstruction(PushbackInputStream externalInputStream, Template_Type template, byte[] internalBytes) throws IOException {
         if (X86Opcode.isFloatingPointEscape(template.opcode1())) {
             // We skip FWAIT instructions that the external assembler may inject before floating point operations
             final int externalOpcode = externalInputStream.read();
@@ -211,13 +211,13 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
     }
 
     @Override
-    protected boolean readNop(InputStream stream) throws IOException {
+    protected final boolean readNop(InputStream stream) throws IOException {
         final int instruction = stream.read();
         return instruction == 0x90;
     }
 
     @Override
-    protected String disassembleFields(Template_Type template, byte[] assembledInstruction) {
+    protected final String disassembleFields(Template_Type template, byte[] assembledInstruction) {
         return "<not yet implemented>";
     }
 }

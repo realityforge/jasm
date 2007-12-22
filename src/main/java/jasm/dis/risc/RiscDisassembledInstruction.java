@@ -26,7 +26,7 @@ public abstract class RiscDisassembledInstruction<Template_Type extends RiscTemp
     }
 
     @Override
-    public int offsetForRelativeAddressing() {
+    public final int offsetForRelativeAddressing() {
         return startOffset();
     }
 }

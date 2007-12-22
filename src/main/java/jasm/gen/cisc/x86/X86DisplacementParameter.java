@@ -13,14 +13,14 @@ import jasm.WordWidth;
 /**
  * @author Bernd Mathiske
  */
-public class X86DisplacementParameter extends X86OffsetParameter {
+public final class X86DisplacementParameter extends X86OffsetParameter {
 
     public X86DisplacementParameter(X86Operand.Designation designation, WordWidth width) {
         super(designation, width);
     }
 
     @Override
-    public String variableName() {
+    public final String variableName() {
         return "disp" + width().numberOfBits();
     }
 

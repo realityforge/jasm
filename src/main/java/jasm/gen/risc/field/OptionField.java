@@ -34,7 +34,7 @@ import java.util.ArrayList;
  * @author Adam Spitz
  * @author Doug Simon
  */
-public class OptionField extends RiscField {
+public final class OptionField extends RiscField {
 
     public OptionField(BitRange bitRange) {
         super(bitRange);
@@ -45,24 +45,24 @@ public class OptionField extends RiscField {
         return new OptionField(bitRange);
     }
 
-    public RiscConstant constant(int value) {
+    public final RiscConstant constant(int value) {
         return new RiscConstant(this, value);
     }
 
     protected Option _defaultOption;
 
-    public Option defaultOption() {
+    public final Option defaultOption() {
         return _defaultOption;
     }
 
     protected ArrayList<Option> _options = new ArrayList<Option>();
 
-    public Iterable<Option> options() {
+    public final Iterable<Option> options() {
         return _options;
     }
 
     @Override
-    public OptionField clone() {
+    public final OptionField clone() {
         final OptionField result = (OptionField) super.clone();
         result._options = (ArrayList<Option>) _options.clone();
         return result;
@@ -76,7 +76,7 @@ public class OptionField extends RiscField {
      * @param externalName addition to the external assembler syntax used to specify the option value
      * @return the extended field
      */
-    public OptionField withOption(String name, int value, String externalName) {
+    public final OptionField withOption(String name, int value, String externalName) {
         final OptionField result = clone();
         final Option newOption = new Option(name, value, externalName, result);
         for (Option option : _options) {
@@ -99,7 +99,7 @@ public class OptionField extends RiscField {
      * @param value  the option value
      * @return the extended field
      */
-    public OptionField withOption(String name, int value) {
+    public final OptionField withOption(String name, int value) {
         return withOption(name, value, name);
     }
 
@@ -110,7 +110,7 @@ public class OptionField extends RiscField {
      * @param argument   the option value represented as a symbol
      * @return the extended field
      */
-    public OptionField withOption(String name, SymbolicArgument argument) {
+    public final OptionField withOption(String name, SymbolicArgument argument) {
         if (argument instanceof ExternalMnemonicSuffixArgument) {
             return withOption(name, argument.value(), argument.externalValue());
         }

@@ -11,7 +11,7 @@ package jasm.util.program;
 /**
  * @author Bernd Mathiske
  */
-public class ProgramError extends Error {
+public final class ProgramError extends Error {
 
   private static final long serialVersionUID = 0;
 

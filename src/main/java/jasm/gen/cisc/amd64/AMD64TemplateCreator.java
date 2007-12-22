@@ -17,14 +17,14 @@ import jasm.WordWidth;
 /**
  * @author Bernd Mathiske
  */
-public class AMD64TemplateCreator extends X86TemplateCreator<AMD64Template> {
+public final class AMD64TemplateCreator extends X86TemplateCreator<AMD64Template> {
 
     public AMD64TemplateCreator() {
         super(WordWidth.BITS_64);
     }
 
     @Override
-    protected AMD64Template createTemplate(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {
+    protected final AMD64Template createTemplate(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {
         return new AMD64Template(instructionDescription, serial, instructionFamily, context);
     }
 

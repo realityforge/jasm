@@ -21,7 +21,7 @@ import jasm.util.io.IndentWriter;
  *
  * @author Bernd Mathiske
  */
-public class IA32AssemblerGenerator
+public final class IA32AssemblerGenerator
     extends X86AssemblerGenerator<IA32Template> {
 
     public IA32AssemblerGenerator() {
@@ -29,7 +29,7 @@ public class IA32AssemblerGenerator
     }
 
     @Override
-    protected void printModVariants(IndentWriter stream, IA32Template template) {
+    protected final void printModVariants(IndentWriter stream, IA32Template template) {
         if (template.modCase() != X86TemplateContext.ModCase.MOD_0) {
             return;
         }
@@ -62,7 +62,7 @@ public class IA32AssemblerGenerator
     }
 
     @Override
-    protected void printSibVariants(IndentWriter stream, IA32Template template) {
+    protected final void printSibVariants(IndentWriter stream, IA32Template template) {
         if (template.modCase() != null && template.modCase() != X86TemplateContext.ModCase.MOD_3 &&
                                           template.rmCase() == X86TemplateContext.RMCase.NORMAL &&
                                           template.addressSizeAttribute() == WordWidth.BITS_32) {

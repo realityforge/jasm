@@ -16,14 +16,14 @@ import jasm.gen.risc.RiscTemplateCreator;
  *
  * @author Bernd Mathiske
  */
-public class PPCTemplateCreator extends RiscTemplateCreator<PPCTemplate> {
+public final class PPCTemplateCreator extends RiscTemplateCreator<PPCTemplate> {
 
     PPCTemplateCreator() {
         super();
     }
 
     @Override
-    protected PPCTemplate createTemplate(InstructionDescription instructionDescription) {
+    protected final PPCTemplate createTemplate(InstructionDescription instructionDescription) {
         return new PPCTemplate(instructionDescription);
     }
 

@@ -40,12 +40,12 @@ public abstract class RiscAssemblyTester<Template_Type extends RiscTemplate, Dis
     }
 
     @Override
-    protected String disassembleFields(Template_Type template, byte[] assembledInstruction) {
+    protected final String disassembleFields(Template_Type template, byte[] assembledInstruction) {
         return new RiscFieldDisassembler<Template_Type>(template, assembledInstruction).toString();
     }
 
     @Override
-    protected boolean isLegalArgumentList(Template_Type template, List<Argument> arguments) {
+    protected final boolean isLegalArgumentList(Template_Type template, List<Argument> arguments) {
         final List<InstructionConstraint> constraints = template.instructionDescription().constraints();
         for (InstructionConstraint constraint : constraints) {
             if (!(constraint.check(template, arguments))) {

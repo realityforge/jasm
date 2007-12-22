@@ -18,7 +18,7 @@ import java.util.Collections;
 /**
  * @author Bernd Mathiske
  */
-public class X86EnumerableParameter<EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument> extends X86Parameter implements EnumerableParameter {
+public final class X86EnumerableParameter<EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument> extends X86Parameter implements EnumerableParameter {
 
     private final Enumerator<EnumerableArgument_Type> _enumerator;
 
@@ -59,28 +59,28 @@ public class X86EnumerableParameter<EnumerableArgument_Type extends Enum<Enumera
         }
     }
 
-    public Enumerator<EnumerableArgument_Type> enumerator() {
+    public final Enumerator<EnumerableArgument_Type> enumerator() {
         return _enumerator;
     }
 
-    public Class type() {
+    public final Class type() {
         return _enumerator.type();
     }
 
-    public String valueString() {
+    public final String valueString() {
         return variableName() + ".value()";
     }
 
-    public Iterable<EnumerableArgument_Type> getLegalTestArguments() {
+    public final Iterable<EnumerableArgument_Type> getLegalTestArguments() {
         return _enumerator;
     }
 
-    public Iterable<? extends Argument> getIllegalTestArguments() {
+    public final Iterable<? extends Argument> getIllegalTestArguments() {
       return Collections.emptySet();
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return type().getSimpleName();
     }
 

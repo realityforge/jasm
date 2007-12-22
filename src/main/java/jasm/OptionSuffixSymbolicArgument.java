@@ -24,11 +24,11 @@ public abstract class OptionSuffixSymbolicArgument extends AbstractSymbolicArgum
     }
 
     @Override
-    public String externalValue() {
+    public final String externalValue() {
         return _externalMnemonicSuffix;
     }
 
-    public boolean isOptional() {
+    public final boolean isOptional() {
         return true;
     }
 }

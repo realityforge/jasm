@@ -36,23 +36,23 @@ public abstract class DisassembledInstruction<Template_Type extends Template> im
         _arguments = arguments;
     }
 
-    public int startOffset() {
+    public final int startOffset() {
         return _startOffset;
     }
 
-    public int endOffset() {
+    public final int endOffset() {
         return _startOffset + _bytes.length;
     }
 
-    public byte[] bytes() {
+    public final byte[] bytes() {
         return _bytes.clone();
     }
 
-    public Template_Type template() {
+    public final Template_Type template() {
         return _template;
     }
 
-    public List<Argument> arguments() {
+    public final List<Argument> arguments() {
         return _arguments;
     }
 
@@ -67,7 +67,7 @@ public abstract class DisassembledInstruction<Template_Type extends Template> im
         return result;
     }
 
-    protected DisassembledLabel instructionOffsetToLabel(int instructionOffset, List<DisassembledLabel> labels) {
+    protected final DisassembledLabel instructionOffsetToLabel(int instructionOffset, List<DisassembledLabel> labels) {
         for (DisassembledLabel label : labels) {
             if (label.offset() == instructionOffset) {
                 return label;
@@ -76,13 +76,13 @@ public abstract class DisassembledInstruction<Template_Type extends Template> im
         return null;
     }
 
-    protected DisassembledLabel offsetArgumentToLabel(ImmediateArgument argument, List<DisassembledLabel> labels) {
+    protected final DisassembledLabel offsetArgumentToLabel(ImmediateArgument argument, List<DisassembledLabel> labels) {
         final int argumentOffset = (int) argument.asLong();
         final int targetOffset = argumentOffset + offsetForRelativeAddressing();
         return instructionOffsetToLabel(targetOffset, labels);
     }
 
-    protected DisassembledLabel addressArgumentToLabel(ImmediateArgument argument, List<DisassembledLabel> labels) {
+    protected final DisassembledLabel addressArgumentToLabel(ImmediateArgument argument, List<DisassembledLabel> labels) {
         final long targetOffset = addressToOffset(argument);
         if (targetOffset < 0) {
             return null;
@@ -92,7 +92,7 @@ public abstract class DisassembledInstruction<Template_Type extends Template> im
 
     public abstract String toString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper);
 
-    public String toString(List<DisassembledLabel> labels) {
+    public final String toString(List<DisassembledLabel> labels) {
         return toString(labels, null);
     }
 
@@ -100,7 +100,7 @@ public abstract class DisassembledInstruction<Template_Type extends Template> im
 
     public abstract String operandsToString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper);
 
-    public String operandsToString(List<DisassembledLabel> labels) {
+    public final String operandsToString(List<DisassembledLabel> labels) {
         return operandsToString(labels, null);
     }
 
@@ -109,7 +109,7 @@ public abstract class DisassembledInstruction<Template_Type extends Template> im
     /*
      * Return the byte array encoding this instruction.
      */
-    protected byte[] rawInstruction() {
+    protected final byte[] rawInstruction() {
         return _bytes;
     }
 

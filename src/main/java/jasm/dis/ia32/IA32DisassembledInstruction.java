@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * @author Bernd Mathiske
  */
-public class IA32DisassembledInstruction extends X86DisassembledInstruction<IA32Template> implements Address32Instruction {
+public final class IA32DisassembledInstruction extends X86DisassembledInstruction<IA32Template> implements Address32Instruction {
 
     private final Address32Instruction.Mixin _addressInstruction;
 
@@ -27,15 +27,15 @@ public class IA32DisassembledInstruction extends X86DisassembledInstruction<IA32
         _addressInstruction = new Address32Instruction.Mixin(this, startAddress);
     }
 
-    public int address() {
+    public final int address() {
         return _addressInstruction.address();
     }
 
-    public String addressString() {
+    public final String addressString() {
         return _addressInstruction.addressString();
     }
 
-    public int addressToOffset(ImmediateArgument argument) {
+    public final int addressToOffset(ImmediateArgument argument) {
         return _addressInstruction.addressToOffset(argument);
     }
 

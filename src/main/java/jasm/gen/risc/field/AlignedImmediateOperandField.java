@@ -36,13 +36,13 @@ public class AlignedImmediateOperandField extends ImmediateOperandField {
     }
 
     @Override
-    public String asJavaExpression() {
+    public final String asJavaExpression() {
         final String value = valueString();
         return "(" + super.asJavaExpression() + ") && ((" + value + " % " + grain() + ") == 0)";
     }
 
     @Override
-    public boolean check(Template template, List<Argument> arguments) {
+    public final boolean check(Template template, List<Argument> arguments) {
         if (!super.check(template, arguments)) {
             return false;
         }
@@ -51,17 +51,17 @@ public class AlignedImmediateOperandField extends ImmediateOperandField {
     }
 
     @Override
-    public int maxArgumentValue() {
+    public final int maxArgumentValue() {
         return super.maxArgumentValue() << zeroes();
     }
 
     @Override
-    public int minArgumentValue() {
+    public final int minArgumentValue() {
         return super.minArgumentValue() << zeroes();
     }
 
     @Override
-    public int zeroes() {
+    public final int zeroes() {
         return _zeroes;
     }
 
@@ -89,7 +89,7 @@ public class AlignedImmediateOperandField extends ImmediateOperandField {
     }
 
   @Override
-    public Immediate32Argument disassemble(int instruction) {
+    public final Immediate32Argument disassemble(int instruction) {
         return new Immediate32Argument(operandToArgument(extract(instruction)));
     }
 }

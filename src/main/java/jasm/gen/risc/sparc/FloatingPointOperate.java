@@ -29,7 +29,7 @@ import static jasm.gen.risc.sparc.SPARCFields.opf;
  * @author Dave Ungar
  * @author Adam Spitz
  */
-public class FloatingPointOperate extends SPARCInstructionDescriptionCreator {
+public final class FloatingPointOperate extends SPARCInstructionDescriptionCreator {
 
     private void createCompare(String name, String type, Object frs1Field, Object frs2Field, int opfContents) {
         define("f" + name + type, op(0x2), bits_29_27(0), _fcc_26_25, op3(0x35), frs1Field, frs2Field, opf(opfContents));

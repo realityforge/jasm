@@ -26,7 +26,7 @@ import java.util.Map;
  *
  * @author Bernd Mathiske
  */
-public class IA32Disassembler extends X86Disassembler<IA32Template, IA32DisassembledInstruction> {
+public final class IA32Disassembler extends X86Disassembler<IA32Template, IA32DisassembledInstruction> {
 
     private final int _startAddress;
 
@@ -36,17 +36,17 @@ public class IA32Disassembler extends X86Disassembler<IA32Template, IA32Disassem
     }
 
     @Override
-    protected boolean isRexPrefix(HexByte opcode) {
+    protected final boolean isRexPrefix(HexByte opcode) {
         return false;
     }
 
     @Override
-    protected IA32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, IA32Template template, List<Argument> arguments) {
+    protected final IA32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, IA32Template template, List<Argument> arguments) {
         return new IA32DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
     }
 
     @Override
-    protected Assembler createAssembler(int offset) {
+    protected final Assembler createAssembler(int offset) {
         return new IA32Assembler(_startAddress + offset);
     }
 
@@ -54,7 +54,7 @@ public class IA32Disassembler extends X86Disassembler<IA32Template, IA32Disassem
         X86InstructionHeader.createMapping(IA32Assembly.ASSEMBLY, WordWidth.BITS_32);
 
     @Override
-    protected Map<X86InstructionHeader, LinkedList<IA32Template>> headerToTemplates() {
+    protected final Map<X86InstructionHeader, LinkedList<IA32Template>> headerToTemplates() {
         return _headerToTemplates;
     }
 

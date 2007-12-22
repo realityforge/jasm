@@ -32,7 +32,7 @@ public class StateRegister extends AbstractSymbolicArgument {
     /**
      * @return true if this is the Y register or an Ancillary State register
      */
-    public boolean isYorASR() {
+    public final boolean isYorASR() {
         return this == Y || value() >= 16 && value() <= 31;
     }
 

@@ -13,7 +13,7 @@ package jasm.dis;
  *
  * @author Bernd Mathiske
  */
-public class DisassembledLabel {
+public final class DisassembledLabel {
 
     private final int _instructionIndex;
 
@@ -22,7 +22,7 @@ public class DisassembledLabel {
         _instructionIndex = instructionIndex;
     }
 
-    public int instructionIndex() {
+    public final int instructionIndex() {
         return _instructionIndex;
     }
 
@@ -30,21 +30,21 @@ public class DisassembledLabel {
 
     private int _serial = -1;
 
-    public void setSerial(int index) {
+    public final void setSerial(int index) {
         _serial = index;
     }
 
-    public String name() {
+    public final String name() {
         return PREFIX + _serial;
     }
 
     private int _offset = -1;
 
-    public void bind(int offset) {
+    public final void bind(int offset) {
         _offset = offset;
     }
 
-    public int offset() {
+    public final int offset() {
         return _offset;
     }
 }

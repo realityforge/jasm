@@ -22,29 +22,29 @@ import java.util.List;
 /**
  * @author Bernd Mathiske
  */
-public class IA32AssemblyTester extends X86AssemblyTester<IA32Template, IA32DisassembledInstruction> {
+public final class IA32AssemblyTester extends X86AssemblyTester<IA32Template, IA32DisassembledInstruction> {
 
     public IA32AssemblyTester(EnumSet<AssemblyTestComponent> components) {
         super(IA32Assembly.ASSEMBLY, WordWidth.BITS_32, components);
     }
 
     @Override
-    protected String assemblerCommand() {
+    protected final String assemblerCommand() {
         return "as -32";
     }
 
     @Override
-    protected Assembler createTestAssembler() {
+    protected final Assembler createTestAssembler() {
         return new IA32Assembler(0);
     }
 
     @Override
-    protected IA32Disassembler createTestDisassembler() {
+    protected final IA32Disassembler createTestDisassembler() {
         return new IA32Disassembler(0);
     }
 
     @Override
-    protected boolean isLegalArgumentList(IA32Template template, List<Argument> arguments) {
+    protected final boolean isLegalArgumentList(IA32Template template, List<Argument> arguments) {
         return true;
     }
 }

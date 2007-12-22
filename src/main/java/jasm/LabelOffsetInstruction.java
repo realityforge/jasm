@@ -40,16 +40,16 @@ public abstract class LabelOffsetInstruction extends LabelInstruction {
         assembler.addFixedLengthLabelInstruction(this);
     }
 
-    void setSize(int nBytes) {
+    final void setSize(int nBytes) {
         _size = nBytes;
     }
 
 
-    protected WordWidth labelWidth() {
+    protected final WordWidth labelWidth() {
         return _labelWidthSequence.get(_labelWidthIndex);
     }
 
-    void setLabelWidth(WordWidth width) throws AssemblyException {
+    final void setLabelWidth(WordWidth width) throws AssemblyException {
         for (int i = 0; i < _labelWidthSequence.size(); i++) {
             if (_labelWidthSequence.get(i).greaterEqual(width)) {
                 _labelWidthIndex = i;
@@ -63,11 +63,11 @@ public abstract class LabelOffsetInstruction extends LabelInstruction {
         return assembler().labelOffsetInstructionRelative(label(), this);
     }
 
-    WordWidth requiredLabelWidth() throws AssemblyException {
+    final WordWidth requiredLabelWidth() throws AssemblyException {
         return WordWidth.signedEffective(labelOffset());
     }
 
-    protected byte labelOffsetAsByte() throws AssemblyException {
+    protected final byte labelOffsetAsByte() throws AssemblyException {
         if (assembler().selectingLabelInstructions()) {
             return (byte) 0;
         }
@@ -78,7 +78,7 @@ public abstract class LabelOffsetInstruction extends LabelInstruction {
         return (byte) result;
     }
 
-    protected short labelOffsetAsShort() throws AssemblyException {
+    protected final short labelOffsetAsShort() throws AssemblyException {
         if (assembler().selectingLabelInstructions()) {
             return (short) 0;
         }
@@ -89,7 +89,7 @@ public abstract class LabelOffsetInstruction extends LabelInstruction {
         return (short) result;
     }
 
-    protected int labelOffsetAsInt() throws AssemblyException {
+    protected final int labelOffsetAsInt() throws AssemblyException {
         if (assembler().selectingLabelInstructions()) {
             return 0;
         }

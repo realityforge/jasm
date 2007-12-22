@@ -17,7 +17,7 @@ import jasm.gen.risc.bitRange.BitRangeOrder;
  * @author Adam Spitz
  * @author Bernd Mathiske
  */
-public class BranchDisplacementOperandField extends AlignedImmediateOperandField implements OffsetParameter {
+public final class BranchDisplacementOperandField extends AlignedImmediateOperandField implements OffsetParameter {
 
     public BranchDisplacementOperandField(BitRange bitRange) {
         super(bitRange, 2);

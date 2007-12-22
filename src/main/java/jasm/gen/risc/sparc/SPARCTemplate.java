@@ -16,7 +16,7 @@ import jasm.gen.risc.RiscTemplate;
  *
  * @author Bernd Mathiske
  */
-public class SPARCTemplate extends RiscTemplate {
+public final class SPARCTemplate extends RiscTemplate {
 
     SPARCTemplate(InstructionDescription instructionDescription) {
         super(instructionDescription);

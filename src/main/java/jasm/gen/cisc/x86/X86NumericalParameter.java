@@ -32,19 +32,19 @@ public abstract class X86NumericalParameter extends X86Parameter implements Para
         _width = width;
     }
 
-    public WordWidth width() {
+    public final WordWidth width() {
         return _width;
     }
 
-    public String valueString() {
+    public final String valueString() {
         return variableName();
     }
 
-    public Class type() {
+    public final Class type() {
         return width().canonicalPrimitiveType();
     }
 
-    public Iterable< ? extends ImmediateArgument> getLegalTestArguments() {
+    public final Iterable< ? extends ImmediateArgument> getLegalTestArguments() {
         try {
             switch (_width) {
                 case BITS_8:
@@ -65,12 +65,12 @@ public abstract class X86NumericalParameter extends X86Parameter implements Para
         return null;
     }
 
-    public Iterable<? extends Argument> getIllegalTestArguments() {
+    public final Iterable<? extends Argument> getIllegalTestArguments() {
       return Collections.emptySet();
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return getClass().getSimpleName();
     }
 }

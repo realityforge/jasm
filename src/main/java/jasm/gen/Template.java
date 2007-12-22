@@ -34,11 +34,11 @@ public abstract class Template implements Cloneable, Comparable<Template> {
         _serial = serial;
     }
 
-    public int serial() {
+    public final int serial() {
         return _serial;
     }
 
-    public void setSerial(int serial) {
+    public final void setSerial(int serial) {
         _serial = serial;
     }
 
@@ -46,14 +46,14 @@ public abstract class Template implements Cloneable, Comparable<Template> {
         return _instructionDescription;
     }
 
-    public int labelParameterIndex() {
+    public final int labelParameterIndex() {
         return _labelParameterIndex;
     }
 
     /**
      * Call this right before adding a parameter that may be represented by a label.
      */
-    protected void setLabelParameterIndex() {
+    protected final void setLabelParameterIndex() {
         if (_labelParameterIndex != -1) {
             ProgramError.unexpected("a template can have at most one label parameter");
         }
@@ -73,7 +73,7 @@ public abstract class Template implements Cloneable, Comparable<Template> {
         return _internalName;
     }
 
-    protected void setInternalName(String internalName) {
+    protected final void setInternalName(String internalName) {
         _internalName = internalName;
     }
 
@@ -84,11 +84,11 @@ public abstract class Template implements Cloneable, Comparable<Template> {
         return internalName();
     }
 
-    public boolean isDisassemblable() {
+    public final boolean isDisassemblable() {
         return _instructionDescription.isDisassemblable();
     }
 
-    public boolean isExternallyTestable() {
+    public final boolean isExternallyTestable() {
         return _instructionDescription.isExternallyTestable();
     }
 
@@ -101,7 +101,7 @@ public abstract class Template implements Cloneable, Comparable<Template> {
      *
      * @return the argument at index {@code i} in {@code arguments} where {@code parameter == parameters().get(i)}
      */
-    public Argument bindingFor(Parameter parameter, List<Argument> arguments) {
+    public final Argument bindingFor(Parameter parameter, List<Argument> arguments) {
         final List< ? extends Parameter> parameters = parameters();
         assert arguments.size() == parameters.size();
         final int index = CollectionUtil.indexOfIdentical(parameters, parameter);
@@ -109,7 +109,7 @@ public abstract class Template implements Cloneable, Comparable<Template> {
         return arguments.get(index);
     }
 
-    public Class[] parameterTypes() {
+    public final Class[] parameterTypes() {
       final List<? extends Parameter> parameters = parameters();
       final Class[] parameterTypes = new Class[parameters.size()];
         for (int i = 0; i < parameterTypes.length; i++) {
@@ -119,7 +119,7 @@ public abstract class Template implements Cloneable, Comparable<Template> {
     }
 
     @Override
-    public Template clone() {
+    public final Template clone() {
         try {
             final Template result = (Template) super.clone();
             result._instructionDescription = _instructionDescription.clone();
@@ -130,7 +130,7 @@ public abstract class Template implements Cloneable, Comparable<Template> {
         return null;
     }
 
-    public int compareTo(Template other) {
+    public final int compareTo(Template other) {
         int result = _internalName.compareTo(other._internalName);
         if (result != 0) {
             return result;

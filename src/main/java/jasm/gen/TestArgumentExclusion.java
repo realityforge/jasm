@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * @author Bernd Mathiske
  */
-public class TestArgumentExclusion {
+public final class TestArgumentExclusion {
 
   private final AssemblyTestComponent _component;
   private final WrappableSpecification _specification;
@@ -29,15 +29,15 @@ public class TestArgumentExclusion {
     _arguments = arguments;
   }
 
-  public AssemblyTestComponent component() {
+  public final AssemblyTestComponent component() {
     return _component;
   }
 
-  public WrappableSpecification wrappedSpecification() {
+  public final WrappableSpecification wrappedSpecification() {
     return _specification;
   }
 
-  public Set<Argument> arguments() {
+  public final Set<Argument> arguments() {
     return _arguments;
   }
 

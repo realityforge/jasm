@@ -37,7 +37,7 @@ final class TemplateSelector<Template_Type extends Template> {
     _pattern = pattern;
   }
 
-  final State select(Template_Type template) {
+  State select(Template_Type template) {
     if (template.serial() > _endSerial) {
       return State.DONE;
     } else if (template.serial() >= _startSerial &&

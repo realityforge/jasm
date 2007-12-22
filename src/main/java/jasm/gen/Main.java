@@ -16,7 +16,7 @@ import org.realityforge.cli.CLUtil;
 import org.realityforge.cli.Option;
 import org.realityforge.cli.OptionDescriptor;
 
-public class Main {
+public final class Main {
   private static final int HELP_OPT = 'h';
   private static final int DIR_OPT = 'd';
   private static final int VERBOSE_OPT = 1;

@@ -50,7 +50,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
     }
 
     @Override
-    protected int printMethod(IndentWriter writer, Template_Type template) {
+    protected final int printMethod(IndentWriter writer, Template_Type template) {
         final int startLineCount = writer.lineCount();
         writer.print("public final void ");
         writer.print(template.assemblerMethodName() + "(");
@@ -101,7 +101,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
     }
 
     @Override
-    protected int printLabelMethod(IndentWriter writer, Template_Type labelTemplate, List<Template_Type> labelTemplates) {
+    protected final int printLabelMethod(IndentWriter writer, Template_Type labelTemplate, List<Template_Type> labelTemplates) {
         final int startLineCount = writer.lineCount();
         printOffsetLabelMethod(writer, labelTemplate);
         return writer.lineCount() - startLineCount;
@@ -111,7 +111,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
      * Prints the reference to the raw method from which a synthetic method was defined.
      */
     @Override
-    protected void printExtraMethodJavadoc(IndentWriter writer, Template_Type template, ArrayList<String> extraLinks) {
+    protected final void printExtraMethodJavadoc(IndentWriter writer, Template_Type template, ArrayList<String> extraLinks) {
         if (template.instructionDescription().isSynthetic()) {
           final RiscTemplate rawTemplate = template.synthesizedFrom();
             final List<? extends Parameter> parameters = getParameters(rawTemplate);

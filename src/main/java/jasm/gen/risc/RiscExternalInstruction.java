@@ -78,7 +78,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
 
     private String _nameString;
 
-    public String name() {
+    public final String name() {
         if (_nameString == null) {
             _nameString = _template.externalName();
             for (Argument argument : _arguments) {
@@ -92,7 +92,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
 
     private String _operandsString;
 
-    public String operands() {
+    public final String operands() {
         if (_operandsString == null) {
             _operandsString = "";
             RiscInstructionDescriptionVisitor.Static.visitInstructionDescription(this, _template.instructionDescription());
@@ -101,7 +101,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return StringUtil.padLengthWithSpaces(name(), 10) + "    " + operands();
     }
 
@@ -114,7 +114,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
     /**
      * @return the symbol used to represent the value of the current location counter
      */
-    protected String locationCounterSymbol() {
+    protected final String locationCounterSymbol() {
         return ".";
     }
 
@@ -148,7 +148,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
 
     private Object _previousSpecification;
 
-    public void visitField(RiscField field) {
+    public final void visitField(RiscField field) {
         if (field instanceof OperandField) {
             final OperandField operandField = (OperandField) field;
             if (operandField.boundTo() != null) {
@@ -179,12 +179,12 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
         }
     }
 
-    public void visitConstant(RiscConstant constant) {
+    public final void visitConstant(RiscConstant constant) {
     }
 
     private boolean _writingStrings;
 
-    public void visitString(String string) {
+    public final void visitString(String string) {
         if (_writingStrings) {
             print(string);
             _previousSpecification = string;
@@ -192,7 +192,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
         _writingStrings = true;
     }
 
-    public void visitConstraint(InstructionConstraint constraint) {
+    public final void visitConstraint(InstructionConstraint constraint) {
     }
 
 }

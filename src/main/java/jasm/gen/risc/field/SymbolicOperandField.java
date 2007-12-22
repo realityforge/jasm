@@ -29,7 +29,7 @@ import java.util.Collections;
  * @author Dave Ungar
  * @author Adam Spitz
  */
-public class SymbolicOperandField<Argument_Type extends SymbolicArgument> extends OperandField<Argument_Type> implements WrappableSpecification {
+public final class SymbolicOperandField<Argument_Type extends SymbolicArgument> extends OperandField<Argument_Type> implements WrappableSpecification {
 
     private final Symbolizer<Argument_Type> _symbolizer;
 
@@ -59,15 +59,15 @@ public class SymbolicOperandField<Argument_Type extends SymbolicArgument> extend
         return createDescending(null, symbolizer, bits);
     }
 
-    public RiscConstant constant(Argument_Type argument) {
+    public final RiscConstant constant(Argument_Type argument) {
         return new RiscConstant(new ConstantField(name(), bitRange()), argument);
     }
 
-    public Class type() {
+    public final Class type() {
         return _symbolizer.type();
     }
 
-    public String valueString() {
+    public final String valueString() {
         if (boundTo() != null) {
             return boundTo().valueString();
         }
@@ -75,34 +75,34 @@ public class SymbolicOperandField<Argument_Type extends SymbolicArgument> extend
     }
 
   @Override
-    public Argument_Type disassemble(int instruction) {
+    public final Argument_Type disassemble(int instruction) {
         return _symbolizer.fromValue(extract(instruction));
     }
 
     @Override
-    public SymbolicOperandField<Argument_Type> setVariableName(String name) {
+    public final SymbolicOperandField<Argument_Type> setVariableName(String name) {
         super.setVariableName(name);
         return this;
     }
 
-    public ArgumentRange argumentRange() {
+    public final ArgumentRange argumentRange() {
         return null;
     }
 
-    public Iterable<? extends Argument> getLegalTestArguments() {
+    public final Iterable<? extends Argument> getLegalTestArguments() {
         return _symbolizer;
     }
 
-    public Iterable<? extends Argument> getIllegalTestArguments() {
+    public final Iterable<? extends Argument> getIllegalTestArguments() {
       return Collections.emptySet();
     }
 
-  public TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
+  public final TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
         return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, this, CollectionUtil.hashSetFrom(arguments));
     }
 
     @Override
-    public SymbolicOperandField<Argument_Type> bindTo(Expression expression) {
+    public final SymbolicOperandField<Argument_Type> bindTo(Expression expression) {
         return StaticLoophole.cast(super.bindTo(expression));
     }
 }

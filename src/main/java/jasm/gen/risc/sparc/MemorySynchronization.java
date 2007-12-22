@@ -22,7 +22,7 @@ import static jasm.gen.risc.sparc.SPARCFields.op3;
  * @author Dave Ungar
  * @author Adam Spitz
  */
-class MemorySynchronization extends SPARCInstructionDescriptionCreator {
+final class MemorySynchronization extends SPARCInstructionDescriptionCreator {
 
     private void create_A32() {
         define("membar", op(0x2), _res_29_25, op3(0x28), bits_18_14(0xf), i(1), _res_12_7, _membarMask);

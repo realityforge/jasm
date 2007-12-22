@@ -29,7 +29,7 @@ import junit.framework.TestCase;
 /**
  * @author Bernd Mathiske
  */
-public class BoundLabelTest extends TestCase {
+public final class BoundLabelTest extends TestCase {
   private static final int LABEL_DELTA = 10;
 
   private int insertInstructions(AMD64Assembler assembler, Label[] labels, int labelIndex) {
@@ -94,7 +94,7 @@ public class BoundLabelTest extends TestCase {
     disassembler.scanAndPrint(stream, System.out);
   }
 
-  public void notest_allLabelInstructions() throws IOException, AssemblyException {
+  public final void notest_allLabelInstructions() throws IOException, AssemblyException {
     final long startAddress = 0x0L;
 
     byte[] bytes = assemble(startAddress, 0);
@@ -107,7 +107,7 @@ public class BoundLabelTest extends TestCase {
     disassemble(startAddress, bytes);
   }
 
-  public void test_effectOfVariableInstructionLengthOnLabel() throws IOException, AssemblyException {
+  public final void test_effectOfVariableInstructionLengthOnLabel() throws IOException, AssemblyException {
     // Repeat with different assembled sizes of the 'jnz' instruction below:
     for (int n = 4; n < 2000; n += 128) {
       final long startAddress = 0x0L;

@@ -291,7 +291,7 @@ import static jasm.x86.SegmentRegister.SS;
  *
  * @author Bernd Mathiske
  */
-class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
+final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
 
     private void create_low() {
         define(_00, "ADD", Eb, Gb);

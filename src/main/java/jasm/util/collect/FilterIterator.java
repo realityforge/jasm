@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
  *
  * @author Doug Simon
  */
-public class FilterIterator<Element_Type> implements Iterator<Element_Type> {
+public final class FilterIterator<Element_Type> implements Iterator<Element_Type> {
 
   public interface Predicate<Element_Type> {
     boolean evaluate(Element_Type object);
@@ -31,11 +31,11 @@ public class FilterIterator<Element_Type> implements Iterator<Element_Type> {
         _predicate = predicate;
     }
 
-    public boolean hasNext() {
+    public final boolean hasNext() {
       return _advanced || advance();
     }
 
-    public Element_Type next() {
+    public final Element_Type next() {
         if (!_advanced) {
             if (!advance()) {
                 throw new NoSuchElementException();
@@ -45,7 +45,7 @@ public class FilterIterator<Element_Type> implements Iterator<Element_Type> {
         return _next;
     }
 
-    public void remove() {
+    public final void remove() {
         if (_advanced) {
             throw new IllegalStateException("remove() cannot be called");
         }

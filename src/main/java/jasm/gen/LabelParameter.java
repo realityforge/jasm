@@ -16,50 +16,50 @@ import java.util.Set;
 /**
  * @author Bernd Mathiske
  */
-public class LabelParameter implements Parameter {
+public final class LabelParameter implements Parameter {
 
     public LabelParameter() {
     }
 
-    public Class type() {
+    public final Class type() {
         return Label.class;
     }
 
-    public String variableName() {
+    public final String variableName() {
         return "label";
     }
 
-    public String valueString() {
+    public final String valueString() {
         return variableName();
     }
 
-    public ArgumentRange argumentRange() {
+    public final ArgumentRange argumentRange() {
         return null;
     }
 
 
-    public Iterable<Label> getLegalTestArguments() {
+    public final Iterable<Label> getLegalTestArguments() {
       return Collections.emptySet();
     }
 
-    public Iterable<? extends Argument> getIllegalTestArguments() {
+    public final Iterable<? extends Argument> getIllegalTestArguments() {
       return Collections.emptySet();
     }
 
-    public Set<Argument> excludedDisassemblerTestArguments() {
+    public final Set<Argument> excludedDisassemblerTestArguments() {
       return Collections.emptySet();
     }
 
-    public Set<Argument> excludedExternalTestArguments() {
+    public final Set<Argument> excludedExternalTestArguments() {
       return Collections.emptySet();
     }
 
-    public int compareTo(Parameter other) {
+    public final int compareTo(Parameter other) {
         return type().getName().compareTo(other.type().getName());
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return "<LabelParameter>";
     }
 

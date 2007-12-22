@@ -20,7 +20,7 @@ public interface Address64Instruction extends AddressInstruction {
 
     long address();
 
-    public static class Mixin implements Address64Instruction {
+    public static final class Mixin implements Address64Instruction {
 
         private final long _startAddress;
         private final DisassembledInstruction _disassembledInstruction;
@@ -30,19 +30,19 @@ public interface Address64Instruction extends AddressInstruction {
             _disassembledInstruction = disassembledInstruction;
         }
 
-        public long address() {
+        public final long address() {
             return _startAddress + startOffset();
         }
 
-        public int startOffset() {
+        public final int startOffset() {
             return _disassembledInstruction.startOffset();
         }
 
-        public String addressString() {
+        public final String addressString() {
             return HexUtil.toHexLiteral(address());
         }
 
-        public int addressToOffset(ImmediateArgument argument) {
+        public final int addressToOffset(ImmediateArgument argument) {
             final long argumentAddress = argument.asLong();
             final long result = argumentAddress - _startAddress;
             if (result > Integer.MAX_VALUE) {

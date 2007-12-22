@@ -31,11 +31,11 @@ public enum WordWidth {
     _canonicalPrimitiveType = canonicalPrimitiveType;
   }
 
-  public final int numberOfBits() {
+  public int numberOfBits() {
     return _nBits;
   }
 
-  public final int numberOfBytes() {
+  public int numberOfBytes() {
     return _nBits / 8;
   }
 

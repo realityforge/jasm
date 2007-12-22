@@ -33,7 +33,7 @@ public abstract class InstructionDescriptionCreator<InstructionDescription_Type 
 
     protected abstract InstructionDescription_Type createInstructionDescription(List<Object> specifications);
 
-    protected InstructionDescription_Type defineInstructionDescription(List<Object> specifications) {
+    protected final InstructionDescription_Type defineInstructionDescription(List<Object> specifications) {
         final InstructionDescription_Type instructionDescription = createInstructionDescription(specifications);
         _instructionDescriptions.addLast(instructionDescription);
         instructionDescription.setArchitectureManualSection(_currentArchitectureManualSection);
@@ -53,11 +53,11 @@ public abstract class InstructionDescriptionCreator<InstructionDescription_Type 
      * Sets the name of the architecture manual section for which instruction descriptions are
      * currently being {@link #define defined}.
      */
-    public void setCurrentArchitectureManualSection(String section) {
+    public final void setCurrentArchitectureManualSection(String section) {
         _currentArchitectureManualSection = section;
     }
 
-    public LinkedList<InstructionDescription_Type> instructionDescriptions() {
+    public final LinkedList<InstructionDescription_Type> instructionDescriptions() {
         return _instructionDescriptions;
     }
 }

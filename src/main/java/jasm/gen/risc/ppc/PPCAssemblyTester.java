@@ -32,29 +32,29 @@ public abstract class PPCAssemblyTester<DisassembledInstruction_Type extends Dis
     }
 
     @Override
-    public PPCAssembly assembly() {
+    public final PPCAssembly assembly() {
         return (PPCAssembly) super.assembly();
     }
 
     @Override
-    protected String assemblerCommand() {
+    protected final String assemblerCommand() {
         return "as -force_cpusubtype_ALL";
     }
 
     @Override
-    protected void assembleExternally(IndentWriter writer, PPCTemplate template, List<Argument> argumentList, String label) {
+    protected final void assembleExternally(IndentWriter writer, PPCTemplate template, List<Argument> argumentList, String label) {
         final PPCExternalInstruction instruction = new PPCExternalInstruction(template, argumentList);
         writer.println(instruction.toString());
     }
 
     @Override
-    protected boolean readNop(InputStream stream) throws IOException {
+    protected final boolean readNop(InputStream stream) throws IOException {
         final int instruction = Endianness.BIG.readInt(stream);
         return instruction == 0x60000000;
     }
 
     @Override
-    protected byte[] readExternalInstruction(PushbackInputStream externalInputStream, PPCTemplate template, byte[] internalBytes) throws IOException {
+    protected final byte[] readExternalInstruction(PushbackInputStream externalInputStream, PPCTemplate template, byte[] internalBytes) throws IOException {
         final byte[] result = super.readExternalInstruction(externalInputStream, template, internalBytes);
 
         // Work-around for bug in Apple's version of the GNU 'as' assembler (see javadoc for 'isExternalMTCRFEncodingBroken' for more details)

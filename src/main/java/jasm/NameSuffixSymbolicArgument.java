@@ -21,11 +21,11 @@ public abstract class NameSuffixSymbolicArgument extends AbstractSymbolicArgumen
     }
 
     @Override
-    public String externalValue() {
+    public final String externalValue() {
         return name().toLowerCase();
     }
 
-    public boolean isOptional() {
+    public final boolean isOptional() {
         return false;
     }
 }

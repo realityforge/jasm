@@ -30,19 +30,19 @@ public abstract class SimpleBitRange extends ContiguousBitRange {
     }
 
     @Override
-    public int instructionMask() {
+    public final int instructionMask() {
         return valueMask() << numberOfLessSignificantBits();
     }
 
     @Override
-    public int encodedWidth() {
+    public final int encodedWidth() {
         return width();
     }
 
     // comparing
 
     @Override
-    public boolean equals(Object other) {
+    public final boolean equals(Object other) {
         if (!(other instanceof SimpleBitRange)) {
             return false;
         }
@@ -51,14 +51,14 @@ public abstract class SimpleBitRange extends ContiguousBitRange {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return _firstBitIndex ^ _lastBitIndex;
     }
 
     // extracting
 
     @Override
-    public int extractSignedInt(int syllable) {
+    public final int extractSignedInt(int syllable) {
         final int unsignedInt = extractUnsignedInt(syllable);
         final int max = 1 << (width() - 1);
         if (unsignedInt < max) {
@@ -68,24 +68,24 @@ public abstract class SimpleBitRange extends ContiguousBitRange {
     }
 
     @Override
-    public int extractUnsignedInt(int syllable) {
+    public final int extractUnsignedInt(int syllable) {
         return (syllable >>> numberOfLessSignificantBits()) & valueMask();
     }
 
     // inserting
 
     @Override
-    public int assembleUncheckedSignedInt(int signedInt) {
+    public final int assembleUncheckedSignedInt(int signedInt) {
         return (signedInt & valueMask()) << numberOfLessSignificantBits();
     }
 
     @Override
-    public int assembleUncheckedUnsignedInt(int unsignedInt) {
+    public final int assembleUncheckedUnsignedInt(int unsignedInt) {
         return (unsignedInt & valueMask()) << numberOfLessSignificantBits();
     }
 
     @Override
-    public String encodingString(String value, boolean signed, boolean omitMask) {
+    public final String encodingString(String value, boolean signed, boolean omitMask) {
         final StringBuilder sb = new StringBuilder();
         if (valueMask() == 0 || omitMask) {
             sb.append(value);
@@ -99,7 +99,7 @@ public abstract class SimpleBitRange extends ContiguousBitRange {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return _firstBitIndex + ":" + _lastBitIndex;
     }
 }

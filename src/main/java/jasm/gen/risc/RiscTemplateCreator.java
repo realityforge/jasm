@@ -29,13 +29,13 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
 
     private ArrayList<Template_Type> _templates = new ArrayList<Template_Type>();
 
-    public List<Template_Type> templates() {
+    public final List<Template_Type> templates() {
         return _templates;
     }
 
     protected abstract Template_Type createTemplate(InstructionDescription instructionDescription);
 
-    public List<Template_Type> createOptionTemplates(List<Template_Type> templates, OptionField optionField) {
+    public final List<Template_Type> createOptionTemplates(List<Template_Type> templates, OptionField optionField) {
         final Class<Template_Type> templateType = null;
         final ArrayList<Template_Type> newTemplates = new ArrayList<Template_Type>();
         for (Template_Type template : templates) {
@@ -60,11 +60,11 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
     private int _serial;
     private final TemplateMap<Template_Type> _nameToTemplates = new TemplateMap<Template_Type>();
 
-    public List<Template_Type> nameToTemplates(String name) {
+    public final List<Template_Type> nameToTemplates(String name) {
         return _nameToTemplates.get(name);
     }
 
-    public void createTemplates(RiscInstructionDescriptionCreator instructionDescriptionCreator) {
+    public final void createTemplates(RiscInstructionDescriptionCreator instructionDescriptionCreator) {
         final ArrayList<Template_Type> initialTemplates = new ArrayList<Template_Type>();
         for (InstructionDescription instructionDescription : instructionDescriptionCreator.instructionDescriptions()) {
             final Template_Type template = createTemplate(instructionDescription);

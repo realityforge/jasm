@@ -19,7 +19,7 @@ import jasm.gen.risc.bitRange.BitRangeOrder;
  * @author Adam Spitz
  * @author Doug Simon
  */
-public class IgnoredOperandField extends ImmediateOperandField {
+public final class IgnoredOperandField extends ImmediateOperandField {
 
     public IgnoredOperandField(BitRange bitRange) {
         super(bitRange);

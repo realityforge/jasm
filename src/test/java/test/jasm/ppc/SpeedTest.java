@@ -27,8 +27,8 @@ import junit.framework.TestCase;
 /**
  * @author Bernd Mathiske
  */
-public class SpeedTest extends TestCase {
-  public void produce() throws AssemblyException {
+public final class SpeedTest extends TestCase {
+  public final void produce() throws AssemblyException {
     final int startAddress = 0x0000ecf0;
     final PPC32Assembler asm = new PPC32Assembler(startAddress);
     final Label label1 = new Label();
@@ -73,7 +73,7 @@ public class SpeedTest extends TestCase {
     asm.toByteArray();
   }
 
-  public void test_speed() throws IOException, AssemblyException {
+  public final void test_speed() throws IOException, AssemblyException {
     System.out.println("start");
     for (int i = 0; i < 10000000; i++) {
       produce();

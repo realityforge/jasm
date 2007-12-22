@@ -10,7 +10,6 @@ package jasm.gen.risc.bitRange;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * A range of bits that is composed of several disjoint subranges.
@@ -20,7 +19,7 @@ import java.util.List;
  * @author Adam Spitz
  */
 
-public class CompoundBitRange extends BitRange {
+public final class CompoundBitRange extends BitRange {
 
     public CompoundBitRange() {
         super();
@@ -28,12 +27,12 @@ public class CompoundBitRange extends BitRange {
 
     private ArrayList<ContiguousBitRange> _contiguousBitRanges = new ArrayList<ContiguousBitRange>();
 
-  public void add(ContiguousBitRange contiguousBitRange) {
+  public final void add(ContiguousBitRange contiguousBitRange) {
         _contiguousBitRanges.add(contiguousBitRange);
     }
 
     @Override
-    public CompoundBitRange move(boolean left, int bits) {
+    public final CompoundBitRange move(boolean left, int bits) {
         final CompoundBitRange movedRange = new CompoundBitRange();
         for (ContiguousBitRange contiguousBitRange : _contiguousBitRanges) {
             movedRange.add((ContiguousBitRange) contiguousBitRange.move(left, bits));
@@ -42,7 +41,7 @@ public class CompoundBitRange extends BitRange {
     }
 
     @Override
-    public int width() {
+    public final int width() {
         int result = 0;
         for (ContiguousBitRange contiguousBitRange : _contiguousBitRanges) {
             result += contiguousBitRange.width();
@@ -51,7 +50,7 @@ public class CompoundBitRange extends BitRange {
     }
 
     @Override
-    public int encodedWidth() {
+    public final int encodedWidth() {
         int result = 0;
         for (ContiguousBitRange contiguousBitRange : _contiguousBitRanges) {
             result += contiguousBitRange.encodedWidth();
@@ -60,7 +59,7 @@ public class CompoundBitRange extends BitRange {
     }
 
     @Override
-    public int instructionMask() {
+    public final int instructionMask() {
         int mask = 0;
         for (ContiguousBitRange contiguousBitRange : _contiguousBitRanges) {
             mask |= contiguousBitRange.instructionMask();
@@ -69,7 +68,7 @@ public class CompoundBitRange extends BitRange {
     }
 
     @Override
-    public int numberOfLessSignificantBits() {
+    public final int numberOfLessSignificantBits() {
         int result = 32;
         for (ContiguousBitRange contiguousBitRange : _contiguousBitRanges) {
             final int n = contiguousBitRange.numberOfLessSignificantBits();
@@ -81,7 +80,7 @@ public class CompoundBitRange extends BitRange {
     }
 
     @Override
-    public boolean equals(Object other) {
+    public final boolean equals(Object other) {
         if (!(other instanceof CompoundBitRange)) {
             return false;
         }
@@ -90,12 +89,12 @@ public class CompoundBitRange extends BitRange {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return _contiguousBitRanges.hashCode();
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         String result = null;
         for (ContiguousBitRange contiguousBitRange : _contiguousBitRanges) {
             if (result != null) {
@@ -110,7 +109,7 @@ public class CompoundBitRange extends BitRange {
     /* Extracting */
 
     @Override
-    public int extractSignedInt(int instruction) {
+    public final int extractSignedInt(int instruction) {
         final Iterator<ContiguousBitRange> iterator = _contiguousBitRanges.iterator();
         final ContiguousBitRange firstBitRange = iterator.next();
         int signedInt = firstBitRange.extractSignedInt(instruction);
@@ -123,7 +122,7 @@ public class CompoundBitRange extends BitRange {
     }
 
     @Override
-    public int extractUnsignedInt(int instruction) {
+    public final int extractUnsignedInt(int instruction) {
         int unsignedInt = 0;
         for (ContiguousBitRange contiguousBitRange : _contiguousBitRanges) {
             unsignedInt <<= contiguousBitRange.width();
@@ -135,7 +134,7 @@ public class CompoundBitRange extends BitRange {
     /* Inserting */
 
     @Override
-    public int assembleUncheckedSignedInt(int signedInt) throws IndexOutOfBoundsException {
+    public final int assembleUncheckedSignedInt(int signedInt) throws IndexOutOfBoundsException {
         int value = signedInt;
         int result = 0;
         for (int i = _contiguousBitRanges.size() - 1; i >= 0; i--) {
@@ -147,7 +146,7 @@ public class CompoundBitRange extends BitRange {
     }
 
     @Override
-    public int assembleUncheckedUnsignedInt(int unsignedInt) throws IndexOutOfBoundsException {
+    public final int assembleUncheckedUnsignedInt(int unsignedInt) throws IndexOutOfBoundsException {
         int value = unsignedInt;
         int result = 0;
         for (int i = _contiguousBitRanges.size() - 1; i >= 0; i--) {
@@ -159,7 +158,7 @@ public class CompoundBitRange extends BitRange {
     }
 
     @Override
-    public String encodingString(String value, boolean signed, boolean checked) {
+    public final String encodingString(String value, boolean signed, boolean checked) {
         final StringBuilder sb = new StringBuilder();
         int shift = 0;
         for (int i = _contiguousBitRanges.size() - 1; i >= 0; i--) {

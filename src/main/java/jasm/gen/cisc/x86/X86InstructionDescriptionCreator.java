@@ -24,7 +24,7 @@ public class X86InstructionDescriptionCreator extends InstructionDescriptionCrea
     }
 
     @Override
-    protected X86InstructionDescription createInstructionDescription(List<Object> specifications) {
+    protected final X86InstructionDescription createInstructionDescription(List<Object> specifications) {
         return new X86InstructionDescription(specifications);
     }
 }

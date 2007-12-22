@@ -17,8 +17,8 @@ import junit.framework.TestCase;
  *
  * @author Hiroshi Yamauchi
  */
-public class HexByteTest extends TestCase {
-  public void test_value() {
+public final class HexByteTest extends TestCase {
+  public final void test_value() {
     final EnumSet<HexByte> enumSet = EnumSet.allOf(HexByte.class);
     for (Enum e : enumSet) {
       assertTrue(Integer.parseInt(e.name().substring(1), 16) == e.ordinal());

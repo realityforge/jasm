@@ -36,35 +36,35 @@ public abstract class LabelInstruction implements AssemblyInstruction {
         _size = endOffset - _startOffset;
     }
 
-    protected Assembler assembler() {
+    protected final Assembler assembler() {
         return _assembler;
     }
 
-    public int initialStartOffset() {
+    public final int initialStartOffset() {
         return _initialStartOffset;
     }
 
-    public int initialEndOffset() {
+    public final int initialEndOffset() {
         return _initialEndOffset;
     }
 
-    void adjust(int delta) {
+    final void adjust(int delta) {
         _startOffset += delta;
     }
 
-    public int startOffset() {
+    public final int startOffset() {
         return _startOffset;
     }
 
-    public int endOffset() {
+    public final int endOffset() {
         return _startOffset + _size;
     }
 
-    public int size() {
+    public final int size() {
         return _size;
     }
 
-    protected Label label() {
+    protected final Label label() {
         return _label;
     }
 

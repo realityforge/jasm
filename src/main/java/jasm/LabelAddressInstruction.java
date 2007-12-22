@@ -22,7 +22,7 @@ public abstract class LabelAddressInstruction extends LabelInstruction {
         assembler.addFixedLengthLabelInstruction(this);
     }
 
-    public int labelAddressAsInt() throws AssemblyException {
+    public final int labelAddressAsInt() throws AssemblyException {
         final Assembler32 assembler = (Assembler32) assembler();
         switch (label().state()) {
             case BOUND: {
@@ -41,7 +41,7 @@ public abstract class LabelAddressInstruction extends LabelInstruction {
         }
     }
 
-    public long labelAddressAsLong() throws AssemblyException {
+    public final long labelAddressAsLong() throws AssemblyException {
         final Assembler64 assembler = (Assembler64) assembler();
         switch (label().state()) {
             case BOUND: {

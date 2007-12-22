@@ -17,7 +17,7 @@ import jasm.Label;
  *
  * @author Bernd Mathiske
  */
-public class PPC64Assembler extends PPCAssembler implements Assembler64 {
+public final class PPC64Assembler extends PPCAssembler implements Assembler64 {
 
     private long _startAddress; // address of first instruction
 
@@ -28,19 +28,19 @@ public class PPC64Assembler extends PPCAssembler implements Assembler64 {
         _startAddress = startAddress;
     }
 
-    public long startAddress() {
+    public final long startAddress() {
         return _startAddress;
     }
 
-    public void setStartAddress(long address) {
+    public final void setStartAddress(long address) {
         _startAddress = address;
     }
 
-    public void fixLabel(Label label, long address) {
+    public final void fixLabel(Label label, long address) {
         fixLabel64(label, address);
     }
 
-    public long address(Label label) throws AssemblyException {
+    public final long address(Label label) throws AssemblyException {
         return address64(label);
     }
 

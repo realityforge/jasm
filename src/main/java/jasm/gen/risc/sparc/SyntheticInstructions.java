@@ -40,7 +40,7 @@ import jasm.sparc.StateRegister;
  * @author Bernd Mathiske
  * @author Doug Simon
  */
-class SyntheticInstructions extends SPARCInstructionDescriptionCreator {
+final class SyntheticInstructions extends SPARCInstructionDescriptionCreator {
 
     private void create_A39() {
         synthesize("nop", "sethi", imm22(0), rd(G0));

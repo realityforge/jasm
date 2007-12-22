@@ -200,12 +200,12 @@ public abstract class X86DisassembledInstruction<Template_Type extends X86Templa
     }
 
     @Override
-    public String externalName() {
+    public final String externalName() {
         return template().externalName();
     }
 
     @Override
-    public String operandsToString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
+    public final String operandsToString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
         final LinkedList<X86Operand> operandQueue = new LinkedList<X86Operand>(template().operands());
         final LinkedList<Argument> argumentQueue = new LinkedList<Argument>(arguments());
         String result = "";
@@ -218,7 +218,7 @@ public abstract class X86DisassembledInstruction<Template_Type extends X86Templa
     }
 
     @Override
-    public String toString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
+    public final String toString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
         String s = operandsToString(labels, globalLabelMapper);
         if (s.length() > 0) {
             s = "  " + s;
@@ -227,7 +227,7 @@ public abstract class X86DisassembledInstruction<Template_Type extends X86Templa
     }
 
     @Override
-    public int offsetForRelativeAddressing() {
+    public final int offsetForRelativeAddressing() {
         return startOffset() + bytes().length;
     }
 

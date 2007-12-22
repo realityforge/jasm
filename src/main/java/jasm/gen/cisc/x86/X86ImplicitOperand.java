@@ -18,7 +18,7 @@ import jasm.gen.ImplicitOperand;
  *
  * @author Bernd Mathiske
  */
-public class X86ImplicitOperand extends X86Operand implements ImplicitOperand {
+public final class X86ImplicitOperand extends X86Operand implements ImplicitOperand {
 
     private final ImplicitOperand.ExternalPresence _externalPresence;
     private final Argument _argument;
@@ -29,19 +29,19 @@ public class X86ImplicitOperand extends X86Operand implements ImplicitOperand {
         _argument = argument;
     }
 
-    public ImplicitOperand.ExternalPresence externalPresence() {
+    public final ImplicitOperand.ExternalPresence externalPresence() {
         return _externalPresence;
     }
 
-    public Class type() {
+    public final Class type() {
         return _argument.getClass();
     }
 
-    public Argument argument() {
+    public final Argument argument() {
         return _argument;
     }
 
-    public String name() {
+    public final String name() {
         if (_argument instanceof Enum) {
             final Enum enumerable = (Enum) _argument;
             return enumerable.name();
@@ -52,7 +52,7 @@ public class X86ImplicitOperand extends X86Operand implements ImplicitOperand {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return "<ImplicitOperand: " + _argument.externalValue() + ">";
     }
 }

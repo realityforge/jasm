@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author Bernd Mathiske
  */
-public class SPARC64Disassembler extends SPARCDisassembler<SPARC64DisassembledInstruction> {
+public final class SPARC64Disassembler extends SPARCDisassembler<SPARC64DisassembledInstruction> {
 
     private final long _startAddress;
 
@@ -31,12 +31,12 @@ public class SPARC64Disassembler extends SPARCDisassembler<SPARC64DisassembledIn
     }
 
     @Override
-    protected SPARC64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, SPARCTemplate template, List<Argument> arguments) {
+    protected final SPARC64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, SPARCTemplate template, List<Argument> arguments) {
         return new SPARC64DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
     }
 
     @Override
-    protected Assembler createAssembler(int offset) {
+    protected final Assembler createAssembler(int offset) {
         return new SPARC64Assembler(_startAddress + offset);
     }
 

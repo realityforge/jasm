@@ -31,19 +31,19 @@ public class Enumerator<Enumerable_Type extends Enum<Enumerable_Type> & Symbol>
         _enumSet = enumSet;
     }
 
-    public Class<Enumerable_Type> type() {
+    public final Class<Enumerable_Type> type() {
         return _type;
     }
 
-    public Set<Enumerable_Type> asSet() {
+    public final Set<Enumerable_Type> asSet() {
         return _enumSet;
     }
 
-    public Iterator<Enumerable_Type> iterator() {
+    public final Iterator<Enumerable_Type> iterator() {
         return _enumSet.iterator();
     }
 
-    public Enumerable_Type fromValue(int value) {
+    public final Enumerable_Type fromValue(int value) {
         for (Enumerable_Type enumerable : this) {
             if (enumerable.value() == value && _enumSet.contains(enumerable)) {
                 return enumerable;

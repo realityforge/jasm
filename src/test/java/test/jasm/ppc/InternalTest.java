@@ -32,7 +32,7 @@ import junit.framework.TestCase;
 /**
  * @author Bernd Mathiske
  */
-public class InternalTest extends TestCase {
+public final class InternalTest extends TestCase {
   private byte[] assemble(PPCAssembler asm) throws AssemblyException {
     final Label loop1 = new Label();
     final Label loop2 = new Label();
@@ -60,7 +60,7 @@ public class InternalTest extends TestCase {
     return new String(baos.toByteArray());
   }
 
-  public void test32() throws IOException, AssemblyException {
+  public final void test32() throws IOException, AssemblyException {
     final int startAddress = 0x12340000;
     final PPC32Assembler assembler = new PPC32Assembler(startAddress);
     final PPC32Disassembler disassembler = new PPC32Disassembler(startAddress);
@@ -79,7 +79,7 @@ public class InternalTest extends TestCase {
     assertEquals(expected, output);
   }
 
-  public void test64() throws IOException, AssemblyException {
+  public final void test64() throws IOException, AssemblyException {
     final long startAddress = 0x1234567812340000L;
     final PPC64Assembler assembler = new PPC64Assembler(startAddress);
     final PPC64Disassembler disassembler = new PPC64Disassembler(startAddress);

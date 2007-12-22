@@ -45,7 +45,7 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
     }
 
     @Override
-    public RiscAssembly<Template_Type> assembly() {
+    public final RiscAssembly<Template_Type> assembly() {
         return StaticLoophole.cast(super.assembly());
     }
 
@@ -81,7 +81,7 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
         return true;
     }
     @Override
-    public List<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream) throws IOException, AssemblyException {
+    public final List<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream) throws IOException, AssemblyException {
         final int instruction = endianness().readInt(stream);
         final ArrayList<DisassembledInstruction_Type> result = new ArrayList<DisassembledInstruction_Type>();
         final byte[] instructionBytes = endianness().toBytes(instruction);
@@ -120,7 +120,7 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
     }
 
     @Override
-    public List<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException {
+    public final List<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException {
         final ArrayList<DisassembledInstruction_Type> result = new ArrayList<DisassembledInstruction_Type>();
         try {
             while (true) {

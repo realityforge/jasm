@@ -31,7 +31,7 @@ public abstract class X86TemplateCreator<Template_Type extends X86Template> {
         _addressWidth = addressWidth;
     }
 
-    public List<Template_Type> templates() {
+    public final List<Template_Type> templates() {
         return _templates;
     }
 
@@ -164,7 +164,7 @@ public abstract class X86TemplateCreator<Template_Type extends X86Template> {
         }
     }
 
-    public void createTemplates(InstructionDescriptionCreator<X86InstructionDescription> instructionDescriptionCreator) {
+    public final void createTemplates(InstructionDescriptionCreator<X86InstructionDescription> instructionDescriptionCreator) {
         for (X86InstructionDescription instructionDescription : instructionDescriptionCreator.instructionDescriptions()) {
             _instructionDescription = instructionDescription;
             _instructionAssessment = new InstructionAssessment();

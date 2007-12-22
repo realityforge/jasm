@@ -45,14 +45,14 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
         _serial = _nextSerial++;
     }
 
-    public int serial() {
+    public final int serial() {
         return _serial;
     }
 
     /**
      * @return the objects from which this description is composed
      */
-    public List<Object> specifications() {
+    public final List<Object> specifications() {
         return _specifications;
     }
 
@@ -61,7 +61,7 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
     /**
      * @return the {@link InstructionConstraint} instances (if any) within this description
      */
-    public List<InstructionConstraint> constraints() {
+    public final List<InstructionConstraint> constraints() {
         if (_constraints == null) {
           final ArrayList<InstructionConstraint> result = new ArrayList<InstructionConstraint>();
           for (Object element : _specifications) {
@@ -76,22 +76,22 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
 
     private String _architectureManualSection;
 
-    public InstructionDescription setArchitectureManualSection(String section) {
+    public final InstructionDescription setArchitectureManualSection(String section) {
         _architectureManualSection = section;
         return this;
     }
 
-    public String architectureManualSection() {
+    public final String architectureManualSection() {
         return _architectureManualSection;
     }
 
     private String _externalName;
 
-    public String externalName() {
+    public final String externalName() {
         return _externalName;
     }
 
-    public InstructionDescription setExternalName(String externalName) {
+    public final InstructionDescription setExternalName(String externalName) {
         _externalName = externalName;
         return this;
     }
@@ -105,11 +105,11 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
      * In RISC architectures, this will be any instruction that has at least one {@link InputOperandField}
      * parameter.
      */
-    public boolean isDisassemblable() {
+    public final boolean isDisassemblable() {
         return _isDisassemblable;
     }
 
-    public InstructionDescription beNotDisassemblable() {
+    public final InstructionDescription beNotDisassemblable() {
         _isDisassemblable = false;
         return this;
     }
@@ -120,43 +120,43 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
 
     private boolean _isExternallyTestable = true;
 
-    public boolean isExternallyTestable() {
+    public final boolean isExternallyTestable() {
         return _isExternallyTestable;
     }
 
-    public InstructionDescription beNotExternallyTestable() {
+    public final InstructionDescription beNotExternallyTestable() {
         _isExternallyTestable = false;
         return this;
     }
 
     private WordWidth _requiredAddressSize;
 
-    public WordWidth requiredAddressSize() {
+    public final WordWidth requiredAddressSize() {
         return _requiredAddressSize;
     }
 
-    public InstructionDescription requireAddressSize(WordWidth requiredAddressSize) {
+    public final InstructionDescription requireAddressSize(WordWidth requiredAddressSize) {
         _requiredAddressSize = requiredAddressSize;
         return this;
     }
 
     private WordWidth _requiredOperandSize;
 
-    public WordWidth requiredOperandSize() {
+    public final WordWidth requiredOperandSize() {
         return _requiredOperandSize;
     }
 
-    public InstructionDescription requireOperandSize(WordWidth requiredOperandSize) {
+    public final InstructionDescription requireOperandSize(WordWidth requiredOperandSize) {
         _requiredOperandSize = requiredOperandSize;
         return this;
     }
 
-    public Iterator<Object> iterator() {
+    public final Iterator<Object> iterator() {
         return _specifications.iterator();
     }
 
     @Override
-    public InstructionDescription clone() {
+    public final InstructionDescription clone() {
         try {
             final InstructionDescription clone = (InstructionDescription) super.clone();
             clone._serial = ++_nextSerial;

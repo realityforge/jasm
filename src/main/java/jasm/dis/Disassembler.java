@@ -54,11 +54,11 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
         return _assembly;
     }
 
-    public WordWidth addressWidth() {
+    public final WordWidth addressWidth() {
         return _addressWidth;
     }
 
-    public Endianness endianness() {
+    public final Endianness endianness() {
         return _endianness;
     }
 
@@ -98,7 +98,7 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
      * A label map is a sequence of labels that matches a sequence of disassembled instructions,
      * containing either a label or null at the index of each instruction.
      */
-    public DisassembledLabel[] createLabelMap(List<DisassembledInstruction_Type> disassembledInstructions) {
+    public final DisassembledLabel[] createLabelMap(List<DisassembledInstruction_Type> disassembledInstructions) {
         final DisassembledLabel[] labels = new DisassembledLabel[disassembledInstructions.size()];
         for (DisassembledInstruction_Type disassembledInstruction : disassembledInstructions) {
             final Template_Type template = disassembledInstruction.template();
@@ -121,7 +121,7 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
     /**
      * Assigns serial numbers to these labels and calculates the maximum number of chars needed to print any one of these labels.
      */
-    public int updateLabels(List<DisassembledLabel> labels, List<DisassembledInstruction_Type> disassembledInstructions) {
+    public final int updateLabels(List<DisassembledLabel> labels, List<DisassembledInstruction_Type> disassembledInstructions) {
         int result = 0;
         int serial = 1;
         for (DisassembledLabel label : labels) {
@@ -150,15 +150,15 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
 
     private boolean _isHeadingEnabled;
 
-    public void enableHeading() {
+    public final void enableHeading() {
         _isHeadingEnabled = true;
     }
 
-    public void disableHeading() {
+    public final void disableHeading() {
         _isHeadingEnabled = false;
     }
 
-    public void print(OutputStream outputStream, List<DisassembledInstruction_Type> disassembledInstructions, GlobalLabelMapper globalLabelMapper) {
+    public final void print(OutputStream outputStream, List<DisassembledInstruction_Type> disassembledInstructions, GlobalLabelMapper globalLabelMapper) {
         final PrintStream stream = new PrintStream(outputStream);
         final int nOffsetChars = Integer.toString(disassembledInstructions.get(disassembledInstructions.size() - 1).startOffset()).length();
         final DisassembledLabel[] labelMap = createLabelMap(disassembledInstructions);
@@ -193,16 +193,16 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
         }
     }
 
-    public void print(OutputStream outputStream, List<DisassembledInstruction_Type> disassembledInstructions) throws IOException {
+    public final void print(OutputStream outputStream, List<DisassembledInstruction_Type> disassembledInstructions) throws IOException {
         print(outputStream, disassembledInstructions, null);
     }
 
-    public void scanAndPrint(BufferedInputStream bufferedInputStream, OutputStream outputStream, GlobalLabelMapper globalLabelMapper) throws IOException, AssemblyException {
+    public final void scanAndPrint(BufferedInputStream bufferedInputStream, OutputStream outputStream, GlobalLabelMapper globalLabelMapper) throws IOException, AssemblyException {
         final List<DisassembledInstruction_Type> disassembledInstructions = scan(bufferedInputStream);
         print(outputStream, disassembledInstructions, globalLabelMapper);
     }
 
-    public void scanAndPrint(BufferedInputStream bufferedInputStream, OutputStream outputStream) throws IOException, AssemblyException {
+    public final void scanAndPrint(BufferedInputStream bufferedInputStream, OutputStream outputStream) throws IOException, AssemblyException {
         scanAndPrint(bufferedInputStream, outputStream, null);
     }
 
@@ -212,28 +212,28 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
 
     private AbstractionPreference _abstractionPreference = AbstractionPreference.SYNTHETIC;
 
-    protected AbstractionPreference abstractionPreference() {
+    protected final AbstractionPreference abstractionPreference() {
         return _abstractionPreference;
     }
 
-    public void setAbstractionPreference(AbstractionPreference abstractionPreference) {
+    public final void setAbstractionPreference(AbstractionPreference abstractionPreference) {
         _abstractionPreference = abstractionPreference;
     }
 
     private int _expectedNumberOfArguments = -1;
 
-    protected int expectedNumberOfArguments() {
+    protected final int expectedNumberOfArguments() {
         return _expectedNumberOfArguments;
     }
 
-    public void setExpectedNumberOfArguments(int expectedNumberOfArguments) {
+    public final void setExpectedNumberOfArguments(int expectedNumberOfArguments) {
         _expectedNumberOfArguments = expectedNumberOfArguments;
     }
 
     /**
      * @return the offset in the instruction stream at the given offset from the given instruction
      */
-    public long getRelativeOffsetFromInstruction(DisassembledInstruction_Type disassembledInstruction, long offset) {
+    public final long getRelativeOffsetFromInstruction(DisassembledInstruction_Type disassembledInstruction, long offset) {
         switch (assembly().instructionSet().relativeAddressing()) {
             case FROM_INSTRUCTION_START:
                 return disassembledInstruction.startOffset() + offset;

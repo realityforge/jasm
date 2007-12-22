@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class CollectionUtil {
+public final class CollectionUtil {
 
   /**
          * Returns true if {@code sequence} contains an element identical to {@code value}. More formally, returns true

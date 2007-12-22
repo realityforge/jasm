@@ -17,7 +17,7 @@ import jasm.WordWidth;
  *
  * @author Laurent Daynes
  */
-public class AMD64InstructionEditor extends AMD64Assembler implements AssemblyInstructionEditor {
+public final class AMD64InstructionEditor extends AMD64Assembler implements AssemblyInstructionEditor {
     // Buffer holding the instruction to edit
     final byte[] _instruction;
     // Offset to the first byte of the instruction
@@ -47,7 +47,7 @@ public class AMD64InstructionEditor extends AMD64Assembler implements AssemblyIn
         _instruction = code;
     }
 
-    public  int getIntDisplacement(WordWidth displacementWidth) throws AssemblyException {
+    public final int getIntDisplacement(WordWidth displacementWidth) throws AssemblyException {
         // Displacement always appended in the end. Same as immediate
         final int displacementOffset = _startOffset + _length - displacementWidth.numberOfBytes();
         switch(displacementWidth) {
@@ -62,7 +62,7 @@ public class AMD64InstructionEditor extends AMD64Assembler implements AssemblyIn
         }
     }
 
-    public int getIntImmediate(WordWidth immediateWidth) throws AssemblyException {
+    public final int getIntImmediate(WordWidth immediateWidth) throws AssemblyException {
         final int immediateOffset = _startOffset + _length - immediateWidth.numberOfBytes();
         switch(immediateWidth) {
             case BITS_8:
@@ -76,7 +76,7 @@ public class AMD64InstructionEditor extends AMD64Assembler implements AssemblyIn
         }
     }
 
-    public void fixDisplacement(WordWidth displacementWidth, boolean withIndex, byte disp8) {
+    public final void fixDisplacement(WordWidth displacementWidth, boolean withIndex, byte disp8) {
         // TODO: various invariant control here to make sure that the template of the assembly
         // instruction here has a displacement of the specified width
 
@@ -151,14 +151,7 @@ public class AMD64InstructionEditor extends AMD64Assembler implements AssemblyIn
         _instruction[startOffset + 7] = (byte) (imm & 0xff);
     }
 
-    private int getImm64(int startOffset) {
-        int imm64 = 0;
-        imm64 |= getImm32(startOffset + 4) << 32;
-        imm64 |= getImm32(startOffset);
-        return imm64;
-    }
-
-    public void fixDisplacement(WordWidth displacementWidth, boolean withIndex, int disp32) throws AssemblyException {
+    public final void fixDisplacement(WordWidth displacementWidth, boolean withIndex, int disp32) throws AssemblyException {
         if (displacementWidth != WordWidth.BITS_32) {
             throw new AssemblyException("Invalid offset width. Can't");
         }
@@ -174,14 +167,14 @@ public class AMD64InstructionEditor extends AMD64Assembler implements AssemblyIn
         }
     }
 
-    public void fixImmediateOperand(WordWidth operandWidth, byte imm8) {
+    public final void fixImmediateOperand(WordWidth operandWidth, byte imm8) {
         final int numBytes = operandWidth.numberOfBytes();
         final int immediateStart = _startOffset + _length - numBytes;
         _instruction[immediateStart] = imm8;
         zeroFillFrom(immediateStart + 1);
     }
 
-    public void fixImmediateOperand(WordWidth operandWidth, short imm16) {
+    public final void fixImmediateOperand(WordWidth operandWidth, short imm16) {
         // The Eir to AMD64 code generation uses only two width for immediate operands: 8 bits, or 32 bits.
         final WordWidth effectiveOperandWidth =  (operandWidth == WordWidth.BITS_8) ? WordWidth.BITS_8 : WordWidth.BITS_32;
         // index to the first byte of the immediate value
@@ -196,7 +189,7 @@ public class AMD64InstructionEditor extends AMD64Assembler implements AssemblyIn
      * @param operandWidth width of the operand of the assembly instruction.
      * @param imm32 the new value of the instruction's operand.
      */
-    public void fixImmediateOperand(WordWidth operandWidth, int imm32) {
+    public final void fixImmediateOperand(WordWidth operandWidth, int imm32) {
         // The Eir to AMD64 code generation uses only two width for immediate operands: 8 bits, or 32 bits.
         if (operandWidth == WordWidth.BITS_8) {
             // index to the first byte of the immediate value
@@ -214,13 +207,13 @@ public class AMD64InstructionEditor extends AMD64Assembler implements AssemblyIn
      *  instruction was originally generated with must be 32 bits.
      * @param imm32 the new value of the instruction's operand.
      */
-    public void fixImmediateOperand(int imm32) {
+    public final void fixImmediateOperand(int imm32) {
         // index to the first byte of the immediate value
         final int immediateStart = _startOffset + _length - WordWidth.BITS_32.numberOfBytes();
         fixImm32(immediateStart, imm32);
     }
 
-    public void fixImmediateOperand(long imm64) {
+    public final void fixImmediateOperand(long imm64) {
         // index to the first byte of the immediate value
         final int immediateStart = _startOffset + _length - WordWidth.BITS_64.numberOfBytes();
         fixImm64(immediateStart, imm64);

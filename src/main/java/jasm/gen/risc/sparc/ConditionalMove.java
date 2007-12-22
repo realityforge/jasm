@@ -43,7 +43,7 @@ import static jasm.gen.risc.sparc.SPARCFields.rcond_12_10;
  * @author Dave Ungar
  * @author Adam Spitz
  */
-class ConditionalMove extends SPARCInstructionDescriptionCreator {
+final class ConditionalMove extends SPARCInstructionDescriptionCreator {
 
     private void addIccOrFcc(String suffix, RiscField fmovccField, RiscField movccField, int typeBitContents, int condContents) {
         // A.33

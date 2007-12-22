@@ -25,7 +25,7 @@ import java.util.Set;
  * @author Bernd Mathiske
  * @author Doug Simon
  */
-public class OpcodeMaskGroup<Template_Type extends RiscTemplate> {
+public final class OpcodeMaskGroup<Template_Type extends RiscTemplate> {
 
     private final int _mask;
 
@@ -33,7 +33,7 @@ public class OpcodeMaskGroup<Template_Type extends RiscTemplate> {
         _mask = mask;
     }
 
-    public int mask() {
+    public final int mask() {
         return _mask;
     }
 
@@ -41,7 +41,7 @@ public class OpcodeMaskGroup<Template_Type extends RiscTemplate> {
 
     private final HashMap<Integer,LinkedList<Template_Type>> _templatesForOpcodes = new HashMap<Integer,LinkedList<Template_Type>>();
 
-    public void add(Template_Type template) {
+    public final void add(Template_Type template) {
         assert template.opcodeMask() == _mask;
         _templates.add(template);
         LinkedList<Template_Type> templatesForOpcode = _templatesForOpcodes.get(template.opcode());
@@ -52,7 +52,7 @@ public class OpcodeMaskGroup<Template_Type extends RiscTemplate> {
         templatesForOpcode.addLast(template);
     }
 
-    public List<Template_Type> templatesFor(int opcode) {
+    public final List<Template_Type> templatesFor(int opcode) {
         final LinkedList<Template_Type> result = _templatesForOpcodes.get(opcode);
         if (result == null) {
             return StaticLoophole.cast(Collections.EMPTY_LIST);
@@ -60,7 +60,7 @@ public class OpcodeMaskGroup<Template_Type extends RiscTemplate> {
         return result;
     }
 
-    public List<Template_Type> templates() {
+    public final List<Template_Type> templates() {
         return new ArrayList<Template_Type>(_templates);
     }
 }

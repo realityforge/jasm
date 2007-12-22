@@ -25,29 +25,29 @@ import java.util.List;
 /**
  * @author Bernd Mathiske
  */
-public class AMD64AssemblyTester extends X86AssemblyTester<AMD64Template, AMD64DisassembledInstruction> {
+public final class AMD64AssemblyTester extends X86AssemblyTester<AMD64Template, AMD64DisassembledInstruction> {
 
     public AMD64AssemblyTester(EnumSet<AssemblyTestComponent> components) {
         super(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64, components);
     }
 
     @Override
-    protected String assemblerCommand() {
+    protected final String assemblerCommand() {
         return "as -64";
     }
 
     @Override
-    protected Assembler createTestAssembler() {
+    protected final Assembler createTestAssembler() {
         return new AMD64Assembler(0L);
     }
 
     @Override
-    protected AMD64Disassembler createTestDisassembler() {
+    protected final AMD64Disassembler createTestDisassembler() {
         return new AMD64Disassembler(0L);
     }
 
     @Override
-    protected boolean isLegalArgumentList(AMD64Template template, List<Argument> arguments) {
+    protected final boolean isLegalArgumentList(AMD64Template template, List<Argument> arguments) {
         final WordWidth externalCodeSizeAttribute = template.externalCodeSizeAttribute();
         for (Argument argument : arguments) {
             if (argument instanceof AMD64GeneralRegister8) {

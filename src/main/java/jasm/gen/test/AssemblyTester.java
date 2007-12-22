@@ -99,15 +99,15 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     _tmpFilePrefix = _assembly.instructionSet().name().toLowerCase() + "-asmTest-";
   }
 
-  public void setCreateExternalSource(final boolean createExternalSource) {
+  public final void setCreateExternalSource(final boolean createExternalSource) {
     _createExternalSource = createExternalSource;
   }
 
-  public ExternalAssembler getExternalAssembler() {
+  public final ExternalAssembler getExternalAssembler() {
     return _externalAssembler;
   }
 
-  public TemplateSelector<Template_Type> getSelector() {
+  public final TemplateSelector<Template_Type> getSelector() {
     return _selector;
   }
 
@@ -115,7 +115,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     return _assembly;
   }
 
-  public WordWidth addressWidth() {
+  public final WordWidth addressWidth() {
     return _addressWidth;
   }
 
@@ -402,7 +402,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     return illegalTestCaseNumber;
   }
 
-  public void run() throws IOException {
+  public final void run() throws IOException {
     IndentWriter stream = null;
 
     File sourceFile;

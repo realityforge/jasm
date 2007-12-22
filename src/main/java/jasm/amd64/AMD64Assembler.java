@@ -34,19 +34,19 @@ public class AMD64Assembler extends AMD64LabelAssembler implements Assembler64 {
     public AMD64Assembler() {
     }
 
-    public long startAddress() {
+    public final long startAddress() {
         return _startAddress;
     }
 
-    public void setStartAddress(long address) {
+    public final void setStartAddress(long address) {
         _startAddress = address;
     }
 
-    public void fixLabel(Label label, long address) {
+    public final void fixLabel(Label label, long address) {
         fixLabel64(label, address);
     }
 
-    public long address(Label label) throws AssemblyException {
+    public final long address(Label label) throws AssemblyException {
         return address64(label);
     }
 }

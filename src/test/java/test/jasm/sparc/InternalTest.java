@@ -41,7 +41,7 @@ import junit.framework.TestCase;
 /**
  * @author Bernd Mathiske
  */
-public class InternalTest extends TestCase {
+public final class InternalTest extends TestCase {
   private byte[] assemble(SPARCAssembler asm) throws AssemblyException {
     asm.rd(StateRegister.PC, G1);
 
@@ -90,7 +90,7 @@ public class InternalTest extends TestCase {
     return new String(baos.toByteArray());
   }
 
-  public void test32() throws IOException, AssemblyException {
+  public final void test32() throws IOException, AssemblyException {
     final int startAddress = 0x12340000;
     final SPARC32Assembler assembler = new SPARC32Assembler(startAddress);
     final SPARC32Disassembler disassembler = new SPARC32Disassembler(startAddress);
@@ -118,7 +118,7 @@ public class InternalTest extends TestCase {
     assertEquals(expected, output);
   }
 
-  public void test64() throws IOException, AssemblyException {
+  public final void test64() throws IOException, AssemblyException {
     final long startAddress = 0x1234567812340000L;
     final SPARC64Assembler assembler = new SPARC64Assembler(startAddress);
     final SPARC64Disassembler disassembler = new SPARC64Disassembler(startAddress);

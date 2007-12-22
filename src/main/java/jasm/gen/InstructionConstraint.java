@@ -56,12 +56,12 @@ public interface InstructionConstraint {
     Method predicateMethod();
 
     public abstract static class SimpleInstructionConstraint implements InstructionConstraint {
-        public Method predicateMethod() {
+        public final Method predicateMethod() {
             return null;
         }
 
         @Override
-        public String toString() {
+        public final String toString() {
             return asJavaExpression();
         }
     }

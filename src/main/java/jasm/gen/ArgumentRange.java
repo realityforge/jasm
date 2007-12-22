@@ -13,7 +13,7 @@ import jasm.Argument;
 /**
  * @author Bernd Mathiske
  */
-public class ArgumentRange {
+public final class ArgumentRange {
 
     private final WrappableSpecification _specification;
     private final long _minValue;
@@ -25,29 +25,29 @@ public class ArgumentRange {
         _maxValue = maxValue;
     }
 
-    public WrappableSpecification wrappedSpecification() {
+    public final WrappableSpecification wrappedSpecification() {
         return _specification;
     }
 
-    public long minValue() {
+    public final long minValue() {
         return _minValue;
     }
 
-    public long maxValue() {
+    public final long maxValue() {
         return _maxValue;
     }
 
-    public boolean includes(Argument argument) {
+    public final boolean includes(Argument argument) {
         return _minValue <= argument.asLong() && argument.asLong() <= _maxValue;
     }
 
     private boolean _appliesInternally = true;
 
-    public boolean appliesInternally() {
+    public final boolean appliesInternally() {
         return _appliesInternally;
     }
 
-    public void doNotApplyInternally() {
+    public final void doNotApplyInternally() {
         _appliesInternally = false;
     }
 

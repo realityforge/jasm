@@ -16,8 +16,8 @@ import junit.framework.TestCase;
  *
  * @author Hiroshi Yamauchi
  */
-public class WordWidthTest extends TestCase {
-  public void test_fromInt() {
+public final class WordWidthTest extends TestCase {
+  public final void test_fromInt() {
     assertTrue(WordWidth.fromInt(-1000) == WordWidth.BITS_8);
     assertTrue(WordWidth.fromInt(-1) == WordWidth.BITS_8);
     assertTrue(WordWidth.fromInt(0) == WordWidth.BITS_8);
@@ -41,7 +41,7 @@ public class WordWidthTest extends TestCase {
     assertTrue(WordWidth.fromInt(1000) == WordWidth.BITS_64);
   }
 
-  public void test_unsignedEffectiveInt() {
+  public final void test_unsignedEffectiveInt() {
     assertTrue(WordWidth.unsignedEffective(0) == WordWidth.BITS_8);
     assertTrue(WordWidth.unsignedEffective(1) == WordWidth.BITS_8);
     assertTrue(WordWidth.unsignedEffective(2) == WordWidth.BITS_8);
@@ -55,7 +55,7 @@ public class WordWidthTest extends TestCase {
     assertTrue(WordWidth.unsignedEffective(257) == WordWidth.BITS_16);
   }
 
-  public void test_unsignedEffectiveLong() {
+  public final void test_unsignedEffectiveLong() {
     assertTrue(WordWidth.unsignedEffective(0L) == WordWidth.BITS_8);
     assertTrue(WordWidth.unsignedEffective(1L) == WordWidth.BITS_8);
     assertTrue(WordWidth.unsignedEffective(2L) == WordWidth.BITS_8);
@@ -69,7 +69,7 @@ public class WordWidthTest extends TestCase {
     assertTrue(WordWidth.unsignedEffective(257L) == WordWidth.BITS_16);
   }
 
-  public void test_signedEffectiveInt() {
+  public final void test_signedEffectiveInt() {
     assertTrue(WordWidth.signedEffective(0) == WordWidth.BITS_8);
     assertTrue(WordWidth.signedEffective(1) == WordWidth.BITS_8);
     assertTrue(WordWidth.signedEffective(2) == WordWidth.BITS_8);
@@ -95,7 +95,7 @@ public class WordWidthTest extends TestCase {
     assertTrue(WordWidth.signedEffective(-257) == WordWidth.BITS_16);
   }
 
-  public void test_signedEffectiveLong() {
+  public final void test_signedEffectiveLong() {
     assertTrue(WordWidth.signedEffective(0L) == WordWidth.BITS_8);
     assertTrue(WordWidth.signedEffective(1L) == WordWidth.BITS_8);
     assertTrue(WordWidth.signedEffective(2L) == WordWidth.BITS_8);

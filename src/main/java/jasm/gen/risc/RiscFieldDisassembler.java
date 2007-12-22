@@ -21,7 +21,7 @@ import jasm.util.lang.StringUtil;
  *
  * @author Doug Simon
  */
-class RiscFieldDisassembler<Template_Type extends Template> implements RiscInstructionDescriptionVisitor {
+final class RiscFieldDisassembler<Template_Type extends Template> implements RiscInstructionDescriptionVisitor {
 
     private final Template_Type _template;
     private final int _assembledInstruction;
@@ -34,7 +34,7 @@ class RiscFieldDisassembler<Template_Type extends Template> implements RiscInstr
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         if (_string == null) {
             _string = "";
             RiscInstructionDescriptionVisitor.Static.visitInstructionDescription(this, _template.instructionDescription());
@@ -42,14 +42,14 @@ class RiscFieldDisassembler<Template_Type extends Template> implements RiscInstr
         return _string;
     }
 
-    public void visitConstant(RiscConstant constant) {
+    public final void visitConstant(RiscConstant constant) {
         visitField(constant.field());
     }
 
-    public void visitConstraint(InstructionConstraint constraint) {
+    public final void visitConstraint(InstructionConstraint constraint) {
     }
 
-    public void visitField(RiscField field) {
+    public final void visitField(RiscField field) {
         if (_string.length() != 0) {
             _string += ' ';
         }
@@ -72,7 +72,7 @@ class RiscFieldDisassembler<Template_Type extends Template> implements RiscInstr
         _string += field.name() + "[" + bitRange + "]=" + value + "{" + binary + "}";
     }
 
-    public void visitString(String string) {
+    public final void visitString(String string) {
     }
 
 

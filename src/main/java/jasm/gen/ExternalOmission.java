@@ -14,7 +14,7 @@ package jasm.gen;
  *
  * @author Bernd Mathiske
  */
-public class ExternalOmission {
+public final class ExternalOmission {
 
     private final Object _specification;
 
@@ -22,7 +22,7 @@ public class ExternalOmission {
         _specification = specification;
     }
 
-    public Object wrappedSpecification() {
+    public final Object wrappedSpecification() {
         return _specification;
     }
 

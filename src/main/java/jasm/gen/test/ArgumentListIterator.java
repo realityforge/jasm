@@ -32,7 +32,7 @@ import java.util.Arrays;
  *
  * @author Doug Simon
  */
-class ArgumentListIterator<Template_Type extends Template> implements Iterator<List<Argument>> {
+final class ArgumentListIterator<Template_Type extends Template> implements Iterator<List<Argument>> {
 
   private final Template_Type _template;
   private final Parameter[] _parameters;
@@ -66,11 +66,11 @@ class ArgumentListIterator<Template_Type extends Template> implements Iterator<L
   /**
    * @return the number of times {@link #next} has been invoked on this iterator without throwing a NoSuchElementException.
    */
-  public int iterations() {
+  public final int iterations() {
     return _iterations;
   }
 
-  public boolean hasNext() {
+  public final boolean hasNext() {
     if (_count == 0) {
       return _testCaseLegality == TestCaseLegality.LEGAL && _iterations == 0;
     }
@@ -84,7 +84,7 @@ class ArgumentListIterator<Template_Type extends Template> implements Iterator<L
    * The returned sequence is only valid for a single iteration and so should be copied
    * if needed after this iteration.
    */
-  public List<Argument> next() {
+  public final List<Argument> next() {
     if (!hasNext()) {
       throw new NoSuchElementException();
     }
@@ -190,7 +190,7 @@ class ArgumentListIterator<Template_Type extends Template> implements Iterator<L
     return true;
   }
 
-  public void remove() {
+  public final void remove() {
     throw new UnsupportedOperationException();
   }
 }

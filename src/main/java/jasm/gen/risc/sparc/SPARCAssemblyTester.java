@@ -33,19 +33,19 @@ public abstract class SPARCAssemblyTester<DisassembledInstruction_Type extends D
     }
 
     @Override
-    public SPARCAssembly assembly() {
+    public final SPARCAssembly assembly() {
         return (SPARCAssembly) super.assembly();
     }
 
     @Override
-    protected String assemblerCommand() {
+    protected final String assemblerCommand() {
         return "as -xarch=v9a";
     }
 
     private SPARCTemplate _lastTemplate;
 
     @Override
-    protected void assembleExternally(IndentWriter writer, SPARCTemplate template, List<Argument> argumentList, String label) {
+    protected final void assembleExternally(IndentWriter writer, SPARCTemplate template, List<Argument> argumentList, String label) {
 
         // This is a workaround for SPARC V9 ABI compliance checks: http://developers.sun.com/solaris/articles/sparcv9abi.html
         if (_lastTemplate == null || template != _lastTemplate) {
@@ -61,13 +61,13 @@ public abstract class SPARCAssemblyTester<DisassembledInstruction_Type extends D
     }
 
     @Override
-    protected boolean readNop(InputStream stream) throws IOException {
+    protected final boolean readNop(InputStream stream) throws IOException {
         final int instruction = Endianness.BIG.readInt(stream);
         return instruction == 0x01000000;
     }
 
     @Override
-    protected byte[] readExternalInstruction(PushbackInputStream externalInputStream, SPARCTemplate template, byte[] internalBytes) throws IOException {
+    protected final byte[] readExternalInstruction(PushbackInputStream externalInputStream, SPARCTemplate template, byte[] internalBytes) throws IOException {
         final byte[] result = super.readExternalInstruction(externalInputStream, template, internalBytes);
         if (!readNop(externalInputStream)) { // read potential DCTI slot place holder contents - see above
             ProgramError.unexpected("nop missing after external instruction");

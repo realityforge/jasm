@@ -57,7 +57,7 @@ import jasm.sparc.FBfcc;
  * @author Dave Ungar
  * @author Adam Spitz
  */
-class ControlTransfer extends SPARCInstructionDescriptionCreator {
+final class ControlTransfer extends SPARCInstructionDescriptionCreator {
 
     private void createBPr(String prefix, Object... objects) {
         for (BPr condition : BPr.SYMBOLIZER) {

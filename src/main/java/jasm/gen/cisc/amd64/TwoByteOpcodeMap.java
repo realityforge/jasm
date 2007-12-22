@@ -296,7 +296,7 @@ import static jasm.x86.SegmentRegister.GS;
 /**
  * @author Bernd Mathiske
  */
-public class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
+public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
 
     /**
      * See A-5 in the book.

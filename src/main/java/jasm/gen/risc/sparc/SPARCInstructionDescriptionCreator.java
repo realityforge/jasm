@@ -22,7 +22,7 @@ public abstract class SPARCInstructionDescriptionCreator extends RiscInstruction
     }
 
     @Override
-    public SPARCAssembly assembly() {
+    public final SPARCAssembly assembly() {
         final Assembly assembly = super.assembly();
         return (SPARCAssembly) assembly;
     }

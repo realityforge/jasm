@@ -47,20 +47,20 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     }
 
     @Override
-    public X86Assembly<Template_Type> assembly() {
+    public final X86Assembly<Template_Type> assembly() {
         return StaticLoophole.cast(super.assembly());
     }
 
-    public WordWidth addressWidth() {
+    public final WordWidth addressWidth() {
         return _addressWidth;
     }
 
     @Override
-    protected Class<? extends Assembler> endiannessSpecificAssemblerClass() {
+    protected final Class<? extends Assembler> endiannessSpecificAssemblerClass() {
         return LittleEndianAssembler.class;
     }
 
-    protected X86Parameter getParameter(Template_Type template, Class parameterType) {
+    protected final X86Parameter getParameter(Template_Type template, Class parameterType) {
         for (X86Parameter parameter : template.parameters()) {
             if (parameter.type() == parameterType) {
                 return parameter;
@@ -91,11 +91,11 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
         writer.println(");");
     }
 
-    protected String asIdentifier(EnumerableArgument argument) {
+    protected final String asIdentifier(EnumerableArgument argument) {
         return argument.getClass().getSimpleName() + "." + argument.name();
     }
 
-    protected <Argument_Type extends Enum<Argument_Type> & EnumerableArgument> void printModVariant(IndentWriter writer,
+    protected final <Argument_Type extends Enum<Argument_Type> & EnumerableArgument> void printModVariant(IndentWriter writer,
                     final Template_Type template, Argument_Type... arguments) {
         final Class argumentType = arguments[0].getClass();
         final X86Parameter parameter = getParameter(template, argumentType);
@@ -224,7 +224,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
         writer.println();
     }
 
-    protected <Argument_Type extends Enum<Argument_Type> & EnumerableArgument>
+    protected final <Argument_Type extends Enum<Argument_Type> & EnumerableArgument>
     void printSibVariant(IndentWriter writer, Template_Type template, Argument_Type... arguments) {
         final Class argumentType = arguments[0].getClass();
         final X86Parameter parameter = getParameter(template, argumentType);
@@ -346,7 +346,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     }
 
     @Override
-    protected int printMethod(IndentWriter writer, Template_Type template) {
+    protected final int printMethod(IndentWriter writer, Template_Type template) {
         final int startLineCount = writer.lineCount();
         writer.print("public final void ");
         writer.print(template.assemblerMethodName() + "(");
@@ -373,7 +373,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     }
 
     @Override
-    protected int printSubroutines(IndentWriter writer) {
+    protected final int printSubroutines(IndentWriter writer) {
         final Set<String> subroutineSet = _subroutineToName.keySet();
         final String[] subroutines = subroutineSet.toArray(new String[subroutineSet.size()]);
         for (int i = 0; i < subroutines.length; i++) {
@@ -517,7 +517,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     }
 
     @Override
-    protected int printLabelMethod(IndentWriter writer, Template_Type labelTemplate, List<Template_Type> labelTemplates) {
+    protected final int printLabelMethod(IndentWriter writer, Template_Type labelTemplate, List<Template_Type> labelTemplates) {
         final int startLineCount = writer.lineCount();
         if (labelTemplate.addressSizeAttribute() == addressWidth()) {
             if (!labelTemplate._isLabelMethodWritten) {

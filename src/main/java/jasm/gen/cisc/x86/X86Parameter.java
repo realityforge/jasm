@@ -30,13 +30,13 @@ public abstract class X86Parameter extends X86Operand implements Parameter {
         _place = place;
     }
 
-    public ParameterPlace place() {
+    public final ParameterPlace place() {
         return _place;
     }
 
     private String _variableName = "p";
 
-    public void setVariableName(String variableName) {
+    public final void setVariableName(String variableName) {
         _variableName = variableName;
     }
 
@@ -46,18 +46,18 @@ public abstract class X86Parameter extends X86Operand implements Parameter {
 
     private ArgumentRange _argumentRange;
 
-    public ArgumentRange argumentRange() {
+    public final ArgumentRange argumentRange() {
         return _argumentRange;
     }
 
-    public void setArgumentRange(ArgumentRange argumentRange) {
+    public final void setArgumentRange(ArgumentRange argumentRange) {
         _argumentRange = argumentRange;
     }
 
     private Set<Argument> _excludedDisassemblerTestArguments = new HashSet<Argument>();
     private Set<Argument> _excludedExternalTestArguments = new HashSet<Argument>();
 
-    public void excludeTestArguments(TestArgumentExclusion testArgumentExclusion) {
+    public final void excludeTestArguments(TestArgumentExclusion testArgumentExclusion) {
         switch (testArgumentExclusion.component()) {
             case DISASSEMBLER:
                 _excludedDisassemblerTestArguments = testArgumentExclusion.arguments();
@@ -70,15 +70,15 @@ public abstract class X86Parameter extends X86Operand implements Parameter {
         }
     }
 
-    public Set<Argument> excludedDisassemblerTestArguments() {
+    public final Set<Argument> excludedDisassemblerTestArguments() {
         return _excludedDisassemblerTestArguments;
     }
 
-    public Set<Argument> excludedExternalTestArguments() {
+    public final Set<Argument> excludedExternalTestArguments() {
         return _excludedExternalTestArguments;
     }
 
-    public int compareTo(Parameter other) {
+    public final int compareTo(Parameter other) {
         return type().getName().compareTo(other.type().getName());
     }
 }

@@ -13,7 +13,7 @@ import jasm.WordWidth;
 /**
  * @author Bernd Mathiske
  */
-public class Immediate16Argument extends ImmediateArgument {
+public final class Immediate16Argument extends ImmediateArgument {
 
     private short _value;
 
@@ -22,38 +22,38 @@ public class Immediate16Argument extends ImmediateArgument {
     }
 
     @Override
-    public WordWidth width() {
+    public final WordWidth width() {
         return WordWidth.BITS_16;
     }
 
-    public short value() {
+    public final short value() {
         return _value;
     }
 
-    public long asLong() {
+    public final long asLong() {
         return value();
     }
 
-    public String externalValue() {
+    public final String externalValue() {
         return "0x" + Integer.toHexString(_value & 0xffff);
     }
 
-    public String disassembledValue() {
+    public final String disassembledValue() {
         return "0x" + String.format("%X", _value);
     }
 
     @Override
-    public String signedExternalValue() {
+    public final String signedExternalValue() {
         return Integer.toString(_value);
     }
 
     @Override
-    public Object boxedJavaValue() {
+    public final Object boxedJavaValue() {
         return new Short(_value);
     }
 
     @Override
-    public boolean equals(Object other) {
+    public final boolean equals(Object other) {
         if (other instanceof Immediate16Argument) {
             final Immediate16Argument argument = (Immediate16Argument) other;
             return _value == argument._value;
@@ -62,7 +62,7 @@ public class Immediate16Argument extends ImmediateArgument {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return _value;
     }
 }

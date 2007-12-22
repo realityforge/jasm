@@ -17,7 +17,7 @@ import jasm.Label;
 
  * @author Bernd Mathiske
  */
-public class SPARC32Assembler extends SPARCAssembler implements Assembler32 {
+public final class SPARC32Assembler extends SPARCAssembler implements Assembler32 {
 
     private final int _startAddress; // address of first instruction
 
@@ -25,15 +25,15 @@ public class SPARC32Assembler extends SPARCAssembler implements Assembler32 {
         _startAddress = startAddress;
     }
 
-    public int startAddress() {
+    public final int startAddress() {
         return _startAddress;
     }
 
-    public void fixLabel(Label label, int address) {
+    public final void fixLabel(Label label, int address) {
         fixLabel32(label, address);
     }
 
-    public int address(Label label) throws AssemblyException {
+    public final int address(Label label) throws AssemblyException {
         return address32(label);
     }
 

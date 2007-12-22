@@ -80,7 +80,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     return new File(directory, classSimpleName + ".java");
   }
 
-  public void setSourceDirectory(final File sourceDirectory) {
+  public final void setSourceDirectory(final File sourceDirectory) {
     _sourceDirectory = sourceDirectory;
   }
 
@@ -112,7 +112,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         printImports(writer, packages);
     }
 
-    protected void printLabelImports(IndentWriter writer, Set<String> packages) {
+    protected final void printLabelImports(IndentWriter writer, Set<String> packages) {
         printImports(writer, packages);
     }
 
@@ -124,7 +124,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         writer.println("}");
     }
 
-    protected String formatParameterList(String separator, List<? extends Parameter> parameters, boolean typesOnly) {
+    protected final String formatParameterList(String separator, List<? extends Parameter> parameters, boolean typesOnly) {
         String sep = separator;
         final StringBuilder sb = new StringBuilder();
         for (Parameter parameter : parameters) {
@@ -161,7 +161,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         return 0;
     }
 
-    protected Set<String> getImportPackages(Iterable<Template_Type> templates) {
+    protected final Set<String> getImportPackages(Iterable<Template_Type> templates) {
         final Set<String> packages = new HashSet<String>();
         for (Template_Type template : templates) {
             for (Parameter parameter : template.parameters()) {
@@ -219,7 +219,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
      *
      * @param template the template from which the assembler method is generated
      */
-    protected void printMethodJavadoc(IndentWriter writer, Template_Type template) {
+    protected final void printMethodJavadoc(IndentWriter writer, Template_Type template) {
         final ArrayList<String> extraLinks = new ArrayList<String>();
         final List<? extends Parameter> parameters = getParameters(template);
         writer.println("/**");
@@ -351,7 +351,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
      * Gets the parameters for a template, replacing the label parameter with a LabelParameter instance
      * if the template has a label parameter and this generator is currently generating the label assembler.
      */
-    protected List<Parameter> getParameters(Template template) {
+    protected final List<Parameter> getParameters(Template template) {
         if (!_generatingLabelAssembler || template.labelParameterIndex() == -1) {
             return StaticLoophole.cast(template.parameters());
         }
@@ -360,7 +360,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         return parameters;
     }
 
-    protected List<Parameter> printLabelMethodHead(IndentWriter writer, Template_Type template) {
+    protected final List<Parameter> printLabelMethodHead(IndentWriter writer, Template_Type template) {
         final List<Parameter> parameters = getParameters(template);
         writer.print("public final void " + template.assemblerMethodName() + "(");
         writer.print(formatParameterList("final ", parameters, false));
@@ -369,7 +369,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         return parameters;
     }
 
-    protected void printInitialRawCall(IndentWriter writer, Template_Type template) {
+    protected final void printInitialRawCall(IndentWriter writer, Template_Type template) {
         writer.println("final " + template.parameters().get(template.labelParameterIndex()).type() + " placeHolder = 0;");
         writer.print(template.assemblerMethodName() + "(");
         String separator = "";
@@ -385,7 +385,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         writer.println(");");
     }
 
-    protected void printRawCall(IndentWriter writer, Template_Type template, List<Parameter> parameters) {
+    protected final void printRawCall(IndentWriter writer, Template_Type template, List<Parameter> parameters) {
         writer.print(template.assemblerMethodName() + "(");
         String separator = "";
         for (int i = 0; i < parameters.size(); i++) {
@@ -411,7 +411,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
 
     private boolean _generatingLabelAssembler;
 
-    protected boolean generatingLabelAssembler() {
+    protected final boolean generatingLabelAssembler() {
         return _generatingLabelAssembler;
     }
 
@@ -570,12 +570,12 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     outputStream.flush();
   }
 
-  private static class CharArraySource
+  private static final class CharArraySource
         extends CharArrayWriter {
         CharArraySource(int initialSize) {
             super(initialSize);
         }
-        public Reader reader() {
+        public final Reader reader() {
             final Reader reader = new CharArrayReader(buf, 0, count);
             return new BufferedReader(reader);
         }
@@ -616,15 +616,15 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         return markGeneratedContent(labelAssemblerFile, charArrayWriter);
     }
 
-    protected void emitByte(IndentWriter writer, String byteValue) {
+    protected final void emitByte(IndentWriter writer, String byteValue) {
         writer.print("emitByte(" + byteValue + ");");
     }
 
-    protected void emitByte(IndentWriter writer, byte value) {
+    protected final void emitByte(IndentWriter writer, byte value) {
         emitByte(writer, "((byte) " + HexUtil.toHexLiteral(value) + ")");
     }
 
-    protected void generate() {
+    protected final void generate() {
         try {
             if (!generateRawAssemblerClass()) {
                 Trace.line(1, "unmodified: " + _rawAssemblerClassName);

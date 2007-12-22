@@ -44,7 +44,7 @@ import jasm.x86.SegmentRegister;
 /**
  * @author Bernd Mathiske
  */
-public class IA32Template extends X86Template {
+public final class IA32Template extends X86Template {
 
     IA32Template(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {
         super(instructionDescription, serial, instructionFamily, context);
@@ -100,7 +100,7 @@ public class IA32Template extends X86Template {
     }
 
     @Override
-    protected void organize_M(X86Operand.Designation designation) throws TemplateNotNeededException {
+    protected final void organize_M(X86Operand.Designation designation) throws TemplateNotNeededException {
         switch (context().modCase()) {
             case MOD_0: {
                 switch (context().rmCase()) {
@@ -228,7 +228,7 @@ public class IA32Template extends X86Template {
         }
     }
 
-    public void visitOperandCode(OperandCode operandCode, X86Operand.Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion)
+    public final void visitOperandCode(OperandCode operandCode, X86Operand.Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion)
         throws TemplateNotNeededException {
         switch (operandCode) {
             case Ap:
@@ -468,7 +468,7 @@ public class IA32Template extends X86Template {
         }
     }
 
-    public void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, X86Operand.Designation designation, ImplicitOperand.ExternalPresence externalPresence) {
+    public final void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, X86Operand.Designation designation, ImplicitOperand.ExternalPresence externalPresence) {
         switch (operandSizeAttribute()) {
             case BITS_16:
                 addImplicitOperand(new X86ImplicitOperand(designation, externalPresence, IA32GeneralRegister16.values()[registerOperandCode.id()]));

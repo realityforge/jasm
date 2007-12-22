@@ -193,7 +193,7 @@ import static jasm.x86.SegmentRegister.GS;
 /**
  * @author Bernd Mathiske
  */
-class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
+final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
 
     private void create_low() {
         define(_0F, _00, GROUP_6a);

@@ -13,7 +13,7 @@ import jasm.WordWidth;
 /**
  * @author Bernd Mathiske
  */
-public class Immediate64Argument extends ImmediateArgument {
+public final class Immediate64Argument extends ImmediateArgument {
 
     private long _value;
 
@@ -22,38 +22,38 @@ public class Immediate64Argument extends ImmediateArgument {
     }
 
     @Override
-    public WordWidth width() {
+    public final WordWidth width() {
         return WordWidth.BITS_64;
     }
 
-    public long value() {
+    public final long value() {
         return _value;
     }
 
-    public long asLong() {
+    public final long asLong() {
         return value();
     }
 
-    public String externalValue() {
+    public final String externalValue() {
         return "0x" + Long.toHexString(_value);
     }
 
-    public String disassembledValue() {
+    public final String disassembledValue() {
         return "0x" + String.format("%X", _value);
     }
 
     @Override
-    public String signedExternalValue() {
+    public final String signedExternalValue() {
         return Long.toString(_value);
     }
 
     @Override
-    public Object boxedJavaValue() {
+    public final Object boxedJavaValue() {
         return new Long(_value);
     }
 
     @Override
-    public boolean equals(Object other) {
+    public final boolean equals(Object other) {
         if (other instanceof Immediate64Argument) {
             final Immediate64Argument argument = (Immediate64Argument) other;
             return _value == argument._value;
@@ -62,7 +62,7 @@ public class Immediate64Argument extends ImmediateArgument {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return (int) (_value ^ _value >> 32);
     }
 

@@ -30,7 +30,7 @@ import static jasm.gen.risc.sparc.SPARCFields.x;
  * @author Dave Ungar
  * @author Adam Spitz
  */
-class IntegerArithmetic extends SPARCInstructionDescriptionCreator {
+final class IntegerArithmetic extends SPARCInstructionDescriptionCreator {
 
     private void createBinaryArithmetic(String name, int op3Contents) {
         define(name, op(0x2), _rs1, i(0), _res_12_5, _rs2, _rd, op3(op3Contents));

@@ -41,11 +41,11 @@ public enum FPStackRegister implements EnumerableArgument {
         _value = value;
     }
 
-    public int value() {
+    public final int value() {
         return _value;
     }
 
-    public long asLong() {
+    public final long asLong() {
         return value();
     }
 

@@ -27,7 +27,7 @@ public abstract class X86Operand implements Operand {
         _designation = designation;
     }
 
-    public Designation designation() {
+    public final Designation designation() {
         return _designation;
     }
 

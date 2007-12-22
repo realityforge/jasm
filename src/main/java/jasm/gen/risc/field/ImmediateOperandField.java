@@ -47,11 +47,11 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
         return minArgumentValue() <= value && value <= maxArgumentValue();
     }
 
-    public Method predicateMethod() {
+    public final Method predicateMethod() {
         return null;
     }
 
-    public boolean referencesParameter(Parameter parameter) {
+    public final boolean referencesParameter(Parameter parameter) {
         return parameter == this;
     }
 
@@ -72,11 +72,11 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
         return new ImmediateOperandField(bitRange);
     }
 
-    public Class type() {
+    public final Class type() {
         return int.class;
     }
 
-    public String valueString() {
+    public final String valueString() {
         if (boundTo() != null) {
             return boundTo().valueString();
         }
@@ -84,12 +84,12 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
     }
 
     @Override
-    public ImmediateOperandField beSigned() {
+    public final ImmediateOperandField beSigned() {
         return (ImmediateOperandField) super.beSigned();
     }
 
     @Override
-    public ImmediateOperandField beSignedOrUnsigned() {
+    public final ImmediateOperandField beSignedOrUnsigned() {
         return (ImmediateOperandField) super.beSignedOrUnsigned();
     }
 
@@ -99,14 +99,14 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
     }
 
     @Override
-    public ImmediateOperandField setVariableName(String name) {
+    public final ImmediateOperandField setVariableName(String name) {
         super.setVariableName(name);
         return this;
     }
 
     private ArgumentRange _argumentRange;
 
-    public ArgumentRange argumentRange() {
+    public final ArgumentRange argumentRange() {
         if (_argumentRange == null) {
             _argumentRange = new ArgumentRange(this, minArgumentValue(), maxArgumentValue());
         }
@@ -116,7 +116,7 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
     private Iterable<? extends Argument> _testArguments;
     private Iterable<? extends Argument> _illegalTestArguments;
 
-    public Iterable<? extends Argument> getLegalTestArguments() {
+    public final Iterable<? extends Argument> getLegalTestArguments() {
       if (_testArguments == null) {
         final List<Integer> integers =
             signDependentOperations().legalTestArgumentValues(minArgumentValue(), maxArgumentValue(), grain());
@@ -129,7 +129,7 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
         return _testArguments;
     }
 
-    public Iterable<? extends Argument> getIllegalTestArguments() {
+    public final Iterable<? extends Argument> getIllegalTestArguments() {
         if (_illegalTestArguments == null) {
             final ArrayList<Immediate32Argument> illegalTestArguments = new ArrayList<Immediate32Argument>(4);
             final int min = minArgumentValue();
@@ -147,12 +147,12 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
         return _illegalTestArguments;
     }
 
-    public TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
+    public final TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
         return TestArgumentExclusion.NONE;
     }
 
     @Override
-    public ImmediateOperandField bindTo(Expression expression) {
+    public final ImmediateOperandField bindTo(Expression expression) {
         return (ImmediateOperandField) super.bindTo(expression);
     }
 }

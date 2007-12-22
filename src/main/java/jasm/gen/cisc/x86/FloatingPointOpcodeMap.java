@@ -57,7 +57,7 @@ import static jasm.x86.FPStackRegister.ST_0;
 /**
  * @author Bernd Mathiske
  */
-public class FloatingPointOpcodeMap extends X86InstructionDescriptionCreator {
+public final class FloatingPointOpcodeMap extends X86InstructionDescriptionCreator {
 
     private void create_D8() {
         define(_D8, _C0, "FADD", ST, ST_i);

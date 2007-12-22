@@ -27,7 +27,7 @@ import java.util.Map;
  *
  * @author Bernd Mathiske
  */
-public class AMD64Disassembler extends X86Disassembler<AMD64Template, AMD64DisassembledInstruction> {
+public final class AMD64Disassembler extends X86Disassembler<AMD64Template, AMD64DisassembledInstruction> {
 
     private final long _startAddress;
 
@@ -37,24 +37,24 @@ public class AMD64Disassembler extends X86Disassembler<AMD64Template, AMD64Disas
     }
 
     @Override
-    protected boolean isRexPrefix(HexByte opcode) {
+    protected final boolean isRexPrefix(HexByte opcode) {
         return X86Opcode.isRexPrefix(opcode);
     }
 
     @Override
-    protected AMD64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, AMD64Template template, List<Argument> arguments) {
+    protected final AMD64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, AMD64Template template, List<Argument> arguments) {
         return new AMD64DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
     }
 
     @Override
-    protected Assembler createAssembler(int offset) {
+    protected final Assembler createAssembler(int offset) {
         return new AMD64Assembler(_startAddress + offset);
     }
 
     private static Map<X86InstructionHeader, LinkedList<AMD64Template>> _headerToTemplates = X86InstructionHeader.createMapping(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);
 
     @Override
-    protected Map<X86InstructionHeader, LinkedList<AMD64Template>> headerToTemplates() {
+    protected final Map<X86InstructionHeader, LinkedList<AMD64Template>> headerToTemplates() {
         return _headerToTemplates;
     }
 

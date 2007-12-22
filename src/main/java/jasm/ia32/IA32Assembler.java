@@ -18,7 +18,7 @@ import jasm.Label;
  *
  * @author Bernd Mathiske
  */
-public class IA32Assembler extends IA32LabelAssembler implements Assembler32 {
+public final class IA32Assembler extends IA32LabelAssembler implements Assembler32 {
 
     @Override
     public final InstructionSet instructionSet() {
@@ -27,7 +27,7 @@ public class IA32Assembler extends IA32LabelAssembler implements Assembler32 {
 
     private int _startAddress; // address of first instruction
 
-    public int startAddress() {
+    public final int startAddress() {
         return _startAddress;
     }
 
@@ -38,11 +38,11 @@ public class IA32Assembler extends IA32LabelAssembler implements Assembler32 {
         _startAddress = startAddress;
     }
 
-    public void fixLabel(Label label, int address) {
+    public final void fixLabel(Label label, int address) {
         fixLabel32(label, address);
     }
 
-    public int address(Label label) throws AssemblyException {
+    public final int address(Label label) throws AssemblyException {
         return address32(label);
     }
 

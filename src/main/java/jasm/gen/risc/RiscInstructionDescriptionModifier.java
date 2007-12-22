@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Bernd Mathiske
  */
-public class RiscInstructionDescriptionModifier {
+public final class RiscInstructionDescriptionModifier {
 
     private final List<RiscInstructionDescription> _instructionDescriptions;
 
@@ -30,7 +30,7 @@ public class RiscInstructionDescriptionModifier {
      * @param before  the specification to be replaced (matched with {@link Object#equals})
      * @param after   the replacement value
      */
-    public RiscInstructionDescriptionModifier replace(Object before, Object after) {
+    public final RiscInstructionDescriptionModifier replace(Object before, Object after) {
         for (RiscInstructionDescription instructionDescription : _instructionDescriptions) {
             final List<Object> specifications = instructionDescription.specifications();
             for (int i = 0; i < specifications.size(); i++) {
@@ -43,7 +43,7 @@ public class RiscInstructionDescriptionModifier {
     }
 
 
-    public RiscInstructionDescriptionModifier swap(Object a, Object b) {
+    public final RiscInstructionDescriptionModifier swap(Object a, Object b) {
         for (RiscInstructionDescription instructionDescription : _instructionDescriptions) {
             final List<Object> specifications = instructionDescription.specifications();
             final int aIndex = CollectionUtil.indexOfIdentical(specifications, a);
@@ -56,7 +56,7 @@ public class RiscInstructionDescriptionModifier {
         return this;
     }
 
-    public RiscInstructionDescriptionModifier setExternalName(String externalName) {
+    public final RiscInstructionDescriptionModifier setExternalName(String externalName) {
         for (RiscInstructionDescription instructionDescription : _instructionDescriptions) {
             instructionDescription.setExternalName(externalName);
         }

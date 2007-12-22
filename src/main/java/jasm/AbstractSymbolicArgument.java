@@ -30,15 +30,15 @@ public abstract class AbstractSymbolicArgument implements SymbolicArgument, Stat
         _value = value;
     }
 
-    public void setName(String name) {
+    public final void setName(String name) {
         _name = name;
     }
 
-    public String name() {
+    public final String name() {
         return _name;
     }
 
-    public int value() {
+    public final int value() {
         return _value;
     }
 
@@ -46,11 +46,11 @@ public abstract class AbstractSymbolicArgument implements SymbolicArgument, Stat
         return "%" + name().toLowerCase();
     }
 
-    public long asLong() {
+    public final long asLong() {
         return value();
     }
 
-    public String disassembledValue() {
+    public final String disassembledValue() {
         return externalValue();
     }
 

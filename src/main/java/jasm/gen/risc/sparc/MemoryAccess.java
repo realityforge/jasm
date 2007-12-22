@@ -30,7 +30,7 @@ import static jasm.gen.risc.sparc.SPARCFields.rd;
  * @author Dave Ungar
  * @author Adam Spitz
  */
-class MemoryAccess extends SPARCInstructionDescriptionCreator {
+final class MemoryAccess extends SPARCInstructionDescriptionCreator {
 
     private void create_A9() {
         define("casa",  op(0x3), op3(0x3c), "[", _rs1, "] ", i(0), _immAsi, ",",    _rs2, _rd);

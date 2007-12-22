@@ -50,7 +50,7 @@ import junit.framework.TestCase;
 /**
  * @author Bernd Mathiske
  */
-public class InternalTest extends TestCase {
+public final class InternalTest extends TestCase {
 
   private static String disassemble(int startAddress, byte[] bytes) throws IOException, AssemblyException {
     final IA32Disassembler disassembler = new IA32Disassembler(startAddress);
@@ -60,7 +60,7 @@ public class InternalTest extends TestCase {
     return new String(baos.toByteArray());
   }
 
-  public void no_work_as_generated_operand_size_prefix_test_complex() throws IOException, AssemblyException {
+  public final void no_work_as_generated_operand_size_prefix_test_complex() throws IOException, AssemblyException {
     final int startAddress = 0x12358;
     final IA32GeneralRegister32 myGPR = EAX;
     final IA32Assembler asm = new IA32Assembler(startAddress);
@@ -154,7 +154,7 @@ public class InternalTest extends TestCase {
     assertEquals(expected, output);
   }
 
-  public void test_simple() throws IOException, AssemblyException {
+  public final void test_simple() throws IOException, AssemblyException {
     final int address = 0x12358;
     final IA32Assembler asm = new IA32Assembler(address);
     asm.add(EDX.indirect(), BL);
@@ -181,7 +181,7 @@ public class InternalTest extends TestCase {
     assertEquals(expected, output);
   }
 
-  public void test_simple_with_jump() throws IOException, AssemblyException {
+  public final void test_simple_with_jump() throws IOException, AssemblyException {
     final int address = 0x12358;
     final IA32Assembler asm = new IA32Assembler(address);
     final Label startLabel = new Label();
@@ -213,7 +213,7 @@ public class InternalTest extends TestCase {
     assertEquals(expected, output);
   }
 
-  public void failing_test_jmp_with_operand_size_prefix() throws IOException, AssemblyException {
+  public final void failing_test_jmp_with_operand_size_prefix() throws IOException, AssemblyException {
     final int startAddress = 0x12358;
     final byte[] bytes = new byte[]{(byte) 0x66, (byte) 0xE9, (byte) 0x8B, (byte) 0x00};
     final String output = disassemble(startAddress, bytes);

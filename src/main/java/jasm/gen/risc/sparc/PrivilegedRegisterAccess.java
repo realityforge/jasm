@@ -25,7 +25,7 @@ import static jasm.gen.risc.sparc.SPARCFields.op3;
  * @author Dave Ungar
  * @author Adam Spitz
  */
-public class PrivilegedRegisterAccess extends SPARCInstructionDescriptionCreator {
+public final class PrivilegedRegisterAccess extends SPARCInstructionDescriptionCreator {
 
     private void create_A42() {
         define("rdpr", op(0x2), op3(0x2a), _res_13_0, _rs1PrivReg, _rd);

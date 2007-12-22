@@ -17,7 +17,7 @@ import junit.framework.TestCase;
  *
  * @author Hiroshi Yamauchi
  */
-public class EnumeratorTest extends TestCase {
+public final class EnumeratorTest extends TestCase {
   private static final class NonSuccessiveEnumerator<E extends Enum<E> & Symbol> extends Enumerator<E> {
     private NonSuccessiveEnumerator(Class<E> type) {
       super(type);
@@ -42,7 +42,7 @@ public class EnumeratorTest extends TestCase {
     }
   }
 
-  public void test_value() {
+  public final void test_value() {
     assertTrue(NonSuccessiveEnum.E0.ordinal() == 0);
     assertTrue(NonSuccessiveEnum.E100.ordinal() == 1);
     assertTrue(NonSuccessiveEnum.E1000.ordinal() == 2);
@@ -51,7 +51,7 @@ public class EnumeratorTest extends TestCase {
     assertTrue(NonSuccessiveEnum.E1000.value() == 1000);
   }
 
-  public void test_enumerator() {
+  public final void test_enumerator() {
     final Enumerator<NonSuccessiveEnum> enumerator = NonSuccessiveEnum.E0.enumerator();
     assertTrue(enumerator.type() == NonSuccessiveEnum.class);
     int sum = 0;

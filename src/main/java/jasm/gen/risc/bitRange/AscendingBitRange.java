@@ -17,7 +17,7 @@ package jasm.gen.risc.bitRange;
  * @author Dave Ungar
  * @author Adam Spitz
  */
-public class AscendingBitRange extends SimpleBitRange {
+public final class AscendingBitRange extends SimpleBitRange {
 
     public AscendingBitRange(int firstBitIndex, int lastBitIndex) {
         super(firstBitIndex, lastBitIndex);
@@ -27,7 +27,7 @@ public class AscendingBitRange extends SimpleBitRange {
     }
 
     @Override
-    public AscendingBitRange move(boolean left, int bits) {
+    public final AscendingBitRange move(boolean left, int bits) {
         if (left) {
             return new AscendingBitRange(_firstBitIndex - bits, _lastBitIndex - bits);
         }
@@ -35,12 +35,12 @@ public class AscendingBitRange extends SimpleBitRange {
     }
 
     @Override
-    public int numberOfLessSignificantBits() {
+    public final int numberOfLessSignificantBits() {
         return (32 - _lastBitIndex) - 1;
     }
 
     @Override
-    public int width() {
+    public final int width() {
         return (_lastBitIndex - _firstBitIndex) + 1;
     }
 }

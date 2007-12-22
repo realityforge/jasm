@@ -86,10 +86,10 @@ import jasm.ppc.Zero;
  *
  * @author Doug Simon
  */
-class SyntheticInstructions extends PPCInstructionDescriptionCreator {
+final class SyntheticInstructions extends PPCInstructionDescriptionCreator {
 
     @Override
-    protected RiscInstructionDescription define(Object... specifications) {
+    protected final RiscInstructionDescription define(Object... specifications) {
         return (RiscInstructionDescription) super.define(specifications).beSynthetic();
     }
 

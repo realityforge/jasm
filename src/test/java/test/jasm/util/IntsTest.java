@@ -16,8 +16,8 @@ import junit.framework.TestCase;
  *
  * @author Bernd Mathiske
  */
-public class IntsTest extends TestCase {
-  public void test_numberOfEffectiveUnsignedBits() {
+public final class IntsTest extends TestCase {
+  public final void test_numberOfEffectiveUnsignedBits() {
     assertTrue(Ints.numberOfEffectiveUnsignedBits(0) == 0);
     assertTrue(Ints.numberOfEffectiveUnsignedBits(1) == 1);
     assertTrue(Ints.numberOfEffectiveUnsignedBits(2) == 2);
@@ -33,7 +33,7 @@ public class IntsTest extends TestCase {
     assertTrue(Ints.numberOfEffectiveUnsignedBits(257) == 9);
   }
 
-  public void test_numberOfEffectiveSignedBits() {
+  public final void test_numberOfEffectiveSignedBits() {
     for (int i = 0; i < 257; i++) {
       assertTrue(Ints.numberOfEffectiveSignedBits(i) == Ints.numberOfEffectiveUnsignedBits(i) + 1);
     }

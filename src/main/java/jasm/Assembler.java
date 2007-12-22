@@ -30,13 +30,13 @@ public abstract class Assembler {
 
     private int _currentOffset; // address of current instruction
 
-    protected int currentOffset() {
+    protected final int currentOffset() {
         return _currentOffset;
     }
 
     private ByteArrayOutputStream _stream = new ByteArrayOutputStream();
 
-    protected void emitByte(byte byteValue) {
+    protected final void emitByte(byte byteValue) {
         _stream.write(byteValue);
         _currentOffset++;
     }
@@ -49,7 +49,7 @@ public abstract class Assembler {
 
     private boolean _selectingLabelInstructions = true;
 
-    boolean selectingLabelInstructions() {
+    final boolean selectingLabelInstructions() {
         return _selectingLabelInstructions;
     }
 
@@ -79,15 +79,15 @@ public abstract class Assembler {
      * set of label instructions so they can adjust appropriately the offsets within the target code of their annotations.
      * @return list of label instructions
      */
-    public LinkedList<LabelInstruction> labelInstructions() {
+    public final LinkedList<LabelInstruction> labelInstructions() {
         return _labelInstructions;
     }
 
-    void addFixedLengthLabelInstruction(LabelInstruction fixedLengthLabelInstruction) {
+    final void addFixedLengthLabelInstruction(LabelInstruction fixedLengthLabelInstruction) {
         _labelInstructions.addLast(fixedLengthLabelInstruction);
     }
 
-    void addSpanDependentLabelInstruction(LabelOffsetInstruction spanDependentLabelInstruction) {
+    final void addSpanDependentLabelInstruction(LabelOffsetInstruction spanDependentLabelInstruction) {
         _labelInstructions.addLast(spanDependentLabelInstruction);
         _spanDependentLabelInstructions.addLast(spanDependentLabelInstruction);
     }
@@ -170,7 +170,7 @@ public abstract class Assembler {
      * @throws AssemblyException
      *             if there any problem with binding labels to addresses
      */
-    public void output(OutputStream outputStream) throws IOException, AssemblyException {
+    public final void output(OutputStream outputStream) throws IOException, AssemblyException {
         final byte[] initialBytes = _stream.toByteArray();
         gatherLabels();
         updateSpanDependentLabelInstructions();
@@ -183,7 +183,7 @@ public abstract class Assembler {
      * @throws AssemblyException
      *             if there any problem with binding labels to addresses
      */
-    public byte[] toByteArray() throws AssemblyException {
+    public final byte[] toByteArray() throws AssemblyException {
         final ByteArrayOutputStream stream = new ByteArrayOutputStream();
         try {
             output(stream);
@@ -195,23 +195,23 @@ public abstract class Assembler {
         return new byte[0];
     }
 
-    protected void fixLabel32(Label label, int address32) {
+    protected final void fixLabel32(Label label, int address32) {
         label.fix32(address32);
     }
 
-    protected void fixLabel64(Label label, long address64) {
+    protected final void fixLabel64(Label label, long address64) {
         label.fix64(address64);
     }
 
-    protected int address32(Label label) throws AssemblyException {
+    protected final int address32(Label label) throws AssemblyException {
         return label.address32();
     }
 
-    protected long address64(Label label) throws AssemblyException {
+    protected final long address64(Label label) throws AssemblyException {
         return label.address64();
     }
 
-    protected void checkConstraint(boolean passed, String expression) {
+    protected final void checkConstraint(boolean passed, String expression) {
         if (!passed) {
             throw new IllegalArgumentException(expression);
         }
@@ -221,7 +221,7 @@ public abstract class Assembler {
      * Calculate the difference between a Label and an offset within our assembled code.
      * @throws AssemblyException
      */
-    public int labelOffsetRelative(Label label, int offset) throws AssemblyException {
+    public final int labelOffsetRelative(Label label, int offset) throws AssemblyException {
         switch (label.state()) {
             case BOUND: {
                 return label.offset() - offset;

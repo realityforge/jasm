@@ -41,18 +41,18 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
     }
 
     @Override
-    public RiscInstructionDescription instructionDescription() {
+    public final RiscInstructionDescription instructionDescription() {
         return (RiscInstructionDescription) super.instructionDescription();
     }
 
     private RiscTemplate _synthesizedFrom;
 
-    public void setSynthesizedFrom(RiscTemplate synthesizedFrom) {
+    public final void setSynthesizedFrom(RiscTemplate synthesizedFrom) {
         assert instructionDescription().isSynthetic();
         _synthesizedFrom = synthesizedFrom;
     }
 
-    public RiscTemplate synthesizedFrom() {
+    public final RiscTemplate synthesizedFrom() {
         return _synthesizedFrom;
     }
 
@@ -72,7 +72,7 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
         }
     }
 
-    public void visitField(RiscField field) {
+    public final void visitField(RiscField field) {
         if (field instanceof OperandField) {
             final OperandField operandField = (OperandField) field;
             if (field instanceof OffsetParameter) {
@@ -91,11 +91,11 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
         }
     }
 
-    public void visitConstant(RiscConstant constant) {
+    public final void visitConstant(RiscConstant constant) {
         organizeConstant(constant.field(), constant.value());
     }
 
-    public void visitConstraint(InstructionConstraint constraint) {
+    public final void visitConstraint(InstructionConstraint constraint) {
     }
 
     /**
@@ -103,33 +103,33 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
      *
      * @param string  a string specified in the to consider
      */
-    public void visitString(String string) {
+    public final void visitString(String string) {
         if (internalName() == null) {
             setInternalName(string);
         }
     }
 
-    public List<OperandField> operandFields() {
+    public final List<OperandField> operandFields() {
         return _operandFields;
     }
 
-    public int opcode() {
+    public final int opcode() {
         return _opcode;
     }
 
-    public int opcodeMask() {
+    public final int opcodeMask() {
         return _opcodeMask;
     }
 
-    public List<OptionField> optionFields() {
+    public final List<OptionField> optionFields() {
         return _optionFields;
     }
 
-  public int specificity() {
+  public final int specificity() {
         return Integer.bitCount(_opcodeMask);
     }
 
-    public void organizeOption(Option option, RiscTemplate canonicalRepresentative) {
+    public final void organizeOption(Option option, RiscTemplate canonicalRepresentative) {
         instructionDescription().setExternalName(externalName() + option.externalName());
         setInternalName(internalName() + option.name());
         try {
@@ -144,12 +144,12 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
         }
     }
 
-    public boolean isRedundant() {
+    public final boolean isRedundant() {
         return _canonicalRepresentative != null;
     }
 
     @Override
-    public boolean isEquivalentTo(Template other) {
+    public final boolean isEquivalentTo(Template other) {
         if (this == other) {
             return true;
         }
@@ -168,23 +168,23 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
     }
 
     @Override
-    public String assemblerMethodName() {
+    public final String assemblerMethodName() {
         return internalName();
     }
 
     @Override
-    public List<Operand> operands() {
+    public final List<Operand> operands() {
         ProgramError.unimplemented();
         return null;
     }
 
     @Override
-    public List<OperandField> parameters() {
+    public final List<OperandField> parameters() {
         return _parameters;
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return "<" + getClass().getSimpleName() + " #" + serial() + ": " + internalName() + " " + Integer.toHexString(opcode()) + ", " + parameters() + ">";
     }
 

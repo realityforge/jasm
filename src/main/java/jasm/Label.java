@@ -21,10 +21,10 @@ import jasm.util.program.ProgramError;
  *
  * @author Bernd Mathiske
  */
-public class Label implements Argument {
+public final class Label implements Argument {
 
     public enum State {
-        UNASSIGNED, BOUND, FIXED_32, FIXED_64;
+        UNASSIGNED, BOUND, FIXED_32, FIXED_64
     }
 
     protected State _state = State.UNASSIGNED;
@@ -32,7 +32,7 @@ public class Label implements Argument {
     public Label() {
     }
 
-    public State state() {
+    public final State state() {
         return _state;
     }
 
@@ -41,7 +41,7 @@ public class Label implements Argument {
     /**
      * Must only be called when the label is bound!
      */
-    public int offset() throws AssemblyException {
+    public final int offset() throws AssemblyException {
         if (_state != State.BOUND) {
             throw new AssemblyException("unassigned or unbound label");
         }
@@ -55,17 +55,17 @@ public class Label implements Argument {
      *
      * Only to be called by {@link Assembler#bindLabel(Label)}.
      *
-     * @param address
+     * @param offset
      *            an instruction's start address in the assembler's instruction stream
      *
      * @see Assembler#bindLabel(Label)
      */
-    void bind(int offset) {
+    final void bind(int offset) {
         _offset = offset;
         _state = State.BOUND;
     }
 
-    void adjust(int delta) {
+    final void adjust(int delta) {
         assert _state == State.BOUND;
         _offset += delta;
     }
@@ -78,11 +78,11 @@ public class Label implements Argument {
      * If used in a 64-bit assembler,
      * the effective address value would be unsigned-extended.
      *
-     * @param address an absolute memory location
+     * @param address32 an absolute memory location
      *
      * @see Assembler#bindLabel(Label)
      */
-    void fix32(int address32) {
+    final void fix32(int address32) {
         _address32 = address32;
         _state = State.FIXED_32;
     }
@@ -90,11 +90,11 @@ public class Label implements Argument {
     /**
      * Assigns a fixed, absolute 64-bit address to this label.
      *
-     * @param address an absolute memory location
+     * @param address64 an absolute memory location
      *
      * @see Assembler#bindLabel(Label)
      */
-    void fix64(long address64) {
+    final void fix64(long address64) {
         _address64 = address64;
         _state = State.FIXED_64;
     }
@@ -102,7 +102,7 @@ public class Label implements Argument {
     /**
      * Must only be called if this label has been {@link #fix32 fixed}.
      */
-    public int address32() throws AssemblyException {
+    public final int address32() throws AssemblyException {
         switch (_state) {
             case FIXED_32: {
                 return _address32;
@@ -120,7 +120,7 @@ public class Label implements Argument {
     /**
      * Must only be called if this label has been {@link #fix64 fixed}.
      */
-    public long address64() throws AssemblyException {
+    public final long address64() throws AssemblyException {
         switch (_state) {
             case FIXED_64: {
                 return _address64;
@@ -135,23 +135,23 @@ public class Label implements Argument {
         }
     }
 
-    public String externalValue() {
+    public final String externalValue() {
         ProgramError.unexpected();
         return null;
     }
 
-    public String disassembledValue() {
+    public final String disassembledValue() {
         ProgramError.unexpected();
         return null;
     }
 
-    public long asLong() {
+    public final long asLong() {
         ProgramError.unimplemented();
         return 0L;
     }
 
     @Override
-    public boolean equals(Object other) {
+    public final boolean equals(Object other) {
         if (other instanceof Label) {
             final Label label = (Label) other;
             if (_state != label._state) {
@@ -175,7 +175,7 @@ public class Label implements Argument {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         switch (_state) {
             case BOUND:
                 return _offset;

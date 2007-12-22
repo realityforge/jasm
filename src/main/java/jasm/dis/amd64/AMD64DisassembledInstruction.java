@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * @author Bernd Mathiske
  */
-public class AMD64DisassembledInstruction extends X86DisassembledInstruction<AMD64Template> implements Address64Instruction {
+public final class AMD64DisassembledInstruction extends X86DisassembledInstruction<AMD64Template> implements Address64Instruction {
 
     private final Address64Instruction.Mixin _addressInstruction;
 
@@ -27,15 +27,15 @@ public class AMD64DisassembledInstruction extends X86DisassembledInstruction<AMD
         _addressInstruction = new Address64Instruction.Mixin(this, startAddress);
     }
 
-    public long address() {
+    public final long address() {
         return _addressInstruction.address();
     }
 
-    public String addressString() {
+    public final String addressString() {
         return _addressInstruction.addressString();
     }
 
-    public int addressToOffset(ImmediateArgument argument) {
+    public final int addressToOffset(ImmediateArgument argument) {
         return _addressInstruction.addressToOffset(argument);
     }
 

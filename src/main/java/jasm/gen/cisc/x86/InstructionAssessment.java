@@ -16,7 +16,7 @@ package jasm.gen.cisc.x86;
  *
  * @author Bernd Mathiske
  */
-public class InstructionAssessment {
+public final class InstructionAssessment {
 
     private boolean _hasAddressSizeVariants;
     private boolean _hasOperandSizeVariants;
@@ -27,44 +27,44 @@ public class InstructionAssessment {
     public InstructionAssessment() {
     }
 
-    public void haveAddressSizeVariants() {
+    public final void haveAddressSizeVariants() {
         _hasAddressSizeVariants = true;
     }
 
-    public boolean hasAddressSizeVariants() {
+    public final boolean hasAddressSizeVariants() {
         return _hasAddressSizeVariants;
     }
 
-    public void haveOperandSizeVariants() {
+    public final void haveOperandSizeVariants() {
         _hasOperandSizeVariants = true;
     }
 
-    public boolean hasOperandSizeVariants() {
+    public final boolean hasOperandSizeVariants() {
         return _hasOperandSizeVariants;
     }
 
-    public void haveModRMByte() {
+    public final void haveModRMByte() {
         _hasModRMByte = true;
     }
 
-    public boolean hasModRMByte() {
+    public final boolean hasModRMByte() {
         return _hasModRMByte;
     }
 
-    public void setModRMGroup(ModRMGroup modRMGroup) {
+    public final void setModRMGroup(ModRMGroup modRMGroup) {
         _modRMGroup = modRMGroup;
         _hasModRMByte = modRMGroup != null;
     }
 
-    public ModRMGroup modRMGroup() {
+    public final ModRMGroup modRMGroup() {
         return _modRMGroup;
     }
 
-    public void beJump() {
+    public final void beJump() {
         _isJump = true;
     }
 
-    public boolean isJump() {
+    public final boolean isJump() {
         return _isJump;
     }
 }

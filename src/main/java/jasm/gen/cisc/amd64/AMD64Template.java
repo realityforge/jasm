@@ -52,7 +52,7 @@ import java.util.List;
 /**
  * @author Bernd Mathiske
  */
-public class AMD64Template extends X86Template {
+public final class AMD64Template extends X86Template {
 
     AMD64Template(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {
         super(instructionDescription, serial, instructionFamily, context);
@@ -116,7 +116,7 @@ public class AMD64Template extends X86Template {
     }
 
     @Override
-    protected void organize_M(X86Operand.Designation designation) throws TemplateNotNeededException {
+    protected final void organize_M(X86Operand.Designation designation) throws TemplateNotNeededException {
         switch (context().modCase()) {
             case MOD_0: {
                 switch (context().rmCase()) {
@@ -231,7 +231,7 @@ public class AMD64Template extends X86Template {
         }
     }
 
-    public void visitOperandCode(OperandCode operandCode, X86Operand.Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion)
+    public final void visitOperandCode(OperandCode operandCode, X86Operand.Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion)
         throws TemplateNotNeededException {
         switch (operandCode) {
             case Cq: {
@@ -597,7 +597,7 @@ public class AMD64Template extends X86Template {
         }
     }
 
-    public void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, X86Operand.Designation designation, ImplicitOperand.ExternalPresence externalPresence) {
+    public final void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, X86Operand.Designation designation, ImplicitOperand.ExternalPresence externalPresence) {
         switch (operandSizeAttribute()) {
             case BITS_16:
                 addImplicitOperand(new X86ImplicitOperand(designation, externalPresence, AMD64GeneralRegister16.values()[registerOperandCode.id()]));
@@ -614,7 +614,7 @@ public class AMD64Template extends X86Template {
         }
     }
 
-    public boolean hasRexPrefix(List<Argument> arguments) {
+    public final boolean hasRexPrefix(List<Argument> arguments) {
         if (instructionDescription().defaultOperandSize() == WordWidth.BITS_64) {
             return false;
         }

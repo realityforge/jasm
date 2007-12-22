@@ -14,7 +14,7 @@ package jasm.gen;
  *
  * @author Bernd Mathiske
  */
-public class Trace {
+public final class Trace {
   private static final boolean _ENABLED = true;
   private static int _level;
 

@@ -253,7 +253,7 @@ import jasm.WordWidth;
 /**
  * @author Bernd Mathiske
  */
-public class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
+public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
 
     private void create_low() {
         define(_00, "ADD", Eb, Gb);

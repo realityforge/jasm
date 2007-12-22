@@ -85,7 +85,7 @@ public abstract class BitRange {
     /*
      * @return a mask that expresses this bit range's mere width, indicating a value range for operands
      */
-    public int valueMask() {
+    public final int valueMask() {
         final int width = width();
         if (width == 32) {
             return ~0;
@@ -125,7 +125,7 @@ public abstract class BitRange {
 
     public abstract BitRange move(boolean left, int bits);
 
-    protected void checkRangeOfSignedInt(int signedInt) throws IllegalArgumentException {
+    protected final void checkRangeOfSignedInt(int signedInt) throws IllegalArgumentException {
         final int width = width();
         final int mostNegative = -1 << (width - 1);
         final int tooPositive = 1 << (width - 1);
@@ -138,7 +138,7 @@ public abstract class BitRange {
         }
     }
 
-    protected void checkRangeOfUnsignedInt(int unsignedInt) throws IllegalArgumentException {
+    protected final void checkRangeOfUnsignedInt(int unsignedInt) throws IllegalArgumentException {
         if (width() < 32 && unsignedInt < 0) {
             throw new IllegalArgumentException(Integer.toHexString(unsignedInt) + " is negative and so cannot fit in an unsigned " + width() + "-bit bit-range");
         }
@@ -148,12 +148,12 @@ public abstract class BitRange {
         throw new IllegalArgumentException(Integer.toHexString(unsignedInt) + " > " + Integer.toHexString(valueMask()) + " and so is too positive to fit in an unsigned " + width() + "-bit bit-range");
     }
 
-    public int assembleSignedInt(int signedInt) throws IllegalArgumentException {
+    public final int assembleSignedInt(int signedInt) throws IllegalArgumentException {
         checkRangeOfSignedInt(signedInt);
         return assembleUncheckedSignedInt(signedInt);
     }
 
-    public int assembleUnsignedInt(int unsignedInt) throws IllegalArgumentException {
+    public final int assembleUnsignedInt(int unsignedInt) throws IllegalArgumentException {
         checkRangeOfUnsignedInt(unsignedInt);
         return assembleUncheckedUnsignedInt(unsignedInt);
     }

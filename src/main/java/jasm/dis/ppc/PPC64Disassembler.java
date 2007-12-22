@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author Bernd Mathiske
  */
-public class PPC64Disassembler extends PPCDisassembler<PPC64DisassembledInstruction> {
+public final class PPC64Disassembler extends PPCDisassembler<PPC64DisassembledInstruction> {
 
     private final long _startAddress;
 
@@ -31,12 +31,12 @@ public class PPC64Disassembler extends PPCDisassembler<PPC64DisassembledInstruct
     }
 
     @Override
-    protected PPC64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {
+    protected final PPC64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {
         return new PPC64DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
     }
 
     @Override
-    protected Assembler createAssembler(int offset) {
+    protected final Assembler createAssembler(int offset) {
         return new PPC64Assembler(_startAddress + offset);
     }
 

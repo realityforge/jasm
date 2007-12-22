@@ -23,7 +23,7 @@ import static jasm.gen.risc.sparc.SPARCFields.op3;
 /**
  * @author Bernd Mathiske
  */
-public class StateRegisterAccess extends SPARCInstructionDescriptionCreator {
+public final class StateRegisterAccess extends SPARCInstructionDescriptionCreator {
 
     private void create_A43() {
         define("rd", op(0x2), op3(0x28), _rs1_state, i(0), _res_12_0, _rd);

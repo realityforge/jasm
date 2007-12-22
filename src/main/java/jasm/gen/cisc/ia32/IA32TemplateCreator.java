@@ -17,14 +17,14 @@ import jasm.WordWidth;
 /**
  * @author Bernd Mathiske
  */
-public class IA32TemplateCreator extends X86TemplateCreator<IA32Template> {
+public final class IA32TemplateCreator extends X86TemplateCreator<IA32Template> {
 
     public IA32TemplateCreator() {
         super(WordWidth.BITS_32);
     }
 
     @Override
-    protected IA32Template createTemplate(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {
+    protected final IA32Template createTemplate(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {
         return new IA32Template(instructionDescription, serial, instructionFamily, context);
     }
 

@@ -20,7 +20,7 @@ import java.util.List;
  * @author Bernd Mathiske
  * @author Doug Simon
  */
-public class SPARCExternalInstruction extends RiscExternalInstruction {
+public final class SPARCExternalInstruction extends RiscExternalInstruction {
 
     SPARCExternalInstruction(SPARCTemplate template, List<Argument> arguments) {
         super(template, arguments);
@@ -31,7 +31,7 @@ public class SPARCExternalInstruction extends RiscExternalInstruction {
     }
 
     @Override
-    public boolean isAbsoluteBranch() {
+    public final boolean isAbsoluteBranch() {
         // There are no branch instructions in SPARC whose target address is not PC relative
         return false;
     }

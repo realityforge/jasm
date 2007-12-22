@@ -14,7 +14,7 @@ package jasm.gen.cisc;
  *
  * @author Bernd Mathiske
  */
-public class TemplateNotNeededException extends Exception {
+public final class TemplateNotNeededException extends Exception {
 
     public TemplateNotNeededException() {
         super();
