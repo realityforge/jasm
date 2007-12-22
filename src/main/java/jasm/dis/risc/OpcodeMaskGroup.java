@@ -13,10 +13,8 @@ import jasm.util.HexUtil;
 import jasm.util.lang.StaticLoophole;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * An opcode mask group is a collection of templates that share the same opcode mask.
