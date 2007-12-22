@@ -10,11 +10,11 @@ package jasm.gen;
 
 import jasm.Argument;
 import jasm.SymbolicArgument;
-import jasm.util.lang.ArrayUtil;
 import jasm.util.program.ProgramError;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -249,7 +249,7 @@ public interface InstructionConstraint {
             try {
                 return declaringClass.getDeclaredMethod(methodName, parameterTypes);
             } catch (NoSuchMethodException e) {
-                ProgramError.unexpected("constraint method not found: " + declaringClass + "." + methodName + "(" + ArrayUtil.toString(parameterTypes) + ")");
+                ProgramError.unexpected("constraint method not found: " + declaringClass + "." + methodName + "(" + Arrays.asList(parameterTypes) + ")");
                 return null;
             }
         }
@@ -346,9 +346,14 @@ public interface InstructionConstraint {
                     return buf.toString();
                 }
 
-                public boolean referencesParameter(Parameter parameter) {
-                    return ArrayUtil.contains(parameters, parameter);
+              public boolean referencesParameter(Parameter parameter) {
+                for (Parameter element : parameters) {
+                  if (element == parameter) {
+                    return true;
+                  }
                 }
+                return false;
+              }
             };
         }
     }

@@ -24,7 +24,7 @@ import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.WordWidth;
-import jasm.util.lang.Strings;
+import jasm.util.lang.StringUtil;
 import jasm.x86.IndirectRegister;
 import jasm.x86.Scale;
 import java.util.List;
@@ -223,7 +223,7 @@ public abstract class X86DisassembledInstruction<Template_Type extends X86Templa
         if (s.length() > 0) {
             s = "  " + s;
         }
-        return Strings.padLengthWithSpaces(externalName(), 8) + s;
+        return StringUtil.padLengthWithSpaces(externalName(), 8) + s;
     }
 
     @Override

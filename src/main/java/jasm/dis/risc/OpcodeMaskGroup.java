@@ -9,10 +9,10 @@
 package jasm.dis.risc;
 
 import jasm.gen.risc.RiscTemplate;
-import jasm.util.collect.IntHashMap;
 import jasm.util.lang.StaticLoophole;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class OpcodeMaskGroup<Template_Type extends RiscTemplate> {
 
     private final Set<Template_Type> _templates = new HashSet<Template_Type>();
 
-    private final IntHashMap<LinkedList<Template_Type>> _templatesForOpcodes = new IntHashMap<LinkedList<Template_Type>>();
+    private final HashMap<Integer,LinkedList<Template_Type>> _templatesForOpcodes = new HashMap<Integer,LinkedList<Template_Type>>();
 
     public void add(Template_Type template) {
         assert template.opcodeMask() == _mask;

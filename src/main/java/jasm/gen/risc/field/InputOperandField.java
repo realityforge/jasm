@@ -13,8 +13,8 @@ import jasm.gen.ArgumentRange;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import jasm.util.collect.Iterables;
 import jasm.util.program.ProgramError;
+import java.util.Collections;
 
 /**
  * An input operand is a parameter to an assembler method that does not correspond directly
@@ -63,7 +63,7 @@ public class InputOperandField extends OperandField<ImmediateArgument> {
     }
 
     public Iterable<? extends Argument> getIllegalTestArguments() {
-        return Iterables.empty();
+      return Collections.emptySet();
     }
 
     public ArgumentRange argumentRange() {

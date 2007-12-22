@@ -10,7 +10,6 @@ package jasm.gen;
 
 import jasm.Argument;
 import jasm.Label;
-import jasm.util.collect.Iterables;
 import java.util.Collections;
 import java.util.Set;
 
@@ -40,11 +39,11 @@ public class LabelParameter implements Parameter {
 
 
     public Iterable<Label> getLegalTestArguments() {
-        return Iterables.empty();
+      return Collections.emptySet();
     }
 
     public Iterable<? extends Argument> getIllegalTestArguments() {
-        return Iterables.empty();
+      return Collections.emptySet();
     }
 
     public Set<Argument> excludedDisassemblerTestArguments() {

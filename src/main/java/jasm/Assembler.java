@@ -9,7 +9,6 @@
 package jasm;
 
 import jasm.util.Longs;
-import jasm.util.collect.IdentityHashSet;
 import jasm.util.program.ProgramError;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -54,7 +53,7 @@ public abstract class Assembler {
         return _selectingLabelInstructions;
     }
 
-    private final IdentityHashSet<Label> _boundLabels = new IdentityHashSet<Label>();
+    private final LabelSet _boundLabels = new LabelSet();
 
     /**
      * Binds a given label to the address in the assembler's instruction stream of the start of the next instruction.

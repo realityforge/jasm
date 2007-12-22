@@ -12,10 +12,11 @@ import jasm.InstructionSet;
 import jasm.dis.risc.OpcodeMaskGroup;
 import jasm.dis.risc.SpecificityGroup;
 import jasm.gen.Assembly;
-import jasm.util.collect.IntHashMap;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Collection;
 
 /**
  * @author Bernd Mathiske
@@ -31,12 +32,12 @@ public abstract class RiscAssembly<Template_Type extends RiscTemplate> extends A
     private ArrayList<SpecificityGroup<Template_Type>> _specificityGroups;
 
     private void initialize() {
-        final IntHashMap<IntHashMap<OpcodeMaskGroup<Template_Type>>> specificityTable = new IntHashMap<IntHashMap<OpcodeMaskGroup<Template_Type>>>();
+        final HashMap<Integer,HashMap<Integer,OpcodeMaskGroup<Template_Type>>> specificityTable = new HashMap<Integer,HashMap<Integer,OpcodeMaskGroup<Template_Type>>>();
         for (Template_Type template : templates()) {
             if (!template.isRedundant()) {
-                IntHashMap<OpcodeMaskGroup<Template_Type>> opcodeMaskGroups = specificityTable.get(template.specificity());
+                HashMap<Integer,OpcodeMaskGroup<Template_Type>> opcodeMaskGroups = specificityTable.get(template.specificity());
                 if (opcodeMaskGroups == null) {
-                    opcodeMaskGroups = new IntHashMap<OpcodeMaskGroup<Template_Type>>();
+                    opcodeMaskGroups = new HashMap<Integer,OpcodeMaskGroup<Template_Type>>();
                     specificityTable.put(template.specificity(), opcodeMaskGroups);
                 }
                 final int opcodeMask = template.opcodeMask();
@@ -50,9 +51,9 @@ public abstract class RiscAssembly<Template_Type extends RiscTemplate> extends A
         }
         _specificityGroups = new ArrayList<SpecificityGroup<Template_Type>>();
         for (int specificity = 33; specificity >= 0; specificity--) {
-            final IntHashMap<OpcodeMaskGroup<Template_Type>> opcodeGroupTable = specificityTable.get(specificity);
+            final HashMap<Integer,OpcodeMaskGroup<Template_Type>> opcodeGroupTable = specificityTable.get(specificity);
             if (opcodeGroupTable != null) {
-                final List<OpcodeMaskGroup<Template_Type>> opcodeMaskGroups = opcodeGroupTable.toList();
+                final Collection<OpcodeMaskGroup<Template_Type>> opcodeMaskGroups = opcodeGroupTable.values();
                 final SpecificityGroup<Template_Type> specificityGroup = new SpecificityGroup<Template_Type>(specificity, opcodeMaskGroups);
                 _specificityGroups.add(specificityGroup);
             }

@@ -13,7 +13,7 @@ import jasm.gen.Template;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.field.OperandField;
 import jasm.gen.risc.field.RiscField;
-import jasm.util.lang.Strings;
+import jasm.util.lang.StringUtil;
 
 /**
  * Disassembles an assembled RISC instruction to show the value of each field in the instruction as
@@ -66,7 +66,7 @@ class RiscFieldDisassembler<Template_Type extends Template> implements RiscInstr
         if (binary.length() > width) {
             binary = binary.substring(binary.length() - width);
         } else if (binary.length() < width) {
-            binary = Strings.times('0', width - binary.length()) + binary;
+            binary = StringUtil.times('0', width - binary.length()) + binary;
         }
 
         _string += field.name() + "[" + bitRange + "]=" + value + "{" + binary + "}";

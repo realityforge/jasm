@@ -17,7 +17,7 @@ import jasm.gen.InstructionConstraint;
 import jasm.gen.risc.field.BranchDisplacementOperandField;
 import jasm.gen.risc.field.OperandField;
 import jasm.gen.risc.field.RiscField;
-import jasm.util.lang.Strings;
+import jasm.util.lang.StringUtil;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -102,7 +102,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
 
     @Override
     public String toString() {
-        return Strings.padLengthWithSpaces(name(), 10) + "    " + operands();
+        return StringUtil.padLengthWithSpaces(name(), 10) + "    " + operands();
     }
 
     private void print(String s) {

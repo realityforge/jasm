@@ -17,8 +17,8 @@ import jasm.gen.Immediate8Argument;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.ImmediateParameter;
 import jasm.gen.cisc.AppendedParameter;
-import jasm.util.collect.Iterables;
 import jasm.util.program.ProgramError;
+import java.util.Collections;
 
 /**
  * @author Bernd Mathiske
@@ -66,7 +66,7 @@ public abstract class X86NumericalParameter extends X86Parameter implements Appe
     }
 
     public Iterable<? extends Argument> getIllegalTestArguments() {
-        return Iterables.empty();
+      return Collections.emptySet();
     }
 
     @Override

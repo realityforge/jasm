@@ -1,12 +1,11 @@
 package jasm.util.collect;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Arrays;
 import jasm.util.lang.ArrayUtil;
 import jasm.util.lang.StaticLoophole;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class CollectionUtil {
 
@@ -60,20 +59,6 @@ public class CollectionUtil {
           array[i] = sequence.get(i);
       }
       return array;
-  }
-
-  /**
-         * Extracts the elements from a given sequence that are {@linkplain Class#isInstance(Object) instances of} a given class
-   * and returns them in a new sequence.
-   */
-  public static <Element_Type, Sub_Type extends Element_Type> ArrayList<Sub_Type> filter(Iterable<Element_Type> sequence, Class<Sub_Type> subType) {
-      final ArrayList<Sub_Type> result = new ArrayList<Sub_Type>();
-      for (Element_Type element : sequence) {
-          if (subType.isInstance(element)) {
-              result.add(subType.cast(element));
-          }
-      }
-      return result;
   }
 
   public static <Element_Type> Set<Element_Type> hashSetFrom(Element_Type... elements) {

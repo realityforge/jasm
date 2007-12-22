@@ -10,7 +10,6 @@ package jasm.gen.risc;
 
 import jasm.gen.InstructionDescription;
 import jasm.gen.risc.field.OptionField;
-import jasm.util.collect.SequenceMultiMap;
 import jasm.util.lang.StaticLoophole;
 import jasm.util.program.ProgramError;
 import java.util.ArrayList;
@@ -59,7 +58,7 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
     }
 
     private int _serial;
-    private final SequenceMultiMap<String, Template_Type> _nameToTemplates = new SequenceMultiMap<String, Template_Type>();
+    private final TemplateMap<Template_Type> _nameToTemplates = new TemplateMap<Template_Type>();
 
     public List<Template_Type> nameToTemplates(String name) {
         return _nameToTemplates.get(name);

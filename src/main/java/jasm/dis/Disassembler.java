@@ -18,7 +18,7 @@ import jasm.gen.OffsetParameter;
 import jasm.gen.Parameter;
 import jasm.gen.Template;
 import jasm.util.lang.Endianness;
-import jasm.util.lang.Strings;
+import jasm.util.lang.StringUtil;
 import jasm.util.program.ProgramError;
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -139,13 +139,13 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
     private static final int NUMBER_OF_INSTRUCTION_CHARS = 48;
 
     private void printHeading(PrintStream stream, int nOffsetChars, int nLabelChars)  {
-        String s = Strings.padLengthWithSpaces("Address", (addressWidth().numberOfBytes() * 2) + 2) + SPACE;
-        s += Strings.padLengthWithSpaces("+", nOffsetChars) + SPACE;
-        s += Strings.padLengthWithSpaces(":", nLabelChars + 1) + SPACE;
-        s += Strings.padLengthWithSpaces("Instruction", NUMBER_OF_INSTRUCTION_CHARS) + SPACE;
+        String s = StringUtil.padLengthWithSpaces("Address", (addressWidth().numberOfBytes() * 2) + 2) + SPACE;
+        s += StringUtil.padLengthWithSpaces("+", nOffsetChars) + SPACE;
+        s += StringUtil.padLengthWithSpaces(":", nLabelChars + 1) + SPACE;
+        s += StringUtil.padLengthWithSpaces("Instruction", NUMBER_OF_INSTRUCTION_CHARS) + SPACE;
         s += "Bytes";
         stream.println(s);
-        stream.println(Strings.times('-', s.length()));
+        stream.println(StringUtil.times('-', s.length()));
     }
 
     private boolean _isHeadingEnabled;
@@ -181,12 +181,12 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
             stream.printf("%0" + nOffsetChars + "d", disassembledInstruction.startOffset());
             stream.print(SPACE);
             if (labelMap[i] != null) {
-                stream.print(Strings.padLengthWithSpaces(labelMap[i].name(), nLabelChars) + ":");
+                stream.print(StringUtil.padLengthWithSpaces(labelMap[i].name(), nLabelChars) + ":");
             } else {
-                stream.print(Strings.spaces(nLabelChars) + " ");
+                stream.print(StringUtil.spaces(nLabelChars) + " ");
             }
             stream.print(SPACE);
-            stream.print(Strings.padLengthWithSpaces(disassembledInstruction.toString(labels, globalLabelMapper), NUMBER_OF_INSTRUCTION_CHARS));
+            stream.print(StringUtil.padLengthWithSpaces(disassembledInstruction.toString(labels, globalLabelMapper), NUMBER_OF_INSTRUCTION_CHARS));
             stream.print(SPACE);
             stream.print(DisassembledInstruction.toHexString(disassembledInstruction.bytes()));
             stream.println();

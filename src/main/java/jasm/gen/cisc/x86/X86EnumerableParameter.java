@@ -12,8 +12,8 @@ import jasm.Argument;
 import jasm.EnumerableArgument;
 import jasm.gen.EnumerableParameter;
 import jasm.util.Enumerator;
-import jasm.util.collect.Iterables;
 import jasm.util.program.ProgramError;
+import java.util.Collections;
 
 /**
  * @author Bernd Mathiske
@@ -76,7 +76,7 @@ public class X86EnumerableParameter<EnumerableArgument_Type extends Enum<Enumera
     }
 
     public Iterable<? extends Argument> getIllegalTestArguments() {
-        return Iterables.empty();
+      return Collections.emptySet();
     }
 
     @Override

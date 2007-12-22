@@ -18,7 +18,7 @@ import jasm.util.collect.CollectionUtil;
 import jasm.util.io.IndentWriter;
 import jasm.util.io.ReadableSource;
 import jasm.util.lang.StaticLoophole;
-import jasm.util.lang.Strings;
+import jasm.util.lang.StringUtil;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.CharArrayReader;
@@ -226,7 +226,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         writer.println("/**");
         writer.println(" * Pseudo-external assembler syntax: {@code " + template.externalName() + externalMnemonicSuffixes(parameters) + "  }" + externalParameters(parameters));
         printExtraMethodJavadoc(writer, template, extraLinks);
-        final List<InstructionConstraint> constraints = CollectionUtil.filter(template.instructionDescription().specifications(), InstructionConstraint.class);
+        final List<InstructionConstraint> constraints = template.instructionDescription().constraints();
         if (!constraints.isEmpty()) {
             writer.println(" * <p>");
             for (InstructionConstraint constraint : constraints) {
@@ -399,7 +399,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
                     assert template.parameters().get(template.labelParameterIndex()) instanceof AddressParameter;
                     writer.print("Address");
                 }
-                writer.print("As" + Strings.firstCharToUpperCase(template.parameters().get(i).type().getSimpleName()) + "()");
+                writer.print("As" + StringUtil.firstCharToUpperCase(template.parameters().get(i).type().getSimpleName()) + "()");
             } else {
                 writer.print(parameters.get(i).variableName());
             }

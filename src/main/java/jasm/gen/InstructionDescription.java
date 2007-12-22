@@ -12,10 +12,10 @@ import jasm.gen.cisc.x86.X86InstructionDescriptionVisitor;
 import jasm.gen.risc.RiscInstructionDescriptionVisitor;
 import jasm.gen.risc.field.InputOperandField;
 import jasm.WordWidth;
-import jasm.util.collect.CollectionUtil;
 import jasm.util.program.ProgramError;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * A sequence of objects that describe group of closely related instructions. An
@@ -63,7 +63,13 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
      */
     public List<InstructionConstraint> constraints() {
         if (_constraints == null) {
-            _constraints = CollectionUtil.filter(_specifications, InstructionConstraint.class);
+          final ArrayList<InstructionConstraint> result = new ArrayList<InstructionConstraint>();
+          for (Object element : _specifications) {
+            if (InstructionConstraint.class.isInstance(element)) {
+              result.add(InstructionConstraint.class.cast(element));
+            }
+          }
+          _constraints = result;
         }
         return _constraints;
     }
@@ -173,6 +179,4 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
         }
         return false;
     }
-
-
 }

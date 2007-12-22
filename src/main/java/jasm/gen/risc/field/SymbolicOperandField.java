@@ -20,9 +20,9 @@ import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
 import jasm.util.Symbolizer;
-import jasm.util.collect.Iterables;
 import jasm.util.collect.CollectionUtil;
 import jasm.util.lang.StaticLoophole;
+import java.util.Collections;
 
 /**
  * @author Bernd Mathiske
@@ -99,7 +99,7 @@ public class SymbolicOperandField<Argument_Type extends SymbolicArgument> extend
     }
 
     public Iterable<? extends Argument> getIllegalTestArguments() {
-        return Iterables.empty();
+      return Collections.emptySet();
     }
 
     @Override
