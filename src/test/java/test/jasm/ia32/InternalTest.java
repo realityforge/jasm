@@ -84,7 +84,8 @@ public class InternalTest extends TestCase {
     asm.add(0x87654321, EDI.indirect(), CH);
     asm.add(0x87654321, EAX.base(), EBX.index(), SCALE_1, DL);
     asm.add(CL, DL);
-    asm.fixLabel(fixLabel, startAddress + 52); // choose the right addend according to output to hit an instruction start address
+    asm.fixLabel(fixLabel,
+                 startAddress + 52); // choose the right addend according to output to hit an instruction start address
     asm.add(ESI.indirect(), EDX);
     asm.add(EAX.base(), EBX.index(), SCALE_8, ECX);
     asm.m_add(0x12345678, EDX.index(), SCALE_1, EAX);
@@ -214,7 +215,7 @@ public class InternalTest extends TestCase {
 
   public void failing_test_jmp_with_operand_size_prefix() throws IOException, AssemblyException {
     final int startAddress = 0x12358;
-    final byte[] bytes = new byte[]{(byte) 0x66,(byte) 0xE9,(byte) 0x8B,(byte) 0x00};
+    final byte[] bytes = new byte[]{(byte) 0x66, (byte) 0xE9, (byte) 0x8B, (byte) 0x00};
     final String output = disassemble(startAddress, bytes);
     //operand prefix causes failure - see issue jasm-9
     final String expected =

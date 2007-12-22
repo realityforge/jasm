@@ -24,7 +24,7 @@ public class IntHashMapTest extends TestCase {
 
   private void initialize() {
     for (int i = 0; i < N; i++) {
-      _integers[i] = new Integer(i);
+      _integers[i] = i;
     }
   }
 

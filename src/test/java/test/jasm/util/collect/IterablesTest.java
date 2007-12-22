@@ -17,13 +17,12 @@ import junit.framework.TestCase;
  * @author Hiroshi Yamauchi
  */
 public class IterablesTest extends TestCase {
-    public void test_empty() {
-        final Iterable<String> iterable = Iterables.empty();
-        int counter = 0;
-        for (String s : iterable) {
-            counter = s.length() + 1;
-        }
-        assertTrue(counter == 0);
+  public void test_empty() {
+    final Iterable<String> iterable = Iterables.empty();
+    int counter = 0;
+    for (String s : iterable) {
+      counter = s.length() + 1;
     }
-
+    assertTrue(counter == 0);
+  }
 }
