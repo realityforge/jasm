@@ -10,13 +10,13 @@ package jasm.dis.ia32;
 
 import jasm.Argument;
 import jasm.Assembler;
+import jasm.WordWidth;
 import jasm.dis.x86.X86Disassembler;
 import jasm.dis.x86.X86InstructionHeader;
 import jasm.gen.cisc.ia32.IA32Assembly;
 import jasm.gen.cisc.ia32.IA32Template;
 import jasm.ia32.IA32Assembler;
 import jasm.util.HexByte;
-import jasm.WordWidth;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
