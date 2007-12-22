@@ -17,8 +17,8 @@ import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.util.lang.StaticLoophole;
 import java.util.Collections;
-import java.util.Set;
 import java.util.List;
+import java.util.Set;
 
 /**
  * An operand field defines an instruction field whose value is given as a parameter in the generated
