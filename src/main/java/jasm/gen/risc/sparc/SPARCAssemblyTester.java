@@ -9,10 +9,10 @@
 package jasm.gen.risc.sparc;
 
 import jasm.Argument;
+import jasm.WordWidth;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.risc.RiscAssemblyTester;
-import jasm.WordWidth;
 import jasm.util.io.IndentWriter;
 import jasm.util.lang.Endianness;
 import jasm.util.program.ProgramError;
