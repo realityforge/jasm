@@ -9,9 +9,8 @@
 package jasm.dis.risc;
 
 import jasm.gen.risc.RiscTemplate;
-import jasm.util.lang.StaticLoophole;
 import jasm.util.HexUtil;
-import java.util.ArrayList;
+import jasm.util.lang.StaticLoophole;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,7 +27,6 @@ import java.util.Set;
  */
 public final class OpcodeMaskGroup<Template_Type extends RiscTemplate> {
 
-  private final Set<Template_Type> _templates = new HashSet<Template_Type>();
   private final HashMap<Integer, LinkedList<Template_Type>> _templatesForOpcodes = new HashMap<Integer, LinkedList<Template_Type>>();
   private final int _mask;
 
@@ -41,8 +39,9 @@ public final class OpcodeMaskGroup<Template_Type extends RiscTemplate> {
   }
 
   public final void add(Template_Type template) {
-    assert template.opcodeMask() == _mask;
-    _templates.add(template);
+    if (template.opcodeMask() != _mask) {
+      throw new IllegalStateException();
+    }
     LinkedList<Template_Type> templatesForOpcode = _templatesForOpcodes.get(template.opcode());
     if (templatesForOpcode == null) {
       templatesForOpcode = new LinkedList<Template_Type>();
@@ -57,10 +56,6 @@ public final class OpcodeMaskGroup<Template_Type extends RiscTemplate> {
       return StaticLoophole.cast(Collections.EMPTY_LIST);
     }
     return result;
-  }
-
-  public final List<Template_Type> templates() {
-    return new ArrayList<Template_Type>(_templates);
   }
 
   public String toString() {
