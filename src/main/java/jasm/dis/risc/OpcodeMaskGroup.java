@@ -10,6 +10,7 @@ package jasm.dis.risc;
 
 import jasm.gen.risc.RiscTemplate;
 import jasm.util.lang.StaticLoophole;
+import jasm.util.HexUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,40 +28,42 @@ import java.util.Set;
  */
 public final class OpcodeMaskGroup<Template_Type extends RiscTemplate> {
 
-    private final int _mask;
+  private final Set<Template_Type> _templates = new HashSet<Template_Type>();
+  private final HashMap<Integer, LinkedList<Template_Type>> _templatesForOpcodes = new HashMap<Integer, LinkedList<Template_Type>>();
+  private final int _mask;
 
-    public OpcodeMaskGroup(int mask) {
-        _mask = mask;
+  public OpcodeMaskGroup(int mask) {
+    _mask = mask;
+  }
+
+  public final int mask() {
+    return _mask;
+  }
+
+  public final void add(Template_Type template) {
+    assert template.opcodeMask() == _mask;
+    _templates.add(template);
+    LinkedList<Template_Type> templatesForOpcode = _templatesForOpcodes.get(template.opcode());
+    if (templatesForOpcode == null) {
+      templatesForOpcode = new LinkedList<Template_Type>();
+      _templatesForOpcodes.put(template.opcode(), templatesForOpcode);
     }
+    templatesForOpcode.addLast(template);
+  }
 
-    public final int mask() {
-        return _mask;
+  public final List<Template_Type> templatesFor(int opcode) {
+    final LinkedList<Template_Type> result = _templatesForOpcodes.get(opcode);
+    if (result == null) {
+      return StaticLoophole.cast(Collections.EMPTY_LIST);
     }
+    return result;
+  }
 
-    private final Set<Template_Type> _templates = new HashSet<Template_Type>();
+  public final List<Template_Type> templates() {
+    return new ArrayList<Template_Type>(_templates);
+  }
 
-    private final HashMap<Integer,LinkedList<Template_Type>> _templatesForOpcodes = new HashMap<Integer,LinkedList<Template_Type>>();
-
-    public final void add(Template_Type template) {
-        assert template.opcodeMask() == _mask;
-        _templates.add(template);
-        LinkedList<Template_Type> templatesForOpcode = _templatesForOpcodes.get(template.opcode());
-        if (templatesForOpcode == null) {
-            templatesForOpcode = new LinkedList<Template_Type>();
-            _templatesForOpcodes.put(template.opcode(), templatesForOpcode);
-        }
-        templatesForOpcode.addLast(template);
-    }
-
-    public final List<Template_Type> templatesFor(int opcode) {
-        final LinkedList<Template_Type> result = _templatesForOpcodes.get(opcode);
-        if (result == null) {
-            return StaticLoophole.cast(Collections.EMPTY_LIST);
-        }
-        return result;
-    }
-
-    public final List<Template_Type> templates() {
-        return new ArrayList<Template_Type>(_templates);
-    }
+  public String toString() {
+    return "[OpcodeMaskGroup mask=" + HexUtil.toHexLiteral(_mask) + "]";
+  }
 }
