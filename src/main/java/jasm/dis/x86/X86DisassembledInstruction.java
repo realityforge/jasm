@@ -9,6 +9,7 @@
 package jasm.dis.x86;
 
 import jasm.Argument;
+import jasm.WordWidth;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.DisassembledLabel;
 import jasm.dis.GlobalLabelMapper;
@@ -23,13 +24,12 @@ import jasm.gen.cisc.x86.X86Operand;
 import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
-import jasm.WordWidth;
 import jasm.util.lang.StringUtil;
 import jasm.x86.IndirectRegister;
 import jasm.x86.Scale;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.LinkedList;
 
 /**
  * An x86 instruction, given as an x86 template and a sequence of arguments.
