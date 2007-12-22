@@ -112,8 +112,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
     @Override
     protected void printExtraMethodJavadoc(IndentWriter writer, Template_Type template, AppendableSequence<String> extraLinks) {
         if (template.instructionDescription().isSynthetic()) {
-            final RiscTemplate syntheticTemplate = template;
-            final RiscTemplate rawTemplate = syntheticTemplate.synthesizedFrom();
+          final RiscTemplate rawTemplate = template.synthesizedFrom();
             final Sequence<? extends Parameter> parameters = getParameters(rawTemplate);
             final String ref = rawTemplate.internalName() + "(" + formatParameterList("", parameters, true) + ")";
             writer.println(" * <p>");
@@ -125,7 +124,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
                 if (!firstOperand) {
                     writer.print(", ");
                 }
-                writer.print(getRawOperandReplacement(syntheticTemplate, rawTemplate, rawOperand));
+                writer.print(getRawOperandReplacement(template, rawOperand));
                 firstOperand = false;
             }
 
@@ -139,12 +138,11 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
      *
      * @param syntheticTemplate
      *                the synthetic instruction
-     * @param rawTemplate
-     *                the raw instruction from which {@code syntheticTemplate} was derived
      * @param rawOperand
-     *                a parameter of {@code rawTemplate}
+ *                a parameter of {@code rawTemplate}
      */
-    private String getRawOperandReplacement(RiscTemplate syntheticTemplate, RiscTemplate rawTemplate, OperandField rawOperand) {
+    private String getRawOperandReplacement(RiscTemplate syntheticTemplate,
+                                            OperandField rawOperand) {
         if (Sequence.Static.containsIdentical(syntheticTemplate.operandFields(), rawOperand)) {
             if (rawOperand instanceof OffsetParameter && generatingLabelAssembler()) {
                 return new LabelParameter().variableName();
@@ -163,7 +161,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
             } else if (value instanceof Enum) {
                 expression = ((Enum) value).name();
             } else if (value instanceof ImmediateArgument) {
-                expression = Long.toString(((ImmediateArgument) value).asLong());
+                expression = Long.toString(value.asLong());
             } else {
                 ProgramError.unexpected("unknown type of disassembled value: " + value.getClass().getName());
             }
