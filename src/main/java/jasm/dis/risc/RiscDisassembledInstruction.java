@@ -11,7 +11,7 @@ package jasm.dis.risc;
 import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.risc.RiscTemplate;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  *
@@ -21,7 +21,7 @@ import jasm.util.collect.Sequence;
  */
 public abstract class RiscDisassembledInstruction<Template_Type extends RiscTemplate> extends DisassembledInstruction<Template_Type> {
 
-    protected RiscDisassembledInstruction(int offset, byte[] bytes, Template_Type template, Sequence<Argument> arguments) {
+    protected RiscDisassembledInstruction(int offset, byte[] bytes, Template_Type template, List<Argument> arguments) {
         super(offset, bytes, template, arguments);
     }
 

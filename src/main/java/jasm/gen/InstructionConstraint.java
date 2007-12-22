@@ -10,12 +10,12 @@ package jasm.gen;
 
 import jasm.Argument;
 import jasm.SymbolicArgument;
-import jasm.util.collect.Sequence;
-import jasm.util.lang.Arrays;
+import jasm.util.lang.ArrayUtil;
 import jasm.util.program.ProgramError;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.List;
 
 /**
  * An instruction constraint can be specified as part of an {@link InstructionDescription} to specify a constraint on one
@@ -36,7 +36,7 @@ public interface InstructionConstraint {
      * @param arguments  the list of arguments to check
      * @return true if the argument list is valid, false otherwise
      */
-    boolean check(Template template, Sequence<Argument> arguments);
+    boolean check(Template template, List<Argument> arguments);
 
     /**
      * @return a Java expression that performs the {@link #check check}
@@ -77,7 +77,7 @@ public interface InstructionConstraint {
         public static InstructionConstraint eq(final Parameter first, final SymbolicArgument symbol) {
             return new SimpleInstructionConstraint() {
 
-                public boolean check(Template template, Sequence<Argument> arguments) {
+                public boolean check(Template template, List<Argument> arguments) {
                     return template.bindingFor(first, arguments) == symbol;
                 }
 
@@ -97,7 +97,7 @@ public interface InstructionConstraint {
         public static InstructionConstraint ne(final Parameter first, final Parameter second) {
             return new SimpleInstructionConstraint() {
 
-                public boolean check(Template template, Sequence<Argument> arguments) {
+                public boolean check(Template template, List<Argument> arguments) {
                     return template.bindingFor(first, arguments).asLong() != template.bindingFor(second, arguments).asLong();
                 }
 
@@ -117,7 +117,7 @@ public interface InstructionConstraint {
         public static InstructionConstraint ne(final Parameter first, final SymbolicArgument symbol) {
             return new SimpleInstructionConstraint() {
 
-                public boolean check(Template template, Sequence<Argument> arguments) {
+                public boolean check(Template template, List<Argument> arguments) {
                     return template.bindingFor(first, arguments) != symbol;
                 }
 
@@ -138,7 +138,7 @@ public interface InstructionConstraint {
         public static InstructionConstraint lt(final Parameter first, final Parameter second) {
             return new SimpleInstructionConstraint() {
 
-                public boolean check(Template template, Sequence<Argument> arguments) {
+                public boolean check(Template template, List<Argument> arguments) {
                     return template.bindingFor(first, arguments).asLong() < template.bindingFor(second, arguments).asLong();
                 }
 
@@ -160,7 +160,7 @@ public interface InstructionConstraint {
         public static InstructionConstraint le(final Parameter first, final Parameter second) {
             return new SimpleInstructionConstraint() {
 
-                public boolean check(Template template, Sequence<Argument> arguments) {
+                public boolean check(Template template, List<Argument> arguments) {
                     return template.bindingFor(first, arguments).asLong() <= template.bindingFor(second, arguments).asLong();
                 }
 
@@ -181,7 +181,7 @@ public interface InstructionConstraint {
         public static InstructionConstraint gt(final Parameter first, final long value) {
             return new SimpleInstructionConstraint() {
 
-                public boolean check(Template template, Sequence<Argument> arguments) {
+                public boolean check(Template template, List<Argument> arguments) {
                     return template.bindingFor(first, arguments).asLong() > value;
                 }
 
@@ -202,7 +202,7 @@ public interface InstructionConstraint {
         public static InstructionConstraint lt(final Parameter first, final long value) {
             return new SimpleInstructionConstraint() {
 
-                public boolean check(Template template, Sequence<Argument> arguments) {
+                public boolean check(Template template, List<Argument> arguments) {
                     return template.bindingFor(first, arguments).asLong() < value;
                 }
 
@@ -223,7 +223,7 @@ public interface InstructionConstraint {
         public static InstructionConstraint ne(final Parameter parameter, final long value) {
             return new SimpleInstructionConstraint() {
 
-                public boolean check(Template template, Sequence<Argument> arguments) {
+                public boolean check(Template template, List<Argument> arguments) {
                     return template.bindingFor(parameter, arguments).asLong() != value;
                 }
 
@@ -249,7 +249,7 @@ public interface InstructionConstraint {
             try {
                 return declaringClass.getDeclaredMethod(methodName, parameterTypes);
             } catch (NoSuchMethodException e) {
-                ProgramError.unexpected("constraint method not found: " + declaringClass + "." + methodName + "(" + Arrays.toString(parameterTypes) + ")");
+                ProgramError.unexpected("constraint method not found: " + declaringClass + "." + methodName + "(" + ArrayUtil.toString(parameterTypes) + ")");
                 return null;
             }
         }
@@ -287,7 +287,7 @@ public interface InstructionConstraint {
                  *            the actual values
                  * @return true if the constraint held for {@code arguments}
                  */
-                public boolean check(Template template, Sequence<Argument> arguments) {
+                public boolean check(Template template, List<Argument> arguments) {
                     int parameterIndex;
                     final Object receiver;
                     final Object[] objects;
@@ -347,7 +347,7 @@ public interface InstructionConstraint {
                 }
 
                 public boolean referencesParameter(Parameter parameter) {
-                    return Arrays.contains(parameters, parameter);
+                    return ArrayUtil.contains(parameters, parameter);
                 }
             };
         }

@@ -15,10 +15,10 @@ import jasm.gen.AssemblyTestComponent;
 import jasm.gen.InstructionConstraint;
 import jasm.gen.test.AssemblyTester;
 import jasm.util.WordWidth;
-import jasm.util.collect.Sequence;
 import java.io.IOException;
 import java.io.PushbackInputStream;
 import java.util.EnumSet;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -45,8 +45,8 @@ public abstract class RiscAssemblyTester<Template_Type extends RiscTemplate, Dis
     }
 
     @Override
-    protected boolean isLegalArgumentList(Template_Type template, Sequence<Argument> arguments) {
-        final Sequence<InstructionConstraint> constraints = template.instructionDescription().constraints();
+    protected boolean isLegalArgumentList(Template_Type template, List<Argument> arguments) {
+        final List<InstructionConstraint> constraints = template.instructionDescription().constraints();
         for (InstructionConstraint constraint : constraints) {
             if (!(constraint.check(template, arguments))) {
                 return false;

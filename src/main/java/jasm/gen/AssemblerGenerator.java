@@ -14,11 +14,7 @@ import jasm.AssemblyException;
 import jasm.ExternalMnemonicSuffixArgument;
 import jasm.Label;
 import jasm.util.HexUtil;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.ArraySequence;
-import jasm.util.collect.MutableSequence;
-import jasm.util.collect.Sequence;
+import jasm.util.collect.CollectionUtil;
 import jasm.util.io.IndentWriter;
 import jasm.util.io.ReadableSource;
 import jasm.util.lang.StaticLoophole;
@@ -40,8 +36,11 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -126,7 +125,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         writer.println("}");
     }
 
-    protected String formatParameterList(String separator, Sequence<? extends Parameter> parameters, boolean typesOnly) {
+    protected String formatParameterList(String separator, List<? extends Parameter> parameters, boolean typesOnly) {
         String sep = separator;
         final StringBuilder sb = new StringBuilder();
         for (Parameter parameter : parameters) {
@@ -178,14 +177,14 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
 
     protected abstract Class<? extends Assembler> endiannessSpecificAssemblerClass();
 
-    private Sequence<Template_Type> _templates;
+    private List<Template_Type> _templates;
 
-    private Sequence<Template_Type> templates() {
+    private List<Template_Type> templates() {
         if (_templates == null) {
             if (_sortAssemblerMethods) {
-                final Template_Type[] array = Sequence.Static.toArray(assembly().templates(), assembly().templateType());
+                final Template_Type[] array = CollectionUtil.toArray(assembly().templates(), assembly().templateType());
                 java.util.Arrays.sort(array);
-                _templates = new ArraySequence<Template_Type>(array);
+                _templates = Arrays.asList(array);
             } else {
                 _templates = assembly().templates();
             }
@@ -213,7 +212,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
      * @param extraLinks
      *                a sequence to which extra javadoc links should be appended
      */
-    protected void printExtraMethodJavadoc(IndentWriter writer, Template_Type template, AppendableSequence<String> extraLinks) {
+    protected void printExtraMethodJavadoc(IndentWriter writer, Template_Type template, ArrayList<String> extraLinks) {
     }
 
     /**
@@ -222,18 +221,18 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
      * @param template the template from which the assembler method is generated
      */
     protected void printMethodJavadoc(IndentWriter writer, Template_Type template) {
-        final AppendableSequence<String> extraLinks = new ArrayListSequence<String>();
-        final Sequence<? extends Parameter> parameters = getParameters(template);
+        final ArrayList<String> extraLinks = new ArrayList<String>();
+        final List<? extends Parameter> parameters = getParameters(template);
         writer.println("/**");
         writer.println(" * Pseudo-external assembler syntax: {@code " + template.externalName() + externalMnemonicSuffixes(parameters) + "  }" + externalParameters(parameters));
         printExtraMethodJavadoc(writer, template, extraLinks);
-        final Sequence<InstructionConstraint> constraints = Sequence.Static.filter(template.instructionDescription().specifications(), InstructionConstraint.class);
+        final List<InstructionConstraint> constraints = CollectionUtil.filter(template.instructionDescription().specifications(), InstructionConstraint.class);
         if (!constraints.isEmpty()) {
             writer.println(" * <p>");
             for (InstructionConstraint constraint : constraints) {
                 final Method predicateMethod = constraint.predicateMethod();
                 if (predicateMethod != null) {
-                    extraLinks.append(predicateMethod.getDeclaringClass().getName() + "#" + predicateMethod.getName());
+                    extraLinks.add(predicateMethod.getDeclaringClass().getName() + "#" + predicateMethod.getName());
                 }
                 writer.println(" * Constraint: {@code " + constraint.asJavaExpression() + "}<br />");
             }
@@ -254,7 +253,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         writer.println(" */");
     }
 
-    private String externalParameters(Sequence< ? extends Parameter> parameters) {
+    private String externalParameters(List< ? extends Parameter> parameters) {
         final StringBuilder sb = new StringBuilder();
         boolean first = true;
         for (Parameter parameter : parameters) {
@@ -269,7 +268,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         return sb.toString();
     }
 
-    private String externalMnemonicSuffixes(Sequence< ? extends Parameter> parameters) {
+    private String externalMnemonicSuffixes(List< ? extends Parameter> parameters) {
         final StringBuilder sb = new StringBuilder();
         for (Parameter parameter : parameters) {
             if (ExternalMnemonicSuffixArgument.class.isAssignableFrom(parameter.type())) {
@@ -318,7 +317,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         int codeLineCount = 0;
         final Map<InstructionDescription, Integer> instructionDescriptions = new HashMap<InstructionDescription, Integer>();
         int maxTemplatesPerDescription = 0;
-        for (int i = 0; i < templates().length(); i++) {
+        for (int i = 0; i < templates().size(); i++) {
             final Template_Type template = templates().get(i);
             printMethodComment(writer, template, i + 1);
             codeLineCount += printMethod(writer, template);
@@ -342,8 +341,8 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
 
         Trace.line(1, "Generated raw assembler: " + _rawAssemblerClassSimpleName +
                         " [code line count=" + codeLineCount + ", total line count=" + writer.lineCount() +
-                        ", method count=" + (templates().length() + subroutineCount) +
-                        ", instruction templates=" + templates().length() + ", max templates per description=" + maxTemplatesPerDescription +
+                        ", method count=" + (templates().size() + subroutineCount) +
+                        ", instruction templates=" + templates().size() + ", max templates per description=" + maxTemplatesPerDescription +
                         "]");
 
         return markGeneratedContent(rawAssemblerFile, charArrayWriter);
@@ -353,17 +352,17 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
      * Gets the parameters for a template, replacing the label parameter with a LabelParameter instance
      * if the template has a label parameter and this generator is currently generating the label assembler.
      */
-    protected Sequence<Parameter> getParameters(Template template) {
+    protected List<Parameter> getParameters(Template template) {
         if (!_generatingLabelAssembler || template.labelParameterIndex() == -1) {
             return StaticLoophole.cast(template.parameters());
         }
-        final MutableSequence<Parameter> parameters = new ArrayListSequence<Parameter>(template.parameters());
+        final ArrayList<Parameter> parameters = new ArrayList<Parameter>(template.parameters());
         parameters.set(template.labelParameterIndex(), new LabelParameter());
         return parameters;
     }
 
-    protected Sequence<Parameter> printLabelMethodHead(IndentWriter writer, Template_Type template) {
-        final Sequence<Parameter> parameters = getParameters(template);
+    protected List<Parameter> printLabelMethodHead(IndentWriter writer, Template_Type template) {
+        final List<Parameter> parameters = getParameters(template);
         writer.print("public void " + template.assemblerMethodName() + "(");
         writer.print(formatParameterList("final ", parameters, false));
         writer.println(") {");
@@ -375,7 +374,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         writer.println("final " + template.parameters().get(template.labelParameterIndex()).type() + " placeHolder = 0;");
         writer.print(template.assemblerMethodName() + "(");
         String separator = "";
-        for (int i = 0; i < template.parameters().length(); i++) {
+        for (int i = 0; i < template.parameters().size(); i++) {
             writer.print(separator);
             if (i == template.labelParameterIndex()) {
                 writer.print("placeHolder");
@@ -387,10 +386,10 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         writer.println(");");
     }
 
-    protected void printRawCall(IndentWriter writer, Template_Type template, Sequence<Parameter> parameters) {
+    protected void printRawCall(IndentWriter writer, Template_Type template, List<Parameter> parameters) {
         writer.print(template.assemblerMethodName() + "(");
         String separator = "";
-        for (int i = 0; i < parameters.length(); i++) {
+        for (int i = 0; i < parameters.size(); i++) {
             writer.print(separator);
             if (i == template.labelParameterIndex()) {
                 writer.print("label");
@@ -409,7 +408,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         writer.println(");");
     }
 
-    protected abstract int printLabelMethod(IndentWriter writer, Template_Type labelTemplate, Sequence<Template_Type> labelTemplates);
+    protected abstract int printLabelMethod(IndentWriter writer, Template_Type labelTemplate, List<Template_Type> labelTemplates);
 
     private boolean _generatingLabelAssembler;
 
@@ -592,7 +591,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         final CharArraySource charArrayWriter = new CharArraySource((int) labelAssemblerFile.length());
         final IndentWriter writer = new IndentWriter(new PrintWriter(charArrayWriter));
         printClassHeader(writer);
-        final Sequence<Template_Type> labelTemplates = assembly().getLabelTemplates();
+        final List<Template_Type> labelTemplates = assembly().getLabelTemplates();
         final Set<String> importPackages = getImportPackages(labelTemplates);
         importPackages.add(Label.class.getPackage().getName()); // for Label parameters
         printLabelImports(writer, importPackages);
@@ -604,7 +603,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         writer.println();
 
         int codeLineCount = 0;
-        for (int i = 0; i < labelTemplates.length(); i++) {
+        for (int i = 0; i < labelTemplates.size(); i++) {
             printMethodComment(writer, labelTemplates.get(i), i + 1);
             codeLineCount += printLabelMethod(writer, labelTemplates.get(i), labelTemplates);
         }
@@ -614,7 +613,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         _generatingLabelAssembler = false;
 
         Trace.line(1, "Generated label assembler: " + _labelAssemblerClassSimpleName + " [code line count=" + codeLineCount + ", total line count=" +
-                        writer.lineCount() + ", method count=" + templates().length() + ")");
+                        writer.lineCount() + ", method count=" + templates().size() + ")");
 
         return markGeneratedContent(labelAssemblerFile, charArrayWriter);
     }

@@ -21,19 +21,19 @@ import jasm.gen.cisc.TemplateNotNeededException;
 import jasm.util.Enumerator;
 import jasm.util.HexByte;
 import jasm.util.WordWidth;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.Sequence;
+import jasm.util.collect.CollectionUtil;
 import jasm.util.program.ProgramError;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
 import jasm.x86.SegmentRegister;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
  */
 public abstract class X86Template extends Template implements X86InstructionDescriptionVisitor {
-    // Defaults initial capacity for the ArrayListSequences below.
+    // Defaults initial capacity for the ArrayLists below.
     private static final int MAX_NUM_OF_OPERANDS = 3;
     private static final int MAX_NUM_OF_IMPLICIT_OPERANDS = 3;
     private static final int MAX_NUM_OF_PARAMETERS = 3;
@@ -46,9 +46,9 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     private HexByte _opcode2;
     private ModRMGroup _modRMGroup;
     private ModRMGroup.Opcode _modRMGroupOpcode;
-    private AppendableSequence<X86Operand> _operands = new ArrayListSequence<X86Operand>(MAX_NUM_OF_OPERANDS);
-    private AppendableSequence<X86ImplicitOperand> _implicitOperands = new ArrayListSequence<X86ImplicitOperand>(MAX_NUM_OF_IMPLICIT_OPERANDS);
-    private AppendableSequence<X86Parameter> _parameters = new ArrayListSequence<X86Parameter>(MAX_NUM_OF_PARAMETERS);
+    private ArrayList<X86Operand> _operands = new ArrayList<X86Operand>(MAX_NUM_OF_OPERANDS);
+    private ArrayList<X86ImplicitOperand> _implicitOperands = new ArrayList<X86ImplicitOperand>(MAX_NUM_OF_IMPLICIT_OPERANDS);
+    private ArrayList<X86Parameter> _parameters = new ArrayList<X86Parameter>(MAX_NUM_OF_PARAMETERS);
     protected boolean _isLabelMethodWritten;
 
     protected X86Template(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {
@@ -173,8 +173,8 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     public String assemblerMethodName() {
         if (_assemblerMethodName == null) {
             _assemblerMethodName = _namePrefix + internalName();
-            if (_implicitOperands.length() == 1) {
-                final X86ImplicitOperand implicitOperand = _implicitOperands.first();
+            if (_implicitOperands.size() == 1) {
+                final X86ImplicitOperand implicitOperand = _implicitOperands.get(0);
                 switch (implicitOperand.designation()) {
                     case DESTINATION:
                     case OTHER:
@@ -205,8 +205,8 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     }
 
     protected <Parameter_Type extends X86Parameter> Parameter_Type addParameter(Parameter_Type parameter) {
-        _parameters.append(parameter);
-        _operands.append(parameter);
+        _parameters.add(parameter);
+        _operands.add(parameter);
         if (parameter instanceof X86AddressParameter) {
             useNamePrefix("m_");
         }
@@ -229,21 +229,21 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     }
 
     protected void addImplicitOperand(X86ImplicitOperand implicitOperand) {
-        _implicitOperands.append(implicitOperand);
-        _operands.append(implicitOperand);
+        _implicitOperands.add(implicitOperand);
+        _operands.add(implicitOperand);
     }
 
-    public Sequence<X86ImplicitOperand> implicitOperands() {
+    public List<X86ImplicitOperand> implicitOperands() {
         return _implicitOperands;
     }
 
     @Override
-    public Sequence<X86Operand> operands() {
+    public List<X86Operand> operands() {
         return _operands;
     }
 
     @Override
-    public Sequence<X86Parameter> parameters() {
+    public List<X86Parameter> parameters() {
         return _parameters;
     }
 
@@ -414,15 +414,14 @@ public abstract class X86Template extends Template implements X86InstructionDesc
         if (!assemblerMethodName().equals(other.assemblerMethodName())) {
             return false;
         }
-        if (_parameters.length() != other._parameters.length()) {
+        if (_parameters.size() != other._parameters.size()) {
             return false;
         }
-        for (int i = 0; i < _parameters.length(); i++) {
+        for (int i = 0; i < _parameters.size(); i++) {
             if (!_parameters.get(i).type().equals(other._parameters.get(i).type())) {
                 return false;
             }
         }
         return true;
     }
-
 }

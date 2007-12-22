@@ -17,8 +17,8 @@ import jasm.gen.cisc.ia32.IA32Template;
 import jasm.ia32.IA32Assembler;
 import jasm.util.HexByte;
 import jasm.util.WordWidth;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.Sequence;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,7 +41,7 @@ public class IA32Disassembler extends X86Disassembler<IA32Template, IA32Disassem
     }
 
     @Override
-    protected IA32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, IA32Template template, Sequence<Argument> arguments) {
+    protected IA32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, IA32Template template, List<Argument> arguments) {
         return new IA32DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
     }
 
@@ -50,11 +50,11 @@ public class IA32Disassembler extends X86Disassembler<IA32Template, IA32Disassem
         return new IA32Assembler(_startAddress + offset);
     }
 
-    private static Map<X86InstructionHeader, AppendableSequence<IA32Template>> _headerToTemplates =
+    private static Map<X86InstructionHeader, LinkedList<IA32Template>> _headerToTemplates =
         X86InstructionHeader.createMapping(IA32Assembly.ASSEMBLY, WordWidth.BITS_32);
 
     @Override
-    protected Map<X86InstructionHeader, AppendableSequence<IA32Template>> headerToTemplates() {
+    protected Map<X86InstructionHeader, LinkedList<IA32Template>> headerToTemplates() {
         return _headerToTemplates;
     }
 

@@ -16,8 +16,8 @@ import jasm.gen.AssemblyTestComponent;
 import jasm.gen.cisc.x86.X86AssemblyTester;
 import jasm.ia32.IA32Assembler;
 import jasm.util.WordWidth;
-import jasm.util.collect.Sequence;
 import java.util.EnumSet;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -44,7 +44,7 @@ public class IA32AssemblyTester extends X86AssemblyTester<IA32Template, IA32Disa
     }
 
     @Override
-    protected boolean isLegalArgumentList(IA32Template template, Sequence<Argument> arguments) {
+    protected boolean isLegalArgumentList(IA32Template template, List<Argument> arguments) {
         return true;
     }
 }

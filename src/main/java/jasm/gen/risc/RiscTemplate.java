@@ -17,10 +17,9 @@ import jasm.gen.risc.field.OperandField;
 import jasm.gen.risc.field.OptionField;
 import jasm.gen.risc.field.ReservedField;
 import jasm.gen.risc.field.RiscField;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.Sequence;
 import jasm.util.program.ProgramError;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -29,11 +28,11 @@ import jasm.util.program.ProgramError;
  */
 public abstract class RiscTemplate extends Template implements RiscInstructionDescriptionVisitor {
 
-    private final AppendableSequence<RiscField> _allFields = new ArrayListSequence<RiscField>();
-    private final AppendableSequence<OperandField> _operandFields = new ArrayListSequence<OperandField>();
-    private final AppendableSequence<OptionField> _optionFields = new ArrayListSequence<OptionField>();
-    private final AppendableSequence<OperandField> _parameters = new ArrayListSequence<OperandField>();
-    private final AppendableSequence<Option> _options = new ArrayListSequence<Option>();
+    private final ArrayList<RiscField> _allFields = new ArrayList<RiscField>();
+    private final ArrayList<OperandField> _operandFields = new ArrayList<OperandField>();
+    private final ArrayList<OptionField> _optionFields = new ArrayList<OptionField>();
+    private final ArrayList<OperandField> _parameters = new ArrayList<OperandField>();
+    private final ArrayList<Option> _options = new ArrayList<Option>();
 
     private int _opcode;
     private int _opcodeMask;
@@ -76,18 +75,18 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
     }
 
     public void visitField(RiscField field) {
-        _allFields.append(field);
+        _allFields.add(field);
         if (field instanceof OperandField) {
             final OperandField operandField = (OperandField) field;
             if (field instanceof OffsetParameter) {
                 setLabelParameterIndex();
             }
             if (operandField.boundTo() == null) {
-                _parameters.append(operandField);
+                _parameters.add(operandField);
             }
-            _operandFields.append(operandField);
+            _operandFields.add(operandField);
         } else if (field instanceof OptionField) {
-            _optionFields.append((OptionField) field);
+            _optionFields.add((OptionField) field);
         } else if (field instanceof ReservedField) {
             organizeConstant(field, 0);
         } else {
@@ -113,7 +112,7 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
         }
     }
 
-    public Sequence<OperandField> operandFields() {
+    public List<OperandField> operandFields() {
         return _operandFields;
     }
 
@@ -125,13 +124,13 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
         return _opcodeMask;
     }
 
-    public Sequence<OptionField> optionFields() {
+    public List<OptionField> optionFields() {
         return _optionFields;
     }
 
     public void addOptionField(OptionField f) {
-        _allFields.append(f);
-        _optionFields.append(f);
+        _allFields.add(f);
+        _optionFields.add(f);
     }
 
     public int specificity() {
@@ -148,7 +147,7 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
             ProgramError.unexpected("Option: " + option.name() + " does not fit in field " + option.field().name());
         }
 
-        _options.append(option);
+        _options.add(option);
         if (option.isRedundant()) {
             _canonicalRepresentative = canonicalRepresentative;
         }
@@ -183,13 +182,13 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
     }
 
     @Override
-    public Sequence<Operand> operands() {
+    public List<Operand> operands() {
         ProgramError.unimplemented();
         return null;
     }
 
     @Override
-    public Sequence<OperandField> parameters() {
+    public List<OperandField> parameters() {
         return _parameters;
     }
 

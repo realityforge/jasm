@@ -12,7 +12,7 @@ import jasm.Argument;
 import jasm.dis.Address32Instruction;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.risc.sparc.SPARCTemplate;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  *
@@ -23,7 +23,7 @@ public class SPARC32DisassembledInstruction extends SPARCDisassembledInstruction
 
     private final Address32Instruction.Mixin _addressInstruction;
 
-    SPARC32DisassembledInstruction(int startAddress, int offset, byte[] bytes, SPARCTemplate template, Sequence<Argument> arguments) {
+    SPARC32DisassembledInstruction(int startAddress, int offset, byte[] bytes, SPARCTemplate template, List<Argument> arguments) {
         super(offset, bytes, template, arguments);
         _addressInstruction = new Address32Instruction.Mixin(this, startAddress);
     }

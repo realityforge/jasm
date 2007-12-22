@@ -9,7 +9,7 @@
 package jasm.gen;
 
 import jasm.Argument;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  * An expression can provide the value of an operand field. This enables synthetic instructions to be
@@ -22,7 +22,7 @@ public interface Expression {
     /**
      * Evaluates the expression given a template and a set of arguments.
      */
-    long evaluate(Template template, Sequence<Argument> arguments);
+    long evaluate(Template template, List<Argument> arguments);
 
     /**
      * @return a Java expression that performs the {@link #evaluate evaluation}
@@ -39,7 +39,7 @@ public interface Expression {
          *
          * @param term   a {@link Number}, {@link Expression} or {@link Parameter} instance
          */
-        public static long evaluateTerm(Object term, Template template, Sequence<Argument> arguments) {
+        public static long evaluateTerm(Object term, Template template, List<Argument> arguments) {
             if (term instanceof Number) {
                 return ((Number) term).longValue();
             }
@@ -75,7 +75,7 @@ public interface Expression {
         public static Expression add(final Object first, final Object second) {
             return new Expression() {
 
-                public long evaluate(Template template, Sequence<Argument> arguments) {
+                public long evaluate(Template template, List<Argument> arguments) {
                     return evaluateTerm(first, template, arguments) + evaluateTerm(second, template, arguments);
                 }
 
@@ -94,7 +94,7 @@ public interface Expression {
         public static Expression sub(final Object first, final Object second) {
             return new Expression() {
 
-                public long evaluate(Template template, Sequence<Argument> arguments) {
+                public long evaluate(Template template, List<Argument> arguments) {
                     return evaluateTerm(first, template, arguments) - evaluateTerm(second, template, arguments);
                 }
 
@@ -112,7 +112,7 @@ public interface Expression {
         public static Expression neg(final Object term) {
             return new Expression() {
 
-                public long evaluate(Template template, Sequence<Argument> arguments) {
+                public long evaluate(Template template, List<Argument> arguments) {
                     return -evaluateTerm(term, template, arguments);
                 }
 

@@ -10,7 +10,7 @@ package jasm.gen.cisc.x86;
 
 import jasm.gen.Assembly;
 import jasm.gen.InstructionDescriptionCreator;
-import jasm.util.collect.MutableSequence;
+import java.util.List;
 
 /**
  *
@@ -24,7 +24,7 @@ public class X86InstructionDescriptionCreator extends InstructionDescriptionCrea
     }
 
     @Override
-    protected X86InstructionDescription createInstructionDescription(MutableSequence<Object> specifications) {
+    protected X86InstructionDescription createInstructionDescription(List<Object> specifications) {
         return new X86InstructionDescription(specifications);
     }
 }

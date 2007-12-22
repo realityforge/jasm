@@ -22,10 +22,11 @@ import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.field.InputOperandField;
 import jasm.gen.risc.field.OperandField;
 import jasm.util.Ints;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.Sequence;
+import jasm.util.collect.CollectionUtil;
 import jasm.util.io.IndentWriter;
 import jasm.util.program.ProgramError;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -59,7 +60,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
         writer.println("int instruction = " + Ints.toHexLiteral(template.opcode()) + ";");
 
         // Print argument constraint checking statements
-        final Sequence<InstructionConstraint> constraints = template.instructionDescription().constraints();
+        final List<InstructionConstraint> constraints = template.instructionDescription().constraints();
         for (InstructionConstraint constraint : constraints) {
             final String constraintExpr = constraint.asJavaExpression();
             writer.println("checkConstraint(" + constraintExpr + ", \"" + constraintExpr + "\");");
@@ -79,7 +80,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
     }
 
     private void printOffsetLabelMethod(IndentWriter writer, Template_Type template) {
-        final Sequence<Parameter> parameters = printLabelMethodHead(writer, template);
+        final List<Parameter> parameters = printLabelMethodHead(writer, template);
         writer.println("emitInt(0); // instruction place holder");
         writer.print("new " + LabelOffsetInstruction.class.getSimpleName());
         writer.println("(this, " + parameters.get(template.labelParameterIndex()).variableName() + ") {");
@@ -100,7 +101,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
     }
 
     @Override
-    protected int printLabelMethod(IndentWriter writer, Template_Type labelTemplate, Sequence<Template_Type> labelTemplates) {
+    protected int printLabelMethod(IndentWriter writer, Template_Type labelTemplate, List<Template_Type> labelTemplates) {
         final int startLineCount = writer.lineCount();
         printOffsetLabelMethod(writer, labelTemplate);
         return writer.lineCount() - startLineCount;
@@ -110,14 +111,14 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
      * Prints the reference to the raw method from which a synthetic method was defined.
      */
     @Override
-    protected void printExtraMethodJavadoc(IndentWriter writer, Template_Type template, AppendableSequence<String> extraLinks) {
+    protected void printExtraMethodJavadoc(IndentWriter writer, Template_Type template, ArrayList<String> extraLinks) {
         if (template.instructionDescription().isSynthetic()) {
           final RiscTemplate rawTemplate = template.synthesizedFrom();
-            final Sequence<? extends Parameter> parameters = getParameters(rawTemplate);
+            final List<? extends Parameter> parameters = getParameters(rawTemplate);
             final String ref = rawTemplate.internalName() + "(" + formatParameterList("", parameters, true) + ")";
             writer.println(" * <p>");
             writer.print(" * This is a synthetic instruction equivalent to: {@code " + rawTemplate.internalName() + "(");
-            extraLinks.append("#" + ref);
+            extraLinks.add("#" + ref);
 
             boolean firstOperand = true;
             for (OperandField rawOperand : rawTemplate.operandFields()) {
@@ -143,7 +144,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
      */
     private String getRawOperandReplacement(RiscTemplate syntheticTemplate,
                                             OperandField rawOperand) {
-        if (Sequence.Static.containsIdentical(syntheticTemplate.operandFields(), rawOperand)) {
+        if (CollectionUtil.containsIdentical(syntheticTemplate.operandFields(), rawOperand)) {
             if (rawOperand instanceof OffsetParameter && generatingLabelAssembler()) {
                 return new LabelParameter().variableName();
             }

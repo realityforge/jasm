@@ -8,16 +8,16 @@
  */
 package jasm.util;
 
-import jasm.util.collect.Sequence;
 import jasm.util.program.ProgramError;
 import java.util.Iterator;
+import java.util.List;
 
 final class SequenceSymbolizer<Symbol_Type extends Symbol> implements Symbolizer<Symbol_Type> {
 
     private final Class<Symbol_Type> _symbolType;
-    private final Sequence<Symbol_Type> _symbols;
+    private final List<Symbol_Type> _symbols;
 
-    SequenceSymbolizer(Class<Symbol_Type> symbolType, Sequence<Symbol_Type> symbols) {
+    SequenceSymbolizer(Class<Symbol_Type> symbolType, List<Symbol_Type> symbols) {
         if (symbolType.getName().startsWith("jasm") && Symbolizer.Static.hasPackageExternalAccessibleConstructors(symbolType)) {
             // This test ensures that values passed for symbolic parameters of methods in the
             // generated assemblers are guaranteed to be legal (assuming client code does not

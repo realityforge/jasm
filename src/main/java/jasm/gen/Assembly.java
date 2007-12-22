@@ -14,12 +14,11 @@ import jasm.AssemblyException;
 import jasm.InstructionSet;
 import jasm.Label;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.Sequence;
 import jasm.util.program.ProgramError;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An assembly framework, instantiated once per instruction set.
@@ -46,22 +45,22 @@ public abstract class Assembly<Template_Type extends Template> {
         return _templateType;
     }
 
-    protected abstract Sequence<Template_Type> createTemplates();
+    protected abstract List<Template_Type> createTemplates();
 
-    private Sequence<Template_Type> _templates;
+    private List<Template_Type> _templates;
 
-    public Sequence<Template_Type> templates() {
+    public List<Template_Type> templates() {
         if (_templates == null) {
             _templates = createTemplates();
         }
         return _templates;
     }
 
-    public Sequence<Template_Type> getLabelTemplates() {
-        final AppendableSequence<Template_Type> result = new ArrayListSequence<Template_Type>();
+    public List<Template_Type> getLabelTemplates() {
+        final ArrayList<Template_Type> result = new ArrayList<Template_Type>();
         for (Template_Type template : templates()) {
             if (template.labelParameterIndex() >= 0) {
-                result.append(template);
+                result.add(template);
             }
         }
         return result;
@@ -77,10 +76,10 @@ public abstract class Assembly<Template_Type extends Template> {
         return argument;
     }
 
-    public final String createMethodCallString(Template_Type template, Sequence<Argument> argumentList) {
-        assert argumentList.length() == template.parameters().length();
+    public final String createMethodCallString(Template_Type template, List<Argument> argumentList) {
+        assert argumentList.size() == template.parameters().size();
         String call = template.assemblerMethodName() + "(";
-        for (int i = 0; i < argumentList.length(); i++) {
+        for (int i = 0; i < argumentList.size(); i++) {
             call += ((i == 0) ? "" : ", ") + getBoxedJavaValue(argumentList.get(i));
         }
         return call + ")";
@@ -95,7 +94,7 @@ public abstract class Assembly<Template_Type extends Template> {
         return null;
     }
 
-    private Method getAssemblerMethod(Assembler assembler, Template_Type template, Sequence<Argument> arguments) {
+    private Method getAssemblerMethod(Assembler assembler, Template_Type template, List<Argument> arguments) {
         final Class[] parameterTypes = template.parameterTypes();
         final int index = template.labelParameterIndex();
         if (index >= 0 && arguments.get(index) instanceof Label) {
@@ -108,11 +107,11 @@ public abstract class Assembly<Template_Type extends Template> {
         return template._assemblerMethod;
     }
 
-    public void assemble(Assembler assembler, Template_Type template, Sequence<Argument> arguments) throws AssemblyException {
-        assert arguments.length() == template.parameters().length();
+    public void assemble(Assembler assembler, Template_Type template, List<Argument> arguments) throws AssemblyException {
+        assert arguments.size() == template.parameters().size();
         final Method assemblerMethod = getAssemblerMethod(assembler, template, arguments);
-        final Object[] objects = new Object[arguments.length()];
-        for (int i = 0; i < arguments.length(); i++) {
+        final Object[] objects = new Object[arguments.size()];
+        for (int i = 0; i < arguments.size(); i++) {
             objects[i] = getBoxedJavaValue(arguments.get(i));
         }
         try {

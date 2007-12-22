@@ -18,9 +18,9 @@ import jasm.dis.amd64.AMD64Disassembler;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.cisc.x86.X86AssemblyTester;
 import jasm.util.WordWidth;
-import jasm.util.collect.Sequence;
 import jasm.x86.GeneralRegister;
 import java.util.EnumSet;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -47,7 +47,7 @@ public class AMD64AssemblyTester extends X86AssemblyTester<AMD64Template, AMD64D
     }
 
     @Override
-    protected boolean isLegalArgumentList(AMD64Template template, Sequence<Argument> arguments) {
+    protected boolean isLegalArgumentList(AMD64Template template, List<Argument> arguments) {
         final WordWidth externalCodeSizeAttribute = template.externalCodeSizeAttribute();
         for (Argument argument : arguments) {
             if (argument instanceof AMD64GeneralRegister8) {

@@ -11,6 +11,7 @@ package test.jasm.amd64;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.Label;
+import jasm.util.collect.CollectionUtil;
 import jasm.amd64.AMD64Assembler;
 import static jasm.amd64.AMD64GeneralRegister64.RAX;
 import static jasm.amd64.AMD64GeneralRegister64.RBX;
@@ -18,13 +19,13 @@ import jasm.dis.amd64.AMD64Disassembler;
 import jasm.gen.Parameter;
 import jasm.gen.cisc.amd64.AMD64Assembly;
 import jasm.gen.cisc.amd64.AMD64Template;
-import jasm.util.collect.ArraySequence;
-import jasm.util.collect.MutableSequence;
-import jasm.util.collect.Sequence;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Arrays;
 import junit.framework.TestCase;
 
 /**
@@ -45,8 +46,8 @@ public class BoundLabelTest extends TestCase {
 
   private byte[] assemble(long startAddress, int labelDelta) throws AssemblyException {
     final AMD64Assembler assembler = new AMD64Assembler(startAddress);
-    final Sequence<AMD64Template> labelTemplates = AMD64Assembly.ASSEMBLY.getLabelTemplates();
-    final Label[] labels = new Label[labelTemplates.length() + LABEL_DELTA];
+    final List<AMD64Template> labelTemplates = AMD64Assembly.ASSEMBLY.getLabelTemplates();
+    final Label[] labels = new Label[labelTemplates.size() + LABEL_DELTA];
     for (int i = 0; i < labels.length; i++) {
       labels[i] = new Label();
     }
@@ -59,10 +60,10 @@ public class BoundLabelTest extends TestCase {
     }
     for (AMD64Template template : labelTemplates) {
       assembler.bindLabel(labels[bindIndex]);
-      final MutableSequence<Argument> arguments = new ArraySequence<Argument>(template.parameters().length());
-      for (int parameterIndex = 0; parameterIndex < template.parameters().length(); parameterIndex++) {
+      final Argument[] arguments = new Argument[template.parameters().size()];
+      for (int parameterIndex = 0; parameterIndex < template.parameters().size(); parameterIndex++) {
         if (parameterIndex == template.labelParameterIndex()) {
-          arguments.set(parameterIndex, labels[labelIndex]);
+          arguments[parameterIndex] = labels[labelIndex];
         } else {
           final Parameter parameter = template.parameters().get(parameterIndex);
           final Iterator<? extends Argument> testArguments = parameter.getLegalTestArguments().iterator();
@@ -73,10 +74,10 @@ public class BoundLabelTest extends TestCase {
               argument = testArguments.next();
             }
           }
-          arguments.set(parameterIndex, argument);
+          arguments[parameterIndex] = argument;
         }
       }
-      AMD64Assembly.ASSEMBLY.assemble(assembler, template, arguments);
+      AMD64Assembly.ASSEMBLY.assemble(assembler, template, Arrays.asList(arguments));
       bindIndex++;
       labelIndex++;
     }

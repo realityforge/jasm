@@ -25,10 +25,10 @@ import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.util.MutableQueue;
 import jasm.util.WordWidth;
-import jasm.util.collect.Sequence;
 import jasm.util.lang.Strings;
 import jasm.x86.IndirectRegister;
 import jasm.x86.Scale;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -110,7 +110,7 @@ import java.util.Queue;
  */
 public abstract class X86DisassembledInstruction<Template_Type extends X86Template> extends DisassembledInstruction<Template_Type> {
 
-    protected X86DisassembledInstruction(int offset, byte[] bytes, Template_Type template, Sequence<Argument> arguments) {
+    protected X86DisassembledInstruction(int offset, byte[] bytes, Template_Type template, List<Argument> arguments) {
         super(offset, bytes, template, arguments);
     }
 
@@ -137,7 +137,7 @@ public abstract class X86DisassembledInstruction<Template_Type extends X86Templa
         return "-" + space + s.substring(1);
     }
 
-    private String getOperand(Queue<X86Operand> operands, Queue<Argument> arguments, Sequence<DisassembledLabel> labels) {
+    private String getOperand(Queue<X86Operand> operands, Queue<Argument> arguments, List<DisassembledLabel> labels) {
         final X86Operand operand = operands.remove();
         if (operand instanceof ImplicitOperand) {
             final ImplicitOperand implicitOperand = (ImplicitOperand) operand;
@@ -205,7 +205,7 @@ public abstract class X86DisassembledInstruction<Template_Type extends X86Templa
     }
 
     @Override
-    public String operandsToString(Sequence<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
+    public String operandsToString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
         final MutableQueue<X86Operand> operandQueue = MutableQueue.create(template().operands());
         final MutableQueue<Argument> argumentQueue = MutableQueue.create(arguments());
         String result = "";
@@ -218,7 +218,7 @@ public abstract class X86DisassembledInstruction<Template_Type extends X86Templa
     }
 
     @Override
-    public String toString(Sequence<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
+    public String toString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
         String s = operandsToString(labels, globalLabelMapper);
         if (s.length() > 0) {
             s = "  " + s;

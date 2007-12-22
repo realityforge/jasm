@@ -59,7 +59,8 @@ final class PPCFields {
     /**
      * RA field that can also accept the constant 0.
      */
-    public static final SymbolicOperandField<ZeroOrRegister> _ra0 = SymbolicOperandField.createAscending(ZeroOrRegister.symbolizer(), 11, 15).setVariableName("ra");
+    public static final SymbolicOperandField<ZeroOrRegister> _ra0 =
+        SymbolicOperandField.createAscending(ZeroOrRegister.symbolizer(), 11, 15).setVariableName("ra");
 
     public static RiscConstant ra0(ZeroOrRegister value) {
         return _ra0.constant(value);

@@ -10,9 +10,9 @@ package jasm.sparc;
 
 import jasm.AbstractSymbolicArgument;
 import jasm.util.Symbolizer;
-import jasm.util.collect.ArraySequence;
-import jasm.util.collect.Sequence;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * The components of the argument to the Memory Barrier (i.e. {@code membar}) instruction.
@@ -59,7 +59,7 @@ public final class MembarOperand extends AbstractSymbolicArgument {
 
     public static final Symbolizer<MembarOperand> SYMBOLIZER = new Symbolizer<MembarOperand>() {
 
-        private final Sequence<MembarOperand> _values = new ArraySequence<MembarOperand>(new MembarOperand[]{NO_MEMBAR, LOAD_LOAD, STORE_LOAD, LOAD_STORE, STORE_STORE, LOOKASIDE, MEM_ISSUE, SYNC});
+        private final List<MembarOperand> _values = Arrays.asList(NO_MEMBAR, LOAD_LOAD, STORE_LOAD, LOAD_STORE, STORE_STORE, LOOKASIDE, MEM_ISSUE, SYNC);
 
         public Class<MembarOperand> type() {
             return MembarOperand.class;

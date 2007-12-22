@@ -13,7 +13,7 @@ import jasm.dis.Address64Instruction;
 import jasm.dis.x86.X86DisassembledInstruction;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.cisc.amd64.AMD64Template;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -22,7 +22,7 @@ public class AMD64DisassembledInstruction extends X86DisassembledInstruction<AMD
 
     private final Address64Instruction.Mixin _addressInstruction;
 
-    AMD64DisassembledInstruction(long startAddress, int offset, byte[] bytes, AMD64Template template, Sequence<Argument> arguments) {
+    AMD64DisassembledInstruction(long startAddress, int offset, byte[] bytes, AMD64Template template, List<Argument> arguments) {
         super(offset, bytes, template, arguments);
         _addressInstruction = new Address64Instruction.Mixin(this, startAddress);
     }

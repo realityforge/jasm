@@ -161,7 +161,7 @@ public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template
 
     @Override
     protected void printModVariants(IndentWriter writer, AMD64Template template) {
-        if (template.modCase() != X86TemplateContext.ModCase.MOD_0 || template.parameters().length() == 0) {
+        if (template.modCase() != X86TemplateContext.ModCase.MOD_0 || template.parameters().size() == 0) {
             return;
         }
         switch (template.rmCase()) {
@@ -207,7 +207,7 @@ public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template
 
     @Override
     protected void printSibVariants(IndentWriter writer, AMD64Template template) {
-        if (template.parameters().length() == 0 ||
+        if (template.parameters().size() == 0 ||
                         template.modCase() == null || template.modCase() == X86TemplateContext.ModCase.MOD_3 ||
                 template.rmCase() != X86TemplateContext.RMCase.NORMAL) {
             return;

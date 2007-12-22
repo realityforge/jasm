@@ -18,8 +18,8 @@ import jasm.gen.cisc.amd64.AMD64Template;
 import jasm.gen.cisc.x86.X86Opcode;
 import jasm.util.HexByte;
 import jasm.util.WordWidth;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.Sequence;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,7 +42,7 @@ public class AMD64Disassembler extends X86Disassembler<AMD64Template, AMD64Disas
     }
 
     @Override
-    protected AMD64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, AMD64Template template, Sequence<Argument> arguments) {
+    protected AMD64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, AMD64Template template, List<Argument> arguments) {
         return new AMD64DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
     }
 
@@ -51,10 +51,10 @@ public class AMD64Disassembler extends X86Disassembler<AMD64Template, AMD64Disas
         return new AMD64Assembler(_startAddress + offset);
     }
 
-    private static Map<X86InstructionHeader, AppendableSequence<AMD64Template>> _headerToTemplates = X86InstructionHeader.createMapping(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);
+    private static Map<X86InstructionHeader, LinkedList<AMD64Template>> _headerToTemplates = X86InstructionHeader.createMapping(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);
 
     @Override
-    protected Map<X86InstructionHeader, AppendableSequence<AMD64Template>> headerToTemplates() {
+    protected Map<X86InstructionHeader, LinkedList<AMD64Template>> headerToTemplates() {
         return _headerToTemplates;
     }
 

@@ -11,7 +11,7 @@ package jasm.gen.risc.ppc;
 import jasm.InstructionSet;
 import jasm.gen.risc.RiscAssembly;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  * @author Doug Simon
@@ -55,7 +55,7 @@ public final class PPCAssembly extends RiscAssembly<PPCTemplate> {
     }
 
     @Override
-    protected Sequence<PPCTemplate> createTemplates() {
+    protected List<PPCTemplate> createTemplates() {
         final PPCTemplateCreator creator = new PPCTemplateCreator();
         creator.createTemplates(new RawInstructions(creator));
         creator.createTemplates(new SyntheticInstructions(creator));

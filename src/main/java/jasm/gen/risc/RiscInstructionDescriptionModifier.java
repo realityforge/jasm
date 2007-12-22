@@ -8,8 +8,8 @@
  */
 package jasm.gen.risc;
 
-import jasm.util.collect.MutableSequence;
-import jasm.util.collect.Sequence;
+import jasm.util.collect.CollectionUtil;
+import java.util.List;
 
 /**
  * This class provides a mechanism for making modifications to a set of RISC instruction descriptions.
@@ -18,9 +18,9 @@ import jasm.util.collect.Sequence;
  */
 public class RiscInstructionDescriptionModifier {
 
-    private final Sequence<RiscInstructionDescription> _instructionDescriptions;
+    private final List<RiscInstructionDescription> _instructionDescriptions;
 
-    public RiscInstructionDescriptionModifier(Sequence<RiscInstructionDescription> instructionDescriptions) {
+    public RiscInstructionDescriptionModifier(List<RiscInstructionDescription> instructionDescriptions) {
         _instructionDescriptions = instructionDescriptions;
     }
 
@@ -32,8 +32,8 @@ public class RiscInstructionDescriptionModifier {
      */
     public RiscInstructionDescriptionModifier replace(Object before, Object after) {
         for (RiscInstructionDescription instructionDescription : _instructionDescriptions) {
-            final MutableSequence<Object> specifications = instructionDescription.specifications();
-            for (int i = 0; i < specifications.length(); i++) {
+            final List<Object> specifications = instructionDescription.specifications();
+            for (int i = 0; i < specifications.size(); i++) {
                 if (specifications.get(i).equals(before)) {
                     specifications.set(i, after);
                 }
@@ -45,9 +45,9 @@ public class RiscInstructionDescriptionModifier {
 
     public RiscInstructionDescriptionModifier swap(Object a, Object b) {
         for (RiscInstructionDescription instructionDescription : _instructionDescriptions) {
-            final MutableSequence<Object> specifications = instructionDescription.specifications();
-            final int aIndex = Sequence.Static.indexOfIdentical(specifications, a);
-            final int bIndex = Sequence.Static.indexOfIdentical(specifications, b);
+            final List<Object> specifications = instructionDescription.specifications();
+            final int aIndex = CollectionUtil.indexOfIdentical(specifications, a);
+            final int bIndex = CollectionUtil.indexOfIdentical(specifications, b);
             if (aIndex != -1 && bIndex != -1) {
                 specifications.set(aIndex, b);
                 specifications.set(bIndex, a);

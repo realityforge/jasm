@@ -10,14 +10,12 @@ package jasm;
 
 import jasm.util.Longs;
 import jasm.util.WordWidth;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
 import jasm.util.collect.IdentityHashSet;
-import jasm.util.collect.Sequence;
 import jasm.util.program.ProgramError;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.LinkedList;
 
 /**
  * Super class of generated assemblers.
@@ -74,8 +72,8 @@ public abstract class Assembler {
         _boundLabels.add(label);
     }
 
-    private final AppendableSequence<LabelInstruction> _labelInstructions = new ArrayListSequence<LabelInstruction>();
-    private final AppendableSequence<LabelOffsetInstruction> _spanDependentLabelInstructions = new ArrayListSequence<LabelOffsetInstruction>();
+    private final LinkedList<LabelInstruction> _labelInstructions = new LinkedList<LabelInstruction>();
+    private final LinkedList<LabelOffsetInstruction> _spanDependentLabelInstructions = new LinkedList<LabelOffsetInstruction>();
 
     /**
      * The size of label instruction is know past the initial generation of code. This may invalidate annotations to target code that
@@ -83,17 +81,17 @@ public abstract class Assembler {
      * set of label instructions so they can adjust appropriately the offsets within the target code of their annotations.
      * @return list of label instructions
      */
-    public Sequence<LabelInstruction> labelInstructions() {
+    public LinkedList<LabelInstruction> labelInstructions() {
         return _labelInstructions;
     }
 
     void addFixedLengthLabelInstruction(LabelInstruction fixedLengthLabelInstruction) {
-        _labelInstructions.append(fixedLengthLabelInstruction);
+        _labelInstructions.addLast(fixedLengthLabelInstruction);
     }
 
     void addSpanDependentLabelInstruction(LabelOffsetInstruction spanDependentLabelInstruction) {
-        _labelInstructions.append(spanDependentLabelInstruction);
-        _spanDependentLabelInstructions.append(spanDependentLabelInstruction);
+        _labelInstructions.addLast(spanDependentLabelInstruction);
+        _spanDependentLabelInstructions.addLast(spanDependentLabelInstruction);
     }
 
     private void gatherLabels() throws AssemblyException {

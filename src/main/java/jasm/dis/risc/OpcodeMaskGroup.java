@@ -9,11 +9,13 @@
 package jasm.dis.risc;
 
 import jasm.gen.risc.RiscTemplate;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
 import jasm.util.collect.IntHashMap;
-import jasm.util.collect.Sequence;
+import jasm.util.lang.StaticLoophole;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -37,29 +39,28 @@ public class OpcodeMaskGroup<Template_Type extends RiscTemplate> {
 
     private final Set<Template_Type> _templates = new HashSet<Template_Type>();
 
-    private final IntHashMap<AppendableSequence<Template_Type>> _templatesForOpcodes = new IntHashMap<AppendableSequence<Template_Type>>();
-    private final Sequence<Template_Type> _empty = new ArrayListSequence<Template_Type>();
+    private final IntHashMap<LinkedList<Template_Type>> _templatesForOpcodes = new IntHashMap<LinkedList<Template_Type>>();
 
     public void add(Template_Type template) {
         assert template.opcodeMask() == _mask;
         _templates.add(template);
-        AppendableSequence<Template_Type> templatesForOpcode = _templatesForOpcodes.get(template.opcode());
+        LinkedList<Template_Type> templatesForOpcode = _templatesForOpcodes.get(template.opcode());
         if (templatesForOpcode == null) {
-            templatesForOpcode = new ArrayListSequence<Template_Type>();
+            templatesForOpcode = new LinkedList<Template_Type>();
             _templatesForOpcodes.put(template.opcode(), templatesForOpcode);
         }
-        templatesForOpcode.append(template);
+        templatesForOpcode.addLast(template);
     }
 
-    public Sequence<Template_Type> templatesFor(int opcode) {
-        final Sequence<Template_Type> result = _templatesForOpcodes.get(opcode);
+    public List<Template_Type> templatesFor(int opcode) {
+        final LinkedList<Template_Type> result = _templatesForOpcodes.get(opcode);
         if (result == null) {
-            return _empty;
+            return StaticLoophole.cast(Collections.EMPTY_LIST);
         }
         return result;
     }
 
-    public Sequence<Template_Type> templates() {
-        return new ArrayListSequence<Template_Type>(_templates);
+    public List<Template_Type> templates() {
+        return new ArrayList<Template_Type>(_templates);
     }
 }

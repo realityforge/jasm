@@ -12,15 +12,14 @@ import jasm.gen.cisc.x86.X86InstructionDescriptionVisitor;
 import jasm.gen.risc.RiscInstructionDescriptionVisitor;
 import jasm.gen.risc.field.InputOperandField;
 import jasm.util.WordWidth;
-import jasm.util.collect.MutableSequence;
-import jasm.util.collect.Sequence;
+import jasm.util.collect.CollectionUtil;
 import jasm.util.program.ProgramError;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * A sequence of objects that describe group of closely related instructions. An
- * {@link #Template instruction template} is created for each instruction in the
- * group.
+ * instruction template is created for each instruction in the group.
  * <p>
  * The types of objects that an instruction description contains
  * depend on the whether the underlying platform is CISC or RISC.
@@ -39,9 +38,9 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
     /**
      * The components of the description.
      */
-    private final MutableSequence<Object> _specifications;
+    private final List<Object> _specifications;
 
-    public InstructionDescription(MutableSequence<Object> specifications) {
+    public InstructionDescription(List<Object> specifications) {
         _specifications = specifications;
         _serial = _nextSerial++;
     }
@@ -53,18 +52,18 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
     /**
      * @return the objects from which this description is composed
      */
-    public MutableSequence<Object> specifications() {
+    public List<Object> specifications() {
         return _specifications;
     }
 
-    private Sequence<InstructionConstraint> _constraints;
+    private List<InstructionConstraint> _constraints;
 
     /**
      * @return the {@link InstructionConstraint} instances (if any) within this description
      */
-    public Sequence<InstructionConstraint> constraints() {
+    public List<InstructionConstraint> constraints() {
         if (_constraints == null) {
-            _constraints = Sequence.Static.filter(_specifications, InstructionConstraint.class);
+            _constraints = CollectionUtil.filter(_specifications, InstructionConstraint.class);
         }
         return _constraints;
     }

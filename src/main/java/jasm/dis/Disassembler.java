@@ -17,10 +17,6 @@ import jasm.gen.OffsetParameter;
 import jasm.gen.Parameter;
 import jasm.gen.Template;
 import jasm.util.WordWidth;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.ArraySequence;
-import jasm.util.collect.MutableSequence;
-import jasm.util.collect.Sequence;
 import jasm.util.lang.Endianness;
 import jasm.util.lang.Strings;
 import jasm.util.program.ProgramError;
@@ -28,6 +24,8 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Disassemblers scan machine code, discern and decode individual instructions
@@ -64,7 +62,7 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
         return _endianness;
     }
 
-    protected abstract DisassembledInstruction_Type createDisassembledInstruction(int offset, byte[] bytes, Template_Type template, Sequence<Argument> arguments);
+    protected abstract DisassembledInstruction_Type createDisassembledInstruction(int offset, byte[] bytes, Template_Type template, List<Argument> arguments);
 
     protected abstract Assembler createAssembler(int offset);
 
@@ -73,7 +71,7 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
      * <p>
      * @return the disassembled forms that match the first encoded instruction in {@code stream}
      */
-    public abstract Sequence<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream) throws IOException, AssemblyException;
+    public abstract List<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream) throws IOException, AssemblyException;
 
     /**
      * Scans an instruction stream and disassembles the encoded instructions. If an encoded instruction has
@@ -83,11 +81,11 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
      * The {@link #scanOneInstruction} method can be used to obtain all the disassembled forms
      * for each instruction in an instruction stream.
      */
-    public abstract Sequence<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException;
+    public abstract List<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException;
 
-    private int findTargetInstructionIndex(int offset, Sequence<DisassembledInstruction_Type> disassembledInstructions) {
-        if (offset >= 0 && offset <= disassembledInstructions.last().startOffset()) {
-            for (int i = 0; i < disassembledInstructions.length(); i++) {
+    private int findTargetInstructionIndex(int offset, List<DisassembledInstruction_Type> disassembledInstructions) {
+        if (offset >= 0 && offset <= disassembledInstructions.get(disassembledInstructions.size() - 1).startOffset()) {
+            for (int i = 0; i < disassembledInstructions.size(); i++) {
                 if (disassembledInstructions.get(i).startOffset() == offset) {
                     return i;
                 }
@@ -100,8 +98,8 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
      * A label map is a sequence of labels that matches a sequence of disassembled instructions,
      * containing either a label or null at the index of each instruction.
      */
-    public Sequence<DisassembledLabel> createLabelMap(Sequence<DisassembledInstruction_Type> disassembledInstructions) {
-        final MutableSequence<DisassembledLabel> labels = new ArraySequence<DisassembledLabel>(disassembledInstructions.length());
+    public DisassembledLabel[] createLabelMap(List<DisassembledInstruction_Type> disassembledInstructions) {
+        final DisassembledLabel[] labels = new DisassembledLabel[disassembledInstructions.size()];
         for (DisassembledInstruction_Type disassembledInstruction : disassembledInstructions) {
             final Template_Type template = disassembledInstruction.template();
             final int parameterIndex = template.labelParameterIndex();
@@ -112,8 +110,8 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
                                 (int) immediateArgument.asLong() + disassembledInstruction.offsetForRelativeAddressing() :
                                 disassembledInstruction.addressToOffset(immediateArgument);
                 final int targetInstructionIndex = findTargetInstructionIndex(offset, disassembledInstructions);
-                if (targetInstructionIndex >= 0 && labels.get(targetInstructionIndex) == null) {
-                    labels.set(targetInstructionIndex, new DisassembledLabel(targetInstructionIndex));
+                if (targetInstructionIndex >= 0 && labels[targetInstructionIndex] == null) {
+                    labels[targetInstructionIndex] = new DisassembledLabel(targetInstructionIndex);
                 }
             }
         }
@@ -123,7 +121,7 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
     /**
      * Assigns serial numbers to these labels and calculates the maximum number of chars needed to print any one of these labels.
      */
-    public int updateLabels(Sequence<DisassembledLabel> labels, Sequence<DisassembledInstruction_Type> disassembledInstructions) {
+    public int updateLabels(List<DisassembledLabel> labels, List<DisassembledInstruction_Type> disassembledInstructions) {
         int result = 0;
         int serial = 1;
         for (DisassembledLabel label : labels) {
@@ -160,15 +158,15 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
         _isHeadingEnabled = false;
     }
 
-    public void print(OutputStream outputStream, Sequence<DisassembledInstruction_Type> disassembledInstructions, GlobalLabelMapper globalLabelMapper) throws IOException {
+    public void print(OutputStream outputStream, List<DisassembledInstruction_Type> disassembledInstructions, GlobalLabelMapper globalLabelMapper) throws IOException {
         final PrintStream stream = new PrintStream(outputStream);
-        final int nOffsetChars = Integer.toString(disassembledInstructions.last().startOffset()).length();
-        final Sequence<DisassembledLabel> labelMap = createLabelMap(disassembledInstructions);
+        final int nOffsetChars = Integer.toString(disassembledInstructions.get(disassembledInstructions.size() - 1).startOffset()).length();
+        final DisassembledLabel[] labelMap = createLabelMap(disassembledInstructions);
 
-        final ArrayListSequence<DisassembledLabel> labels = new ArrayListSequence<DisassembledLabel>();
+        final ArrayList<DisassembledLabel> labels = new ArrayList<DisassembledLabel>();
         for (DisassembledLabel element : labelMap) {
           if (element != null) {
-            labels.append(element);
+            labels.add(element);
           }
         }
 
@@ -176,14 +174,14 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
         if (_isHeadingEnabled) {
             printHeading(stream, nOffsetChars, nLabelChars);
         }
-        for (int i = 0; i < disassembledInstructions.length(); i++) {
+        for (int i = 0; i < disassembledInstructions.size(); i++) {
             final DisassembledInstruction_Type disassembledInstruction = disassembledInstructions.get(i);
             stream.print(disassembledInstruction.addressString());
             stream.print(SPACE);
             stream.printf("%0" + nOffsetChars + "d", disassembledInstruction.startOffset());
             stream.print(SPACE);
-            if (labelMap.get(i) != null) {
-                stream.print(Strings.padLengthWithSpaces(labelMap.get(i).name(), nLabelChars) + ":");
+            if (labelMap[i] != null) {
+                stream.print(Strings.padLengthWithSpaces(labelMap[i].name(), nLabelChars) + ":");
             } else {
                 stream.print(Strings.spaces(nLabelChars) + " ");
             }
@@ -195,12 +193,12 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
         }
     }
 
-    public void print(OutputStream outputStream, Sequence<DisassembledInstruction_Type> disassembledInstructions) throws IOException {
+    public void print(OutputStream outputStream, List<DisassembledInstruction_Type> disassembledInstructions) throws IOException {
         print(outputStream, disassembledInstructions, null);
     }
 
     public void scanAndPrint(BufferedInputStream bufferedInputStream, OutputStream outputStream, GlobalLabelMapper globalLabelMapper) throws IOException, AssemblyException {
-        final Sequence<DisassembledInstruction_Type> disassembledInstructions = scan(bufferedInputStream);
+        final List<DisassembledInstruction_Type> disassembledInstructions = scan(bufferedInputStream);
         print(outputStream, disassembledInstructions, globalLabelMapper);
     }
 

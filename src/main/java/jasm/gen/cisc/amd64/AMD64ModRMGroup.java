@@ -45,7 +45,8 @@ import static jasm.gen.cisc.x86.OperandCode.Rv;
 import static jasm.gen.cisc.x86.OperandCode.VRdq;
 import static jasm.gen.cisc.x86.OperandTypeCode.v;
 import jasm.gen.cisc.x86.X86TemplateContext;
-import jasm.util.collect.ArrayListSequence;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * See A-7 in the book.
@@ -283,7 +284,7 @@ public enum AMD64ModRMGroup implements ModRMGroup {
     );
 
     private static ModRMDescription modRM(ModRMGroup.Opcode opcode, String name, Object... specifications) {
-        return new ModRMDescription(opcode, name, new ArrayListSequence<Object>(specifications));
+        return new ModRMDescription(opcode, name, Arrays.asList(specifications));
     }
 
     private final ModRMDescription[] _instructionDescriptions;

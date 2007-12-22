@@ -18,7 +18,6 @@ import jasm.gen.test.AssemblyTester;
 import jasm.util.HexByte;
 import jasm.util.MutableQueue;
 import jasm.util.WordWidth;
-import jasm.util.collect.Sequence;
 import jasm.util.io.IndentWriter;
 import jasm.util.lang.StaticLoophole;
 import jasm.x86.IndirectRegister;
@@ -26,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -118,7 +118,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
      * we want to keep the code in this file here stable.
      */
     @Override
-    protected void assembleExternally(IndentWriter stream, Template_Type template, Sequence<Argument> argumentList, String label) {
+    protected void assembleExternally(IndentWriter stream, Template_Type template, List<Argument> argumentList, String label) {
         final WordWidth externalCodeSizeAttribute = template.externalCodeSizeAttribute();
         if (externalCodeSizeAttribute != null) {
             stream.println(".code" + externalCodeSizeAttribute.numberOfBits());

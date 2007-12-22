@@ -8,9 +8,8 @@
  */
 package jasm.util.lang;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -19,13 +18,9 @@ import java.util.Vector;
  *
  * @author Bernd Mathiske
  */
-public final class Arrays {
+public final class ArrayUtil {
 
-    private Arrays() {
-
-    }
-
-    public static <Element_Type> Element_Type[] create(Class<Element_Type> elementType, int length) {
+    public static <Element_Type> Element_Type[] create(Class<?> elementType, int length) {
         final Object array = Array.newInstance(elementType, length);
         return StaticLoophole.cast(array);
     }
@@ -86,14 +81,14 @@ public final class Arrays {
     }
 
     public static Object[] flatten(Object[] array) {
-        final AppendableSequence<Object> sequence = new ArrayListSequence<Object>();
+        final ArrayList<Object> sequence = new ArrayList<Object>();
         for (Object outer : array) {
             if (outer instanceof Object[]) {
                 for (Object inner : flatten((Object[]) outer)) {
-                    sequence.append(inner);
+                    sequence.add(inner);
                 }
             } else {
-                sequence.append(outer);
+                sequence.add(outer);
             }
         }
       final List<Object> vector = new Vector<Object>();

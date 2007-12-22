@@ -8,7 +8,7 @@
  */
 package test.jasm.util.collect;
 
-import jasm.util.lang.Arrays;
+import jasm.util.lang.ArrayUtil;
 import junit.framework.TestCase;
 
 /**
@@ -32,18 +32,18 @@ public class ArraysTest extends TestCase {
     final Integer[] array = makeIntegerArray(nElements);
 
     try {
-      Arrays.subArray(array, -1);
+      ArrayUtil.subArray(array, -1);
       fail();
     } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
       // OK
     }
 
-    Integer[] result = Arrays.subArray(array, 0);
+    Integer[] result = ArrayUtil.subArray(array, 0);
     assertTrue(equals(array, original));
     assertTrue(equals(result, array));
 
     for (int n = 1; n < array.length; n++) {
-      result = Arrays.subArray(array, n);
+      result = ArrayUtil.subArray(array, n);
       assertTrue(result.length == array.length - n);
       for (int i = n; i < array.length; i++) {
         if (array[i] == null) {
@@ -54,11 +54,11 @@ public class ArraysTest extends TestCase {
       }
     }
 
-    result = Arrays.subArray(array, array.length);
+    result = ArrayUtil.subArray(array, array.length);
     assertTrue(result.length == 0);
 
     try {
-      Arrays.subArray(array, array.length + 1);
+      ArrayUtil.subArray(array, array.length + 1);
       fail();
     } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
       //expected

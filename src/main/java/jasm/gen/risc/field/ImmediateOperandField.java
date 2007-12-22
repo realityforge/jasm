@@ -9,6 +9,7 @@
 package jasm.gen.risc.field;
 
 import jasm.Argument;
+import jasm.util.collect.CollectionUtil;
 import jasm.gen.ArgumentRange;
 import jasm.gen.Expression;
 import jasm.gen.Immediate32Argument;
@@ -19,16 +20,14 @@ import jasm.gen.Parameter;
 import jasm.gen.Template;
 import jasm.gen.TestArgumentExclusion;
 import jasm.gen.WrappableSpecification;
+import jasm.gen.cisc.x86.X86Operand;
 import jasm.gen.risc.bitRange.AscendingBitRange;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
 import jasm.gen.risc.bitRange.DescendingBitRange;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.ArraySequence;
-import jasm.util.collect.MutableSequence;
-import jasm.util.collect.Sequence;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A field that contains an immediate value.
@@ -45,7 +44,7 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
         return minArgumentValue() + " <= " + value + " && " + value + " <= " + maxArgumentValue();
     }
 
-    public boolean check(Template template, Sequence<Argument> arguments) {
+    public boolean check(Template template, List<Argument> arguments) {
         final long value = evaluate(template, arguments);
         return minArgumentValue() <= value && value <= maxArgumentValue();
     }
@@ -121,11 +120,11 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
 
     public Iterable<? extends Argument> getLegalTestArguments() {
       if (_testArguments == null) {
-        final Sequence<Integer> integers =
+        final List<Integer> integers =
             signDependentOperations().legalTestArgumentValues(minArgumentValue(), maxArgumentValue(), grain());
-        final MutableSequence<Immediate32Argument> to = new ArraySequence<Immediate32Argument>(integers.length());
-        for (int i = 0; i < integers.length(); i++) {
-          to.set(i, new Immediate32Argument(integers.get(i)));
+        final ArrayList<Immediate32Argument> to = new ArrayList<Immediate32Argument>(integers.size());
+        for (Integer integer : integers) {
+          to.add(new Immediate32Argument(integer));
         }
         _testArguments = to;
       }
@@ -134,16 +133,16 @@ public class ImmediateOperandField extends OperandField<ImmediateArgument> imple
 
     public Iterable<? extends Argument> getIllegalTestArguments() {
         if (_illegalTestArguments == null) {
-            final AppendableSequence<Immediate32Argument> illegalTestArguments = new ArrayListSequence<Immediate32Argument>(4);
+            final ArrayList<Immediate32Argument> illegalTestArguments = new ArrayList<Immediate32Argument>(4);
             final int min = minArgumentValue();
             if (min != Integer.MIN_VALUE) {
-                illegalTestArguments.append(new Immediate32Argument(min - 1));
-                illegalTestArguments.append(new Immediate32Argument(Integer.MIN_VALUE));
+                illegalTestArguments.add(new Immediate32Argument(min - 1));
+                illegalTestArguments.add(new Immediate32Argument(Integer.MIN_VALUE));
             }
             final int max = maxArgumentValue();
             if (max != Integer.MAX_VALUE) {
-                illegalTestArguments.append(new Immediate32Argument(max + 1));
-                illegalTestArguments.append(new Immediate32Argument(Integer.MAX_VALUE));
+                illegalTestArguments.add(new Immediate32Argument(max + 1));
+                illegalTestArguments.add(new Immediate32Argument(Integer.MAX_VALUE));
             }
             _illegalTestArguments = illegalTestArguments;
         }

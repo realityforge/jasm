@@ -17,10 +17,10 @@ import jasm.gen.Template;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.util.Sets;
-import jasm.util.collect.Sequence;
 import jasm.util.lang.StaticLoophole;
 import java.util.Collections;
 import java.util.Set;
+import java.util.List;
 
 /**
  * An operand field defines an instruction field whose value is given as a parameter in the generated
@@ -161,7 +161,7 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
         return type().getName().compareTo(other.type().getName());
     }
 
-    public long evaluate(Template template, Sequence<Argument> arguments) {
+    public long evaluate(Template template, List<Argument> arguments) {
         if (boundTo() != null) {
             return boundTo().evaluate(template, arguments);
         }

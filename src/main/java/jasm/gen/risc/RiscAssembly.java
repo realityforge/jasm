@@ -12,11 +12,10 @@ import jasm.InstructionSet;
 import jasm.dis.risc.OpcodeMaskGroup;
 import jasm.dis.risc.SpecificityGroup;
 import jasm.gen.Assembly;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
 import jasm.util.collect.IntHashMap;
-import jasm.util.collect.Sequence;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -29,7 +28,7 @@ public abstract class RiscAssembly<Template_Type extends RiscTemplate> extends A
         super(instructionSet, templateType);
     }
 
-    private AppendableSequence<SpecificityGroup<Template_Type>> _specificityGroups;
+    private ArrayList<SpecificityGroup<Template_Type>> _specificityGroups;
 
     private void initialize() {
         final IntHashMap<IntHashMap<OpcodeMaskGroup<Template_Type>>> specificityTable = new IntHashMap<IntHashMap<OpcodeMaskGroup<Template_Type>>>();
@@ -49,13 +48,13 @@ public abstract class RiscAssembly<Template_Type extends RiscTemplate> extends A
                 opcodeMaskGroup.add(template);
             }
         }
-        _specificityGroups = new ArrayListSequence<SpecificityGroup<Template_Type>>();
+        _specificityGroups = new ArrayList<SpecificityGroup<Template_Type>>();
         for (int specificity = 33; specificity >= 0; specificity--) {
             final IntHashMap<OpcodeMaskGroup<Template_Type>> opcodeGroupTable = specificityTable.get(specificity);
             if (opcodeGroupTable != null) {
-                final Sequence<OpcodeMaskGroup<Template_Type>> opcodeMaskGroups = opcodeGroupTable.toSequence();
+                final List<OpcodeMaskGroup<Template_Type>> opcodeMaskGroups = opcodeGroupTable.toList();
                 final SpecificityGroup<Template_Type> specificityGroup = new SpecificityGroup<Template_Type>(specificity, opcodeMaskGroups);
-                _specificityGroups.append(specificityGroup);
+                _specificityGroups.add(specificityGroup);
             }
         }
     }
@@ -72,7 +71,7 @@ public abstract class RiscAssembly<Template_Type extends RiscTemplate> extends A
         }
     }
 
-    public Sequence<SpecificityGroup<Template_Type>> specificityGroups() {
+    public List<SpecificityGroup<Template_Type>> specificityGroups() {
         if (_specificityGroups == null) {
             initialize();
         }

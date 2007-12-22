@@ -12,7 +12,7 @@ import jasm.Argument;
 import jasm.AssemblyInstruction;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.Template;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  * A assembly instruction in internal format, combined with the bytes that it was disassembled from.
@@ -27,9 +27,9 @@ public abstract class DisassembledInstruction<Template_Type extends Template> im
     private final int _startOffset;
     private final byte[] _bytes;
     private final Template_Type _template;
-    private final Sequence<Argument> _arguments;
+    private final List<Argument> _arguments;
 
-    protected DisassembledInstruction(int offset, byte[] bytes, Template_Type template, Sequence<Argument> arguments) {
+    protected DisassembledInstruction(int offset, byte[] bytes, Template_Type template, List<Argument> arguments) {
         _startOffset = offset;
         _bytes = bytes;
         _template = template;
@@ -52,7 +52,7 @@ public abstract class DisassembledInstruction<Template_Type extends Template> im
         return _template;
     }
 
-    public Sequence<Argument> arguments() {
+    public List<Argument> arguments() {
         return _arguments;
     }
 
@@ -67,7 +67,7 @@ public abstract class DisassembledInstruction<Template_Type extends Template> im
         return result;
     }
 
-    protected DisassembledLabel instructionOffsetToLabel(int instructionOffset, Sequence<DisassembledLabel> labels) {
+    protected DisassembledLabel instructionOffsetToLabel(int instructionOffset, List<DisassembledLabel> labels) {
         for (DisassembledLabel label : labels) {
             if (label.offset() == instructionOffset) {
                 return label;
@@ -76,13 +76,13 @@ public abstract class DisassembledInstruction<Template_Type extends Template> im
         return null;
     }
 
-    protected DisassembledLabel offsetArgumentToLabel(ImmediateArgument argument, Sequence<DisassembledLabel> labels) {
+    protected DisassembledLabel offsetArgumentToLabel(ImmediateArgument argument, List<DisassembledLabel> labels) {
         final int argumentOffset = (int) argument.asLong();
         final int targetOffset = argumentOffset + offsetForRelativeAddressing();
         return instructionOffsetToLabel(targetOffset, labels);
     }
 
-    protected DisassembledLabel addressArgumentToLabel(ImmediateArgument argument, Sequence<DisassembledLabel> labels) {
+    protected DisassembledLabel addressArgumentToLabel(ImmediateArgument argument, List<DisassembledLabel> labels) {
         final long targetOffset = addressToOffset(argument);
         if (targetOffset < 0) {
             return null;
@@ -90,17 +90,17 @@ public abstract class DisassembledInstruction<Template_Type extends Template> im
         return instructionOffsetToLabel((int) targetOffset, labels);
     }
 
-    public abstract String toString(Sequence<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper);
+    public abstract String toString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper);
 
-    public String toString(Sequence<DisassembledLabel> labels) {
+    public String toString(List<DisassembledLabel> labels) {
         return toString(labels, null);
     }
 
     public abstract String externalName();
 
-    public abstract String operandsToString(Sequence<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper);
+    public abstract String operandsToString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper);
 
-    public String operandsToString(Sequence<DisassembledLabel> labels) {
+    public String operandsToString(List<DisassembledLabel> labels) {
         return operandsToString(labels, null);
     }
 

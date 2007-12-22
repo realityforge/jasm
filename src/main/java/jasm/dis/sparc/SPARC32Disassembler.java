@@ -14,7 +14,7 @@ import jasm.gen.risc.sparc.SPARCAssembly;
 import jasm.gen.risc.sparc.SPARCTemplate;
 import jasm.sparc.SPARC32Assembler;
 import jasm.util.WordWidth;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  *
@@ -31,7 +31,7 @@ public class SPARC32Disassembler extends SPARCDisassembler<SPARC32DisassembledIn
     }
 
     @Override
-    protected SPARC32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, SPARCTemplate template, Sequence<Argument> arguments) {
+    protected SPARC32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, SPARCTemplate template, List<Argument> arguments) {
         return new SPARC32DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
     }
 

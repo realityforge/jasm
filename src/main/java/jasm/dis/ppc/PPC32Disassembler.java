@@ -14,7 +14,7 @@ import jasm.gen.risc.ppc.PPCAssembly;
 import jasm.gen.risc.ppc.PPCTemplate;
 import jasm.ppc.PPC32Assembler;
 import jasm.util.WordWidth;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  *
@@ -31,7 +31,7 @@ public class PPC32Disassembler extends PPCDisassembler<PPC32DisassembledInstruct
     }
 
     @Override
-    protected PPC32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, PPCTemplate template, Sequence<Argument> arguments) {
+    protected PPC32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {
         return new PPC32DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
     }
 

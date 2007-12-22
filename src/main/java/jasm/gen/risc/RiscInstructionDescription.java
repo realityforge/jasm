@@ -11,8 +11,8 @@ package jasm.gen.risc;
 import jasm.gen.InstructionDescription;
 import jasm.gen.risc.field.InputOperandField;
 import jasm.gen.risc.field.RiscField;
-import jasm.util.collect.MutableSequence;
 import jasm.util.program.ProgramError;
+import java.util.List;
 
 /**
  *
@@ -21,7 +21,7 @@ import jasm.util.program.ProgramError;
  */
 public final class RiscInstructionDescription extends InstructionDescription {
 
-    RiscInstructionDescription(MutableSequence<Object> specifications) {
+    RiscInstructionDescription(List<Object> specifications) {
         super(specifications);
 
         int bits = 0;

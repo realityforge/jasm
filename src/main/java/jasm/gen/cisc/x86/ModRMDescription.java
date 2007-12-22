@@ -9,7 +9,7 @@
 package jasm.gen.cisc.x86;
 
 import jasm.gen.InstructionDescription;
-import jasm.util.collect.MutableSequence;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -19,7 +19,7 @@ public final class ModRMDescription extends InstructionDescription {
     private final ModRMGroup.Opcode _opcode;
     private final String _name;
 
-    public ModRMDescription(ModRMGroup.Opcode opcode, String name, MutableSequence<Object> specifications) {
+    public ModRMDescription(ModRMGroup.Opcode opcode, String name, List<Object> specifications) {
         super(specifications);
         _opcode = opcode;
         _name = name;

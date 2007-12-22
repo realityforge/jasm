@@ -11,7 +11,7 @@ package jasm.gen.risc.sparc;
 import jasm.InstructionSet;
 import jasm.gen.risc.RiscAssembly;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -41,7 +41,7 @@ public final class SPARCAssembly extends RiscAssembly<SPARCTemplate> {
     }
 
     @Override
-    protected Sequence<SPARCTemplate> createTemplates() {
+    protected List<SPARCTemplate> createTemplates() {
         final SPARCTemplateCreator creator = new SPARCTemplateCreator();
         creator.createTemplates(new MemoryAccess(creator));
         creator.createTemplates(new MemorySynchronization(creator));

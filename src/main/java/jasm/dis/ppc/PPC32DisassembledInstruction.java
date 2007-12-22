@@ -12,18 +12,16 @@ import jasm.Argument;
 import jasm.dis.Address32Instruction;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.risc.ppc.PPCTemplate;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
- *
- *
  * @author Bernd Mathiske
  */
 public class PPC32DisassembledInstruction extends PPCDisassembledInstruction implements Address32Instruction {
 
     private final Address32Instruction.Mixin _addressInstruction;
 
-    PPC32DisassembledInstruction(int startAddress, int offset, byte[] bytes, PPCTemplate template, Sequence<Argument> arguments) {
+    PPC32DisassembledInstruction(int startAddress, int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {
         super(offset, bytes, template, arguments);
         _addressInstruction = new Address32Instruction.Mixin(this, startAddress);
     }

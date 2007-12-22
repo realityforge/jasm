@@ -40,7 +40,6 @@ import jasm.gen.cisc.x86.X86Operand;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.util.WordWidth;
-import jasm.util.collect.Sequence;
 import jasm.util.program.ProgramError;
 import jasm.x86.ControlRegister;
 import jasm.x86.DebugRegister;
@@ -48,6 +47,7 @@ import jasm.x86.GeneralRegister;
 import jasm.x86.MMXRegister;
 import jasm.x86.Scale;
 import jasm.x86.SegmentRegister;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -614,7 +614,7 @@ public class AMD64Template extends X86Template {
         }
     }
 
-    public boolean hasRexPrefix(Sequence<Argument> arguments) {
+    public boolean hasRexPrefix(List<Argument> arguments) {
         if (instructionDescription().defaultOperandSize() == WordWidth.BITS_64) {
             return false;
         }

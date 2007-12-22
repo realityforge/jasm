@@ -12,9 +12,8 @@ import jasm.gen.InstructionDescription;
 import jasm.gen.InstructionDescriptionCreator;
 import jasm.gen.Trace;
 import jasm.util.WordWidth;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.Sequence;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -22,7 +21,7 @@ import jasm.util.collect.Sequence;
 public abstract class X86TemplateCreator<Template_Type extends X86Template> {
 
     private final WordWidth _addressWidth;
-    private final AppendableSequence<Template_Type> _templates = new ArrayListSequence<Template_Type>();
+    private final ArrayList<Template_Type> _templates = new ArrayList<Template_Type>();
     private X86InstructionDescription _instructionDescription;
     private InstructionAssessment _instructionAssessment;
     private X86TemplateContext _context;
@@ -32,7 +31,7 @@ public abstract class X86TemplateCreator<Template_Type extends X86Template> {
         _addressWidth = addressWidth;
     }
 
-    public Sequence<Template_Type> templates() {
+    public List<Template_Type> templates() {
         return _templates;
     }
 
@@ -57,7 +56,7 @@ public abstract class X86TemplateCreator<Template_Type extends X86Template> {
             if (!isRedundant(template)) {
                 Trace.line(3, "template: " + template);
                 Trace.line(3);
-                _templates.append(template);
+                _templates.add(template);
                 _serial++;
             }
         }

@@ -14,15 +14,14 @@ import jasm.gen.risc.Option;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
 import jasm.util.program.ProgramError;
+import java.util.ArrayList;
 
 /**
  * An OptionField is a field whose value is specified as an optional part of the assembler
  * mnemonic or assembler method name. The field has a default value if it is not specified.
- * An example of an optional field is the {@link jasm.gen.risc.sparc.SPARCFields#_p_option
- * predict bit} for the SPARC Branch on Equal with Prediction instruction:
+ * An example of an optional field is the {@link jasm.gen.risc.sparc.SPARCFields#_p predict bit}
+ * for the SPARC Branch on Equal with Prediction instruction:
  *
  *     bge        // predict that branch will be taken (default)
  *     bge,pt     // predict that branch will be taken
@@ -56,7 +55,7 @@ public class OptionField extends RiscField {
         return _defaultOption;
     }
 
-    protected AppendableSequence<Option> _options = new ArrayListSequence<Option>();
+    protected ArrayList<Option> _options = new ArrayList<Option>();
 
     public Iterable<Option> options() {
         return _options;
@@ -65,7 +64,7 @@ public class OptionField extends RiscField {
     @Override
     public OptionField clone() {
         final OptionField result = (OptionField) super.clone();
-        result._options = (AppendableSequence<Option>) _options.clone();
+        result._options = (ArrayList<Option>) _options.clone();
         return result;
     }
 
@@ -85,7 +84,7 @@ public class OptionField extends RiscField {
                 throw new ProgramError("duplicate option: " + option);
             }
         }
-        result._options.append(newOption);
+        result._options.add(newOption);
 
         if (name.equals("")) {
             result._defaultOption = newOption;

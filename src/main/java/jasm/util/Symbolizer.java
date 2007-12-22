@@ -8,12 +8,11 @@
  */
 package jasm.util;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.ArraySequence;
-import jasm.util.collect.Sequence;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A symbolizer is used to group a set of {@link Symbol symbols}. The members of the
@@ -58,24 +57,24 @@ public interface Symbolizer<Symbol_Type extends Symbol> extends Iterable<Symbol_
         }
 
         public static <Symbol_Type extends Symbol> Symbolizer<Symbol_Type> from(Class<Symbol_Type> symbolType, Symbol_Type... symbols) {
-            return new SequenceSymbolizer<Symbol_Type>(symbolType, new ArraySequence<Symbol_Type>(symbols));
+            return new SequenceSymbolizer<Symbol_Type>(symbolType, Arrays.asList(symbols));
         }
 
         public static <Symbol_Type extends Symbol> Symbolizer<Symbol_Type> fromSequence(Class<Symbol_Type> symbolType, Iterable< ? extends Symbol_Type> symbols,
                         final Symbol_Type... additionalSymbols) {
-            final AppendableSequence<Symbol_Type> sequence = new ArrayListSequence<Symbol_Type>(additionalSymbols);
+            final List<Symbol_Type> sequence = new ArrayList<Symbol_Type>(Arrays.asList(additionalSymbols));
             for (Symbol_Type symbol : symbols) {
-                sequence.append(symbol);
+                sequence.add(symbol);
             }
             return new SequenceSymbolizer<Symbol_Type>(symbolType, sequence);
         }
 
       public static <Symbol_Type extends Symbol> Symbolizer<Symbol_Type> initialize(Class staticNameFieldClass, Class<Symbol_Type> symbolType) {
-            final AppendableSequence<Symbol_Type> sequence = new ArrayListSequence<Symbol_Type>();
-        final Sequence<StaticFieldName> staticFieldNames = StaticFieldName.Static.initialize(staticNameFieldClass, null);
+            final ArrayList<Symbol_Type> sequence = new ArrayList<Symbol_Type>();
+        final List<StaticFieldName> staticFieldNames = StaticFieldName.Static.initialize(staticNameFieldClass, null);
             for (StaticFieldName staticFieldName : staticFieldNames) {
                 if (symbolType.isInstance(staticFieldName)) {
-                    sequence.append(symbolType.cast(staticFieldName));
+                    sequence.add(symbolType.cast(staticFieldName));
                 }
             }
             return new SequenceSymbolizer<Symbol_Type>(symbolType, sequence);

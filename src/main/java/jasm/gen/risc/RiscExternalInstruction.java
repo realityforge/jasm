@@ -18,8 +18,9 @@ import jasm.gen.risc.field.BranchDisplacementOperandField;
 import jasm.gen.risc.field.OperandField;
 import jasm.gen.risc.field.RiscField;
 import jasm.util.MutableQueue;
-import jasm.util.collect.Sequence;
 import jasm.util.lang.Strings;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Output of RISC instructions in external assembler format
@@ -48,18 +49,18 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
     protected final RiscTemplate _template;
     protected final MutableQueue<Argument> _arguments;
     protected final int _offset;
-    protected final Sequence<DisassembledLabel> _labels;
+    protected final List<DisassembledLabel> _labels;
     protected final GlobalLabelMapper _globalLabelMapper;
 
-    public RiscExternalInstruction(RiscTemplate template, Sequence<Argument> arguments) {
+    public RiscExternalInstruction(RiscTemplate template, List<Argument> arguments) {
         _template = template;
         _arguments = MutableQueue.create(arguments);
         _offset = -1;
-        _labels = Sequence.Static.empty();
+        _labels = Collections.emptyList();
         _globalLabelMapper = null;
     }
 
-    public RiscExternalInstruction(RiscTemplate template, Sequence<Argument> arguments, int offset, Sequence<DisassembledLabel> labels) {
+    public RiscExternalInstruction(RiscTemplate template, List<Argument> arguments, int offset, List<DisassembledLabel> labels) {
         _template = template;
         _arguments = MutableQueue.create(arguments);
         _offset = offset;
@@ -67,7 +68,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
         _globalLabelMapper = null;
     }
 
-    public RiscExternalInstruction(RiscTemplate template, Sequence<Argument> arguments, int offset, Sequence<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
+    public RiscExternalInstruction(RiscTemplate template, List<Argument> arguments, int offset, List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
         _template = template;
         _arguments = MutableQueue.create(arguments);
         _offset = offset;

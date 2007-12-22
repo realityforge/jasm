@@ -13,7 +13,6 @@ import jasm.dis.DisassembledInstruction;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.risc.RiscAssemblyTester;
 import jasm.util.WordWidth;
-import jasm.util.collect.Sequence;
 import jasm.util.io.IndentWriter;
 import jasm.util.lang.Endianness;
 import jasm.util.program.ProgramError;
@@ -21,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;
 import java.util.EnumSet;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -45,7 +45,7 @@ public abstract class SPARCAssemblyTester<DisassembledInstruction_Type extends D
     private SPARCTemplate _lastTemplate;
 
     @Override
-    protected void assembleExternally(IndentWriter writer, SPARCTemplate template, Sequence<Argument> argumentList, String label) {
+    protected void assembleExternally(IndentWriter writer, SPARCTemplate template, List<Argument> argumentList, String label) {
 
         // This is a workaround for SPARC V9 ABI compliance checks: http://developers.sun.com/solaris/articles/sparcv9abi.html
         if (_lastTemplate == null || template != _lastTemplate) {

@@ -14,14 +14,14 @@ import jasm.dis.GlobalLabelMapper;
 import jasm.dis.risc.RiscDisassembledInstruction;
 import jasm.gen.risc.ppc.PPCExternalInstruction;
 import jasm.gen.risc.ppc.PPCTemplate;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
  */
 public abstract class PPCDisassembledInstruction extends RiscDisassembledInstruction<PPCTemplate> {
 
-    PPCDisassembledInstruction(int offset, byte[] bytes, PPCTemplate template, Sequence<Argument> arguments) {
+    PPCDisassembledInstruction(int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {
         super(offset, bytes, template, arguments);
     }
 
@@ -32,13 +32,13 @@ public abstract class PPCDisassembledInstruction extends RiscDisassembledInstruc
     }
 
     @Override
-    public String operandsToString(Sequence<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
+    public String operandsToString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
         final PPCExternalInstruction instruction = new PPCExternalInstruction(template(), arguments(), startOffset(), labels, globalLabelMapper);
         return instruction.operands();
     }
 
     @Override
-    public String toString(Sequence<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
+    public String toString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
         final PPCExternalInstruction instruction = new PPCExternalInstruction(template(), arguments(), startOffset(), labels, globalLabelMapper);
         return instruction.toString();
     }

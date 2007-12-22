@@ -52,7 +52,8 @@ import static jasm.ia32.IA32GeneralRegister32.EDX;
 import static jasm.ia32.IA32GeneralRegister32.ESI;
 import static jasm.ia32.IA32GeneralRegister32.ESP;
 import static jasm.ia32.IA32GeneralRegister8.AL;
-import jasm.util.collect.ArrayListSequence;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * See A-7 in the book.
@@ -247,7 +248,7 @@ public enum IA32ModRMGroup implements ModRMGroup {
     );
 
     private static ModRMDescription modRM(ModRMGroup.Opcode opcode, String name, Object... specifications) {
-        return new ModRMDescription(opcode, name, new ArrayListSequence<Object>(specifications));
+        return new ModRMDescription(opcode, name, Arrays.asList(specifications));
     }
 
     private final ModRMDescription[] _instructionDescriptions;

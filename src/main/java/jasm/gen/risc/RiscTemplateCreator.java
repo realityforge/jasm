@@ -10,13 +10,13 @@ package jasm.gen.risc;
 
 import jasm.gen.InstructionDescription;
 import jasm.gen.risc.field.OptionField;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.Sequence;
 import jasm.util.collect.SequenceMultiMap;
 import jasm.util.lang.StaticLoophole;
 import jasm.util.program.ProgramError;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -28,17 +28,17 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
     protected RiscTemplateCreator() {
     }
 
-    private AppendableSequence<Template_Type> _templates = new ArrayListSequence<Template_Type>();
+    private ArrayList<Template_Type> _templates = new ArrayList<Template_Type>();
 
-    public Sequence<Template_Type> templates() {
+    public List<Template_Type> templates() {
         return _templates;
     }
 
     protected abstract Template_Type createTemplate(InstructionDescription instructionDescription);
 
-    public Sequence<Template_Type> createOptionTemplates(Sequence<Template_Type> templates, OptionField optionField) {
+    public List<Template_Type> createOptionTemplates(List<Template_Type> templates, OptionField optionField) {
         final Class<Template_Type> templateType = null;
-        final AppendableSequence<Template_Type> newTemplates = new ArrayListSequence<Template_Type>();
+        final ArrayList<Template_Type> newTemplates = new ArrayList<Template_Type>();
         for (Template_Type template : templates) {
             Template_Type canonicalRepresentative = null;
             if (optionField.defaultOption() != null) {
@@ -47,11 +47,11 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
             }
             for (Option option : optionField.options()) {
                 if (option.equals(optionField.defaultOption())) {
-                    newTemplates.append(canonicalRepresentative);
+                    newTemplates.add(canonicalRepresentative);
                 } else {
                     final Template_Type templateWithOption = StaticLoophole.cast(templateType, template.clone());
                     templateWithOption.organizeOption(option, canonicalRepresentative);
-                    newTemplates.append(templateWithOption);
+                    newTemplates.add(templateWithOption);
                 }
             }
         }
@@ -61,26 +61,26 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
     private int _serial;
     private final SequenceMultiMap<String, Template_Type> _nameToTemplates = new SequenceMultiMap<String, Template_Type>();
 
-    public Sequence<Template_Type> nameToTemplates(String name) {
+    public List<Template_Type> nameToTemplates(String name) {
         return _nameToTemplates.get(name);
     }
 
     public void createTemplates(RiscInstructionDescriptionCreator instructionDescriptionCreator) {
-        final AppendableSequence<Template_Type> initialTemplates = new ArrayListSequence<Template_Type>();
+        final ArrayList<Template_Type> initialTemplates = new ArrayList<Template_Type>();
         for (InstructionDescription instructionDescription : instructionDescriptionCreator.instructionDescriptions()) {
             final Template_Type template = createTemplate(instructionDescription);
-            initialTemplates.append(template);
+            initialTemplates.add(template);
             RiscInstructionDescriptionVisitor.Static.visitInstructionDescription(template, instructionDescription);
         }
         for (Template_Type initialTemplate : initialTemplates) {
-            Sequence<Template_Type> newTemplates = new ArrayListSequence<Template_Type>(initialTemplate);
+            List<Template_Type> newTemplates = Arrays.asList(initialTemplate);
             for (OptionField optionField : initialTemplate.optionFields()) {
                 newTemplates = createOptionTemplates(newTemplates, optionField);
             }
             for (Template_Type template : newTemplates) {
                 _serial++;
                 template.setSerial(_serial);
-                _templates.append(template);
+                _templates.add(template);
                 _nameToTemplates.add(template.internalName(), template);
 
                 // Create the link to the non-synthetic instruction from which a synthetic instruction is derived.

@@ -12,12 +12,13 @@ import jasm.Argument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.Parameter;
 import jasm.gen.Template;
-import jasm.util.collect.ArraySequence;
 import jasm.util.collect.FilterIterator;
-import jasm.util.collect.Sequence;
+import jasm.util.collect.CollectionUtil;
 import jasm.util.lang.StaticLoophole;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.List;
+import java.util.Arrays;
 
 /**
  * This is an iterator over a (lazily generated) selection of test cases for a given template.
@@ -31,14 +32,14 @@ import java.util.NoSuchElementException;
  *
  * @author Doug Simon
  */
-class ArgumentListIterator<Template_Type extends Template> implements Iterator<Sequence<Argument>> {
+class ArgumentListIterator<Template_Type extends Template> implements Iterator<List<Argument>> {
 
   private final Template_Type _template;
   private final Parameter[] _parameters;
   private final Iterator<? extends Argument>[] _testArgumentIterators;
   private final int _count;
   private final Argument[] _arguments;
-  private final Sequence<Argument> _next;
+  private final List<Argument> _next;
   private final TestCaseLegality _testCaseLegality;
 
   private boolean _hasNext;
@@ -54,10 +55,10 @@ class ArgumentListIterator<Template_Type extends Template> implements Iterator<S
     this.tester = tester;
     _testCaseLegality = testCaseLegality;
     _template = template;
-    _parameters = Sequence.Static.toArray(template.parameters(), Parameter.class);
-    _count = template.parameters().length();
+    _parameters = CollectionUtil.toArray(template.parameters(), Parameter.class);
+    _count = template.parameters().size();
     _arguments = new Argument[_count];
-    _next = new ArraySequence<Argument>(_arguments);
+    _next = Arrays.asList(_arguments);
     _testArgumentIterators = StaticLoophole.cast(new Iterator[_count]);
     _hasNext = advance();
   }
@@ -83,7 +84,7 @@ class ArgumentListIterator<Template_Type extends Template> implements Iterator<S
    * The returned sequence is only valid for a single iteration and so should be copied
    * if needed after this iteration.
    */
-  public Sequence<Argument> next() {
+  public List<Argument> next() {
     if (!hasNext()) {
       throw new NoSuchElementException();
     }

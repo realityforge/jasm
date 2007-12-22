@@ -11,7 +11,7 @@ package jasm;
 import jasm.util.Enums;
 import jasm.util.Ints;
 import jasm.util.WordWidth;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -19,16 +19,16 @@ import jasm.util.collect.Sequence;
  */
 public abstract class LabelOffsetInstruction extends LabelInstruction {
 
-    private static final Sequence<Sequence<WordWidth>> LABEL_WIDTH_SEQUENCES = Enums.powerSequence(WordWidth.class);
+    private static final List<List<WordWidth>> LABEL_WIDTH_SEQUENCES = Enums.powerSequence(WordWidth.class);
 
-    private final Sequence<WordWidth> _labelWidthSequence;
+    private final List<WordWidth> _labelWidthSequence;
     private int _labelWidthIndex;
 
     protected LabelOffsetInstruction(Assembler assembler, int startOffset, int endOffset, Label label, int labelWidthSequenceIndex) {
         super(assembler, startOffset, endOffset, label);
         _labelWidthSequence = LABEL_WIDTH_SEQUENCES.get(labelWidthSequenceIndex);
         assert !_labelWidthSequence.isEmpty();
-        if (_labelWidthSequence.length() == 1) {
+        if (_labelWidthSequence.size() == 1) {
             assembler.addFixedLengthLabelInstruction(this);
         } else {
             assembler.addSpanDependentLabelInstruction(this);
@@ -51,7 +51,7 @@ public abstract class LabelOffsetInstruction extends LabelInstruction {
     }
 
     void setLabelWidth(WordWidth width) throws AssemblyException {
-        for (int i = 0; i < _labelWidthSequence.length(); i++) {
+        for (int i = 0; i < _labelWidthSequence.size(); i++) {
             if (_labelWidthSequence.get(i).greaterEqual(width)) {
                 _labelWidthIndex = i;
                 return;

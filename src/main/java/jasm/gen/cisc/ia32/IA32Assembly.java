@@ -11,7 +11,7 @@ package jasm.gen.cisc.ia32;
 import jasm.InstructionSet;
 import jasm.gen.cisc.x86.FloatingPointOpcodeMap;
 import jasm.gen.cisc.x86.X86Assembly;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -23,7 +23,7 @@ public final class IA32Assembly extends X86Assembly<IA32Template> {
     }
 
     @Override
-    protected Sequence<IA32Template> createTemplates() {
+    protected List<IA32Template> createTemplates() {
         final IA32TemplateCreator creator = new IA32TemplateCreator();
         creator.createTemplates(new OneByteOpcodeMap());
         creator.createTemplates(new TwoByteOpcodeMap());

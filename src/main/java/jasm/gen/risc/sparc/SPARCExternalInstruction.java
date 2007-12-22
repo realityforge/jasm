@@ -12,7 +12,7 @@ import jasm.Argument;
 import jasm.dis.DisassembledLabel;
 import jasm.dis.GlobalLabelMapper;
 import jasm.gen.risc.RiscExternalInstruction;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  * Output of SPARC instructions in external assembler format.
@@ -22,15 +22,15 @@ import jasm.util.collect.Sequence;
  */
 public class SPARCExternalInstruction extends RiscExternalInstruction {
 
-    SPARCExternalInstruction(SPARCTemplate template, Sequence<Argument> arguments) {
+    SPARCExternalInstruction(SPARCTemplate template, List<Argument> arguments) {
         super(template, arguments);
     }
 
-    public SPARCExternalInstruction(SPARCTemplate template, Sequence<Argument> arguments, int offset, Sequence<DisassembledLabel> labels) {
+    public SPARCExternalInstruction(SPARCTemplate template, List<Argument> arguments, int offset, List<DisassembledLabel> labels) {
         super(template, arguments, offset, labels);
     }
 
-    public SPARCExternalInstruction(SPARCTemplate template, Sequence<Argument> arguments, int offset, Sequence<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
+    public SPARCExternalInstruction(SPARCTemplate template, List<Argument> arguments, int offset, List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
         super(template, arguments, offset, labels, globalLabelMapper);
     }
 

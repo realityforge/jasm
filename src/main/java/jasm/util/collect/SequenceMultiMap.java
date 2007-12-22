@@ -11,6 +11,9 @@ package jasm.util.collect;
 import jasm.util.lang.StaticLoophole;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
 
 /**
  * MultiMap implementation where the multi-values are stored and retrieved in sequences.
@@ -20,31 +23,31 @@ import java.util.Iterator;
  */
 public class SequenceMultiMap<Key_Type, Value_Type> {
 
-  private final HashMap<Key_Type, AppendableSequence<Value_Type>> _map;
+  private final HashMap<Key_Type, ArrayList<Value_Type>> _map;
 
   public SequenceMultiMap() {
-    _map = new HashMap<Key_Type, AppendableSequence<Value_Type>>();
+    _map = new HashMap<Key_Type, ArrayList<Value_Type>>();
   }
 
-  public Sequence<Value_Type> get(Key_Type key) {
-    final Sequence<Value_Type> result = _map.get(key);
+  public List<Value_Type> get(Key_Type key) {
+    final ArrayList<Value_Type> result = _map.get(key);
     if (result == null) {
-      return Sequence.Static.empty();
+      return StaticLoophole.cast(Collections.EMPTY_LIST);
     }
     return _map.get(key);
   }
 
-  private AppendableSequence<Value_Type> makeSequence(Key_Type key) {
-    AppendableSequence<Value_Type> sequence = _map.get(key);
+  private ArrayList<Value_Type> makeSequence(Key_Type key) {
+    ArrayList<Value_Type> sequence = _map.get(key);
     if (sequence == null) {
-      sequence = new ArrayListSequence<Value_Type>();
+      sequence = new ArrayList<Value_Type>();
       _map.put(key, sequence);
     }
     return sequence;
   }
 
   public void add(Key_Type key, Value_Type value) {
-    makeSequence(key).append(value);
+    makeSequence(key).add(value);
   }
 
   public Iterator<Value_Type> iterator() {

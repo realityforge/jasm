@@ -19,9 +19,6 @@ import jasm.gen.AssemblyTestComponent;
 import jasm.gen.Parameter;
 import jasm.gen.Template;
 import jasm.util.WordWidth;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.Sequence;
 import jasm.util.io.IndentWriter;
 import jasm.util.program.ProgramError;
 import java.io.BufferedInputStream;
@@ -34,10 +31,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.PushbackInputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -123,14 +122,14 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
   /**
    * Determines if a given set of arguments for a given template is legal.
    */
-  protected abstract boolean isLegalArgumentList(Template_Type template, Sequence<Argument> arguments);
+  protected abstract boolean isLegalArgumentList(Template_Type template, List<Argument> arguments);
 
   protected abstract void assembleExternally(IndentWriter stream, Template_Type template,
-                                             Sequence<Argument> argumentList, String label);
+                                             List<Argument> argumentList, String label);
 
-  private boolean findExcludedDisassemblerTestArgument(Sequence<? extends Parameter> parameters,
-                                                       Sequence<Argument> arguments) {
-    for (int i = 0; i < parameters.length(); i++) {
+  private boolean findExcludedDisassemblerTestArgument(List<? extends Parameter> parameters,
+                                                       List<Argument> arguments) {
+    for (int i = 0; i < parameters.size(); i++) {
       if (parameters.get(i).excludedDisassemblerTestArguments().contains(arguments.get(i))) {
         return true;
       }
@@ -138,9 +137,9 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     return false;
   }
 
-  private boolean findExcludedExternalTestArgument(Sequence<? extends Parameter> parameters,
-                                                   Sequence<Argument> arguments) {
-    for (int i = 0; i < parameters.length(); i++) {
+  private boolean findExcludedExternalTestArgument(List<? extends Parameter> parameters,
+                                                   List<Argument> arguments) {
+    for (int i = 0; i < parameters.size(); i++) {
       final Parameter parameter = parameters.get(i);
       if (parameter.excludedExternalTestArguments().contains(arguments.get(i))) {
         return true;
@@ -153,7 +152,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     return false;
   }
 
-  private File createExternalSourceFile(Template_Type template, Iterator<Sequence<Argument>> argumentLists)
+  private File createExternalSourceFile(Template_Type template, Iterator<List<Argument>> argumentLists)
       throws IOException {
     final File sourceFile =
         File.createTempFile(_tmpFilePrefix + template.internalName(), ExternalAssembler.SOURCE_EXTENSION);
@@ -171,11 +170,12 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     return sourceFile;
   }
 
-  private void createExternalSource(Template_Type template, Iterator<Sequence<Argument>> argumentLists,
+  private void createExternalSource(Template_Type template,
+                                    Iterator<List<Argument>> argumentLists,
                                     IndentWriter stream) {
     int i = 0;
     while (argumentLists.hasNext()) {
-      final Sequence<Argument> argumentList = argumentLists.next();
+      final List<Argument> argumentList = argumentLists.next();
       if (!findExcludedExternalTestArgument(template.parameters(), argumentList)) {
         final String label = "label" + i;
         assembleExternally(stream, template, argumentList, label);
@@ -227,11 +227,11 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
    * It would have been much more clean to override 'equals()' of those argument classes,
    * but they are enums and Java predeclares methods inherited via Enum final :-(
    */
-  private boolean matches(Sequence<Argument> arguments1, Sequence<Argument> arguments2) {
-    if (arguments1.length() != arguments2.length()) {
+  private boolean matches(List<Argument> arguments1, List<Argument> arguments2) {
+    if (arguments1.size() != arguments2.size()) {
       return false;
     }
-    for (int i = 0; i < arguments1.length(); i++) {
+    for (int i = 0; i < arguments1.size(); i++) {
       final Argument argument1 = arguments1.get(i);
       final Argument argument2 = arguments2.get(i);
       if (!argument1.equals(argument2)) {
@@ -246,13 +246,13 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     return true;
   }
 
-  private void testDisassembler(Template_Type template, Sequence<Argument> argumentList, byte[] internalResult)
+  private void testDisassembler(Template_Type template, List<Argument> argumentList, byte[] internalResult)
       throws IOException, AssemblyException {
     final BufferedInputStream disassemblyStream = new BufferedInputStream(new ByteArrayInputStream(internalResult));
     final Disassembler<Template_Type, DisassembledInstruction_Type> disassembler = createTestDisassembler();
     disassembler.setAbstractionPreference(template.instructionDescription().isSynthetic() ? Disassembler.AbstractionPreference.SYNTHETIC : Disassembler.AbstractionPreference.RAW);
-    disassembler.setExpectedNumberOfArguments(argumentList.length());
-    final Sequence<DisassembledInstruction_Type> disassembledInstructions =
+    disassembler.setExpectedNumberOfArguments(argumentList.size());
+    final List<DisassembledInstruction_Type> disassembledInstructions =
         disassembler.scanOneInstruction(disassemblyStream);
 
     boolean matchFound = false;
@@ -266,7 +266,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
 
     if (disassemblyStream.available() != 0 || !matchFound) {
       System.err.println("internal disassembler test failed - " +
-                         disassembledInstructions.length() +
+                         disassembledInstructions.size() +
                          " false matches found:");
       if (disassemblyStream.available() != 0) {
         System.err.print("extra bytes at end of disassembly stream:");
@@ -316,7 +316,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     int testCaseCount = 0;
     for (final ArgumentListIterator<Template_Type> iterator =
         new ArgumentListIterator<Template_Type>(this, template, TestCaseLegality.LEGAL); iterator.hasNext();) {
-      final Sequence<Argument> argumentList = iterator.next();
+      final List<Argument> argumentList = iterator.next();
       final Assembler assembler = createTestAssembler();
 
       final byte[] internalResult;
@@ -382,7 +382,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
       final ArgumentListIterator<Template_Type> iterator =
           new ArgumentListIterator<Template_Type>(this, template, legality);
       while (iterator.hasNext()) {
-        final Sequence<Argument> argumentList = iterator.next();
+        final List<Argument> argumentList = iterator.next();
         ++illegalTestCaseNumber;
         final Assembler assembler = createTestAssembler();
         try {
@@ -412,7 +412,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
       stream.indent();
     }
 
-    final AppendableSequence<Template_Type> errors = new ArrayListSequence<Template_Type>();
+    final ArrayList<Template_Type> errors = new ArrayList<Template_Type>();
 
     for (Template_Type template : assembly().templates()) {
       final TemplateSelector.State state = _selector.select(template);
@@ -426,7 +426,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
       } catch (Throwable throwable) {
         notice(template, "Failed tests.");
         throwable.printStackTrace();
-        errors.append(template);
+        errors.add(template);
       }
     }
 
@@ -439,7 +439,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
       for (Template_Type template : errors) {
         System.err.println("    " + template);
       }
-      ProgramError.unexpected(errors.length() + " templates failed testing: see previous stack dumps in test output");
+      ProgramError.unexpected(errors.size() + " templates failed testing: see previous stack dumps in test output");
     }
   }
 

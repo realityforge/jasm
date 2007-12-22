@@ -13,7 +13,7 @@ import jasm.dis.Address32Instruction;
 import jasm.dis.x86.X86DisassembledInstruction;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.cisc.ia32.IA32Template;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -22,7 +22,7 @@ public class IA32DisassembledInstruction extends X86DisassembledInstruction<IA32
 
     private final Address32Instruction.Mixin _addressInstruction;
 
-    IA32DisassembledInstruction(int startAddress, int offset, byte[] bytes, IA32Template template, Sequence<Argument> arguments) {
+    IA32DisassembledInstruction(int startAddress, int offset, byte[] bytes, IA32Template template, List<Argument> arguments) {
         super(offset, bytes, template, arguments);
         _addressInstruction = new Address32Instruction.Mixin(this, startAddress);
     }

@@ -8,12 +8,11 @@
  */
 package jasm.util;
 
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
-import jasm.util.collect.Sequence;
 import jasm.util.program.ProgramError;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.List;
 
 public interface StaticFieldName {
 
@@ -27,8 +26,8 @@ public interface StaticFieldName {
 
     public static final class Static {
 
-        public static Sequence<StaticFieldName> initialize(Class staticNameFieldClass, StringFunction stringFunction) {
-            final AppendableSequence<StaticFieldName> sequence = new ArrayListSequence<StaticFieldName>();
+        public static List<StaticFieldName> initialize(Class staticNameFieldClass, StringFunction stringFunction) {
+            final ArrayList<StaticFieldName> sequence = new ArrayList<StaticFieldName>();
             for (Field field : staticNameFieldClass.getDeclaredFields()) {
                 if ((field.getModifiers() & Modifier.STATIC) != 0 && StaticFieldName.class.isAssignableFrom(field.getType())) {
                     field.setAccessible(true);
@@ -41,7 +40,7 @@ public interface StaticFieldName {
                             }
                             value.setName(name);
                         }
-                        sequence.append(value);
+                        sequence.add(value);
                     } catch (IllegalAccessException illegalAccessException) {
                         ProgramError.unexpected("could not name value of field: " + field);
                     }

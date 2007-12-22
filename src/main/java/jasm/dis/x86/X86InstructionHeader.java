@@ -14,9 +14,8 @@ import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.util.HexByte;
 import jasm.util.WordWidth;
-import jasm.util.collect.AppendableSequence;
-import jasm.util.collect.ArrayListSequence;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -93,18 +92,18 @@ public final class X86InstructionHeader {
     return result;
   }
 
-  public static <Template_Type extends X86Template> Map<X86InstructionHeader, AppendableSequence<Template_Type>> createMapping(
+  public static <Template_Type extends X86Template> Map<X86InstructionHeader, LinkedList<Template_Type>> createMapping(
       Assembly<Template_Type> assembly, WordWidth addressWidth) {
-    final Map<X86InstructionHeader, AppendableSequence<Template_Type>> result =
-        new HashMap<X86InstructionHeader, AppendableSequence<Template_Type>>();
+    final Map<X86InstructionHeader, LinkedList<Template_Type>> result =
+        new HashMap<X86InstructionHeader, LinkedList<Template_Type>>();
     for (Template_Type template : assembly.templates()) {
       X86InstructionHeader header = new X86InstructionHeader(addressWidth, template);
-      AppendableSequence<Template_Type> matchingTemplates = result.get(header);
+      LinkedList<Template_Type> matchingTemplates = result.get(header);
       if (matchingTemplates == null) {
-        matchingTemplates = new ArrayListSequence<Template_Type>();
+        matchingTemplates = new LinkedList<Template_Type>();
         result.put(header, matchingTemplates);
       }
-      matchingTemplates.append(template);
+      matchingTemplates.addLast(template);
       for (X86Parameter parameter : template.parameters()) {
         switch (parameter.place()) {
           case OPCODE1_REXB:

@@ -13,7 +13,7 @@ import jasm.AssemblyException;
 import jasm.gen.Immediate32Argument;
 import jasm.gen.Template;
 import jasm.gen.risc.bitRange.BitRange;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  * An instruction field whose encoded value does not include bits for
@@ -42,7 +42,7 @@ public class AlignedImmediateOperandField extends ImmediateOperandField {
     }
 
     @Override
-    public boolean check(Template template, Sequence<Argument> arguments) {
+    public boolean check(Template template, List<Argument> arguments) {
         if (!super.check(template, arguments)) {
             return false;
         }

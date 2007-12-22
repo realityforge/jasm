@@ -13,13 +13,13 @@ import jasm.dis.DisassembledInstruction;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.risc.RiscAssemblyTester;
 import jasm.util.WordWidth;
-import jasm.util.collect.Sequence;
 import jasm.util.io.IndentWriter;
 import jasm.util.lang.Endianness;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;
 import java.util.EnumSet;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -42,7 +42,7 @@ public abstract class PPCAssemblyTester<DisassembledInstruction_Type extends Dis
     }
 
     @Override
-    protected void assembleExternally(IndentWriter writer, PPCTemplate template, Sequence<Argument> argumentList, String label) {
+    protected void assembleExternally(IndentWriter writer, PPCTemplate template, List<Argument> argumentList, String label) {
         final PPCExternalInstruction instruction = new PPCExternalInstruction(template, argumentList);
         writer.println(instruction.toString());
     }

@@ -11,8 +11,8 @@ package jasm.gen.risc;
 import jasm.gen.InstructionConstraint;
 import jasm.gen.InstructionDescription;
 import jasm.gen.risc.field.RiscField;
-import jasm.util.collect.Sequence;
 import jasm.util.program.ProgramError;
+import java.util.List;
 
 /**
  *
@@ -47,7 +47,7 @@ public interface RiscInstructionDescriptionVisitor {
             }
         }
 
-        private static void visitSpecifications(RiscInstructionDescriptionVisitor visitor, Sequence<Object> specifications) {
+        private static void visitSpecifications(RiscInstructionDescriptionVisitor visitor, List<Object> specifications) {
             for (Object specification : specifications) {
                 visitSpecification(visitor, specification);
             }

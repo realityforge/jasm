@@ -10,14 +10,14 @@ package jasm.gen.cisc.x86;
 
 import jasm.gen.InstructionDescription;
 import jasm.util.WordWidth;
-import jasm.util.collect.MutableSequence;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
  */
 public final class X86InstructionDescription extends InstructionDescription {
 
-    public X86InstructionDescription(MutableSequence<Object> specifications) {
+    public X86InstructionDescription(List<Object> specifications) {
         super(specifications);
     }
 

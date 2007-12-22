@@ -12,7 +12,8 @@ import jasm.gen.Assembly;
 import jasm.gen.risc.RiscInstructionDescription;
 import jasm.gen.risc.RiscInstructionDescriptionCreator;
 import jasm.gen.risc.RiscInstructionDescriptionModifier;
-import jasm.util.collect.Sequence;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -43,7 +44,7 @@ public abstract class PPCInstructionDescriptionCreator extends RiscInstructionDe
       if ((assembly().generating64BitInstructions())) {
         return synthesize(name, templateName, patterns);
       } else {
-        final Sequence<RiscInstructionDescription> sequence = Sequence.Static.empty();
+        final List<RiscInstructionDescription> sequence = Collections.emptyList();
         return new RiscInstructionDescriptionModifier(sequence);
       }
     }

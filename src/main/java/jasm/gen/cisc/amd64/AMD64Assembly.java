@@ -11,7 +11,7 @@ package jasm.gen.cisc.amd64;
 import jasm.InstructionSet;
 import jasm.gen.cisc.x86.FloatingPointOpcodeMap;
 import jasm.gen.cisc.x86.X86Assembly;
-import jasm.util.collect.Sequence;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
@@ -23,7 +23,7 @@ public final class AMD64Assembly extends X86Assembly<AMD64Template> {
     }
 
     @Override
-    protected Sequence<AMD64Template> createTemplates() {
+    protected List<AMD64Template> createTemplates() {
         final AMD64TemplateCreator creator = new AMD64TemplateCreator();
         creator.createTemplates(new OneByteOpcodeMap());
         creator.createTemplates(new TwoByteOpcodeMap());
