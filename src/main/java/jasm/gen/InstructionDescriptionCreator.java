@@ -9,9 +9,9 @@
 package jasm.gen;
 
 import jasm.util.lang.ArrayUtil;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Arrays;
 
 /**
  * Wraps mere object arrays into instruction descriptions.
