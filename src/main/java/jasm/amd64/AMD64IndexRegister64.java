@@ -19,58 +19,58 @@ import jasm.x86.GeneralRegister;
  */
 public enum AMD64IndexRegister64 implements GeneralRegister {
 
-    RAX_INDEX,
-    RCX_INDEX,
-    RDX_INDEX,
-    RBX_INDEX,
-    // no RSP_INDEX!
-    RBP_INDEX,
-    RSI_INDEX,
-    RDI_INDEX,
-    R8_INDEX,
-    R9_INDEX,
-    R10_INDEX,
-    R11_INDEX,
-    R12_INDEX,
-    R13_INDEX,
-    R14_INDEX,
-    R15_INDEX;
+  RAX_INDEX,
+  RCX_INDEX,
+  RDX_INDEX,
+  RBX_INDEX,
+  // no RSP_INDEX!
+  RBP_INDEX,
+  RSI_INDEX,
+  RDI_INDEX,
+  R8_INDEX,
+  R9_INDEX,
+  R10_INDEX,
+  R11_INDEX,
+  R12_INDEX,
+  R13_INDEX,
+  R14_INDEX,
+  R15_INDEX;
 
-    public static AMD64IndexRegister64 from(GeneralRegister generalRegister) {
-        int ordinal = generalRegister.id();
-        if (ordinal >= AMD64GeneralRegister64.RSP.id()) {
-            ordinal--;
-        }
-        return values()[ordinal];
+  public static AMD64IndexRegister64 from(GeneralRegister generalRegister) {
+    int ordinal = generalRegister.id();
+    if (ordinal >= AMD64GeneralRegister64.RSP.id()) {
+      ordinal--;
     }
+    return values()[ordinal];
+  }
 
-    public int id() {
-        int ordinal = ordinal();
-        if (ordinal >= AMD64GeneralRegister64.RSP.id()) {
-            ordinal++;
-        }
-        return ordinal;
+  public int id() {
+    int ordinal = ordinal();
+    if (ordinal >= AMD64GeneralRegister64.RSP.id()) {
+      ordinal++;
     }
+    return ordinal;
+  }
 
-    public WordWidth width() {
-        return WordWidth.BITS_64;
-    }
+  public WordWidth width() {
+    return WordWidth.BITS_64;
+  }
 
-    public int value() {
-        return id();
-    }
+  public int value() {
+    return id();
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return AMD64GeneralRegister64.from(this).externalValue();
-    }
+  public String externalValue() {
+    return AMD64GeneralRegister64.from(this).externalValue();
+  }
 
-    public String disassembledValue() {
-        return AMD64GeneralRegister64.from(this).disassembledValue();
-    }
+  public String disassembledValue() {
+    return AMD64GeneralRegister64.from(this).disassembledValue();
+  }
 
   public static final SymbolSet<AMD64IndexRegister64> SYMBOLS = SymbolSet.fromEnum(AMD64IndexRegister64.class);
 }

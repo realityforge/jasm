@@ -20,33 +20,33 @@ import jasm.Label;
  */
 public class AMD64Assembler extends AMD64LabelAssembler implements Assembler64 {
 
-    @Override
-    public final InstructionSet instructionSet() {
-        return InstructionSet.AMD64;
-    }
+  private long _startAddress; // address of first instruction
 
-    private long _startAddress; // address of first instruction
+  public AMD64Assembler(long startAddress) {
+    _startAddress = startAddress;
+  }
 
-    public AMD64Assembler(long startAddress) {
-        _startAddress = startAddress;
-    }
+  public AMD64Assembler() {
+  }
 
-    public AMD64Assembler() {
-    }
+  public final long startAddress() {
+    return _startAddress;
+  }
 
-    public final long startAddress() {
-        return _startAddress;
-    }
+  public final void setStartAddress(long address) {
+    _startAddress = address;
+  }
 
-    public final void setStartAddress(long address) {
-        _startAddress = address;
-    }
+  public final void fixLabel(Label label, long address) {
+    fixLabel64(label, address);
+  }
 
-    public final void fixLabel(Label label, long address) {
-        fixLabel64(label, address);
-    }
+  public final long address(Label label) throws AssemblyException {
+    return address64(label);
+  }
 
-    public final long address(Label label) throws AssemblyException {
-        return address64(label);
-    }
+  @Override
+  public final InstructionSet instructionSet() {
+    return InstructionSet.AMD64;
+  }
 }

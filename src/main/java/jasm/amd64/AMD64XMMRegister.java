@@ -16,23 +16,23 @@ import jasm.util.SymbolSet;
  */
 public enum AMD64XMMRegister implements EnumerableArgument {
 
-    XMM0, XMM1, XMM2, XMM3, XMM4, XMM5, XMM6, XMM7, XMM8, XMM9, XMM10, XMM11, XMM12, XMM13, XMM14, XMM15;
+  XMM0, XMM1, XMM2, XMM3, XMM4, XMM5, XMM6, XMM7, XMM8, XMM9, XMM10, XMM11, XMM12, XMM13, XMM14, XMM15;
 
-    public int value() {
-        return ordinal();
-    }
+  public int value() {
+    return ordinal();
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return "%" + name().toLowerCase();
-    }
+  public String externalValue() {
+    return "%" + name().toLowerCase();
+  }
 
-    public String disassembledValue() {
-        return name().toLowerCase();
-    }
+  public String disassembledValue() {
+    return name().toLowerCase();
+  }
 
   public static final SymbolSet<AMD64XMMRegister> SYMBOLS = SymbolSet.fromEnum(AMD64XMMRegister.class);
 }

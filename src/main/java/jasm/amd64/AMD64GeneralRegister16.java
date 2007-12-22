@@ -17,38 +17,36 @@ import jasm.x86.GeneralRegister;
  */
 public enum AMD64GeneralRegister16 implements GeneralRegister {
 
-    // Note: keep the order such that 'value()' can rely on ordinals:
+  // Note: keep the order such that 'value()' can rely on ordinals:
+  AX, CX, DX, BX, SP, BP, SI, DI, R8W, R9W, R10W, R11W, R12W, R13W, R14W, R15W;
 
-    AX, CX, DX, BX, SP, BP, SI, DI, R8W, R9W, R10W, R11W, R12W, R13W, R14W, R15W;
+  public static AMD64GeneralRegister16 from(GeneralRegister generalRegister) {
+    return values()[generalRegister.id()];
+  }
 
-    public static AMD64GeneralRegister16 from(GeneralRegister generalRegister) {
-        return values()[generalRegister.id()];
-    }
+  public WordWidth width() {
+    return WordWidth.BITS_16;
+  }
 
-    public WordWidth width() {
-        return WordWidth.BITS_16;
-    }
+  public int value() {
+    return ordinal();
+  }
 
-    public int value() {
-        return ordinal();
-    }
+  public int id() {
+    return ordinal();
+  }
 
-    public int id() {
-        return ordinal();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public String externalValue() {
+    return "%" + name().toLowerCase();
+  }
 
-    public String externalValue() {
-        return "%" + name().toLowerCase();
-    }
-
-    public String disassembledValue() {
-        return name().toLowerCase();
-    }
+  public String disassembledValue() {
+    return name().toLowerCase();
+  }
 
   public static final SymbolSet<AMD64GeneralRegister16> SYMBOLS = SymbolSet.fromEnum(AMD64GeneralRegister16.class);
-
 }

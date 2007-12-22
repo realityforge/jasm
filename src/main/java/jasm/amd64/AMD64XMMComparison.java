@@ -13,32 +13,31 @@ import jasm.util.SymbolSet;
 
 public enum AMD64XMMComparison implements EnumerableArgument {
 
-    EQUAL,
-    LESS_THAN,
-    GREATER_THAN,
-    LESS_THAN_OR_EQUAL,
-    UNORDERED,
-    NOT_EQUAL,
-    NOT_LESS_THAN,
-    NOT_LESS_THAN_OR_EQUAL,
-    ORDERED;
+  EQUAL,
+  LESS_THAN,
+  GREATER_THAN,
+  LESS_THAN_OR_EQUAL,
+  UNORDERED,
+  NOT_EQUAL,
+  NOT_LESS_THAN,
+  NOT_LESS_THAN_OR_EQUAL,
+  ORDERED;
 
-    public int value() {
-        return ordinal();
-    }
+  public int value() {
+    return ordinal();
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return "$" + Integer.toString(value());
-    }
+  public String externalValue() {
+    return "$" + Integer.toString(value());
+  }
 
-    public String disassembledValue() {
-        return name().toLowerCase();
-    }
+  public String disassembledValue() {
+    return name().toLowerCase();
+  }
 
   public static final SymbolSet<AMD64XMMComparison> SYMBOLS = SymbolSet.fromEnum(AMD64XMMComparison.class);
-
 }

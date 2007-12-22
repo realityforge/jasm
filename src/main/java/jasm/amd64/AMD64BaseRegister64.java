@@ -19,50 +19,50 @@ import jasm.x86.GeneralRegister;
  */
 public enum AMD64BaseRegister64 implements GeneralRegister {
 
-    RAX_BASE,
-    RCX_BASE,
-    RDX_BASE,
-    RBX_BASE,
-    RSP_BASE,
-    RBP_BASE,
-    RSI_BASE,
-    RDI_BASE,
-    R8_BASE,
-    R9_BASE,
-    R10_BASE,
-    R11_BASE,
-    R12_BASE,
-    R13_BASE,
-    R14_BASE,
-    R15_BASE;
+  RAX_BASE,
+  RCX_BASE,
+  RDX_BASE,
+  RBX_BASE,
+  RSP_BASE,
+  RBP_BASE,
+  RSI_BASE,
+  RDI_BASE,
+  R8_BASE,
+  R9_BASE,
+  R10_BASE,
+  R11_BASE,
+  R12_BASE,
+  R13_BASE,
+  R14_BASE,
+  R15_BASE;
 
-    public static AMD64BaseRegister64 from(GeneralRegister generalRegister) {
-        return values()[generalRegister.id()];
-    }
+  public static AMD64BaseRegister64 from(GeneralRegister generalRegister) {
+    return values()[generalRegister.id()];
+  }
 
-    public WordWidth width() {
-        return WordWidth.BITS_64;
-    }
+  public WordWidth width() {
+    return WordWidth.BITS_64;
+  }
 
-    public int id() {
-        return ordinal();
-    }
+  public int id() {
+    return ordinal();
+  }
 
-    public int value() {
-        return id();
-    }
+  public int value() {
+    return id();
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return AMD64GeneralRegister64.from(this).externalValue();
-    }
+  public String externalValue() {
+    return AMD64GeneralRegister64.from(this).externalValue();
+  }
 
-    public String disassembledValue() {
-        return AMD64GeneralRegister64.from(this).disassembledValue();
-    }
+  public String disassembledValue() {
+    return AMD64GeneralRegister64.from(this).disassembledValue();
+  }
 
   public static final SymbolSet<AMD64BaseRegister64> SYMBOLS = SymbolSet.fromEnum(AMD64BaseRegister64.class);
 }

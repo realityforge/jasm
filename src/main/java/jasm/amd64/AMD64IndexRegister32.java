@@ -19,58 +19,58 @@ import jasm.x86.GeneralRegister;
  */
 public enum AMD64IndexRegister32 implements GeneralRegister {
 
-    EAX_INDEX,
-    ECX_INDEX,
-    EDX_INDEX,
-    EBX_INDEX,
-    // no ESP_INDEX!
-    EBP_INDEX,
-    ESI_INDEX,
-    EDI_INDEX,
-    R8D_INDEX,
-    R9D_INDEX,
-    R10D_INDEX,
-    R11D_INDEX,
-    R12D_INDEX,
-    R13D_INDEX,
-    R14D_INDEX,
-    R15D_INDEX;
+  EAX_INDEX,
+  ECX_INDEX,
+  EDX_INDEX,
+  EBX_INDEX,
+  // no ESP_INDEX!
+  EBP_INDEX,
+  ESI_INDEX,
+  EDI_INDEX,
+  R8D_INDEX,
+  R9D_INDEX,
+  R10D_INDEX,
+  R11D_INDEX,
+  R12D_INDEX,
+  R13D_INDEX,
+  R14D_INDEX,
+  R15D_INDEX;
 
-    public static AMD64IndexRegister32 from(GeneralRegister generalRegister) {
-        int ordinal = generalRegister.id();
-        if (ordinal >= AMD64GeneralRegister32.ESP.id()) {
-            ordinal--;
-        }
-        return values()[ordinal];
+  public static AMD64IndexRegister32 from(GeneralRegister generalRegister) {
+    int ordinal = generalRegister.id();
+    if (ordinal >= AMD64GeneralRegister32.ESP.id()) {
+      ordinal--;
     }
+    return values()[ordinal];
+  }
 
-    public WordWidth width() {
-        return WordWidth.BITS_32;
-    }
+  public WordWidth width() {
+    return WordWidth.BITS_32;
+  }
 
-    public int id() {
-        int ordinal = ordinal();
-        if (ordinal >= AMD64GeneralRegister32.ESP.id()) {
-            ordinal++;
-        }
-        return ordinal;
+  public int id() {
+    int ordinal = ordinal();
+    if (ordinal >= AMD64GeneralRegister32.ESP.id()) {
+      ordinal++;
     }
+    return ordinal;
+  }
 
-    public int value() {
-        return id();
-    }
+  public int value() {
+    return id();
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return AMD64GeneralRegister32.from(this).externalValue();
-    }
+  public String externalValue() {
+    return AMD64GeneralRegister32.from(this).externalValue();
+  }
 
-    public String disassembledValue() {
-        return AMD64GeneralRegister32.from(this).disassembledValue();
-    }
+  public String disassembledValue() {
+    return AMD64GeneralRegister32.from(this).disassembledValue();
+  }
 
   public static final SymbolSet<AMD64IndexRegister32> SYMBOLS = SymbolSet.fromEnum(AMD64IndexRegister32.class);
 }

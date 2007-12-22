@@ -20,50 +20,50 @@ import jasm.x86.IndirectRegister;
  */
 public enum AMD64IndirectRegister64 implements GeneralRegister, IndirectRegister {
 
-    RAX_INDIRECT,
-    RCX_INDIRECT,
-    RDX_INDIRECT,
-    RBX_INDIRECT,
-    RSP_INDIRECT,
-    RBP_INDIRECT,
-    RSI_INDIRECT,
-    RDI_INDIRECT,
-    R8_INDIRECT,
-    R9_INDIRECT,
-    R10_INDIRECT,
-    R11_INDIRECT,
-    R12_INDIRECT,
-    R13_INDIRECT,
-    R14_INDIRECT,
-    R15_INDIRECT;
+  RAX_INDIRECT,
+  RCX_INDIRECT,
+  RDX_INDIRECT,
+  RBX_INDIRECT,
+  RSP_INDIRECT,
+  RBP_INDIRECT,
+  RSI_INDIRECT,
+  RDI_INDIRECT,
+  R8_INDIRECT,
+  R9_INDIRECT,
+  R10_INDIRECT,
+  R11_INDIRECT,
+  R12_INDIRECT,
+  R13_INDIRECT,
+  R14_INDIRECT,
+  R15_INDIRECT;
 
-    public static AMD64IndirectRegister64 from(GeneralRegister generalRegister) {
-        return values()[generalRegister.id()];
-    }
+  public static AMD64IndirectRegister64 from(GeneralRegister generalRegister) {
+    return values()[generalRegister.id()];
+  }
 
-    public int id() {
-        return ordinal();
-    }
+  public int id() {
+    return ordinal();
+  }
 
-    public WordWidth width() {
-        return WordWidth.BITS_64;
-    }
+  public WordWidth width() {
+    return WordWidth.BITS_64;
+  }
 
-    public int value() {
-        return id();
-    }
+  public int value() {
+    return id();
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return AMD64GeneralRegister64.from(this).externalValue();
-    }
+  public String externalValue() {
+    return AMD64GeneralRegister64.from(this).externalValue();
+  }
 
-    public String disassembledValue() {
-        return AMD64GeneralRegister64.from(this).disassembledValue();
-    }
+  public String disassembledValue() {
+    return AMD64GeneralRegister64.from(this).disassembledValue();
+  }
 
   public static final SymbolSet<AMD64IndirectRegister64> SYMBOLS = SymbolSet.fromEnum(AMD64IndirectRegister64.class);
 }
