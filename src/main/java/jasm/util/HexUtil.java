@@ -9,6 +9,10 @@
 package jasm.util;
 
 public final class HexUtil {
+  public static String toHexLiteral(int value) {
+    return "0x" + String.format("%08X", value);
+  }
+
   public static String toHexLiteral(byte value) {
       return "0x" + String.format("%02X", value);
   }
