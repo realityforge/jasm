@@ -59,7 +59,7 @@ public final class Main {
                            OptionDescriptor.ARGUMENT_REQUIRED,
                            REMOTE_ACCOUNT_OPT,
                            "the remote account to perform external tests on. ie user@host"),
-      new OptionDescriptor("assembler",
+      new OptionDescriptor("remote-assembler-path",
                            OptionDescriptor.ARGUMENT_REQUIRED,
                            REMOTE_ASSEMBLER_PATH_OPT,
                            "the path to assembler on remote machine. ie /usr/local/bin/"),
