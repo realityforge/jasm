@@ -12,13 +12,13 @@ import jasm.Argument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.Parameter;
 import jasm.gen.Template;
-import jasm.util.collect.FilterIterator;
 import jasm.util.collect.CollectionUtil;
+import jasm.util.collect.FilterIterator;
 import jasm.util.lang.StaticLoophole;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.List;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * This is an iterator over a (lazily generated) selection of test cases for a given template.

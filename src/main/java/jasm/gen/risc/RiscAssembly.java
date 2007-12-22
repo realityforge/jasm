@@ -13,9 +13,9 @@ import jasm.dis.risc.OpcodeMaskGroup;
 import jasm.dis.risc.SpecificityGroup;
 import jasm.gen.Assembly;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.HashMap;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Bernd Mathiske
