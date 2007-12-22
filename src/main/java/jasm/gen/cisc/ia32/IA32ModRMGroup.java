@@ -52,7 +52,6 @@ import static jasm.ia32.IA32GeneralRegister32.EDX;
 import static jasm.ia32.IA32GeneralRegister32.ESI;
 import static jasm.ia32.IA32GeneralRegister32.ESP;
 import static jasm.ia32.IA32GeneralRegister8.AL;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**

@@ -28,11 +28,9 @@ import java.util.List;
  */
 public abstract class RiscTemplate extends Template implements RiscInstructionDescriptionVisitor {
 
-    private final ArrayList<RiscField> _allFields = new ArrayList<RiscField>();
     private final ArrayList<OperandField> _operandFields = new ArrayList<OperandField>();
     private final ArrayList<OptionField> _optionFields = new ArrayList<OptionField>();
     private final ArrayList<OperandField> _parameters = new ArrayList<OperandField>();
-    private final ArrayList<Option> _options = new ArrayList<Option>();
 
     private int _opcode;
     private int _opcodeMask;
@@ -75,7 +73,6 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
     }
 
     public void visitField(RiscField field) {
-        _allFields.add(field);
         if (field instanceof OperandField) {
             final OperandField operandField = (OperandField) field;
             if (field instanceof OffsetParameter) {
@@ -128,12 +125,7 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
         return _optionFields;
     }
 
-    public void addOptionField(OptionField f) {
-        _allFields.add(f);
-        _optionFields.add(f);
-    }
-
-    public int specificity() {
+  public int specificity() {
         return Integer.bitCount(_opcodeMask);
     }
 
@@ -147,7 +139,6 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
             ProgramError.unexpected("Option: " + option.name() + " does not fit in field " + option.field().name());
         }
 
-        _options.add(option);
         if (option.isRedundant()) {
             _canonicalRepresentative = canonicalRepresentative;
         }

@@ -9,7 +9,6 @@
 package jasm.gen.risc.field;
 
 import jasm.Argument;
-import jasm.AssemblyException;
 import jasm.SymbolicArgument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.AssemblyTestComponent;
@@ -75,11 +74,7 @@ public class SymbolicOperandField<Argument_Type extends SymbolicArgument> extend
         return variableName() + ".value()";
     }
 
-    public int assemble(Argument_Type argument) throws AssemblyException {
-        return bitRange().assembleUncheckedUnsignedInt(argument.value());
-    }
-
-    @Override
+  @Override
     public Argument_Type disassemble(int instruction) {
         return _symbolizer.fromValue(extract(instruction));
     }
@@ -102,12 +97,7 @@ public class SymbolicOperandField<Argument_Type extends SymbolicArgument> extend
       return Collections.emptySet();
     }
 
-    @Override
-    public SymbolicOperandField<Argument_Type> withExcludedExternalTestArguments(Argument... arguments) {
-        return StaticLoophole.cast(super.withExcludedExternalTestArguments(arguments));
-    }
-
-    public TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
+  public TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
         return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, this, CollectionUtil.hashSetFrom(arguments));
     }
 

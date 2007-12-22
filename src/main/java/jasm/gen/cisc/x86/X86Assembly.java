@@ -10,7 +10,6 @@ package jasm.gen.cisc.x86;
 
 import jasm.InstructionSet;
 import jasm.gen.Assembly;
-import jasm.gen.risc.bitRange.BitRangeOrder;
 import jasm.util.program.ProgramError;
 
 /**
@@ -22,12 +21,7 @@ public abstract class X86Assembly<Template_Type extends X86Template> extends Ass
         super(instructionSet, templateType);
     }
 
-    @Override
-    public BitRangeOrder bitRangeEndianness() {
-        return BitRangeOrder.DESCENDING;
-    }
-
-    /**
+  /**
      * Whether to support 16 bit addressing.
      */
     private static boolean _are16BitAddressesSupported;

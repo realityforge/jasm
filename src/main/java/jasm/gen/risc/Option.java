@@ -57,19 +57,7 @@ public class Option {
         return _value;
     }
 
-  public Option(String name) {
-        this(name, 0);
-    }
-
-    public Option(String name, int value) {
-        this(name, value, "");
-    }
-
-    public Option(String name, int value, String externalName) {
-        this(name, value, externalName, null);
-    }
-
-    public Option(String name, int value, String externalName, OptionField field) {
+  public Option(String name, int value, String externalName, OptionField field) {
         _name = name;
         _value = value;
         _externalName = externalName;

@@ -27,11 +27,7 @@ public class PPCExternalInstruction extends RiscExternalInstruction {
         super(template, arguments);
     }
 
-    public PPCExternalInstruction(PPCTemplate template, List<Argument> arguments, int offset, List<DisassembledLabel> labels) {
-        super(template, arguments, offset, labels);
-    }
-
-    public PPCExternalInstruction(PPCTemplate template, List<Argument> arguments, int offset, List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
+  public PPCExternalInstruction(PPCTemplate template, List<Argument> arguments, int offset, List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
         super(template, arguments, offset, labels, globalLabelMapper);
     }
 

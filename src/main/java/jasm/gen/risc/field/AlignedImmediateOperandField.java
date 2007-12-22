@@ -88,12 +88,7 @@ public class AlignedImmediateOperandField extends ImmediateOperandField {
         return operand << zeroes();
     }
 
-    @Override
-    public int assemble(int value) throws IndexOutOfBoundsException, AssemblyException {
-        return super.assemble(argumentToOperand(value));
-    }
-
-    @Override
+  @Override
     public Immediate32Argument disassemble(int instruction) {
         return new Immediate32Argument(operandToArgument(extract(instruction)));
     }

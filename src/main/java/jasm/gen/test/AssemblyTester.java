@@ -293,7 +293,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     disassemblyStream.close();
   }
 
-  private void testTemplate(final Template_Type template) throws IOException, InterruptedException, AssemblyException {
+  private void testTemplate(final Template_Type template) throws IOException, AssemblyException {
     final boolean testingExternally =
         _components.contains(AssemblyTestComponent.EXTERNAL_ASSEMBLER) && template.isExternallyTestable();
 
@@ -443,8 +443,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     }
   }
 
-  private void createExternalSource(Template_Type template, IndentWriter stream)
-      throws IOException, InterruptedException, AssemblyException {
+  private void createExternalSource(Template_Type template, IndentWriter stream) {
     if (template.isExternallyTestable()) {
       final ArgumentListIterator<Template_Type> argumentLists =
           new ArgumentListIterator<Template_Type>(this, template, TestCaseLegality.LEGAL);

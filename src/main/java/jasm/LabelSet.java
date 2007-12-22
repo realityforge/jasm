@@ -14,8 +14,8 @@ final class LabelSet implements Iterable<Label> {
     _internalMap = new IdentityHashMap<Label, Label>();
   }
 
-  boolean add(Label element) {
-    return _internalMap.put(element, element) != null;
+  void add(Label element) {
+    _internalMap.put(element, element);
   }
 
   public Iterator<Label> iterator() {

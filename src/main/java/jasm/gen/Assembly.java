@@ -66,9 +66,7 @@ public abstract class Assembly<Template_Type extends Template> {
         return result;
     }
 
-    public abstract BitRangeOrder bitRangeEndianness();
-
-    private Object getBoxedJavaValue(Argument argument) {
+  private Object getBoxedJavaValue(Argument argument) {
         if (argument instanceof ImmediateArgument) {
             final ImmediateArgument immediateArgument = (ImmediateArgument) argument;
             return immediateArgument.boxedJavaValue();
@@ -76,16 +74,7 @@ public abstract class Assembly<Template_Type extends Template> {
         return argument;
     }
 
-    public final String createMethodCallString(Template_Type template, List<Argument> argumentList) {
-        assert argumentList.size() == template.parameters().size();
-        String call = template.assemblerMethodName() + "(";
-        for (int i = 0; i < argumentList.size(); i++) {
-            call += ((i == 0) ? "" : ", ") + getBoxedJavaValue(argumentList.get(i));
-        }
-        return call + ")";
-    }
-
-    private Method getAssemblerMethod(Assembler assembler, Template_Type template, Class[] parameterTypes) {
+  private Method getAssemblerMethod(Assembler assembler, Template_Type template, Class[] parameterTypes) {
         try {
             return assembler.getClass().getMethod(template.assemblerMethodName(), parameterTypes);
         } catch (Throwable throwable) {

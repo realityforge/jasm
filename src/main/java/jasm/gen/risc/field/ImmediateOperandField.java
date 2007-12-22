@@ -9,7 +9,6 @@
 package jasm.gen.risc.field;
 
 import jasm.Argument;
-import jasm.util.collect.CollectionUtil;
 import jasm.gen.ArgumentRange;
 import jasm.gen.Expression;
 import jasm.gen.Immediate32Argument;
@@ -20,7 +19,6 @@ import jasm.gen.Parameter;
 import jasm.gen.Template;
 import jasm.gen.TestArgumentExclusion;
 import jasm.gen.WrappableSpecification;
-import jasm.gen.cisc.x86.X86Operand;
 import jasm.gen.risc.bitRange.AscendingBitRange;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;

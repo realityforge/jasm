@@ -28,11 +28,7 @@ public class CompoundBitRange extends BitRange {
 
     private ArrayList<ContiguousBitRange> _contiguousBitRanges = new ArrayList<ContiguousBitRange>();
 
-    public List<ContiguousBitRange> contiguousBitRanges() {
-        return _contiguousBitRanges;
-    }
-
-    public void add(ContiguousBitRange contiguousBitRange) {
+  public void add(ContiguousBitRange contiguousBitRange) {
         _contiguousBitRanges.add(contiguousBitRange);
     }
 

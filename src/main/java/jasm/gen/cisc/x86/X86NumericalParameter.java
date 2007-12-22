@@ -16,14 +16,14 @@ import jasm.gen.Immediate64Argument;
 import jasm.gen.Immediate8Argument;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.ImmediateParameter;
-import jasm.gen.cisc.AppendedParameter;
+import jasm.gen.Parameter;
 import jasm.util.program.ProgramError;
 import java.util.Collections;
 
 /**
  * @author Bernd Mathiske
  */
-public abstract class X86NumericalParameter extends X86Parameter implements AppendedParameter, ImmediateParameter {
+public abstract class X86NumericalParameter extends X86Parameter implements Parameter, ImmediateParameter {
 
     private final WordWidth _width;
 

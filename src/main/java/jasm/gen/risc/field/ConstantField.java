@@ -29,11 +29,7 @@ public class ConstantField extends RiscField {
         setName(name);
     }
 
-    public RiscConstant constant(Argument argument) {
-        return new RiscConstant(this, argument);
-    }
-
-    public RiscConstant constant(int value) {
+  public RiscConstant constant(int value) {
         return new RiscConstant(this, value);
     }
 

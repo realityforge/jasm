@@ -9,7 +9,6 @@
 package jasm.gen.risc.field;
 
 import jasm.Argument;
-import jasm.AssemblyException;
 import jasm.ExternalMnemonicSuffixArgument;
 import jasm.gen.Expression;
 import jasm.gen.Parameter;
@@ -62,11 +61,7 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
         return _signDependentOperations.minArgumentValue(bitRange());
     }
 
-    public int assemble(int value) throws AssemblyException {
-        return _signDependentOperations.assemble(value, bitRange());
-    }
-
-    public int extract(int instruction) {
+  public int extract(int instruction) {
         return _signDependentOperations.extract(instruction, bitRange());
     }
 
@@ -121,39 +116,15 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
         return this;
     }
 
-    public String externalName() {
-        return variableName();
-    }
+  private Set<Argument> _excludedDisassemblerTestArguments = Collections.emptySet();
 
-    private Set<Argument> _excludedDisassemblerTestArguments = Collections.emptySet();
-
-  public OperandField<Argument_Type> withExcludedDisassemblerTestArguments(Set<Argument> arguments) {
-        final OperandField<Argument_Type> result = clone();
-        result._excludedDisassemblerTestArguments = arguments;
-        return result;
-    }
-
-    public OperandField<Argument_Type> withExcludedDisassemblerTestArguments(Argument... arguments) {
-        return withExcludedDisassemblerTestArguments(CollectionUtil.hashSetFrom(arguments));
-    }
-
-    public Set<Argument> excludedDisassemblerTestArguments() {
+  public Set<Argument> excludedDisassemblerTestArguments() {
         return _excludedDisassemblerTestArguments;
     }
 
     private Set<Argument> _excludedExternalTestArguments = Collections.emptySet();
 
-  public OperandField<Argument_Type> withExcludedExternalTestArguments(Set<Argument> arguments) {
-        final OperandField<Argument_Type> result = clone();
-        result._excludedExternalTestArguments = arguments;
-        return result;
-    }
-
-    public OperandField<Argument_Type> withExcludedExternalTestArguments(Argument... arguments) {
-        return withExcludedExternalTestArguments(CollectionUtil.hashSetFrom(arguments));
-    }
-
-    public Set<Argument> excludedExternalTestArguments() {
+  public Set<Argument> excludedExternalTestArguments() {
         return _excludedExternalTestArguments;
     }
 

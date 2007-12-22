@@ -56,7 +56,7 @@ public abstract class SPARCAssembler extends SPARCLabelAssembler {
 
     // Complex synthetic instructions according to appendix G3 of the SPARC Architecture Manual V9:
 
-    public void setuw(int imm, GPR rd) throws AssemblyException {
+    public void setuw(int imm, GPR rd) {
         if (lo(imm) == 0) {
             sethi(hi(imm), rd);
         } else if (0 <= imm && imm <= 4095) {
@@ -71,7 +71,7 @@ public abstract class SPARCAssembler extends SPARCLabelAssembler {
         setuw(imm, rd);
     }
 
-    public void setsw(int imm, GPR rd) throws AssemblyException {
+    public void setsw(int imm, GPR rd) {
         if (0 <= imm && lo(imm) == 0) {
             sethi(hi(imm), rd);
         } else if (-4096 <= imm && imm <= 4095) {
@@ -89,7 +89,7 @@ public abstract class SPARCAssembler extends SPARCLabelAssembler {
         }
     }
 
-    public void setx(long imm, GPR temp, GPR rd) throws AssemblyException {
+    public void setx(long imm, GPR temp, GPR rd) {
         sethi(uhi(imm), temp);
         or(temp, ulo(imm), temp);
         sllx(temp, 32, temp);

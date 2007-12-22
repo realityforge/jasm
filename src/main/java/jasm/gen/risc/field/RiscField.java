@@ -47,10 +47,7 @@ public abstract class RiscField implements Cloneable, StaticFieldName {
         _name = name;
     }
 
-  public void setLiteralClass(Class literalClass) {
-    }
-
-    public BitRange bitRange() {
+  public BitRange bitRange() {
         return _bitRange;
     }
 

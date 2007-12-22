@@ -60,23 +60,10 @@ public abstract class RiscAssembly<Template_Type extends RiscTemplate> extends A
         }
     }
 
-    public void printSpecificityGroups(PrintStream out) {
-        for (SpecificityGroup<Template_Type> specificityGroup : _specificityGroups) {
-            out.println("Specificity group " + specificityGroup.specificity());
-            for (OpcodeMaskGroup<Template_Type> opcodeMaskGroup : specificityGroup.opcodeMaskGroups()) {
-                out.println("  Opcode mask group " + Integer.toBinaryString(opcodeMaskGroup.mask()));
-                for (Template_Type template : opcodeMaskGroup.templates()) {
-                    out.println("    " + template);
-                }
-            }
-        }
-    }
-
-    public List<SpecificityGroup<Template_Type>> specificityGroups() {
+  public List<SpecificityGroup<Template_Type>> specificityGroups() {
         if (_specificityGroups == null) {
             initialize();
         }
         return _specificityGroups;
     }
-
 }

@@ -68,30 +68,7 @@ public interface InstructionConstraint {
 
     public static final class Static {
 
-        private Static() {
-        }
-
-        /**
-         * Creates an instruction constraint on a parameter such that it must be a given symbol.
-         */
-        public static InstructionConstraint eq(final Parameter first, final SymbolicArgument symbol) {
-            return new SimpleInstructionConstraint() {
-
-                public boolean check(Template template, List<Argument> arguments) {
-                    return template.bindingFor(first, arguments) == symbol;
-                }
-
-                public String asJavaExpression() {
-                    return first.variableName() + " == " + symbol.name();
-                }
-
-                public boolean referencesParameter(Parameter parameter) {
-                    return parameter == first;
-                }
-            };
-        }
-
-        /**
+      /**
          * Creates an instruction constraint between two parameters such that their values cannot be the same.
          */
         public static InstructionConstraint ne(final Parameter first, final Parameter second) {

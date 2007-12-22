@@ -158,7 +158,7 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
         _isHeadingEnabled = false;
     }
 
-    public void print(OutputStream outputStream, List<DisassembledInstruction_Type> disassembledInstructions, GlobalLabelMapper globalLabelMapper) throws IOException {
+    public void print(OutputStream outputStream, List<DisassembledInstruction_Type> disassembledInstructions, GlobalLabelMapper globalLabelMapper) {
         final PrintStream stream = new PrintStream(outputStream);
         final int nOffsetChars = Integer.toString(disassembledInstructions.get(disassembledInstructions.size() - 1).startOffset()).length();
         final DisassembledLabel[] labelMap = createLabelMap(disassembledInstructions);

@@ -49,7 +49,7 @@ public class InternalTest extends TestCase {
     return new String(baos.toByteArray());
   }
 
-  private byte[] assemble1(long startAddress) throws AssemblyException {
+  private byte[] assemble1(long startAddress) throws Exception {
     final AMD64GeneralRegister64 myGPR = RAX;
     final AMD64Assembler asm = new AMD64Assembler(startAddress);
     final Label startLabel = new Label();
@@ -90,7 +90,7 @@ public class InternalTest extends TestCase {
     return asm.toByteArray();
   }
 
-  public void test1() throws IOException, AssemblyException {
+  public void test1() throws Exception {
     final long startAddress = 0x12345678abcdef00L;
     final byte[] bytes = assemble1(startAddress);
     final String output = disassemble(startAddress, bytes);
@@ -118,7 +118,7 @@ public class InternalTest extends TestCase {
     assertEquals(expected, output);
   }
 
-  private byte[] assemble2(long startAddress) throws AssemblyException {
+  private byte[] assemble2(long startAddress) throws Exception {
     final AMD64Assembler asm = new AMD64Assembler(startAddress);
 
     final Label loop = new Label();
@@ -137,7 +137,7 @@ public class InternalTest extends TestCase {
     return asm.toByteArray();
   }
 
-  public void test2() throws IOException, AssemblyException {
+  public void test2() throws Exception {
     final long startAddress = 0x12345678L;
     final byte[] bytes = assemble2(startAddress);
     final String output = disassemble(startAddress, bytes);

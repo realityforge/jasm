@@ -9,6 +9,7 @@
 package jasm.dis;
 
 import jasm.gen.ImmediateArgument;
+import jasm.util.HexUtil;
 
 /**
  * Mixin delegation style (for lack of multiple class inheritance in the Java(TM) Programming Language).
@@ -38,7 +39,7 @@ public interface Address64Instruction extends AddressInstruction {
         }
 
         public String addressString() {
-            return String.format("0x%016X", address());
+            return HexUtil.toHexLiteral(address());
         }
 
         public int addressToOffset(ImmediateArgument argument) {

@@ -55,11 +55,6 @@ public class ProgramError extends Error {
     unexpected("unknown switch case");
   }
 
-  public static void fatal(String message) {
-    System.err.println("FATAL PROGRAM ERROR: " + message);
-    System.exit(1);
-  }
-
   public static void unimplemented() {
     throw new ProgramError("unimplemented");
   }

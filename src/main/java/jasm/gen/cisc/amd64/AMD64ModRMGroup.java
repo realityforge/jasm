@@ -45,7 +45,6 @@ import static jasm.gen.cisc.x86.OperandCode.Rv;
 import static jasm.gen.cisc.x86.OperandCode.VRdq;
 import static jasm.gen.cisc.x86.OperandTypeCode.v;
 import jasm.gen.cisc.x86.X86TemplateContext;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**

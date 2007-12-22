@@ -10,7 +10,6 @@ package jasm.gen.risc.sparc;
 
 import jasm.InstructionSet;
 import jasm.gen.risc.RiscAssembly;
-import jasm.gen.risc.bitRange.BitRangeOrder;
 import java.util.List;
 
 /**
@@ -35,12 +34,7 @@ public final class SPARCAssembly extends RiscAssembly<SPARCTemplate> {
         return GENERATING_V9_INSTRUCTIONS;
     }
 
-    @Override
-    public BitRangeOrder bitRangeEndianness() {
-        return BitRangeOrder.DESCENDING;
-    }
-
-    @Override
+  @Override
     protected List<SPARCTemplate> createTemplates() {
         final SPARCTemplateCreator creator = new SPARCTemplateCreator();
         creator.createTemplates(new MemoryAccess(creator));

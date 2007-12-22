@@ -9,19 +9,24 @@
 package jasm.util;
 
 public final class HexUtil {
+
+  public static String toHexLiteral(long value) {
+    return String.format("0x%016X", value);
+  }
+
   public static String toHexLiteral(int value) {
-    return "0x" + String.format("%08X", value);
+    return String.format("0x%08X", value);
   }
 
   public static String toHexLiteral(byte value) {
-      return "0x" + String.format("%02X", value);
+    return String.format("0x%02X", value);
   }
 
   public static String toHexLiteral(byte[] values) {
-      String s = "0x";
-      for (byte value : values) {
-          s += String.format("%02X", value);
-      }
-      return s;
+    String s = "0x";
+    for (byte value : values) {
+      s += String.format("%02X", value);
+    }
+    return s;
   }
 }

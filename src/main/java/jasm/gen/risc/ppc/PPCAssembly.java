@@ -10,7 +10,6 @@ package jasm.gen.risc.ppc;
 
 import jasm.InstructionSet;
 import jasm.gen.risc.RiscAssembly;
-import jasm.gen.risc.bitRange.BitRangeOrder;
 import java.util.List;
 
 /**
@@ -18,19 +17,14 @@ import java.util.List;
  */
 public final class PPCAssembly extends RiscAssembly<PPCTemplate> {
 
-    private static final boolean GENERATING_DEPRECATED_INSTRUCTIONS = true;
-    private static final boolean GENERATING_64BIT_INSTRUCTIONS = true;
+  private static final boolean GENERATING_64BIT_INSTRUCTIONS = true;
     private static final boolean GENERATING_POWER5_INSTRUCTIONS = false;
 
     private PPCAssembly() {
         super(InstructionSet.PPC, PPCTemplate.class);
     }
 
-    public boolean generatingDeprecatedInstructions() {
-        return GENERATING_DEPRECATED_INSTRUCTIONS;
-    }
-
-    public boolean generating64BitInstructions() {
+  public boolean generating64BitInstructions() {
         return GENERATING_64BIT_INSTRUCTIONS;
     }
 
@@ -49,12 +43,7 @@ public final class PPCAssembly extends RiscAssembly<PPCTemplate> {
         return true;
     }
 
-    @Override
-    public BitRangeOrder bitRangeEndianness() {
-        return BitRangeOrder.ASCENDING;
-    }
-
-    @Override
+  @Override
     protected List<PPCTemplate> createTemplates() {
         final PPCTemplateCreator creator = new PPCTemplateCreator();
         creator.createTemplates(new RawInstructions(creator));

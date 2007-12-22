@@ -26,11 +26,7 @@ public class SPARCExternalInstruction extends RiscExternalInstruction {
         super(template, arguments);
     }
 
-    public SPARCExternalInstruction(SPARCTemplate template, List<Argument> arguments, int offset, List<DisassembledLabel> labels) {
-        super(template, arguments, offset, labels);
-    }
-
-    public SPARCExternalInstruction(SPARCTemplate template, List<Argument> arguments, int offset, List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
+  public SPARCExternalInstruction(SPARCTemplate template, List<Argument> arguments, int offset, List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
         super(template, arguments, offset, labels, globalLabelMapper);
     }
 

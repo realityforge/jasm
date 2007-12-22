@@ -155,8 +155,7 @@ public class Main {
 
   }
 
-  private static AssemblerGenerator<?> newAssembly()
-      throws Exception {
+  private static AssemblerGenerator<?> newAssembly() throws Exception {
     final String classname = _isa.getGeneratorClassname();
     return (AssemblerGenerator<?>) Class.forName(classname).newInstance();
   }

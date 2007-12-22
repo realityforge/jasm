@@ -103,17 +103,7 @@ public class OptionField extends RiscField {
         return withOption(name, value, name);
     }
 
-    /**
-     * Creates a copy of this field that can take an additional value.
-     *
-     * @param value  the option value
-     * @return the extended field
-     */
-    public OptionField withOption(int value) {
-        return withOption("", value);
-    }
-
-    /**
+  /**
      * Creates a copy of this field that can take an additional value.
      *
      * @param name       addition to the assembler method's name used to specify the option value

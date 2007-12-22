@@ -42,12 +42,12 @@ public class X86TemplateContext implements Cloneable {
 
     public enum SibIndexCase {
         GENERAL_REGISTER,
-        NONE;
+        NONE
     }
 
     public enum SibBaseCase {
         GENERAL_REGISTER,
-        SPECIAL;
+        SPECIAL
     }
 
     X86TemplateContext() {

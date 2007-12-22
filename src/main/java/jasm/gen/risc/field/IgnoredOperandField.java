@@ -25,12 +25,7 @@ public class IgnoredOperandField extends ImmediateOperandField {
         super(bitRange);
     }
 
-    public static IgnoredOperandField createAscendingIgnored(int... bits) {
-        final BitRange bitRange = BitRange.create(bits, BitRangeOrder.ASCENDING);
-        return new IgnoredOperandField(bitRange);
-    }
-
-    public static IgnoredOperandField createDescendingIgnored(int... bits) {
+  public static IgnoredOperandField createDescendingIgnored(int... bits) {
         final BitRange bitRange = BitRange.create(bits, BitRangeOrder.DESCENDING);
         return new IgnoredOperandField(bitRange);
     }
