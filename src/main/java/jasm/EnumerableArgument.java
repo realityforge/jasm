@@ -8,12 +8,9 @@
  */
 package jasm;
 
-import jasm.util.Symbol;
-
 /**
  * @author Bernd Mathiske
  */
 public interface EnumerableArgument
-    extends Symbol, SymbolicArgument {
-
+    extends SymbolicArgument {
 }
