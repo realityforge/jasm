@@ -8,21 +8,14 @@
  */
 package test.jasm.util;
 
-import jasm.util.Enumerator;
 import jasm.util.Symbol;
+import jasm.util.SymbolSet;
 import junit.framework.TestCase;
 
 /**
- * Tests for jasm.util.Enumerator.
- *
  * @author Hiroshi Yamauchi
  */
-public final class EnumeratorTest extends TestCase {
-  private static final class NonSuccessiveEnumerator<E extends Enum<E> & Symbol> extends Enumerator<E> {
-    private NonSuccessiveEnumerator(Class<E> type) {
-      super(type);
-    }
-  }
+public final class SymbolSetTest extends TestCase {
 
   private static enum NonSuccessiveEnum implements Symbol {
     E0(0), E100(100), E1000(1000);
@@ -36,10 +29,6 @@ public final class EnumeratorTest extends TestCase {
     public int value() {
       return _value;
     }
-
-    private Enumerator<NonSuccessiveEnum> enumerator() {
-      return new NonSuccessiveEnumerator<NonSuccessiveEnum>(NonSuccessiveEnum.class);
-    }
   }
 
   public final void test_value() {
@@ -51,8 +40,8 @@ public final class EnumeratorTest extends TestCase {
     assertTrue(NonSuccessiveEnum.E1000.value() == 1000);
   }
 
-  public final void test_enumerator() {
-    final Enumerator<NonSuccessiveEnum> enumerator = NonSuccessiveEnum.E0.enumerator();
+  public final void test_symbols() {
+    final SymbolSet<NonSuccessiveEnum> enumerator = SymbolSet.fromEnum(NonSuccessiveEnum.class);
     assertTrue(enumerator.type() == NonSuccessiveEnum.class);
     int sum = 0;
     for (NonSuccessiveEnum e : enumerator) {

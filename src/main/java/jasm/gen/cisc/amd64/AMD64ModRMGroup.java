@@ -109,7 +109,7 @@ public enum AMD64ModRMGroup implements ModRMGroup {
     GROUP_5b(
         modRM(ModRMGroup.Opcode._2, "CALL", Ev),
         modRM(ModRMGroup.Opcode._4, "JMP", Ev),
-        modRM(ModRMGroup.Opcode._6, "PUSH", Ev.excludeExternalTestArguments(AMD64GeneralRegister16.ENUMERATOR, AMD64GeneralRegister32.ENUMERATOR, AMD64GeneralRegister64.ENUMERATOR))
+        modRM(ModRMGroup.Opcode._6, "PUSH", Ev.excludeExternalTestArguments(AMD64GeneralRegister16.SYMBOLS, AMD64GeneralRegister32.SYMBOLS, AMD64GeneralRegister64.SYMBOLS))
     ),
     GROUP_6a(
         modRM(ModRMGroup.Opcode._0, "SLDT", Mw),

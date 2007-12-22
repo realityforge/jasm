@@ -9,7 +9,7 @@
 package jasm.sparc;
 
 import jasm.util.StaticFieldName;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 
 /**
  * The quad-precision (128-bit) floating-point registers.
@@ -35,5 +35,5 @@ public interface QFPR extends DFPR, StaticFieldName {
     QFPR F56 = FPR.F56;
     QFPR F60 = FPR.F60;
 
-    Symbolizer<QFPR> SYMBOLIZER = Symbolizer.Static.initialize(QFPR.class);
+    SymbolSet<QFPR> SYMBOLS = SymbolSet.initialize(QFPR.class);
 }

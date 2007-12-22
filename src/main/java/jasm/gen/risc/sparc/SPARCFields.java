@@ -203,14 +203,14 @@ public final class SPARCFields {
     public static final BranchDisplacementOperandField _disp19 = BranchDisplacementOperandField.createDescendingBranchDisplacementOperandField(18, 0);
     public static final BranchDisplacementOperandField _d16 = BranchDisplacementOperandField.createDescendingBranchDisplacementOperandField(21, 20, 13, 0);
 
-    public static final SymbolicOperandField<MembarOperand> _membarMask = SymbolicOperandField.createDescending(MembarOperand.SYMBOLIZER, 6, 0);
+    public static final SymbolicOperandField<MembarOperand> _membarMask = SymbolicOperandField.createDescending(MembarOperand.SYMBOLS, 6, 0);
 
     private static SymbolicOperandField<ICCOperand> createICCOperandField(int... bits) {
-        return SymbolicOperandField.createDescending("i_or_x_cc", ICCOperand.SYMBOLIZER, bits);
+        return SymbolicOperandField.createDescending("i_or_x_cc", ICCOperand.SYMBOLS, bits);
     }
 
     private static SymbolicOperandField<FCCOperand> createFCCOperandField(int... bits) {
-        return SymbolicOperandField.createDescending("n", FCCOperand.SYMBOLIZER, bits);
+        return SymbolicOperandField.createDescending("n", FCCOperand.SYMBOLS, bits);
     }
 
     public static final SymbolicOperandField<ICCOperand> _cc = createICCOperandField(21, 20);
@@ -227,7 +227,7 @@ public final class SPARCFields {
     public static final SymbolicOperandField<ICCOperand> _movicc = createICCOperandField(12, 11);
     public static final SymbolicOperandField<FCCOperand> _movfcc = createFCCOperandField(12, 11);
 
-    public static final SymbolicOperandField<GPR> _rs1 = SymbolicOperandField.createDescending(GPR.SYMBOLIZER, 18, 14);
+    public static final SymbolicOperandField<GPR> _rs1 = SymbolicOperandField.createDescending(GPR.SYMBOLS, 18, 14);
 
     public static RiscConstant rs1(GPR gpr) {
         return _rs1.constant(gpr);
@@ -241,13 +241,13 @@ public final class SPARCFields {
         return _rs1.constant(value);
     }
 
-    public static final SymbolicOperandField<StateRegister> _rs1_state = SymbolicOperandField.createDescending("rs1", StateRegister.SYMBOLIZER, 18, 14);
+    public static final SymbolicOperandField<StateRegister> _rs1_state = SymbolicOperandField.createDescending("rs1", StateRegister.SYMBOLS, 18, 14);
 
     public static RiscConstant rs1_state(int value) {
         return _rs1_state.constant(value);
     }
 
-    public static final SymbolicOperandField<GPR> _rs2 = SymbolicOperandField.createDescending(GPR.SYMBOLIZER, 4, 0);
+    public static final SymbolicOperandField<GPR> _rs2 = SymbolicOperandField.createDescending(GPR.SYMBOLS, 4, 0);
 
     public static RiscConstant rs2(GPR gpr) {
         return _rs2.constant(gpr);
@@ -257,7 +257,7 @@ public final class SPARCFields {
         return _rs2.bindTo(expression);
     }
 
-    public static final SymbolicOperandField<GPR> _rd = SymbolicOperandField.createDescending(GPR.SYMBOLIZER, 29, 25);
+    public static final SymbolicOperandField<GPR> _rd = SymbolicOperandField.createDescending(GPR.SYMBOLS, 29, 25);
 
     public static RiscConstant rd(GPR gpr) {
         return _rd.constant(gpr);
@@ -267,52 +267,52 @@ public final class SPARCFields {
         return _rd.constant(value);
     }
 
-    public static final SymbolicOperandField<GPR.Even> _rd_even = SymbolicOperandField.createDescending("rd", GPR.EVEN_SYMBOLIZER, 29, 25);
+    public static final SymbolicOperandField<GPR.Even> _rd_even = SymbolicOperandField.createDescending("rd", GPR.EVEN_SYMBOLS, 29, 25);
 
-    public static final SymbolicOperandField<StateRegister.Writable> _rd_state = SymbolicOperandField.createDescending("rd", StateRegister.WRITE_ONLY_SYMBOLIZER, 29, 25);
+    public static final SymbolicOperandField<StateRegister.Writable> _rd_state = SymbolicOperandField.createDescending("rd", StateRegister.WRITE_ONLY_SYMBOLS, 29, 25);
 
     public static final SymbolicOperandField<ICCOperand> _tcc = createICCOperandField(12, 11);
-    public static final SymbolicOperandField<SFPR> _sfrs1 = SymbolicOperandField.createDescending("rs1", SFPR.SYMBOLIZER, 18, 14);
-    public static final SymbolicOperandField<SFPR> _sfrs2 = SymbolicOperandField.createDescending("rs2", SFPR.SYMBOLIZER, 4, 0);
-    public static final SymbolicOperandField<SFPR> _sfrd = SymbolicOperandField.createDescending("rd", SFPR.SYMBOLIZER, 29, 25);
-    public static final SymbolicOperandField<DFPR> _dfrs1 = SymbolicOperandField.createDescending("rs1", DFPR.SYMBOLIZER, 14, 14, 18, 15, -1);
-    public static final SymbolicOperandField<DFPR> _dfrs2 = SymbolicOperandField.createDescending("rs2", DFPR.SYMBOLIZER, 0, 0, 4, 1, -1);
-    public static final SymbolicOperandField<DFPR> _dfrd = SymbolicOperandField.createDescending("rd", DFPR.SYMBOLIZER, 25, 25, 29, 26, -1);
-    public static final SymbolicOperandField<PrivilegedRegister> _rs1PrivReg = SymbolicOperandField.createDescending("rs1", PrivilegedRegister.SYMBOLIZER, 18, 14);
-    public static final SymbolicOperandField<PrivilegedRegister.Writable> _rdPrivReg = SymbolicOperandField.createDescending("rd", PrivilegedRegister.WRITE_ONLY_SYMBOLIZER, 29, 25);
+    public static final SymbolicOperandField<SFPR> _sfrs1 = SymbolicOperandField.createDescending("rs1", SFPR.SYMBOLS, 18, 14);
+    public static final SymbolicOperandField<SFPR> _sfrs2 = SymbolicOperandField.createDescending("rs2", SFPR.SYMBOLS, 4, 0);
+    public static final SymbolicOperandField<SFPR> _sfrd = SymbolicOperandField.createDescending("rd", SFPR.SYMBOLS, 29, 25);
+    public static final SymbolicOperandField<DFPR> _dfrs1 = SymbolicOperandField.createDescending("rs1", DFPR.SYMBOLS, 14, 14, 18, 15, -1);
+    public static final SymbolicOperandField<DFPR> _dfrs2 = SymbolicOperandField.createDescending("rs2", DFPR.SYMBOLS, 0, 0, 4, 1, -1);
+    public static final SymbolicOperandField<DFPR> _dfrd = SymbolicOperandField.createDescending("rd", DFPR.SYMBOLS, 25, 25, 29, 26, -1);
+    public static final SymbolicOperandField<PrivilegedRegister> _rs1PrivReg = SymbolicOperandField.createDescending("rs1", PrivilegedRegister.SYMBOLS, 18, 14);
+    public static final SymbolicOperandField<PrivilegedRegister.Writable> _rdPrivReg = SymbolicOperandField.createDescending("rd", PrivilegedRegister.WRITE_ONLY_SYMBOLS, 29, 25);
 
-    private static final SymbolicOperandField<QFPR> _qfrs1_raw = SymbolicOperandField.createDescending("rs1", QFPR.SYMBOLIZER, 14, 14, 18, 16, -2);
-    private static final SymbolicOperandField<QFPR> _qfrs2_raw = SymbolicOperandField.createDescending("rs2", QFPR.SYMBOLIZER, 0, 0, 4, 2, -2);
-    private static final SymbolicOperandField<QFPR> _qfrd_raw = SymbolicOperandField.createDescending("rd", QFPR.SYMBOLIZER, 25, 25, 29, 27, -2);
+    private static final SymbolicOperandField<QFPR> _qfrs1_raw = SymbolicOperandField.createDescending("rs1", QFPR.SYMBOLS, 14, 14, 18, 16, -2);
+    private static final SymbolicOperandField<QFPR> _qfrs2_raw = SymbolicOperandField.createDescending("rs2", QFPR.SYMBOLS, 0, 0, 4, 2, -2);
+    private static final SymbolicOperandField<QFPR> _qfrd_raw = SymbolicOperandField.createDescending("rd", QFPR.SYMBOLS, 25, 25, 29, 27, -2);
 
     public static final Object[] _qfrs1 = {_qfrs1_raw, ReservedField.createDescending(15, 15)};
     public static final Object[] _qfrs2 = {_qfrs2_raw, ReservedField.createDescending(1, 1)};
     public static final Object[] _qfrd =  {_qfrd_raw, ReservedField.createDescending(26, 26)};
 
-    public static final SymbolicOperandField<BPr> _rcond_27_25 = SymbolicOperandField.createDescending("cond", BPr.SYMBOLIZER, 27, 25);
+    public static final SymbolicOperandField<BPr> _rcond_27_25 = SymbolicOperandField.createDescending("cond", BPr.SYMBOLS, 27, 25);
 
     public static RiscConstant rcond_27_25(BPr value) {
         return _rcond_27_25.constant(value);
     }
 
-    public static final SymbolicOperandField<FBfcc> _fcond_28_25 = SymbolicOperandField.createDescending("cond", FBfcc.SYMBOLIZER, 28, 25);
+    public static final SymbolicOperandField<FBfcc> _fcond_28_25 = SymbolicOperandField.createDescending("cond", FBfcc.SYMBOLS, 28, 25);
 
     public static RiscConstant fcond_28_25(FBfcc value) {
         return _fcond_28_25.constant(value);
     }
 
-    public static final SymbolicOperandField<Bicc> _icond_28_25 = SymbolicOperandField.createDescending("cond", Bicc.SYMBOLIZER, 28, 25);
+    public static final SymbolicOperandField<Bicc> _icond_28_25 = SymbolicOperandField.createDescending("cond", Bicc.SYMBOLS, 28, 25);
 
     public static RiscConstant icond_28_25(Bicc value) {
         return _icond_28_25.constant(value);
     }
 
-    public static final SymbolicOperandField<AnnulBit> _a = SymbolicOperandField.createDescending(AnnulBit.SYMBOLIZER, 29, 29);
+    public static final SymbolicOperandField<AnnulBit> _a = SymbolicOperandField.createDescending(AnnulBit.SYMBOLS, 29, 29);
     public static RiscConstant a(AnnulBit value) {
         return _a.constant(value);
     }
 
-    public static final SymbolicOperandField<BranchPredictionBit> _p = SymbolicOperandField.createDescending(BranchPredictionBit.SYMBOLIZER, 19, 19);
+    public static final SymbolicOperandField<BranchPredictionBit> _p = SymbolicOperandField.createDescending(BranchPredictionBit.SYMBOLS, 19, 19);
     public static RiscConstant p(BranchPredictionBit value) {
         return _p.constant(value);
     }

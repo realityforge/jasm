@@ -9,7 +9,7 @@
 package jasm.sparc;
 
 import jasm.AbstractSymbolicArgument;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 
 /**
  * The argument to a Branch on Floating-Point Condition Code with Prediction instruction specifying
@@ -29,5 +29,5 @@ public final class FCCOperand extends AbstractSymbolicArgument implements Condit
     public static final FCCOperand FCC2 = new FCCOperand(2);
     public static final FCCOperand FCC3 = new FCCOperand(3);
 
-    public static final Symbolizer<FCCOperand> SYMBOLIZER = Symbolizer.Static.initialize(FCCOperand.class);
+    public static final SymbolSet<FCCOperand> SYMBOLS = SymbolSet.initialize(FCCOperand.class);
 }

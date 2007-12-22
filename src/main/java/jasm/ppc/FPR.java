@@ -9,7 +9,7 @@
 package jasm.ppc;
 
 import jasm.EnumerableArgument;
-import jasm.util.Enumerator;
+import jasm.util.SymbolSet;
 
 /**
  * The floating point registers.
@@ -40,6 +40,6 @@ public enum FPR implements EnumerableArgument {
         return externalValue();
     }
 
-  public static final Enumerator<FPR> ENUMERATOR = new Enumerator<FPR>(FPR.class);
+  public static final SymbolSet<FPR> SYMBOLS = SymbolSet.fromEnum(FPR.class);
 
 }

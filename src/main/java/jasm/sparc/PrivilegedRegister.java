@@ -9,7 +9,7 @@
 package jasm.sparc;
 
 import jasm.AbstractSymbolicArgument;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 
 /**
  * The class defining the symbolic identifiers for the privileged registers
@@ -54,6 +54,6 @@ public class PrivilegedRegister extends AbstractSymbolicArgument {
     public static final PrivilegedRegister FQ = new PrivilegedRegister(15);
     public static final PrivilegedRegister VER = new PrivilegedRegister(31);
 
-    public static final Symbolizer<PrivilegedRegister> SYMBOLIZER = Symbolizer.Static.initialize(PrivilegedRegister.class);
-    public static final Symbolizer<Writable> WRITE_ONLY_SYMBOLIZER = Symbolizer.Static.initialize(PrivilegedRegister.class, Writable.class);
+    public static final SymbolSet<PrivilegedRegister> SYMBOLS = SymbolSet.initialize(PrivilegedRegister.class);
+    public static final SymbolSet<Writable> WRITE_ONLY_SYMBOLS = SymbolSet.initialize(PrivilegedRegister.class, Writable.class);
 }

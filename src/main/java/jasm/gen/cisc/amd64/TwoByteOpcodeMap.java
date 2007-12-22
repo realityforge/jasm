@@ -8,6 +8,7 @@
  */
 package jasm.gen.cisc.amd64;
 
+import jasm.WordWidth;
 import static jasm.amd64.AMD64GeneralRegister8.CL;
 import jasm.amd64.AMD64XMMRegister;
 import static jasm.gen.cisc.amd64.AMD64ModRMGroup.GROUP_10;
@@ -289,7 +290,6 @@ import static jasm.util.HexByte._FB;
 import static jasm.util.HexByte._FC;
 import static jasm.util.HexByte._FD;
 import static jasm.util.HexByte._FE;
-import jasm.WordWidth;
 import static jasm.x86.SegmentRegister.FS;
 import static jasm.x86.SegmentRegister.GS;
 
@@ -488,7 +488,7 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
         define(_66, _0F, _D3, "PSRLQ", Vdq, Wdq);
         define(_66, _0F, _D4, "PADDQ", Vdq, Wdq);
         define(_66, _0F, _D5, "PMULLW", Vdq, Wdq);
-        define(_66, _0F, _D6, "MOVQ", Wq.excludeExternalTestArguments(AMD64XMMRegister.ENUMERATOR), Vq); // gas uses F3 0F 7E for reg-reg
+        define(_66, _0F, _D6, "MOVQ", Wq.excludeExternalTestArguments(AMD64XMMRegister.SYMBOLS), Vq); // gas uses F3 0F 7E for reg-reg
         define(_66, _0F, _D7, "PMOVMSKB", Gd, VRdq);
 
         define(_F2, _0F, _D6, "MOVDQ2Q", Pq, VRq);

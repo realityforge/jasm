@@ -8,6 +8,7 @@
  */
 package jasm.gen.cisc.ia32;
 
+import jasm.WordWidth;
 import jasm.gen.ArgumentRange;
 import jasm.gen.ImplicitOperand;
 import jasm.gen.TestArgumentExclusion;
@@ -33,7 +34,6 @@ import jasm.ia32.IA32GeneralRegister8;
 import jasm.ia32.IA32IndexRegister32;
 import jasm.ia32.IA32IndirectRegister16;
 import jasm.ia32.IA32IndirectRegister32;
-import jasm.WordWidth;
 import jasm.util.program.ProgramError;
 import jasm.x86.ControlRegister;
 import jasm.x86.DebugRegister;
@@ -57,12 +57,12 @@ public final class IA32Template extends X86Template {
             case GENERAL_REGISTER: {
                 switch (context().modCase()) {
                     case MOD_0: {
-                        addEnumerableParameter(designation, ParameterPlace.SIB_BASE, IA32BaseRegister32.ENUMERATOR);
+                        addEnumerableParameter(designation, ParameterPlace.SIB_BASE, IA32BaseRegister32.SYMBOLS);
                         break;
                     }
                     case MOD_1:
                     case MOD_2: {
-                        addEnumerableParameter(designation, ParameterPlace.SIB_BASE, IA32BaseRegister32.ENUMERATOR);
+                        addEnumerableParameter(designation, ParameterPlace.SIB_BASE, IA32BaseRegister32.SYMBOLS);
                         break;
                     }
                     case MOD_3: {
@@ -89,14 +89,14 @@ public final class IA32Template extends X86Template {
         }
         switch (context().sibIndexCase()) {
             case GENERAL_REGISTER:
-                addEnumerableParameter(designation, ParameterPlace.SIB_INDEX, IA32IndexRegister32.ENUMERATOR);
+                addEnumerableParameter(designation, ParameterPlace.SIB_INDEX, IA32IndexRegister32.SYMBOLS);
                 break;
             case NONE:
                 // Our external assembler (gas) cannot generate these case and they seem redundant anyway,
                 // so for now we do not produce them:
                 throw new TemplateNotNeededException();
         }
-        addParameter(new X86EnumerableParameter<Scale>(designation, ParameterPlace.SIB_SCALE, Scale.ENUMERATOR));
+        addParameter(new X86EnumerableParameter<Scale>(designation, ParameterPlace.SIB_SCALE, Scale.SYMBOLS));
     }
 
     @Override
@@ -107,10 +107,10 @@ public final class IA32Template extends X86Template {
                     case NORMAL:
                         switch (context().addressSizeAttribute()) {
                             case BITS_16:
-                                addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32IndirectRegister16.ENUMERATOR);
+                                addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32IndirectRegister16.SYMBOLS);
                                 break;
                             case BITS_32:
-                                addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32IndirectRegister32.ENUMERATOR);
+                                addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32IndirectRegister32.SYMBOLS);
                                 break;
                             default:
                                 ProgramError.unexpected();
@@ -155,10 +155,10 @@ public final class IA32Template extends X86Template {
                     case NORMAL:
                         switch (context().addressSizeAttribute()) {
                             case BITS_16:
-                                addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32IndirectRegister16.ENUMERATOR);
+                                addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32IndirectRegister16.SYMBOLS);
                                 break;
                             case BITS_32:
-                                addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32IndirectRegister32.ENUMERATOR);
+                                addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32IndirectRegister32.SYMBOLS);
                                 break;
                             default:
                                 ProgramError.unexpected();
@@ -195,10 +195,10 @@ public final class IA32Template extends X86Template {
                     case NORMAL:
                         switch (context().addressSizeAttribute()) {
                             case BITS_16:
-                                addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32IndirectRegister16.ENUMERATOR);
+                                addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32IndirectRegister16.SYMBOLS);
                                 break;
                             case BITS_32:
-                                addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32IndirectRegister32.ENUMERATOR);
+                                addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32IndirectRegister32.SYMBOLS);
                                 break;
                             default:
                                 ProgramError.unexpected();
@@ -248,28 +248,28 @@ public final class IA32Template extends X86Template {
                 }
                 break;
             case Cd: {
-                addParameter(new X86EnumerableParameter<ControlRegister>(designation, ParameterPlace.MOD_REG, ControlRegister.ENUMERATOR));
+                addParameter(new X86EnumerableParameter<ControlRegister>(designation, ParameterPlace.MOD_REG, ControlRegister.SYMBOLS));
                 break;
             }
             case Dd: {
-                addParameter(new X86EnumerableParameter<DebugRegister>(designation, ParameterPlace.MOD_REG, DebugRegister.ENUMERATOR));
+                addParameter(new X86EnumerableParameter<DebugRegister>(designation, ParameterPlace.MOD_REG, DebugRegister.SYMBOLS));
                 break;
             }
             case Eb: {
-                organize_E(designation, ParameterPlace.MOD_RM, IA32GeneralRegister8.ENUMERATOR, testArgumentExclusion);
+                organize_E(designation, ParameterPlace.MOD_RM, IA32GeneralRegister8.SYMBOLS, testArgumentExclusion);
                 break;
             }
             case Ed: {
-                organize_E(designation, ParameterPlace.MOD_RM, IA32GeneralRegister32.ENUMERATOR, testArgumentExclusion);
+                organize_E(designation, ParameterPlace.MOD_RM, IA32GeneralRegister32.SYMBOLS, testArgumentExclusion);
                 break;
             }
             case Ev: {
                 switch (context().operandSizeAttribute()) {
                     case BITS_16:
-                        organize_E(designation, ParameterPlace.MOD_RM, IA32GeneralRegister16.ENUMERATOR, testArgumentExclusion);
+                        organize_E(designation, ParameterPlace.MOD_RM, IA32GeneralRegister16.SYMBOLS, testArgumentExclusion);
                         break;
                     case BITS_32:
-                        organize_E(designation, ParameterPlace.MOD_RM, IA32GeneralRegister32.ENUMERATOR, testArgumentExclusion);
+                        organize_E(designation, ParameterPlace.MOD_RM, IA32GeneralRegister32.SYMBOLS, testArgumentExclusion);
                         break;
                     default:
                         ProgramError.unexpected();
@@ -278,25 +278,25 @@ public final class IA32Template extends X86Template {
                 break;
             }
             case Ew: {
-                organize_E(designation, ParameterPlace.MOD_RM, IA32GeneralRegister16.ENUMERATOR, testArgumentExclusion);
+                organize_E(designation, ParameterPlace.MOD_RM, IA32GeneralRegister16.SYMBOLS, testArgumentExclusion);
                 break;
             }
             case Fv: {
                 break;
             }
             case Gb: {
-                addEnumerableParameter(designation, ParameterPlace.MOD_REG, IA32GeneralRegister8.ENUMERATOR).excludeTestArguments(
+                addEnumerableParameter(designation, ParameterPlace.MOD_REG, IA32GeneralRegister8.SYMBOLS).excludeTestArguments(
                                 testArgumentExclusion);
                 break;
             }
             case Gv: {
                 switch (context().operandSizeAttribute()) {
                     case BITS_16:
-                        addEnumerableParameter(designation, ParameterPlace.MOD_REG, IA32GeneralRegister16.ENUMERATOR).excludeTestArguments(
+                        addEnumerableParameter(designation, ParameterPlace.MOD_REG, IA32GeneralRegister16.SYMBOLS).excludeTestArguments(
                                         testArgumentExclusion);
                         break;
                     case BITS_32:
-                        addEnumerableParameter(designation, ParameterPlace.MOD_REG, IA32GeneralRegister32.ENUMERATOR).excludeTestArguments(
+                        addEnumerableParameter(designation, ParameterPlace.MOD_REG, IA32GeneralRegister32.SYMBOLS).excludeTestArguments(
                                         testArgumentExclusion);
                         break;
                     default:
@@ -306,7 +306,7 @@ public final class IA32Template extends X86Template {
                 break;
             }
             case Gw: {
-                addEnumerableParameter(designation, ParameterPlace.MOD_REG, IA32GeneralRegister16.ENUMERATOR).excludeTestArguments(
+                addEnumerableParameter(designation, ParameterPlace.MOD_REG, IA32GeneralRegister16.SYMBOLS).excludeTestArguments(
                                 testArgumentExclusion);
                 break;
             }
@@ -366,23 +366,23 @@ public final class IA32Template extends X86Template {
                 break;
             }
             case Nb: {
-                addEnumerableParameter(designation, ParameterPlace.OPCODE1, IA32GeneralRegister8.ENUMERATOR).excludeTestArguments(
+                addEnumerableParameter(designation, ParameterPlace.OPCODE1, IA32GeneralRegister8.SYMBOLS).excludeTestArguments(
                                 testArgumentExclusion);
                 break;
             }
             case Nd:
-                addEnumerableParameter(designation, ParameterPlace.OPCODE2, IA32GeneralRegister32.ENUMERATOR).excludeTestArguments(
+                addEnumerableParameter(designation, ParameterPlace.OPCODE2, IA32GeneralRegister32.SYMBOLS).excludeTestArguments(
                                 testArgumentExclusion);
                 break;
             case Nv:
                 final ParameterPlace place = (opcode2() != null) ? ParameterPlace.OPCODE2 : ParameterPlace.OPCODE1;
                 switch (context().operandSizeAttribute()) {
                     case BITS_16:
-                        addEnumerableParameter(designation, place, IA32GeneralRegister16.ENUMERATOR).excludeTestArguments(
+                        addEnumerableParameter(designation, place, IA32GeneralRegister16.SYMBOLS).excludeTestArguments(
                                                testArgumentExclusion);
                         break;
                     case BITS_32:
-                        addEnumerableParameter(designation, place, IA32GeneralRegister32.ENUMERATOR).excludeTestArguments(
+                        addEnumerableParameter(designation, place, IA32GeneralRegister32.SYMBOLS).excludeTestArguments(
                                                testArgumentExclusion);
                         break;
                     default:
@@ -409,26 +409,26 @@ public final class IA32Template extends X86Template {
             }
             case Pd:
             case Pq: {
-                addEnumerableParameter(designation, ParameterPlace.MOD_REG, MMXRegister.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                addEnumerableParameter(designation, ParameterPlace.MOD_REG, MMXRegister.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                 break;
             }
             case PRq: {
                 if (context().modCase() != X86TemplateContext.ModCase.MOD_3) {
                     throw new TemplateNotNeededException();
                 }
-                addEnumerableParameter(designation, ParameterPlace.MOD_RM, MMXRegister.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                addEnumerableParameter(designation, ParameterPlace.MOD_RM, MMXRegister.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                 break;
             }
             case Qd:
             case Qq: {
-                organize_E(designation, ParameterPlace.MOD_RM, MMXRegister.ENUMERATOR, testArgumentExclusion);
+                organize_E(designation, ParameterPlace.MOD_RM, MMXRegister.SYMBOLS, testArgumentExclusion);
                 break;
             }
             case Rd: {
                 if (context().modCase() != X86TemplateContext.ModCase.MOD_3) {
                     throw new TemplateNotNeededException();
                 }
-                addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32GeneralRegister32.ENUMERATOR).excludeTestArguments(
+                addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32GeneralRegister32.SYMBOLS).excludeTestArguments(
                                 testArgumentExclusion);
                 break;
             }
@@ -438,11 +438,11 @@ public final class IA32Template extends X86Template {
                 }
                 switch (context().operandSizeAttribute()) {
                     case BITS_16:
-                        addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32GeneralRegister16.ENUMERATOR).excludeTestArguments(
+                        addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32GeneralRegister16.SYMBOLS).excludeTestArguments(
                                                testArgumentExclusion);
                         break;
                     case BITS_32:
-                        addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32GeneralRegister32.ENUMERATOR).excludeTestArguments(
+                        addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32GeneralRegister32.SYMBOLS).excludeTestArguments(
                                                testArgumentExclusion);
                         break;
                     default:
@@ -451,7 +451,7 @@ public final class IA32Template extends X86Template {
                 }
                 break;
             case Sw: {
-                addEnumerableParameter(designation, ParameterPlace.MOD_REG, SegmentRegister.ENUMERATOR).excludeTestArguments(
+                addEnumerableParameter(designation, ParameterPlace.MOD_REG, SegmentRegister.SYMBOLS).excludeTestArguments(
                                 testArgumentExclusion);
                 break;
             }

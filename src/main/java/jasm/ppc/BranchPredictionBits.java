@@ -9,7 +9,7 @@
 package jasm.ppc;
 
 import jasm.OptionSuffixSymbolicArgument;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 
 /**
  * The branch prediction values for the conditional branches whose encoding includes
@@ -38,5 +38,5 @@ public final class BranchPredictionBits extends OptionSuffixSymbolicArgument {
      */
     public static final BranchPredictionBits PN = new BranchPredictionBits(2, "--");
 
-    public static final Symbolizer<BranchPredictionBits> SYMBOLIZER = Symbolizer.Static.initialize(BranchPredictionBits.class);
+    public static final SymbolSet<BranchPredictionBits> SYMBOLS = SymbolSet.initialize(BranchPredictionBits.class);
 }

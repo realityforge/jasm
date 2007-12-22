@@ -66,10 +66,10 @@ public final class AMD64Template extends X86Template {
                 switch (context().addressSizeAttribute()) {
                     case BITS_32:
                         setExternalCodeSizeAttribute(context().addressSizeAttribute());
-                        addEnumerableParameter(designation, ParameterPlace.SIB_BASE, AMD64BaseRegister32.ENUMERATOR);
+                        addEnumerableParameter(designation, ParameterPlace.SIB_BASE, AMD64BaseRegister32.SYMBOLS);
                         break;
                     case BITS_64:
-                        addEnumerableParameter(designation, ParameterPlace.SIB_BASE_REXB, AMD64BaseRegister64.ENUMERATOR);
+                        addEnumerableParameter(designation, ParameterPlace.SIB_BASE_REXB, AMD64BaseRegister64.SYMBOLS);
                         break;
                     default:
                         ProgramError.unexpected();
@@ -97,10 +97,10 @@ public final class AMD64Template extends X86Template {
                 switch (context().addressSizeAttribute()) {
                     case BITS_32:
                         setExternalCodeSizeAttribute(context().addressSizeAttribute());
-                        addEnumerableParameter(designation, ParameterPlace.SIB_INDEX, AMD64IndexRegister32.ENUMERATOR);
+                        addEnumerableParameter(designation, ParameterPlace.SIB_INDEX, AMD64IndexRegister32.SYMBOLS);
                         break;
                     case BITS_64:
-                        addEnumerableParameter(designation, ParameterPlace.SIB_INDEX_REXX, AMD64IndexRegister64.ENUMERATOR);
+                        addEnumerableParameter(designation, ParameterPlace.SIB_INDEX_REXX, AMD64IndexRegister64.SYMBOLS);
                         break;
                     default:
                         ProgramError.unexpected();
@@ -112,7 +112,7 @@ public final class AMD64Template extends X86Template {
                 // so for now we do not produce them:
                 throw new TemplateNotNeededException();
         }
-        addParameter(new X86EnumerableParameter<Scale>(designation, ParameterPlace.SIB_SCALE, Scale.ENUMERATOR));
+        addParameter(new X86EnumerableParameter<Scale>(designation, ParameterPlace.SIB_SCALE, Scale.SYMBOLS));
     }
 
     @Override
@@ -124,10 +124,10 @@ public final class AMD64Template extends X86Template {
                         switch (context().addressSizeAttribute()) {
                             case BITS_32:
                                 setExternalCodeSizeAttribute(context().addressSizeAttribute());
-                                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64IndirectRegister32.ENUMERATOR);
+                                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64IndirectRegister32.SYMBOLS);
                                 break;
                             case BITS_64:
-                                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64IndirectRegister64.ENUMERATOR);
+                                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64IndirectRegister64.SYMBOLS);
                                 break;
                             default:
                                 ProgramError.unexpected();
@@ -171,10 +171,10 @@ public final class AMD64Template extends X86Template {
                         switch (context().addressSizeAttribute()) {
                             case BITS_32:
                                 setExternalCodeSizeAttribute(context().addressSizeAttribute());
-                                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64IndirectRegister32.ENUMERATOR);
+                                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64IndirectRegister32.SYMBOLS);
                                 break;
                             case BITS_64:
-                                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64IndirectRegister64.ENUMERATOR);
+                                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64IndirectRegister64.SYMBOLS);
                                 break;
                             default:
                                 ProgramError.unexpected();
@@ -207,10 +207,10 @@ public final class AMD64Template extends X86Template {
                         switch (context().addressSizeAttribute()) {
                             case BITS_32:
                                 setExternalCodeSizeAttribute(context().addressSizeAttribute());
-                                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64IndirectRegister32.ENUMERATOR);
+                                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64IndirectRegister32.SYMBOLS);
                                 break;
                             case BITS_64:
-                                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64IndirectRegister64.ENUMERATOR);
+                                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64IndirectRegister64.SYMBOLS);
                                 break;
                             default:
                                 ProgramError.unexpected();
@@ -235,29 +235,29 @@ public final class AMD64Template extends X86Template {
         throws TemplateNotNeededException {
         switch (operandCode) {
             case Cq: {
-                addParameter(new X86EnumerableParameter<ControlRegister>(designation, ParameterPlace.MOD_REG, ControlRegister.ENUMERATOR));
+                addParameter(new X86EnumerableParameter<ControlRegister>(designation, ParameterPlace.MOD_REG, ControlRegister.SYMBOLS));
                 break;
             }
             case Dq: {
-                addParameter(new X86EnumerableParameter<DebugRegister>(designation, ParameterPlace.MOD_REG, DebugRegister.ENUMERATOR));
+                addParameter(new X86EnumerableParameter<DebugRegister>(designation, ParameterPlace.MOD_REG, DebugRegister.SYMBOLS));
                 break;
             }
             case Eb: {
-                organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister8.ENUMERATOR, testArgumentExclusion);
+                organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister8.SYMBOLS, testArgumentExclusion);
                 break;
             }
             case Ed: {
-                organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister32.ENUMERATOR, testArgumentExclusion);
+                organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister32.SYMBOLS, testArgumentExclusion);
                 break;
             }
             case Ed_q: {
                 visitOperandTypeCode(operandCode.operandTypeCode());
                 switch (context().operandSizeAttribute()) {
                     case BITS_32:
-                        organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister32.ENUMERATOR, testArgumentExclusion);
+                        organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister32.SYMBOLS, testArgumentExclusion);
                         break;
                     case BITS_64:
-                        organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister64.ENUMERATOR, testArgumentExclusion);
+                        organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister64.SYMBOLS, testArgumentExclusion);
                         break;
                     default:
                         throw new TemplateNotNeededException();
@@ -267,13 +267,13 @@ public final class AMD64Template extends X86Template {
             case Ev: {
                 switch (context().operandSizeAttribute()) {
                     case BITS_16:
-                        organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister16.ENUMERATOR, testArgumentExclusion);
+                        organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister16.SYMBOLS, testArgumentExclusion);
                         break;
                     case BITS_32:
-                        organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister32.ENUMERATOR, testArgumentExclusion);
+                        organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister32.SYMBOLS, testArgumentExclusion);
                         break;
                     case BITS_64:
-                        organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister64.ENUMERATOR, testArgumentExclusion);
+                        organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister64.SYMBOLS, testArgumentExclusion);
                         break;
                     default:
                         ProgramError.unexpected();
@@ -282,27 +282,27 @@ public final class AMD64Template extends X86Template {
                 break;
             }
             case Ew: {
-                organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister16.ENUMERATOR, testArgumentExclusion);
+                organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister16.SYMBOLS, testArgumentExclusion);
                 break;
             }
             case Fv: {
                 break;
             }
             case Gb: {
-                addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister8.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister8.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                 break;
             }
             case Gd: {
-                addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister32.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister32.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                 break;
             }
             case Gd_q: {
                 switch (context().operandSizeAttribute()) {
                     case BITS_32:
-                        addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister32.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                        addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister32.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     case BITS_64:
-                        addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister64.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                        addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister64.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     default:
                         throw new TemplateNotNeededException();
@@ -310,19 +310,19 @@ public final class AMD64Template extends X86Template {
                 break;
             }
             case Gq: {
-                addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister64.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister64.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                 break;
             }
             case Gv: {
                 switch (context().operandSizeAttribute()) {
                     case BITS_16:
-                        addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister16.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                        addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister16.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     case BITS_32:
-                        addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister32.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                        addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister32.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     case BITS_64:
-                        addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister64.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                        addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister64.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     default:
                         ProgramError.unexpected();
@@ -331,17 +331,17 @@ public final class AMD64Template extends X86Template {
                 break;
             }
             case Gw: {
-                addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister16.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister16.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                 break;
             }
             case Gz: {
                 switch (context().operandSizeAttribute()) {
                     case BITS_16:
-                        addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister16.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                        addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister16.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     case BITS_32:
                     case BITS_64:
-                        addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister32.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                        addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister32.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     default:
                         ProgramError.unexpected();
@@ -354,7 +354,7 @@ public final class AMD64Template extends X86Template {
                 break;
             }
             case ICb: {
-                addEnumerableParameter(designation, ParameterPlace.APPEND, AMD64XMMComparison.ENUMERATOR);
+                addEnumerableParameter(designation, ParameterPlace.APPEND, AMD64XMMComparison.SYMBOLS);
                 break;
             }
             case Iv: {
@@ -434,17 +434,17 @@ public final class AMD64Template extends X86Template {
                 break;
             }
             case Nb: {
-                addEnumerableParameter(designation, ParameterPlace.OPCODE1_REXB, AMD64GeneralRegister8.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                addEnumerableParameter(designation, ParameterPlace.OPCODE1_REXB, AMD64GeneralRegister8.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                 break;
             }
             case Nd_q: {
                 final ParameterPlace place = (opcode2() != null) ? ParameterPlace.OPCODE2_REXB : ParameterPlace.OPCODE1_REXB;
                 switch (context().operandSizeAttribute()) {
                     case BITS_32:
-                        addEnumerableParameter(designation, place, AMD64GeneralRegister32.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                        addEnumerableParameter(designation, place, AMD64GeneralRegister32.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     case BITS_64:
-                        addEnumerableParameter(designation, place, AMD64GeneralRegister64.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                        addEnumerableParameter(designation, place, AMD64GeneralRegister64.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     default:
                         throw new TemplateNotNeededException();
@@ -455,13 +455,13 @@ public final class AMD64Template extends X86Template {
                 final ParameterPlace place = (opcode2() != null) ? ParameterPlace.OPCODE2_REXB : ParameterPlace.OPCODE1_REXB;
                 switch (context().operandSizeAttribute()) {
                     case BITS_16:
-                        addEnumerableParameter(designation, place, AMD64GeneralRegister16.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                        addEnumerableParameter(designation, place, AMD64GeneralRegister16.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     case BITS_32:
-                        addEnumerableParameter(designation, place, AMD64GeneralRegister32.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                        addEnumerableParameter(designation, place, AMD64GeneralRegister32.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     case BITS_64:
-                        addEnumerableParameter(designation, place, AMD64GeneralRegister64.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                        addEnumerableParameter(designation, place, AMD64GeneralRegister64.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     default:
                         ProgramError.unexpected();
@@ -486,30 +486,30 @@ public final class AMD64Template extends X86Template {
                 break;
             }
             case Pdq: {
-                addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64XMMRegister.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64XMMRegister.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                 break;
             }
             case Pq: {
-                addEnumerableParameter(designation, ParameterPlace.MOD_REG, MMXRegister.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                addEnumerableParameter(designation, ParameterPlace.MOD_REG, MMXRegister.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                 break;
             }
             case PRq: {
                 if (context().modCase() != X86TemplateContext.ModCase.MOD_3) {
                     throw new TemplateNotNeededException();
                 }
-                addEnumerableParameter(designation, ParameterPlace.MOD_RM, MMXRegister.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                addEnumerableParameter(designation, ParameterPlace.MOD_RM, MMXRegister.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                 break;
             }
             case Qd:
             case Qq: {
-                organize_E(designation, ParameterPlace.MOD_RM, MMXRegister.ENUMERATOR, testArgumentExclusion);
+                organize_E(designation, ParameterPlace.MOD_RM, MMXRegister.SYMBOLS, testArgumentExclusion);
                 break;
             }
             case Rq: {
                 if (context().modCase() != X86TemplateContext.ModCase.MOD_3) {
                     throw new TemplateNotNeededException();
                 }
-                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister64.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister64.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                 break;
             }
             case Rv:
@@ -518,13 +518,13 @@ public final class AMD64Template extends X86Template {
                 }
                 switch (context().operandSizeAttribute()) {
                     case BITS_16:
-                        addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister16.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                        addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister16.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     case BITS_32:
-                        addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister32.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                        addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister32.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     case BITS_64:
-                        addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister64.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                        addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister64.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     default:
                         ProgramError.unexpected();
@@ -532,7 +532,7 @@ public final class AMD64Template extends X86Template {
                 }
                 break;
             case Sw: {
-                addEnumerableParameter(designation, ParameterPlace.MOD_REG, SegmentRegister.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                addEnumerableParameter(designation, ParameterPlace.MOD_REG, SegmentRegister.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                 break;
             }
             case Vpd:
@@ -541,7 +541,7 @@ public final class AMD64Template extends X86Template {
             case Vdq:
             case Vsd:
             case Vss: {
-                addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64XMMRegister.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64XMMRegister.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                 break;
             }
             case VRq:
@@ -551,7 +551,7 @@ public final class AMD64Template extends X86Template {
                 if (context().modCase() != X86TemplateContext.ModCase.MOD_3) {
                     throw new TemplateNotNeededException();
                 }
-                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64XMMRegister.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64XMMRegister.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                 break;
             }
             case Wdq:
@@ -563,7 +563,7 @@ public final class AMD64Template extends X86Template {
                 switch (context().operandSizeAttribute()) {
                     case BITS_32:
                     case BITS_64:
-                        organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64XMMRegister.ENUMERATOR, testArgumentExclusion);
+                        organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64XMMRegister.SYMBOLS, testArgumentExclusion);
                         break;
                     default:
                         throw new TemplateNotNeededException();

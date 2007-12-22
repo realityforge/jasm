@@ -9,7 +9,7 @@
 package jasm.x86;
 
 import jasm.EnumerableArgument;
-import jasm.util.Enumerator;
+import jasm.util.SymbolSet;
 
 /**
  * @author Bernd Mathiske
@@ -34,6 +34,6 @@ public enum Scale implements EnumerableArgument {
         return name().substring(name().length() - 1);
     }
 
-  public static final Enumerator<Scale> ENUMERATOR = new Enumerator<Scale>(Scale.class);
+  public static final SymbolSet<Scale> SYMBOLS = SymbolSet.fromEnum(Scale.class);
 
 }

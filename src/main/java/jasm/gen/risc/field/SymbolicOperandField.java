@@ -18,7 +18,7 @@ import jasm.gen.WrappableSpecification;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 import jasm.util.collect.CollectionUtil;
 import jasm.util.lang.StaticLoophole;
 import java.util.Collections;
@@ -31,32 +31,32 @@ import java.util.Collections;
  */
 public final class SymbolicOperandField<Argument_Type extends SymbolicArgument> extends OperandField<Argument_Type> implements WrappableSpecification {
 
-    private final Symbolizer<Argument_Type> _symbolizer;
+    private final SymbolSet<Argument_Type> _symbols;
 
-    public SymbolicOperandField(BitRange bitRange, Symbolizer<Argument_Type> symbolizer) {
+    public SymbolicOperandField(BitRange bitRange, SymbolSet<Argument_Type> symbols) {
         super(bitRange);
-        assert symbolizer != null;
-        _symbolizer = symbolizer;
+        assert symbols != null;
+        _symbols = symbols;
     }
 
     public static <Argument_Type extends SymbolicArgument> SymbolicOperandField<Argument_Type> createAscending(
-        Symbolizer<Argument_Type> symbolizer, int... bits) {
+        SymbolSet<Argument_Type> symbols, int... bits) {
         final BitRange bitRange = BitRange.create(bits, BitRangeOrder.ASCENDING);
-        return new SymbolicOperandField<Argument_Type>(bitRange, symbolizer);
+        return new SymbolicOperandField<Argument_Type>(bitRange, symbols);
     }
 
     public static <Argument_Type extends SymbolicArgument> SymbolicOperandField<Argument_Type> createDescending(String variableName,
-                    final Symbolizer<Argument_Type> symbolizer, int... bits) {
+                    final SymbolSet<Argument_Type> symbols, int... bits) {
         final BitRange bitRange = BitRange.create(bits, BitRangeOrder.DESCENDING);
-        final SymbolicOperandField<Argument_Type> field = new SymbolicOperandField<Argument_Type>(bitRange, symbolizer);
+        final SymbolicOperandField<Argument_Type> field = new SymbolicOperandField<Argument_Type>(bitRange, symbols);
         if (variableName != null) {
             field.setVariableName(variableName);
         }
         return field;
     }
 
-    public static <Argument_Type extends SymbolicArgument> SymbolicOperandField<Argument_Type> createDescending(Symbolizer<Argument_Type> symbolizer, int... bits) {
-        return createDescending(null, symbolizer, bits);
+    public static <Argument_Type extends SymbolicArgument> SymbolicOperandField<Argument_Type> createDescending(SymbolSet<Argument_Type> symbols, int... bits) {
+        return createDescending(null, symbols, bits);
     }
 
     public final RiscConstant constant(Argument_Type argument) {
@@ -64,7 +64,7 @@ public final class SymbolicOperandField<Argument_Type extends SymbolicArgument> 
     }
 
     public final Class type() {
-        return _symbolizer.type();
+        return _symbols.type();
     }
 
     public final String valueString() {
@@ -76,7 +76,7 @@ public final class SymbolicOperandField<Argument_Type extends SymbolicArgument> 
 
   @Override
     public final Argument_Type disassemble(int instruction) {
-        return _symbolizer.fromValue(extract(instruction));
+        return _symbols.fromValue(extract(instruction));
     }
 
     @Override
@@ -90,7 +90,7 @@ public final class SymbolicOperandField<Argument_Type extends SymbolicArgument> 
     }
 
     public final Iterable<? extends Argument> getLegalTestArguments() {
-        return _symbolizer;
+        return _symbols;
     }
 
     public final Iterable<? extends Argument> getIllegalTestArguments() {

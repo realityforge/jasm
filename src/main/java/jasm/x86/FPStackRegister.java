@@ -9,7 +9,7 @@
 package jasm.x86;
 
 import jasm.EnumerableArgument;
-import jasm.util.Enumerator;
+import jasm.util.SymbolSet;
 
 /**
  * @author Bernd Mathiske
@@ -57,6 +57,6 @@ public enum FPStackRegister implements EnumerableArgument {
         return "st(" + value() + ")";
     }
 
-  public static final Enumerator<FPStackRegister> ENUMERATOR = new Enumerator<FPStackRegister>(FPStackRegister.class);
+  public static final SymbolSet<FPStackRegister> SYMBOLS = SymbolSet.fromEnum(FPStackRegister.class);
 
 }

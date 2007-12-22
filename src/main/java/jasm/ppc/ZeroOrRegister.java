@@ -9,7 +9,9 @@
 package jasm.ppc;
 
 import jasm.AbstractSymbolicArgument;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * The super type of all the {@link GPR General Purpose Registers} and the constant {@link Zero#ZERO}.
@@ -39,14 +41,19 @@ public abstract class ZeroOrRegister extends AbstractSymbolicArgument {
         return ra < rt || lastReg < ra;
     }
 
-    public static Symbolizer<ZeroOrRegister> symbolizer() {
-        if (_symbolizer == null) {
-            _symbolizer = Symbolizer.Static.fromSequence(ZeroOrRegister.class, GPR.GPR_SYMBOLIZER, Zero.ZERO);
+    public static SymbolSet<ZeroOrRegister> symbols() {
+      if (_symbols == null) {
+        final Collection<ZeroOrRegister> symbols = new ArrayList<ZeroOrRegister>(GPR.GPR_SYMBOLS.size() + 1);
+        symbols.add(Zero.ZERO);
+        for (GPR symbol : GPR.GPR_SYMBOLS) {
+          symbols.add(symbol);
         }
-        return _symbolizer;
+        _symbols = SymbolSet.fromCollection(ZeroOrRegister.class, symbols);
+      }
+      return _symbols;
     }
 
     // This must be lazily constructed to avoid dependency on the GPR class initializer
-    private static Symbolizer<ZeroOrRegister> _symbolizer;
+    private static SymbolSet<ZeroOrRegister> _symbols;
 
 }

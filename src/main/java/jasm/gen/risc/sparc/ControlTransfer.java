@@ -60,7 +60,7 @@ import jasm.sparc.FBfcc;
 final class ControlTransfer extends SPARCInstructionDescriptionCreator {
 
     private void createBPr(String prefix, Object... objects) {
-        for (BPr condition : BPr.SYMBOLIZER) {
+        for (BPr condition : BPr.SYMBOLS) {
             define(prefix + condition.name().toLowerCase(), objects, rcond_27_25(condition));
         }
     }
@@ -72,7 +72,7 @@ final class ControlTransfer extends SPARCInstructionDescriptionCreator {
     }
 
     private void createFBfcc(String prefix, Object... objects) {
-        for (FBfcc condition : FBfcc.SYMBOLIZER) {
+        for (FBfcc condition : FBfcc.SYMBOLS) {
             define(prefix + condition.name().toLowerCase(), objects, fcond_28_25(condition));
         }
     }
@@ -94,7 +94,7 @@ final class ControlTransfer extends SPARCInstructionDescriptionCreator {
     }
 
     private void createBicc(String prefix, Object... objects) {
-        for (Bicc condition : Bicc.SYMBOLIZER) {
+        for (Bicc condition : Bicc.SYMBOLS) {
             define(prefix + condition.name().toLowerCase(), objects, icond_28_25(condition));
         }
     }

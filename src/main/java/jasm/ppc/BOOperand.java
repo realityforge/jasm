@@ -9,7 +9,7 @@
 package jasm.ppc;
 
 import jasm.AbstractSymbolicArgument;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 
 /**
  * The argument to a Branch Conditional instruction specifying the conditions
@@ -206,5 +206,5 @@ public final class BOOperand extends AbstractSymbolicArgument {
 
     // Checkstyle: resume constant name check
 
-    public static final Symbolizer<BOOperand> SYMBOLIZER = Symbolizer.Static.initialize(BOOperand.class);
+    public static final SymbolSet<BOOperand> SYMBOLS = SymbolSet.initialize(BOOperand.class);
 }

@@ -8,8 +8,8 @@
  */
 package jasm.amd64;
 
-import jasm.util.Enumerator;
 import jasm.WordWidth;
+import jasm.util.SymbolSet;
 import jasm.x86.GeneralRegister;
 import jasm.x86.IndirectRegister;
 
@@ -65,5 +65,5 @@ public enum AMD64IndirectRegister32 implements GeneralRegister, IndirectRegister
         return AMD64GeneralRegister32.from(this).disassembledValue();
     }
 
-  public static final Enumerator<AMD64IndirectRegister32> ENUMERATOR = new Enumerator<AMD64IndirectRegister32>(AMD64IndirectRegister32.class);
+  public static final SymbolSet<AMD64IndirectRegister32> SYMBOLS = SymbolSet.fromEnum(AMD64IndirectRegister32.class);
 }

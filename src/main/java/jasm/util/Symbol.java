@@ -12,8 +12,6 @@ package jasm.util;
  * A symbol is an immutable binding of a name to a value.
  *
  * @author Bernd Mathiske
- *
- * @see Symbolizer
  */
 public interface Symbol {
 

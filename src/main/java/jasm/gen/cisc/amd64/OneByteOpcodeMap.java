@@ -8,6 +8,7 @@
  */
 package jasm.gen.cisc.amd64;
 
+import jasm.WordWidth;
 import jasm.amd64.AMD64GeneralRegister16;
 import static jasm.amd64.AMD64GeneralRegister16.AX;
 import static jasm.amd64.AMD64GeneralRegister16.BP;
@@ -248,7 +249,6 @@ import static jasm.util.HexByte._FC;
 import static jasm.util.HexByte._FD;
 import static jasm.util.HexByte._FE;
 import static jasm.util.HexByte._FF;
-import jasm.WordWidth;
 
 /**
  * @author Bernd Mathiske
@@ -329,8 +329,8 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
         define(_C1, GROUP_2, v, Ev, Ib);
         define(_C2, "RET", Iw).setDefaultOperandSize(WordWidth.BITS_64);
         define(_C3, "RET").setDefaultOperandSize(WordWidth.BITS_64);
-        define(_C6, "MOV", b, Eb.excludeExternalTestArguments(AMD64GeneralRegister8.ENUMERATOR), Ib);
-        define(_C7, "MOV", v, Ev.excludeExternalTestArguments(AMD64GeneralRegister16.ENUMERATOR, AMD64GeneralRegister32.ENUMERATOR), Iz.externalRange(0, Integer.MAX_VALUE));
+        define(_C6, "MOV", b, Eb.excludeExternalTestArguments(AMD64GeneralRegister8.SYMBOLS), Ib);
+        define(_C7, "MOV", v, Ev.excludeExternalTestArguments(AMD64GeneralRegister16.SYMBOLS, AMD64GeneralRegister32.SYMBOLS), Iz.externalRange(0, Integer.MAX_VALUE));
 
         define(_D0, GROUP_2, b, Eb, 1);
         define(_D1, GROUP_2, v, Ev, 1);
@@ -413,7 +413,7 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
         define(_89, "MOV", Ev, Gv.excludeExternalTestArguments(AX, EAX));
         define(_8A, "MOV", Gb.excludeExternalTestArguments(AL), Eb);
         define(_8B, "MOV", Gv.excludeExternalTestArguments(AX, EAX), Ev);
-        define(_8C, "MOV", Ew.excludeExternalTestArguments(AMD64GeneralRegister16.ENUMERATOR), Sw); // gas may needlessly insert OPERAND_SIZE prefix
+        define(_8C, "MOV", Ew.excludeExternalTestArguments(AMD64GeneralRegister16.SYMBOLS), Sw); // gas may needlessly insert OPERAND_SIZE prefix
         define(_8D, "LEA", Gv, M);
         define(_8E, "MOV", Sw, Ew.excludeExternalTestArguments(AX, CX, DX, BX, SP, BP, SI, DI)); // gas may needlessly insert OPERAND_SIZE prefix
         define(_8F, "POP", Ev.excludeExternalTestArguments(AX, CX, DX, BX, SP, BP, SI, DI)).setDefaultOperandSize(WordWidth.BITS_64);

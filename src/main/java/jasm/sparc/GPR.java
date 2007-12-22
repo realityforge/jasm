@@ -9,7 +9,7 @@
 package jasm.sparc;
 
 import jasm.AbstractSymbolicArgument;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 
 /**
  * The class defining the symbolic identifiers for the general purpose registers.
@@ -62,6 +62,6 @@ public class GPR extends AbstractSymbolicArgument {
     public static final Even I6 = new Even(30);
     public static final  GPR I7 = new  GPR(31);
 
-    public static final Symbolizer<GPR> SYMBOLIZER = Symbolizer.Static.initialize(GPR.class);
-    public static final Symbolizer<Even> EVEN_SYMBOLIZER = Symbolizer.Static.initialize(GPR.class, Even.class);
+    public static final SymbolSet<GPR> SYMBOLS = SymbolSet.initialize(GPR.class);
+    public static final SymbolSet<Even> EVEN_SYMBOLS = SymbolSet.initialize(GPR.class, Even.class);
 }

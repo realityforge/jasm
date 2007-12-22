@@ -9,7 +9,7 @@
 package jasm.x86;
 
 import jasm.EnumerableArgument;
-import jasm.util.Enumerator;
+import jasm.util.SymbolSet;
 
 /**
  * @author Bernd Mathiske
@@ -40,6 +40,6 @@ public enum DebugRegister implements EnumerableArgument {
         return name().toLowerCase();
     }
 
-  public static final Enumerator<DebugRegister> ENUMERATOR = new Enumerator<DebugRegister>(DebugRegister.class);
+  public static final SymbolSet<DebugRegister> SYMBOLS = SymbolSet.fromEnum(DebugRegister.class);
 
 }

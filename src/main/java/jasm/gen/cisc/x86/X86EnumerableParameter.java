@@ -11,7 +11,7 @@ package jasm.gen.cisc.x86;
 import jasm.Argument;
 import jasm.EnumerableArgument;
 import jasm.gen.EnumerableParameter;
-import jasm.util.Enumerator;
+import jasm.util.SymbolSet;
 import jasm.util.program.ProgramError;
 import java.util.Collections;
 
@@ -20,9 +20,9 @@ import java.util.Collections;
  */
 public final class X86EnumerableParameter<EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument> extends X86Parameter implements EnumerableParameter {
 
-    private final Enumerator<EnumerableArgument_Type> _enumerator;
+    private final SymbolSet<EnumerableArgument_Type> _enumerator;
 
-    public X86EnumerableParameter(X86Operand.Designation designation, ParameterPlace place, Enumerator<EnumerableArgument_Type> enumerator) {
+    public X86EnumerableParameter(X86Operand.Designation designation, ParameterPlace place, SymbolSet<EnumerableArgument_Type> enumerator) {
         super(designation, place);
         _enumerator = enumerator;
         switch (place) {
@@ -59,7 +59,7 @@ public final class X86EnumerableParameter<EnumerableArgument_Type extends Enum<E
         }
     }
 
-    public final Enumerator<EnumerableArgument_Type> enumerator() {
+    public final SymbolSet<EnumerableArgument_Type> enumerator() {
         return _enumerator;
     }
 

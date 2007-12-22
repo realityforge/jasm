@@ -9,7 +9,7 @@
 package jasm.amd64;
 
 import jasm.EnumerableArgument;
-import jasm.util.Enumerator;
+import jasm.util.SymbolSet;
 
 public enum AMD64XMMComparison implements EnumerableArgument {
 
@@ -39,6 +39,6 @@ public enum AMD64XMMComparison implements EnumerableArgument {
         return name().toLowerCase();
     }
 
-  public static final Enumerator<AMD64XMMComparison> ENUMERATOR = new Enumerator<AMD64XMMComparison>(AMD64XMMComparison.class);
+  public static final SymbolSet<AMD64XMMComparison> SYMBOLS = SymbolSet.fromEnum(AMD64XMMComparison.class);
 
 }

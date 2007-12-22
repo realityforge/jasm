@@ -9,7 +9,7 @@
 package jasm.sparc;
 
 import jasm.OptionSuffixSymbolicArgument;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 
 /**
  * An optional (suffix) argument to a branch assembler instruction specifying
@@ -35,6 +35,6 @@ public final class AnnulBit extends OptionSuffixSymbolicArgument {
      */
     public static final AnnulBit A = new AnnulBit(1, ",a");
 
-    public static final Symbolizer<AnnulBit> SYMBOLIZER = Symbolizer.Static.initialize(AnnulBit.class);
+    public static final SymbolSet<AnnulBit> SYMBOLS = SymbolSet.initialize(AnnulBit.class);
 
 }

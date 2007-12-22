@@ -28,8 +28,8 @@ import jasm.gen.cisc.x86.X86Opcode;
 import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
-import jasm.util.Enumerator;
 import jasm.util.HexByte;
+import jasm.util.SymbolSet;
 import jasm.util.collect.CollectionUtil;
 import jasm.util.lang.Endianness;
 import java.io.BufferedInputStream;
@@ -129,7 +129,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
                 case APPEND:
                     if (parameter instanceof X86EnumerableParameter) {
                         final X86EnumerableParameter enumerableParameter = (X86EnumerableParameter) parameter;
-                        final Enumerator enumerator = enumerableParameter.enumerator();
+                        final SymbolSet enumerator = enumerableParameter.enumerator();
                         arguments.add((Argument) enumerator.fromValue(endianness().readByte(stream)));
                         continue;
                     }
@@ -163,8 +163,8 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
                     break;
             }
             final X86EnumerableParameter enumerableParameter = (X86EnumerableParameter) parameter;
-            final Enumerator enumerator = enumerableParameter.enumerator();
-            if (enumerator == AMD64GeneralRegister8.ENUMERATOR) {
+            final SymbolSet enumerator = enumerableParameter.enumerator();
+            if (enumerator == AMD64GeneralRegister8.SYMBOLS) {
                 arguments.add(AMD64GeneralRegister8.fromValue(value, header._rexPrefix != null));
             } else {
                 arguments.add((Argument) enumerator.fromValue(value));

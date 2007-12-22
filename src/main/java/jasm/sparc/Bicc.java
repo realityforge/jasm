@@ -9,7 +9,7 @@
 package jasm.sparc;
 
 import jasm.NameSuffixSymbolicArgument;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 
 /**
  * The argument to a Branch on Integer Condition Code instruction specifying
@@ -47,7 +47,7 @@ public final class Bicc extends NameSuffixSymbolicArgument implements Predicate<
     public static final Bicc VC = new Bicc(15);
     public static final Bicc VS = new Bicc(7, VC);
 
-    public static final Symbolizer<Bicc> SYMBOLIZER = Symbolizer.Static.initialize(Bicc.class);
+    public static final SymbolSet<Bicc> SYMBOLS = SymbolSet.initialize(Bicc.class);
 
     public Bicc negate() {
         return _negation;

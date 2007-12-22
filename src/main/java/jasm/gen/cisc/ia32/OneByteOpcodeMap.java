@@ -8,6 +8,7 @@
  */
 package jasm.gen.cisc.ia32;
 
+import jasm.WordWidth;
 import static jasm.gen.cisc.ia32.IA32ModRMGroup.FP_D8;
 import static jasm.gen.cisc.ia32.IA32ModRMGroup.FP_D9;
 import static jasm.gen.cisc.ia32.IA32ModRMGroup.FP_DA;
@@ -280,7 +281,6 @@ import static jasm.util.HexByte._FC;
 import static jasm.util.HexByte._FD;
 import static jasm.util.HexByte._FE;
 import static jasm.util.HexByte._FF;
-import jasm.WordWidth;
 import static jasm.x86.SegmentRegister.CS;
 import static jasm.x86.SegmentRegister.DS;
 import static jasm.x86.SegmentRegister.ES;

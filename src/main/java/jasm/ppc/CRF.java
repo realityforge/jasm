@@ -9,7 +9,7 @@
 package jasm.ppc;
 
 import jasm.EnumerableArgument;
-import jasm.util.Enumerator;
+import jasm.util.SymbolSet;
 
 /**
  * The constants denoting the eight 4-bit fields into which the 32-bit Condition Register
@@ -119,6 +119,6 @@ public enum CRF implements EnumerableArgument {
     public static final int UN = 3;
 
 
-    public static final Enumerator<CRF> ENUMERATOR = new Enumerator<CRF>(CRF.class);
+    public static final SymbolSet<CRF> SYMBOLS = SymbolSet.fromEnum(CRF.class);
 
 }

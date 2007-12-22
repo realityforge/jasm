@@ -10,7 +10,7 @@ package jasm.sparc;
 
 import jasm.SymbolicArgument;
 import jasm.util.StaticFieldName;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 
 /**
  * The single-precision (32-bit) floating-point registers.
@@ -52,5 +52,5 @@ public interface SFPR extends SymbolicArgument, StaticFieldName {
     SFPR F30 = FPR.F30;
     SFPR F31 = FPR.F31;
 
-    Symbolizer<SFPR> SYMBOLIZER = Symbolizer.Static.initialize(SFPR.class);
+    SymbolSet<SFPR> SYMBOLS = SymbolSet.initialize(SFPR.class);
 }

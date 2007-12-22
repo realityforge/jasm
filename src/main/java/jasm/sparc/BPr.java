@@ -9,7 +9,7 @@
 package jasm.sparc;
 
 import jasm.NameSuffixSymbolicArgument;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 
 /**
  * The argument to a Branch on Integer Register with Prediction instruction specifying
@@ -31,6 +31,6 @@ public final class BPr extends NameSuffixSymbolicArgument {
     public static final BPr GZ = new BPr(6);
     public static final BPr GEZ = new BPr(7);
 
-    public static final Symbolizer<BPr> SYMBOLIZER = Symbolizer.Static.initialize(BPr.class);
+    public static final SymbolSet<BPr> SYMBOLS = SymbolSet.initialize(BPr.class);
 
 }

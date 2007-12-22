@@ -9,7 +9,7 @@
 package jasm.sparc;
 
 import jasm.OptionSuffixSymbolicArgument;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 
 /**
  * An optional (suffix) argument to a branch with prediction assembler instruction
@@ -35,5 +35,5 @@ public final class BranchPredictionBit extends OptionSuffixSymbolicArgument {
      */
     public static final BranchPredictionBit PT = new BranchPredictionBit(1, ",pt");
 
-    public static final Symbolizer<BranchPredictionBit> SYMBOLIZER = Symbolizer.Static.initialize(BranchPredictionBit.class);
+    public static final SymbolSet<BranchPredictionBit> SYMBOLS = SymbolSet.initialize(BranchPredictionBit.class);
 }

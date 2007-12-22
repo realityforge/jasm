@@ -9,7 +9,7 @@
 package jasm.ppc;
 
 import jasm.AbstractSymbolicArgument;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 
 /**
  * Special Purpose Registers.
@@ -37,6 +37,6 @@ public final class SPR extends AbstractSymbolicArgument {
      */
     public static final SPR CTR = new SPR(9);
 
-    public static final Symbolizer<SPR> SYMBOLIZER = Symbolizer.Static.initialize(SPR.class);
+    public static final SymbolSet<SPR> SYMBOLS = SymbolSet.initialize(SPR.class);
 
 }

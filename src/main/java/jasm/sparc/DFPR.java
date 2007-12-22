@@ -10,7 +10,7 @@ package jasm.sparc;
 
 import jasm.SymbolicArgument;
 import jasm.util.StaticFieldName;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 
 /**
  * The double-precision (64-bit) floating-point registers.
@@ -53,5 +53,5 @@ public interface DFPR extends SymbolicArgument, StaticFieldName {
     DFPR F60 = FPR.F60;
     DFPR F62 = FPR.F62;
 
-    Symbolizer<DFPR> SYMBOLIZER = Symbolizer.Static.initialize(DFPR.class);
+    SymbolSet<DFPR> SYMBOLS = SymbolSet.initialize(DFPR.class);
 }

@@ -60,7 +60,7 @@ final class PPCFields {
      * RA field that can also accept the constant 0.
      */
     public static final SymbolicOperandField<ZeroOrRegister> _ra0 =
-        SymbolicOperandField.createAscending(ZeroOrRegister.symbolizer(), 11, 15).setVariableName("ra");
+        SymbolicOperandField.createAscending(ZeroOrRegister.symbols(), 11, 15).setVariableName("ra");
 
     public static RiscConstant ra0(ZeroOrRegister value) {
         return _ra0.constant(value);
@@ -69,7 +69,7 @@ final class PPCFields {
     /**
      * RA field that can only accept GPR symbols.
      */
-    public static final SymbolicOperandField<GPR> _ra = SymbolicOperandField.createAscending(GPR.GPR_SYMBOLIZER, 11, 15);
+    public static final SymbolicOperandField<GPR> _ra = SymbolicOperandField.createAscending(GPR.GPR_SYMBOLS, 11, 15);
 
     public static RiscConstant ra(GPR value) {
         return _ra.constant(value);
@@ -85,7 +85,7 @@ final class PPCFields {
      */
     public static final Object[] _ra0_notR0 = {_ra0, ne(_ra0, GPR.R0)};
 
-    public static final SymbolicOperandField<GPR> _rb = SymbolicOperandField.createAscending(GPR.GPR_SYMBOLIZER, 16, 20);
+    public static final SymbolicOperandField<GPR> _rb = SymbolicOperandField.createAscending(GPR.GPR_SYMBOLS, 16, 20);
 
     public static RiscConstant rb(GPR value) {
         return _rb.constant(value);
@@ -99,8 +99,8 @@ final class PPCFields {
         return _rs.bindTo(expression);
     }
 
-    public static final SymbolicOperandField<GPR> _rs = SymbolicOperandField.createAscending(GPR.GPR_SYMBOLIZER, 6, 10);
-    public static final SymbolicOperandField<GPR> _rt = SymbolicOperandField.createAscending(GPR.GPR_SYMBOLIZER, 6, 10);
+    public static final SymbolicOperandField<GPR> _rs = SymbolicOperandField.createAscending(GPR.GPR_SYMBOLS, 6, 10);
+    public static final SymbolicOperandField<GPR> _rt = SymbolicOperandField.createAscending(GPR.GPR_SYMBOLS, 6, 10);
 
     /**
      * GPR symbol RA field with constraint: RA != GPR.R0 && RA != RT.
@@ -112,24 +112,24 @@ final class PPCFields {
      */
     public static final Object[] _ra0_notR0_ltRT = {_ra0, ne(_ra0, GPR.R0), lt(_ra0, _rt)};
 
-    public static final SymbolicOperandField<CRF> _bf = SymbolicOperandField.createAscending(CRF.ENUMERATOR, 6, 8);
+    public static final SymbolicOperandField<CRF> _bf = SymbolicOperandField.createAscending(CRF.SYMBOLS, 6, 8);
 
     public static RiscConstant bf(CRF value) {
         return _bf.constant(value);
     }
 
-    public static final SymbolicOperandField<CRF> _bfa = SymbolicOperandField.createAscending(CRF.ENUMERATOR, 11, 13);
-    public static final SymbolicOperandField<CRF> _br_crf = SymbolicOperandField.createAscending(CRF.ENUMERATOR, 11, 13).setVariableName("crf");
+    public static final SymbolicOperandField<CRF> _bfa = SymbolicOperandField.createAscending(CRF.SYMBOLS, 11, 13);
+    public static final SymbolicOperandField<CRF> _br_crf = SymbolicOperandField.createAscending(CRF.SYMBOLS, 11, 13).setVariableName("crf");
 
     public static final ImmediateOperandField _spr = ImmediateOperandField.createAscending(16, 20, 11, 15);
 
-    public static final SymbolicOperandField<FPR> _frt = SymbolicOperandField.createAscending(FPR.ENUMERATOR, 6, 10);
-    public static final SymbolicOperandField<FPR> _frs = SymbolicOperandField.createAscending(FPR.ENUMERATOR, 6, 10);
-    public static final SymbolicOperandField<FPR> _fra = SymbolicOperandField.createAscending(FPR.ENUMERATOR, 11, 15);
-    public static final SymbolicOperandField<FPR> _frb = SymbolicOperandField.createAscending(FPR.ENUMERATOR, 16, 20);
-    public static final SymbolicOperandField<FPR> _frc = SymbolicOperandField.createAscending(FPR.ENUMERATOR, 21, 25);
+    public static final SymbolicOperandField<FPR> _frt = SymbolicOperandField.createAscending(FPR.SYMBOLS, 6, 10);
+    public static final SymbolicOperandField<FPR> _frs = SymbolicOperandField.createAscending(FPR.SYMBOLS, 6, 10);
+    public static final SymbolicOperandField<FPR> _fra = SymbolicOperandField.createAscending(FPR.SYMBOLS, 11, 15);
+    public static final SymbolicOperandField<FPR> _frb = SymbolicOperandField.createAscending(FPR.SYMBOLS, 16, 20);
+    public static final SymbolicOperandField<FPR> _frc = SymbolicOperandField.createAscending(FPR.SYMBOLS, 21, 25);
 
-    public static final SymbolicOperandField<BOOperand> _bo = SymbolicOperandField.createAscending(BOOperand.SYMBOLIZER, 6, 10);
+    public static final SymbolicOperandField<BOOperand> _bo = SymbolicOperandField.createAscending(BOOperand.SYMBOLS, 6, 10);
 
     public static RiscConstant bo(BOOperand value) {
         return _bo.constant(value);
@@ -429,12 +429,12 @@ final class PPCFields {
     /**
      * An OperandField for the prediction bits in the BO values that are only in terms of a bit in the Condition Register (CR).
      */
-    public static final SymbolicOperandField<BranchPredictionBits> _bo_CR_prediction = SymbolicOperandField.createAscending(BranchPredictionBits.SYMBOLIZER, 9, 10).setVariableName("prediction");
+    public static final SymbolicOperandField<BranchPredictionBits> _bo_CR_prediction = SymbolicOperandField.createAscending(BranchPredictionBits.SYMBOLS, 9, 10).setVariableName("prediction");
 
     /**
      * An OperandField for the prediction bits in the BO values that are only in terms of a bit in the Count Register (CTR).
      */
-    public static final SymbolicOperandField<BranchPredictionBits> _bo_CTR_prediction = SymbolicOperandField.createAscending(BranchPredictionBits.SYMBOLIZER, 7, 7, 10, 10).setVariableName("prediction");
+    public static final SymbolicOperandField<BranchPredictionBits> _bo_CTR_prediction = SymbolicOperandField.createAscending(BranchPredictionBits.SYMBOLS, 7, 7, 10, 10).setVariableName("prediction");
 
     /**
      * An OptionField for the prediction bits in the BO values that are only in terms of a bit in the Condition Register (CR).

@@ -19,8 +19,8 @@ import jasm.gen.Template;
 import jasm.gen.TestArgumentExclusion;
 import jasm.gen.Trace;
 import jasm.gen.cisc.TemplateNotNeededException;
-import jasm.util.Enumerator;
 import jasm.util.HexByte;
+import jasm.util.SymbolSet;
 import jasm.util.program.ProgramError;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
@@ -223,7 +223,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     }
 
     protected final <EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument> X86Parameter addEnumerableParameter(X86Operand.Designation designation, ParameterPlace parameterPlace,
-                                            final Enumerator<EnumerableArgument_Type> enumerator) {
+                                            final SymbolSet<EnumerableArgument_Type> enumerator) {
         return addParameter(new X86EnumerableParameter<EnumerableArgument_Type>(designation, parameterPlace, enumerator));
     }
 
@@ -346,7 +346,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     protected abstract void organize_M(X86Operand.Designation designation) throws TemplateNotNeededException;
 
     protected final <EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument> void organize_E(X86Operand.Designation designation, ParameterPlace place,
-                    final Enumerator<EnumerableArgument_Type> registerEnumerator, TestArgumentExclusion testArgumentExclusion) throws TemplateNotNeededException {
+                    final SymbolSet<EnumerableArgument_Type> registerEnumerator, TestArgumentExclusion testArgumentExclusion) throws TemplateNotNeededException {
         if (context().modCase() == X86TemplateContext.ModCase.MOD_3) {
             switch (context().rmCase()) {
                 case NORMAL:
@@ -364,7 +364,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
                                               final TestArgumentExclusion testArgumentExclusion) throws TemplateNotNeededException {
         switch (floatingPointOperandCode) {
             case ST_i:
-                addEnumerableParameter(designation, ParameterPlace.OPCODE2, FPStackRegister.ENUMERATOR).excludeTestArguments(testArgumentExclusion);
+                addEnumerableParameter(designation, ParameterPlace.OPCODE2, FPStackRegister.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                 break;
             default:
                 setOperandTypeSuffix(floatingPointOperandCode.operandTypeSuffix());

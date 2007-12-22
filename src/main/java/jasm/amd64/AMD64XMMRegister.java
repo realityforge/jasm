@@ -9,7 +9,7 @@
 package jasm.amd64;
 
 import jasm.EnumerableArgument;
-import jasm.util.Enumerator;
+import jasm.util.SymbolSet;
 
 /**
  * @author Bernd Mathiske
@@ -34,5 +34,5 @@ public enum AMD64XMMRegister implements EnumerableArgument {
         return name().toLowerCase();
     }
 
-  public static final Enumerator<AMD64XMMRegister> ENUMERATOR = new Enumerator<AMD64XMMRegister>(AMD64XMMRegister.class);
+  public static final SymbolSet<AMD64XMMRegister> SYMBOLS = SymbolSet.fromEnum(AMD64XMMRegister.class);
 }

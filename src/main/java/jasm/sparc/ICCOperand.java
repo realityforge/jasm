@@ -9,7 +9,7 @@
 package jasm.sparc;
 
 import jasm.AbstractSymbolicArgument;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 
 /**
  * The argument to a Branch on Integer Condition Code with Prediction instruction specifying
@@ -27,5 +27,5 @@ public final class ICCOperand extends AbstractSymbolicArgument implements Condit
     public static final ICCOperand ICC = new ICCOperand(0);
     public static final ICCOperand XCC = new ICCOperand(2);
 
-    public static final Symbolizer<ICCOperand> SYMBOLIZER = Symbolizer.Static.initialize(ICCOperand.class);
+    public static final SymbolSet<ICCOperand> SYMBOLS = SymbolSet.initialize(ICCOperand.class);
 }

@@ -8,8 +8,8 @@
  */
 package jasm.ia32;
 
-import jasm.util.Enumerator;
 import jasm.WordWidth;
+import jasm.util.SymbolSet;
 import jasm.x86.GeneralRegister;
 
 /**
@@ -54,5 +54,5 @@ public enum IA32BaseRegister32 implements GeneralRegister {
         return IA32GeneralRegister32.from(this).disassembledValue();
     }
 
-  public static final Enumerator<IA32BaseRegister32> ENUMERATOR = new Enumerator<IA32BaseRegister32>(IA32BaseRegister32.class);
+  public static final SymbolSet<IA32BaseRegister32> SYMBOLS = SymbolSet.fromEnum(IA32BaseRegister32.class);
 }

@@ -9,7 +9,7 @@
 package jasm.sparc;
 
 import jasm.AbstractSymbolicArgument;
-import jasm.util.Symbolizer;
+import jasm.util.SymbolSet;
 
 /**
  * The argument to the Write State Register and Read State Register instructions.
@@ -59,6 +59,6 @@ public class StateRegister extends AbstractSymbolicArgument {
     public static final Writable ASR30 = new Writable(30);
     public static final Writable ASR31 = new Writable(31);
 
-    public static final Symbolizer<StateRegister> SYMBOLIZER = Symbolizer.Static.initialize(StateRegister.class);
-    public static final Symbolizer<Writable> WRITE_ONLY_SYMBOLIZER = Symbolizer.Static.initialize(StateRegister.class, Writable.class);
+    public static final SymbolSet<StateRegister> SYMBOLS = SymbolSet.initialize(StateRegister.class);
+    public static final SymbolSet<Writable> WRITE_ONLY_SYMBOLS = SymbolSet.initialize(StateRegister.class, Writable.class);
 }
