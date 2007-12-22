@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Arrays;
 
 /**
  * @author Bernd Mathiske
@@ -347,7 +348,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     @Override
     protected int printMethod(IndentWriter writer, Template_Type template) {
         final int startLineCount = writer.lineCount();
-        writer.print("public void ");
+        writer.print("public final void ");
         writer.print(template.assemblerMethodName() + "(");
         writer.print(formatParameterList("", template.parameters(), false));
         writer.println(") {");
@@ -378,7 +379,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
         for (int i = 0; i < subroutines.length; i++) {
             subroutines[i] = _subroutineToName.get(subroutines[i]) + subroutines[i];
         }
-        java.util.Arrays.sort(subroutines);
+        Arrays.sort(subroutines);
         for (String subroutine : subroutines) {
             writer.print("private void " + subroutine);
             writer.println();

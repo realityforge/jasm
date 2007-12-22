@@ -362,7 +362,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
 
     protected List<Parameter> printLabelMethodHead(IndentWriter writer, Template_Type template) {
         final List<Parameter> parameters = getParameters(template);
-        writer.print("public void " + template.assemblerMethodName() + "(");
+        writer.print("public final void " + template.assemblerMethodName() + "(");
         writer.print(formatParameterList("final ", parameters, false));
         writer.println(") {");
         writer.indent();
