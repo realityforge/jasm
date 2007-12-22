@@ -19,7 +19,7 @@ import jasm.gen.risc.RiscAssembly;
 import jasm.gen.risc.RiscTemplate;
 import jasm.gen.risc.field.OperandField;
 import jasm.util.HexUtil;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 import jasm.util.lang.Endianness;
 import jasm.util.lang.StaticLoophole;
 import jasm.util.program.ProgramWarning;

@@ -10,6 +10,7 @@ package jasm.gen.cisc.amd64;
 
 import jasm.Argument;
 import jasm.Assembler;
+import jasm.WordWidth;
 import jasm.amd64.AMD64Assembler;
 import jasm.amd64.AMD64GeneralRegister8;
 import jasm.amd64.AMD64XMMRegister;
@@ -17,7 +18,6 @@ import jasm.dis.amd64.AMD64DisassembledInstruction;
 import jasm.dis.amd64.AMD64Disassembler;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.cisc.x86.X86AssemblyTester;
-import jasm.util.WordWidth;
 import jasm.x86.GeneralRegister;
 import java.util.EnumSet;
 import java.util.List;

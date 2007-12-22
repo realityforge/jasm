@@ -20,7 +20,7 @@ import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.util.HexUtil;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 import jasm.util.io.IndentWriter;
 import jasm.util.program.ProgramError;
 
@@ -38,7 +38,8 @@ public class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template
     private static final String REX_BYTE_NAME = "rex";
 
     private String basicRexValue(X86Template template) {
-        if (template.operandSizeAttribute() == WordWidth.BITS_64 && template.instructionDescription().defaultOperandSize() != WordWidth.BITS_64) {
+        if (template.operandSizeAttribute() == WordWidth.BITS_64 && template.instructionDescription().defaultOperandSize() != WordWidth
+            .BITS_64) {
             return HexUtil.toHexLiteral((byte) (X86Opcode.REX_MIN.ordinal() + (1 << X86Field.REX_W_BIT_INDEX)));
         }
         return HexUtil.toHexLiteral((byte) X86Opcode.REX_MIN.ordinal());

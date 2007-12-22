@@ -10,10 +10,10 @@ package jasm.dis.sparc;
 
 import jasm.Argument;
 import jasm.Assembler;
+import jasm.WordWidth;
 import jasm.gen.risc.sparc.SPARCAssembly;
 import jasm.gen.risc.sparc.SPARCTemplate;
 import jasm.sparc.SPARC32Assembler;
-import jasm.util.WordWidth;
 import java.util.List;
 
 /**

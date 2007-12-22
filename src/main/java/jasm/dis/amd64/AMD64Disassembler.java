@@ -10,6 +10,7 @@ package jasm.dis.amd64;
 
 import jasm.Argument;
 import jasm.Assembler;
+import jasm.WordWidth;
 import jasm.amd64.AMD64Assembler;
 import jasm.dis.x86.X86Disassembler;
 import jasm.dis.x86.X86InstructionHeader;
@@ -17,7 +18,6 @@ import jasm.gen.cisc.amd64.AMD64Assembly;
 import jasm.gen.cisc.amd64.AMD64Template;
 import jasm.gen.cisc.x86.X86Opcode;
 import jasm.util.HexByte;
-import jasm.util.WordWidth;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;

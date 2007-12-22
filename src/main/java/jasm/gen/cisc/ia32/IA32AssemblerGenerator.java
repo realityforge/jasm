@@ -13,7 +13,7 @@ import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.ia32.IA32BaseRegister32;
 import jasm.ia32.IA32IndirectRegister16;
 import jasm.ia32.IA32IndirectRegister32;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 import jasm.util.io.IndentWriter;
 
 /**

@@ -33,7 +33,7 @@ import jasm.ia32.IA32GeneralRegister8;
 import jasm.ia32.IA32IndexRegister32;
 import jasm.ia32.IA32IndirectRegister16;
 import jasm.ia32.IA32IndirectRegister32;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 import jasm.util.program.ProgramError;
 import jasm.x86.ControlRegister;
 import jasm.x86.DebugRegister;

@@ -8,8 +8,6 @@
  */
 package jasm;
 
-import jasm.util.WordWidth;
-
 /**
  * Interface for target code edition. Currently, used by the JIT only, for template-based code generation.
  * The interface is currently customized to the need of the JIT.

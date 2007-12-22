@@ -9,7 +9,7 @@
 package jasm.gen.cisc.x86;
 
 import jasm.gen.AddressParameter;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 
 /**
  * @author Bernd Mathiske

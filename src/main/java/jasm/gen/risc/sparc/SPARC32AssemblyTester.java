@@ -9,11 +9,11 @@
 package jasm.gen.risc.sparc;
 
 import jasm.Assembler;
+import jasm.WordWidth;
 import jasm.dis.sparc.SPARC32DisassembledInstruction;
 import jasm.dis.sparc.SPARC32Disassembler;
 import jasm.gen.AssemblyTestComponent;
 import jasm.sparc.SPARC32Assembler;
-import jasm.util.WordWidth;
 import java.util.EnumSet;
 
 /**

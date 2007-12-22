@@ -6,7 +6,10 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.util;
+package jasm;
+
+import jasm.util.Ints;
+import jasm.util.Longs;
 
 /**
  * A word width value describes many bits there are in a machine word.

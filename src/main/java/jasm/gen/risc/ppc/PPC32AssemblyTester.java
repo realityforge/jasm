@@ -13,7 +13,7 @@ import jasm.dis.ppc.PPC32DisassembledInstruction;
 import jasm.dis.ppc.PPC32Disassembler;
 import jasm.gen.AssemblyTestComponent;
 import jasm.ppc.PPC32Assembler;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 import java.util.EnumSet;
 
 /**

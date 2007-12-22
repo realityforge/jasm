@@ -9,7 +9,7 @@
 package jasm.amd64;
 
 import jasm.util.Enumerator;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 import jasm.x86.GeneralRegister;
 import jasm.x86.IndirectRegister;
 

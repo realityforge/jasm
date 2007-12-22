@@ -9,6 +9,7 @@
 package jasm.gen.cisc.amd64;
 
 import jasm.Argument;
+import jasm.WordWidth;
 import jasm.amd64.AMD64BaseRegister32;
 import jasm.amd64.AMD64BaseRegister64;
 import jasm.amd64.AMD64GeneralRegister16;
@@ -39,7 +40,6 @@ import jasm.gen.cisc.x86.X86OffsetParameter;
 import jasm.gen.cisc.x86.X86Operand;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
-import jasm.util.WordWidth;
 import jasm.util.program.ProgramError;
 import jasm.x86.ControlRegister;
 import jasm.x86.DebugRegister;

@@ -10,7 +10,6 @@ package jasm;
 
 import jasm.util.Enums;
 import jasm.util.Ints;
-import jasm.util.WordWidth;
 import java.util.List;
 
 /**

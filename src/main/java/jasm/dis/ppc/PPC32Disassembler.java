@@ -10,10 +10,10 @@ package jasm.dis.ppc;
 
 import jasm.Argument;
 import jasm.Assembler;
+import jasm.WordWidth;
 import jasm.gen.risc.ppc.PPCAssembly;
 import jasm.gen.risc.ppc.PPCTemplate;
 import jasm.ppc.PPC32Assembler;
-import jasm.util.WordWidth;
 import java.util.List;
 
 /**

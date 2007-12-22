@@ -8,7 +8,7 @@
  */
 package jasm.gen.cisc.x86;
 
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 import jasm.util.program.ProgramError;
 
 /**

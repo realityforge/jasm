@@ -12,7 +12,7 @@ import jasm.gen.cisc.x86.InstructionAssessment;
 import jasm.gen.cisc.x86.X86InstructionDescription;
 import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.gen.cisc.x86.X86TemplateCreator;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 
 /**
  * @author Bernd Mathiske

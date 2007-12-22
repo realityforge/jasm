@@ -13,7 +13,7 @@ import jasm.Assembler;
 import jasm.gen.risc.ppc.PPCAssembly;
 import jasm.gen.risc.ppc.PPCTemplate;
 import jasm.ppc.PPC64Assembler;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 import java.util.List;
 
 /**

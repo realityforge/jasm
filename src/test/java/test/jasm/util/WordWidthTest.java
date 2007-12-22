@@ -8,11 +8,11 @@
  */
 package test.jasm.util;
 
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 import junit.framework.TestCase;
 
 /**
- * Tests for {@link jasm.util.WordWidth}.
+ * Tests for {@link jasm.WordWidth}.
  *
  * @author Hiroshi Yamauchi
  */

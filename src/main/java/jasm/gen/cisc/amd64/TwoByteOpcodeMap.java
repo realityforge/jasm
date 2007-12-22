@@ -289,7 +289,7 @@ import static jasm.util.HexByte._FB;
 import static jasm.util.HexByte._FC;
 import static jasm.util.HexByte._FD;
 import static jasm.util.HexByte._FE;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 import static jasm.x86.SegmentRegister.FS;
 import static jasm.x86.SegmentRegister.GS;
 

@@ -10,12 +10,12 @@ package jasm.gen.cisc.ia32;
 
 import jasm.Argument;
 import jasm.Assembler;
+import jasm.WordWidth;
 import jasm.dis.ia32.IA32DisassembledInstruction;
 import jasm.dis.ia32.IA32Disassembler;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.cisc.x86.X86AssemblyTester;
 import jasm.ia32.IA32Assembler;
-import jasm.util.WordWidth;
 import java.util.EnumSet;
 import java.util.List;
 

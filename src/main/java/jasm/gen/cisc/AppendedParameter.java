@@ -9,7 +9,7 @@
 package jasm.gen.cisc;
 
 import jasm.gen.Parameter;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 
 /**
  * @author Bernd Mathiske

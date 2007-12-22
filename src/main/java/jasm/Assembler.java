@@ -9,7 +9,6 @@
 package jasm;
 
 import jasm.util.Longs;
-import jasm.util.WordWidth;
 import jasm.util.collect.IdentityHashSet;
 import jasm.util.program.ProgramError;
 import java.io.ByteArrayOutputStream;

@@ -9,7 +9,7 @@
 package jasm.ia32;
 
 import jasm.util.Enumerator;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 import jasm.x86.GeneralRegister;
 import java.util.EnumSet;
 

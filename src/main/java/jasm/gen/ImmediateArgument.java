@@ -9,7 +9,7 @@
 package jasm.gen;
 
 import jasm.Argument;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 
 /**
  * @author Bernd Mathiske

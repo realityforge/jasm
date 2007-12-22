@@ -12,7 +12,7 @@ import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.risc.RiscAssemblyTester;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 import jasm.util.io.IndentWriter;
 import jasm.util.lang.Endianness;
 import jasm.util.program.ProgramError;

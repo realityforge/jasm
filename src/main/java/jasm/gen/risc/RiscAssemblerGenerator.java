@@ -21,7 +21,7 @@ import jasm.gen.Parameter;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.field.InputOperandField;
 import jasm.gen.risc.field.OperandField;
-import jasm.util.Ints;
+import jasm.util.HexUtil;
 import jasm.util.collect.CollectionUtil;
 import jasm.util.io.IndentWriter;
 import jasm.util.program.ProgramError;
@@ -57,7 +57,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
         writer.print(formatParameterList("final ", template.parameters(), false));
         writer.println(") {");
         writer.indent();
-        writer.println("int instruction = " + Ints.toHexLiteral(template.opcode()) + ";");
+      writer.println("int instruction = " + HexUtil.toHexLiteral(template.opcode()) + ";");
 
         // Print argument constraint checking statements
         final List<InstructionConstraint> constraints = template.instructionDescription().constraints();

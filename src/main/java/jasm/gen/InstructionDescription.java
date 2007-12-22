@@ -11,7 +11,7 @@ package jasm.gen;
 import jasm.gen.cisc.x86.X86InstructionDescriptionVisitor;
 import jasm.gen.risc.RiscInstructionDescriptionVisitor;
 import jasm.gen.risc.field.InputOperandField;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 import jasm.util.collect.CollectionUtil;
 import jasm.util.program.ProgramError;
 import java.util.Iterator;

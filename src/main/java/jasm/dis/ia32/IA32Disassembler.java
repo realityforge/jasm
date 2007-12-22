@@ -16,7 +16,7 @@ import jasm.gen.cisc.ia32.IA32Assembly;
 import jasm.gen.cisc.ia32.IA32Template;
 import jasm.ia32.IA32Assembler;
 import jasm.util.HexByte;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;

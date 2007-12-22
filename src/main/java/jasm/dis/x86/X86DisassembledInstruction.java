@@ -23,7 +23,7 @@ import jasm.gen.cisc.x86.X86Operand;
 import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
-import jasm.util.WordWidth;
+import jasm.WordWidth;
 import jasm.util.lang.Strings;
 import jasm.x86.IndirectRegister;
 import jasm.x86.Scale;
