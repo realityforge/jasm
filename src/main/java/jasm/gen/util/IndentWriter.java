@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.util.io;
+package jasm.gen.util;
 
 import java.io.PrintWriter;
 import java.io.Writer;

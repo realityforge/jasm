@@ -12,9 +12,9 @@ import jasm.Argument;
 import jasm.WordWidth;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.AssemblyTestComponent;
+import jasm.gen.util.IndentWriter;
 import jasm.gen.risc.RiscAssemblyTester;
-import jasm.util.io.IndentWriter;
-import jasm.util.lang.Endianness;
+import jasm.util.lang.EndianUtil;
 import jasm.util.program.ProgramError;
 import java.io.IOException;
 import java.io.InputStream;
@@ -62,7 +62,7 @@ public abstract class SPARCAssemblyTester<DisassembledInstruction_Type extends D
 
     @Override
     protected final boolean readNop(InputStream stream) throws IOException {
-        final int instruction = Endianness.BIG.readInt(stream);
+        final int instruction = EndianUtil.readBEInt(stream);
         return instruction == 0x01000000;
     }
 

@@ -20,8 +20,8 @@ import jasm.gen.cisc.x86.X86Opcode;
 import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
+import jasm.gen.util.IndentWriter;
 import jasm.util.HexUtil;
-import jasm.util.io.IndentWriter;
 import jasm.util.program.ProgramError;
 
 /**

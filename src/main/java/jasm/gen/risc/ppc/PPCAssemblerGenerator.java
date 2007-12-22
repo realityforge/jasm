@@ -11,8 +11,8 @@ package jasm.gen.risc.ppc;
 import jasm.Assembler;
 import jasm.BigEndianAssembler;
 import jasm.gen.risc.RiscAssemblerGenerator;
+import jasm.gen.util.IndentWriter;
 import jasm.ppc.GPR;
-import jasm.util.io.IndentWriter;
 import java.util.Set;
 
 /**

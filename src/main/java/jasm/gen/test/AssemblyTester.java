@@ -19,7 +19,7 @@ import jasm.gen.Assembly;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.Parameter;
 import jasm.gen.Template;
-import jasm.util.io.IndentWriter;
+import jasm.gen.util.IndentWriter;
 import jasm.util.program.ProgramError;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;

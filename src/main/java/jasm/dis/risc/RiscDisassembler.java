@@ -20,8 +20,9 @@ import jasm.gen.risc.RiscAssembly;
 import jasm.gen.risc.RiscTemplate;
 import jasm.gen.risc.field.OperandField;
 import jasm.util.HexUtil;
-import jasm.util.lang.Endianness;
+import jasm.Endianness;
 import jasm.util.lang.StaticLoophole;
+import jasm.util.lang.EndianUtil;
 import jasm.util.program.ProgramWarning;
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -80,11 +81,25 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
         }
         return true;
     }
+
+    public byte[] toBEBytes(int value) {
+            int val = value;
+            final byte[] bytes = new byte[4];
+            bytes[3] = (byte) (val & 0xff);
+            val >>= 8;
+            bytes[2] = (byte) (val & 0xff);
+            val >>= 8;
+            bytes[1] = (byte) (val & 0xff);
+            val >>= 8;
+            bytes[0] = (byte) (val & 0xff);
+            return bytes;
+        }
+
     @Override
     public final List<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream) throws IOException, AssemblyException {
-        final int instruction = endianness().readInt(stream);
+        final int instruction = EndianUtil.readBEInt(stream);
         final ArrayList<DisassembledInstruction_Type> result = new ArrayList<DisassembledInstruction_Type>();
-        final byte[] instructionBytes = endianness().toBytes(instruction);
+        final byte[] instructionBytes = toBEBytes(instruction);
         for (SpecificityGroup<Template_Type> specificityGroup : assembly().specificityGroups()) {
             for (OpcodeMaskGroup<Template_Type> opcodeMaskGroup : specificityGroup.opcodeMaskGroups()) {
                 final int opcode = instruction & opcodeMaskGroup.mask();
@@ -113,7 +128,7 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
             }
         }
         if (result.isEmpty()) {
-            throw new AssemblyException("instruction could not be disassembled: " + HexUtil.toHexLiteral(endianness().toBytes(instruction)));
+            throw new AssemblyException("instruction could not be disassembled: " + HexUtil.toHexLiteral(toBEBytes(instruction)));
         }
         _currentOffset += 4;
         return result;

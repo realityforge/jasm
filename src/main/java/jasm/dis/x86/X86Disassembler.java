@@ -12,6 +12,7 @@ import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;
 import jasm.WordWidth;
+import jasm.Endianness;
 import jasm.amd64.AMD64GeneralRegister8;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.Disassembler;
@@ -31,7 +32,7 @@ import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.util.HexByte;
 import jasm.util.SymbolSet;
 import jasm.util.collect.CollectionUtil;
-import jasm.util.lang.Endianness;
+import jasm.util.lang.EndianUtil;
 import java.io.BufferedInputStream;
 import java.io.EOFException;
 import java.io.IOException;
@@ -130,22 +131,22 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
                     if (parameter instanceof X86EnumerableParameter) {
                         final X86EnumerableParameter enumerableParameter = (X86EnumerableParameter) parameter;
                         final SymbolSet enumerator = enumerableParameter.enumerator();
-                        arguments.add((Argument) enumerator.fromValue(endianness().readByte(stream)));
+                        arguments.add((Argument) enumerator.fromValue(EndianUtil.readByte(stream)));
                         continue;
                     }
                     final X86NumericalParameter numericalParameter = (X86NumericalParameter) parameter;
                     switch (numericalParameter.width()) {
                         case BITS_8:
-                            arguments.add(new Immediate8Argument(endianness().readByte(stream)));
+                            arguments.add(new Immediate8Argument(EndianUtil.readByte(stream)));
                             break;
                         case BITS_16:
-                            arguments.add(new Immediate16Argument(endianness().readShort(stream)));
+                            arguments.add(new Immediate16Argument(EndianUtil.readLEShort(stream)));
                             break;
                         case BITS_32:
-                            arguments.add(new Immediate32Argument(endianness().readInt(stream)));
+                            arguments.add(new Immediate32Argument(EndianUtil.readLEInt(stream)));
                             break;
                         case BITS_64:
-                            arguments.add(new Immediate64Argument(endianness().readLong(stream)));
+                            arguments.add(new Immediate64Argument(EndianUtil.readLELong(stream)));
                             break;
                     }
                     continue;
@@ -219,11 +220,11 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
             return 0;
         }
         if (template.hasSibByte()) {
-            return endianness().readByte(stream);
+            return EndianUtil.readByte(stream);
         }
         if (template.hasModRMByte() && X86Field.RM.extract(modRMByte) == X86TemplateContext.RMCase.SIB.value() &&
                    X86Field.MOD.extract(modRMByte) != X86TemplateContext.ModCase.MOD_3.value()) {
-            return endianness().readByte(stream);
+            return EndianUtil.readByte(stream);
         }
         return 0;
     }
@@ -255,7 +256,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
             int modVariantParameterIndex = -1;
             List<Argument> arguments = null;
             if (template.hasModRMByte()) {
-              modRMByte = endianness().readByte(stream);
+              modRMByte = EndianUtil.readByte(stream);
               sibByte = getSibByte(stream, template, modRMByte);
               modVariantParameterIndex = getModVariantParameterIndex(template, modRMByte, sibByte);
               if (modVariantParameterIndex >= 0) {

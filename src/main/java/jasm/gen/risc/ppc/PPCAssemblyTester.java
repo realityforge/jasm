@@ -13,8 +13,8 @@ import jasm.WordWidth;
 import jasm.dis.DisassembledInstruction;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.risc.RiscAssemblyTester;
-import jasm.util.io.IndentWriter;
-import jasm.util.lang.Endianness;
+import jasm.gen.util.IndentWriter;
+import jasm.util.lang.EndianUtil;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;
@@ -49,7 +49,7 @@ public abstract class PPCAssemblyTester<DisassembledInstruction_Type extends Dis
 
     @Override
     protected final boolean readNop(InputStream stream) throws IOException {
-        final int instruction = Endianness.BIG.readInt(stream);
+        final int instruction = EndianUtil.readBEInt(stream);
         return instruction == 0x60000000;
     }
 
