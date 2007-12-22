@@ -12,7 +12,6 @@ import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;
 import jasm.WordWidth;
-import jasm.Endianness;
 import jasm.gen.Assembly;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.OffsetParameter;
@@ -41,13 +40,11 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
 
     private final Assembly<Template_Type> _assembly;
     private final WordWidth _addressWidth;
-    private final Endianness _endianness;
 
-    protected Disassembler(Assembly<Template_Type> assembly, WordWidth addressWidth, Endianness endianness) {
+    protected Disassembler(Assembly<Template_Type> assembly, WordWidth addressWidth) {
         super();
         _assembly = assembly;
         _addressWidth = addressWidth;
-        _endianness = endianness;
     }
 
     public Assembly<Template_Type> assembly() {
@@ -56,10 +53,6 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
 
     public final WordWidth addressWidth() {
         return _addressWidth;
-    }
-
-    public final Endianness endianness() {
-        return _endianness;
     }
 
     protected abstract DisassembledInstruction_Type createDisassembledInstruction(int offset, byte[] bytes, Template_Type template, List<Argument> arguments);

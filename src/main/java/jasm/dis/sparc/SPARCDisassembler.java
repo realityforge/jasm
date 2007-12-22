@@ -13,7 +13,6 @@ import jasm.dis.DisassembledInstruction;
 import jasm.dis.risc.RiscDisassembler;
 import jasm.gen.risc.sparc.SPARCAssembly;
 import jasm.gen.risc.sparc.SPARCTemplate;
-import jasm.Endianness;
 
 /**
  *
@@ -24,7 +23,7 @@ public abstract class SPARCDisassembler<DisassembledInstruction_Type extends Dis
         extends RiscDisassembler<SPARCTemplate, DisassembledInstruction_Type> {
 
     protected SPARCDisassembler(SPARCAssembly assembly, WordWidth addressWidth) {
-        super(assembly, addressWidth, Endianness.BIG);
+        super(assembly, addressWidth);
     }
 
 }

@@ -20,9 +20,8 @@ import jasm.gen.risc.RiscAssembly;
 import jasm.gen.risc.RiscTemplate;
 import jasm.gen.risc.field.OperandField;
 import jasm.util.HexUtil;
-import jasm.Endianness;
-import jasm.util.lang.StaticLoophole;
 import jasm.util.lang.EndianUtil;
+import jasm.util.lang.StaticLoophole;
 import jasm.util.program.ProgramWarning;
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -41,8 +40,8 @@ import java.util.List;
 public abstract class RiscDisassembler<Template_Type extends RiscTemplate, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
     extends Disassembler<Template_Type, DisassembledInstruction_Type> {
 
-    protected RiscDisassembler(Assembly<Template_Type> assembly, WordWidth addressWidth, Endianness endianness) {
-        super(assembly, addressWidth, endianness);
+    protected RiscDisassembler(Assembly<Template_Type> assembly, WordWidth addressWidth) {
+        super(assembly, addressWidth);
     }
 
     @Override

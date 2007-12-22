@@ -12,7 +12,6 @@ import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;
 import jasm.WordWidth;
-import jasm.Endianness;
 import jasm.amd64.AMD64GeneralRegister8;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.Disassembler;
@@ -57,7 +56,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
     private int _currentOffset;
 
     protected X86Disassembler(Assembly<Template_Type> assembly, WordWidth addressWidth) {
-        super(assembly, addressWidth, Endianness.LITTLE);
+        super(assembly, addressWidth);
     }
 
     protected abstract boolean isRexPrefix(HexByte opcode);

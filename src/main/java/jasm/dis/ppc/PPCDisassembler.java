@@ -13,7 +13,6 @@ import jasm.dis.DisassembledInstruction;
 import jasm.dis.risc.RiscDisassembler;
 import jasm.gen.risc.ppc.PPCAssembly;
 import jasm.gen.risc.ppc.PPCTemplate;
-import jasm.Endianness;
 
 /**
  *
@@ -24,7 +23,7 @@ public abstract class PPCDisassembler<DisassembledInstruction_Type extends Disas
         extends RiscDisassembler<PPCTemplate, DisassembledInstruction_Type> {
 
     protected PPCDisassembler(PPCAssembly assembly, WordWidth addressWidth) {
-        super(assembly, addressWidth, Endianness.BIG);
+        super(assembly, addressWidth);
     }
 
 }
