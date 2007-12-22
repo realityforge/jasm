@@ -16,62 +16,62 @@ import java.io.Writer;
  *
  * @author Bernd Mathiske
  */
-public class IndentWriter {
+public final class IndentWriter {
 
-    private final PrintWriter _writer;
-    private int _lineCount;
+  private final PrintWriter _writer;
+  private int _lineCount;
 
   public IndentWriter(Writer writer) {
-        _writer = (writer instanceof PrintWriter) ? (PrintWriter) writer : new PrintWriter(writer);
-    }
+    _writer = (writer instanceof PrintWriter) ? (PrintWriter) writer : new PrintWriter(writer);
+  }
 
-    public void close() {
-        _writer.close();
-    }
+  public void close() {
+    _writer.close();
+  }
 
   private int _indentation = 4;
 
   private int _prefix;
 
-    public void indent() {
-        _prefix += _indentation;
-    }
+  public void indent() {
+    _prefix += _indentation;
+  }
 
-    public void outdent() {
-        _prefix -= _indentation;
-        assert _prefix >= 0;
-    }
+  public void outdent() {
+    _prefix -= _indentation;
+    assert _prefix >= 0;
+  }
 
-    private boolean _isCurrentLineIndented;
+  private boolean _isCurrentLineIndented;
 
-    private void writeIndentation() {
-        if (!_isCurrentLineIndented) {
-            for (int i = 0; i < _prefix; i++) {
-                _writer.print(" ");
-            }
-            _isCurrentLineIndented = true;
-        }
+  private void writeIndentation() {
+    if (!_isCurrentLineIndented) {
+      for (int i = 0; i < _prefix; i++) {
+        _writer.print(" ");
+      }
+      _isCurrentLineIndented = true;
     }
+  }
 
-    public void print(String s) {
-        writeIndentation();
-        _writer.print(s);
-    }
+  public void print(String s) {
+    writeIndentation();
+    _writer.print(s);
+  }
 
-    public void println() {
-        _writer.println();
-        _isCurrentLineIndented = false;
-        ++_lineCount;
-    }
+  public void println() {
+    _writer.println();
+    _isCurrentLineIndented = false;
+    ++_lineCount;
+  }
 
-    public void println(String s) {
-        writeIndentation();
-        _writer.println(s);
-        _isCurrentLineIndented = false;
-        ++_lineCount;
-    }
+  public void println(String s) {
+    writeIndentation();
+    _writer.println(s);
+    _isCurrentLineIndented = false;
+    ++_lineCount;
+  }
 
   public int lineCount() {
-        return _lineCount;
-    }
+    return _lineCount;
+  }
 }
