@@ -26,7 +26,7 @@ public interface AssemblyInstructionEditor {
 
     /**
      * Returns the immediate int value in the edited instruction.
-     * @param displacementWidth the width of the displacement in the instruction
+     * @param immediateWidth the width of the immediate in the instruction.
      * @return  the displacement in the edited instruction
      */
    int getIntImmediate(WordWidth immediateWidth) throws AssemblyException;
@@ -74,7 +74,7 @@ public interface AssemblyInstructionEditor {
 
     /**
      * Replace the value of the immediate source operand of an  instruction.
-     * @param imm64 the new immediate value of the operand.
+     * @param imm32 the new immediate value of the operand.
      */
     void fixImmediateOperand(int imm32);
 
