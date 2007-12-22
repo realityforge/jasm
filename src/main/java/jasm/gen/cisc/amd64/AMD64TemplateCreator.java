@@ -8,11 +8,11 @@
  */
 package jasm.gen.cisc.amd64;
 
+import jasm.WordWidth;
 import jasm.gen.cisc.x86.InstructionAssessment;
 import jasm.gen.cisc.x86.X86InstructionDescription;
 import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.gen.cisc.x86.X86TemplateCreator;
-import jasm.WordWidth;
 
 /**
  * @author Bernd Mathiske
