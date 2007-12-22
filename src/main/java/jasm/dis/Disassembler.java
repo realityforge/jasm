@@ -233,7 +233,7 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
             case FROM_INSTRUCTION_END:
                 return disassembledInstruction.endOffset() + offset;
         }
-        ProgramError.unknownCase();
-        return 0;
+      //Unknown relative addressing
+        throw new IllegalStateException();
     }
 }

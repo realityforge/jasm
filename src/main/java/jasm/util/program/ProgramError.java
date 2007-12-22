@@ -15,23 +15,17 @@ public final class ProgramError extends Error {
 
   private static final long serialVersionUID = 0;
 
-  public ProgramError(String message) {
-    this(message, null);
-  }
-
   public ProgramError(String message, Throwable cause) {
     super(message, cause);
   }
 
   public static void check(boolean condition) {
-    if (!condition) {
-      throw new ProgramError("Program Error");
-    }
+    check(condition, "Program Error");
   }
 
   public static void check(boolean condition, String message) {
     if (!condition) {
-      throw new ProgramError(message);
+      throw new ProgramError(message, null);
     }
   }
 
@@ -49,13 +43,5 @@ public final class ProgramError extends Error {
 
   public static void unexpected() {
     unexpected("");
-  }
-
-  public static void unknownCase() {
-    unexpected("unknown switch case");
-  }
-
-  public static void unimplemented() {
-    throw new ProgramError("unimplemented");
   }
 }

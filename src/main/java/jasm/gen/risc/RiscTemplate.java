@@ -174,8 +174,7 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
 
     @Override
     public final List<Operand> operands() {
-        ProgramError.unimplemented();
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override

@@ -257,7 +257,6 @@ public abstract class Assembler {
             case FROM_INSTRUCTION_END:
                 return labelOffsetRelative(label, instruction.endOffset());
         }
-        ProgramError.unknownCase();
-        return 0;
+        throw new IllegalStateException();
     }
 }

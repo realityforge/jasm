@@ -81,7 +81,7 @@ public final class OptionField extends RiscField {
         final Option newOption = new Option(name, value, externalName, result);
         for (Option option : _options) {
             if (option.equals(newOption)) {
-                throw new ProgramError("duplicate option: " + option);
+                ProgramError.unexpected("duplicate option: " + option);
             }
         }
         result._options.add(newOption);

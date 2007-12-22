@@ -146,8 +146,7 @@ public final class Label implements Argument {
     }
 
     public final long asLong() {
-        ProgramError.unimplemented();
-        return 0L;
+      throw new UnsupportedOperationException();
     }
 
     @Override
