@@ -212,7 +212,6 @@ public class AMD64InstructionEditor extends AMD64Assembler implements AssemblyIn
     /**
      * Replace the operand of the assembly instruction with a new value. The width of the immediate operand the
      *  instruction was originally generated with must be 32 bits.
-     * @param operandWidth width of the operand of the assembly instruction.
      * @param imm32 the new value of the instruction's operand.
      */
     public void fixImmediateOperand(int imm32) {
