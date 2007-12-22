@@ -8,8 +8,8 @@
  */
 package jasm.gen.cisc.x86;
 
-import jasm.gen.OffsetParameter;
 import jasm.WordWidth;
+import jasm.gen.OffsetParameter;
 
 /**
  * @author Bernd Mathiske

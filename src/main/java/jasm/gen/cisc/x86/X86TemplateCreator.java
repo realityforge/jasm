@@ -8,10 +8,10 @@
  */
 package jasm.gen.cisc.x86;
 
+import jasm.WordWidth;
 import jasm.gen.InstructionDescription;
 import jasm.gen.InstructionDescriptionCreator;
 import jasm.gen.Trace;
-import jasm.WordWidth;
 import java.util.ArrayList;
 import java.util.List;
 
