@@ -16,7 +16,6 @@ import jasm.Label;
 import jasm.util.HexUtil;
 import jasm.util.collect.CollectionUtil;
 import jasm.util.io.IndentWriter;
-import jasm.util.io.ReadableSource;
 import jasm.util.lang.StaticLoophole;
 import jasm.util.lang.StringUtil;
 import java.io.BufferedReader;
@@ -443,7 +442,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
    *
    * @return true if the file was modified or created
    */
-  private static boolean markGeneratedContent(File file, ReadableSource content) throws IOException {
+  private static boolean markGeneratedContent(File file, CharArraySource content) throws IOException {
     final String start = "// START GENERATED CONTENT";
     final String end = "// END GENERATED CONTENT";
     if (!file.exists()) {
@@ -572,8 +571,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
   }
 
   private static class CharArraySource
-        extends CharArrayWriter
-        implements ReadableSource {
+        extends CharArrayWriter {
         CharArraySource(int initialSize) {
             super(initialSize);
         }
