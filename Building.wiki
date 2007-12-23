@@ -1,0 +1,25 @@
+#summary Overview of the build framework.
+
+= Building =
+
+The project uses [http://ant.apache.org Apache Ant] as the build tool for the project. Running the `ant` command in the base directory of the project will build, unit test and package the system. Below are the available build targets;
+
+{{{
+$ ant -projecthelp
+Buildfile: build.xml
+
+Main targets:
+
+ clean                Clean the output directory
+ clobber              Remove all generated artifacts.
+ compile              Compile the code
+ compile-tests        Compile the code
+ generate-assemblers  Generate the assemblers
+ main                 Compile, package and test the code
+ package              Package the code
+ unit-tests           Run the test cases
+Default target: main
+
+}}}
+
+It should be noted that if you need to regenerate the assemblers (after changing the generation classes) that you will need to run `ant clobber` to delete the existing generated files before running the `ant` command again.
