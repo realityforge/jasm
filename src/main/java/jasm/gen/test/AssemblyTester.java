@@ -400,9 +400,10 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
   public final void run() throws IOException {
     IndentWriter stream = null;
 
+    final String externalSourceFilename = _tmpFilePrefix + "all" + ExternalAssembler.SOURCE_EXTENSION;
     File sourceFile;
     if (_createExternalSource) {
-      sourceFile = new File(_tmpFilePrefix + "all" + ExternalAssembler.SOURCE_EXTENSION);
+      sourceFile = new File(externalSourceFilename);
       stream = new IndentWriter(new PrintWriter(new BufferedWriter(new FileWriter(sourceFile))));
       stream.indent();
     }
@@ -426,6 +427,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     }
 
     if (_createExternalSource) {
+      System.err.println("External source generated at: " + externalSourceFilename);
       stream.close();
     }
 
