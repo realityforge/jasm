@@ -2,9 +2,9 @@
 
 = Overview =
 
-The jasm  project provides several assemblers and disassemblers written in the Java programming language. [SupportedISAs Supported instruction set architectures (ISAs)] include IA32, PowerPC, AMD64 and SPARC. The project started out by cloning the [https://maxwellassembler.dev.java.net/ Project Maxwell Assembler Framework], which in turn started out by copying the Java version of the Klein assembly framework, which is based on the original Self version of the Klein assembly framework.
+The jasm  project provides several assemblers and disassemblers written in the Java programming language. [SupportedISAs Supported instruction set architectures (ISAs)] include IA32, PowerPC, AMD64 and SPARC. The project started out by cloning the [https://maxwellassembler.dev.java.net/ Project Maxwell Assembler Framework], which in turn started out by copying the Java version of the Klein assembly framework, which is based on the original Self version of the Klein assembly framework.The project hopes to help support compiler development and research in the Java programming language. 
 
-The project hopes to help support compiler development and research in the Java programming language. Without further ado...
+Without further ado...
 
   * [Building Build]
   * [Testing Test]
