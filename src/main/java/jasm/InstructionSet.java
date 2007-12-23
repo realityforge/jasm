@@ -8,11 +8,15 @@
  */
 package jasm;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Arrays;
+
 public enum InstructionSet {
-  AMD64(Category.CISC, Endianness.LITTLE, RelativeAddressing.FROM_INSTRUCTION_END),
-  IA32(Category.CISC, Endianness.LITTLE, RelativeAddressing.FROM_INSTRUCTION_END),
-  PPC(Category.RISC, Endianness.BIG, RelativeAddressing.FROM_INSTRUCTION_START),
-  SPARC(Category.RISC, Endianness.BIG, RelativeAddressing.FROM_INSTRUCTION_START);
+  AMD64(Category.CISC, Endianness.LITTLE, RelativeAddressing.FROM_INSTRUCTION_END, WordWidth.BITS_64),
+  IA32(Category.CISC, Endianness.LITTLE, RelativeAddressing.FROM_INSTRUCTION_END, WordWidth.BITS_32),
+  PPC(Category.RISC, Endianness.BIG, RelativeAddressing.FROM_INSTRUCTION_START, WordWidth.BITS_32, WordWidth.BITS_64),
+  SPARC(Category.RISC, Endianness.BIG, RelativeAddressing.FROM_INSTRUCTION_START, WordWidth.BITS_32, WordWidth.BITS_64);
 
   public enum Category { CISC, RISC }
 
@@ -21,12 +25,16 @@ public enum InstructionSet {
   private final Category _category;
   private final Endianness _endianness;
   private final RelativeAddressing _relativeAddressing;
+  private final Collection<WordWidth> _wordWidths;
 
-  private InstructionSet(final Category category, final Endianness endianness, RelativeAddressing relativeAddressing) {
+  private InstructionSet(final Category category, final Endianness endianness, RelativeAddressing relativeAddressing, WordWidth... wordWidths) {
     _category = category;
     _endianness = endianness;
     _relativeAddressing = relativeAddressing;
+    _wordWidths = Collections.unmodifiableCollection(Arrays.asList(wordWidths));
   }
+
+  public Collection<WordWidth> getWordWidths() { return _wordWidths; }
 
   public Category getCategory() { return _category; }
 
