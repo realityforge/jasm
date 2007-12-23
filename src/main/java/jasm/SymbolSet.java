@@ -6,9 +6,10 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.util;
+package jasm;
 
 import jasm.util.program.ProgramError;
+import jasm.util.NamedField;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;

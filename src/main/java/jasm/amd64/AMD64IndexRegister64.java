@@ -9,7 +9,7 @@
 package jasm.amd64;
 
 import jasm.WordWidth;
-import jasm.util.SymbolSet;
+import jasm.SymbolSet;
 import jasm.x86.GeneralRegister;
 
 /**

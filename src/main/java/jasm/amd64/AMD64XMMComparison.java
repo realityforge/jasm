@@ -9,7 +9,7 @@
 package jasm.amd64;
 
 import jasm.EnumerableArgument;
-import jasm.util.SymbolSet;
+import jasm.SymbolSet;
 
 public enum AMD64XMMComparison implements EnumerableArgument {
 

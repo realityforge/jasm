@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.util;
+package jasm;
 
 /**
  * A symbol is an immutable binding of a name to a value.

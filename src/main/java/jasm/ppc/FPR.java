@@ -9,7 +9,7 @@
 package jasm.ppc;
 
 import jasm.EnumerableArgument;
-import jasm.util.SymbolSet;
+import jasm.SymbolSet;
 
 /**
  * The floating point registers.

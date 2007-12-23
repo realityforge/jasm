@@ -9,7 +9,7 @@
 package jasm.amd64;
 
 import jasm.EnumerableArgument;
-import jasm.util.SymbolSet;
+import jasm.SymbolSet;
 
 /**
  * @author Bernd Mathiske

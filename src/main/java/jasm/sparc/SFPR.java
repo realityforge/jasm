@@ -10,7 +10,7 @@ package jasm.sparc;
 
 import jasm.SymbolicArgument;
 import jasm.util.Nameable;
-import jasm.util.SymbolSet;
+import jasm.SymbolSet;
 
 /**
  * The single-precision (32-bit) floating-point registers.

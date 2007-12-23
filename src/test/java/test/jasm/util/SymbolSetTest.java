@@ -8,8 +8,8 @@
  */
 package test.jasm.util;
 
-import jasm.util.Symbol;
-import jasm.util.SymbolSet;
+import jasm.Symbol;
+import jasm.SymbolSet;
 import junit.framework.TestCase;
 
 /**

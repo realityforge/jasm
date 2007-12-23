@@ -10,8 +10,8 @@ package jasm.gen.cisc.x86;
 
 import jasm.Argument;
 import jasm.EnumerableArgument;
+import jasm.SymbolSet;
 import jasm.gen.EnumerableParameter;
-import jasm.util.SymbolSet;
 import jasm.util.program.ProgramError;
 import java.util.Collections;
 

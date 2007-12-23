@@ -8,7 +8,7 @@
  */
 package jasm.sparc;
 
-import jasm.util.SymbolSet;
+import jasm.SymbolSet;
 
 /**
  * The quad-precision (128-bit) floating-point registers.

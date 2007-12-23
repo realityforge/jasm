@@ -9,7 +9,7 @@
 package jasm.sparc;
 
 import jasm.AbstractSymbolicArgument;
-import jasm.util.SymbolSet;
+import jasm.SymbolSet;
 
 /**
  * The argument to a Branch on Integer Condition Code with Prediction instruction specifying

@@ -9,7 +9,7 @@
 package jasm.ppc;
 
 import jasm.OptionSuffixSymbolicArgument;
-import jasm.util.SymbolSet;
+import jasm.SymbolSet;
 
 /**
  * The branch prediction values for the conditional branches whose encoding includes

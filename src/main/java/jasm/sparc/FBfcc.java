@@ -9,7 +9,7 @@
 package jasm.sparc;
 
 import jasm.NameSuffixSymbolicArgument;
-import jasm.util.SymbolSet;
+import jasm.SymbolSet;
 
 /**
  * The argument to a Branch on Floating-Point Condition Code instruction specifying

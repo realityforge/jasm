@@ -9,7 +9,7 @@
 package jasm.sparc;
 
 import jasm.AbstractSymbolicArgument;
-import jasm.util.SymbolSet;
+import jasm.SymbolSet;
 import java.util.Arrays;
 
 /**

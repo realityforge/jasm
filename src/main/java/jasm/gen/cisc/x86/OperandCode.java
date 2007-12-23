@@ -9,6 +9,7 @@
 package jasm.gen.cisc.x86;
 
 import jasm.Argument;
+import jasm.SymbolSet;
 import jasm.gen.ArgumentRange;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.TestArgumentExclusion;
@@ -50,7 +51,6 @@ import static jasm.gen.cisc.x86.OperandTypeCode.ss;
 import static jasm.gen.cisc.x86.OperandTypeCode.v;
 import static jasm.gen.cisc.x86.OperandTypeCode.w;
 import static jasm.gen.cisc.x86.OperandTypeCode.z;
-import jasm.util.SymbolSet;
 import jasm.util.collect.CollectionUtil;
 import jasm.util.lang.StaticLoophole;
 import java.util.HashSet;

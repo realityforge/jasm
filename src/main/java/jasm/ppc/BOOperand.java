@@ -9,7 +9,7 @@
 package jasm.ppc;
 
 import jasm.AbstractSymbolicArgument;
-import jasm.util.SymbolSet;
+import jasm.SymbolSet;
 
 /**
  * The argument to a Branch Conditional instruction specifying the conditions

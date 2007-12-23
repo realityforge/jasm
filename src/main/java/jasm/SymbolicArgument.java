@@ -8,7 +8,7 @@
  */
 package jasm;
 
-import jasm.util.Symbol;
+import jasm.Symbol;
 
 /**
  * An argument that is a symbol.

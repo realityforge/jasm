@@ -10,6 +10,7 @@ package jasm.gen.risc.field;
 
 import jasm.Argument;
 import jasm.SymbolicArgument;
+import jasm.SymbolSet;
 import jasm.gen.ArgumentRange;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.Expression;
@@ -18,7 +19,6 @@ import jasm.gen.WrappableSpecification;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import jasm.util.SymbolSet;
 import jasm.util.collect.CollectionUtil;
 import jasm.util.lang.StaticLoophole;
 import java.util.Collections;

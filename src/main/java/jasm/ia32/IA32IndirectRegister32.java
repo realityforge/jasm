@@ -9,7 +9,7 @@
 package jasm.ia32;
 
 import jasm.WordWidth;
-import jasm.util.SymbolSet;
+import jasm.SymbolSet;
 import jasm.x86.GeneralRegister;
 import jasm.x86.IndirectRegister;
 

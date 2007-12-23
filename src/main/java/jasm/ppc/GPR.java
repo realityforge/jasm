@@ -8,7 +8,7 @@
  */
 package jasm.ppc;
 
-import jasm.util.SymbolSet;
+import jasm.SymbolSet;
 import java.util.Arrays;
 
 /**

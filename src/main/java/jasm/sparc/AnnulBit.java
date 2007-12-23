@@ -9,7 +9,7 @@
 package jasm.sparc;
 
 import jasm.OptionSuffixSymbolicArgument;
-import jasm.util.SymbolSet;
+import jasm.SymbolSet;
 
 /**
  * An optional (suffix) argument to a branch assembler instruction specifying

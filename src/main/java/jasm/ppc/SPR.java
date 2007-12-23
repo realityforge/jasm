@@ -9,7 +9,7 @@
 package jasm.ppc;
 
 import jasm.AbstractSymbolicArgument;
-import jasm.util.SymbolSet;
+import jasm.SymbolSet;
 
 /**
  * Special Purpose Registers.
