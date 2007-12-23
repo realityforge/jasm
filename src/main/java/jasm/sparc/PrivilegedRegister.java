@@ -54,6 +54,6 @@ public class PrivilegedRegister extends AbstractSymbolicArgument {
     public static final PrivilegedRegister FQ = new PrivilegedRegister(15);
     public static final PrivilegedRegister VER = new PrivilegedRegister(31);
 
-    public static final SymbolSet<PrivilegedRegister> SYMBOLS = SymbolSet.initialize(PrivilegedRegister.class);
-    public static final SymbolSet<Writable> WRITE_ONLY_SYMBOLS = SymbolSet.initialize(PrivilegedRegister.class, Writable.class);
+    public static final SymbolSet<PrivilegedRegister> SYMBOLS = SymbolSet.fromStaticFields(PrivilegedRegister.class);
+    public static final SymbolSet<Writable> WRITE_ONLY_SYMBOLS = SymbolSet.fromStaticFields(PrivilegedRegister.class, Writable.class);
 }

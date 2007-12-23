@@ -9,23 +9,23 @@
 package jasm.gen.risc.sparc;
 
 import jasm.gen.risc.field.RiscField;
-import static jasm.gen.risc.sparc.SPARCFields._dfrd;
-import static jasm.gen.risc.sparc.SPARCFields._dfrs2;
-import static jasm.gen.risc.sparc.SPARCFields._fmovfcc;
-import static jasm.gen.risc.sparc.SPARCFields._fmovicc;
-import static jasm.gen.risc.sparc.SPARCFields._movfcc;
-import static jasm.gen.risc.sparc.SPARCFields._movicc;
-import static jasm.gen.risc.sparc.SPARCFields._qfrd;
-import static jasm.gen.risc.sparc.SPARCFields._qfrs2;
-import static jasm.gen.risc.sparc.SPARCFields._rd;
-import static jasm.gen.risc.sparc.SPARCFields._res_10_5;
-import static jasm.gen.risc.sparc.SPARCFields._res_9_5;
-import static jasm.gen.risc.sparc.SPARCFields._rs1;
-import static jasm.gen.risc.sparc.SPARCFields._rs2;
-import static jasm.gen.risc.sparc.SPARCFields._sfrd;
-import static jasm.gen.risc.sparc.SPARCFields._sfrs2;
-import static jasm.gen.risc.sparc.SPARCFields._simm10;
-import static jasm.gen.risc.sparc.SPARCFields._simm11;
+import static jasm.gen.risc.sparc.SPARCFields.dfrd;
+import static jasm.gen.risc.sparc.SPARCFields.dfrs2;
+import static jasm.gen.risc.sparc.SPARCFields.fmovfcc;
+import static jasm.gen.risc.sparc.SPARCFields.fmovicc;
+import static jasm.gen.risc.sparc.SPARCFields.movfcc;
+import static jasm.gen.risc.sparc.SPARCFields.movicc;
+import static jasm.gen.risc.sparc.SPARCFields.qfrd;
+import static jasm.gen.risc.sparc.SPARCFields.qfrs2;
+import static jasm.gen.risc.sparc.SPARCFields.rd;
+import static jasm.gen.risc.sparc.SPARCFields.res_10_5;
+import static jasm.gen.risc.sparc.SPARCFields.res_9_5;
+import static jasm.gen.risc.sparc.SPARCFields.rs1;
+import static jasm.gen.risc.sparc.SPARCFields.rs2;
+import static jasm.gen.risc.sparc.SPARCFields.sfrd;
+import static jasm.gen.risc.sparc.SPARCFields.sfrs2;
+import static jasm.gen.risc.sparc.SPARCFields.simm10;
+import static jasm.gen.risc.sparc.SPARCFields.simm11;
 import static jasm.gen.risc.sparc.SPARCFields.bits_13_13;
 import static jasm.gen.risc.sparc.SPARCFields.bits_18_18;
 import static jasm.gen.risc.sparc.SPARCFields.cond_17_14;
@@ -49,37 +49,37 @@ final class ConditionalMove extends SPARCInstructionDescriptionCreator {
         // A.33
         final Object[] fmovHead = {op(0x2), op3(0x35), bits_18_18(0), cond_17_14(condContents), fmovTypeBit(typeBitContents), fmovccField};
         setCurrentArchitectureManualSection("A.33");
-        define("fmovs" + suffix, fmovHead, opfLow_10_5(0x1), _sfrs2, _sfrd);
-        define("fmovd" + suffix, fmovHead, opfLow_10_5(0x2), _dfrs2, _dfrd);
-        define("fmovq" + suffix, fmovHead, opfLow_10_5(0x3), _qfrs2, _qfrd);
+        define("fmovs" + suffix, fmovHead, opfLow_10_5(0x1), sfrs2, sfrd);
+        define("fmovd" + suffix, fmovHead, opfLow_10_5(0x2), dfrs2, dfrd);
+        define("fmovq" + suffix, fmovHead, opfLow_10_5(0x3), qfrs2, qfrd);
         // A.35
         final Object[] movHead = {op(0x2), op3(0x2c), movTypeBit(typeBitContents), cond_17_14(condContents), movccField};
         setCurrentArchitectureManualSection("A.35");
-        define("mov" + suffix, movHead, i(1), _simm11, _rd);
-        define("mov" + suffix, movHead, i(0), _res_10_5, _rs2, _rd);
+        define("mov" + suffix, movHead, i(1), simm11, rd);
+        define("mov" + suffix, movHead, i(0), res_10_5, rs2, rd);
     }
 
     private void addMovr(String suffix, int rcondContents) {
         // A.34
         final Object[] fmovrHead = {op(0x2), op3(0x35), bits_13_13(0), rcond_12_10(rcondContents)};
         setCurrentArchitectureManualSection("A.34");
-        define("fmovrs" + suffix, fmovrHead, opfLow_9_5(0x5), _rs1, _sfrs2, _sfrd);
-        define("fmovrd" + suffix, fmovrHead, opfLow_9_5(0x6), _rs1, _dfrs2, _dfrd);
-        define("fmovrq" + suffix, fmovrHead, opfLow_9_5(0x7), _rs1, _qfrs2, _qfrd);
+        define("fmovrs" + suffix, fmovrHead, opfLow_9_5(0x5), rs1, sfrs2, sfrd);
+        define("fmovrd" + suffix, fmovrHead, opfLow_9_5(0x6), rs1, dfrs2, dfrd);
+        define("fmovrq" + suffix, fmovrHead, opfLow_9_5(0x7), rs1, qfrs2, qfrd);
         // A.36
         final Object[] movrHead = {op(0x2), op3(0x2f), rcond_12_10(rcondContents)};
         setCurrentArchitectureManualSection("A.36");
-        define("movr" + suffix, movrHead, i(0), _res_9_5, _rs1, _rs2, _rd);
+        define("movr" + suffix, movrHead, i(0), res_9_5, rs1, rs2, rd);
         // sparc asm is too lenient with simm10
-        define("movr" + suffix, movrHead, i(1), _rs1, _simm10, _rd);
+        define("movr" + suffix, movrHead, i(1), rs1, simm10, rd);
     }
 
     private void addIcc(String suffix, int condContents) {
-        addIccOrFcc(suffix, _fmovicc, _movicc, 1, condContents);
+        addIccOrFcc(suffix, fmovicc, movicc, 1, condContents);
     }
 
     private void addFcc(String suffix, int condContents) {
-        addIccOrFcc(suffix, _fmovfcc, _movfcc, 0, condContents);
+        addIccOrFcc(suffix, fmovfcc, movfcc, 0, condContents);
     }
 
     private void create_A33_A35() {

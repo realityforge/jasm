@@ -35,6 +35,6 @@ public final class AnnulBit extends OptionSuffixSymbolicArgument {
      */
     public static final AnnulBit A = new AnnulBit(1, ",a");
 
-    public static final SymbolSet<AnnulBit> SYMBOLS = SymbolSet.initialize(AnnulBit.class);
+    public static final SymbolSet<AnnulBit> SYMBOLS = SymbolSet.fromStaticFields(AnnulBit.class);
 
 }

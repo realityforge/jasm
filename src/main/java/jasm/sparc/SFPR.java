@@ -9,7 +9,7 @@
 package jasm.sparc;
 
 import jasm.SymbolicArgument;
-import jasm.util.StaticFieldName;
+import jasm.util.Nameable;
 import jasm.util.SymbolSet;
 
 /**
@@ -18,7 +18,7 @@ import jasm.util.SymbolSet;
  * @author Bernd Mathiske
  * @author Doug Simon
  */
-public interface SFPR extends SymbolicArgument, StaticFieldName {
+public interface SFPR extends Nameable, SymbolicArgument {
     SFPR F0 = FPR.F0;
     SFPR F1 = FPR.F1;
     SFPR F2 = FPR.F2;
@@ -52,5 +52,5 @@ public interface SFPR extends SymbolicArgument, StaticFieldName {
     SFPR F30 = FPR.F30;
     SFPR F31 = FPR.F31;
 
-    SymbolSet<SFPR> SYMBOLS = SymbolSet.initialize(SFPR.class);
+    SymbolSet<SFPR> SYMBOLS = SymbolSet.fromStaticFields(SFPR.class);
 }

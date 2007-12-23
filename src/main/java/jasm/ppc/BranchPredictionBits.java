@@ -38,5 +38,5 @@ public final class BranchPredictionBits extends OptionSuffixSymbolicArgument {
      */
     public static final BranchPredictionBits PN = new BranchPredictionBits(2, "--");
 
-    public static final SymbolSet<BranchPredictionBits> SYMBOLS = SymbolSet.initialize(BranchPredictionBits.class);
+    public static final SymbolSet<BranchPredictionBits> SYMBOLS = SymbolSet.fromStaticFields(BranchPredictionBits.class);
 }

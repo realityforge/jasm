@@ -152,7 +152,6 @@ public final class Main {
       System.exit(42);
     }
     System.exit(0);
-
   }
 
   private static AssemblerGenerator<?> newAssembly() throws Exception {

@@ -8,10 +8,10 @@
  */
 package jasm.gen.risc.sparc;
 
-import static jasm.gen.risc.sparc.SPARCFields._membarMask;
-import static jasm.gen.risc.sparc.SPARCFields._res_12_0;
-import static jasm.gen.risc.sparc.SPARCFields._res_12_7;
-import static jasm.gen.risc.sparc.SPARCFields._res_29_25;
+import static jasm.gen.risc.sparc.SPARCFields.membarMask;
+import static jasm.gen.risc.sparc.SPARCFields.res_12_0;
+import static jasm.gen.risc.sparc.SPARCFields.res_12_7;
+import static jasm.gen.risc.sparc.SPARCFields.res_29_25;
 import static jasm.gen.risc.sparc.SPARCFields.bits_18_14;
 import static jasm.gen.risc.sparc.SPARCFields.i;
 import static jasm.gen.risc.sparc.SPARCFields.op;
@@ -25,12 +25,12 @@ import static jasm.gen.risc.sparc.SPARCFields.op3;
 final class MemorySynchronization extends SPARCInstructionDescriptionCreator {
 
     private void create_A32() {
-        define("membar", op(0x2), _res_29_25, op3(0x28), bits_18_14(0xf), i(1), _res_12_7, _membarMask);
+        define("membar", op(0x2), res_29_25, op3(0x28), bits_18_14(0xf), i(1), res_12_7, membarMask);
     }
 
     private void create_A51() {
         if (assembly().generatingDeprecatedInstructions()) {
-            define("stbar", op(0x2), _res_29_25, op3(0x28), bits_18_14(0xf), i(0), _res_12_0);
+            define("stbar", op(0x2), res_29_25, op3(0x28), bits_18_14(0xf), i(0), res_12_0);
         }
     }
 

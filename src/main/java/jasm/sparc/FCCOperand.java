@@ -29,5 +29,5 @@ public final class FCCOperand extends AbstractSymbolicArgument implements Condit
     public static final FCCOperand FCC2 = new FCCOperand(2);
     public static final FCCOperand FCC3 = new FCCOperand(3);
 
-    public static final SymbolSet<FCCOperand> SYMBOLS = SymbolSet.initialize(FCCOperand.class);
+    public static final SymbolSet<FCCOperand> SYMBOLS = SymbolSet.fromStaticFields(FCCOperand.class);
 }

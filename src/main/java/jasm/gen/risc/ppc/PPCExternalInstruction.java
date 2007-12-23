@@ -34,6 +34,6 @@ public final class PPCExternalInstruction extends RiscExternalInstruction {
     @Override
     public final boolean isAbsoluteBranch() {
         // An absolute branch instruction in PowerPC has an AA field with its bit set
-        return CollectionUtil.containsEqual(_template.optionFields(), PPCFields._aa) && (_template.opcode() & PPCFields._aa.bitRange().instructionMask()) != 0;
+        return CollectionUtil.containsEqual(_template.optionFields(), PPCFields.aa) && (_template.opcode() & PPCFields.aa.bitRange().instructionMask()) != 0;
     }
 }

@@ -19,27 +19,25 @@ import jasm.gen.risc.bitRange.BitRangeOrder;
  */
 public final class ConstantField extends RiscField {
 
-    public ConstantField(BitRange bitRange) {
-        super(bitRange);
-    }
+  public ConstantField(BitRange bitRange) {
+    super(bitRange);
+  }
 
-    public ConstantField(String name, BitRange bitRange) {
-        super(bitRange);
-        setName(name);
-    }
+  public ConstantField(String name, BitRange bitRange) {
+    super(name, bitRange);
+  }
 
   public final RiscConstant constant(int value) {
-        return new RiscConstant(this, value);
-    }
+    return new RiscConstant(this, value);
+  }
 
-    public static ConstantField createAscending(int... bits) {
-        final BitRange bitRange = BitRange.create(bits, BitRangeOrder.ASCENDING);
-        return new ConstantField(bitRange);
-    }
+  public static ConstantField createAscending(int... bits) {
+    final BitRange bitRange = BitRange.create(bits, BitRangeOrder.ASCENDING);
+    return new ConstantField(bitRange);
+  }
 
-    public static ConstantField createDescending(int... bits) {
-        final BitRange bitRange = BitRange.create(bits, BitRangeOrder.DESCENDING);
-        return new ConstantField(bitRange);
-    }
-
+  public static ConstantField createDescending(int... bits) {
+    final BitRange bitRange = BitRange.create(bits, BitRangeOrder.DESCENDING);
+    return new ConstantField(bitRange);
+  }
 }

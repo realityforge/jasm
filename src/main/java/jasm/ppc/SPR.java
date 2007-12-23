@@ -37,6 +37,6 @@ public final class SPR extends AbstractSymbolicArgument {
      */
     public static final SPR CTR = new SPR(9);
 
-    public static final SymbolSet<SPR> SYMBOLS = SymbolSet.initialize(SPR.class);
+    public static final SymbolSet<SPR> SYMBOLS = SymbolSet.fromStaticFields(SPR.class);
 
 }

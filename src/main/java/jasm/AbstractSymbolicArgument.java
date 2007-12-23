@@ -8,7 +8,7 @@
  */
 package jasm;
 
-import jasm.util.StaticFieldName;
+import jasm.util.NamedField;
 
 /**
  * This class provides a skeletal implementation of the {@link SymbolicArgument} interface, to minimize the
@@ -16,46 +16,39 @@ import jasm.util.StaticFieldName;
  *
  * @author Doug Simon
  */
-public abstract class AbstractSymbolicArgument implements SymbolicArgument, StaticFieldName {
+public abstract class AbstractSymbolicArgument
+    extends NamedField
+    implements SymbolicArgument {
 
-    private String _name;
-    private final int _value;
+  private final int _value;
 
-    protected AbstractSymbolicArgument(String name, int value) {
-        _name = name;
-        _value = value;
-    }
+  protected AbstractSymbolicArgument(String name, int value) {
+    super(name);
+    _value = value;
+  }
 
-    protected AbstractSymbolicArgument(int value) {
-        _value = value;
-    }
+  protected AbstractSymbolicArgument(int value) {
+    this(null, value);
+  }
 
-    public final void setName(String name) {
-        _name = name;
-    }
+  public final int value() {
+    return _value;
+  }
 
-    public final String name() {
-        return _name;
-    }
+  public String externalValue() {
+    return "%" + name().toLowerCase();
+  }
 
-    public final int value() {
-        return _value;
-    }
+  public final long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return "%" + name().toLowerCase();
-    }
+  public final String disassembledValue() {
+    return externalValue();
+  }
 
-    public final long asLong() {
-        return value();
-    }
-
-    public final String disassembledValue() {
-        return externalValue();
-    }
-
-    @Override
-    public String toString() {
-        return name();
-    }
+  @Override
+  public String toString() {
+    return name();
+  }
 }

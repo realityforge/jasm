@@ -47,6 +47,6 @@ public final class FBfcc extends NameSuffixSymbolicArgument implements Predicate
     public static final FBfcc ULE = new FBfcc(14, G);
     public static final FBfcc O = new FBfcc(15, U);
 
-    public static final SymbolSet<FBfcc> SYMBOLS = SymbolSet.initialize(FBfcc.class);
+    public static final SymbolSet<FBfcc> SYMBOLS = SymbolSet.fromStaticFields(FBfcc.class);
     public FBfcc negate() { return _negation; }
 }

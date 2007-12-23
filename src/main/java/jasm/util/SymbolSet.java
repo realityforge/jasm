@@ -91,29 +91,26 @@ public class SymbolSet<Symbol_Type extends Symbol>
     return false;
   }
 
-
-
   public static <Symbol_Type extends Enum & Symbol> SymbolSet<Symbol_Type> fromEnum(Class<Symbol_Type> symbolType) {
-        return new SymbolSet<Symbol_Type>(symbolType, EnumSet.allOf(symbolType));
+    return new SymbolSet<Symbol_Type>(symbolType, EnumSet.allOf(symbolType));
   }
 
   public static <Symbol_Type extends Symbol> SymbolSet<Symbol_Type> fromCollection(Class<Symbol_Type> symbolType, Collection<Symbol_Type> collection) {
     return new SymbolSet<Symbol_Type>(symbolType, collection);
   }
 
-  public static <Symbol_Type extends Symbol> SymbolSet<Symbol_Type> initialize(Class staticNameFieldClass,
-                                                                               Class<Symbol_Type> symbolType) {
+  public static <Symbol_Type extends Symbol> SymbolSet<Symbol_Type> fromStaticFields(Class<?> source, Class<Symbol_Type> type) {
     final ArrayList<Symbol_Type> sequence = new ArrayList<Symbol_Type>();
-    final List<StaticFieldName> staticFieldNames = StaticFieldName.Static.initialize(staticNameFieldClass, null);
-    for (StaticFieldName staticFieldName : staticFieldNames) {
-      if (symbolType.isInstance(staticFieldName)) {
-        sequence.add(symbolType.cast(staticFieldName));
+    final List<NamedField> fields = NamedField.initStaticFieldNames(source);
+    for (NamedField field : fields) {
+      if (type.isInstance(field)) {
+        sequence.add(type.cast(field));
       }
     }
-    return new SymbolSet<Symbol_Type>(symbolType, sequence);
+    return new SymbolSet<Symbol_Type>(type, sequence);
   }
 
-  public static <Symbol_Type extends Symbol> SymbolSet<Symbol_Type> initialize(Class<Symbol_Type> symbolType) {
-    return initialize(symbolType, symbolType);
+  public static <Symbol_Type extends Symbol> SymbolSet<Symbol_Type> fromStaticFields(Class<Symbol_Type> symbolType) {
+    return fromStaticFields(symbolType, symbolType);
   }
 }

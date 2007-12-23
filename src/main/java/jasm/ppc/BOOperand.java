@@ -206,5 +206,5 @@ public final class BOOperand extends AbstractSymbolicArgument {
 
     // Checkstyle: resume constant name check
 
-    public static final SymbolSet<BOOperand> SYMBOLS = SymbolSet.initialize(BOOperand.class);
+    public static final SymbolSet<BOOperand> SYMBOLS = SymbolSet.fromStaticFields(BOOperand.class);
 }

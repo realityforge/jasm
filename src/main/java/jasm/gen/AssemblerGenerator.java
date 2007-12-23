@@ -624,20 +624,15 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         emitByte(writer, "((byte) " + HexUtil.toHexLiteral(value) + ")");
     }
 
-    protected final void generate() {
-        try {
-            if (!generateRawAssemblerClass()) {
-                Trace.line(1, "unmodified: " + _rawAssemblerClassName);
-            }
-
-            if (!generateLabelAssemblerClass()) {
-                Trace.line(1, "unmodified: " + _labelAssemblerClassName);
-            }
-
-            Trace.line(1, "done");
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-            System.err.println("something went wrong: " + throwable + ": " + throwable.getMessage());
-        }
+  protected final void generate() throws Exception {
+    if (!generateRawAssemblerClass()) {
+      Trace.line(1, "unmodified: " + _rawAssemblerClassName);
     }
+
+    if (!generateLabelAssemblerClass()) {
+      Trace.line(1, "unmodified: " + _labelAssemblerClassName);
+    }
+
+    Trace.line(1, "done");
+  }
 }

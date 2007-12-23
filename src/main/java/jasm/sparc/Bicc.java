@@ -47,7 +47,7 @@ public final class Bicc extends NameSuffixSymbolicArgument implements Predicate<
     public static final Bicc VC = new Bicc(15);
     public static final Bicc VS = new Bicc(7, VC);
 
-    public static final SymbolSet<Bicc> SYMBOLS = SymbolSet.initialize(Bicc.class);
+    public static final SymbolSet<Bicc> SYMBOLS = SymbolSet.fromStaticFields(Bicc.class);
 
     public Bicc negate() {
         return _negation;

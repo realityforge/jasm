@@ -31,6 +31,6 @@ public final class BPr extends NameSuffixSymbolicArgument {
     public static final BPr GZ = new BPr(6);
     public static final BPr GEZ = new BPr(7);
 
-    public static final SymbolSet<BPr> SYMBOLS = SymbolSet.initialize(BPr.class);
+    public static final SymbolSet<BPr> SYMBOLS = SymbolSet.fromStaticFields(BPr.class);
 
 }

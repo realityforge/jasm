@@ -59,6 +59,6 @@ public class StateRegister extends AbstractSymbolicArgument {
     public static final Writable ASR30 = new Writable(30);
     public static final Writable ASR31 = new Writable(31);
 
-    public static final SymbolSet<StateRegister> SYMBOLS = SymbolSet.initialize(StateRegister.class);
-    public static final SymbolSet<Writable> WRITE_ONLY_SYMBOLS = SymbolSet.initialize(StateRegister.class, Writable.class);
+    public static final SymbolSet<StateRegister> SYMBOLS = SymbolSet.fromStaticFields(StateRegister.class);
+    public static final SymbolSet<Writable> WRITE_ONLY_SYMBOLS = SymbolSet.fromStaticFields(StateRegister.class, Writable.class);
 }

@@ -8,7 +8,6 @@
  */
 package jasm.sparc;
 
-import jasm.util.StaticFieldName;
 import jasm.util.SymbolSet;
 
 /**
@@ -17,7 +16,7 @@ import jasm.util.SymbolSet;
  * @author Bernd Mathiske
  * @author Doug Simon
  */
-public interface QFPR extends DFPR, StaticFieldName {
+public interface QFPR extends DFPR {
     QFPR F0 = FPR.F0;
     QFPR F4 = FPR.F4;
     QFPR F8 = FPR.F8;
@@ -35,5 +34,5 @@ public interface QFPR extends DFPR, StaticFieldName {
     QFPR F56 = FPR.F56;
     QFPR F60 = FPR.F60;
 
-    SymbolSet<QFPR> SYMBOLS = SymbolSet.initialize(QFPR.class);
+    SymbolSet<QFPR> SYMBOLS = SymbolSet.fromStaticFields(QFPR.class);
 }

@@ -8,17 +8,17 @@
  */
 package jasm.gen.risc.sparc;
 
-import static jasm.gen.risc.sparc.SPARCFields._imm22;
-import static jasm.gen.risc.sparc.SPARCFields._rd;
-import static jasm.gen.risc.sparc.SPARCFields._res_11_5;
-import static jasm.gen.risc.sparc.SPARCFields._res_11_6;
-import static jasm.gen.risc.sparc.SPARCFields._res_12_5;
-import static jasm.gen.risc.sparc.SPARCFields._res_18_14;
-import static jasm.gen.risc.sparc.SPARCFields._rs1;
-import static jasm.gen.risc.sparc.SPARCFields._rs2;
-import static jasm.gen.risc.sparc.SPARCFields._shcnt32;
-import static jasm.gen.risc.sparc.SPARCFields._shcnt64;
-import static jasm.gen.risc.sparc.SPARCFields._simm13;
+import static jasm.gen.risc.sparc.SPARCFields.imm22;
+import static jasm.gen.risc.sparc.SPARCFields.rd;
+import static jasm.gen.risc.sparc.SPARCFields.res_11_5;
+import static jasm.gen.risc.sparc.SPARCFields.res_11_6;
+import static jasm.gen.risc.sparc.SPARCFields.res_12_5;
+import static jasm.gen.risc.sparc.SPARCFields.res_18_14;
+import static jasm.gen.risc.sparc.SPARCFields.rs1;
+import static jasm.gen.risc.sparc.SPARCFields.rs2;
+import static jasm.gen.risc.sparc.SPARCFields.shcnt32;
+import static jasm.gen.risc.sparc.SPARCFields.shcnt64;
+import static jasm.gen.risc.sparc.SPARCFields.simm13;
 import static jasm.gen.risc.sparc.SPARCFields.i;
 import static jasm.gen.risc.sparc.SPARCFields.op;
 import static jasm.gen.risc.sparc.SPARCFields.op2;
@@ -33,8 +33,8 @@ import static jasm.gen.risc.sparc.SPARCFields.x;
 final class IntegerArithmetic extends SPARCInstructionDescriptionCreator {
 
     private void createBinaryArithmetic(String name, int op3Contents) {
-        define(name, op(0x2), _rs1, i(0), _res_12_5, _rs2, _rd, op3(op3Contents));
-        define(name, op(0x2), _rs1, i(1), _simm13, _rd, op3(op3Contents));
+        define(name, op(0x2), rs1, i(0), res_12_5, rs2, rd, op3(op3Contents));
+        define(name, op(0x2), rs1, i(1), simm13, rd, op3(op3Contents));
     }
 
     private void create_A2() {
@@ -93,20 +93,20 @@ final class IntegerArithmetic extends SPARCInstructionDescriptionCreator {
     }
 
     private void create_A41() {
-        define("popc", op(0x2), _res_18_14, i(0), _res_12_5, _rs2, _rd, op3(0x2e));
-        define("popc", op(0x2), _res_18_14, i(1), _simm13, _rd, op3(0x2e));
+        define("popc", op(0x2), res_18_14, i(0), res_12_5, rs2, rd, op3(0x2e));
+        define("popc", op(0x2), res_18_14, i(1), simm13, rd, op3(0x2e));
     }
 
     private void create_A48() {
-        define("sethi", op(0x0), op2(0x4), _imm22, _rd);
+        define("sethi", op(0x0), op2(0x4), imm22, rd);
     }
 
     private void createShift(String name, int op3Contents) {
-        final Object[] head = {op(0x2), _rs1, op3(op3Contents)};
-        define(name, head, i(0), x(0), _res_11_5, _rs2, _rd);
-        define(name + "x", head, i(0), x(1), _res_11_5, _rs2, _rd);
-        define(name, head, i(1), x(0), _res_11_5, _shcnt32, _rd);
-        define(name + "x", head, i(1), x(1), _res_11_6, _shcnt64, _rd);
+        final Object[] head = {op(0x2), rs1, op3(op3Contents)};
+        define(name, head, i(0), x(0), res_11_5, rs2, rd);
+        define(name + "x", head, i(0), x(1), res_11_5, rs2, rd);
+        define(name, head, i(1), x(0), res_11_5, shcnt32, rd);
+        define(name + "x", head, i(1), x(1), res_11_6, shcnt64, rd);
     }
 
     private void create_A49() {

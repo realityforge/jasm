@@ -9,7 +9,7 @@
 package jasm.gen.risc.field;
 
 import jasm.gen.risc.bitRange.BitRange;
-import jasm.util.StaticFieldName;
+import jasm.util.NamedField;
 import jasm.util.program.ProgramError;
 
 /**
@@ -19,63 +19,59 @@ import jasm.util.program.ProgramError;
  * @author Dave Ungar
  * @author Adam Spitz
  */
-public abstract class RiscField implements Cloneable, StaticFieldName {
+public abstract class RiscField
+    extends NamedField
+    implements Cloneable {
 
-    private final BitRange _bitRange;
+  private final BitRange _bitRange;
 
-    protected RiscField(BitRange bitRange) {
-        _bitRange = bitRange;
+  protected RiscField(String name, BitRange bitRange) {
+    super(name);
+    _bitRange = bitRange;
+  }
+
+  protected RiscField(BitRange bitRange) {
+    this(null, bitRange);
+  }
+
+  @Override
+  public RiscField clone() {
+    try {
+      return (RiscField) super.clone();
+    } catch (CloneNotSupportedException cloneNotSupportedException) {
+      ProgramError.unexpected("Field.clone() not supported");
     }
-
-    @Override
-    public RiscField clone() {
-        try {
-            return (RiscField) super.clone();
-        } catch (CloneNotSupportedException cloneNotSupportedException) {
-            ProgramError.unexpected("Field.clone() not supported");
-        }
-        return null;
-    }
-
-    private String _name;
-
-    public final String name() {
-        return _name;
-    }
-
-    public final void setName(String name) {
-        _name = name;
-    }
+    return null;
+  }
 
   public final BitRange bitRange() {
-        return _bitRange;
-    }
+    return _bitRange;
+  }
 
-    /**
-     * Two RISC fields are considered equal if they define the same set of bits in an instruction
-     * (i.e. their bit ranges are equal).
-     */
-    @Override
-    public final boolean equals(Object other) {
-        if (other instanceof RiscField) {
-            final RiscField riscField = (RiscField) other;
-            return bitRange().equals(riscField.bitRange());
-        }
-        return false;
+  /**
+   * Two RISC fields are considered equal if they define the same set of bits in an instruction
+   * (i.e. their bit ranges are equal).
+   */
+  @Override
+  public final boolean equals(Object other) {
+    if (other instanceof RiscField) {
+      final RiscField riscField = (RiscField) other;
+      return bitRange().equals(riscField.bitRange());
     }
+    return false;
+  }
 
-    @Override
-    public final int hashCode() {
-        int result = _bitRange.hashCode();
-        if (_name != null) {
-            result ^= _name.hashCode();
-        }
-        return result;
+  @Override
+  public final int hashCode() {
+    int result = _bitRange.hashCode();
+    if (name() != null) {
+      result ^= name().hashCode();
     }
+    return result;
+  }
 
-    @Override
-    public final String toString() {
-        return name();
-    }
-
+  @Override
+  public final String toString() {
+    return name();
+  }
 }

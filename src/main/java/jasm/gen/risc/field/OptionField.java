@@ -20,7 +20,7 @@ import java.util.ArrayList;
 /**
  * An OptionField is a field whose value is specified as an optional part of the assembler
  * mnemonic or assembler method name. The field has a default value if it is not specified.
- * An example of an optional field is the {@link jasm.gen.risc.sparc.SPARCFields#_p predict bit}
+ * An example of an optional field is the {@link jasm.gen.risc.sparc.SPARCFields#p predict bit}
  * for the SPARC Branch on Equal with Prediction instruction:
  *
  *     bge        // predict that branch will be taken (default)
