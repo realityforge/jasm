@@ -21,12 +21,4 @@ public final class HexUtil {
   public static String toHexLiteral(byte value) {
     return String.format("0x%02X", value);
   }
-
-  public static String toHexLiteral(byte[] values) {
-    String s = "0x";
-    for (byte value : values) {
-      s += String.format("%02X", value);
-    }
-    return s;
-  }
 }

@@ -19,7 +19,6 @@ import jasm.gen.InstructionConstraint;
 import jasm.gen.risc.RiscAssembly;
 import jasm.gen.risc.RiscTemplate;
 import jasm.gen.risc.field.OperandField;
-import jasm.util.HexUtil;
 import jasm.util.lang.EndianUtil;
 import jasm.util.lang.StaticLoophole;
 import jasm.util.program.ProgramWarning;
@@ -127,7 +126,11 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
             }
         }
         if (result.isEmpty()) {
-            throw new AssemblyException("instruction could not be disassembled: " + HexUtil.toHexLiteral(toBEBytes(instruction)));
+          String s = "0x";
+          for (byte value : toBEBytes(instruction)) {
+            s += String.format("%02X", value);
+          }
+          throw new AssemblyException("instruction could not be disassembled: " + s);
         }
         _currentOffset += 4;
         return result;
