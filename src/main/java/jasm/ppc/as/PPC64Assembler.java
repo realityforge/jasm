@@ -6,25 +6,25 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.sparc;
+package jasm.ppc.as;
 
 import jasm.Assembler64;
 import jasm.AssemblyException;
 import jasm.Label;
 
 /**
- * The concrete class for a 64-bit SPARC assembler.
+ * The concrete class for a 64-bit PowerPC assembler.
  *
  * @author Bernd Mathiske
  */
-public final class SPARC64Assembler extends SPARCAssembler implements Assembler64 {
+public final class PPC64Assembler extends PPCAssembler implements Assembler64 {
 
     private long _startAddress; // address of first instruction
 
-    public SPARC64Assembler() {
+    public PPC64Assembler() {
     }
 
-    public SPARC64Assembler(long startAddress) {
+    public PPC64Assembler(long startAddress) {
         _startAddress = startAddress;
     }
 

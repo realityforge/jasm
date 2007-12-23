@@ -62,9 +62,10 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         super();
         _assembly = assembly;
         _sourceDirectory = new File(".");
-        _outputPackage = Assembler.class.getPackage().getName() + "." + assembly.instructionSet().name().toLowerCase();
-        _rawAssemblerClassSimpleName = assembly.instructionSet().name() + "RawAssembler";
-        _labelAssemblerClassSimpleName = assembly.instructionSet().name() + "LabelAssembler";
+        final String isaName = assembly.instructionSet().name();
+        _outputPackage = Assembler.class.getPackage().getName() + "." + isaName.toLowerCase() + ".as" ;
+        _rawAssemblerClassSimpleName = isaName + "RawAssembler";
+        _labelAssemblerClassSimpleName = isaName + "LabelAssembler";
         _rawAssemblerClassName = _outputPackage + "." + _rawAssemblerClassSimpleName;
         _labelAssemblerClassName = _outputPackage + "." + _labelAssemblerClassSimpleName;
         _sortAssemblerMethods = sortAssemblerMethods;

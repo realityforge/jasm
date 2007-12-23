@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.amd64;
+package jasm.amd64.as;
 
 import jasm.Assembler64;
 import jasm.AssemblyException;

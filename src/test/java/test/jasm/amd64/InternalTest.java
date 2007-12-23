@@ -10,7 +10,7 @@ package test.jasm.amd64;
 
 import jasm.AssemblyException;
 import jasm.Label;
-import jasm.amd64.AMD64Assembler;
+import jasm.amd64.as.AMD64Assembler;
 import static jasm.amd64.AMD64GeneralRegister32.EBX;
 import static jasm.amd64.AMD64GeneralRegister32.ECX;
 import jasm.amd64.AMD64GeneralRegister64;

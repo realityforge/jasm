@@ -11,7 +11,7 @@ package jasm.gen.cisc.amd64;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.WordWidth;
-import jasm.amd64.AMD64Assembler;
+import jasm.amd64.as.AMD64Assembler;
 import jasm.amd64.AMD64GeneralRegister8;
 import jasm.amd64.AMD64XMMRegister;
 import jasm.dis.amd64.AMD64DisassembledInstruction;

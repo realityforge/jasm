@@ -11,7 +11,7 @@ package test.jasm.ia32;
 import jasm.AssemblyException;
 import jasm.Label;
 import jasm.dis.ia32.IA32Disassembler;
-import jasm.ia32.IA32Assembler;
+import jasm.ia32.as.IA32Assembler;
 import static jasm.ia32.IA32GeneralRegister16.AX;
 import static jasm.ia32.IA32GeneralRegister16.BP;
 import static jasm.ia32.IA32GeneralRegister16.BX;

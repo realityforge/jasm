@@ -6,22 +6,22 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.ppc;
+package jasm.sparc.as;
 
 import jasm.Assembler32;
 import jasm.AssemblyException;
 import jasm.Label;
 
 /**
- * The concrete class for a 32-bit PowerPC assembler.
+ * The concrete class for a 32-bit SPARC assembler.
 
  * @author Bernd Mathiske
  */
-public final class PPC32Assembler extends PPCAssembler implements Assembler32 {
+public final class SPARC32Assembler extends SPARCAssembler implements Assembler32 {
 
     private final int _startAddress; // address of first instruction
 
-    public PPC32Assembler(int startAddress) {
+    public SPARC32Assembler(int startAddress) {
         _startAddress = startAddress;
     }
 

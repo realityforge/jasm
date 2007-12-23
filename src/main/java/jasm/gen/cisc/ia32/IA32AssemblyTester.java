@@ -15,7 +15,7 @@ import jasm.dis.ia32.IA32DisassembledInstruction;
 import jasm.dis.ia32.IA32Disassembler;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.cisc.x86.X86AssemblyTester;
-import jasm.ia32.IA32Assembler;
+import jasm.ia32.as.IA32Assembler;
 import java.util.EnumSet;
 import java.util.List;
 

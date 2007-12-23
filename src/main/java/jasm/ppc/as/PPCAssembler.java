@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.ppc;
+package jasm.ppc.as;
 
 import jasm.InstructionSet;
 

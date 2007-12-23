@@ -11,7 +11,7 @@ package jasm.dis.amd64;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.WordWidth;
-import jasm.amd64.AMD64Assembler;
+import jasm.amd64.as.AMD64Assembler;
 import jasm.dis.x86.X86Disassembler;
 import jasm.dis.x86.X86InstructionHeader;
 import jasm.gen.cisc.amd64.AMD64Assembly;

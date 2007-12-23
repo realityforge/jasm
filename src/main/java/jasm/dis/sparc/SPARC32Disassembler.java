@@ -13,7 +13,7 @@ import jasm.Assembler;
 import jasm.WordWidth;
 import jasm.gen.risc.sparc.SPARCAssembly;
 import jasm.gen.risc.sparc.SPARCTemplate;
-import jasm.sparc.SPARC32Assembler;
+import jasm.sparc.as.SPARC32Assembler;
 import java.util.List;
 
 /**

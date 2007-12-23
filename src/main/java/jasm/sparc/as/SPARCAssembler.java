@@ -6,11 +6,12 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.sparc;
+package jasm.sparc.as;
 
 import jasm.AssemblyException;
 import jasm.InstructionSet;
 import static jasm.sparc.GPR.G0;
+import jasm.sparc.GPR;
 
 /**
  * The base class for the 32-bit and 64-bit SPARC assemblers. This class also defines

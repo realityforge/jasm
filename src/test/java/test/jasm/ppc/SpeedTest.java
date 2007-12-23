@@ -20,7 +20,7 @@ import static jasm.ppc.GPR.R3;
 import static jasm.ppc.GPR.R30;
 import static jasm.ppc.GPR.R31;
 import static jasm.ppc.GPR.SP;
-import jasm.ppc.PPC32Assembler;
+import jasm.ppc.as.PPC32Assembler;
 import java.io.IOException;
 import junit.framework.TestCase;
 

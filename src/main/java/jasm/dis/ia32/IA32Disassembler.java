@@ -15,7 +15,7 @@ import jasm.dis.x86.X86Disassembler;
 import jasm.dis.x86.X86InstructionHeader;
 import jasm.gen.cisc.ia32.IA32Assembly;
 import jasm.gen.cisc.ia32.IA32Template;
-import jasm.ia32.IA32Assembler;
+import jasm.ia32.as.IA32Assembler;
 import jasm.util.HexByte;
 import java.util.LinkedList;
 import java.util.List;

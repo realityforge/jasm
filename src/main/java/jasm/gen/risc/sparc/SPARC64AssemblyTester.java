@@ -13,7 +13,7 @@ import jasm.WordWidth;
 import jasm.dis.sparc.SPARC64DisassembledInstruction;
 import jasm.dis.sparc.SPARC64Disassembler;
 import jasm.gen.AssemblyTestComponent;
-import jasm.sparc.SPARC64Assembler;
+import jasm.sparc.as.SPARC64Assembler;
 import java.util.EnumSet;
 
 /**

@@ -29,14 +29,15 @@
   </target>
 
   <target name="clean" description="Clean the output directory">
+    <echo>It's clobbering time!</echo>
     <delete dir="${output.dir}"/>
   </target>
 
   <macrodef name="gen-asm">
     <attribute name="isa"/>
     <sequential>
-      <delete dir="${generated.java}/jasm/@{isa}"/>
-      <mkdir dir="${generated.java}/jasm/@{isa}"/>
+      <delete dir="${generated.java}/jasm/@{isa}/as"/>
+      <mkdir dir="${generated.java}/jasm/@{isa}/as"/>
       <java classname="jasm.gen.Main" classpath="${output.main.classes}:${cli.jar}" failonerror="true">
         <arg line="-d ${generated.java} --isa @{isa}"/>
       </java>
@@ -60,7 +61,7 @@
   <target name="check-generated">
     <!-- Check by looking to see if last file was generated -->
     <available property="assemblers.generated"
-               file="${generated.java}/jasm/sparc/SPARCLabelAssembler.java"/>
+               file="${generated.java}/jasm/sparc/as/SPARCLabelAssembler.java"/>
   </target>
 
   <target name="generate-assemblers"

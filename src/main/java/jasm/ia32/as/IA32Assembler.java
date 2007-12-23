@@ -6,27 +6,36 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.sparc;
+package jasm.ia32.as;
 
 import jasm.Assembler32;
 import jasm.AssemblyException;
+import jasm.InstructionSet;
 import jasm.Label;
 
 /**
- * The concrete class for a 32-bit SPARC assembler.
-
+ * Instatiate this class to assemble IA32 instructions.
+ *
  * @author Bernd Mathiske
  */
-public final class SPARC32Assembler extends SPARCAssembler implements Assembler32 {
+public final class IA32Assembler extends IA32LabelAssembler implements Assembler32 {
 
-    private final int _startAddress; // address of first instruction
-
-    public SPARC32Assembler(int startAddress) {
-        _startAddress = startAddress;
+    @Override
+    public final InstructionSet instructionSet() {
+        return InstructionSet.IA32;
     }
+
+    private int _startAddress; // address of first instruction
 
     public final int startAddress() {
         return _startAddress;
+    }
+
+    public IA32Assembler() {
+    }
+
+    public IA32Assembler(int startAddress) {
+        _startAddress = startAddress;
     }
 
     public final void fixLabel(Label label, int address) {

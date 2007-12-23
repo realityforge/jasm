@@ -11,7 +11,7 @@ package test.jasm.amd64;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.Label;
-import jasm.amd64.AMD64Assembler;
+import jasm.amd64.as.AMD64Assembler;
 import static jasm.amd64.AMD64GeneralRegister64.RAX;
 import static jasm.amd64.AMD64GeneralRegister64.RBX;
 import jasm.dis.amd64.AMD64Disassembler;
