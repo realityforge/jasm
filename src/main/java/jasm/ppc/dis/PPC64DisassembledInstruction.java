@@ -6,23 +6,24 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.dis.amd64;
+package jasm.ppc.dis;
 
 import jasm.Argument;
 import jasm.dis.Address64Instruction;
-import jasm.dis.x86.X86DisassembledInstruction;
 import jasm.gen.ImmediateArgument;
-import jasm.gen.cisc.amd64.AMD64Template;
+import jasm.gen.risc.ppc.PPCTemplate;
 import java.util.List;
 
 /**
+ *
+ *
  * @author Bernd Mathiske
  */
-public final class AMD64DisassembledInstruction extends X86DisassembledInstruction<AMD64Template> implements Address64Instruction {
+public final class PPC64DisassembledInstruction extends PPCDisassembledInstruction implements Address64Instruction {
 
     private final Address64Instruction.Mixin _addressInstruction;
 
-    AMD64DisassembledInstruction(long startAddress, int offset, byte[] bytes, AMD64Template template, List<Argument> arguments) {
+    PPC64DisassembledInstruction(long startAddress, int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {
         super(offset, bytes, template, arguments);
         _addressInstruction = new Address64Instruction.Mixin(this, startAddress);
     }

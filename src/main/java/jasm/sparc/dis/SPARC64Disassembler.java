@@ -6,14 +6,14 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.dis.sparc;
+package jasm.sparc.dis;
 
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.WordWidth;
 import jasm.gen.risc.sparc.SPARCAssembly;
 import jasm.gen.risc.sparc.SPARCTemplate;
-import jasm.sparc.as.SPARC32Assembler;
+import jasm.sparc.as.SPARC64Assembler;
 import java.util.List;
 
 /**
@@ -21,23 +21,23 @@ import java.util.List;
  *
  * @author Bernd Mathiske
  */
-public final class SPARC32Disassembler extends SPARCDisassembler<SPARC32DisassembledInstruction> {
+public final class SPARC64Disassembler extends SPARCDisassembler<SPARC64DisassembledInstruction> {
 
-    private final int _startAddress;
+    private final long _startAddress;
 
-    public SPARC32Disassembler(int startAddress) {
-        super(SPARCAssembly.ASSEMBLY, WordWidth.BITS_32);
+    public SPARC64Disassembler(long startAddress) {
+        super(SPARCAssembly.ASSEMBLY, WordWidth.BITS_64);
         _startAddress = startAddress;
     }
 
     @Override
-    protected final SPARC32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, SPARCTemplate template, List<Argument> arguments) {
-        return new SPARC32DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
+    protected final SPARC64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, SPARCTemplate template, List<Argument> arguments) {
+        return new SPARC64DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
     }
 
     @Override
     protected final Assembler createAssembler(int offset) {
-        return new SPARC32Assembler(_startAddress + offset);
+        return new SPARC64Assembler(_startAddress + offset);
     }
 
 }

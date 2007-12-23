@@ -6,24 +6,23 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.dis.sparc;
+package jasm.ia32.dis;
 
 import jasm.Argument;
 import jasm.dis.Address32Instruction;
 import jasm.gen.ImmediateArgument;
-import jasm.gen.risc.sparc.SPARCTemplate;
+import jasm.gen.cisc.ia32.IA32Template;
+import jasm.x86.dis.X86DisassembledInstruction;
 import java.util.List;
 
 /**
- *
- *
  * @author Bernd Mathiske
  */
-public final class SPARC32DisassembledInstruction extends SPARCDisassembledInstruction implements Address32Instruction {
+public final class IA32DisassembledInstruction extends X86DisassembledInstruction<IA32Template> implements Address32Instruction {
 
     private final Address32Instruction.Mixin _addressInstruction;
 
-    SPARC32DisassembledInstruction(int startAddress, int offset, byte[] bytes, SPARCTemplate template, List<Argument> arguments) {
+    IA32DisassembledInstruction(int startAddress, int offset, byte[] bytes, IA32Template template, List<Argument> arguments) {
         super(offset, bytes, template, arguments);
         _addressInstruction = new Address32Instruction.Mixin(this, startAddress);
     }
@@ -39,4 +38,5 @@ public final class SPARC32DisassembledInstruction extends SPARCDisassembledInstr
     public final int addressToOffset(ImmediateArgument argument) {
         return _addressInstruction.addressToOffset(argument);
     }
+
 }

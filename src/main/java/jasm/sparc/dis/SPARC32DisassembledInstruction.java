@@ -6,12 +6,12 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.dis.ppc;
+package jasm.sparc.dis;
 
 import jasm.Argument;
-import jasm.dis.Address64Instruction;
+import jasm.dis.Address32Instruction;
 import jasm.gen.ImmediateArgument;
-import jasm.gen.risc.ppc.PPCTemplate;
+import jasm.gen.risc.sparc.SPARCTemplate;
 import java.util.List;
 
 /**
@@ -19,16 +19,16 @@ import java.util.List;
  *
  * @author Bernd Mathiske
  */
-public final class PPC64DisassembledInstruction extends PPCDisassembledInstruction implements Address64Instruction {
+public final class SPARC32DisassembledInstruction extends SPARCDisassembledInstruction implements Address32Instruction {
 
-    private final Address64Instruction.Mixin _addressInstruction;
+    private final Address32Instruction.Mixin _addressInstruction;
 
-    PPC64DisassembledInstruction(long startAddress, int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {
+    SPARC32DisassembledInstruction(int startAddress, int offset, byte[] bytes, SPARCTemplate template, List<Argument> arguments) {
         super(offset, bytes, template, arguments);
-        _addressInstruction = new Address64Instruction.Mixin(this, startAddress);
+        _addressInstruction = new Address32Instruction.Mixin(this, startAddress);
     }
 
-    public final long address() {
+    public final int address() {
         return _addressInstruction.address();
     }
 
@@ -39,5 +39,4 @@ public final class PPC64DisassembledInstruction extends PPCDisassembledInstructi
     public final int addressToOffset(ImmediateArgument argument) {
         return _addressInstruction.addressToOffset(argument);
     }
-
 }

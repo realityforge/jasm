@@ -6,17 +6,17 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.dis.ia32;
+package jasm.ia32.dis;
 
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.WordWidth;
-import jasm.dis.x86.X86Disassembler;
-import jasm.dis.x86.X86InstructionHeader;
 import jasm.gen.cisc.ia32.IA32Assembly;
 import jasm.gen.cisc.ia32.IA32Template;
 import jasm.ia32.as.IA32Assembler;
 import jasm.util.HexByte;
+import jasm.x86.dis.X86Disassembler;
+import jasm.x86.dis.X86InstructionHeader;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;

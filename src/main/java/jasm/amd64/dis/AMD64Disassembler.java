@@ -6,18 +6,18 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.dis.amd64;
+package jasm.amd64.dis;
 
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.WordWidth;
 import jasm.amd64.as.AMD64Assembler;
-import jasm.dis.x86.X86Disassembler;
-import jasm.dis.x86.X86InstructionHeader;
 import jasm.gen.cisc.amd64.AMD64Assembly;
 import jasm.gen.cisc.amd64.AMD64Template;
 import jasm.gen.cisc.x86.X86Opcode;
 import jasm.util.HexByte;
+import jasm.x86.dis.X86Disassembler;
+import jasm.x86.dis.X86InstructionHeader;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;

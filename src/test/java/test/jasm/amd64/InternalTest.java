@@ -10,7 +10,6 @@ package test.jasm.amd64;
 
 import jasm.AssemblyException;
 import jasm.Label;
-import jasm.amd64.as.AMD64Assembler;
 import static jasm.amd64.AMD64GeneralRegister32.EBX;
 import static jasm.amd64.AMD64GeneralRegister32.ECX;
 import jasm.amd64.AMD64GeneralRegister64;
@@ -27,7 +26,8 @@ import static jasm.amd64.AMD64GeneralRegister8.BL;
 import static jasm.amd64.AMD64GeneralRegister8.CL;
 import static jasm.amd64.AMD64GeneralRegister8.DL;
 import static jasm.amd64.AMD64IndexRegister64.RBX_INDEX;
-import jasm.dis.amd64.AMD64Disassembler;
+import jasm.amd64.as.AMD64Assembler;
+import jasm.amd64.dis.AMD64Disassembler;
 import static jasm.x86.Scale.SCALE_1;
 import static jasm.x86.Scale.SCALE_2;
 import static jasm.x86.Scale.SCALE_8;

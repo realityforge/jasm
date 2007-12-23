@@ -6,14 +6,14 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.dis.ppc;
+package jasm.ppc.dis;
 
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.WordWidth;
 import jasm.gen.risc.ppc.PPCAssembly;
 import jasm.gen.risc.ppc.PPCTemplate;
-import jasm.ppc.as.PPC32Assembler;
+import jasm.ppc.as.PPC64Assembler;
 import java.util.List;
 
 /**
@@ -21,23 +21,23 @@ import java.util.List;
  *
  * @author Bernd Mathiske
  */
-public final class PPC32Disassembler extends PPCDisassembler<PPC32DisassembledInstruction> {
+public final class PPC64Disassembler extends PPCDisassembler<PPC64DisassembledInstruction> {
 
-    private final int _startAddress;
+    private final long _startAddress;
 
-    public PPC32Disassembler(int startAddress) {
-        super(PPCAssembly.ASSEMBLY, WordWidth.BITS_32);
+    public PPC64Disassembler(long startAddress) {
+        super(PPCAssembly.ASSEMBLY, WordWidth.BITS_64);
         _startAddress = startAddress;
     }
 
     @Override
-    protected final PPC32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {
-        return new PPC32DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
+    protected final PPC64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {
+        return new PPC64DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
     }
 
     @Override
     protected final Assembler createAssembler(int offset) {
-        return new PPC32Assembler(_startAddress + offset);
+        return new PPC64Assembler(_startAddress + offset);
     }
 
 }

@@ -10,8 +10,6 @@ package test.jasm.ia32;
 
 import jasm.AssemblyException;
 import jasm.Label;
-import jasm.dis.ia32.IA32Disassembler;
-import jasm.ia32.as.IA32Assembler;
 import static jasm.ia32.IA32GeneralRegister16.AX;
 import static jasm.ia32.IA32GeneralRegister16.BP;
 import static jasm.ia32.IA32GeneralRegister16.BX;
@@ -36,6 +34,8 @@ import static jasm.ia32.IA32GeneralRegister8.CH;
 import static jasm.ia32.IA32GeneralRegister8.CL;
 import static jasm.ia32.IA32GeneralRegister8.DH;
 import static jasm.ia32.IA32GeneralRegister8.DL;
+import jasm.ia32.as.IA32Assembler;
+import jasm.ia32.dis.IA32Disassembler;
 import jasm.x86.Scale;
 import static jasm.x86.Scale.SCALE_1;
 import static jasm.x86.Scale.SCALE_2;

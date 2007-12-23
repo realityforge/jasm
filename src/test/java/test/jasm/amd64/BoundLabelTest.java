@@ -11,19 +11,19 @@ package test.jasm.amd64;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.Label;
-import jasm.amd64.as.AMD64Assembler;
 import static jasm.amd64.AMD64GeneralRegister64.RAX;
 import static jasm.amd64.AMD64GeneralRegister64.RBX;
-import jasm.dis.amd64.AMD64Disassembler;
+import jasm.amd64.as.AMD64Assembler;
+import jasm.amd64.dis.AMD64Disassembler;
 import jasm.gen.Parameter;
 import jasm.gen.cisc.amd64.AMD64Assembly;
 import jasm.gen.cisc.amd64.AMD64Template;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Arrays;
 import junit.framework.TestCase;
 
 /**

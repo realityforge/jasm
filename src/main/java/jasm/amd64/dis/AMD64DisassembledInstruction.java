@@ -6,28 +6,28 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.dis.ia32;
+package jasm.amd64.dis;
 
 import jasm.Argument;
-import jasm.dis.Address32Instruction;
-import jasm.dis.x86.X86DisassembledInstruction;
+import jasm.dis.Address64Instruction;
 import jasm.gen.ImmediateArgument;
-import jasm.gen.cisc.ia32.IA32Template;
+import jasm.gen.cisc.amd64.AMD64Template;
+import jasm.x86.dis.X86DisassembledInstruction;
 import java.util.List;
 
 /**
  * @author Bernd Mathiske
  */
-public final class IA32DisassembledInstruction extends X86DisassembledInstruction<IA32Template> implements Address32Instruction {
+public final class AMD64DisassembledInstruction extends X86DisassembledInstruction<AMD64Template> implements Address64Instruction {
 
-    private final Address32Instruction.Mixin _addressInstruction;
+    private final Address64Instruction.Mixin _addressInstruction;
 
-    IA32DisassembledInstruction(int startAddress, int offset, byte[] bytes, IA32Template template, List<Argument> arguments) {
+    AMD64DisassembledInstruction(long startAddress, int offset, byte[] bytes, AMD64Template template, List<Argument> arguments) {
         super(offset, bytes, template, arguments);
-        _addressInstruction = new Address32Instruction.Mixin(this, startAddress);
+        _addressInstruction = new Address64Instruction.Mixin(this, startAddress);
     }
 
-    public final int address() {
+    public final long address() {
         return _addressInstruction.address();
     }
 

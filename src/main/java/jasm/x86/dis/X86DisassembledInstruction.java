@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.dis.x86;
+package jasm.x86.dis;
 
 import jasm.Argument;
 import jasm.WordWidth;

@@ -10,10 +10,10 @@ package jasm.gen.risc.ppc;
 
 import jasm.Assembler;
 import jasm.WordWidth;
-import jasm.dis.ppc.PPC32DisassembledInstruction;
-import jasm.dis.ppc.PPC32Disassembler;
 import jasm.gen.AssemblyTestComponent;
 import jasm.ppc.as.PPC32Assembler;
+import jasm.ppc.dis.PPC32DisassembledInstruction;
+import jasm.ppc.dis.PPC32Disassembler;
 import java.util.EnumSet;
 
 /**

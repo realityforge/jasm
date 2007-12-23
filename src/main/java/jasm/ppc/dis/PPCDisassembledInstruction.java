@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.dis.ppc;
+package jasm.ppc.dis;
 
 import jasm.Argument;
 import jasm.dis.DisassembledLabel;

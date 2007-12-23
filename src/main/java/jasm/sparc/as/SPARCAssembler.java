@@ -10,8 +10,8 @@ package jasm.sparc.as;
 
 import jasm.AssemblyException;
 import jasm.InstructionSet;
-import static jasm.sparc.GPR.G0;
 import jasm.sparc.GPR;
+import static jasm.sparc.GPR.G0;
 
 /**
  * The base class for the 32-bit and 64-bit SPARC assemblers. This class also defines

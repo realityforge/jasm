@@ -10,10 +10,10 @@ package jasm.gen.risc.sparc;
 
 import jasm.Assembler;
 import jasm.WordWidth;
-import jasm.dis.sparc.SPARC64DisassembledInstruction;
-import jasm.dis.sparc.SPARC64Disassembler;
 import jasm.gen.AssemblyTestComponent;
 import jasm.sparc.as.SPARC64Assembler;
+import jasm.sparc.dis.SPARC64DisassembledInstruction;
+import jasm.sparc.dis.SPARC64Disassembler;
 import java.util.EnumSet;
 
 /**

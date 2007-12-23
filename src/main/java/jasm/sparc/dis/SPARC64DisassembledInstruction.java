@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.dis.sparc;
+package jasm.sparc.dis;
 
 import jasm.Argument;
 import jasm.dis.Address64Instruction;
