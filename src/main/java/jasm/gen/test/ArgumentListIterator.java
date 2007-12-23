@@ -13,7 +13,6 @@ import jasm.gen.ArgumentRange;
 import jasm.gen.Parameter;
 import jasm.gen.Template;
 import jasm.util.collect.CollectionUtil;
-import jasm.util.collect.FilterIterator;
 import jasm.util.lang.StaticLoophole;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -25,7 +24,7 @@ import java.util.NoSuchElementException;
  * Using an iterator means that each test case is generated as needed and does not
  * use up memory longer than necessary. This helps prevent out of memory errors
  * for templates where the number of test cases can be very large.
- *
+ * <p/>
  * It is important to note that the value returned by {@link #next()} is only valid
  * until {@code next()} is called again. That is, the same <code>Sequence<Argument></code>
  * object is returned by each call to {@code next()}, only its contents have changed.
@@ -108,7 +107,7 @@ final class ArgumentListIterator<Template_Type extends Template> implements Iter
     do {
       result = advance0();
     } while (result && tester.isLegalArgumentList(_template, _next) !=
-                       (_testCaseLegality == TestCaseLegality.LEGAL));
+        (_testCaseLegality == TestCaseLegality.LEGAL));
     return result;
   }
 
@@ -149,12 +148,7 @@ final class ArgumentListIterator<Template_Type extends Template> implements Iter
         if (argumentRange == null || !argumentRange.appliesInternally()) {
           _testArgumentIterators[i] = arguments.iterator();
         } else {
-          _testArgumentIterators[i] =
-              new FilterIterator<Argument>(arguments.iterator(), new FilterIterator.Predicate<Argument>() {
-                public boolean evaluate(Argument argument) {
-                  return argumentRange.includes(argument);
-                }
-              });
+          _testArgumentIterators[i] = new ArgInRangeFilterIterator(arguments.iterator(), argumentRange);
         }
       } else {
         Iterator<? extends Argument> iterator = parameter.getIllegalTestArguments().iterator();
