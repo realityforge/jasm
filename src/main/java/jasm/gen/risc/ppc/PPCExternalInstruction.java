@@ -12,7 +12,6 @@ import jasm.Argument;
 import jasm.dis.DisassembledLabel;
 import jasm.dis.GlobalLabelMapper;
 import jasm.gen.risc.RiscExternalInstruction;
-import jasm.util.collect.CollectionUtil;
 import java.util.List;
 
 /**
@@ -34,6 +33,6 @@ public final class PPCExternalInstruction extends RiscExternalInstruction {
     @Override
     public final boolean isAbsoluteBranch() {
         // An absolute branch instruction in PowerPC has an AA field with its bit set
-        return CollectionUtil.containsEqual(_template.optionFields(), PPCFields.aa) && (_template.opcode() & PPCFields.aa.bitRange().instructionMask()) != 0;
+      return _template.optionFields().contains(PPCFields.aa) && (_template.opcode() & PPCFields.aa.bitRange().instructionMask()) != 0;
     }
 }

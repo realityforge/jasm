@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Collection;
+import java.util.Collections;
 
 public final class CollectionUtil {
 
@@ -17,20 +19,6 @@ public final class CollectionUtil {
   public static boolean containsIdentical(List sequence, Object value) {
       for (Object element : sequence) {
           if (element == value) {
-              return true;
-          }
-      }
-      return false;
-  }
-
-  /**
-         * Returns true if {@code sequence} contains an element equal to {@code value}. More formally, returns true
-   * if and only if {@code sequence} contains at least one element {@code e} such that
-   * {@code (value == null ? e == null : value.equals(e))}.
-   */
-  public static boolean containsEqual(List sequence, Object value) {
-      for (Object element : sequence) {
-          if (element.equals(value)) {
               return true;
           }
       }
