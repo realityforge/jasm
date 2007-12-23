@@ -11,9 +11,6 @@ package jasm.gen.cisc.x86;
 import jasm.WordWidth;
 import jasm.gen.OffsetParameter;
 
-/**
- * @author Bernd Mathiske
- */
 public class X86OffsetParameter extends X86NumericalParameter implements OffsetParameter {
 
     public X86OffsetParameter(X86Operand.Designation designation, WordWidth width) {

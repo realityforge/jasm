@@ -23,8 +23,6 @@ import java.util.Map;
 
 /**
  * Instantiate this class to disassemble IA32 instruction streams.
- *
- * @author Bernd Mathiske
  */
 public final class IA32Disassembler extends X86Disassembler<IA32Template, IA32DisassembledInstruction> {
 

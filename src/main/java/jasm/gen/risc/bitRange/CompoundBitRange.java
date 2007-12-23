@@ -13,12 +13,7 @@ import java.util.Iterator;
 
 /**
  * A range of bits that is composed of several disjoint subranges.
- *
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
  */
-
 public final class CompoundBitRange extends BitRange {
 
     public CompoundBitRange() {

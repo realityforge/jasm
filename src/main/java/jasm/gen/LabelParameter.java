@@ -13,9 +13,6 @@ import jasm.Label;
 import java.util.Collections;
 import java.util.Set;
 
-/**
- * @author Bernd Mathiske
- */
 public final class LabelParameter implements Parameter {
 
     public LabelParameter() {

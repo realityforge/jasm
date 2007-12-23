@@ -11,10 +11,6 @@ package jasm.dis.risc;
 import jasm.gen.risc.RiscTemplate;
 import java.util.Collection;
 
-/**
- * @author Dave Ungar
- * @author Bernd Mathiske
- */
 public final class SpecificityGroup<Template_Type extends RiscTemplate> {
 
   private final int _specificity;

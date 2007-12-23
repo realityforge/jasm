@@ -14,8 +14,6 @@ import jasm.x86.GeneralRegister;
 
 /**
  * Aliases for 32-bit AMD64 general registers to be used as base registers.
- *
- * @author Bernd Mathiske
  */
 public enum AMD64BaseRegister32 implements GeneralRegister {
 

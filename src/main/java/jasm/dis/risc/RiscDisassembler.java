@@ -28,14 +28,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- *
- *
- * @author Bernd Mathiske
- * @author Doug Simon
- * @author Dave Ungar
- * @author Adam Spitz
- */
 public abstract class RiscDisassembler<Template_Type extends RiscTemplate, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
     extends Disassembler<Template_Type, DisassembledInstruction_Type> {
 

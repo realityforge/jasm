@@ -16,11 +16,6 @@ import jasm.gen.risc.sparc.SPARCTemplate;
 import jasm.sparc.as.SPARC32Assembler;
 import java.util.List;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public final class SPARC32Disassembler extends SPARCDisassembler<SPARC32DisassembledInstruction> {
 
     private final int _startAddress;

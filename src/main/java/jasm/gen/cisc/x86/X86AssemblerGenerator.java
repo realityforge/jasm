@@ -33,9 +33,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @author Bernd Mathiske
- */
 public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     extends AssemblerGenerator<Template_Type> {
 

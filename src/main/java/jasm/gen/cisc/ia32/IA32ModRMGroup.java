@@ -58,8 +58,6 @@ import java.util.Arrays;
  * See A-7 in the book.
  *
  * @see jasm.x86
- *
- * @author Bernd Mathiske
  */
 public enum IA32ModRMGroup implements ModRMGroup {
 

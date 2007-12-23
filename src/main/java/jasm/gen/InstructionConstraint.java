@@ -24,8 +24,6 @@ import java.util.List;
  * An instruction constraint implements a predicate on a complete assembler instruction and it's used by the
  * {@link jasm.gen.test.AssemblyTester test framework} in concert with {@link Parameter#getLegalTestArguments()} to generate test
  * cases.
- *
- * @author Doug Simon
  */
 public interface InstructionConstraint {
 

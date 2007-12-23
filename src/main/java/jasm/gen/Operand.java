@@ -8,11 +8,6 @@
  */
 package jasm.gen;
 
-/**
- * @author Bernd Mathiske
- */
 public interface Operand {
-
-    Class type();
-
+  Class type();
 }

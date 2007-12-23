@@ -35,8 +35,6 @@ import java.util.EnumSet;
 
 /**
  * x86 instruction prefix bytes.
- *
- * @author Bernd Mathiske
  */
 public final class X86Opcode {
 

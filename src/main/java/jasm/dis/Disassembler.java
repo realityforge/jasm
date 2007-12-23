@@ -31,9 +31,6 @@ import java.util.List;
  * which they can then render in human-readable form, an assembly listing.
  *
  * @see DisassembledInstruction
- *
- * @author Bernd Mathiske
- * @author Greg Wright
  */
 public abstract class Disassembler<Template_Type extends Template, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>> {
 

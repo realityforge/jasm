@@ -15,8 +15,6 @@ import java.util.Vector;
 
 /**
  * Additonal methods that one could expect in java.util.Arrays.
- *
- * @author Bernd Mathiske
  */
 public final class ArrayUtil {
 

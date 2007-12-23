@@ -13,9 +13,6 @@ import jasm.gen.ArgumentRange;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * @author Doug Simon
- */
 final class ArgInRangeFilterIterator implements Iterator<Argument> {
 
   private final Iterator<? extends Argument> _iterator;

@@ -14,9 +14,6 @@ import java.util.Arrays;
 
 /**
  * The components of the argument to the Memory Barrier (i.e. {@code membar}) instruction.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public final class MembarOperand extends AbstractSymbolicArgument {
 

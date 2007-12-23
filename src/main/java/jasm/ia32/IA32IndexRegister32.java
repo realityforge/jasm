@@ -12,9 +12,6 @@ import jasm.WordWidth;
 import jasm.SymbolSet;
 import jasm.x86.GeneralRegister;
 
-/**
- * @author Bernd Mathiske
- */
 public enum IA32IndexRegister32 implements GeneralRegister {
 
     EAX_INDEX,

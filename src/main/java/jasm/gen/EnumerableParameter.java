@@ -8,12 +8,8 @@
  */
 package jasm.gen;
 
-
-
 /**
  * Parameters with enumerable arguments.
- *
- * @author Bernd Mathiske
  */
 public interface EnumerableParameter extends Parameter {
 

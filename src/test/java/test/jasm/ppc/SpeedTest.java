@@ -24,9 +24,6 @@ import jasm.ppc.as.PPC32Assembler;
 import java.io.IOException;
 import junit.framework.TestCase;
 
-/**
- * @author Bernd Mathiske
- */
 public final class SpeedTest extends TestCase {
   public final void produce() throws AssemblyException {
     final int startAddress = 0x0000ecf0;

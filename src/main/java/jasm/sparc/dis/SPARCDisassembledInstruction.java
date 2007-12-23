@@ -16,9 +16,6 @@ import jasm.gen.risc.sparc.SPARCExternalInstruction;
 import jasm.gen.risc.sparc.SPARCTemplate;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- */
 public abstract class SPARCDisassembledInstruction extends RiscDisassembledInstruction<SPARCTemplate> {
 
     SPARCDisassembledInstruction(int offset, byte[] bytes, SPARCTemplate template, List<Argument> arguments) {

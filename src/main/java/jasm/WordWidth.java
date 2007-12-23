@@ -13,8 +13,6 @@ import jasm.util.Longs;
 
 /**
  * A word width value describes many bits there are in a machine word.
- *
- * @author Bernd Mathiske
  */
 public enum WordWidth {
 

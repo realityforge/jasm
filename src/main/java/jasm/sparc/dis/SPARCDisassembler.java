@@ -14,11 +14,6 @@ import jasm.dis.risc.RiscDisassembler;
 import jasm.gen.risc.sparc.SPARCAssembly;
 import jasm.gen.risc.sparc.SPARCTemplate;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public abstract class SPARCDisassembler<DisassembledInstruction_Type extends DisassembledInstruction<SPARCTemplate>>
         extends RiscDisassembler<SPARCTemplate, DisassembledInstruction_Type> {
 

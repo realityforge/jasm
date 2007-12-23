@@ -10,9 +10,6 @@ package jasm.gen;
 
 /**
  * The set of tests that can be performed against a generated assembler.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public enum AssemblyTestComponent {
 

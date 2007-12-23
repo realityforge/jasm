@@ -14,11 +14,6 @@ import jasm.gen.ImmediateArgument;
 import jasm.gen.risc.sparc.SPARCTemplate;
 import java.util.List;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public final class SPARC32DisassembledInstruction extends SPARCDisassembledInstruction implements Address32Instruction {
 
     private final Address32Instruction.Mixin _addressInstruction;

@@ -32,9 +32,6 @@ import jasm.sparc.StateRegister;
 
 /**
  * Simple synthetic SPARC instructions.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 final class SyntheticInstructions extends SPARCInstructionDescriptionCreator {
 

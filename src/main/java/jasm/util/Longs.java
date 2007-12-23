@@ -10,8 +10,6 @@ package jasm.util;
 
 /**
  * Additonal methods that one might want in java.lang.Long.
- *
- * @author Bernd Mathiske
  */
 public final class Longs {
 

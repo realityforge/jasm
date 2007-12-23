@@ -14,9 +14,6 @@ import jasm.gen.cisc.x86.X86InstructionDescription;
 import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.gen.cisc.x86.X86TemplateCreator;
 
-/**
- * @author Bernd Mathiske
- */
 public final class AMD64TemplateCreator extends X86TemplateCreator<AMD64Template> {
 
     public AMD64TemplateCreator() {

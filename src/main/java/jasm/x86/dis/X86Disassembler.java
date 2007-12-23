@@ -47,8 +47,6 @@ import java.util.Map;
  *
  * @see Disassembler
  * @see X86DisassembledInstruction
- *
- * @author Bernd Mathiske
  */
 public abstract class X86Disassembler<Template_Type extends X86Template, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
     extends Disassembler<Template_Type, DisassembledInstruction_Type> {

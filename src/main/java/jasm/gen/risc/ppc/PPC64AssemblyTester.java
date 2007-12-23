@@ -16,11 +16,6 @@ import jasm.ppc.dis.PPC64DisassembledInstruction;
 import jasm.ppc.dis.PPC64Disassembler;
 import java.util.EnumSet;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public final class PPC64AssemblyTester extends PPCAssemblyTester<PPC64DisassembledInstruction> {
 
     public PPC64AssemblyTester(EnumSet<AssemblyTestComponent> components) {

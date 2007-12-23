@@ -14,10 +14,6 @@ import jasm.util.program.ProgramError;
 
 /**
  * A field describes a bit range and how it relates to an operand.
- *
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
  */
 public abstract class RiscField
     extends NamedField

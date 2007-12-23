@@ -10,8 +10,6 @@ package jasm;
 
 /**
  * A symbol is an immutable binding of a name to a value.
- *
- * @author Bernd Mathiske
  */
 public interface Symbol {
 

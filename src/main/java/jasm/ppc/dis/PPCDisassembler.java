@@ -14,11 +14,6 @@ import jasm.dis.risc.RiscDisassembler;
 import jasm.gen.risc.ppc.PPCAssembly;
 import jasm.gen.risc.ppc.PPCTemplate;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public abstract class PPCDisassembler<DisassembledInstruction_Type extends DisassembledInstruction<PPCTemplate>>
         extends RiscDisassembler<PPCTemplate, DisassembledInstruction_Type> {
 

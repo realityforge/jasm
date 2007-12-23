@@ -12,11 +12,6 @@ import jasm.gen.Assembly;
 import jasm.gen.InstructionDescriptionCreator;
 import java.util.List;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public class X86InstructionDescriptionCreator extends InstructionDescriptionCreator<X86InstructionDescription> {
 
     public X86InstructionDescriptionCreator(Assembly<? extends X86Template> assembly) {

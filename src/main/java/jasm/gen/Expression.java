@@ -15,8 +15,6 @@ import java.util.List;
  * An expression can provide the value of an operand field. This enables synthetic instructions to be
  * generated where the parameters of the generated assembler method are part of an expression whose
  * value is encoded into an operand field.
- *
- * @author Doug Simon
  */
 public interface Expression {
     /**

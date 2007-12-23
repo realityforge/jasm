@@ -15,11 +15,6 @@ import jasm.gen.risc.RiscInstructionDescriptionModifier;
 import java.util.Collections;
 import java.util.List;
 
-/**
- *
- *
- * @author Doug Simon
- */
 public abstract class PPCInstructionDescriptionCreator extends RiscInstructionDescriptionCreator {
 
     protected PPCInstructionDescriptionCreator(PPCTemplateCreator templateCreator) {

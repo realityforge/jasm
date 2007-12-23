@@ -13,9 +13,6 @@ import jasm.util.lang.StaticLoophole;
 import java.util.Collections;
 import java.util.Set;
 
-/**
- * @author Bernd Mathiske
- */
 public final class TestArgumentExclusion {
 
   private final AssemblyTestComponent _component;

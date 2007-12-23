@@ -20,8 +20,6 @@ import java.util.Collections;
  * An input operand is a parameter to an assembler method that does not correspond directly
  * to a set of bits in the instruction but is a term in an expression that gives the value
  * for another operand that does represent a set of bits in the instruction.
- *
- * @author Doug Simon
  */
 public final class InputOperandField extends OperandField<ImmediateArgument> {
 

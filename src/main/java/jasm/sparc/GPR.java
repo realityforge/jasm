@@ -13,9 +13,6 @@ import jasm.SymbolSet;
 
 /**
  * The class defining the symbolic identifiers for the general purpose registers.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public class GPR extends AbstractSymbolicArgument {
 

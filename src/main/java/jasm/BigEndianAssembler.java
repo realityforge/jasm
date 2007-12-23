@@ -8,9 +8,6 @@
  */
 package jasm;
 
-/**
- * @author Bernd Mathiske
- */
 public abstract class BigEndianAssembler extends Assembler {
 
   protected BigEndianAssembler() {

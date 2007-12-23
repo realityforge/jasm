@@ -10,9 +10,6 @@ package jasm.gen.cisc.x86;
 
 import jasm.WordWidth;
 
-/**
- * @author Bernd Mathiske
- */
 public final class X86DisplacementParameter extends X86OffsetParameter {
 
     public X86DisplacementParameter(X86Operand.Designation designation, WordWidth width) {

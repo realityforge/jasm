@@ -15,8 +15,6 @@ import jasm.Label;
 
 /**
  * Instatiate this class to assemble IA32 instructions.
- *
- * @author Bernd Mathiske
  */
 public final class IA32Assembler extends IA32LabelAssembler implements Assembler32 {
 

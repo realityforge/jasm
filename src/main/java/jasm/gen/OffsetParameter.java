@@ -8,11 +8,5 @@
  */
 package jasm.gen;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public interface OffsetParameter extends Parameter {
-
 }

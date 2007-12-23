@@ -13,8 +13,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for {@link Longs}.
- *
- * @author Bernd Mathiske
  */
 public final class LongsTest extends TestCase {
   public final void test_numberOfEffectiveUnsignedBits() {

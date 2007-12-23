@@ -17,11 +17,6 @@ import jasm.gen.risc.field.OptionField;
  *
  *    bge_pt(...)  // assembler method
  *    bge,pt ...   // external assembler syntax
- *
- * @author Dave Ungar
- * @author Adam Spitz
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public final class Option {
 

@@ -11,9 +11,6 @@ package jasm.x86;
 import jasm.EnumerableArgument;
 import jasm.SymbolSet;
 
-/**
- * @author Bernd Mathiske
- */
 public enum FPStackRegister implements EnumerableArgument {
 
   ST_0(0),

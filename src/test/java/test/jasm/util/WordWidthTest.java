@@ -13,8 +13,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for {@link jasm.WordWidth}.
- *
- * @author Hiroshi Yamauchi
  */
 public final class WordWidthTest extends TestCase {
   public final void test_fromInt() {

@@ -20,9 +20,6 @@ import static jasm.gen.risc.sparc.SPARCFields.rs1_state;
 import static jasm.gen.risc.sparc.SPARCFields.rs2;
 import static jasm.gen.risc.sparc.SPARCFields.simm13;
 
-/**
- * @author Bernd Mathiske
- */
 public final class StateRegisterAccess extends SPARCInstructionDescriptionCreator {
 
     private void create_A43() {

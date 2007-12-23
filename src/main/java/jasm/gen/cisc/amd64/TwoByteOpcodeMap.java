@@ -293,9 +293,6 @@ import static jasm.util.HexByte._FE;
 import static jasm.x86.SegmentRegister.FS;
 import static jasm.x86.SegmentRegister.GS;
 
-/**
- * @author Bernd Mathiske
- */
 public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
 
     /**

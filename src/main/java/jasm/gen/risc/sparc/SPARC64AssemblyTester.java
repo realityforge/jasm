@@ -16,11 +16,6 @@ import jasm.sparc.dis.SPARC64DisassembledInstruction;
 import jasm.sparc.dis.SPARC64Disassembler;
 import java.util.EnumSet;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public final class SPARC64AssemblyTester extends SPARCAssemblyTester<SPARC64DisassembledInstruction> {
 
     public SPARC64AssemblyTester(EnumSet<AssemblyTestComponent> components) {

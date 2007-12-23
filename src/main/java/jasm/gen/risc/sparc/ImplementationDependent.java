@@ -12,11 +12,6 @@ import static jasm.gen.risc.sparc.SPARCFields.impl_dep;
 import static jasm.gen.risc.sparc.SPARCFields.op;
 import static jasm.gen.risc.sparc.SPARCFields.op3;
 
-/**
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
- */
 public final class ImplementationDependent extends SPARCInstructionDescriptionCreator {
 
     private void create_A23() {

@@ -73,11 +73,6 @@ import java.util.Set;
  * without incurring a syntax or type error from javac. The majority of the remaining possibilities
  * for specifying illegal arguments lies in RISC assemblers' featuring immediate fields whose
  * ranges of legal values is not exactly described by a Java primitive type (e.g. int, short, char, etc).
- *
- * @author Bernd Mathiske
- * @author Doug Simon
- * @author Dave Ungar
- * @author Adam Spitz
  */
 public abstract class AssemblyTester<Template_Type extends Template, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>> {
 

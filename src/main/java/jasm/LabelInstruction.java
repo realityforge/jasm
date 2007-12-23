@@ -13,8 +13,6 @@ package jasm;
  * An assembler instruction that has an offset argument which can be represented by a Label.
  *
  * @see Label
- *
- * @author Bernd Mathiske
  */
 public abstract class LabelInstruction implements AssemblyInstruction {
 

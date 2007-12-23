@@ -11,8 +11,6 @@ package jasm.util;
 /**
  * Additonal methods that one might want in java.lang.Integer
  * and int array stuff.
- *
- * @author Bernd Mathiske
  */
 public final class Ints {
 

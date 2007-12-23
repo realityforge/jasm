@@ -18,8 +18,6 @@ import java.util.Set;
 
 /**
  * An explicit operand, specifying an assembler method parameter.
- *
- * @author Bernd Mathiske
  */
 public abstract class X86Parameter extends X86Operand implements Parameter {
 

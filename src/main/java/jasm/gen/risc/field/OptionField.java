@@ -28,11 +28,6 @@ import java.util.ArrayList;
  *     bge,pn     // predict that branch will not be taken
  *
  * The definition of this field therefore has three {@link Option options}.
- *
- * @author Dave Ungar
- * @author Bernd Mathiske
- * @author Adam Spitz
- * @author Doug Simon
  */
 public final class OptionField extends RiscField {
 

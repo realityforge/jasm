@@ -14,8 +14,6 @@ import jasm.Label;
 
 /**
  * The concrete class for a 32-bit PowerPC assembler.
-
- * @author Bernd Mathiske
  */
 public final class PPC32Assembler extends PPCAssembler implements Assembler32 {
 

@@ -13,8 +13,6 @@ import jasm.util.NamedField;
 /**
  * This class provides a skeletal implementation of the {@link SymbolicArgument} interface, to minimize the
  * effort required to implement this interface.
- *
- * @author Doug Simon
  */
 public abstract class AbstractSymbolicArgument
     extends NamedField

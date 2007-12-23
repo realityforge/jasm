@@ -10,9 +10,6 @@ package jasm.gen;
 
 import jasm.Argument;
 
-/**
- * @author Bernd Mathiske
- */
 public final class ArgumentRange {
 
     private final WrappableSpecification _specification;

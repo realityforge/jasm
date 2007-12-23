@@ -11,8 +11,6 @@ package jasm;
 /**
  * Interface for target code edition. Currently, used by the JIT only, for template-based code generation.
  * The interface is currently customized to the need of the JIT.
- *
- * @author Laurent Daynes
  */
 public interface AssemblyInstructionEditor {
     /**

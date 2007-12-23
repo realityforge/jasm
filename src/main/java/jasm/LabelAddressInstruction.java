@@ -10,11 +10,6 @@ package jasm;
 
 import jasm.util.program.ProgramError;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public abstract class LabelAddressInstruction extends LabelInstruction {
 
     protected LabelAddressInstruction(Assembler assembler, int startOffset, int endOffset, Label label) {

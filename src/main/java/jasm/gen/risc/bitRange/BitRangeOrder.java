@@ -12,9 +12,6 @@ package jasm.gen.risc.bitRange;
 /**
  * The bit range order of an instruction set is how the bit positions of instruction fields
  * are specified in the architecture manual.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public enum BitRangeOrder {
 

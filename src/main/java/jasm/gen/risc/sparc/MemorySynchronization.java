@@ -17,11 +17,6 @@ import static jasm.gen.risc.sparc.SPARCFields.res_12_0;
 import static jasm.gen.risc.sparc.SPARCFields.res_12_7;
 import static jasm.gen.risc.sparc.SPARCFields.res_29_25;
 
-/**
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
- */
 final class MemorySynchronization extends SPARCInstructionDescriptionCreator {
 
     private void create_A32() {

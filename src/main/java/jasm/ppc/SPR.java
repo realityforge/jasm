@@ -13,8 +13,6 @@ import jasm.SymbolSet;
 
 /**
  * Special Purpose Registers.
- *
- * @author Bernd Mathiske
  */
 public final class SPR extends AbstractSymbolicArgument {
 

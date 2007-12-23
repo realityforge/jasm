@@ -10,8 +10,6 @@ package jasm;
 
 /**
  * A runtime argument to an assembler method.
- *
- * @author Bernd Mathiske
  */
 public interface Argument {
 

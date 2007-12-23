@@ -13,8 +13,6 @@ import java.io.Writer;
 
 /**
  * A line oriented character writer that indents line output on the left.
- *
- * @author Bernd Mathiske
  */
 public final class IndentWriter {
 

@@ -15,9 +15,6 @@ import java.util.List;
 
 /**
  * Wraps mere object arrays into instruction descriptions.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public abstract class InstructionDescriptionCreator<InstructionDescription_Type extends InstructionDescription> {
 

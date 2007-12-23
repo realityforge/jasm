@@ -19,9 +19,6 @@ import java.util.List;
 /**
  * An opcode mask group is a collection of templates that share the same opcode mask.
  * Some templates in the group may also share the same opcode.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public final class OpcodeMaskGroup<Template_Type extends RiscTemplate> {
 

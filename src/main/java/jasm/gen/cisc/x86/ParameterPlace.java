@@ -10,8 +10,6 @@ package jasm.gen.cisc.x86;
 
 /**
  * The place/field into which the argument value passed to a parameter is to be assembled.
- *
- * @author Bernd Mathiske
  */
 public enum ParameterPlace {
 

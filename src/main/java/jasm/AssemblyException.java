@@ -10,9 +10,6 @@ package jasm;
 
 /**
  * Thrown when an invalid argument is given to an assembler method.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public final class AssemblyException extends Exception {
 

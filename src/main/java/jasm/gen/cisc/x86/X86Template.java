@@ -28,9 +28,6 @@ import jasm.x86.SegmentRegister;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- */
 public abstract class X86Template extends Template implements X86InstructionDescriptionVisitor {
     // Defaults initial capacity for the ArrayLists below.
     private static final int MAX_NUM_OF_OPERANDS = 3;

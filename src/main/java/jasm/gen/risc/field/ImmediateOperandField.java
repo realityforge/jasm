@@ -29,11 +29,6 @@ import java.util.List;
 
 /**
  * A field that contains an immediate value.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
- * @author Dave Ungar
- * @author Adam Spitz
  */
 public class ImmediateOperandField extends OperandField<ImmediateArgument> implements ImmediateParameter, WrappableSpecification, InstructionConstraint {
 

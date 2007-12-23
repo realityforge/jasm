@@ -12,11 +12,6 @@ import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
 
-/**
- * @author Dave Ungar
- * @author Bernd Mathiske
- * @author Adam Spitz
- */
 public final class ConstantField extends RiscField {
 
   public ConstantField(BitRange bitRange) {

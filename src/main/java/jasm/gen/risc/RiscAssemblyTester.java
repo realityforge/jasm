@@ -20,9 +20,6 @@ import java.io.PushbackInputStream;
 import java.util.EnumSet;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- */
 public abstract class RiscAssemblyTester<Template_Type extends RiscTemplate, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
                           extends AssemblyTester<Template_Type, DisassembledInstruction_Type> {
 

@@ -16,9 +16,6 @@ import java.util.List;
 
 /**
  * Output of PowerPC instructions in external assembler format.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public final class PPCExternalInstruction extends RiscExternalInstruction {
 

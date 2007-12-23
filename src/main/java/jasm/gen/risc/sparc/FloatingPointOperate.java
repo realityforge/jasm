@@ -24,11 +24,6 @@ import static jasm.gen.risc.sparc.SPARCFields.sfrd;
 import static jasm.gen.risc.sparc.SPARCFields.sfrs1;
 import static jasm.gen.risc.sparc.SPARCFields.sfrs2;
 
-/**
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
- */
 public final class FloatingPointOperate extends SPARCInstructionDescriptionCreator {
 
     private void createCompare(String name, String type, Object frs1Field, Object frs2Field, int opfContents) {

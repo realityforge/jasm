@@ -8,9 +8,6 @@
  */
 package jasm.gen.cisc.x86;
 
-/**
- * @author Bernd Mathiske
- */
 public enum AddressingMethodCode  {
 
     A,

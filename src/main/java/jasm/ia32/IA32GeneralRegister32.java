@@ -13,9 +13,6 @@ import jasm.SymbolSet;
 import jasm.x86.GeneralRegister;
 import java.util.EnumSet;
 
-/**
- * @author Bernd Mathiske
- */
 public enum IA32GeneralRegister32 implements GeneralRegister {
 
     // Note: keep the order such that 'value()' can rely on ordinals:

@@ -13,8 +13,6 @@ import jasm.util.program.ProgramError;
 
 /**
  * A bundle of choices one can make when creating a template.
- *
- * @author Bernd Mathiske
  */
 public final class X86TemplateContext implements Cloneable {
 

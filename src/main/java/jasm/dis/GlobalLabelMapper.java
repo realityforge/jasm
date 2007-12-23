@@ -11,8 +11,6 @@ package jasm.dis;
 /**
  * Allows readable names to be given to branch displacements
  * (including calls) which point outside the function being disassembled.
- *
- * @author Greg Wright
  */
 public interface GlobalLabelMapper {
     /**

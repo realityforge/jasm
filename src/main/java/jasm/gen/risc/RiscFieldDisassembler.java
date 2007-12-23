@@ -18,8 +18,6 @@ import jasm.util.lang.StringUtil;
 /**
  * Disassembles an assembled RISC instruction to show the value of each field in the instruction as
  * well as the bits occupied by the field.
- *
- * @author Doug Simon
  */
 final class RiscFieldDisassembler<Template_Type extends Template> implements RiscInstructionDescriptionVisitor {
 

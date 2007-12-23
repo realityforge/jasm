@@ -11,9 +11,6 @@ package jasm.gen.cisc.x86;
 import jasm.gen.InstructionDescription;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- */
 public final class ModRMDescription extends InstructionDescription {
 
     private final ModRMGroup.Opcode _opcode;

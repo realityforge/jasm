@@ -28,12 +28,6 @@ import jasm.util.program.ProgramError;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- *
- * @author Bernd Mathiske
- * @author Doug Simon
- */
 public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate> extends AssemblerGenerator<Template_Type> {
 
     protected RiscAssemblerGenerator(Assembly<Template_Type> assembly) {

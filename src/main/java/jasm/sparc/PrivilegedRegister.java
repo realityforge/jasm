@@ -15,9 +15,6 @@ import jasm.SymbolSet;
  * The class defining the symbolic identifiers for the privileged registers
  * accessed by the Read Privileged Register and Write Privileged Register
  * instructions.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public class PrivilegedRegister extends AbstractSymbolicArgument {
 

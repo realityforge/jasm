@@ -79,8 +79,6 @@ import jasm.ppc.Zero;
  * disassembly would require support for solving simultaneous equations. Given that the
  * external Mac OS X 'otool' disassembler does not disassemble these instructions into their
  * extended mnemonic form either, no one should be too upset with this limited functionality.
- *
- * @author Doug Simon
  */
 final class SyntheticInstructions extends PPCInstructionDescriptionCreator {
 

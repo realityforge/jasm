@@ -10,9 +10,6 @@ package jasm.gen.cisc.x86;
 
 import jasm.gen.ExternalOmission;
 
-/**
- * @author Bernd Mathiske
- */
 public enum RegisterOperandCode {
 
     eAX, eCX, eDX, eBX, eSP, eBP, eSI, eDI,

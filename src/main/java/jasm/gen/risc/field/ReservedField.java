@@ -11,11 +11,6 @@ package jasm.gen.risc.field;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
 
-/**
- * @author Dave Ungar
- * @author Adam Spitz
- * @author Bernd Mathiske
- */
 public final class ReservedField extends RiscField {
 
     public ReservedField(BitRange bitRange) {

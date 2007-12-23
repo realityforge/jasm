@@ -10,8 +10,6 @@ package jasm.util;
 
 /**
  * Finally: byte literals!
- *
- * @author Bernd Mathiske
  */
 public enum HexByte {
     _00, _01, _02, _03, _04, _05, _06, _07, _08, _09, _0A, _0B, _0C, _0D, _0E, _0F,

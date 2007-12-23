@@ -12,9 +12,6 @@ import jasm.InstructionSet;
 import jasm.gen.risc.RiscAssembly;
 import java.util.List;
 
-/**
- * @author Doug Simon
- */
 public final class PPCAssembly extends RiscAssembly<PPCTemplate> {
 
   private static final boolean GENERATING_64BIT_INSTRUCTIONS = true;

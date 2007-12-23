@@ -41,9 +41,6 @@ import jasm.x86.MMXRegister;
 import jasm.x86.Scale;
 import jasm.x86.SegmentRegister;
 
-/**
- * @author Bernd Mathiske
- */
 public final class IA32Template extends X86Template {
 
     IA32Template(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {

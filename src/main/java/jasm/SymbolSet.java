@@ -26,8 +26,6 @@ import java.util.List;
  * This class is similiar to the semantics of {@code enum}s in Java but adds
  * the ability to have a set of predefined symbols whose primitive values are not
  * necessarily contiguous and starting at 0.
- *
- * @author Bernd Mathiske
  */
 public class SymbolSet<Symbol_Type extends Symbol>
     implements Iterable<Symbol_Type> {

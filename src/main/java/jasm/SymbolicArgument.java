@@ -8,12 +8,8 @@
  */
 package jasm;
 
-import jasm.Symbol;
-
 /**
  * An argument that is a symbol.
- *
- * @author Bernd Mathiske
  */
 public interface SymbolicArgument extends Argument, Symbol {
 }

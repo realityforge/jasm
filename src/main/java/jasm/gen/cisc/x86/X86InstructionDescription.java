@@ -12,9 +12,6 @@ import jasm.WordWidth;
 import jasm.gen.InstructionDescription;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- */
 public final class X86InstructionDescription extends InstructionDescription {
 
     public X86InstructionDescription(List<Object> specifications) {

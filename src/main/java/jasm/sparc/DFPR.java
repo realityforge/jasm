@@ -14,9 +14,6 @@ import jasm.util.Nameable;
 
 /**
  * The double-precision (64-bit) floating-point registers.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public interface DFPR extends Nameable, SymbolicArgument {
 

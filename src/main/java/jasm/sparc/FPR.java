@@ -12,9 +12,6 @@ import jasm.AbstractSymbolicArgument;
 
 /**
  * The class defining the symbolic identifiers for the floating-point registers.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 class FPR extends AbstractSymbolicArgument {
 

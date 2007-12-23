@@ -11,8 +11,6 @@ package jasm.gen;
 /**
  * Wrapper for a specification in an instruction description that indicates that whatever
  * is specified is omitted in the external assembler syntax.
- *
- * @author Bernd Mathiske
  */
 public final class ExternalOmission {
 

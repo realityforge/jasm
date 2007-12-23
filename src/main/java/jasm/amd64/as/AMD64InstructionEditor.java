@@ -14,8 +14,6 @@ import jasm.WordWidth;
 
 /**
  * Facility to patch AMD64 assembly instructions.
- *
- * @author Laurent Daynes
  */
 public final class AMD64InstructionEditor extends AMD64Assembler implements AssemblyInstructionEditor {
   // Buffer holding the instruction to edit

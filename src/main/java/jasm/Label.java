@@ -18,8 +18,6 @@ import jasm.util.program.ProgramError;
  *
  * @see Assembler32
  * @see Assembler64
- *
- * @author Bernd Mathiske
  */
 public final class Label implements Argument {
 

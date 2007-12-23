@@ -16,8 +16,6 @@ import java.util.List;
 
 /**
  * An internal representation of an assembler method.
- *
- * @author Bernd Mathiske
  */
 public abstract class Template implements Cloneable, Comparable<Template> {
 

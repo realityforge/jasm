@@ -11,11 +11,6 @@ package jasm.gen.risc.bitRange;
 
 /**
  * A bit range that has its least significant bit on the left and its most significant bit on the right.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
- * @author Dave Ungar
- * @author Adam Spitz
  */
 public final class AscendingBitRange extends SimpleBitRange {
 

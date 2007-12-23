@@ -56,9 +56,6 @@ import jasm.util.lang.StaticLoophole;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author Bernd Mathiske
- */
 public enum OperandCode implements WrappableSpecification {
 
     Ap(A, p),

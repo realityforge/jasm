@@ -13,9 +13,6 @@ import jasm.SymbolSet;
 import jasm.x86.GeneralRegister;
 import jasm.x86.IndirectRegister;
 
-/**
- * @author Bernd Mathiske
- */
 public enum IA32IndirectRegister16 implements GeneralRegister, IndirectRegister {
 
     BX_PLUS_SI_INDIRECT(INVALID_ID, "%bx,%si", "bx + si"),

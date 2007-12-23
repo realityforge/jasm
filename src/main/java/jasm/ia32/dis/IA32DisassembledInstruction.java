@@ -15,9 +15,6 @@ import jasm.gen.cisc.ia32.IA32Template;
 import jasm.x86.dis.X86DisassembledInstruction;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- */
 public final class IA32DisassembledInstruction extends X86DisassembledInstruction<IA32Template> implements Address32Instruction {
 
     private final Address32Instruction.Mixin _addressInstruction;

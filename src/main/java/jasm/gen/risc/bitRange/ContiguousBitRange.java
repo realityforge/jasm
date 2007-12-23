@@ -8,12 +8,6 @@
  */
 package jasm.gen.risc.bitRange;
 
-
-/**
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
- */
 public abstract class ContiguousBitRange extends BitRange {
 
     protected ContiguousBitRange() {

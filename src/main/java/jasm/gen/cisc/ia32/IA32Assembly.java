@@ -13,9 +13,6 @@ import jasm.gen.cisc.x86.FloatingPointOpcodeMap;
 import jasm.gen.cisc.x86.X86Assembly;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- */
 public final class IA32Assembly extends X86Assembly<IA32Template> {
 
     private IA32Assembly() {

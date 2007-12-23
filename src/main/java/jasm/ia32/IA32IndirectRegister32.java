@@ -13,9 +13,6 @@ import jasm.SymbolSet;
 import jasm.x86.GeneralRegister;
 import jasm.x86.IndirectRegister;
 
-/**
- * @author Bernd Mathiske
- */
 public enum IA32IndirectRegister32 implements GeneralRegister, IndirectRegister {
 
     EAX_INDIRECT,

@@ -23,12 +23,6 @@ import jasm.util.collect.CollectionUtil;
 import jasm.util.lang.StaticLoophole;
 import java.util.Collections;
 
-/**
- * @author Bernd Mathiske
- * @author Doug Simon
- * @author Dave Ungar
- * @author Adam Spitz
- */
 public final class SymbolicOperandField<Argument_Type extends SymbolicArgument> extends OperandField<Argument_Type> implements WrappableSpecification {
 
     private final SymbolSet<Argument_Type> _symbols;

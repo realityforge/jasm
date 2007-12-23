@@ -21,11 +21,6 @@ import jasm.util.program.ProgramError;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
- */
 public abstract class RiscTemplate extends Template implements RiscInstructionDescriptionVisitor {
 
     private final ArrayList<OperandField> _operandFields = new ArrayList<OperandField>();

@@ -13,9 +13,6 @@ import java.util.Arrays;
 
 /**
  * The general purpose registers.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public final class GPR extends ZeroOrRegister {
 

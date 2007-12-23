@@ -18,8 +18,6 @@ import jasm.ia32.IA32IndirectRegister32;
 
 /**
  * Run this program to generate the IA32RawAssembler and IA32LabelAssembler classes.
- *
- * @author Bernd Mathiske
  */
 public final class IA32AssemblerGenerator
     extends X86AssemblerGenerator<IA32Template> {

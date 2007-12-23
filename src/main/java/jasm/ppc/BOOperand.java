@@ -14,8 +14,6 @@ import jasm.SymbolSet;
 /**
  * The argument to a Branch Conditional instruction specifying the conditions
  * under which the branch is taken.
- *
- * @author Doug Simon
  */
 public final class BOOperand extends AbstractSymbolicArgument {
 

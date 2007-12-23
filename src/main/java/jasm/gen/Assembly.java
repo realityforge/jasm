@@ -21,10 +21,6 @@ import java.util.List;
 
 /**
  * An assembly framework, instantiated once per instruction set.
- *
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
  */
 public abstract class Assembly<Template_Type extends Template> {
 

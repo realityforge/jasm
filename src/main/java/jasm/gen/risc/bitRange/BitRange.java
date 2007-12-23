@@ -15,10 +15,6 @@ import jasm.util.program.ProgramError;
  * bit positions in an instruction. The bit positions are not necessarily contiguous.
  * In addition, one or more implicit bits for a field's value can be specified with an
  * {@link OmittedBitRange}.
- *
- * @author Dave Ungar
- * @author Adam Spitz
- * @author Bernd Mathiske
  */
 public abstract class BitRange {
 

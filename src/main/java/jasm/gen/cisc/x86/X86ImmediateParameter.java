@@ -10,9 +10,6 @@ package jasm.gen.cisc.x86;
 
 import jasm.WordWidth;
 
-/**
- * @author Bernd Mathiske
- */
 public final class X86ImmediateParameter extends X86NumericalParameter {
 
     public X86ImmediateParameter(X86Operand.Designation designation, WordWidth width) {

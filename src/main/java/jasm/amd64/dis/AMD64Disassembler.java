@@ -24,8 +24,6 @@ import java.util.Map;
 
 /**
  * Instantiate this class to disassemble AMD64 instruction streams.
- *
- * @author Bernd Mathiske
  */
 public final class AMD64Disassembler extends X86Disassembler<AMD64Template, AMD64DisassembledInstruction> {
 

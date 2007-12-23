@@ -14,8 +14,6 @@ import jasm.Label;
 
 /**
  * The concrete class for a 32-bit SPARC assembler.
-
- * @author Bernd Mathiske
  */
 public final class SPARC32Assembler extends SPARCAssembler implements Assembler32 {
 

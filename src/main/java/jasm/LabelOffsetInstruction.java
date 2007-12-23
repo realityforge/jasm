@@ -12,10 +12,6 @@ import jasm.util.Enums;
 import jasm.util.Ints;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- * @author Greg Wright
- */
 public abstract class LabelOffsetInstruction extends LabelInstruction {
 
     private static final List<List<WordWidth>> LABEL_WIDTH_SEQUENCES = Enums.powerSequence(WordWidth.class);

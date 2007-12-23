@@ -12,10 +12,6 @@ import jasm.Assembler;
 import jasm.BigEndianAssembler;
 import jasm.gen.risc.RiscAssemblerGenerator;
 
-/**
- * @author Bernd Mathiske
- * @author Doug Simon
- */
 public final class SPARCAssemblerGenerator extends RiscAssemblerGenerator<SPARCTemplate> {
 
   public SPARCAssemblerGenerator() {

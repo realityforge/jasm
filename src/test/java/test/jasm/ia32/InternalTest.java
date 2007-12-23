@@ -47,9 +47,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import junit.framework.TestCase;
 
-/**
- * @author Bernd Mathiske
- */
 public final class InternalTest extends TestCase {
 
   private static String disassemble(int startAddress, byte[] bytes) throws IOException, AssemblyException {

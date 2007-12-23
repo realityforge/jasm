@@ -16,11 +16,6 @@ import jasm.ppc.dis.PPC32DisassembledInstruction;
 import jasm.ppc.dis.PPC32Disassembler;
 import java.util.EnumSet;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public final class PPC32AssemblyTester extends PPCAssemblyTester<PPC32DisassembledInstruction> {
 
     public PPC32AssemblyTester(EnumSet<AssemblyTestComponent> components) {

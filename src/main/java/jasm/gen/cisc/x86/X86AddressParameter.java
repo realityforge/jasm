@@ -11,9 +11,6 @@ package jasm.gen.cisc.x86;
 import jasm.WordWidth;
 import jasm.gen.AddressParameter;
 
-/**
- * @author Bernd Mathiske
- */
 public final class X86AddressParameter extends X86NumericalParameter implements AddressParameter {
 
     public X86AddressParameter(X86Operand.Designation designation, WordWidth width) {

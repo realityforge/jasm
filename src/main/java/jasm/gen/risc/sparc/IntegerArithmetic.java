@@ -25,11 +25,6 @@ import static jasm.gen.risc.sparc.SPARCFields.shcnt64;
 import static jasm.gen.risc.sparc.SPARCFields.simm13;
 import static jasm.gen.risc.sparc.SPARCFields.x;
 
-/**
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
- */
 final class IntegerArithmetic extends SPARCInstructionDescriptionCreator {
 
     private void createBinaryArithmetic(String name, int op3Contents) {

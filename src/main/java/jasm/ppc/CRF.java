@@ -14,9 +14,6 @@ import jasm.SymbolSet;
 /**
  * The constants denoting the eight 4-bit fields into which the 32-bit Condition Register
  * is logically partitioned.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public enum CRF implements EnumerableArgument {
 

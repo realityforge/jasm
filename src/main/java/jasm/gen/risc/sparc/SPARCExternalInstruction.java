@@ -16,9 +16,6 @@ import java.util.List;
 
 /**
  * Output of SPARC instructions in external assembler format.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public final class SPARCExternalInstruction extends RiscExternalInstruction {
 

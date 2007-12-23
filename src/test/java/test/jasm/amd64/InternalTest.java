@@ -37,9 +37,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import junit.framework.TestCase;
 
-/**
- * @author Bernd Mathiske
- */
 public final class InternalTest extends TestCase {
   private String disassemble(long startAddress, byte[] bytes) throws IOException, AssemblyException {
     final AMD64Disassembler disassembler = new AMD64Disassembler(startAddress);

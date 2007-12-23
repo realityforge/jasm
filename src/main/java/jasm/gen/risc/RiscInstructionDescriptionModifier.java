@@ -13,8 +13,6 @@ import java.util.List;
 
 /**
  * This class provides a mechanism for making modifications to a set of RISC instruction descriptions.
- *
- * @author Bernd Mathiske
  */
 public final class RiscInstructionDescriptionModifier {
 

@@ -8,9 +8,6 @@
  */
 package jasm;
 
-/**
- * @author Bernd Mathiske
- */
 public enum Endianness {
   LITTLE, BIG
 }

@@ -15,8 +15,6 @@ import jasm.gen.ImplicitOperand;
 /**
  * An operand that is already implicit in the machine instruction,
  * without requiring an assembler method parameter.
- *
- * @author Bernd Mathiske
  */
 public final class X86ImplicitOperand extends X86Operand implements ImplicitOperand {
 

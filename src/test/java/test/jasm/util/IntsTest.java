@@ -13,8 +13,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for {@link Ints}.
- *
- * @author Bernd Mathiske
  */
 public final class IntsTest extends TestCase {
   public final void test_numberOfEffectiveUnsignedBits() {

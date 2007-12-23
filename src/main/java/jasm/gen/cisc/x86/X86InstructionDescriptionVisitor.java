@@ -24,8 +24,6 @@ import jasm.x86.SegmentRegister;
 /**
  * Almost like the visitor pattern.
  * Specialized dispatch over InstructionDescription objects.
- *
- * @author Bernd Mathiske
  */
 public interface X86InstructionDescriptionVisitor {
 

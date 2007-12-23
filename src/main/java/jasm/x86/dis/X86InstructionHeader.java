@@ -21,8 +21,6 @@ import java.util.Map;
 /**
  * Info about the first few bytes of an x86 instruction,
  * narrowing the set of possible instructions to probe by the disassembler.
- *
- * @author Bernd Mathiske
  */
 public final class X86InstructionHeader {
 

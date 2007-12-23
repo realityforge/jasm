@@ -11,9 +11,6 @@ package jasm.x86;
 import jasm.EnumerableArgument;
 import jasm.SymbolSet;
 
-/**
- * @author Bernd Mathiske
- */
 public enum Scale implements EnumerableArgument {
 
   SCALE_1, SCALE_2, SCALE_4, SCALE_8;

@@ -22,9 +22,6 @@ import java.io.PushbackInputStream;
 import java.util.EnumSet;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- */
 public abstract class SPARCAssemblyTester<DisassembledInstruction_Type extends DisassembledInstruction<SPARCTemplate>>
                           extends RiscAssemblyTester<SPARCTemplate, DisassembledInstruction_Type> {
 

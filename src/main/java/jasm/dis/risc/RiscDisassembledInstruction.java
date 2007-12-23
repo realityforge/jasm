@@ -13,12 +13,6 @@ import jasm.dis.DisassembledInstruction;
 import jasm.gen.risc.RiscTemplate;
 import java.util.List;
 
-/**
- *
- *
- * @author Bernd Mathiske
- * @author Greg Wright
- */
 public abstract class RiscDisassembledInstruction<Template_Type extends RiscTemplate> extends DisassembledInstruction<Template_Type> {
 
     protected RiscDisassembledInstruction(int offset, byte[] bytes, Template_Type template, List<Argument> arguments) {

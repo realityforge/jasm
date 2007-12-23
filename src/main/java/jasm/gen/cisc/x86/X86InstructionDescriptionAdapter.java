@@ -20,8 +20,6 @@ import jasm.x86.SegmentRegister;
 
 /**
  * Empty default implementations for X86InstructionDescriptionVisitor.
- *
- * @author Bernd Mathiske
  */
 public class X86InstructionDescriptionAdapter implements X86InstructionDescriptionVisitor {
 

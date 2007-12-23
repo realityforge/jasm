@@ -12,11 +12,6 @@ import jasm.InstructionSet;
 import jasm.gen.risc.RiscAssembly;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
- */
 public final class SPARCAssembly extends RiscAssembly<SPARCTemplate> {
 
     private static final boolean GENERATING_DEPRECATED_INSTRUCTIONS = true;

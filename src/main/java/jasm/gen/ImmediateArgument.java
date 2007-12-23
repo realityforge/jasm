@@ -11,9 +11,6 @@ package jasm.gen;
 import jasm.Argument;
 import jasm.WordWidth;
 
-/**
- * @author Bernd Mathiske
- */
 public abstract class ImmediateArgument implements Argument {
 
     public abstract WordWidth width();

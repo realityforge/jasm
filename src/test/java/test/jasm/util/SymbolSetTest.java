@@ -12,9 +12,6 @@ import jasm.Symbol;
 import jasm.SymbolSet;
 import junit.framework.TestCase;
 
-/**
- * @author Hiroshi Yamauchi
- */
 public final class SymbolSetTest extends TestCase {
 
   private static enum NonSuccessiveEnum implements Symbol {

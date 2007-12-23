@@ -10,9 +10,6 @@ package jasm.util.lang;
 
 /**
  * Static type loophole that prevents "unchecked" compiler warnings but that does not circumvent dynamic type checks.
- *
- * @author Bernd Mathiske
- * @author Doug Simon (modified to use @SuppressWarnings instead of reflection)
  */
 public final class StaticLoophole {
 

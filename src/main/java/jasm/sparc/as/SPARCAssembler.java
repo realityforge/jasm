@@ -16,11 +16,6 @@ import static jasm.sparc.GPR.G0;
 /**
  * The base class for the 32-bit and 64-bit SPARC assemblers. This class also defines
  * the more complex synthetic SPARC instructions.
- *
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
- * @author Greg Wright
  */
 public abstract class SPARCAssembler extends SPARCLabelAssembler {
 

@@ -26,9 +26,6 @@ import java.util.Iterator;
 import java.util.List;
 import junit.framework.TestCase;
 
-/**
- * @author Bernd Mathiske
- */
 public final class BoundLabelTest extends TestCase {
   private static final int LABEL_DELTA = 10;
 

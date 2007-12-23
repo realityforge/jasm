@@ -12,9 +12,6 @@ import jasm.SymbolSet;
 
 /**
  * The quad-precision (128-bit) floating-point registers.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public interface QFPR extends DFPR {
     QFPR F0 = FPR.F0;

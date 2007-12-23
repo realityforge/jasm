@@ -46,11 +46,6 @@ import jasm.sparc.Bicc;
 import static jasm.sparc.BranchPredictionBit.PT;
 import jasm.sparc.FBfcc;
 
-/**
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
- */
 final class ControlTransfer extends SPARCInstructionDescriptionCreator {
 
     private void createBPr(String prefix, Object... objects) {

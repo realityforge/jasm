@@ -11,15 +11,8 @@ package jasm.gen.risc.sparc;
 import jasm.gen.InstructionDescription;
 import jasm.gen.risc.RiscTemplate;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public final class SPARCTemplate extends RiscTemplate {
-
-    SPARCTemplate(InstructionDescription instructionDescription) {
-        super(instructionDescription);
-    }
-
+  SPARCTemplate(InstructionDescription instructionDescription) {
+    super(instructionDescription);
+  }
 }

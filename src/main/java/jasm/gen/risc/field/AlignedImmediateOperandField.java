@@ -20,11 +20,6 @@ import java.util.List;
  * the low-order 0 bits of the aligned values that the field represents.
  * This class can convert between the field's <i>argument</i> (i.e.
  * the represented value) and it's <i>operand</i> (i.e. the encoded value).
- *
- * @author Dave Ungar
- * @author Bernd Mathiske
- * @author Adam Spitz
- * @author Doug Simon
  */
 public class AlignedImmediateOperandField extends ImmediateOperandField {
 

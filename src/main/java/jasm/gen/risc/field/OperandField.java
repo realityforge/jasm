@@ -25,11 +25,6 @@ import java.util.Set;
  * assembler method. The field is also a parameter in the external assembler syntax unless
  * it's {@link #type value type} implements {@link ExternalMnemonicSuffixArgument} in which
  * case, the field's value is represented as a suffix of the mnemonic in the external assembler syntax.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
- * @author Dave Ungar
- * @author Adam Spitz
  */
 public abstract class OperandField<Argument_Type extends Argument> extends RiscField implements Parameter, Expression  {
 

@@ -49,9 +49,6 @@ import jasm.x86.Scale;
 import jasm.x86.SegmentRegister;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- */
 public final class AMD64Template extends X86Template {
 
     AMD64Template(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {

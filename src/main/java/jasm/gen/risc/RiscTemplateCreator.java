@@ -17,11 +17,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
 
     protected RiscTemplateCreator() {

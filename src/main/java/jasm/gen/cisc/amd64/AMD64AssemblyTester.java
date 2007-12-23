@@ -22,9 +22,6 @@ import jasm.x86.GeneralRegister;
 import java.util.EnumSet;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- */
 public final class AMD64AssemblyTester extends X86AssemblyTester<AMD64Template, AMD64DisassembledInstruction> {
 
     public AMD64AssemblyTester(EnumSet<AssemblyTestComponent> components) {

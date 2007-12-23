@@ -15,9 +15,6 @@ import jasm.SymbolSet;
  * An optional (suffix) argument to a branch with prediction assembler instruction
  * specifying if the prediction bit is to be set. For example:
  * <pre>bgu,pt <i>i_or_x_cc</i>, <i>label</i></pre>
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public final class BranchPredictionBit extends OptionSuffixSymbolicArgument {
 

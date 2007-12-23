@@ -14,8 +14,6 @@ import jasm.SymbolSet;
 /**
  * The branch prediction values for the conditional branches whose encoding includes
  * a hint about whether the branch is likely to be taken or is likely not to be taken.
- *
- * @author Doug Simon
  */
 public final class BranchPredictionBits extends OptionSuffixSymbolicArgument {
 

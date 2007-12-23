@@ -13,8 +13,6 @@ package jasm.gen.cisc.x86;
  * Some information about a family of instructions that have the same basic opcode.
  *
  * @see OpcodeAssessor
- *
- * @author Bernd Mathiske
  */
 public final class InstructionAssessment {
 

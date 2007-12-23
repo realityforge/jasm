@@ -34,11 +34,6 @@ import jasm.util.NamedField;
 
 /**
  * The fields used in defining the SPARC instruction templates.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
- * @author Dave Ungar
- * @author Adam Spitz
  */
 public final class SPARCFields {
 

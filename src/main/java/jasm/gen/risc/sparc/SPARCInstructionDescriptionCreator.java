@@ -11,20 +11,15 @@ package jasm.gen.risc.sparc;
 import jasm.gen.Assembly;
 import jasm.gen.risc.RiscInstructionDescriptionCreator;
 
-/**
- * @author Bernd Mathiske
- */
-
 public abstract class SPARCInstructionDescriptionCreator extends RiscInstructionDescriptionCreator {
 
-    protected SPARCInstructionDescriptionCreator(SPARCTemplateCreator templateCreator) {
-        super(SPARCAssembly.ASSEMBLY, templateCreator);
-    }
+  protected SPARCInstructionDescriptionCreator(SPARCTemplateCreator templateCreator) {
+    super(SPARCAssembly.ASSEMBLY, templateCreator);
+  }
 
-    @Override
-    public final SPARCAssembly assembly() {
-        final Assembly assembly = super.assembly();
-        return (SPARCAssembly) assembly;
-    }
-
+  @Override
+  public final SPARCAssembly assembly() {
+    final Assembly assembly = super.assembly();
+    return (SPARCAssembly) assembly;
+  }
 }

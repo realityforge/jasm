@@ -20,11 +20,6 @@ import static jasm.gen.risc.sparc.SPARCFields.rs1PrivReg;
 import static jasm.gen.risc.sparc.SPARCFields.rs2;
 import static jasm.gen.risc.sparc.SPARCFields.simm13;
 
-/**
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
- */
 public final class PrivilegedRegisterAccess extends SPARCInstructionDescriptionCreator {
 
     private void create_A42() {

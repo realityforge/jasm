@@ -15,8 +15,6 @@ import jasm.x86.IndirectRegister;
 
 /**
  * Aliases for 32-bit AMD64 general registers to be used for indirect addressing.
- *
- * @author Bernd Mathiske
  */
 public enum AMD64IndirectRegister32 implements GeneralRegister, IndirectRegister {
 

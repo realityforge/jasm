@@ -22,11 +22,6 @@ import static jasm.gen.risc.sparc.SPARCFields.rs1;
 import static jasm.gen.risc.sparc.SPARCFields.rs2;
 import static jasm.gen.risc.sparc.SPARCFields.simm13;
 
-/**
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
- */
 public final class RegisterWindowManagement extends SPARCInstructionDescriptionCreator {
 
     private void createSaveOrRestore(String name, int op3Contents) {

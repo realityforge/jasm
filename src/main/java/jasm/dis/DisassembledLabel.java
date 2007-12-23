@@ -10,8 +10,6 @@ package jasm.dis;
 
 /**
  * A label deduced from one or more disassembled instructions.
- *
- * @author Bernd Mathiske
  */
 public final class DisassembledLabel {
 

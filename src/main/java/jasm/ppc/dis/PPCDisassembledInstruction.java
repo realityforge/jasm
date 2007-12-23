@@ -16,9 +16,6 @@ import jasm.gen.risc.ppc.PPCExternalInstruction;
 import jasm.gen.risc.ppc.PPCTemplate;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- */
 public abstract class PPCDisassembledInstruction extends RiscDisassembledInstruction<PPCTemplate> {
 
     PPCDisassembledInstruction(int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {

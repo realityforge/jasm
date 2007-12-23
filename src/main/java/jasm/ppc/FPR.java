@@ -13,9 +13,6 @@ import jasm.SymbolSet;
 
 /**
  * The floating point registers.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public enum FPR implements EnumerableArgument {
 

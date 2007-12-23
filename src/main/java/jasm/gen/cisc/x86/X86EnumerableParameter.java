@@ -15,9 +15,6 @@ import jasm.gen.EnumerableParameter;
 import jasm.util.program.ProgramError;
 import java.util.Collections;
 
-/**
- * @author Bernd Mathiske
- */
 public final class X86EnumerableParameter<EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument> extends X86Parameter implements EnumerableParameter {
 
     private final SymbolSet<EnumerableArgument_Type> _enumerator;

@@ -10,11 +10,6 @@ package jasm.gen;
 
 import jasm.Argument;
 
-/**
- * @author Bernd Mathiske
- */
 public interface WrappableSpecification {
-
-    TestArgumentExclusion excludeExternalTestArguments(Argument... arguments);
-
+  TestArgumentExclusion excludeExternalTestArguments(Argument... arguments);
 }

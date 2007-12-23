@@ -13,9 +13,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- */
 public interface ImmediateParameter extends Parameter {
 
     public static final class Static {

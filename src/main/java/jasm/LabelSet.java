@@ -3,9 +3,6 @@ package jasm;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
 
-/**
- * @author Hiroshi Yamauchi
- */
 final class LabelSet implements Iterable<Label> {
 
   private final IdentityHashMap<Label, Label> _internalMap;

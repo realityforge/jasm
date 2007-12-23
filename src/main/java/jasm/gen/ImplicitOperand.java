@@ -12,8 +12,6 @@ import jasm.Argument;
 
 /**
  * An operand that does not correspond to a parameter.
- *
- * @author Bernd Mathiske
  */
 public interface ImplicitOperand extends Operand {
 
@@ -21,11 +19,9 @@ public interface ImplicitOperand extends Operand {
 
     /**
      * Determines whether the operand is to be omitted or explicitly stated in external syntax.
-     *
-     * @author Bernd Mathiske
      */
     public enum ExternalPresence {
-        OMITTED, EXPLICIT;
+        OMITTED, EXPLICIT
     }
 
     ExternalPresence externalPresence();

@@ -12,9 +12,6 @@ import jasm.WordWidth;
 import jasm.SymbolSet;
 import jasm.x86.GeneralRegister;
 
-/**
- * @author Bernd Mathiske
- */
 public enum AMD64GeneralRegister8 implements GeneralRegister {
 
   AL(0, false),

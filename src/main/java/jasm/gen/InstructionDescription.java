@@ -26,8 +26,6 @@ import java.util.List;
  * The types for these two instruction categories are enumerated by
  * the {@code visit...} methods in the {@link RiscInstructionDescriptionVisitor}
  * and {@link X86InstructionDescriptionVisitor} classes.
- *
- * @author Bernd Mathiske
  */
 public abstract class InstructionDescription implements Iterable<Object>, Cloneable {
 

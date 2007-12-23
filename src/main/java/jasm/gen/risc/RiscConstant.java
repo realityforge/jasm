@@ -11,11 +11,6 @@ package jasm.gen.risc;
 import jasm.Argument;
 import jasm.gen.risc.field.RiscField;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public final class RiscConstant {
 
     private final RiscField _field;

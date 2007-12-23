@@ -24,11 +24,6 @@ import static jasm.gen.risc.sparc.SPARCFields.rs2;
 import static jasm.gen.risc.sparc.SPARCFields.sfrd;
 import static jasm.gen.risc.sparc.SPARCFields.simm13;
 
-/**
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
- */
 final class MemoryAccess extends SPARCInstructionDescriptionCreator {
 
     private void create_A9() {

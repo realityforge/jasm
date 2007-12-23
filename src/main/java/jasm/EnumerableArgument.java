@@ -8,9 +8,6 @@
  */
 package jasm;
 
-/**
- * @author Bernd Mathiske
- */
 public interface EnumerableArgument
     extends SymbolicArgument {
 }

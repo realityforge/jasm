@@ -13,8 +13,6 @@ import java.util.Set;
 
 /**
  * An operand that represents a formal parameter of an assembler method.
- *
- * @author Bernd Mathiske
  */
 public interface Parameter extends Operand, Comparable<Parameter> {
 

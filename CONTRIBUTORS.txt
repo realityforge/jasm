@@ -1,0 +1,17 @@
+The original authors were Sun employees and are listed below in the order
+of the frequency their name appeared in @author tags in the source code.
+They are the people who deserve all the real credit for the work but they
+should not be approached for support. Those poor souls are listed below
+the original developers in alphabetical order.
+
+Original Developers:
+* Bernd Mathiske
+* Doug Simon
+* Dave Ungar
+* Adam Spitz
+* Greg Wright
+* Hiroshi Yamauchi
+* Laurent Daynes
+
+Maintainers:
+* Peter Donald

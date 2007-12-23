@@ -14,8 +14,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for {@link HexByte}.
- *
- * @author Hiroshi Yamauchi
  */
 public final class HexByteTest extends TestCase {
   public final void test_value() {

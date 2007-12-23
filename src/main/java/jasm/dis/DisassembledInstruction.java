@@ -16,11 +16,6 @@ import java.util.List;
 
 /**
  * A assembly instruction in internal format, combined with the bytes that it was disassembled from.
- *
- * @author Dave Ungar
- * @author Adam Spitz
- * @author Bernd Mathiske
- * @author Greg Wright
  */
 public abstract class DisassembledInstruction<Template_Type extends Template> implements AssemblyInstruction, AddressInstruction {
 

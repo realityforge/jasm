@@ -8,13 +8,6 @@
  */
 package jasm.gen.risc.bitRange;
 
-
-/**
- * @author Bernd Mathiske
- * @author Doug Simon
- * @author Dave Ungar
- * @author Adam Spitz
- */
 public abstract class SimpleBitRange extends ContiguousBitRange {
 
     protected final int _firstBitIndex;

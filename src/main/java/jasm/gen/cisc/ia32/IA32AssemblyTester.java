@@ -19,9 +19,6 @@ import jasm.ia32.dis.IA32Disassembler;
 import java.util.EnumSet;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- */
 public final class IA32AssemblyTester extends X86AssemblyTester<IA32Template, IA32DisassembledInstruction> {
 
     public IA32AssemblyTester(EnumSet<AssemblyTestComponent> components) {

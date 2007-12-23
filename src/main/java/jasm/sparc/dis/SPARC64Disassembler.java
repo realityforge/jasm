@@ -16,11 +16,6 @@ import jasm.gen.risc.sparc.SPARCTemplate;
 import jasm.sparc.as.SPARC64Assembler;
 import java.util.List;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public final class SPARC64Disassembler extends SPARCDisassembler<SPARC64DisassembledInstruction> {
 
     private final long _startAddress;

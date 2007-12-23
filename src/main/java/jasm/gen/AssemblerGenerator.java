@@ -44,8 +44,6 @@ import java.util.Set;
 
 /**
  * Source code generator for both the raw assembler and the label assembler.
- *
- * @author Bernd Mathiske
  */
 public abstract class AssemblerGenerator<Template_Type extends Template> {
 

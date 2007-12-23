@@ -104,9 +104,6 @@ import java.util.Queue;
  *
  * jmp L1: +100
  * adc [L2: +128], ESI
- *
- * @author Bernd Mathiske
- * @author Greg Wright
  */
 public abstract class X86DisassembledInstruction<Template_Type extends X86Template> extends DisassembledInstruction<Template_Type> {
 

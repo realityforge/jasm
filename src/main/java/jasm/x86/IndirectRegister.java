@@ -8,8 +8,5 @@
  */
 package jasm.x86;
 
-/**
- * @author Bernd Mathiske
- */
 public interface IndirectRegister {
 }

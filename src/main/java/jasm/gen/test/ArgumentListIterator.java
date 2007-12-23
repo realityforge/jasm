@@ -28,8 +28,6 @@ import java.util.NoSuchElementException;
  * It is important to note that the value returned by {@link #next()} is only valid
  * until {@code next()} is called again. That is, the same <code>Sequence<Argument></code>
  * object is returned by each call to {@code next()}, only its contents have changed.
- *
- * @author Doug Simon
  */
 final class ArgumentListIterator<Template_Type extends Template> implements Iterator<List<Argument>> {
 

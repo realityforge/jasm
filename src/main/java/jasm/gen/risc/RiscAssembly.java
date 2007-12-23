@@ -17,11 +17,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
- */
 public abstract class RiscAssembly<Template_Type extends RiscTemplate> extends Assembly<Template_Type> {
 
   private ArrayList<SpecificityGroup<Template_Type>> _specificityGroups;

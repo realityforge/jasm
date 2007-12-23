@@ -11,9 +11,6 @@ package jasm.x86;
 import jasm.EnumerableArgument;
 import jasm.SymbolSet;
 
-/**
- * @author Bernd Mathiske
- */
 public enum ControlRegister implements EnumerableArgument {
 
   CR0(0), CR2(2), CR3(3);

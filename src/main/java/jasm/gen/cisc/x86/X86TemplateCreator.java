@@ -15,9 +15,6 @@ import jasm.gen.Trace;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- */
 public abstract class X86TemplateCreator<Template_Type extends X86Template> {
 
     private final WordWidth _addressWidth;

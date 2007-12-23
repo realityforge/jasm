@@ -14,9 +14,6 @@ import jasm.gen.TestArgumentExclusion;
 import jasm.gen.WrappableSpecification;
 import jasm.util.collect.CollectionUtil;
 
-/**
- * @author Bernd Mathiske
- */
 public enum FloatingPointOperandCode implements WrappableSpecification {
     bytes_2(""),
     bytes_14_28(""),

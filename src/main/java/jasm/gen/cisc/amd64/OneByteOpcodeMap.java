@@ -250,9 +250,6 @@ import static jasm.util.HexByte._FD;
 import static jasm.util.HexByte._FE;
 import static jasm.util.HexByte._FF;
 
-/**
- * @author Bernd Mathiske
- */
 public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
 
     private void create_low() {

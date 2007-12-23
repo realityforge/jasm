@@ -8,10 +8,6 @@
  */
 package jasm.gen.cisc.x86;
 
-
-/**
- * @author Bernd Mathiske
- */
 public final class X86Field {
 
     private final int _shift;

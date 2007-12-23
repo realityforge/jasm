@@ -15,10 +15,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- * @author Doug Simon
- */
 final class TemplateMap<Value_Type extends RiscTemplate> {
 
   private final HashMap<String, ArrayList<Value_Type>> _map;

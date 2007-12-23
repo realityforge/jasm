@@ -15,9 +15,6 @@ import jasm.SymbolSet;
  * An optional (suffix) argument to a branch assembler instruction specifying
  * if the instruction in the delay slot of the branch will be executed. For example:
  * <pre>bne,a <i>label</i></pre>
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public final class AnnulBit extends OptionSuffixSymbolicArgument {
 

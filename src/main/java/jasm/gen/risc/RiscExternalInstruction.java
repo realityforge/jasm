@@ -38,11 +38,6 @@ import java.util.List;
  *
  *     ba     L1: +112
  *     be,pt  L2: -50
- *
- *
- * @author Bernd Mathiske
- * @author Doug Simon
- * @author Greg Wright
  */
 public abstract class RiscExternalInstruction implements RiscInstructionDescriptionVisitor {
 

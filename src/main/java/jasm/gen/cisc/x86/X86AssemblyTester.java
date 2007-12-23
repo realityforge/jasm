@@ -28,9 +28,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-/**
- * @author Bernd Mathiske
- */
 public abstract class X86AssemblyTester<Template_Type extends X86Template, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
                           extends AssemblyTester<Template_Type, DisassembledInstruction_Type> {
 

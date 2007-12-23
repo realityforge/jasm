@@ -12,9 +12,6 @@ import jasm.InstructionSet;
 import jasm.gen.Assembly;
 import jasm.util.program.ProgramError;
 
-/**
- * @author Bernd Mathiske
- */
 public abstract class X86Assembly<Template_Type extends X86Template> extends Assembly<Template_Type> {
 
     public X86Assembly(InstructionSet instructionSet, Class<Template_Type> templateType) {

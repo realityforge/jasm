@@ -17,9 +17,6 @@ import java.util.Set;
 
 /**
  * The program entry point for the PowerPC assembler generator.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public final class PPCAssemblerGenerator
     extends RiscAssemblerGenerator<PPCTemplate> {

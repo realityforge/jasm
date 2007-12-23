@@ -11,8 +11,6 @@ package jasm.gen.cisc;
 /**
  * Thrown to abruptly stop template creation in some corner cases
  * that would otherwise be hard to describe.
- *
- * @author Bernd Mathiske
  */
 public final class TemplateNotNeededException extends Exception {
 

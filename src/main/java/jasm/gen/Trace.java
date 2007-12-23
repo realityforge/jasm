@@ -11,8 +11,6 @@ package jasm.gen;
 /**
  * Tracing output for debugging purposes. No performance impact when disabled. Some performance impact when active, even
  * without output. Possibly significant performance impact when producing a lot of output.
- *
- * @author Bernd Mathiske
  */
 public final class Trace {
   private static final boolean _ENABLED = true;

@@ -12,8 +12,6 @@ import jasm.gen.ImmediateArgument;
 
 /**
  * Delegation interface (for lack of multiple class inheritance in the Java(TM) Programming Language).
- *
- * @author Bernd Mathiske
  */
 public interface AddressInstruction {
 

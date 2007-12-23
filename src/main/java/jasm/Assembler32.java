@@ -10,8 +10,6 @@ package jasm;
 
 /**
  * Assemblers for 32-bit address spaces.
- *
- * @author Bernd Mathiske
  */
 public interface Assembler32 {
 

@@ -26,8 +26,6 @@ import jasm.util.program.ProgramError;
 
 /**
  * Run this program to generate the AMD64RawAssembler and AMD64LabelAssembler classes.
- *
- * @author Bernd Mathiske
  */
 public final class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template> {
 

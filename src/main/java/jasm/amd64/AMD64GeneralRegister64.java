@@ -12,9 +12,6 @@ import jasm.WordWidth;
 import jasm.SymbolSet;
 import jasm.x86.GeneralRegister;
 
-/**
- * @author Bernd Mathiske
- */
 public enum AMD64GeneralRegister64 implements GeneralRegister {
 
   // Note: keep the order such that 'value()' can rely on ordinals:

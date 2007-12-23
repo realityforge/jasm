@@ -14,9 +14,6 @@ import jasm.SymbolSet;
 /**
  * The argument to a Branch on Floating-Point Condition Code instruction specifying
  * the conditional test to be performed.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public final class FBfcc extends NameSuffixSymbolicArgument implements Predicate<FCCOperand, FBfcc> {
     private FBfcc _negation;

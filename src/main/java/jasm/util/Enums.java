@@ -16,8 +16,6 @@ import java.util.List;
 
 /**
  * Additional dealings with Enum types.
- *
- * @author Bernd Mathiske
  */
 public final class Enums {
   /**

@@ -15,8 +15,6 @@ import java.util.Collection;
 
 /**
  * The super type of all the {@link GPR General Purpose Registers} and the constant {@link Zero#ZERO}.
- *
- * @author Doug Simon
  */
 public abstract class ZeroOrRegister extends AbstractSymbolicArgument {
 

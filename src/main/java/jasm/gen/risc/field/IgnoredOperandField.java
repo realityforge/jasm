@@ -13,11 +13,6 @@ import jasm.gen.risc.bitRange.BitRangeOrder;
 
 /**
  * A field that contains an immediate value that is ignored by the hardware.
- *
- * @author Bernd Mathiske
- * @author Dave Ungar
- * @author Adam Spitz
- * @author Doug Simon
  */
 public final class IgnoredOperandField extends ImmediateOperandField {
 

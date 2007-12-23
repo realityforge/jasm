@@ -10,9 +10,6 @@ package jasm.gen;
 
 import jasm.WordWidth;
 
-/**
- * @author Bernd Mathiske
- */
 public final class Immediate32Argument extends ImmediateArgument {
 
     private int _value;

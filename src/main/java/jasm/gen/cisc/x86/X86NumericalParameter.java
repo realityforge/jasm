@@ -20,9 +20,6 @@ import jasm.gen.Parameter;
 import jasm.util.program.ProgramError;
 import java.util.Collections;
 
-/**
- * @author Bernd Mathiske
- */
 public abstract class X86NumericalParameter extends X86Parameter implements Parameter, ImmediateParameter {
 
     private final WordWidth _width;

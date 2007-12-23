@@ -12,13 +12,11 @@ import jasm.gen.Operand;
 
 /**
  * Description of an assembly instruction operand.
- *
- * @author Bernd Mathiske
  */
 public abstract class X86Operand implements Operand {
 
     public enum Designation {
-        DESTINATION, SOURCE, OTHER;
+        DESTINATION, SOURCE, OTHER
     }
 
     private Designation _designation;

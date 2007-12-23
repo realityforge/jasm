@@ -10,8 +10,6 @@ package jasm.util.lang;
 
 /**
  * Additional String-related operations.
- *
- * @author Bernd Mathiske
  */
 public final class StringUtil {
   public static String times(char ch, int nTimes) {

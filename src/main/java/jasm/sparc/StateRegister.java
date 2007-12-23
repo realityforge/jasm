@@ -13,9 +13,6 @@ import jasm.SymbolSet;
 
 /**
  * The argument to the Write State Register and Read State Register instructions.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public class StateRegister extends AbstractSymbolicArgument {
 

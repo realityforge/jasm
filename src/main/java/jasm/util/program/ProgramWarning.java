@@ -8,9 +8,6 @@
  */
 package jasm.util.program;
 
-/**
- * @author Bernd Mathiske
- */
 public final class ProgramWarning {
     public static void message(String warning) {
         System.err.println("WARNING: " + warning);

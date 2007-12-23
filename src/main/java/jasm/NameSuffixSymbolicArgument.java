@@ -10,9 +10,6 @@ package jasm;
 
 /**
  * An argument that corresponds to a non-optional mnemonic suffix in the external assembler syntax.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public abstract class NameSuffixSymbolicArgument extends AbstractSymbolicArgument implements ExternalMnemonicSuffixArgument {
 

@@ -43,18 +43,8 @@ import jasm.util.NamedField;
 
 /**
  * The fields used in defining the PowerPC instruction templates.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
- * @author Dave Ungar
- * @author Adam Spitz
  */
 final class PPCFields {
-
-    private PPCFields() {
-    }
-
-    // Checkstyle: stop constant name checks
 
     /**
      * RA field that can also accept the constant 0.

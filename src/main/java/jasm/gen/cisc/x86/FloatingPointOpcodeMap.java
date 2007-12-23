@@ -54,9 +54,6 @@ import static jasm.util.HexByte._FF;
 import static jasm.x86.FPStackRegister.ST;
 import static jasm.x86.FPStackRegister.ST_0;
 
-/**
- * @author Bernd Mathiske
- */
 public final class FloatingPointOpcodeMap extends X86InstructionDescriptionCreator {
 
     private void create_D8() {

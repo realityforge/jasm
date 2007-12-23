@@ -17,8 +17,6 @@ import jasm.gen.cisc.TemplateNotNeededException;
  * Used when pre-scanning instruction descriptions to assess variants within the respective instruction family.
  *
  * @see InstructionAssessment
- *
- * @author Bernd Mathiske
  */
 public final class OpcodeAssessor extends X86InstructionDescriptionAdapter {
 

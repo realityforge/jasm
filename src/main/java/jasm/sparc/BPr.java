@@ -14,9 +14,6 @@ import jasm.SymbolSet;
 /**
  * The argument to a Branch on Integer Register with Prediction instruction specifying
  * the conditional test to be performed.
- *
- * @author Bernd Mathiske
- * @author Doug Simon
  */
 public final class BPr extends NameSuffixSymbolicArgument {
 

@@ -21,9 +21,6 @@ import java.io.PushbackInputStream;
 import java.util.EnumSet;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- */
 public abstract class PPCAssemblyTester<DisassembledInstruction_Type extends DisassembledInstruction<PPCTemplate>>
                           extends RiscAssemblyTester<PPCTemplate, DisassembledInstruction_Type> {
 

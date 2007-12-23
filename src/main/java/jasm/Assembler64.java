@@ -10,8 +10,6 @@ package jasm;
 
 /**
  * Assemblers for 64-bit address spaces.
- *
- * @author Bernd Mathiske
  */
 public interface Assembler64 {
 

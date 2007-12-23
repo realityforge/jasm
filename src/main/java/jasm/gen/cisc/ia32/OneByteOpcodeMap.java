@@ -288,8 +288,6 @@ import static jasm.x86.SegmentRegister.SS;
 
 /**
  * Representation of the ...
- *
- * @author Bernd Mathiske
  */
 final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
 

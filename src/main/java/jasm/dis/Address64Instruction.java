@@ -13,8 +13,6 @@ import jasm.util.HexUtil;
 
 /**
  * Mixin delegation style (for lack of multiple class inheritance in the Java(TM) Programming Language).
- *
- * @author Bernd Mathiske
  */
 public interface Address64Instruction extends AddressInstruction {
 

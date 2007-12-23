@@ -23,10 +23,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * @author Bernd Mathiske
- * @author Doug Simon
- */
 public abstract class RiscInstructionDescriptionCreator extends InstructionDescriptionCreator<RiscInstructionDescription> {
 
     protected final RiscTemplateCreator<? extends RiscTemplate> _templateCreator;

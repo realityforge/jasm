@@ -14,11 +14,6 @@ import jasm.gen.risc.field.RiscField;
 import jasm.util.program.ProgramError;
 import java.util.List;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public final class RiscInstructionDescription extends InstructionDescription {
 
     RiscInstructionDescription(List<Object> specifications) {

@@ -14,8 +14,6 @@ import jasm.Label;
 
 /**
  * The concrete class for a 64-bit PowerPC assembler.
- *
- * @author Bernd Mathiske
  */
 public final class PPC64Assembler extends PPCAssembler implements Assembler64 {
 

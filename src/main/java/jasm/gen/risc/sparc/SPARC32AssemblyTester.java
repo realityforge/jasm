@@ -16,11 +16,6 @@ import jasm.sparc.dis.SPARC32DisassembledInstruction;
 import jasm.sparc.dis.SPARC32Disassembler;
 import java.util.EnumSet;
 
-/**
- *
- *
- * @author Bernd Mathiske
- */
 public final class SPARC32AssemblyTester extends SPARCAssemblyTester<SPARC32DisassembledInstruction> {
 
     public SPARC32AssemblyTester(EnumSet<AssemblyTestComponent> components) {

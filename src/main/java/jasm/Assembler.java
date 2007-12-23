@@ -17,9 +17,6 @@ import java.util.LinkedList;
 
 /**
  * Super class of generated assemblers.
- *
- * @author Bernd Mathiske
- * @author Greg Wright
  */
 public abstract class Assembler {
 
