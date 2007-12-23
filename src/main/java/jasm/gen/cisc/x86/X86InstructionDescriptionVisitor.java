@@ -16,7 +16,7 @@ import jasm.gen.InstructionDescription;
 import jasm.gen.TestArgumentExclusion;
 import jasm.gen.cisc.TemplateNotNeededException;
 import jasm.util.HexByte;
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
 import jasm.x86.SegmentRegister;

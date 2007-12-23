@@ -22,9 +22,9 @@ import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.field.InputOperandField;
 import jasm.gen.risc.field.OperandField;
 import jasm.gen.util.IndentWriter;
+import jasm.util.CollectionUtil;
 import jasm.util.HexUtil;
-import jasm.util.collect.CollectionUtil;
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 import java.util.ArrayList;
 import java.util.List;
 

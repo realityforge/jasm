@@ -8,8 +8,8 @@
  */
 package jasm.sparc;
 
-import jasm.SymbolicArgument;
 import jasm.SymbolSet;
+import jasm.SymbolicArgument;
 import jasm.util.Nameable;
 
 /**

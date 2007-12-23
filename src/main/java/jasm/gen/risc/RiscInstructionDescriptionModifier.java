@@ -8,7 +8,7 @@
  */
 package jasm.gen.risc;
 
-import jasm.util.collect.CollectionUtil;
+import jasm.util.CollectionUtil;
 import java.util.List;
 
 /**

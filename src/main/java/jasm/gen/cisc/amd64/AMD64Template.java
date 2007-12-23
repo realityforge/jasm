@@ -40,7 +40,7 @@ import jasm.gen.cisc.x86.X86OffsetParameter;
 import jasm.gen.cisc.x86.X86Operand;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 import jasm.x86.ControlRegister;
 import jasm.x86.DebugRegister;
 import jasm.x86.GeneralRegister;

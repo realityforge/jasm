@@ -8,8 +8,8 @@
  */
 package jasm.ia32;
 
-import jasm.WordWidth;
 import jasm.SymbolSet;
+import jasm.WordWidth;
 import jasm.x86.GeneralRegister;
 import jasm.x86.IndirectRegister;
 

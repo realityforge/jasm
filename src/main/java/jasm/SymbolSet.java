@@ -8,8 +8,8 @@
  */
 package jasm;
 
-import jasm.util.program.ProgramError;
 import jasm.util.NamedField;
+import jasm.util.ProgramError;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;

@@ -8,7 +8,7 @@
  */
 package jasm.gen.test;
 
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;

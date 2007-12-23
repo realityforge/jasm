@@ -8,7 +8,7 @@
  */
 package jasm.gen.test;
 
-import jasm.util.program.ProgramWarning;
+import jasm.util.ProgramWarning;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;

@@ -51,8 +51,8 @@ import static jasm.gen.cisc.x86.OperandTypeCode.ss;
 import static jasm.gen.cisc.x86.OperandTypeCode.v;
 import static jasm.gen.cisc.x86.OperandTypeCode.w;
 import static jasm.gen.cisc.x86.OperandTypeCode.z;
-import jasm.util.collect.CollectionUtil;
-import jasm.util.lang.StaticLoophole;
+import jasm.util.CollectionUtil;
+import jasm.util.StaticLoophole;
 import java.util.HashSet;
 import java.util.Set;
 

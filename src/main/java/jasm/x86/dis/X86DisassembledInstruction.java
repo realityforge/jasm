@@ -24,7 +24,7 @@ import jasm.gen.cisc.x86.X86Operand;
 import jasm.gen.cisc.x86.X86Parameter;
 import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
-import jasm.util.lang.StringUtil;
+import jasm.util.StringUtil;
 import jasm.x86.IndirectRegister;
 import jasm.x86.Scale;
 import java.util.LinkedList;

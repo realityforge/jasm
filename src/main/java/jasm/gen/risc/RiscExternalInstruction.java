@@ -17,7 +17,7 @@ import jasm.gen.InstructionConstraint;
 import jasm.gen.risc.field.BranchDisplacementOperandField;
 import jasm.gen.risc.field.OperandField;
 import jasm.gen.risc.field.RiscField;
-import jasm.util.lang.StringUtil;
+import jasm.util.StringUtil;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;

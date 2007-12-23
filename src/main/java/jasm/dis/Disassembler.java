@@ -17,7 +17,7 @@ import jasm.gen.ImmediateArgument;
 import jasm.gen.OffsetParameter;
 import jasm.gen.Parameter;
 import jasm.gen.Template;
-import jasm.util.lang.StringUtil;
+import jasm.util.StringUtil;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.OutputStream;

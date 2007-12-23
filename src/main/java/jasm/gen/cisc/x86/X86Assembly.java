@@ -10,7 +10,7 @@ package jasm.gen.cisc.x86;
 
 import jasm.InstructionSet;
 import jasm.gen.Assembly;
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 
 public abstract class X86Assembly<Template_Type extends X86Template> extends Assembly<Template_Type> {
 

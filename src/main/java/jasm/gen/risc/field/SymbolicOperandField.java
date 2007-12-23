@@ -9,8 +9,8 @@
 package jasm.gen.risc.field;
 
 import jasm.Argument;
-import jasm.SymbolicArgument;
 import jasm.SymbolSet;
+import jasm.SymbolicArgument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.Expression;
@@ -19,8 +19,8 @@ import jasm.gen.WrappableSpecification;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import jasm.util.collect.CollectionUtil;
-import jasm.util.lang.StaticLoophole;
+import jasm.util.CollectionUtil;
+import jasm.util.StaticLoophole;
 import java.util.Collections;
 
 public final class SymbolicOperandField<Argument_Type extends SymbolicArgument> extends OperandField<Argument_Type> implements WrappableSpecification {

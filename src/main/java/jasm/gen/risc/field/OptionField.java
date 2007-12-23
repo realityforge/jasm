@@ -14,7 +14,7 @@ import jasm.gen.risc.Option;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 import java.util.ArrayList;
 
 /**

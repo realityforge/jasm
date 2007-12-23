@@ -1,7 +1,5 @@
-package jasm.util.collect;
+package jasm.util;
 
-import jasm.util.lang.ArrayUtil;
-import jasm.util.lang.StaticLoophole;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;

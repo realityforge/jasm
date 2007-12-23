@@ -8,7 +8,7 @@
  */
 package jasm;
 
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 
 public abstract class LabelAddressInstruction extends LabelInstruction {
 

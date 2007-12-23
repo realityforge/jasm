@@ -17,7 +17,7 @@ import jasm.gen.Immediate8Argument;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.ImmediateParameter;
 import jasm.gen.Parameter;
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 import java.util.Collections;
 
 public abstract class X86NumericalParameter extends X86Parameter implements Parameter, ImmediateParameter {

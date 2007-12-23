@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.util.lang;
+package jasm.util;
 
 /**
  * Static type loophole that prevents "unchecked" compiler warnings but that does not circumvent dynamic type checks.

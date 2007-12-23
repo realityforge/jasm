@@ -9,7 +9,7 @@
 package jasm.gen;
 
 import jasm.Argument;
-import jasm.util.lang.StaticLoophole;
+import jasm.util.StaticLoophole;
 import java.util.Collections;
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package jasm.util.lang;
+package jasm.util;
 
 import java.io.IOException;
 import java.io.InputStream;

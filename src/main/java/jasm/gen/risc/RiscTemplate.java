@@ -17,7 +17,7 @@ import jasm.gen.risc.field.OperandField;
 import jasm.gen.risc.field.OptionField;
 import jasm.gen.risc.field.ReservedField;
 import jasm.gen.risc.field.RiscField;
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 import java.util.ArrayList;
 import java.util.List;
 

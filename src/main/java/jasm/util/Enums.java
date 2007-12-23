@@ -8,8 +8,6 @@
  */
 package jasm.util;
 
-import jasm.util.lang.ArrayUtil;
-import jasm.util.lang.StaticLoophole;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;

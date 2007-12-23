@@ -9,7 +9,7 @@
 package jasm;
 
 import jasm.util.Longs;
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;

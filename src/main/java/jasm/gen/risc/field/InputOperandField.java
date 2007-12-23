@@ -13,7 +13,7 @@ import jasm.gen.ArgumentRange;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.risc.bitRange.BitRange;
 import jasm.gen.risc.bitRange.BitRangeOrder;
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 import java.util.Collections;
 
 /**

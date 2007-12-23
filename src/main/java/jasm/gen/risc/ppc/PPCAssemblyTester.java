@@ -14,7 +14,7 @@ import jasm.dis.DisassembledInstruction;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.risc.RiscAssemblyTester;
 import jasm.gen.util.IndentWriter;
-import jasm.util.lang.EndianUtil;
+import jasm.util.EndianUtil;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;

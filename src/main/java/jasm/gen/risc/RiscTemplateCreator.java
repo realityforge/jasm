@@ -10,8 +10,8 @@ package jasm.gen.risc;
 
 import jasm.gen.InstructionDescription;
 import jasm.gen.risc.field.OptionField;
-import jasm.util.lang.StaticLoophole;
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
+import jasm.util.StaticLoophole;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;

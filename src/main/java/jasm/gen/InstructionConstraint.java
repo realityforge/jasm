@@ -10,7 +10,7 @@ package jasm.gen;
 
 import jasm.Argument;
 import jasm.SymbolicArgument;
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

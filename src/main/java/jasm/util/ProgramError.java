@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.util.program;
+package jasm.util;
 
 public final class ProgramError extends Error {
 

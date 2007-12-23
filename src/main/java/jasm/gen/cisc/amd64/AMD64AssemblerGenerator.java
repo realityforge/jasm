@@ -22,7 +22,7 @@ import jasm.gen.cisc.x86.X86Template;
 import jasm.gen.cisc.x86.X86TemplateContext;
 import jasm.gen.util.IndentWriter;
 import jasm.util.HexUtil;
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 
 /**
  * Run this program to generate the AMD64RawAssembler and AMD64LabelAssembler classes.

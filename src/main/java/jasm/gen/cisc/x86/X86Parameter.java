@@ -12,7 +12,7 @@ import jasm.Argument;
 import jasm.gen.ArgumentRange;
 import jasm.gen.Parameter;
 import jasm.gen.TestArgumentExclusion;
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 import java.util.HashSet;
 import java.util.Set;
 

@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.util.lang;
+package jasm.util;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

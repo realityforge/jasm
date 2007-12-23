@@ -11,7 +11,7 @@ package jasm.gen.risc;
 import jasm.gen.InstructionConstraint;
 import jasm.gen.InstructionDescription;
 import jasm.gen.risc.field.RiscField;
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 import java.util.List;
 
 public interface RiscInstructionDescriptionVisitor {

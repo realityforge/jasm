@@ -13,7 +13,7 @@ import jasm.Assembler;
 import jasm.AssemblyException;
 import jasm.InstructionSet;
 import jasm.Label;
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;

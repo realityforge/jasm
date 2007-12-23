@@ -18,7 +18,7 @@ import jasm.gen.ImplicitOperand;
 import jasm.gen.test.AssemblyTester;
 import jasm.gen.util.IndentWriter;
 import jasm.util.HexByte;
-import jasm.util.lang.StaticLoophole;
+import jasm.util.StaticLoophole;
 import jasm.x86.IndirectRegister;
 import java.io.IOException;
 import java.io.InputStream;

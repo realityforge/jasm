@@ -8,7 +8,7 @@
  */
 package jasm.gen.risc;
 
-import jasm.util.lang.StaticLoophole;
+import jasm.util.StaticLoophole;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

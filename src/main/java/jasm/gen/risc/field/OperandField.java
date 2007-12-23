@@ -15,7 +15,7 @@ import jasm.gen.Parameter;
 import jasm.gen.Template;
 import jasm.gen.risc.RiscConstant;
 import jasm.gen.risc.bitRange.BitRange;
-import jasm.util.lang.StaticLoophole;
+import jasm.util.StaticLoophole;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;

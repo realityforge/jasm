@@ -10,7 +10,7 @@ package jasm.dis.risc;
 
 import jasm.gen.risc.RiscTemplate;
 import jasm.util.HexUtil;
-import jasm.util.lang.StaticLoophole;
+import jasm.util.StaticLoophole;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;

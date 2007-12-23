@@ -8,7 +8,7 @@
  */
 package jasm.gen;
 
-import jasm.util.lang.ArrayUtil;
+import jasm.util.ArrayUtil;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;

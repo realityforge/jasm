@@ -8,7 +8,7 @@
  */
 package jasm;
 
-import jasm.util.program.ProgramError;
+import jasm.util.ProgramError;
 
 /**
  * Assembler labels for symbolic addressing.
