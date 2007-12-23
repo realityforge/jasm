@@ -17,7 +17,6 @@ import jasm.gen.util.IndentWriter;
 import jasm.util.HexUtil;
 import jasm.util.collect.CollectionUtil;
 import jasm.util.lang.StaticLoophole;
-import jasm.util.lang.StringUtil;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.CharArrayReader;
@@ -398,7 +397,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
                     assert template.parameters().get(template.labelParameterIndex()) instanceof AddressParameter;
                     writer.print("Address");
                 }
-                writer.print("As" + StringUtil.firstCharToUpperCase(template.parameters().get(i).type().getSimpleName()) + "()");
+                writer.print("As" + firstCharToUpperCase(template.parameters().get(i).type().getSimpleName()) + "()");
             } else {
                 writer.print(parameters.get(i).variableName());
             }
@@ -406,6 +405,13 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         }
         writer.println(");");
     }
+
+  private static String firstCharToUpperCase(String s) {
+    if (s == null || s.length() == 0) {
+      return s;
+    }
+    return s.substring(0, 1).toUpperCase() + s.substring(1);
+  }
 
     protected abstract int printLabelMethod(IndentWriter writer, Template_Type labelTemplate, List<Template_Type> labelTemplates);
 

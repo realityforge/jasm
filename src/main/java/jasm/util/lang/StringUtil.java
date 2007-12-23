@@ -14,13 +14,6 @@ package jasm.util.lang;
  * @author Bernd Mathiske
  */
 public final class StringUtil {
-  public static String firstCharToUpperCase(String s) {
-    if (s == null || s.length() == 0) {
-      return s;
-    }
-    return s.substring(0, 1).toUpperCase() + s.substring(1);
-  }
-
   public static String times(char ch, int nTimes) {
     if (nTimes <= 0) {
       return "";
