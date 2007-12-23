@@ -147,7 +147,7 @@ public final class Main {
       if (_16bitAddresses) X86Assembly.support16BitAddresses();
       if (_16bitOffsets) X86Assembly.support16BitOffsets();
       generator.generate();
-    } catch (Exception e) {
+    } catch (Throwable e) {
       e.printStackTrace();
       System.exit(42);
     }
