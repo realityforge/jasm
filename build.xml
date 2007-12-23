@@ -20,6 +20,7 @@
   <property name="output.dir" location="target"/>
   <property name="output.main.classes" location="${output.dir}/main-classes"/>
   <property name="output.test.classes" location="${output.dir}/test-classes"/>
+  <property name="output.example.classes" location="${output.dir}/example-classes"/>
   <property name="output.unit.test.reports" location="${output.dir}/test/unit/reports"/>
   <property name="output.jar" location="${output.dir}/jasm.jar"/>
   <property name="output.javadocs" location="${output.dir}/javadocs"/>
@@ -96,6 +97,16 @@
            optimize="false"/>
   </target>
 
+  <target name="compile-examples" depends="compile">
+    <mkdir dir="${output.example.classes}"/>
+    <javac srcdir="example/answer/java"
+           destdir="${output.example.classes}"
+           classpath="${output.main.classes}"
+           debug="true"
+           deprecation="true"
+           optimize="false"/>
+  </target>
+
   <target name="unit-tests" depends="compile-tests" description="Run the test cases" unless="skip.tests">
     <mkdir dir="${output.unit.test.reports}"/>
     <junit printSummary="yes" errorproperty="tests.failed" failureproperty="tests.failed" fork="true" dir=".">
@@ -116,7 +127,7 @@
     <fail if="tests.failed" message="Tests failed."/>
   </target>
 
-  <target name="package" depends="unit-tests, compile" description="Package the code" unless="skip.tests">
+  <target name="package" depends="unit-tests, compile-examples, compile" description="Package the code" unless="skip.tests">
     <jar jarfile="${output.jar}" basedir="${output.main.classes}"/>
   </target>
 
