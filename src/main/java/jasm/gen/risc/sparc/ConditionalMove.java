@@ -9,14 +9,25 @@
 package jasm.gen.risc.sparc;
 
 import jasm.gen.risc.field.RiscField;
+import static jasm.gen.risc.sparc.SPARCFields.bits_13_13;
+import static jasm.gen.risc.sparc.SPARCFields.bits_18_18;
+import static jasm.gen.risc.sparc.SPARCFields.cond_17_14;
 import static jasm.gen.risc.sparc.SPARCFields.dfrd;
 import static jasm.gen.risc.sparc.SPARCFields.dfrs2;
+import static jasm.gen.risc.sparc.SPARCFields.fmovTypeBit;
 import static jasm.gen.risc.sparc.SPARCFields.fmovfcc;
 import static jasm.gen.risc.sparc.SPARCFields.fmovicc;
+import static jasm.gen.risc.sparc.SPARCFields.i;
+import static jasm.gen.risc.sparc.SPARCFields.movTypeBit;
 import static jasm.gen.risc.sparc.SPARCFields.movfcc;
 import static jasm.gen.risc.sparc.SPARCFields.movicc;
+import static jasm.gen.risc.sparc.SPARCFields.op;
+import static jasm.gen.risc.sparc.SPARCFields.op3;
+import static jasm.gen.risc.sparc.SPARCFields.opfLow_10_5;
+import static jasm.gen.risc.sparc.SPARCFields.opfLow_9_5;
 import static jasm.gen.risc.sparc.SPARCFields.qfrd;
 import static jasm.gen.risc.sparc.SPARCFields.qfrs2;
+import static jasm.gen.risc.sparc.SPARCFields.rcond_12_10;
 import static jasm.gen.risc.sparc.SPARCFields.rd;
 import static jasm.gen.risc.sparc.SPARCFields.res_10_5;
 import static jasm.gen.risc.sparc.SPARCFields.res_9_5;
@@ -26,17 +37,6 @@ import static jasm.gen.risc.sparc.SPARCFields.sfrd;
 import static jasm.gen.risc.sparc.SPARCFields.sfrs2;
 import static jasm.gen.risc.sparc.SPARCFields.simm10;
 import static jasm.gen.risc.sparc.SPARCFields.simm11;
-import static jasm.gen.risc.sparc.SPARCFields.bits_13_13;
-import static jasm.gen.risc.sparc.SPARCFields.bits_18_18;
-import static jasm.gen.risc.sparc.SPARCFields.cond_17_14;
-import static jasm.gen.risc.sparc.SPARCFields.fmovTypeBit;
-import static jasm.gen.risc.sparc.SPARCFields.i;
-import static jasm.gen.risc.sparc.SPARCFields.movTypeBit;
-import static jasm.gen.risc.sparc.SPARCFields.op;
-import static jasm.gen.risc.sparc.SPARCFields.op3;
-import static jasm.gen.risc.sparc.SPARCFields.opfLow_10_5;
-import static jasm.gen.risc.sparc.SPARCFields.opfLow_9_5;
-import static jasm.gen.risc.sparc.SPARCFields.rcond_12_10;
 
 /**
  * @author Bernd Mathiske

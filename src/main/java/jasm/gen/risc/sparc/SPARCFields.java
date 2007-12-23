@@ -31,7 +31,6 @@ import jasm.sparc.QFPR;
 import jasm.sparc.SFPR;
 import jasm.sparc.StateRegister;
 import jasm.util.NamedField;
-import jasm.util.Nameable;
 
 /**
  * The fields used in defining the SPARC instruction templates.

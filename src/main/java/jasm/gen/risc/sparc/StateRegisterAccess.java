@@ -8,6 +8,9 @@
  */
 package jasm.gen.risc.sparc;
 
+import static jasm.gen.risc.sparc.SPARCFields.i;
+import static jasm.gen.risc.sparc.SPARCFields.op;
+import static jasm.gen.risc.sparc.SPARCFields.op3;
 import static jasm.gen.risc.sparc.SPARCFields.rd;
 import static jasm.gen.risc.sparc.SPARCFields.rd_state;
 import static jasm.gen.risc.sparc.SPARCFields.res_12_0;
@@ -16,9 +19,6 @@ import static jasm.gen.risc.sparc.SPARCFields.rs1;
 import static jasm.gen.risc.sparc.SPARCFields.rs1_state;
 import static jasm.gen.risc.sparc.SPARCFields.rs2;
 import static jasm.gen.risc.sparc.SPARCFields.simm13;
-import static jasm.gen.risc.sparc.SPARCFields.i;
-import static jasm.gen.risc.sparc.SPARCFields.op;
-import static jasm.gen.risc.sparc.SPARCFields.op3;
 
 /**
  * @author Bernd Mathiske

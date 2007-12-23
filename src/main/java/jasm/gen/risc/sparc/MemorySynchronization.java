@@ -8,14 +8,14 @@
  */
 package jasm.gen.risc.sparc;
 
+import static jasm.gen.risc.sparc.SPARCFields.bits_18_14;
+import static jasm.gen.risc.sparc.SPARCFields.i;
 import static jasm.gen.risc.sparc.SPARCFields.membarMask;
+import static jasm.gen.risc.sparc.SPARCFields.op;
+import static jasm.gen.risc.sparc.SPARCFields.op3;
 import static jasm.gen.risc.sparc.SPARCFields.res_12_0;
 import static jasm.gen.risc.sparc.SPARCFields.res_12_7;
 import static jasm.gen.risc.sparc.SPARCFields.res_29_25;
-import static jasm.gen.risc.sparc.SPARCFields.bits_18_14;
-import static jasm.gen.risc.sparc.SPARCFields.i;
-import static jasm.gen.risc.sparc.SPARCFields.op;
-import static jasm.gen.risc.sparc.SPARCFields.op3;
 
 /**
  * @author Bernd Mathiske

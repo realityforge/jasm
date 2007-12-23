@@ -8,10 +8,14 @@
  */
 package jasm.gen.risc.sparc;
 
+import static jasm.gen.risc.sparc.SPARCFields.bits_29_27;
 import static jasm.gen.risc.sparc.SPARCFields.dfrd;
 import static jasm.gen.risc.sparc.SPARCFields.dfrs1;
 import static jasm.gen.risc.sparc.SPARCFields.dfrs2;
 import static jasm.gen.risc.sparc.SPARCFields.fcc_26_25;
+import static jasm.gen.risc.sparc.SPARCFields.op;
+import static jasm.gen.risc.sparc.SPARCFields.op3;
+import static jasm.gen.risc.sparc.SPARCFields.opf;
 import static jasm.gen.risc.sparc.SPARCFields.qfrd;
 import static jasm.gen.risc.sparc.SPARCFields.qfrs1;
 import static jasm.gen.risc.sparc.SPARCFields.qfrs2;
@@ -19,10 +23,6 @@ import static jasm.gen.risc.sparc.SPARCFields.res_18_14;
 import static jasm.gen.risc.sparc.SPARCFields.sfrd;
 import static jasm.gen.risc.sparc.SPARCFields.sfrs1;
 import static jasm.gen.risc.sparc.SPARCFields.sfrs2;
-import static jasm.gen.risc.sparc.SPARCFields.bits_29_27;
-import static jasm.gen.risc.sparc.SPARCFields.op;
-import static jasm.gen.risc.sparc.SPARCFields.op3;
-import static jasm.gen.risc.sparc.SPARCFields.opf;
 
 /**
  * @author Bernd Mathiske
