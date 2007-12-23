@@ -6,7 +6,7 @@ The jasm  project provides several assemblers and disassemblers written in the J
 
 The project hopes to help support compiler development and research in the Java programming language. Without further ado...
 
-* [Building Build]
-* [Testing Test]
-* [Using Use]
-* [Contributing Contribute]
+  * [Building Build]
+  * [Testing Test]
+  * [Using Use]
+  * [Contributing Contribute]
