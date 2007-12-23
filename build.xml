@@ -25,11 +25,11 @@
   <property name="output.javadocs" location="${output.dir}/javadocs"/>
 
   <target name="clobber" depends="clean" description="Remove all generated artifacts.">
+    <echo>It's clobbering time!</echo>
     <delete dir="${generated.dir}"/>
   </target>
 
   <target name="clean" description="Clean the output directory">
-    <echo>It's clobbering time!</echo>
     <delete dir="${output.dir}"/>
   </target>
 
