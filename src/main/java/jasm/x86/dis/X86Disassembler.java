@@ -283,7 +283,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
               }
               arguments = result;
             }
-            if (!CollectionUtil.containsIdentical(arguments, null)) {
+            if (-1 == CollectionUtil.indexOfIdentical(arguments, null)) {
               final Assembler assembler = createAssembler(_currentOffset);
               assembly().assemble(assembler, template, arguments);
               final byte[] bytes = assembler.toByteArray();

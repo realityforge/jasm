@@ -138,7 +138,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
      */
     private String getRawOperandReplacement(RiscTemplate syntheticTemplate,
                                             OperandField rawOperand) {
-        if (CollectionUtil.containsIdentical(syntheticTemplate.operandFields(), rawOperand)) {
+      if (-1 != CollectionUtil.indexOfIdentical(syntheticTemplate.operandFields(), rawOperand)) {
             if (rawOperand instanceof OffsetParameter && generatingLabelAssembler()) {
                 return new LabelParameter().variableName();
             }
