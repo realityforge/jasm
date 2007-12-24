@@ -17,6 +17,8 @@
 
 /LICENSE\.txt/ { next }
 /CONTRIBUTORS\.txt/ { next }
+/CHANGES\.txt/ { next }
+/examples\/.*\/README\.txt/ { next }
 
 # print everything else
 { print; }
