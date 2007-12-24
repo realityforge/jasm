@@ -210,11 +210,15 @@ public abstract class Assembler {
 
     protected final void checkConstraint(boolean passed, String expression) {
         if (!passed) {
-            throw new IllegalArgumentException(expression);
+          constraintFailed(expression);
         }
     }
 
-    /**
+    protected final void constraintFailed(final String expression) {
+      throw new IllegalArgumentException(expression);
+    }
+
+  /**
      * Calculate the difference between a Label and an offset within our assembled code.
      * @throws AssemblyException
      */

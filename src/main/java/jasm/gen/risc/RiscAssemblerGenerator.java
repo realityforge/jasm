@@ -57,7 +57,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
         final List<InstructionConstraint> constraints = template.instructionDescription().constraints();
         for (InstructionConstraint constraint : constraints) {
             final String constraintExpr = constraint.asJavaExpression();
-            writer.println("checkConstraint(" + constraintExpr + ", \"" + constraintExpr + "\");");
+            writer.println("if( Config.ENABLE_CONSTRAINT_CHECKS && !(" + constraintExpr + ")) constraintFailed(\"" + constraintExpr + "\");");
         }
 
         for (OperandField operandField : template.operandFields()) {
