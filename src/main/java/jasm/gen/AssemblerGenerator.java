@@ -10,9 +10,9 @@ package jasm.gen;
 
 import jasm.Argument;
 import jasm.Assembler;
-import jasm.AssemblyException;
 import jasm.ExternalMnemonicSuffixArgument;
 import jasm.Label;
+import jasm.annotations.Inline;
 import jasm.gen.util.IndentWriter;
 import jasm.util.CollectionUtil;
 import jasm.util.HexUtil;
@@ -302,7 +302,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         printClassHeader(writer);
         final Set<String> importPackages = getImportPackages(templates());
         importPackages.add(Assembler.class.getPackage().getName()); // for the assembler's super class
-        importPackages.add(AssemblyException.class.getPackage().getName());
+        importPackages.add(Inline.class.getPackage().getName());
         printRawImports(writer, importPackages);
         writer.println();
         writer.println("public abstract class " + _rawAssemblerClassSimpleName + " extends " + endiannessSpecificAssemblerClass().getSimpleName() + " {");

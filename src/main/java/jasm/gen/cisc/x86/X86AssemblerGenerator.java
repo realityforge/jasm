@@ -345,6 +345,8 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     @Override
     protected final int printMethod(IndentWriter writer, Template_Type template) {
         final int startLineCount = writer.lineCount();
+        writer.print("@Inline");
+        writer.println();
         writer.print("public final void ");
         writer.print(template.assemblerMethodName() + "(");
         writer.print(formatParameterList("", template.parameters(), false));

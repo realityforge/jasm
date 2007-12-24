@@ -46,6 +46,8 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
     @Override
     protected final int printMethod(IndentWriter writer, Template_Type template) {
         final int startLineCount = writer.lineCount();
+        writer.print("@Inline");
+        writer.println();
         writer.print("public final void ");
         writer.print(template.assemblerMethodName() + "(");
         writer.print(formatParameterList("final ", template.parameters(), false));
