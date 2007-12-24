@@ -37,10 +37,14 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     extends AssemblerGenerator<Template_Type> {
 
     private final WordWidth _addressWidth;
+    private final boolean _promoteEnumerableParameters;
 
-    protected X86AssemblerGenerator(Assembly<Template_Type> assembly, WordWidth addressWidth) {
+    protected X86AssemblerGenerator(Assembly<Template_Type> assembly,
+                                    WordWidth addressWidth,
+                                    final boolean promoteEnumerableParameters) {
         super(assembly, true);
         _addressWidth = addressWidth;
+        _promoteEnumerableParameters = promoteEnumerableParameters;
     }
 
     @Override
@@ -89,7 +93,8 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     }
 
     protected final String asIdentifier(EnumerableArgument argument) {
-        return argument.getClass().getSimpleName() + "." + argument.name();
+        return argument.getClass().getSimpleName() + "." +
+            argument.name() + (_promoteEnumerableParameters ? ".value()" : "");
     }
 
     protected final <Argument_Type extends Enum<Argument_Type> & EnumerableArgument> void printModVariant(IndentWriter writer,
@@ -127,16 +132,20 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
         }
     }
 
+    protected final String subroutineEnumUse(X86Parameter parameter) {
+      return _promoteEnumerableParameters ? parameter.variableName() : parameter.valueString();
+    }
+
     private void printOpcode(IndentWriter writer, Template_Type template, String opcodeVarName,
                              final ParameterPlace parameterPlace32, ParameterPlace parameterPlace64) {
         String comment = "";
         String opcodeVariableName = opcodeVarName;
         for (X86Parameter parameter : template.parameters()) {
             if (parameter.place() == parameterPlace32) {
-                opcodeVariableName += " + " + parameter.valueString();
+                opcodeVariableName += " + " + subroutineEnumUse(parameter);
                 comment = " // " + parameterPlace32.name().toLowerCase();
             } else if (parameter.place() == parameterPlace64) {
-                opcodeVariableName += " + (" + parameter.valueString() + "& 7)";
+                opcodeVariableName += " + (" + subroutineEnumUse(parameter) + "& 7)";
                 comment = " // " + parameterPlace64.name().toLowerCase();
             }
         }
@@ -175,12 +184,12 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
             switch (parameter.place()) {
                 case MOD_REG:
                 case MOD_REG_REXR: {
-                    writer.println(MODRM_BYTE_VARIABLE_NAME + " |= (" + parameter.valueString() + " & 7) << " + X86Field.REG.shift() + "; // reg field");
+                    writer.println(MODRM_BYTE_VARIABLE_NAME + " |= (" + subroutineEnumUse(parameter) + " & 7) << " + X86Field.REG.shift() + "; // reg field");
                     break;
                 }
                 case MOD_RM:
                 case MOD_RM_REXB: {
-                    writer.println(MODRM_BYTE_VARIABLE_NAME + " |= (" + parameter.valueString() + " & 7) << " + X86Field.RM.shift() + "; // rm field");
+                    writer.println(MODRM_BYTE_VARIABLE_NAME + " |= (" + subroutineEnumUse(parameter) + " & 7) << " + X86Field.RM.shift() + "; // rm field");
                     break;
                 }
                 default:
@@ -204,14 +213,14 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
             switch (parameter.place()) {
                 case SIB_BASE:
                 case SIB_BASE_REXB:
-                    writer.println(SIB_BYTE_NAME + " |= (" + parameter.valueString() + " & 7) << " + X86Field.BASE.shift() + "; // base field");
+                    writer.println(SIB_BYTE_NAME + " |= (" + subroutineEnumUse(parameter) + " & 7) << " + X86Field.BASE.shift() + "; // base field");
                     break;
                 case SIB_INDEX:
                 case SIB_INDEX_REXX:
-                    writer.println(SIB_BYTE_NAME + " |= (" + parameter.valueString() + " & 7) << " + X86Field.INDEX.shift() + "; // index field");
+                    writer.println(SIB_BYTE_NAME + " |= (" + subroutineEnumUse(parameter) + " & 7) << " + X86Field.INDEX.shift() + "; // index field");
                     break;
                 case SIB_SCALE:
-                    writer.println(SIB_BYTE_NAME + " |= " + parameter.valueString() + " << " + X86Field.SCALE.shift() + "; // scale field");
+                    writer.println(SIB_BYTE_NAME + " |= " + subroutineEnumUse(parameter) + " << " + X86Field.SCALE.shift() + "; // scale field");
                     break;
                 default:
                     break;
@@ -303,7 +312,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
         if (template.modRMGroupOpcode() != null) {
             writer.print(", byte " + MODRM_GROUP_OPCODE_VARIABLE_NAME);
         }
-        writer.print(formatParameterList(", ", template.parameters(), false));
+        writer.print(formatParameterList(", ", template.parameters(), false, _promoteEnumerableParameters));
         writer.println(") {");
         writer.indent();
         writer.indent();
@@ -363,7 +372,11 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
             writer.print(", (byte) " + HexUtil.toHexLiteral(template.modRMGroupOpcode().byteValue()));
         }
         for (X86Parameter parameter : template.parameters()) {
+          if (_promoteEnumerableParameters && parameter instanceof X86EnumerableParameter) {
+            writer.print(", " + parameter.valueString());
+          } else {
             writer.print(", " + parameter.variableName());
+          }
         }
         writer.println(");");
         writer.outdent();

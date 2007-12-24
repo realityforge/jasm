@@ -122,7 +122,14 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
         writer.println("}");
     }
 
-    protected final String formatParameterList(String separator, List<? extends Parameter> parameters, boolean typesOnly) {
+  protected final String formatParameterList(String separator, List<? extends Parameter> parameters, boolean typesOnly) {
+    return formatParameterList(separator, parameters, typesOnly, false);
+  }
+
+    protected final String formatParameterList(String separator,
+                                               List<? extends Parameter> parameters,
+                                               boolean typesOnly,
+                                               boolean enumsAsInts) {
         String sep = separator;
         final StringBuilder sb = new StringBuilder();
         for (Parameter parameter : parameters) {
@@ -131,7 +138,12 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
                 sb.append(parameter.type().getEnclosingClass().getSimpleName());
                 sb.append(".");
             }
-            sb.append(parameter.type().getSimpleName());
+            if( enumsAsInts && parameter instanceof EnumerableParameter ) {
+              sb.append("int");
+            }
+            else {
+              sb.append(parameter.type().getSimpleName());
+            }
             if (!typesOnly) {
                 sb.append(" ");
                 sb.append(parameter.variableName());

@@ -30,7 +30,7 @@ import jasm.util.ProgramError;
 public final class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template> {
 
     public AMD64AssemblerGenerator() {
-        super(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);
+        super(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64, false);
     }
 
     private static final String REX_BYTE_NAME = "rex";
