@@ -1,0 +1,17 @@
+package jasm.gen.risc.ppc;
+
+import jasm.dis.Disassembler;
+import jasm.ppc.as.PPC64Assembler;
+import jasm.ppc.dis.PPC64Disassembler;
+
+public class PPC64PerformanceTester
+    extends PPCPerformanceTester {
+
+  protected Disassembler<?, ?> getDisassembler() {
+    return new PPC64Disassembler(0);
+  }
+
+  protected byte[] assemble() throws Exception {
+    return assemble(new PPC64Assembler());
+  }
+}

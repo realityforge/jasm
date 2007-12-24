@@ -55,7 +55,9 @@
            optimize="false">
       <include name="jasm/gen/**"/>
       <exclude name="jasm/gen/test/**"/>
+      <exclude name="jasm/gen/perf/**"/>
       <exclude name="jasm/gen/**/*AssemblyTester.java"/>
+      <exclude name="jasm/gen/**/*PerformanceTester.java"/>
     </javac>
   </target>
 
