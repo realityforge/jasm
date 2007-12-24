@@ -21,62 +21,60 @@ import java.util.Set;
  */
 public abstract class X86Parameter extends X86Operand implements Parameter {
 
-    private final ParameterPlace _place;
+  private final ParameterPlace _place;
+  private String _variableName = "p";
+  private ArgumentRange _argumentRange;
 
-    protected X86Parameter(X86Operand.Designation designation, ParameterPlace place) {
-        super(designation);
-        _place = place;
+  private Set<Argument> _excludedDisassemblerTestArguments = new HashSet<Argument>();
+  private Set<Argument> _excludedExternalTestArguments = new HashSet<Argument>();
+
+  protected X86Parameter(X86Operand.Designation designation, ParameterPlace place) {
+    super(designation);
+    _place = place;
+  }
+
+  public final ParameterPlace place() {
+    return _place;
+  }
+
+  public final void setVariableName(String variableName) {
+    _variableName = variableName;
+  }
+
+  public String variableName() {
+    return _variableName;
+  }
+
+  public final ArgumentRange argumentRange() {
+    return _argumentRange;
+  }
+
+  public final void setArgumentRange(ArgumentRange argumentRange) {
+    _argumentRange = argumentRange;
+  }
+
+  public final void excludeTestArguments(TestArgumentExclusion testArgumentExclusion) {
+    switch (testArgumentExclusion.component()) {
+      case DISASSEMBLER:
+        _excludedDisassemblerTestArguments = testArgumentExclusion.arguments();
+        break;
+      case EXTERNAL_ASSEMBLER:
+        _excludedExternalTestArguments = testArgumentExclusion.arguments();
+        break;
+      default:
+        ProgramError.unexpected();
     }
+  }
 
-    public final ParameterPlace place() {
-        return _place;
-    }
+  public final Set<Argument> excludedDisassemblerTestArguments() {
+    return _excludedDisassemblerTestArguments;
+  }
 
-    private String _variableName = "p";
+  public final Set<Argument> excludedExternalTestArguments() {
+    return _excludedExternalTestArguments;
+  }
 
-    public final void setVariableName(String variableName) {
-        _variableName = variableName;
-    }
-
-    public String variableName() {
-        return _variableName;
-    }
-
-    private ArgumentRange _argumentRange;
-
-    public final ArgumentRange argumentRange() {
-        return _argumentRange;
-    }
-
-    public final void setArgumentRange(ArgumentRange argumentRange) {
-        _argumentRange = argumentRange;
-    }
-
-    private Set<Argument> _excludedDisassemblerTestArguments = new HashSet<Argument>();
-    private Set<Argument> _excludedExternalTestArguments = new HashSet<Argument>();
-
-    public final void excludeTestArguments(TestArgumentExclusion testArgumentExclusion) {
-        switch (testArgumentExclusion.component()) {
-            case DISASSEMBLER:
-                _excludedDisassemblerTestArguments = testArgumentExclusion.arguments();
-                break;
-            case EXTERNAL_ASSEMBLER:
-                _excludedExternalTestArguments = testArgumentExclusion.arguments();
-                break;
-            default:
-                ProgramError.unexpected();
-        }
-    }
-
-    public final Set<Argument> excludedDisassemblerTestArguments() {
-        return _excludedDisassemblerTestArguments;
-    }
-
-    public final Set<Argument> excludedExternalTestArguments() {
-        return _excludedExternalTestArguments;
-    }
-
-    public final int compareTo(Parameter other) {
-        return type().getName().compareTo(other.type().getName());
-    }
+  public final int compareTo(Parameter other) {
+    return type().getName().compareTo(other.type().getName());
+  }
 }
