@@ -20,18 +20,23 @@ import java.util.LinkedList;
  */
 public abstract class Assembler {
 
+  private final LinkedList<LabelInstruction> _labelInstructions = new LinkedList<LabelInstruction>();
+  private final LinkedList<LabelOffsetInstruction> _spanDependentLabelInstructions = new LinkedList<LabelOffsetInstruction>();
+  private final LabelSet _boundLabels = new LabelSet();
+
+  private int _currentOffset; // address of current instruction
+  private ByteArrayOutputStream _stream = new ByteArrayOutputStream();
+  private boolean _selectingLabelInstructions = true;
+
   protected Assembler() {
   }
 
   public abstract InstructionSet instructionSet();
 
-  private int _currentOffset; // address of current instruction
 
   protected final int currentOffset() {
     return _currentOffset;
   }
-
-  private ByteArrayOutputStream _stream = new ByteArrayOutputStream();
 
   protected final void emitByte(byte byteValue) {
     _stream.write(byteValue);
@@ -44,13 +49,9 @@ public abstract class Assembler {
 
   protected abstract void emitLong(long longValue);
 
-  private boolean _selectingLabelInstructions = true;
-
   final boolean selectingLabelInstructions() {
     return _selectingLabelInstructions;
   }
-
-  private final LabelSet _boundLabels = new LabelSet();
 
   /**
    * Binds a given label to the address in the assembler's instruction stream of the start of the next instruction.
@@ -64,9 +65,6 @@ public abstract class Assembler {
     label.bind(currentOffset());
     _boundLabels.add(label);
   }
-
-  private final LinkedList<LabelInstruction> _labelInstructions = new LinkedList<LabelInstruction>();
-  private final LinkedList<LabelOffsetInstruction> _spanDependentLabelInstructions = new LinkedList<LabelOffsetInstruction>();
 
   /**
    * The size of label instruction is know past the initial generation of code. This may invalidate annotations to target code that
