@@ -1,0 +1,10 @@
+#summary Overview of using the project
+#labels Phase-Implementation
+
+= Using =
+
+Both the assemblers and disassemblers are easy to get started with if you are familiar with the associated assembly language. The sections below describe basic usage patterns but for those who are more comfortable with code you can look at the unit tests for [http://jasm.googlecode.com/svn/trunk/src/test/java/test/jasm/ia32/InternalTest.java ia32], [http://jasm.googlecode.com/svn/trunk/src/test/java/test/jasm/ppc/InternalTest.java ppc], [http://jasm.googlecode.com/svn/trunk/src/test/java/test/jasm/sparc/InternalTest.java sparc] and [http://jasm.googlecode.com/svn/trunk/src/test/java/test/jasm/amd64/InternalTest.java amd64] that demonstrate the assemblers and disassemblers or the [http://jasm.googlecode.com/svn/trunk/examples/ examples] directory in the distribution.
+
+== Using the Assemblers ==
+
+== Using the Disassemblers ==
