@@ -99,7 +99,7 @@
 
   <target name="compile-examples" depends="compile">
     <mkdir dir="${output.example.classes}"/>
-    <javac srcdir="example/answer/java"
+    <javac srcdir="examples/answer/java"
            destdir="${output.example.classes}"
            classpath="${output.main.classes}"
            debug="true"
