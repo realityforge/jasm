@@ -129,7 +129,7 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
     }
 
     @Override
-    public final List<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException {
+    protected final List<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException {
         final ArrayList<DisassembledInstruction_Type> result = new ArrayList<DisassembledInstruction_Type>();
         try {
             while (true) {

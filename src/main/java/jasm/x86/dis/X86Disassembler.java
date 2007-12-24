@@ -228,7 +228,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
 
     protected abstract Map<X86InstructionHeader, LinkedList<Template_Type>> headerToTemplates();
 
-  public final DisassembledInstruction_Type scanInstruction(BufferedInputStream stream, X86InstructionHeader header)
+  private final DisassembledInstruction_Type scanInstruction(BufferedInputStream stream, X86InstructionHeader header)
       throws IOException, AssemblyException {
     boolean isFloatingPointEscape = false;
     if (X86Opcode.isFloatingPointEscape(header._opcode1)) {
@@ -329,7 +329,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
     }
 
     @Override
-    public final List<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException {
+    protected final List<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException {
         final ArrayList<DisassembledInstruction_Type> result = new ArrayList<DisassembledInstruction_Type>();
         while (true) {
             stream.mark(MORE_THAN_ANY_INSTRUCTION_LENGTH);

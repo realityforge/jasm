@@ -81,7 +81,7 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
    * The {@link #scanOneInstruction} method can be used to obtain all the disassembled forms
    * for each instruction in an instruction stream.
    */
-  public abstract List<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException;
+  protected abstract List<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException;
 
   private int findTargetInstructionIndex(int offset, List<DisassembledInstruction_Type> disassembledInstructions) {
     if (offset >= 0 && offset <= disassembledInstructions.get(disassembledInstructions.size() - 1).startOffset()) {
