@@ -1,0 +1,31 @@
+-*-outline-*-
+
+History of significant changes
+
+* jasm, Version 1.0 Release Notes (Future)
+
+NOTE: This is the release notes for the first version of the project. As such they
+are relatively sparse. The main changes involved refactoring the code base to remove
+use of the custom collection framework and other non-essential or unused code. The
+refactoring also focused on simplifying the codebase where possible to reduce the
+cost of future maintanence. The aim was not to introduce major functional changes in
+this release.
+
+For full details of the changes: svn log -r1:XXXXXXX
+
+** Enhancement
+    * [ 1] - Add Ant script to build and test project. See http://code.google.com/p/jasm/wiki/Building
+    * [ 8] - AssemblerTesters are now driven by a command line application rather than a JUnit
+             test. See http://code.google.com/p/jasm/wiki/Testing for further details.
+    * [16] - Guard constraint checking in assemblers by Config.ENABLE_CONSTRAINT_CHECKS to make it
+             easy to disable in performance sensitive scenarios.
+    * [18] - Mark methods in the ia32 and amd64 assemblers with @Inline if they SHOULD be inlined
+    * [19] - Pass symbolic operands by value rather than by reference within the ia32 assembler
+
+** Task
+    * [03] - IDE specific artifacts have been removed
+    * [04] - Base and Assembler modules merged into a single module and single source tree
+    * [05] - Repackage source code into package hierarchy jasm. Assemblers are now generated into
+             jasm.<isa>.as, diassemblers live in jasm.<isa>.dis
+    * [13] - Add a basic example in examples/ directory
+    * [14] - Add basic documentation to wiki at http://code.google.com/p/jasm/wiki/Overview
