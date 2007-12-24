@@ -16,23 +16,22 @@ import java.util.List;
 
 public final class PPC64DisassembledInstruction extends PPCDisassembledInstruction implements Address64Instruction {
 
-    private final Address64Instruction.Mixin _addressInstruction;
+  private final Address64Instruction.Mixin _addressInstruction;
 
-    PPC64DisassembledInstruction(long startAddress, int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {
-        super(offset, bytes, template, arguments);
-        _addressInstruction = new Address64Instruction.Mixin(this, startAddress);
-    }
+  PPC64DisassembledInstruction(long startAddress, int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {
+    super(offset, bytes, template, arguments);
+    _addressInstruction = new Address64Instruction.Mixin(this, startAddress);
+  }
 
-    public final long address() {
-        return _addressInstruction.address();
-    }
+  public final long address() {
+    return _addressInstruction.address();
+  }
 
-    public final String addressString() {
-        return _addressInstruction.addressString();
-    }
+  public final String addressString() {
+    return _addressInstruction.addressString();
+  }
 
-    public final int addressToOffset(ImmediateArgument argument) {
-        return _addressInstruction.addressToOffset(argument);
-    }
-
+  public final int addressToOffset(ImmediateArgument argument) {
+    return _addressInstruction.addressToOffset(argument);
+  }
 }

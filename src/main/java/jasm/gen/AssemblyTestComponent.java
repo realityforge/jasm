@@ -13,14 +13,14 @@ package jasm.gen;
  */
 public enum AssemblyTestComponent {
 
-    /**
-     * Tests that the output of the assembler can be disassembled.
-     */
-    DISASSEMBLER,
+  /**
+   * Tests that the output of the assembler can be disassembled.
+   */
+  DISASSEMBLER,
 
-    /**
-     * Tests that the output of the assembler matches that of the platform specific
-     * external assembler (e.g. the GNU 'gas' assembler).
-     */
-    EXTERNAL_ASSEMBLER
+  /**
+   * Tests that the output of the assembler matches that of the platform specific
+   * external assembler (e.g. the GNU 'gas' assembler).
+   */
+  EXTERNAL_ASSEMBLER
 }

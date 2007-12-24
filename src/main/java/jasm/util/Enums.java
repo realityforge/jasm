@@ -21,7 +21,7 @@ public final class Enums {
    * but with Set replaced by Sequence, using "natural" ordering.
    * Each sequence representing a subset is ordered according to ascending enum ordinals.
    * The sequence of sequences is ordered as if sorting an array of integers derived from enum bit sets.
-   *
+   * <p/>
    * For example, "powerSequence(Enum_Type.class).get(11)",
    * i.e. querying a power sequence with index 11 (having bits 1, 2 and 8 set)
    * will return the sequence containing the enum values with the ordinals 1, 2 and 8, in that order.
@@ -39,14 +39,13 @@ public final class Enums {
           i++;
         }
       }
-      results[subSetIndex] = StaticLoophole.cast( Arrays.asList(subSet) );
+      results[subSetIndex] = StaticLoophole.cast(Arrays.asList(subSet));
     }
     return Arrays.asList(results);
   }
 
   /**
    * @return the index into the "power sequence" of the enum set's Enum type that corresponds to the given enum set
-   *
    * @see #powerSequence(Class)
    */
   public static <Enum_Type extends Enum<Enum_Type>> int powerSequenceIndex(EnumSet<Enum_Type> enumSet) {

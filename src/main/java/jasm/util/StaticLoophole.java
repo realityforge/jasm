@@ -12,7 +12,6 @@ package jasm.util;
  * Static type loophole that prevents "unchecked" compiler warnings but that does not circumvent dynamic type checks.
  */
 public final class StaticLoophole {
-
   @SuppressWarnings("unchecked")
   public static <T> T cast(Class<T> type, Object object) {
     return (T) object;

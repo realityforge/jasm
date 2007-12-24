@@ -18,21 +18,20 @@ import java.util.List;
 
 public final class SPARC64Disassembler extends SPARCDisassembler<SPARC64DisassembledInstruction> {
 
-    private final long _startAddress;
+  private final long _startAddress;
 
-    public SPARC64Disassembler(long startAddress) {
-        super(SPARCAssembly.ASSEMBLY, WordWidth.BITS_64);
-        _startAddress = startAddress;
-    }
+  public SPARC64Disassembler(long startAddress) {
+    super(SPARCAssembly.ASSEMBLY, WordWidth.BITS_64);
+    _startAddress = startAddress;
+  }
 
-    @Override
-    protected final SPARC64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, SPARCTemplate template, List<Argument> arguments) {
-        return new SPARC64DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
-    }
+  @Override
+  protected final SPARC64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, SPARCTemplate template, List<Argument> arguments) {
+    return new SPARC64DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
+  }
 
-    @Override
-    protected final Assembler createAssembler(int offset) {
-        return new SPARC64Assembler(_startAddress + offset);
-    }
-
+  @Override
+  protected final Assembler createAssembler(int offset) {
+    return new SPARC64Assembler(_startAddress + offset);
+  }
 }

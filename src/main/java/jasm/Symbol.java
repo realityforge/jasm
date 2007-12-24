@@ -13,14 +13,13 @@ package jasm;
  */
 public interface Symbol {
 
-    /**
-     * @return the name of the symbol
-     */
-    String name();
+  /**
+   * @return the name of the symbol
+   */
+  String name();
 
-    /**
-     * @return the value of the symbol
-     */
-    int value();
-
+  /**
+   * @return the value of the symbol
+   */
+  int value();
 }

@@ -15,10 +15,9 @@ import jasm.gen.risc.ppc.PPCAssembly;
 import jasm.gen.risc.ppc.PPCTemplate;
 
 public abstract class PPCDisassembler<DisassembledInstruction_Type extends DisassembledInstruction<PPCTemplate>>
-        extends RiscDisassembler<PPCTemplate, DisassembledInstruction_Type> {
+    extends RiscDisassembler<PPCTemplate, DisassembledInstruction_Type> {
 
-    protected PPCDisassembler(PPCAssembly assembly, WordWidth addressWidth) {
-        super(assembly, addressWidth);
-    }
-
+  protected PPCDisassembler(PPCAssembly assembly, WordWidth addressWidth) {
+    super(assembly, addressWidth);
+  }
 }

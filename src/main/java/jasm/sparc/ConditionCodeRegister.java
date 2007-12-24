@@ -8,7 +8,5 @@
  */
 package jasm.sparc;
 
-
 public interface ConditionCodeRegister {
-
 }

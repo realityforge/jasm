@@ -15,10 +15,9 @@ import jasm.gen.risc.sparc.SPARCAssembly;
 import jasm.gen.risc.sparc.SPARCTemplate;
 
 public abstract class SPARCDisassembler<DisassembledInstruction_Type extends DisassembledInstruction<SPARCTemplate>>
-        extends RiscDisassembler<SPARCTemplate, DisassembledInstruction_Type> {
+    extends RiscDisassembler<SPARCTemplate, DisassembledInstruction_Type> {
 
-    protected SPARCDisassembler(SPARCAssembly assembly, WordWidth addressWidth) {
-        super(assembly, addressWidth);
-    }
-
+  protected SPARCDisassembler(SPARCAssembly assembly, WordWidth addressWidth) {
+    super(assembly, addressWidth);
+  }
 }

@@ -16,34 +16,36 @@ import jasm.SymbolSet;
  * the conditional test to be performed.
  */
 public final class FBfcc extends NameSuffixSymbolicArgument implements Predicate<FCCOperand, FBfcc> {
-    private FBfcc _negation;
+  private FBfcc _negation;
 
-    private FBfcc(int value) {
-        super(value);
-    }
-    private FBfcc(int value, FBfcc negation) {
-        this(value);
-        _negation = negation;
-        negation._negation = this;
-    }
+  private FBfcc(int value) {
+    super(value);
+  }
 
-    public static final FBfcc A = new FBfcc(8);
-    public static final FBfcc N = new FBfcc(0, A);
-    public static final FBfcc U = new FBfcc(7);
-    public static final FBfcc G = new FBfcc(6);
-    public static final FBfcc UG = new FBfcc(5);
-    public static final FBfcc L = new FBfcc(4);
-    public static final FBfcc UL = new FBfcc(3);
-    public static final FBfcc LG = new FBfcc(2);
-    public static final FBfcc NE = new FBfcc(1);
-    public static final FBfcc E = new FBfcc(9, NE);
-    public static final FBfcc UE = new FBfcc(10, LG);
-    public static final FBfcc GE = new FBfcc(11, UL);
-    public static final FBfcc UGE = new FBfcc(12, L);
-    public static final FBfcc LE = new FBfcc(13, UG);
-    public static final FBfcc ULE = new FBfcc(14, G);
-    public static final FBfcc O = new FBfcc(15, U);
+  private FBfcc(int value, FBfcc negation) {
+    this(value);
+    _negation = negation;
+    negation._negation = this;
+  }
 
-    public static final SymbolSet<FBfcc> SYMBOLS = SymbolSet.fromStaticFields(FBfcc.class);
-    public FBfcc negate() { return _negation; }
+  public static final FBfcc A = new FBfcc(8);
+  public static final FBfcc N = new FBfcc(0, A);
+  public static final FBfcc U = new FBfcc(7);
+  public static final FBfcc G = new FBfcc(6);
+  public static final FBfcc UG = new FBfcc(5);
+  public static final FBfcc L = new FBfcc(4);
+  public static final FBfcc UL = new FBfcc(3);
+  public static final FBfcc LG = new FBfcc(2);
+  public static final FBfcc NE = new FBfcc(1);
+  public static final FBfcc E = new FBfcc(9, NE);
+  public static final FBfcc UE = new FBfcc(10, LG);
+  public static final FBfcc GE = new FBfcc(11, UL);
+  public static final FBfcc UGE = new FBfcc(12, L);
+  public static final FBfcc LE = new FBfcc(13, UG);
+  public static final FBfcc ULE = new FBfcc(14, G);
+  public static final FBfcc O = new FBfcc(15, U);
+
+  public static final SymbolSet<FBfcc> SYMBOLS = SymbolSet.fromStaticFields(FBfcc.class);
+
+  public FBfcc negate() { return _negation; }
 }

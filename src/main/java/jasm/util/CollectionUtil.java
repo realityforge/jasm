@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Set;
 
 public final class CollectionUtil {
-
   /**
    * Returns the index in {@code list} of the first occurrence identical to {@code value}, or -1 if
    * {@code list} does not contain {@code value}. More formally, returns the lowest index

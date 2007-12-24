@@ -13,14 +13,14 @@ package jasm.ppc;
  */
 public final class Zero extends ZeroOrRegister {
 
-    public static final Zero ZERO = new Zero();
+  public static final Zero ZERO = new Zero();
 
-    private Zero() {
-        super("0", 0);
-    }
+  private Zero() {
+    super("0", 0);
+  }
 
-    @Override
-    public String externalValue() {
-        return "0";
-    }
+  @Override
+  public String externalValue() {
+    return "0";
+  }
 }

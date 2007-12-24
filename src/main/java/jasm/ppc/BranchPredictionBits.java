@@ -17,24 +17,24 @@ import jasm.SymbolSet;
  */
 public final class BranchPredictionBits extends OptionSuffixSymbolicArgument {
 
-    private BranchPredictionBits(int value, String externalMnemonicSuffix) {
-        super(value, externalMnemonicSuffix);
-    }
+  private BranchPredictionBits(int value, String externalMnemonicSuffix) {
+    super(value, externalMnemonicSuffix);
+  }
 
-    /**
-     * No hint is given.
-     */
-    public static final BranchPredictionBits NONE = new BranchPredictionBits(0, "");
+  /**
+   * No hint is given.
+   */
+  public static final BranchPredictionBits NONE = new BranchPredictionBits(0, "");
 
-    /**
-     * The branch is very likely to be taken.
-     */
-    public static final BranchPredictionBits PT = new BranchPredictionBits(3, "++");
+  /**
+   * The branch is very likely to be taken.
+   */
+  public static final BranchPredictionBits PT = new BranchPredictionBits(3, "++");
 
-    /**
-     * The branch is very likely <b>not</b> to be taken.
-     */
-    public static final BranchPredictionBits PN = new BranchPredictionBits(2, "--");
+  /**
+   * The branch is very likely <b>not</b> to be taken.
+   */
+  public static final BranchPredictionBits PN = new BranchPredictionBits(2, "--");
 
-    public static final SymbolSet<BranchPredictionBits> SYMBOLS = SymbolSet.fromStaticFields(BranchPredictionBits.class);
+  public static final SymbolSet<BranchPredictionBits> SYMBOLS = SymbolSet.fromStaticFields(BranchPredictionBits.class);
 }

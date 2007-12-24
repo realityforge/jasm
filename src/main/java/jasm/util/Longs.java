@@ -12,19 +12,15 @@ package jasm.util;
  * Additonal methods that one might want in java.lang.Long.
  */
 public final class Longs {
-
-    private Longs() {
-    }
-
   public static int numberOfEffectiveSignedBits(long signed) {
-        if (signed >= 0) {
-            return 65 - Long.numberOfLeadingZeros(signed);
-        }
-        return 65 - Long.numberOfLeadingZeros(~signed);
+    if (signed >= 0) {
+      return 65 - Long.numberOfLeadingZeros(signed);
     }
+    return 65 - Long.numberOfLeadingZeros(~signed);
+  }
 
-    public static int numberOfEffectiveUnsignedBits(long unsigned) {
-        return 64 - Long.numberOfLeadingZeros(unsigned);
-    }
+  public static int numberOfEffectiveUnsignedBits(long unsigned) {
+    return 64 - Long.numberOfLeadingZeros(unsigned);
+  }
 
 }

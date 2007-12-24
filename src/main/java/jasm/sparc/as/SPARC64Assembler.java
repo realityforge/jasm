@@ -17,29 +17,28 @@ import jasm.Label;
  */
 public final class SPARC64Assembler extends SPARCAssembler implements Assembler64 {
 
-    private long _startAddress; // address of first instruction
+  private long _startAddress; // address of first instruction
 
-    public SPARC64Assembler() {
-    }
+  public SPARC64Assembler() {
+  }
 
-    public SPARC64Assembler(long startAddress) {
-        _startAddress = startAddress;
-    }
+  public SPARC64Assembler(long startAddress) {
+    _startAddress = startAddress;
+  }
 
-    public final long startAddress() {
-        return _startAddress;
-    }
+  public final long startAddress() {
+    return _startAddress;
+  }
 
-    public final void setStartAddress(long address) {
-        _startAddress = address;
-    }
+  public final void setStartAddress(long address) {
+    _startAddress = address;
+  }
 
-    public final void fixLabel(Label label, long address) {
-        fixLabel64(label, address);
-    }
+  public final void fixLabel(Label label, long address) {
+    fixLabel64(label, address);
+  }
 
-    public final long address(Label label) throws AssemblyException {
-        return address64(label);
-    }
-
+  public final long address(Label label) throws AssemblyException {
+    return address64(label);
+  }
 }

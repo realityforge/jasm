@@ -13,15 +13,14 @@ import jasm.WordWidth;
 
 public abstract class ImmediateArgument implements Argument {
 
-    public abstract WordWidth width();
+  public abstract WordWidth width();
 
-    public abstract String signedExternalValue();
+  public abstract String signedExternalValue();
 
-    public abstract Object boxedJavaValue();
+  public abstract Object boxedJavaValue();
 
-    @Override
-    public final String toString() {
-        return "<" + getClass().getSimpleName() + ": " + externalValue() + ">";
-    }
-
+  @Override
+  public final String toString() {
+    return "<" + getClass().getSimpleName() + ": " + externalValue() + ">";
+  }
 }

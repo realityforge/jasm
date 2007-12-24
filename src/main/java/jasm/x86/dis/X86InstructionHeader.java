@@ -36,11 +36,11 @@ public final class X86InstructionHeader {
   @Override
   public String toString() {
     return "X86InstructionHeader[AddressPrefix=" + _hasAddressSizePrefix +
-           ",rexPrefix=" + _rexPrefix +
-           ",instructionSelectionPrefix=" + _instructionSelectionPrefix +
-           ",opcode1=" + _opcode1 +
-           ",opcode2=" + _opcode2 +
-           "]";
+        ",rexPrefix=" + _rexPrefix +
+        ",instructionSelectionPrefix=" + _instructionSelectionPrefix +
+        ",opcode1=" + _opcode1 +
+        ",opcode2=" + _opcode2 +
+        "]";
   }
 
   private X86InstructionHeader(WordWidth addressWidth, X86Template template) {
@@ -59,9 +59,9 @@ public final class X86InstructionHeader {
     if (other instanceof X86InstructionHeader) {
       final X86InstructionHeader header = (X86InstructionHeader) other;
       return _hasAddressSizePrefix == header._hasAddressSizePrefix &&
-             _instructionSelectionPrefix == header._instructionSelectionPrefix &&
-             _opcode1 == header._opcode1 &&
-             _opcode2 == header._opcode2;
+          _instructionSelectionPrefix == header._instructionSelectionPrefix &&
+          _opcode1 == header._opcode1 &&
+          _opcode2 == header._opcode2;
     }
     return false;
   }

@@ -14,38 +14,37 @@ import jasm.x86.GeneralRegister;
 
 public enum IA32GeneralRegister16 implements GeneralRegister {
 
-    // Note: keep the order such that 'value()' can rely on ordinals:
+  // Note: keep the order such that 'value()' can rely on ordinals:
 
-    AX, CX, DX, BX, SP, BP, SI, DI;
+  AX, CX, DX, BX, SP, BP, SI, DI;
 
-    public static IA32GeneralRegister16 from(GeneralRegister generalRegister) {
-        return values()[generalRegister.id()];
-    }
+  public static IA32GeneralRegister16 from(GeneralRegister generalRegister) {
+    return values()[generalRegister.id()];
+  }
 
-    public WordWidth width() {
-        return WordWidth.BITS_16;
-    }
+  public WordWidth width() {
+    return WordWidth.BITS_16;
+  }
 
-    public int value() {
-        return ordinal();
-    }
+  public int value() {
+    return ordinal();
+  }
 
-    public int id() {
-        return ordinal();
-    }
+  public int id() {
+    return ordinal();
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return "%" + name().toLowerCase();
-    }
+  public String externalValue() {
+    return "%" + name().toLowerCase();
+  }
 
-    public String disassembledValue() {
-        return name().toLowerCase();
-    }
+  public String disassembledValue() {
+    return name().toLowerCase();
+  }
 
   public static final SymbolSet<IA32GeneralRegister16> SYMBOLS = SymbolSet.fromEnum(IA32GeneralRegister16.class);
-
 }

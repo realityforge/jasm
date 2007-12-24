@@ -8,11 +8,9 @@
  */
 package jasm;
 
-
 public interface AssemblyInstruction {
 
-    int startOffset();
+  int startOffset();
 
-    int endOffset();
-
+  int endOffset();
 }

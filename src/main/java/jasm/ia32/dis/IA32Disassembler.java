@@ -26,34 +26,33 @@ import java.util.Map;
  */
 public final class IA32Disassembler extends X86Disassembler<IA32Template, IA32DisassembledInstruction> {
 
-    private final int _startAddress;
+  private final int _startAddress;
 
-    public IA32Disassembler(int startAddress) {
-        super(IA32Assembly.ASSEMBLY, WordWidth.BITS_32);
-        _startAddress = startAddress;
-    }
+  public IA32Disassembler(int startAddress) {
+    super(IA32Assembly.ASSEMBLY, WordWidth.BITS_32);
+    _startAddress = startAddress;
+  }
 
-    @Override
-    protected final boolean isRexPrefix(HexByte opcode) {
-        return false;
-    }
+  @Override
+  protected final boolean isRexPrefix(HexByte opcode) {
+    return false;
+  }
 
-    @Override
-    protected final IA32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, IA32Template template, List<Argument> arguments) {
-        return new IA32DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
-    }
+  @Override
+  protected final IA32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, IA32Template template, List<Argument> arguments) {
+    return new IA32DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
+  }
 
-    @Override
-    protected final Assembler createAssembler(int offset) {
-        return new IA32Assembler(_startAddress + offset);
-    }
+  @Override
+  protected final Assembler createAssembler(int offset) {
+    return new IA32Assembler(_startAddress + offset);
+  }
 
-    private static Map<X86InstructionHeader, LinkedList<IA32Template>> _headerToTemplates =
-        X86InstructionHeader.createMapping(IA32Assembly.ASSEMBLY, WordWidth.BITS_32);
+  private static Map<X86InstructionHeader, LinkedList<IA32Template>> _headerToTemplates =
+      X86InstructionHeader.createMapping(IA32Assembly.ASSEMBLY, WordWidth.BITS_32);
 
-    @Override
-    protected final Map<X86InstructionHeader, LinkedList<IA32Template>> headerToTemplates() {
-        return _headerToTemplates;
-    }
-
+  @Override
+  protected final Map<X86InstructionHeader, LinkedList<IA32Template>> headerToTemplates() {
+    return _headerToTemplates;
+  }
 }

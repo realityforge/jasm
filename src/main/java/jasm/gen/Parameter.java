@@ -16,23 +16,23 @@ import java.util.Set;
  */
 public interface Parameter extends Operand, Comparable<Parameter> {
 
-    /**
-     * @return source code variable name
-     */
-    String variableName();
+  /**
+   * @return source code variable name
+   */
+  String variableName();
 
-    /**
-     * @return source code for raw int value access
-     */
-    String valueString();
+  /**
+   * @return source code for raw int value access
+   */
+  String valueString();
 
-    Iterable<? extends Argument> getLegalTestArguments();
+  Iterable<? extends Argument> getLegalTestArguments();
 
-    Iterable<? extends Argument> getIllegalTestArguments();
+  Iterable<? extends Argument> getIllegalTestArguments();
 
-    ArgumentRange argumentRange();
+  ArgumentRange argumentRange();
 
-    Set<Argument> excludedDisassemblerTestArguments();
+  Set<Argument> excludedDisassemblerTestArguments();
 
-    Set<Argument> excludedExternalTestArguments();
+  Set<Argument> excludedExternalTestArguments();
 }

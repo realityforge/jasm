@@ -8,9 +8,9 @@
  */
 package jasm;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Arrays;
 
 public enum InstructionSet {
   AMD64(Category.CISC, Endianness.LITTLE, RelativeAddressing.FROM_INSTRUCTION_END, WordWidth.BITS_64),
@@ -18,9 +18,13 @@ public enum InstructionSet {
   PPC(Category.RISC, Endianness.BIG, RelativeAddressing.FROM_INSTRUCTION_START, WordWidth.BITS_32, WordWidth.BITS_64),
   SPARC(Category.RISC, Endianness.BIG, RelativeAddressing.FROM_INSTRUCTION_START, WordWidth.BITS_32, WordWidth.BITS_64);
 
-  public enum Category { CISC, RISC }
+  public enum Category {
+    CISC, RISC
+  }
 
-  public enum RelativeAddressing { FROM_INSTRUCTION_START, FROM_INSTRUCTION_END }
+  public enum RelativeAddressing {
+    FROM_INSTRUCTION_START, FROM_INSTRUCTION_END
+  }
 
   private final Category _category;
   private final Endianness _endianness;

@@ -18,26 +18,25 @@ import java.util.List;
 
 public abstract class SPARCDisassembledInstruction extends RiscDisassembledInstruction<SPARCTemplate> {
 
-    SPARCDisassembledInstruction(int offset, byte[] bytes, SPARCTemplate template, List<Argument> arguments) {
-        super(offset, bytes, template, arguments);
-    }
+  SPARCDisassembledInstruction(int offset, byte[] bytes, SPARCTemplate template, List<Argument> arguments) {
+    super(offset, bytes, template, arguments);
+  }
 
-    @Override
-    public final String externalName() {
-        final SPARCExternalInstruction instruction = new SPARCExternalInstruction(template(), arguments(), startOffset(), null, null);
-        return instruction.name();
-    }
+  @Override
+  public final String externalName() {
+    final SPARCExternalInstruction instruction = new SPARCExternalInstruction(template(), arguments(), startOffset(), null, null);
+    return instruction.name();
+  }
 
-    @Override
-    public final String operandsToString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
-        final SPARCExternalInstruction instruction = new SPARCExternalInstruction(template(), arguments(), startOffset(), labels, globalLabelMapper);
-        return instruction.operands();
-    }
+  @Override
+  public final String operandsToString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
+    final SPARCExternalInstruction instruction = new SPARCExternalInstruction(template(), arguments(), startOffset(), labels, globalLabelMapper);
+    return instruction.operands();
+  }
 
-    @Override
-    public final String toString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
-        final SPARCExternalInstruction instruction = new SPARCExternalInstruction(template(), arguments(), startOffset(), labels, globalLabelMapper);
-        return instruction.toString();
-    }
-
+  @Override
+  public final String toString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
+    final SPARCExternalInstruction instruction = new SPARCExternalInstruction(template(), arguments(), startOffset(), labels, globalLabelMapper);
+    return instruction.toString();
+  }
 }

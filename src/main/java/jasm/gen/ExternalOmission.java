@@ -14,14 +14,13 @@ package jasm.gen;
  */
 public final class ExternalOmission {
 
-    private final Object _specification;
+  private final Object _specification;
 
-    public ExternalOmission(Object specification) {
-        _specification = specification;
-    }
+  public ExternalOmission(Object specification) {
+    _specification = specification;
+  }
 
-    public final Object wrappedSpecification() {
-        return _specification;
-    }
-
+  public final Object wrappedSpecification() {
+    return _specification;
+  }
 }

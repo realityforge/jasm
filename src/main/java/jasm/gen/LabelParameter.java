@@ -15,49 +15,47 @@ import java.util.Set;
 
 public final class LabelParameter implements Parameter {
 
-    public LabelParameter() {
-    }
+  public LabelParameter() {
+  }
 
-    public final Class type() {
-        return Label.class;
-    }
+  public final Class type() {
+    return Label.class;
+  }
 
-    public final String variableName() {
-        return "label";
-    }
+  public final String variableName() {
+    return "label";
+  }
 
-    public final String valueString() {
-        return variableName();
-    }
+  public final String valueString() {
+    return variableName();
+  }
 
-    public final ArgumentRange argumentRange() {
-        return null;
-    }
+  public final ArgumentRange argumentRange() {
+    return null;
+  }
 
+  public final Iterable<Label> getLegalTestArguments() {
+    return Collections.emptySet();
+  }
 
-    public final Iterable<Label> getLegalTestArguments() {
-      return Collections.emptySet();
-    }
+  public final Iterable<? extends Argument> getIllegalTestArguments() {
+    return Collections.emptySet();
+  }
 
-    public final Iterable<? extends Argument> getIllegalTestArguments() {
-      return Collections.emptySet();
-    }
+  public final Set<Argument> excludedDisassemblerTestArguments() {
+    return Collections.emptySet();
+  }
 
-    public final Set<Argument> excludedDisassemblerTestArguments() {
-      return Collections.emptySet();
-    }
+  public final Set<Argument> excludedExternalTestArguments() {
+    return Collections.emptySet();
+  }
 
-    public final Set<Argument> excludedExternalTestArguments() {
-      return Collections.emptySet();
-    }
+  public final int compareTo(Parameter other) {
+    return type().getName().compareTo(other.type().getName());
+  }
 
-    public final int compareTo(Parameter other) {
-        return type().getName().compareTo(other.type().getName());
-    }
-
-    @Override
-    public final String toString() {
-        return "<LabelParameter>";
-    }
-
+  @Override
+  public final String toString() {
+    return "<LabelParameter>";
+  }
 }

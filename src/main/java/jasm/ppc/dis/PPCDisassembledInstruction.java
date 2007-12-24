@@ -18,26 +18,25 @@ import java.util.List;
 
 public abstract class PPCDisassembledInstruction extends RiscDisassembledInstruction<PPCTemplate> {
 
-    PPCDisassembledInstruction(int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {
-        super(offset, bytes, template, arguments);
-    }
+  PPCDisassembledInstruction(int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {
+    super(offset, bytes, template, arguments);
+  }
 
-    @Override
-    public final String externalName() {
-        final PPCExternalInstruction instruction = new PPCExternalInstruction(template(), arguments(), startOffset(), null, null);
-        return instruction.name();
-    }
+  @Override
+  public final String externalName() {
+    final PPCExternalInstruction instruction = new PPCExternalInstruction(template(), arguments(), startOffset(), null, null);
+    return instruction.name();
+  }
 
-    @Override
-    public final String operandsToString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
-        final PPCExternalInstruction instruction = new PPCExternalInstruction(template(), arguments(), startOffset(), labels, globalLabelMapper);
-        return instruction.operands();
-    }
+  @Override
+  public final String operandsToString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
+    final PPCExternalInstruction instruction = new PPCExternalInstruction(template(), arguments(), startOffset(), labels, globalLabelMapper);
+    return instruction.operands();
+  }
 
-    @Override
-    public final String toString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
-        final PPCExternalInstruction instruction = new PPCExternalInstruction(template(), arguments(), startOffset(), labels, globalLabelMapper);
-        return instruction.toString();
-    }
-
+  @Override
+  public final String toString(List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
+    final PPCExternalInstruction instruction = new PPCExternalInstruction(template(), arguments(), startOffset(), labels, globalLabelMapper);
+    return instruction.toString();
+  }
 }

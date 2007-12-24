@@ -18,20 +18,19 @@ import jasm.SymbolSet;
  */
 public final class AnnulBit extends OptionSuffixSymbolicArgument {
 
-    private AnnulBit(int value, String externalMnemonicSuffix) {
-        super(value, externalMnemonicSuffix);
-    }
+  private AnnulBit(int value, String externalMnemonicSuffix) {
+    super(value, externalMnemonicSuffix);
+  }
 
-    /**
-     * The annul bit is not set.
-     */
-    public static final AnnulBit NO_A = new AnnulBit(0, "");
+  /**
+   * The annul bit is not set.
+   */
+  public static final AnnulBit NO_A = new AnnulBit(0, "");
 
-    /**
-     * The annul bit is set.
-     */
-    public static final AnnulBit A = new AnnulBit(1, ",a");
+  /**
+   * The annul bit is set.
+   */
+  public static final AnnulBit A = new AnnulBit(1, ",a");
 
-    public static final SymbolSet<AnnulBit> SYMBOLS = SymbolSet.fromStaticFields(AnnulBit.class);
-
+  public static final SymbolSet<AnnulBit> SYMBOLS = SymbolSet.fromStaticFields(AnnulBit.class);
 }

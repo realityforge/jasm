@@ -18,21 +18,20 @@ import java.util.List;
 
 public final class PPC64Disassembler extends PPCDisassembler<PPC64DisassembledInstruction> {
 
-    private final long _startAddress;
+  private final long _startAddress;
 
-    public PPC64Disassembler(long startAddress) {
-        super(PPCAssembly.ASSEMBLY, WordWidth.BITS_64);
-        _startAddress = startAddress;
-    }
+  public PPC64Disassembler(long startAddress) {
+    super(PPCAssembly.ASSEMBLY, WordWidth.BITS_64);
+    _startAddress = startAddress;
+  }
 
-    @Override
-    protected final PPC64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {
-        return new PPC64DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
-    }
+  @Override
+  protected final PPC64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, PPCTemplate template, List<Argument> arguments) {
+    return new PPC64DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
+  }
 
-    @Override
-    protected final Assembler createAssembler(int offset) {
-        return new PPC64Assembler(_startAddress + offset);
-    }
-
+  @Override
+  protected final Assembler createAssembler(int offset) {
+    return new PPC64Assembler(_startAddress + offset);
+  }
 }

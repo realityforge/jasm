@@ -8,11 +8,10 @@
  */
 package jasm;
 
-
 /**
  * An argument whose {@link Argument#externalValue() value} is manifest as a suffix of the mnemonic
  * in external assembler syntax.
  */
 public interface ExternalMnemonicSuffixArgument extends SymbolicArgument {
-    boolean isOptional();
+  boolean isOptional();
 }

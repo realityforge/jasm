@@ -27,33 +27,32 @@ import java.util.Map;
  */
 public final class AMD64Disassembler extends X86Disassembler<AMD64Template, AMD64DisassembledInstruction> {
 
-    private final long _startAddress;
+  private final long _startAddress;
 
-    public AMD64Disassembler(long startAddress) {
-        super(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);
-        _startAddress = startAddress;
-    }
+  public AMD64Disassembler(long startAddress) {
+    super(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);
+    _startAddress = startAddress;
+  }
 
-    @Override
-    protected final boolean isRexPrefix(HexByte opcode) {
-        return X86Opcode.isRexPrefix(opcode);
-    }
+  @Override
+  protected final boolean isRexPrefix(HexByte opcode) {
+    return X86Opcode.isRexPrefix(opcode);
+  }
 
-    @Override
-    protected final AMD64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, AMD64Template template, List<Argument> arguments) {
-        return new AMD64DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
-    }
+  @Override
+  protected final AMD64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, AMD64Template template, List<Argument> arguments) {
+    return new AMD64DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
+  }
 
-    @Override
-    protected final Assembler createAssembler(int offset) {
-        return new AMD64Assembler(_startAddress + offset);
-    }
+  @Override
+  protected final Assembler createAssembler(int offset) {
+    return new AMD64Assembler(_startAddress + offset);
+  }
 
-    private static Map<X86InstructionHeader, LinkedList<AMD64Template>> _headerToTemplates = X86InstructionHeader.createMapping(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);
+  private static Map<X86InstructionHeader, LinkedList<AMD64Template>> _headerToTemplates = X86InstructionHeader.createMapping(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);
 
-    @Override
-    protected final Map<X86InstructionHeader, LinkedList<AMD64Template>> headerToTemplates() {
-        return _headerToTemplates;
-    }
-
+  @Override
+  protected final Map<X86InstructionHeader, LinkedList<AMD64Template>> headerToTemplates() {
+    return _headerToTemplates;
+  }
 }

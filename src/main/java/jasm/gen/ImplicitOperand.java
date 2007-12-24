@@ -15,14 +15,14 @@ import jasm.Argument;
  */
 public interface ImplicitOperand extends Operand {
 
-    Argument argument();
+  Argument argument();
 
-    /**
-     * Determines whether the operand is to be omitted or explicitly stated in external syntax.
-     */
-    public enum ExternalPresence {
-        OMITTED, EXPLICIT
-    }
+  /**
+   * Determines whether the operand is to be omitted or explicitly stated in external syntax.
+   */
+  public enum ExternalPresence {
+    OMITTED, EXPLICIT
+  }
 
-    ExternalPresence externalPresence();
+  ExternalPresence externalPresence();
 }

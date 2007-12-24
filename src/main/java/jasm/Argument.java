@@ -13,22 +13,21 @@ package jasm;
  */
 public interface Argument {
 
-    /**
-     * @return the external assembler syntax for this argument
-     */
-    String externalValue();
+  /**
+   * @return the external assembler syntax for this argument
+   */
+  String externalValue();
 
-    /**
-     * @return the disassembler syntax for this argument
-     */
-    String disassembledValue();
+  /**
+   * @return the disassembler syntax for this argument
+   */
+  String disassembledValue();
 
-    /**
-     * Different argument types may have different value ranges,
-     * but they are all less or equally wide as a long.
-     *
-     * @return the value of this argument sign-extended to a long
-     */
-    long asLong();
-
+  /**
+   * Different argument types may have different value ranges,
+   * but they are all less or equally wide as a long.
+   *
+   * @return the value of this argument sign-extended to a long
+   */
+  long asLong();
 }

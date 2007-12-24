@@ -14,50 +14,50 @@ import jasm.x86.GeneralRegister;
 
 public enum IA32IndexRegister32 implements GeneralRegister {
 
-    EAX_INDEX,
-    ECX_INDEX,
-    EDX_INDEX,
-    EBX_INDEX,
-    // no ESP_INDEX!
-    EBP_INDEX,
-    ESI_INDEX,
-    EDI_INDEX;
+  EAX_INDEX,
+  ECX_INDEX,
+  EDX_INDEX,
+  EBX_INDEX,
+  // no ESP_INDEX!
+  EBP_INDEX,
+  ESI_INDEX,
+  EDI_INDEX;
 
-    public static IA32IndexRegister32 from(GeneralRegister generalRegister) {
-        int ordinal = generalRegister.id();
-        if (ordinal >= IA32GeneralRegister32.ESP.id()) {
-            ordinal--;
-        }
-        return values()[ordinal];
+  public static IA32IndexRegister32 from(GeneralRegister generalRegister) {
+    int ordinal = generalRegister.id();
+    if (ordinal >= IA32GeneralRegister32.ESP.id()) {
+      ordinal--;
     }
+    return values()[ordinal];
+  }
 
-    public WordWidth width() {
-        return WordWidth.BITS_32;
-    }
+  public WordWidth width() {
+    return WordWidth.BITS_32;
+  }
 
-    public int id() {
-        int ordinal = ordinal();
-        if (ordinal >= IA32GeneralRegister32.ESP.id()) {
-            ordinal++;
-        }
-        return ordinal;
+  public int id() {
+    int ordinal = ordinal();
+    if (ordinal >= IA32GeneralRegister32.ESP.id()) {
+      ordinal++;
     }
+    return ordinal;
+  }
 
-    public int value() {
-        return id();
-    }
+  public int value() {
+    return id();
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return IA32GeneralRegister32.from(this).externalValue();
-    }
+  public String externalValue() {
+    return IA32GeneralRegister32.from(this).externalValue();
+  }
 
-    public String disassembledValue() {
-        return IA32GeneralRegister32.from(this).disassembledValue();
-    }
+  public String disassembledValue() {
+    return IA32GeneralRegister32.from(this).disassembledValue();
+  }
 
   public static final SymbolSet<IA32IndexRegister32> SYMBOLS = SymbolSet.fromEnum(IA32IndexRegister32.class);
 }

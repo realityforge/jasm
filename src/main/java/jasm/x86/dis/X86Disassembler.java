@@ -51,182 +51,182 @@ import java.util.Map;
 public abstract class X86Disassembler<Template_Type extends X86Template, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
     extends Disassembler<Template_Type, DisassembledInstruction_Type> {
 
-    private int _currentOffset;
+  private int _currentOffset;
 
-    protected X86Disassembler(Assembly<Template_Type> assembly, WordWidth addressWidth) {
-        super(assembly, addressWidth);
+  protected X86Disassembler(Assembly<Template_Type> assembly, WordWidth addressWidth) {
+    super(assembly, addressWidth);
+  }
+
+  protected abstract boolean isRexPrefix(HexByte opcode);
+
+  private X86InstructionHeader scanInstructionHeader(BufferedInputStream stream) throws IOException {
+    int byteValue = stream.read();
+    if (byteValue < 0) {
+      return null;
     }
-
-    protected abstract boolean isRexPrefix(HexByte opcode);
-
-    private X86InstructionHeader scanInstructionHeader(BufferedInputStream stream) throws IOException {
-        int byteValue = stream.read();
-        if (byteValue < 0) {
-            return null;
+    final X86InstructionHeader header = new X86InstructionHeader();
+    do {
+      final HexByte hexByte = HexByte.values()[byteValue];
+      if (header._opcode1 == null) {
+        if (hexByte == X86Opcode.ADDRESS_SIZE) {
+          header._hasAddressSizePrefix = true;
+        } else if (hexByte == X86Opcode.OPERAND_SIZE ||
+            hexByte == X86Opcode.REPE ||
+            hexByte == X86Opcode.REPNE) {
+          header._instructionSelectionPrefix = hexByte;
+        } else if (isRexPrefix(hexByte)) {
+          header._rexPrefix = hexByte;
+        } else {
+          header._opcode1 = hexByte;
+          if (hexByte != HexByte._0F) {
+            return header;
+          }
         }
-        final X86InstructionHeader header = new X86InstructionHeader();
-        do {
-            final HexByte hexByte = HexByte.values()[byteValue];
-            if (header._opcode1 == null) {
-                if (hexByte == X86Opcode.ADDRESS_SIZE) {
-                    header._hasAddressSizePrefix = true;
-                } else if (hexByte == X86Opcode.OPERAND_SIZE ||
-                           hexByte == X86Opcode.REPE ||
-                           hexByte == X86Opcode.REPNE) {
-                    header._instructionSelectionPrefix = hexByte;
-                } else if (isRexPrefix(hexByte)) {
-                    header._rexPrefix = hexByte;
-                } else {
-                    header._opcode1 = hexByte;
-                    if (hexByte != HexByte._0F) {
-                        return header;
-                    }
-                }
-            } else {
-                header._opcode2 = hexByte;
-                return header;
-            }
-            byteValue = stream.read();
-        } while (byteValue >= 0);
+      } else {
+        header._opcode2 = hexByte;
         return header;
-    }
+      }
+      byteValue = stream.read();
+    } while (byteValue >= 0);
+    return header;
+  }
 
-    private List<Argument> scanArguments(BufferedInputStream stream, Template_Type template, X86InstructionHeader header, byte modRMByte, byte sibByte) throws IOException {
-        final ArrayList<Argument> arguments = new ArrayList<Argument>();
-        final byte rexByte = (header._rexPrefix != null) ? header._rexPrefix.byteValue() : 0;
-        for (X86Parameter parameter : template.parameters()) {
-            int value = 0;
-            switch (parameter.place()) {
-                case MOD_REG_REXR:
-                    value = X86Field.extractRexValue(X86Field.REX_R_BIT_INDEX, rexByte);
-                    // fall through...
-                case MOD_REG:
-                    value += X86Field.REG.extract(modRMByte);
-                    break;
-                case MOD_RM_REXB:
-                    value = X86Field.extractRexValue(X86Field.REX_B_BIT_INDEX, rexByte);
-                    // fall through...
-                case MOD_RM:
-                    value += X86Field.RM.extract(modRMByte);
-                    break;
-                case SIB_BASE_REXB:
-                    value = X86Field.extractRexValue(X86Field.REX_B_BIT_INDEX, rexByte);
-                    // fall through...
-                case SIB_BASE:
-                    value += X86Field.BASE.extract(sibByte);
-                    break;
-                case SIB_INDEX_REXX:
-                    value = X86Field.extractRexValue(X86Field.REX_X_BIT_INDEX, rexByte);
-                    // fall through...
-                case SIB_INDEX:
-                    value += X86Field.INDEX.extract(sibByte);
-                    break;
-                case SIB_SCALE:
-                    value = X86Field.SCALE.extract(sibByte);
-                    break;
-                case APPEND:
-                    if (parameter instanceof X86EnumerableParameter) {
-                        final X86EnumerableParameter enumerableParameter = (X86EnumerableParameter) parameter;
-                        final SymbolSet enumerator = enumerableParameter.enumerator();
-                        arguments.add((Argument) enumerator.fromValue(EndianUtil.readByte(stream)));
-                        continue;
-                    }
-                    final X86NumericalParameter numericalParameter = (X86NumericalParameter) parameter;
-                    switch (numericalParameter.width()) {
-                        case BITS_8:
-                            arguments.add(new Immediate8Argument(EndianUtil.readByte(stream)));
-                            break;
-                        case BITS_16:
-                            arguments.add(new Immediate16Argument(EndianUtil.readLEShort(stream)));
-                            break;
-                        case BITS_32:
-                            arguments.add(new Immediate32Argument(EndianUtil.readLEInt(stream)));
-                            break;
-                        case BITS_64:
-                            arguments.add(new Immediate64Argument(EndianUtil.readLELong(stream)));
-                            break;
-                    }
-                    continue;
-                case OPCODE1_REXB:
-                    value = X86Field.extractRexValue(X86Field.REX_B_BIT_INDEX, rexByte);
-                    // fall through...
-                case OPCODE1:
-                    value += header._opcode1.ordinal() & 7;
-                    break;
-                case OPCODE2_REXB:
-                    value = X86Field.extractRexValue(X86Field.REX_B_BIT_INDEX, rexByte);
-                    // fall through...
-                case OPCODE2:
-                    value += header._opcode2.ordinal() & 7;
-                    break;
-            }
+  private List<Argument> scanArguments(BufferedInputStream stream, Template_Type template, X86InstructionHeader header, byte modRMByte, byte sibByte) throws IOException {
+    final ArrayList<Argument> arguments = new ArrayList<Argument>();
+    final byte rexByte = (header._rexPrefix != null) ? header._rexPrefix.byteValue() : 0;
+    for (X86Parameter parameter : template.parameters()) {
+      int value = 0;
+      switch (parameter.place()) {
+        case MOD_REG_REXR:
+          value = X86Field.extractRexValue(X86Field.REX_R_BIT_INDEX, rexByte);
+          // fall through...
+        case MOD_REG:
+          value += X86Field.REG.extract(modRMByte);
+          break;
+        case MOD_RM_REXB:
+          value = X86Field.extractRexValue(X86Field.REX_B_BIT_INDEX, rexByte);
+          // fall through...
+        case MOD_RM:
+          value += X86Field.RM.extract(modRMByte);
+          break;
+        case SIB_BASE_REXB:
+          value = X86Field.extractRexValue(X86Field.REX_B_BIT_INDEX, rexByte);
+          // fall through...
+        case SIB_BASE:
+          value += X86Field.BASE.extract(sibByte);
+          break;
+        case SIB_INDEX_REXX:
+          value = X86Field.extractRexValue(X86Field.REX_X_BIT_INDEX, rexByte);
+          // fall through...
+        case SIB_INDEX:
+          value += X86Field.INDEX.extract(sibByte);
+          break;
+        case SIB_SCALE:
+          value = X86Field.SCALE.extract(sibByte);
+          break;
+        case APPEND:
+          if (parameter instanceof X86EnumerableParameter) {
             final X86EnumerableParameter enumerableParameter = (X86EnumerableParameter) parameter;
             final SymbolSet enumerator = enumerableParameter.enumerator();
-            if (enumerator == AMD64GeneralRegister8.SYMBOLS) {
-                arguments.add(AMD64GeneralRegister8.fromValue(value, header._rexPrefix != null));
-            } else {
-                arguments.add((Argument) enumerator.fromValue(value));
-            }
-        }
-        return arguments;
+            arguments.add((Argument) enumerator.fromValue(EndianUtil.readByte(stream)));
+            continue;
+          }
+          final X86NumericalParameter numericalParameter = (X86NumericalParameter) parameter;
+          switch (numericalParameter.width()) {
+            case BITS_8:
+              arguments.add(new Immediate8Argument(EndianUtil.readByte(stream)));
+              break;
+            case BITS_16:
+              arguments.add(new Immediate16Argument(EndianUtil.readLEShort(stream)));
+              break;
+            case BITS_32:
+              arguments.add(new Immediate32Argument(EndianUtil.readLEInt(stream)));
+              break;
+            case BITS_64:
+              arguments.add(new Immediate64Argument(EndianUtil.readLELong(stream)));
+              break;
+          }
+          continue;
+        case OPCODE1_REXB:
+          value = X86Field.extractRexValue(X86Field.REX_B_BIT_INDEX, rexByte);
+          // fall through...
+        case OPCODE1:
+          value += header._opcode1.ordinal() & 7;
+          break;
+        case OPCODE2_REXB:
+          value = X86Field.extractRexValue(X86Field.REX_B_BIT_INDEX, rexByte);
+          // fall through...
+        case OPCODE2:
+          value += header._opcode2.ordinal() & 7;
+          break;
+      }
+      final X86EnumerableParameter enumerableParameter = (X86EnumerableParameter) parameter;
+      final SymbolSet enumerator = enumerableParameter.enumerator();
+      if (enumerator == AMD64GeneralRegister8.SYMBOLS) {
+        arguments.add(AMD64GeneralRegister8.fromValue(value, header._rexPrefix != null));
+      } else {
+        arguments.add((Argument) enumerator.fromValue(value));
+      }
     }
+    return arguments;
+  }
 
-    private int getModVariantParameterIndex(Template_Type template, byte modRMByte, byte sibByte) {
-        if (template.modCase() == X86TemplateContext.ModCase.MOD_0 && X86Field.MOD.extract(modRMByte) != X86TemplateContext.ModCase.MOD_0.value()) {
-            switch (template.rmCase()) {
-                case NORMAL:
-                    if (template.addressSizeAttribute() == WordWidth.BITS_16) {
-                        if (X86Field.RM.extract(modRMByte) != X86TemplateContext.RMCase.SWORD.value()) {
-                            return -1;
-                        }
-                    } else if (X86Field.RM.extract(modRMByte) != X86TemplateContext.RMCase.SDWORD.value()) {
-                        return -1;
-                    }
-                    for (int i = 0; i < template.parameters().size(); i++) {
-                        switch (template.parameters().get(i).place()) {
-                            case MOD_RM_REXB:
-                            case MOD_RM:
-                                return i;
-                            default:
-                                break;
-                        }
-                    }
-                    break;
-                case SIB:
-                    if (template.sibBaseCase() == X86TemplateContext.SibBaseCase.GENERAL_REGISTER && X86Field.BASE.extract(sibByte) == 5) {
-                        for (int i = 0; i < template.parameters().size(); i++) {
-                            switch (template.parameters().get(i).place()) {
-                                case SIB_BASE_REXB:
-                                case SIB_BASE:
-                                    return i;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
-                    break;
+  private int getModVariantParameterIndex(Template_Type template, byte modRMByte, byte sibByte) {
+    if (template.modCase() == X86TemplateContext.ModCase.MOD_0 && X86Field.MOD.extract(modRMByte) != X86TemplateContext.ModCase.MOD_0.value()) {
+      switch (template.rmCase()) {
+        case NORMAL:
+          if (template.addressSizeAttribute() == WordWidth.BITS_16) {
+            if (X86Field.RM.extract(modRMByte) != X86TemplateContext.RMCase.SWORD.value()) {
+              return -1;
+            }
+          } else if (X86Field.RM.extract(modRMByte) != X86TemplateContext.RMCase.SDWORD.value()) {
+            return -1;
+          }
+          for (int i = 0; i < template.parameters().size(); i++) {
+            switch (template.parameters().get(i).place()) {
+              case MOD_RM_REXB:
+              case MOD_RM:
+                return i;
+              default:
+                break;
+            }
+          }
+          break;
+        case SIB:
+          if (template.sibBaseCase() == X86TemplateContext.SibBaseCase.GENERAL_REGISTER && X86Field.BASE.extract(sibByte) == 5) {
+            for (int i = 0; i < template.parameters().size(); i++) {
+              switch (template.parameters().get(i).place()) {
+                case SIB_BASE_REXB:
+                case SIB_BASE:
+                  return i;
                 default:
-                    break;
+                  break;
+              }
             }
-        }
-        return -1;
+          }
+          break;
+        default:
+          break;
+      }
     }
+    return -1;
+  }
 
-    private byte getSibByte(BufferedInputStream stream, Template_Type template, byte modRMByte) throws IOException {
-        if (template.addressSizeAttribute() == WordWidth.BITS_16) {
-            return 0;
-        }
-        if (template.hasSibByte()) {
-            return EndianUtil.readByte(stream);
-        }
-        if (template.hasModRMByte() && X86Field.RM.extract(modRMByte) == X86TemplateContext.RMCase.SIB.value() &&
-                   X86Field.MOD.extract(modRMByte) != X86TemplateContext.ModCase.MOD_3.value()) {
-            return EndianUtil.readByte(stream);
-        }
-        return 0;
+  private byte getSibByte(BufferedInputStream stream, Template_Type template, byte modRMByte) throws IOException {
+    if (template.addressSizeAttribute() == WordWidth.BITS_16) {
+      return 0;
     }
+    if (template.hasSibByte()) {
+      return EndianUtil.readByte(stream);
+    }
+    if (template.hasModRMByte() && X86Field.RM.extract(modRMByte) == X86TemplateContext.RMCase.SIB.value() &&
+        X86Field.MOD.extract(modRMByte) != X86TemplateContext.ModCase.MOD_3.value()) {
+      return EndianUtil.readByte(stream);
+    }
+    return 0;
+  }
 
-    protected abstract Map<X86InstructionHeader, LinkedList<Template_Type>> headerToTemplates();
+  protected abstract Map<X86InstructionHeader, LinkedList<Template_Type>> headerToTemplates();
 
   private final DisassembledInstruction_Type scanInstruction(BufferedInputStream stream, X86InstructionHeader header)
       throws IOException, AssemblyException {
@@ -259,8 +259,8 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
               if (modVariantParameterIndex >= 0) {
                 final Template_Type modVariantTemplate =
                     X86Assembly.getModVariantTemplate(templates,
-                                                      template,
-                                                      template.parameters().get(modVariantParameterIndex).type());
+                        template,
+                        template.parameters().get(modVariantParameterIndex).type());
                 arguments = scanArguments(stream, modVariantTemplate, header, modRMByte, sibByte);
               }
             }
@@ -277,9 +277,9 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
               final Argument modVariantArgument = arguments.get(modVariantParameterIndex);
               final ArrayList<Argument> result = new ArrayList<Argument>();
               for (Argument element : arguments) {
-                  if (modVariantArgument != element) {
-                      result.add(element);
-                  }
+                if (modVariantArgument != element) {
+                  result.add(element);
+                }
               }
               arguments = result;
             }
@@ -318,29 +318,29 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
 
   private static final int MORE_THAN_ANY_INSTRUCTION_LENGTH = 100;
 
-    @Override
-    public final List<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream) throws IOException, AssemblyException {
-        stream.mark(MORE_THAN_ANY_INSTRUCTION_LENGTH);
-        final X86InstructionHeader header = scanInstructionHeader(stream);
-        if (header == null) {
-            throw new AssemblyException("unknown instruction");
-        }
-      return Arrays.asList(scanInstruction(stream, header));
+  @Override
+  public final List<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream) throws IOException, AssemblyException {
+    stream.mark(MORE_THAN_ANY_INSTRUCTION_LENGTH);
+    final X86InstructionHeader header = scanInstructionHeader(stream);
+    if (header == null) {
+      throw new AssemblyException("unknown instruction");
     }
+    return Arrays.asList(scanInstruction(stream, header));
+  }
 
-    @Override
-    protected final List<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException {
-        final ArrayList<DisassembledInstruction_Type> result = new ArrayList<DisassembledInstruction_Type>();
-        while (true) {
-            stream.mark(MORE_THAN_ANY_INSTRUCTION_LENGTH);
-            final X86InstructionHeader header = scanInstructionHeader(stream);
-            if (header == null) {
-                return result;
-            }
-            final DisassembledInstruction_Type disassembledInstruction = scanInstruction(stream, header);
-            result.add(disassembledInstruction);
-        }
+  @Override
+  protected final List<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException {
+    final ArrayList<DisassembledInstruction_Type> result = new ArrayList<DisassembledInstruction_Type>();
+    while (true) {
+      stream.mark(MORE_THAN_ANY_INSTRUCTION_LENGTH);
+      final X86InstructionHeader header = scanInstructionHeader(stream);
+      if (header == null) {
+        return result;
+      }
+      final DisassembledInstruction_Type disassembledInstruction = scanInstruction(stream, header);
+      result.add(disassembledInstruction);
     }
+  }
 
   private static boolean startsWith(BufferedInputStream bufferedInputStream, byte[] bytes) throws IOException {
     final byte[] data = new byte[bytes.length];

@@ -17,14 +17,14 @@ import jasm.SymbolSet;
  */
 public final class FCCOperand extends AbstractSymbolicArgument implements ConditionCodeRegister {
 
-    private FCCOperand(int value) {
-        super(value);
-    }
+  private FCCOperand(int value) {
+    super(value);
+  }
 
-    public static final FCCOperand FCC0 = new FCCOperand(0);
-    public static final FCCOperand FCC1 = new FCCOperand(1);
-    public static final FCCOperand FCC2 = new FCCOperand(2);
-    public static final FCCOperand FCC3 = new FCCOperand(3);
+  public static final FCCOperand FCC0 = new FCCOperand(0);
+  public static final FCCOperand FCC1 = new FCCOperand(1);
+  public static final FCCOperand FCC2 = new FCCOperand(2);
+  public static final FCCOperand FCC3 = new FCCOperand(3);
 
-    public static final SymbolSet<FCCOperand> SYMBOLS = SymbolSet.fromStaticFields(FCCOperand.class);
+  public static final SymbolSet<FCCOperand> SYMBOLS = SymbolSet.fromStaticFields(FCCOperand.class);
 }

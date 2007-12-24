@@ -13,19 +13,19 @@ package jasm;
  */
 public abstract class OptionSuffixSymbolicArgument extends AbstractSymbolicArgument implements ExternalMnemonicSuffixArgument {
 
-    private final String _externalMnemonicSuffix;
+  private final String _externalMnemonicSuffix;
 
-    protected OptionSuffixSymbolicArgument(int value, String externalMnemonicSuffix) {
-        super(value);
-        _externalMnemonicSuffix = externalMnemonicSuffix;
-    }
+  protected OptionSuffixSymbolicArgument(int value, String externalMnemonicSuffix) {
+    super(value);
+    _externalMnemonicSuffix = externalMnemonicSuffix;
+  }
 
-    @Override
-    public final String externalValue() {
-        return _externalMnemonicSuffix;
-    }
+  @Override
+  public final String externalValue() {
+    return _externalMnemonicSuffix;
+  }
 
-    public final boolean isOptional() {
-        return true;
-    }
+  public final boolean isOptional() {
+    return true;
+  }
 }

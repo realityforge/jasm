@@ -13,16 +13,16 @@ package jasm;
  */
 public abstract class NameSuffixSymbolicArgument extends AbstractSymbolicArgument implements ExternalMnemonicSuffixArgument {
 
-    protected NameSuffixSymbolicArgument(int value) {
-        super(value);
-    }
+  protected NameSuffixSymbolicArgument(int value) {
+    super(value);
+  }
 
-    @Override
-    public final String externalValue() {
-        return name().toLowerCase();
-    }
+  @Override
+  public final String externalValue() {
+    return name().toLowerCase();
+  }
 
-    public final boolean isOptional() {
-        return false;
-    }
+  public final boolean isOptional() {
+    return false;
+  }
 }

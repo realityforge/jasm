@@ -17,7 +17,6 @@ import java.util.Vector;
  * Additonal methods that one could expect in java.util.Arrays.
  */
 public final class ArrayUtil {
-
   public static <Element_Type> Element_Type[] create(Class<?> elementType, int length) {
     final Object array = Array.newInstance(elementType, length);
     return StaticLoophole.cast(array);

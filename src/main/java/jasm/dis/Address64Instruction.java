@@ -16,38 +16,37 @@ import jasm.util.HexUtil;
  */
 public interface Address64Instruction extends AddressInstruction {
 
-    long address();
+  long address();
 
-    public static final class Mixin implements Address64Instruction {
+  public static final class Mixin implements Address64Instruction {
 
-        private final long _startAddress;
-        private final DisassembledInstruction _disassembledInstruction;
+    private final long _startAddress;
+    private final DisassembledInstruction _disassembledInstruction;
 
-        public Mixin(DisassembledInstruction disassembledInstruction, long startAddress) {
-            _startAddress = startAddress;
-            _disassembledInstruction = disassembledInstruction;
-        }
-
-        public final long address() {
-            return _startAddress + startOffset();
-        }
-
-        public final int startOffset() {
-            return _disassembledInstruction.startOffset();
-        }
-
-        public final String addressString() {
-            return HexUtil.toHexLiteral(address());
-        }
-
-        public final int addressToOffset(ImmediateArgument argument) {
-            final long argumentAddress = argument.asLong();
-            final long result = argumentAddress - _startAddress;
-            if (result > Integer.MAX_VALUE) {
-                return -1;
-            }
-            return (int) result;
-        }
+    public Mixin(DisassembledInstruction disassembledInstruction, long startAddress) {
+      _startAddress = startAddress;
+      _disassembledInstruction = disassembledInstruction;
     }
 
+    public final long address() {
+      return _startAddress + startOffset();
+    }
+
+    public final int startOffset() {
+      return _disassembledInstruction.startOffset();
+    }
+
+    public final String addressString() {
+      return HexUtil.toHexLiteral(address());
+    }
+
+    public final int addressToOffset(ImmediateArgument argument) {
+      final long argumentAddress = argument.asLong();
+      final long result = argumentAddress - _startAddress;
+      if (result > Integer.MAX_VALUE) {
+        return -1;
+      }
+      return (int) result;
+    }
+  }
 }

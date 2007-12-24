@@ -15,9 +15,9 @@ import jasm.gen.ImmediateArgument;
  */
 public interface AddressInstruction {
 
-    int startOffset();
+  int startOffset();
 
-    String addressString();
+  String addressString();
 
-    int addressToOffset(ImmediateArgument argument);
+  int addressToOffset(ImmediateArgument argument);
 }

@@ -13,12 +13,10 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * Class that is the base class of all fields that receive names based on the name of the field they are stored in.
  */
 public abstract class NamedField implements Nameable {
-
   private String _name;
 
   protected NamedField() {

@@ -12,8 +12,7 @@ package jasm;
  * Thrown when an invalid argument is given to an assembler method.
  */
 public final class AssemblyException extends Exception {
-
-    public AssemblyException(String message) {
-        super(message);
-    }
+  public AssemblyException(String message) {
+    super(message);
+  }
 }

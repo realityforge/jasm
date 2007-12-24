@@ -17,17 +17,16 @@ import jasm.SymbolSet;
  */
 public final class BPr extends NameSuffixSymbolicArgument {
 
-    private BPr(int value) {
-        super(value);
-    }
+  private BPr(int value) {
+    super(value);
+  }
 
-    public static final BPr Z = new BPr(1);
-    public static final BPr LEZ = new BPr(2);
-    public static final BPr LZ = new BPr(3);
-    public static final BPr NZ = new BPr(5);
-    public static final BPr GZ = new BPr(6);
-    public static final BPr GEZ = new BPr(7);
+  public static final BPr Z = new BPr(1);
+  public static final BPr LEZ = new BPr(2);
+  public static final BPr LZ = new BPr(3);
+  public static final BPr NZ = new BPr(5);
+  public static final BPr GZ = new BPr(6);
+  public static final BPr GEZ = new BPr(7);
 
-    public static final SymbolSet<BPr> SYMBOLS = SymbolSet.fromStaticFields(BPr.class);
-
+  public static final SymbolSet<BPr> SYMBOLS = SymbolSet.fromStaticFields(BPr.class);
 }

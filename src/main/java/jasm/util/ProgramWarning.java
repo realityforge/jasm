@@ -9,7 +9,7 @@
 package jasm.util;
 
 public final class ProgramWarning {
-    public static void message(String warning) {
-        System.err.println("WARNING: " + warning);
-    }
+  public static void message(String warning) {
+    System.err.println("WARNING: " + warning);
+  }
 }

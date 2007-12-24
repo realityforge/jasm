@@ -14,42 +14,42 @@ import jasm.x86.GeneralRegister;
 
 public enum IA32BaseRegister32 implements GeneralRegister {
 
-    EAX_BASE,
-    ECX_BASE,
-    EDX_BASE,
-    EBX_BASE,
-    ESP_BASE,
-    EBP_BASE,
-    ESI_BASE,
-    EDI_BASE;
+  EAX_BASE,
+  ECX_BASE,
+  EDX_BASE,
+  EBX_BASE,
+  ESP_BASE,
+  EBP_BASE,
+  ESI_BASE,
+  EDI_BASE;
 
-    public static IA32BaseRegister32 from(GeneralRegister generalRegister) {
-        return values()[generalRegister.id()];
-    }
+  public static IA32BaseRegister32 from(GeneralRegister generalRegister) {
+    return values()[generalRegister.id()];
+  }
 
-    public WordWidth width() {
-        return WordWidth.BITS_32;
-    }
+  public WordWidth width() {
+    return WordWidth.BITS_32;
+  }
 
-    public int id() {
-        return ordinal();
-    }
+  public int id() {
+    return ordinal();
+  }
 
-    public int value() {
-        return id();
-    }
+  public int value() {
+    return id();
+  }
 
-    public long asLong() {
-        return value();
-    }
+  public long asLong() {
+    return value();
+  }
 
-    public String externalValue() {
-        return IA32GeneralRegister32.from(this).externalValue();
-    }
+  public String externalValue() {
+    return IA32GeneralRegister32.from(this).externalValue();
+  }
 
-    public String disassembledValue() {
-        return IA32GeneralRegister32.from(this).disassembledValue();
-    }
+  public String disassembledValue() {
+    return IA32GeneralRegister32.from(this).disassembledValue();
+  }
 
   public static final SymbolSet<IA32BaseRegister32> SYMBOLS = SymbolSet.fromEnum(IA32BaseRegister32.class);
 }

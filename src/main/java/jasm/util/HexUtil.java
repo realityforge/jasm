@@ -9,7 +9,6 @@
 package jasm.util;
 
 public final class HexUtil {
-
   public static String toHexLiteral(long value) {
     return String.format("0x%016X", value);
   }

@@ -13,15 +13,14 @@ package jasm.util;
  * and int array stuff.
  */
 public final class Ints {
-
   public static int numberOfEffectiveSignedBits(int signed) {
-        if (signed >= 0) {
-            return 33 - Integer.numberOfLeadingZeros(signed);
-        }
-        return 33 - Integer.numberOfLeadingZeros(~signed);
+    if (signed >= 0) {
+      return 33 - Integer.numberOfLeadingZeros(signed);
     }
+    return 33 - Integer.numberOfLeadingZeros(~signed);
+  }
 
-    public static int numberOfEffectiveUnsignedBits(int unsigned) {
-        return 32 - Integer.numberOfLeadingZeros(unsigned);
-    }
+  public static int numberOfEffectiveUnsignedBits(int unsigned) {
+    return 32 - Integer.numberOfLeadingZeros(unsigned);
+  }
 }

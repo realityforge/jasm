@@ -12,5 +12,4 @@ package jasm.gen;
  * Parameters with enumerable arguments.
  */
 public interface EnumerableParameter extends Parameter {
-
 }

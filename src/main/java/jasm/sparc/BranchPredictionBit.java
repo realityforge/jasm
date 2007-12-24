@@ -18,19 +18,19 @@ import jasm.SymbolSet;
  */
 public final class BranchPredictionBit extends OptionSuffixSymbolicArgument {
 
-    private BranchPredictionBit(int value, String externalMnemonicSuffix) {
-        super(value, externalMnemonicSuffix);
-    }
+  private BranchPredictionBit(int value, String externalMnemonicSuffix) {
+    super(value, externalMnemonicSuffix);
+  }
 
-    /**
-     * The prediction bit is not set, indicating that the branch is not likely to be taken.
-     */
-    public static final BranchPredictionBit PN = new BranchPredictionBit(0, ",pn");
+  /**
+   * The prediction bit is not set, indicating that the branch is not likely to be taken.
+   */
+  public static final BranchPredictionBit PN = new BranchPredictionBit(0, ",pn");
 
-    /**
-     * The prediction bit is set, indicating that the branch is likely to be taken.
-     */
-    public static final BranchPredictionBit PT = new BranchPredictionBit(1, ",pt");
+  /**
+   * The prediction bit is set, indicating that the branch is likely to be taken.
+   */
+  public static final BranchPredictionBit PT = new BranchPredictionBit(1, ",pt");
 
-    public static final SymbolSet<BranchPredictionBit> SYMBOLS = SymbolSet.fromStaticFields(BranchPredictionBit.class);
+  public static final SymbolSet<BranchPredictionBit> SYMBOLS = SymbolSet.fromStaticFields(BranchPredictionBit.class);
 }

@@ -16,25 +16,24 @@ import jasm.SymbolSet;
  */
 public final class SPR extends AbstractSymbolicArgument {
 
-    private SPR(int value) {
-        super(value);
-    }
+  private SPR(int value) {
+    super(value);
+  }
 
-    /**
-     * Denotes the Fixed-Point Exception Register.
-     */
-    public static final SPR XER = new SPR(1);
+  /**
+   * Denotes the Fixed-Point Exception Register.
+   */
+  public static final SPR XER = new SPR(1);
 
-    /**
-     * Denotes the Link Register.
-     */
-    public static final SPR LR = new SPR(8);
+  /**
+   * Denotes the Link Register.
+   */
+  public static final SPR LR = new SPR(8);
 
-    /**
-     * Denotes the Count Register.
-     */
-    public static final SPR CTR = new SPR(9);
+  /**
+   * Denotes the Count Register.
+   */
+  public static final SPR CTR = new SPR(9);
 
-    public static final SymbolSet<SPR> SYMBOLS = SymbolSet.fromStaticFields(SPR.class);
-
+  public static final SymbolSet<SPR> SYMBOLS = SymbolSet.fromStaticFields(SPR.class);
 }

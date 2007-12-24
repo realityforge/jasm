@@ -9,7 +9,6 @@
 package jasm.util;
 
 public final class ProgramError extends Error {
-
   private static final long serialVersionUID = 0;
 
   public ProgramError(String message, Throwable cause) {

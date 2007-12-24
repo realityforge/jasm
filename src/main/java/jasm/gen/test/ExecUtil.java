@@ -19,7 +19,7 @@ final class ExecUtil {
    * Executes a command in a subprocess redirecting the standard streams of the
    * subprocess to/from the standard streams of the current process.
    *
-   * @param command  the command line to execute
+   * @param command the command line to execute
    */
   static void exec(String command) throws IOException, InterruptedException {
     exec(command, System.out, System.err, System.in);
@@ -29,10 +29,10 @@ final class ExecUtil {
    * Executes a command in a subprocess redirecting the standard streams of the
    * subprocess to/from the supplied streams.
    *
-   * @param command  the command line to execute
-   * @param out   the stream to which standard output will be directed
-   * @param err   the stream to which standard error output will be directed
-   * @param in    the stream from which standard input will be read
+   * @param command the command line to execute
+   * @param out     the stream to which standard output will be directed
+   * @param err     the stream to which standard error output will be directed
+   * @param in      the stream from which standard input will be read
    */
   private static void exec(String command, OutputStream out, OutputStream err, InputStream in)
       throws IOException, InterruptedException {
@@ -52,9 +52,9 @@ final class ExecUtil {
         ProgramError.unexpected("execution of command failed: " + command + " [exit code = " + exitValue + "]");
       }
     } finally {
-      if( null != stderr ) stderr.close();
-      if( null != stdout ) stdout.close();
-      if( null != stdin ) stdin.close();
+      if (null != stderr) stderr.close();
+      if (null != stdout) stdout.close();
+      if (null != stdin) stdin.close();
       process.destroy();
     }
   }

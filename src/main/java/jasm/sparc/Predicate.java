@@ -8,7 +8,6 @@
  */
 package jasm.sparc;
 
-
 public interface Predicate<CCRT extends ConditionCodeRegister, T extends Predicate<CCRT, T>> {
-    T negate();
+  T negate();
 }

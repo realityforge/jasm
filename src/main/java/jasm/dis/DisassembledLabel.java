@@ -13,36 +13,36 @@ package jasm.dis;
  */
 public final class DisassembledLabel {
 
-    private final int _instructionIndex;
+  private final int _instructionIndex;
 
-    public DisassembledLabel(int instructionIndex) {
-        super();
-        _instructionIndex = instructionIndex;
-    }
+  public DisassembledLabel(int instructionIndex) {
+    super();
+    _instructionIndex = instructionIndex;
+  }
 
-    public final int instructionIndex() {
-        return _instructionIndex;
-    }
+  public final int instructionIndex() {
+    return _instructionIndex;
+  }
 
-    public static final String PREFIX = "L";
+  public static final String PREFIX = "L";
 
-    private int _serial = -1;
+  private int _serial = -1;
 
-    public final void setSerial(int index) {
-        _serial = index;
-    }
+  public final void setSerial(int index) {
+    _serial = index;
+  }
 
-    public final String name() {
-        return PREFIX + _serial;
-    }
+  public final String name() {
+    return PREFIX + _serial;
+  }
 
-    private int _offset = -1;
+  private int _offset = -1;
 
-    public final void bind(int offset) {
-        _offset = offset;
-    }
+  public final void bind(int offset) {
+    _offset = offset;
+  }
 
-    public final int offset() {
-        return _offset;
-    }
+  public final int offset() {
+    return _offset;
+  }
 }

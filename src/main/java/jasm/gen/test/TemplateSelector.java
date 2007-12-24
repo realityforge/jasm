@@ -41,7 +41,7 @@ final class TemplateSelector<Template_Type extends Template> {
     if (template.serial() > _endSerial) {
       return State.DONE;
     } else if (template.serial() >= _startSerial &&
-               (_pattern == null || template.internalName().contains(_pattern))) {
+        (_pattern == null || template.internalName().contains(_pattern))) {
       return State.TEST;
     } else {
       return State.SKIP;

@@ -13,11 +13,10 @@ package jasm.dis;
  * (including calls) which point outside the function being disassembled.
  */
 public interface GlobalLabelMapper {
-    /**
-     *
-     * @param offsetFromCurrentMethodEntryPoint The displacement to be named, measured from the method entry.
-     *
-     * @return The String naming the destination, or null if none.
-     */
-    String map(int offsetFromCurrentMethodEntryPoint);
+  /**
+   * @param offsetFromCurrentMethodEntryPoint
+   *         The displacement to be named, measured from the method entry.
+   * @return The String naming the destination, or null if none.
+   */
+  String map(int offsetFromCurrentMethodEntryPoint);
 }

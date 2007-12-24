@@ -12,54 +12,54 @@ import jasm.WordWidth;
 
 public final class Immediate16Argument extends ImmediateArgument {
 
-    private short _value;
+  private short _value;
 
-    public Immediate16Argument(short value) {
-        _value = value;
-    }
+  public Immediate16Argument(short value) {
+    _value = value;
+  }
 
-    @Override
-    public final WordWidth width() {
-        return WordWidth.BITS_16;
-    }
+  @Override
+  public final WordWidth width() {
+    return WordWidth.BITS_16;
+  }
 
-    public final short value() {
-        return _value;
-    }
+  public final short value() {
+    return _value;
+  }
 
-    public final long asLong() {
-        return value();
-    }
+  public final long asLong() {
+    return value();
+  }
 
-    public final String externalValue() {
-        return "0x" + Integer.toHexString(_value & 0xffff);
-    }
+  public final String externalValue() {
+    return "0x" + Integer.toHexString(_value & 0xffff);
+  }
 
-    public final String disassembledValue() {
-        return "0x" + String.format("%X", _value);
-    }
+  public final String disassembledValue() {
+    return "0x" + String.format("%X", _value);
+  }
 
-    @Override
-    public final String signedExternalValue() {
-        return Integer.toString(_value);
-    }
+  @Override
+  public final String signedExternalValue() {
+    return Integer.toString(_value);
+  }
 
-    @Override
-    public final Object boxedJavaValue() {
-        return new Short(_value);
-    }
+  @Override
+  public final Object boxedJavaValue() {
+    return new Short(_value);
+  }
 
-    @Override
-    public final boolean equals(Object other) {
-        if (other instanceof Immediate16Argument) {
-            final Immediate16Argument argument = (Immediate16Argument) other;
-            return _value == argument._value;
-        }
-        return false;
+  @Override
+  public final boolean equals(Object other) {
+    if (other instanceof Immediate16Argument) {
+      final Immediate16Argument argument = (Immediate16Argument) other;
+      return _value == argument._value;
     }
+    return false;
+  }
 
-    @Override
-    public final int hashCode() {
-        return _value;
-    }
+  @Override
+  public final int hashCode() {
+    return _value;
+  }
 }

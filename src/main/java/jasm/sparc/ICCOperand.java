@@ -17,12 +17,12 @@ import jasm.SymbolSet;
  */
 public final class ICCOperand extends AbstractSymbolicArgument implements ConditionCodeRegister {
 
-    private ICCOperand(int value) {
-        super(value);
-    }
+  private ICCOperand(int value) {
+    super(value);
+  }
 
-    public static final ICCOperand ICC = new ICCOperand(0);
-    public static final ICCOperand XCC = new ICCOperand(2);
+  public static final ICCOperand ICC = new ICCOperand(0);
+  public static final ICCOperand XCC = new ICCOperand(2);
 
-    public static final SymbolSet<ICCOperand> SYMBOLS = SymbolSet.fromStaticFields(ICCOperand.class);
+  public static final SymbolSet<ICCOperand> SYMBOLS = SymbolSet.fromStaticFields(ICCOperand.class);
 }

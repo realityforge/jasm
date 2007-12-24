@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 
 final class ExternalAssembler {
-
   static final String SOURCE_EXTENSION = ".s";
   private static final String BINARY_EXTENSION = ".o";
 
@@ -39,7 +38,7 @@ final class ExternalAssembler {
    * of ssh+scp commands configured to connect to specified host.
    *
    * @param remoteUserAndHost a {@code user@host} value denoting a machine that
-   *        supports remote execution via SSH2 using public key authentication
+   *                          supports remote execution via SSH2 using public key authentication
    */
   public void setRemoteUserAndHost(String remoteUserAndHost) {
     _remoteUserAndHost = remoteUserAndHost;

@@ -15,12 +15,12 @@ import java.util.List;
 
 public abstract class RiscDisassembledInstruction<Template_Type extends RiscTemplate> extends DisassembledInstruction<Template_Type> {
 
-    protected RiscDisassembledInstruction(int offset, byte[] bytes, Template_Type template, List<Argument> arguments) {
-        super(offset, bytes, template, arguments);
-    }
+  protected RiscDisassembledInstruction(int offset, byte[] bytes, Template_Type template, List<Argument> arguments) {
+    super(offset, bytes, template, arguments);
+  }
 
-    @Override
-    public final int offsetForRelativeAddressing() {
-        return startOffset();
-    }
+  @Override
+  public final int offsetForRelativeAddressing() {
+    return startOffset();
+  }
 }
