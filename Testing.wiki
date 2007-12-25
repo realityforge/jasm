@@ -15,10 +15,10 @@ The "functional" tests compare the output of the generated assembler and an exte
 
 Every instruction is tested so that each operand is varied according to all the different permutations (in the case of symbolic operands) or using boundary values for integer operands. This results in a relatively exhaustive testing of the assembler output but can take a long time to run for all ISAs.
 
-The functional tests are run by executing the Java class `jasm.gen.test.Main`. The help for the command is below. It should be noted that the tests can compare the output of assembler on the local node and an external node by specifying the `--remote-account peter@example.com` option. This will use ssh and scp to perform the remote commands.
+The functional tests are run by executing the Java class `jasm.tools.test.correctness.Main`. The help for the command is below. It should be noted that the tests can compare the output of assembler on the local node and an external node by specifying the `--remote-account peter@example.com` option. This will use ssh and scp to perform the remote commands.
 
 {{{
-$ java -cp target/jasm.jar:lib/cli-1.0.jar jasm.gen.test.Main --help
+$ java -cp target/jasm.jar:lib/cli-1.0.jar jasm.tools.test.correctness.Main --help
 
 Assembler Tester
 Usage: java jasm.gen.test.Main [options]
@@ -51,10 +51,10 @@ Options:
 
 The performance tests measure the time it takes to either assemble or disassemble a sequence of instructions. 
 
-The functional tests are run by executing the Java class `jasm.gen.perf.Main`. The help for the command is below. 
+The functional tests are run by executing the Java class `jasm.tools.test.performance.Main`. The help for the command is below. 
 
 {{{
-$ java -cp target/jasm.jar:lib/cli-1.0.jar jasm.gen.perf.Main --help
+$ java -cp target/jasm.jar:lib/cli-1.0.jar jasm.tools.test.performance.Main --help
 Performance Tester Options: 
         -h, --help
                 print this message and exit
