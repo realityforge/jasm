@@ -12,6 +12,7 @@ import jasm.tools.InstructionDescription;
 import jasm.tools.risc.field.OptionField;
 import jasm.util.ProgramError;
 import jasm.util.StaticLoophole;
+import jasm.util.ArrayUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -67,7 +68,7 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
             RiscInstructionDescriptionVisitor.Static.visitInstructionDescription(template, instructionDescription);
         }
         for (Template_Type initialTemplate : initialTemplates) {
-            List<Template_Type> newTemplates = Arrays.asList(initialTemplate);
+            List<Template_Type> newTemplates = StaticLoophole.asList(initialTemplate);
             for (OptionField optionField : initialTemplate.optionFields()) {
                 newTemplates = createOptionTemplates(newTemplates, optionField);
             }

@@ -90,8 +90,9 @@ public class SymbolSet<Symbol_Type extends Symbol>
     return false;
   }
 
-  public static <Symbol_Type extends Enum & Symbol> SymbolSet<Symbol_Type> fromEnum(Class<Symbol_Type> symbolType) {
-    return new SymbolSet<Symbol_Type>(symbolType, EnumSet.allOf(symbolType));
+  public static <Symbol_Type extends Enum<Symbol_Type> & Symbol> SymbolSet<Symbol_Type> fromEnum(Class<Symbol_Type> symbolType) {
+    final EnumSet<Symbol_Type> symbols = EnumSet.allOf(symbolType);
+    return new SymbolSet<Symbol_Type>(symbolType, symbols);
   }
 
   public static <Symbol_Type extends Symbol> SymbolSet<Symbol_Type> fromCollection(Class<Symbol_Type> symbolType, Collection<Symbol_Type> collection) {

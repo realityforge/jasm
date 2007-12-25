@@ -32,6 +32,7 @@ import jasm.tools.cisc.x86.X86TemplateContext;
 import jasm.util.CollectionUtil;
 import jasm.util.EndianUtil;
 import jasm.util.HexByte;
+import jasm.util.StaticLoophole;
 import java.io.BufferedInputStream;
 import java.io.EOFException;
 import java.io.IOException;
@@ -325,7 +326,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
     if (header == null) {
       throw new AssemblyException("unknown instruction");
     }
-    return Arrays.asList(scanInstruction(stream, header));
+    return StaticLoophole.asList(scanInstruction(stream, header));
   }
 
   @Override

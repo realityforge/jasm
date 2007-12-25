@@ -8,6 +8,9 @@
  */
 package jasm.util;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Static type loophole that prevents "unchecked" compiler warnings but that does not circumvent dynamic type checks.
  */
@@ -20,5 +23,10 @@ public final class StaticLoophole {
   @SuppressWarnings("unchecked")
   public static <T> T cast(Object object) {
     return (T) object;
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <T> List<T> asList(T object) {
+    return Arrays.asList(object);
   }
 }

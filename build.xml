@@ -52,7 +52,9 @@
            classpath="${cli.jar}"
            debug="true"
            deprecation="true"
-           optimize="false">
+           optimize="false"
+           source="1.5">
+      <compilerarg value="-Xlint:unchecked"/>
       <include name="jasm/tools/**"/>
       <exclude name="jasm/tools/test/**"/>
       <exclude name="jasm/tools/**/correctness/**"/>
@@ -83,9 +85,10 @@
            classpath="${cli.jar}"
            debug="true"
            deprecation="true"
-           optimize="false">
-
-      </javac>
+           optimize="false"
+           source="1.5">
+      <compilerarg value="-Xlint:unchecked"/>
+    </javac>
   </target>
 
   <target name="compile-tests" depends="compile" description="Compile the code">
@@ -95,7 +98,10 @@
            classpath="${junit.jar}:${output.main.classes}"
            debug="true"
            deprecation="true"
-           optimize="false"/>
+           optimize="false"
+           source="1.5">
+      <compilerarg value="-Xlint:unchecked"/>
+    </javac>
   </target>
 
   <target name="compile-examples" depends="compile">
@@ -105,7 +111,10 @@
            classpath="${output.main.classes}"
            debug="true"
            deprecation="true"
-           optimize="false"/>
+           optimize="false"
+           source="1.5">
+      <compilerarg value="-Xlint:unchecked"/>
+    </javac>
   </target>
 
   <target name="unit-tests" depends="compile-tests" description="Run the test cases" unless="skip.tests">

@@ -10,7 +10,6 @@ package jasm.tools.risc.field;
 
 import jasm.tools.risc.bitRange.BitRange;
 import jasm.util.NamedField;
-import jasm.util.ProgramError;
 
 /**
  * A field describes a bit range and how it relates to an operand.
@@ -30,14 +29,14 @@ public abstract class RiscField
     this(null, bitRange);
   }
 
+  @SuppressWarnings({"CloneDoesntDeclareCloneNotSupportedException"})
   @Override
   public RiscField clone() {
     try {
       return (RiscField) super.clone();
-    } catch (CloneNotSupportedException cloneNotSupportedException) {
-      ProgramError.unexpected("Field.clone() not supported");
+    } catch (CloneNotSupportedException cnse) {
+      throw new IllegalStateException("Clone should be supported.", cnse);
     }
-    return null;
   }
 
   public final BitRange bitRange() {

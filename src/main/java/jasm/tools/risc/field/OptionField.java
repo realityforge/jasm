@@ -15,6 +15,7 @@ import jasm.tools.risc.RiscConstant;
 import jasm.tools.risc.bitRange.BitRange;
 import jasm.tools.risc.bitRange.BitRangeOrder;
 import jasm.util.ProgramError;
+import jasm.util.StaticLoophole;
 import java.util.ArrayList;
 
 /**
@@ -59,7 +60,7 @@ public final class OptionField extends RiscField {
     @Override
     public final OptionField clone() {
         final OptionField result = (OptionField) super.clone();
-        result._options = (ArrayList<Option>) _options.clone();
+        result._options = StaticLoophole.cast(_options.clone());
         return result;
     }
 
