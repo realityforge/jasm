@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.gen;
+package jasm.gen.gen.as;
 
 import jasm.Argument;
 import jasm.Assembler;
@@ -14,6 +14,16 @@ import jasm.ExternalMnemonicSuffixArgument;
 import jasm.Label;
 import jasm.annotations.Inline;
 import jasm.gen.util.IndentWriter;
+import jasm.gen.Template;
+import jasm.gen.Assembly;
+import jasm.gen.Parameter;
+import jasm.gen.EnumerableParameter;
+import jasm.gen.InstructionConstraint;
+import jasm.gen.Trace;
+import jasm.gen.InstructionDescription;
+import jasm.gen.LabelParameter;
+import jasm.gen.OffsetParameter;
+import jasm.gen.AddressParameter;
 import jasm.util.CollectionUtil;
 import jasm.util.HexUtil;
 import jasm.util.StaticLoophole;

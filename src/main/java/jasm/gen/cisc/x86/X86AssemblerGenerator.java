@@ -14,7 +14,7 @@ import jasm.LabelAddressInstruction;
 import jasm.LabelOffsetInstruction;
 import jasm.LittleEndianAssembler;
 import jasm.WordWidth;
-import jasm.gen.AssemblerGenerator;
+import jasm.gen.gen.as.AssemblerGenerator;
 import jasm.gen.Assembly;
 import jasm.gen.Parameter;
 import jasm.gen.util.IndentWriter;

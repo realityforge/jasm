@@ -11,7 +11,7 @@ package jasm.gen.risc;
 import jasm.Argument;
 import jasm.LabelOffsetInstruction;
 import jasm.SymbolicArgument;
-import jasm.gen.AssemblerGenerator;
+import jasm.gen.gen.as.AssemblerGenerator;
 import jasm.gen.Assembly;
 import jasm.gen.ImmediateArgument;
 import jasm.gen.InstructionConstraint;

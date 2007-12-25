@@ -10,7 +10,7 @@ package jasm.gen.gen.as;
 
 import jasm.gen.cisc.x86.X86Assembly;
 import jasm.gen.Trace;
-import jasm.gen.AssemblerGenerator;
+import jasm.gen.gen.as.AssemblerGenerator;
 import java.io.File;
 import java.util.List;
 import org.realityforge.cli.ArgsParser;
