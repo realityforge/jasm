@@ -282,7 +282,8 @@ public abstract class X86Template extends Template implements X86InstructionDesc
 
   private void checkSuffix(String newSuffix, String oldSuffix) {
     if (oldSuffix != null) {
-      if(!newSuffix.equals(oldSuffix)) throw new IllegalStateException("conflicting operand type codes specified: " + newSuffix + " vs. " + oldSuffix);
+      if (!newSuffix.equals(oldSuffix))
+        throw new IllegalStateException("conflicting operand type codes specified: " + newSuffix + " vs. " + oldSuffix);
     }
   }
 

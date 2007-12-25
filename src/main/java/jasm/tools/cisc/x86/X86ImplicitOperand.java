@@ -9,9 +9,9 @@
 package jasm.tools.cisc.x86;
 
 import jasm.Argument;
+import jasm.tools.ExternalPresence;
 import jasm.tools.Immediate8Argument;
 import jasm.tools.ImplicitOperand;
-import jasm.tools.ExternalPresence;
 
 /**
  * An operand that is already implicit in the machine instruction,

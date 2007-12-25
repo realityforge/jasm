@@ -22,7 +22,6 @@ public final class X86TemplateContext implements Cloneable {
   private SibIndexCase _sibIndexCase;
   protected SibBaseCase _sibBaseCase;
 
-
   X86TemplateContext() {
   }
 

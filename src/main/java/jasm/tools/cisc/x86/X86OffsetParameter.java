@@ -14,7 +14,7 @@ import jasm.tools.OffsetParameter;
 public class X86OffsetParameter
     extends X86NumericalParameter
     implements OffsetParameter {
-  
+
   public X86OffsetParameter(Designation designation, WordWidth width) {
     super(designation, width);
     setVariableName("rel" + width.numberOfBits());

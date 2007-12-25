@@ -14,7 +14,7 @@ package jasm.tools.cisc;
  */
 public final class TemplateNotNeededException extends Exception {
 
-    public TemplateNotNeededException() {
-        super();
-    }
+  public TemplateNotNeededException() {
+    super();
+  }
 }

@@ -9,9 +9,13 @@
 package jasm.tools.cisc.x86;
 
 public class X86Config {
-  /** Whether to support 16 bit addressing. */
+  /**
+   * Whether to support 16 bit addressing.
+   */
   private static boolean c_are16BitAddressesSupported;
-  /** Whether to support 16 bit addressing. */
+  /**
+   * Whether to support 16 bit addressing.
+   */
   private static boolean c_are16BitOffsetsSupported;
 
   public static boolean are16BitAddressesSupported() {

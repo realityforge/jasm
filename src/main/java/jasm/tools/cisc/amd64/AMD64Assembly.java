@@ -13,20 +13,21 @@ import jasm.tools.cisc.x86.FloatingPointOpcodeMap;
 import jasm.tools.cisc.x86.X86Assembly;
 import java.util.List;
 
-public final class AMD64Assembly extends X86Assembly<AMD64Template> {
+public final class AMD64Assembly
+    extends X86Assembly<AMD64Template> {
 
-    private AMD64Assembly() {
-        super(InstructionSet.AMD64, AMD64Template.class);
-    }
+  public static final AMD64Assembly ASSEMBLY = new AMD64Assembly();
 
-    @Override
-    protected List<AMD64Template> createTemplates() {
-        final AMD64TemplateCreator creator = new AMD64TemplateCreator();
-        creator.createTemplates(new OneByteOpcodeMap());
-        creator.createTemplates(new TwoByteOpcodeMap());
-        creator.createTemplates(new FloatingPointOpcodeMap(this));
-        return creator.templates();
-    }
+  private AMD64Assembly() {
+    super(InstructionSet.AMD64, AMD64Template.class);
+  }
 
-    public static final AMD64Assembly ASSEMBLY = new AMD64Assembly();
+  @Override
+  protected List<AMD64Template> createTemplates() {
+    final AMD64TemplateCreator creator = new AMD64TemplateCreator();
+    creator.createTemplates(new OneByteOpcodeMap());
+    creator.createTemplates(new TwoByteOpcodeMap());
+    creator.createTemplates(new FloatingPointOpcodeMap(this));
+    return creator.templates();
+  }
 }

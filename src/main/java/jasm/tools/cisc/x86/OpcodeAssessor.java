@@ -9,8 +9,8 @@
 package jasm.tools.cisc.x86;
 
 import jasm.tools.ArgumentRange;
-import jasm.tools.TestArgumentExclusion;
 import jasm.tools.ExternalPresence;
+import jasm.tools.TestArgumentExclusion;
 import jasm.tools.cisc.TemplateNotNeededException;
 
 /**

@@ -26,55 +26,55 @@ import java.util.List;
 
 public final class AMD64AssemblyTester extends X86AssemblyTester<AMD64Template, AMD64DisassembledInstruction> {
 
-    public AMD64AssemblyTester(EnumSet<AssemblyTestComponent> components) {
-        super(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64, components);
-    }
+  public AMD64AssemblyTester(EnumSet<AssemblyTestComponent> components) {
+    super(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64, components);
+  }
 
-    @Override
-    protected final String assemblerCommand() {
-        return "as -64";
-    }
+  @Override
+  protected final String assemblerCommand() {
+    return "as -64";
+  }
 
-    @Override
-    protected final Assembler createTestAssembler() {
-        return new AMD64Assembler(0L);
-    }
+  @Override
+  protected final Assembler createTestAssembler() {
+    return new AMD64Assembler(0L);
+  }
 
-    @Override
-    protected final AMD64Disassembler createTestDisassembler() {
-        return new AMD64Disassembler(0L);
-    }
+  @Override
+  protected final AMD64Disassembler createTestDisassembler() {
+    return new AMD64Disassembler(0L);
+  }
 
-    @Override
-    protected final boolean isLegalArgumentList(AMD64Template template, List<Argument> arguments) {
-        final WordWidth externalCodeSizeAttribute = template.externalCodeSizeAttribute();
-        for (Argument argument : arguments) {
-            if (argument instanceof AMD64GeneralRegister8) {
-                final AMD64GeneralRegister8 generalRegister8 = (AMD64GeneralRegister8) argument;
-                if (generalRegister8.isHighByte()) {
-                    if (template.hasRexPrefix(arguments)) {
-                        return false;
-                    }
-                } else if (generalRegister8.value() >= 4 && externalCodeSizeAttribute != null && externalCodeSizeAttribute.lessThan(
-                    WordWidth.BITS_64)) {
-                    return false;
-                }
-            } else if (externalCodeSizeAttribute != null && externalCodeSizeAttribute.lessThan(WordWidth.BITS_64)) {
-                // exclude cases that gas does not support (but that otherwise seem plausible):
-                if (argument instanceof GeneralRegister) {
-                    final GeneralRegister generalRegister = (GeneralRegister) argument;
-                    if ((generalRegister.value() >= 8) || (generalRegister.width() == WordWidth.BITS_64)) {
-                        return false;
-                    }
-                } else if (argument instanceof AMD64XMMRegister) {
-                    final AMD64XMMRegister xmmRegister = (AMD64XMMRegister) argument;
-                    if (xmmRegister.value() >= 8) {
-                        return false;
-                    }
-                }
-            }
+  @Override
+  protected final boolean isLegalArgumentList(AMD64Template template, List<Argument> arguments) {
+    final WordWidth externalCodeSizeAttribute = template.externalCodeSizeAttribute();
+    for (Argument argument : arguments) {
+      if (argument instanceof AMD64GeneralRegister8) {
+        final AMD64GeneralRegister8 generalRegister8 = (AMD64GeneralRegister8) argument;
+        if (generalRegister8.isHighByte()) {
+          if (template.hasRexPrefix(arguments)) {
+            return false;
+          }
+        } else
+        if (generalRegister8.value() >= 4 && externalCodeSizeAttribute != null && externalCodeSizeAttribute.lessThan(
+            WordWidth.BITS_64)) {
+          return false;
         }
-        return true;
+      } else if (externalCodeSizeAttribute != null && externalCodeSizeAttribute.lessThan(WordWidth.BITS_64)) {
+        // exclude cases that gas does not support (but that otherwise seem plausible):
+        if (argument instanceof GeneralRegister) {
+          final GeneralRegister generalRegister = (GeneralRegister) argument;
+          if ((generalRegister.value() >= 8) || (generalRegister.width() == WordWidth.BITS_64)) {
+            return false;
+          }
+        } else if (argument instanceof AMD64XMMRegister) {
+          final AMD64XMMRegister xmmRegister = (AMD64XMMRegister) argument;
+          if (xmmRegister.value() >= 8) {
+            return false;
+          }
+        }
+      }
     }
-
+    return true;
+  }
 }

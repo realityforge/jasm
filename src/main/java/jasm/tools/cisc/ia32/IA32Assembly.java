@@ -15,19 +15,18 @@ import java.util.List;
 
 public final class IA32Assembly extends X86Assembly<IA32Template> {
 
-    private IA32Assembly() {
-        super(InstructionSet.IA32, IA32Template.class);
-    }
+  public static final IA32Assembly ASSEMBLY = new IA32Assembly();
 
-    @Override
-    protected List<IA32Template> createTemplates() {
-        final IA32TemplateCreator creator = new IA32TemplateCreator();
-        creator.createTemplates(new OneByteOpcodeMap());
-        creator.createTemplates(new TwoByteOpcodeMap());
-        creator.createTemplates(new FloatingPointOpcodeMap(this));
-        return creator.templates();
-    }
+  private IA32Assembly() {
+    super(InstructionSet.IA32, IA32Template.class);
+  }
 
-    public static final IA32Assembly ASSEMBLY = new IA32Assembly();
-
+  @Override
+  protected List<IA32Template> createTemplates() {
+    final IA32TemplateCreator creator = new IA32TemplateCreator();
+    creator.createTemplates(new OneByteOpcodeMap());
+    creator.createTemplates(new TwoByteOpcodeMap());
+    creator.createTemplates(new FloatingPointOpcodeMap(this));
+    return creator.templates();
+  }
 }

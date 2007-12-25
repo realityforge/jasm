@@ -21,29 +21,30 @@ import jasm.tools.cisc.x86.correctness.X86AssemblyTester;
 import java.util.EnumSet;
 import java.util.List;
 
-public final class IA32AssemblyTester extends X86AssemblyTester<IA32Template, IA32DisassembledInstruction> {
+public final class IA32AssemblyTester
+    extends X86AssemblyTester<IA32Template, IA32DisassembledInstruction> {
 
-    public IA32AssemblyTester(EnumSet<AssemblyTestComponent> components) {
-        super(IA32Assembly.ASSEMBLY, WordWidth.BITS_32, components);
-    }
+  public IA32AssemblyTester(EnumSet<AssemblyTestComponent> components) {
+    super(IA32Assembly.ASSEMBLY, WordWidth.BITS_32, components);
+  }
 
-    @Override
-    protected final String assemblerCommand() {
-        return "as -32";
-    }
+  @Override
+  protected final String assemblerCommand() {
+    return "as -32";
+  }
 
-    @Override
-    protected final Assembler createTestAssembler() {
-        return new IA32Assembler(0);
-    }
+  @Override
+  protected final Assembler createTestAssembler() {
+    return new IA32Assembler(0);
+  }
 
-    @Override
-    protected final IA32Disassembler createTestDisassembler() {
-        return new IA32Disassembler(0);
-    }
+  @Override
+  protected final IA32Disassembler createTestDisassembler() {
+    return new IA32Disassembler(0);
+  }
 
-    @Override
-    protected final boolean isLegalArgumentList(IA32Template template, List<Argument> arguments) {
-        return true;
-    }
+  @Override
+  protected final boolean isLegalArgumentList(IA32Template template, List<Argument> arguments) {
+    return true;
+  }
 }
