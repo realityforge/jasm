@@ -228,7 +228,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
 
   protected abstract Map<X86InstructionHeader, LinkedList<Template_Type>> headerToTemplates();
 
-  private final DisassembledInstruction_Type scanInstruction(BufferedInputStream stream, X86InstructionHeader header)
+  private DisassembledInstruction_Type scanInstruction(BufferedInputStream stream, X86InstructionHeader header)
       throws IOException, AssemblyException {
     boolean isFloatingPointEscape = false;
     if (X86Opcode.isFloatingPointEscape(header._opcode1)) {
