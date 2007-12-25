@@ -8,7 +8,7 @@
  */
 package jasm.dis;
 
-import jasm.gen.ImmediateArgument;
+import jasm.tools.ImmediateArgument;
 import jasm.util.HexUtil;
 
 /**

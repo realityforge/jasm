@@ -10,8 +10,8 @@ package jasm.amd64.dis;
 
 import jasm.Argument;
 import jasm.dis.Address64Instruction;
-import jasm.gen.ImmediateArgument;
-import jasm.gen.cisc.amd64.AMD64Template;
+import jasm.tools.ImmediateArgument;
+import jasm.tools.cisc.amd64.AMD64Template;
 import jasm.x86.dis.X86DisassembledInstruction;
 import java.util.List;
 

@@ -10,8 +10,8 @@ package jasm.ia32.dis;
 
 import jasm.Argument;
 import jasm.dis.Address32Instruction;
-import jasm.gen.ImmediateArgument;
-import jasm.gen.cisc.ia32.IA32Template;
+import jasm.tools.ImmediateArgument;
+import jasm.tools.cisc.ia32.IA32Template;
 import jasm.x86.dis.X86DisassembledInstruction;
 import java.util.List;
 

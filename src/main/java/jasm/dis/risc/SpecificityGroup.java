@@ -8,7 +8,7 @@
  */
 package jasm.dis.risc;
 
-import jasm.gen.risc.RiscTemplate;
+import jasm.tools.risc.RiscTemplate;
 import java.util.Collection;
 
 public final class SpecificityGroup<Template_Type extends RiscTemplate> {

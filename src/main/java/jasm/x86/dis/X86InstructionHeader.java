@@ -9,10 +9,10 @@
 package jasm.x86.dis;
 
 import jasm.WordWidth;
-import jasm.gen.Assembly;
-import jasm.gen.cisc.x86.X86Opcode;
-import jasm.gen.cisc.x86.X86Parameter;
-import jasm.gen.cisc.x86.X86Template;
+import jasm.tools.Assembly;
+import jasm.tools.cisc.x86.X86Opcode;
+import jasm.tools.cisc.x86.X86Parameter;
+import jasm.tools.cisc.x86.X86Template;
 import jasm.util.HexByte;
 import java.util.HashMap;
 import java.util.LinkedList;

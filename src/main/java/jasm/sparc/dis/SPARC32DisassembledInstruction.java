@@ -10,8 +10,8 @@ package jasm.sparc.dis;
 
 import jasm.Argument;
 import jasm.dis.Address32Instruction;
-import jasm.gen.ImmediateArgument;
-import jasm.gen.risc.sparc.SPARCTemplate;
+import jasm.tools.ImmediateArgument;
+import jasm.tools.risc.sparc.SPARCTemplate;
 import java.util.List;
 
 public final class SPARC32DisassembledInstruction extends SPARCDisassembledInstruction implements Address32Instruction {

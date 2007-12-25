@@ -11,8 +11,8 @@ package jasm.sparc.dis;
 import jasm.WordWidth;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.risc.RiscDisassembler;
-import jasm.gen.risc.sparc.SPARCAssembly;
-import jasm.gen.risc.sparc.SPARCTemplate;
+import jasm.tools.risc.sparc.SPARCAssembly;
+import jasm.tools.risc.sparc.SPARCTemplate;
 
 public abstract class SPARCDisassembler<DisassembledInstruction_Type extends DisassembledInstruction<SPARCTemplate>>
     extends RiscDisassembler<SPARCTemplate, DisassembledInstruction_Type> {

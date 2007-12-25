@@ -12,8 +12,8 @@ import jasm.Argument;
 import jasm.dis.DisassembledLabel;
 import jasm.dis.GlobalLabelMapper;
 import jasm.dis.risc.RiscDisassembledInstruction;
-import jasm.gen.risc.ppc.PPCExternalInstruction;
-import jasm.gen.risc.ppc.PPCTemplate;
+import jasm.tools.risc.ppc.PPCExternalInstruction;
+import jasm.tools.risc.ppc.PPCTemplate;
 import java.util.List;
 
 public abstract class PPCDisassembledInstruction extends RiscDisassembledInstruction<PPCTemplate> {

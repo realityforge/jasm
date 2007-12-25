@@ -10,8 +10,8 @@ package jasm.dis;
 
 import jasm.Argument;
 import jasm.AssemblyInstruction;
-import jasm.gen.ImmediateArgument;
-import jasm.gen.Template;
+import jasm.tools.ImmediateArgument;
+import jasm.tools.Template;
 import java.util.List;
 
 /**

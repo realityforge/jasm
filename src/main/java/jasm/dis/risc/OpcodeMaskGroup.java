@@ -8,7 +8,7 @@
  */
 package jasm.dis.risc;
 
-import jasm.gen.risc.RiscTemplate;
+import jasm.tools.risc.RiscTemplate;
 import jasm.util.HexUtil;
 import jasm.util.StaticLoophole;
 import java.util.Collections;

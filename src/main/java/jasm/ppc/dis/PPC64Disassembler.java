@@ -11,8 +11,8 @@ package jasm.ppc.dis;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.WordWidth;
-import jasm.gen.risc.ppc.PPCAssembly;
-import jasm.gen.risc.ppc.PPCTemplate;
+import jasm.tools.risc.ppc.PPCAssembly;
+import jasm.tools.risc.ppc.PPCTemplate;
 import jasm.ppc.as.PPC64Assembler;
 import java.util.List;
 

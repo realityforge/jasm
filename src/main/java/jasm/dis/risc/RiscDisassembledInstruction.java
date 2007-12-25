@@ -10,7 +10,7 @@ package jasm.dis.risc;
 
 import jasm.Argument;
 import jasm.dis.DisassembledInstruction;
-import jasm.gen.risc.RiscTemplate;
+import jasm.tools.risc.RiscTemplate;
 import java.util.List;
 
 public abstract class RiscDisassembledInstruction<Template_Type extends RiscTemplate> extends DisassembledInstruction<Template_Type> {

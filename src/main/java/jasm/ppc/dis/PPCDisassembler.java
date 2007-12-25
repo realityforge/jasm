@@ -11,8 +11,8 @@ package jasm.ppc.dis;
 import jasm.WordWidth;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.risc.RiscDisassembler;
-import jasm.gen.risc.ppc.PPCAssembly;
-import jasm.gen.risc.ppc.PPCTemplate;
+import jasm.tools.risc.ppc.PPCAssembly;
+import jasm.tools.risc.ppc.PPCTemplate;
 
 public abstract class PPCDisassembler<DisassembledInstruction_Type extends DisassembledInstruction<PPCTemplate>>
     extends RiscDisassembler<PPCTemplate, DisassembledInstruction_Type> {

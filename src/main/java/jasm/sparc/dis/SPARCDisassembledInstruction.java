@@ -12,8 +12,8 @@ import jasm.Argument;
 import jasm.dis.DisassembledLabel;
 import jasm.dis.GlobalLabelMapper;
 import jasm.dis.risc.RiscDisassembledInstruction;
-import jasm.gen.risc.sparc.SPARCExternalInstruction;
-import jasm.gen.risc.sparc.SPARCTemplate;
+import jasm.tools.risc.sparc.SPARCExternalInstruction;
+import jasm.tools.risc.sparc.SPARCTemplate;
 import java.util.List;
 
 public abstract class SPARCDisassembledInstruction extends RiscDisassembledInstruction<SPARCTemplate> {

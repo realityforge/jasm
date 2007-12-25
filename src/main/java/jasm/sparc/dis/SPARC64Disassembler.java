@@ -11,8 +11,8 @@ package jasm.sparc.dis;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.WordWidth;
-import jasm.gen.risc.sparc.SPARCAssembly;
-import jasm.gen.risc.sparc.SPARCTemplate;
+import jasm.tools.risc.sparc.SPARCAssembly;
+import jasm.tools.risc.sparc.SPARCTemplate;
 import jasm.sparc.as.SPARC64Assembler;
 import java.util.List;
 

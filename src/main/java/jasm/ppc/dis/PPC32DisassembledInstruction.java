@@ -10,8 +10,8 @@ package jasm.ppc.dis;
 
 import jasm.Argument;
 import jasm.dis.Address32Instruction;
-import jasm.gen.ImmediateArgument;
-import jasm.gen.risc.ppc.PPCTemplate;
+import jasm.tools.ImmediateArgument;
+import jasm.tools.risc.ppc.PPCTemplate;
 import java.util.List;
 
 public final class PPC32DisassembledInstruction extends PPCDisassembledInstruction implements Address32Instruction {

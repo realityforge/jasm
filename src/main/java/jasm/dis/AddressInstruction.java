@@ -8,7 +8,7 @@
  */
 package jasm.dis;
 
-import jasm.gen.ImmediateArgument;
+import jasm.tools.ImmediateArgument;
 
 /**
  * Delegation interface (for lack of multiple class inheritance in the Java(TM) Programming Language).
