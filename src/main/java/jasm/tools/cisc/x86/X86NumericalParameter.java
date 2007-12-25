@@ -18,56 +18,69 @@ import jasm.tools.ImmediateArgument;
 import jasm.tools.ImmediateParameter;
 import jasm.tools.Parameter;
 import jasm.tools.util.ProgramError;
+import java.util.Arrays;
 import java.util.Collections;
 
 public abstract class X86NumericalParameter extends X86Parameter implements Parameter, ImmediateParameter {
 
-    private final WordWidth _width;
+  private final WordWidth _width;
 
-    public X86NumericalParameter(X86Operand.Designation designation, WordWidth width) {
-        super(designation, ParameterPlace.APPEND);
-        _width = width;
-    }
+  public X86NumericalParameter(X86Operand.Designation designation, WordWidth width) {
+    super(designation, ParameterPlace.APPEND);
+    _width = width;
+  }
 
-    public final WordWidth width() {
-        return _width;
-    }
+  public final WordWidth width() {
+    return _width;
+  }
 
-    public final String valueString() {
-        return variableName();
-    }
+  public final String valueString() {
+    return variableName();
+  }
 
-    public final Class type() {
-        return width().canonicalPrimitiveType();
-    }
+  public final Class type() {
+    return width().canonicalPrimitiveType();
+  }
 
-    public final Iterable< ? extends ImmediateArgument> getLegalTestArguments() {
-        try {
-            switch (_width) {
-                case BITS_8:
-                    return Static.createSequence(Immediate8Argument.class, byte.class, Byte.MIN_VALUE, (byte) -1, (byte) 2, Byte.MAX_VALUE);
-                case BITS_16:
-                    return Static.createSequence(Immediate16Argument.class, short.class, Short.MIN_VALUE, (short) (Byte.MIN_VALUE - 1), (short) (Byte.MAX_VALUE + 1), Short.MAX_VALUE);
-                case BITS_32:
-                    return Static.createSequence(Immediate32Argument.class, int.class, Integer.MIN_VALUE, Short.MIN_VALUE - 1, Short.MAX_VALUE + 1, Integer.MAX_VALUE);
-                case BITS_64:
-                    return Static.createSequence(Immediate64Argument.class, long.class, Long.MIN_VALUE, Integer.MIN_VALUE - 1L, Integer.MAX_VALUE + 1L, Long.MAX_VALUE);
-                default:
-                    ProgramError.unexpected();
-                    return null;
-            }
-        } catch (Throwable throwable) {
-            ProgramError.unexpected("could not generate test argument for: " + this, throwable);
-        }
-        return null;
+  public final Iterable<? extends ImmediateArgument> getLegalTestArguments() {
+    try {
+      switch (_width) {
+        case BITS_8:
+          return Arrays.asList(new Immediate8Argument(Byte.MIN_VALUE),
+                               new Immediate8Argument((byte) -1),
+                               new Immediate8Argument((byte) 2),
+                               new Immediate8Argument(Byte.MAX_VALUE));
+        case BITS_16:
+          return Arrays.asList(new Immediate16Argument(Short.MIN_VALUE),
+                               new Immediate16Argument((short) (Byte.MIN_VALUE - 1)),
+                               new Immediate16Argument((short) (Byte.MAX_VALUE + 1)),
+                               new Immediate16Argument(Short.MAX_VALUE));
+        case BITS_32:
+          return Arrays.asList(new Immediate32Argument(Integer.MIN_VALUE),
+                               new Immediate32Argument(Short.MIN_VALUE - 1),
+                               new Immediate32Argument(Short.MAX_VALUE + 1),
+                               new Immediate32Argument(Integer.MAX_VALUE));
+        case BITS_64:
+          return Arrays.asList(new Immediate64Argument(Long.MIN_VALUE),
+                               new Immediate64Argument(Integer.MIN_VALUE - 1L),
+                               new Immediate64Argument(Integer.MAX_VALUE + 1L),
+                               new Immediate64Argument(Long.MAX_VALUE));
+        default:
+          ProgramError.unexpected();
+          return null;
+      }
+    } catch (Throwable throwable) {
+      ProgramError.unexpected("could not generate test argument for: " + this, throwable);
     }
+    return null;
+  }
 
-    public final Iterable<? extends Argument> getIllegalTestArguments() {
-      return Collections.emptySet();
-    }
+  public final Iterable<? extends Argument> getIllegalTestArguments() {
+    return Collections.emptySet();
+  }
 
-    @Override
-    public final String toString() {
-        return getClass().getSimpleName();
-    }
+  @Override
+  public final String toString() {
+    return getClass().getSimpleName();
+  }
 }
