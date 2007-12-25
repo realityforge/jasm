@@ -21,7 +21,7 @@ public abstract class LabelInstruction implements AssemblyInstruction {
   private final int _initialStartOffset;
   private final int _initialEndOffset;
   private int _startOffset;
-  protected int _size;
+  private int _size;
   private final Label _label;
 
   protected LabelInstruction(Assembler assembler, int startOffset, int endOffset, Label label) {
@@ -63,6 +63,10 @@ public abstract class LabelInstruction implements AssemblyInstruction {
 
   protected final Label label() {
     return _label;
+  }
+
+  protected final void setSize(int size) {
+    _size = size;
   }
 
   /**

@@ -36,10 +36,6 @@ public abstract class LabelOffsetInstruction extends LabelInstruction {
     assembler.addFixedLengthLabelInstruction(this);
   }
 
-  final void setSize(int nBytes) {
-    _size = nBytes;
-  }
-
   protected final WordWidth labelWidth() {
     return _labelWidthSequence.get(_labelWidthIndex);
   }
