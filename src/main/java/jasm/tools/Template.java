@@ -22,6 +22,9 @@ public abstract class Template implements Cloneable, Comparable<Template> {
   private int _serial = -1;
   private InstructionDescription _instructionDescription;
   private int _labelParameterIndex = -1;
+  protected Method _assemblerMethod;
+  /** The name of the Java method that will be created from this template. */
+  private String _internalName;
 
   protected Template(InstructionDescription instructionDescription) {
     _instructionDescription = instructionDescription;
@@ -59,13 +62,6 @@ public abstract class Template implements Cloneable, Comparable<Template> {
   }
 
   public abstract String assemblerMethodName();
-
-  protected Method _assemblerMethod;
-
-  /**
-   * The name of the Java method that will be created from this template.
-   */
-  private String _internalName;
 
   public String internalName() {
     return _internalName;
