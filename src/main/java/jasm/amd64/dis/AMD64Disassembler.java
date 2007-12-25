@@ -46,7 +46,7 @@ public final class AMD64Disassembler extends X86Disassembler<AMD64Template, AMD6
 
   @Override
   protected final Assembler createAssembler(int offset) {
-    return new AMD64Assembler(_startAddress + offset);
+    return new AMD64Assembler(10, _startAddress + offset);
   }
 
   private static Map<X86InstructionHeader, LinkedList<AMD64Template>> _headerToTemplates = X86InstructionHeader.createMapping(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);

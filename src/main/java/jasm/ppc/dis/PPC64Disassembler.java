@@ -32,6 +32,6 @@ public final class PPC64Disassembler extends PPCDisassembler<PPC64DisassembledIn
 
   @Override
   protected final Assembler createAssembler(int offset) {
-    return new PPC64Assembler(_startAddress + offset);
+    return new PPC64Assembler(10, _startAddress + offset);
   }
 }

@@ -10,8 +10,8 @@ package jasm;
 
 public abstract class BigEndianAssembler extends Assembler {
 
-  protected BigEndianAssembler() {
-    super();
+  protected BigEndianAssembler(final int initialMachineCodeCapacity) {
+    super(initialMachineCodeCapacity);
   }
 
   @Override

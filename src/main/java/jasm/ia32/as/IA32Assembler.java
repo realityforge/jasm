@@ -12,13 +12,23 @@ import jasm.Assembler32;
 import jasm.AssemblyException;
 import jasm.InstructionSet;
 import jasm.Label;
+import jasm.Config;
 
 /**
  * Instatiate this class to assemble IA32 instructions.
  */
 public final class IA32Assembler extends IA32LabelAssembler implements Assembler32 {
 
-  private int _startAddress; // address of first instruction
+  private final int _startAddress; // address of first instruction
+
+  public IA32Assembler(int startAddress) {
+    this(Config.DEFAULT_INITIAL_MACHINE_CODE_SIZE, startAddress);
+  }
+
+  public IA32Assembler(int initialMachineCodeCapacity, int startAddress) {
+    super(initialMachineCodeCapacity);
+    _startAddress = startAddress;
+  }
 
   @Override
   public final InstructionSet instructionSet() {
@@ -27,13 +37,6 @@ public final class IA32Assembler extends IA32LabelAssembler implements Assembler
 
   public final int startAddress() {
     return _startAddress;
-  }
-
-  public IA32Assembler() {
-  }
-
-  public IA32Assembler(int startAddress) {
-    _startAddress = startAddress;
   }
 
   public final void fixLabel(Label label, int address) {

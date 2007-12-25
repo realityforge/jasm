@@ -19,6 +19,10 @@ import static jasm.sparc.GPR.G0;
  */
 public abstract class SPARCAssembler extends SPARCLabelAssembler {
 
+  protected SPARCAssembler(final int initialMachineCodeCapacity) {
+    super(initialMachineCodeCapacity);
+  }
+
   @Override
   public final InstructionSet instructionSet() {
     return InstructionSet.SPARC;

@@ -16,6 +16,10 @@ import jasm.InstructionSet;
  */
 public abstract class PPCAssembler extends PPCLabelAssembler {
 
+  protected PPCAssembler(int initialMachineCodeCapacity) {
+    super(initialMachineCodeCapacity);
+  }
+
   @Override
   public final InstructionSet instructionSet() {
     return InstructionSet.PPC;

@@ -20,8 +20,6 @@ public interface Assembler64 {
    */
   long startAddress();
 
-  void setStartAddress(long address);
-
   /**
    * Assigns a fixed, absolute 64-bit address to a given label.
    *

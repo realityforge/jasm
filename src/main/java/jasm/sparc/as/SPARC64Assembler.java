@@ -11,27 +11,26 @@ package jasm.sparc.as;
 import jasm.Assembler64;
 import jasm.AssemblyException;
 import jasm.Label;
+import jasm.Config;
 
 /**
  * The concrete class for a 64-bit SPARC assembler.
  */
 public final class SPARC64Assembler extends SPARCAssembler implements Assembler64 {
 
-  private long _startAddress; // address of first instruction
-
-  public SPARC64Assembler() {
-  }
+  private final long _startAddress; // address of first instruction
 
   public SPARC64Assembler(long startAddress) {
+    this(Config.DEFAULT_INITIAL_MACHINE_CODE_SIZE, startAddress);
+  }
+
+  public SPARC64Assembler(int initialMachineCodeCapacity, long startAddress) {
+    super(initialMachineCodeCapacity);
     _startAddress = startAddress;
   }
 
   public final long startAddress() {
     return _startAddress;
-  }
-
-  public final void setStartAddress(long address) {
-    _startAddress = address;
   }
 
   public final void fixLabel(Label label, long address) {

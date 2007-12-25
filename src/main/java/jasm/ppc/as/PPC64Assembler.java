@@ -11,27 +11,26 @@ package jasm.ppc.as;
 import jasm.Assembler64;
 import jasm.AssemblyException;
 import jasm.Label;
+import jasm.Config;
 
 /**
  * The concrete class for a 64-bit PowerPC assembler.
  */
 public final class PPC64Assembler extends PPCAssembler implements Assembler64 {
 
-  private long _startAddress; // address of first instruction
-
-  public PPC64Assembler() {
-  }
+  private final long _startAddress; // address of first instruction
 
   public PPC64Assembler(long startAddress) {
+    this(Config.DEFAULT_INITIAL_MACHINE_CODE_SIZE, startAddress);
+  }
+
+  public PPC64Assembler(int initialMachineCodeCapacity, long startAddress) {
+    super(initialMachineCodeCapacity);
     _startAddress = startAddress;
   }
 
   public final long startAddress() {
     return _startAddress;
-  }
-
-  public final void setStartAddress(long address) {
-    _startAddress = address;
   }
 
   public final void fixLabel(Label label, long address) {

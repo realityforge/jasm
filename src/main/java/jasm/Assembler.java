@@ -10,6 +10,7 @@ package jasm;
 
 import jasm.util.Longs;
 import jasm.util.ProgramError;
+import jasm.annotations.NoInline;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -24,23 +25,35 @@ public abstract class Assembler {
   private final LinkedList<LabelOffsetInstruction> _spanDependentLabelInstructions = new LinkedList<LabelOffsetInstruction>();
   private final LabelSet _boundLabels = new LabelSet();
 
-  private int _currentOffset; // address of current instruction
-  private ByteArrayOutputStream _stream = new ByteArrayOutputStream();
   private boolean _selectingLabelInstructions = true;
 
-  protected Assembler() {
+  // index into current machineCode array
+  private int _machineCodeIndex;
+  private byte[] _machineCode;
+
+  protected Assembler(final int initialMachineCodeCapacity) {
+    _machineCode = new byte[initialMachineCodeCapacity];
   }
 
   public abstract InstructionSet instructionSet();
 
 
   protected final int currentOffset() {
-    return _currentOffset;
+    return _machineCodeIndex;
   }
 
-  protected final void emitByte(byte byteValue) {
-    _stream.write(byteValue);
-    _currentOffset++;
+  protected final void emitByte(byte value) {
+    if(_machineCodeIndex == _machineCode.length) {
+      _machineCode = growMachineCode();
+    }
+    _machineCode[_machineCodeIndex++] = value;
+  }
+
+  @NoInline
+  private byte[] growMachineCode() {
+    final byte[] bytes = new byte[2 * _machineCode.length];
+    System.arraycopy(_machineCode, 0, bytes, 0, _machineCode.length);
+    return bytes;
   }
 
   protected abstract void emitShort(short shortValue);
@@ -108,9 +121,13 @@ public abstract class Assembler {
     }
     final int oldSize = instruction.size();
     instruction.setLabelWidth(requiredWidth);
-    _stream.reset();
+    //UGLY hackery.
+    // We assemble the label instruction at the end of our machineCode
+    // to figure out length then we roll it back by reseting the machineCodeIndex
+    final int oldMCI = _machineCodeIndex;
     instruction.assemble();
-    final int newSize = _stream.toByteArray().length;
+    final int newSize = _machineCodeIndex - oldMCI;
+    _machineCodeIndex = oldMCI;
     instruction.setSize(newSize);
     final int delta = newSize - oldSize;
     updateSuccessorLabels(instruction, delta);
@@ -144,18 +161,21 @@ public abstract class Assembler {
     }
   }
 
-  private void writeOutput(OutputStream outputStream, byte[] initialBytes) throws IOException, AssemblyException {
+  private void writeOutput(OutputStream outputStream) throws IOException, AssemblyException {
     _selectingLabelInstructions = false;
     int offset = 0;
     for (LabelInstruction labelInstruction : _labelInstructions) {
-      outputStream.write(initialBytes, offset, labelInstruction.initialStartOffset() - offset);
-      _stream.reset();
+      outputStream.write(_machineCode, offset, labelInstruction.initialStartOffset() - offset);
+      //UGLY hackery.
+      // We assemble the label instruction at the end of our machineCode
+      // to figure out length then we roll it back by reseting the machineCodeIndex
+      final int oldMCI = _machineCodeIndex;
       labelInstruction.assemble();
-      final byte[] labelInstructionBytes = _stream.toByteArray();
-      outputStream.write(labelInstructionBytes, 0, labelInstructionBytes.length);
+      outputStream.write(_machineCode, oldMCI, _machineCodeIndex - oldMCI);
+      _machineCodeIndex = oldMCI;
       offset = labelInstruction.initialEndOffset();
     }
-    outputStream.write(initialBytes, offset, initialBytes.length - offset);
+    outputStream.write(_machineCode, offset, _machineCodeIndex - offset);
   }
 
   /**
@@ -164,10 +184,9 @@ public abstract class Assembler {
    * @throws AssemblyException if there any problem with binding labels to addresses
    */
   public final void output(OutputStream outputStream) throws IOException, AssemblyException {
-    final byte[] initialBytes = _stream.toByteArray();
     gatherLabels();
     updateSpanDependentLabelInstructions();
-    writeOutput(outputStream, initialBytes);
+    writeOutput(outputStream);
   }
 
   /**

@@ -115,9 +115,9 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
   }
 
   private void printAssemblerConstructor(IndentWriter writer, String classSimpleName) {
-    writer.println("protected " + classSimpleName + "() {");
+    writer.println("protected " + classSimpleName + "(final int initialMachineCodeCapacity) {");
     writer.indent();
-    writer.println("super();");
+    writer.println("super(initialMachineCodeCapacity);");
     writer.outdent();
     writer.println("}");
   }

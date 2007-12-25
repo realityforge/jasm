@@ -20,6 +20,6 @@ public class PPC64PerformanceTester
   }
 
   protected byte[] assemble() throws Exception {
-    return assemble(new PPC64Assembler());
+    return assemble(new PPC64Assembler(0L));
   }
 }

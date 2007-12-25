@@ -41,7 +41,7 @@ public class IA32PerformanceTester
   }
 
   protected byte[] assemble() throws Exception {
-    final IA32Assembler asm = new IA32Assembler();
+    final IA32Assembler asm = new IA32Assembler(0);
     final Label startLabel = new Label();
     asm.bindLabel(startLabel);
     asm.add(EDX.indirect(), BL);

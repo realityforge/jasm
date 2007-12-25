@@ -10,8 +10,8 @@ package jasm;
 
 public abstract class LittleEndianAssembler extends Assembler {
 
-  protected LittleEndianAssembler() {
-    super();
+  protected LittleEndianAssembler(final int initialMachineCodeCapacity) {
+    super(initialMachineCodeCapacity);
   }
 
   @Override

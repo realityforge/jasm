@@ -14,10 +14,19 @@ package jasm;
  * is guarded by booleans below could be removed by javac as dead code.
  * We want the code to exist so that the users of the system can choose
  * to enable the code without recompiling jasm.
- * 
+ *
  * <p>However, a production system will most likely replace this class
  * with a version that has final fields so that dead code can be removed.
  */
 public final class Config {
+  /**
+   * Perform constraint checks during assembly?. 
+   */
   public static boolean ENABLE_CONSTRAINT_CHECKS = true;
+
+  /**
+   * The default initial size of machine code array used by assemblers.
+   */
+  public static int DEFAULT_INITIAL_MACHINE_CODE_SIZE = 64;
 }
+

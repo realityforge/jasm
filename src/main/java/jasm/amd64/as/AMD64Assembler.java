@@ -12,27 +12,26 @@ import jasm.Assembler64;
 import jasm.AssemblyException;
 import jasm.InstructionSet;
 import jasm.Label;
+import jasm.Config;
 
 /**
  * Instantiate this class to assemble AMD64 instructions.
  */
 public class AMD64Assembler extends AMD64LabelAssembler implements Assembler64 {
 
-  private long _startAddress; // address of first instruction
+  private final long _startAddress; // address of first instruction
 
   public AMD64Assembler(long startAddress) {
-    _startAddress = startAddress;
+    this(Config.DEFAULT_INITIAL_MACHINE_CODE_SIZE, startAddress);
   }
 
-  public AMD64Assembler() {
+  public AMD64Assembler(int initialMachineCodeCapacity, long startAddress) {
+    super(initialMachineCodeCapacity);
+    _startAddress = startAddress;
   }
 
   public final long startAddress() {
     return _startAddress;
-  }
-
-  public final void setStartAddress(long address) {
-    _startAddress = address;
   }
 
   public final void fixLabel(Label label, long address) {

@@ -28,7 +28,7 @@ public final class AMD64InstructionEditor extends AMD64Assembler implements Asse
    * The instruction is edited in place.
    */
   public AMD64InstructionEditor(byte[] instruction) {
-    super();
+    super(instruction.length, 0L);
     _startOffset = 0;
     _length = instruction.length;
     _instruction = instruction;
@@ -39,7 +39,7 @@ public final class AMD64InstructionEditor extends AMD64Assembler implements Asse
    * The instruction is edited in place.
    */
   public AMD64InstructionEditor(byte[] code, int startOffset, int length) {
-    super();
+    super(length);
     _startOffset = startOffset;
     _length = length;
     _instruction = code;

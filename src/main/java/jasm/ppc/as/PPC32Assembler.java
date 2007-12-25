@@ -11,6 +11,7 @@ package jasm.ppc.as;
 import jasm.Assembler32;
 import jasm.AssemblyException;
 import jasm.Label;
+import jasm.Config;
 
 /**
  * The concrete class for a 32-bit PowerPC assembler.
@@ -20,6 +21,11 @@ public final class PPC32Assembler extends PPCAssembler implements Assembler32 {
   private final int _startAddress; // address of first instruction
 
   public PPC32Assembler(int startAddress) {
+    this(Config.DEFAULT_INITIAL_MACHINE_CODE_SIZE, startAddress);
+  }
+
+  public PPC32Assembler(int initialMachineCodeCapacity,int startAddress) {
+    super(initialMachineCodeCapacity);
     _startAddress = startAddress;
   }
 
