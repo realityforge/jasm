@@ -254,15 +254,15 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     for (DisassembledInstruction_Type disassembledInstruction : disassembledInstructions) {
       matchFound =
           matchFound ||
-              (disassembledInstruction.template().isEquivalentTo(template) &&
-                  matches(disassembledInstruction.arguments(), argumentList) &&
-                  Arrays.equals(disassembledInstruction.bytes(), internalResult));
+          (disassembledInstruction.template().isEquivalentTo(template) &&
+           matches(disassembledInstruction.arguments(), argumentList) &&
+           Arrays.equals(disassembledInstruction.bytes(), internalResult));
     }
 
     if (disassemblyStream.available() != 0 || !matchFound) {
       System.err.println("internal disassembler test failed - " +
-          disassembledInstructions.size() +
-          " false matches found:");
+                         disassembledInstructions.size() +
+                         " false matches found:");
       if (disassemblyStream.available() != 0) {
         System.err.print("extra bytes at end of disassembly stream:");
         for (final int b = disassemblyStream.read(); b != -1;) {
@@ -280,7 +280,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
         System.err.println("disassembled arguments: " + disassembledInstruction.arguments());
         System.err.println("       assembled bytes: " + DisassembledInstruction.toHexString(internalResult));
         System.err.println("    disassembled bytes: " +
-            DisassembledInstruction.toHexString(disassembledInstruction.bytes()));
+                           DisassembledInstruction.toHexString(disassembledInstruction.bytes()));
         ++matchNumber;
       }
       ProgramError.unexpected("mismatch between internal assembler and disassembler");
@@ -373,7 +373,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
       throws AssemblyException {
     int illegalTestCaseNumber = 0;
     for (TestCaseLegality legality : new TestCaseLegality[]{TestCaseLegality.ILLEGAL_BY_CONSTRAINT,
-        TestCaseLegality.ILLEGAL_BY_ARGUMENT}) {
+                                                            TestCaseLegality.ILLEGAL_BY_ARGUMENT}) {
       final ArgumentListIterator<Template_Type> iterator =
           new ArgumentListIterator<Template_Type>(this, template, legality);
       while (iterator.hasNext()) {

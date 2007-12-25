@@ -195,12 +195,10 @@ public final class Main {
     System.out.println();
 
     final ArrayList<AssemblyTestComponent> components = new ArrayList<AssemblyTestComponent>(2);
-    if( _testDisassembler )
-    {
+    if (_testDisassembler) {
       components.add(AssemblyTestComponent.DISASSEMBLER);
     }
-    if( _testExternal )
-    {
+    if (_testExternal) {
       components.add(AssemblyTestComponent.EXTERNAL_ASSEMBLER);
     }
 
@@ -212,7 +210,7 @@ public final class Main {
       final TemplateSelector selector = tester.getSelector();
       selector.setPattern(_pattern);
       selector.setStartSerial(_start);
-      if( 0 != _end ) selector.setEndSerial(_end);
+      if (0 != _end) selector.setEndSerial(_end);
       tester.setCreateExternalSource(_genSource);
       tester.run();
     } catch (Exception e) {

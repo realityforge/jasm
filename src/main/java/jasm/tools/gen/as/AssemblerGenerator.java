@@ -23,8 +23,8 @@ import jasm.tools.OffsetParameter;
 import jasm.tools.Parameter;
 import jasm.tools.Template;
 import jasm.tools.Trace;
-import jasm.tools.util.IndentWriter;
 import jasm.tools.util.CollectionUtil;
+import jasm.tools.util.IndentWriter;
 import jasm.util.HexUtil;
 import jasm.util.StaticLoophole;
 import java.io.BufferedReader;
@@ -357,10 +357,10 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     writer.close();
 
     Trace.line(1, "Generated raw assembler: " + _rawAssemblerClassSimpleName +
-        " [code line count=" + codeLineCount + ", total line count=" + writer.lineCount() +
-        ", method count=" + (templates().size() + subroutineCount) +
-        ", instruction templates=" + templates().size() + ", max templates per description=" + maxTemplatesPerDescription +
-        "]");
+                  " [code line count=" + codeLineCount + ", total line count=" + writer.lineCount() +
+                  ", method count=" + (templates().size() + subroutineCount) +
+                  ", instruction templates=" + templates().size() + ", max templates per description=" + maxTemplatesPerDescription +
+                  "]");
 
     return markGeneratedContent(rawAssemblerFile, charArrayWriter);
   }
@@ -637,7 +637,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     _generatingLabelAssembler = false;
 
     Trace.line(1, "Generated label assembler: " + _labelAssemblerClassSimpleName + " [code line count=" + codeLineCount + ", total line count=" +
-        writer.lineCount() + ", method count=" + templates().size() + ")");
+                  writer.lineCount() + ", method count=" + templates().size() + ")");
 
     return markGeneratedContent(labelAssemblerFile, charArrayWriter);
   }

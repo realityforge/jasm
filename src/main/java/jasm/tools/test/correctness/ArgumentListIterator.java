@@ -105,7 +105,7 @@ final class ArgumentListIterator<Template_Type extends Template> implements Iter
     do {
       result = advance0();
     } while (result && tester.isLegalArgumentList(_template, _next) !=
-        (_testCaseLegality == TestCaseLegality.LEGAL));
+                       (_testCaseLegality == TestCaseLegality.LEGAL));
     return result;
   }
 

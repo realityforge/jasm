@@ -57,9 +57,8 @@ public abstract class PerformanceTester {
 
   protected abstract byte[] assemble() throws Exception;
 
-  protected void disassemble(byte[] bytes) throws Exception
-  {
-    final Disassembler<?,?> disassembler = getDisassembler();
+  protected void disassemble(byte[] bytes) throws Exception {
+    final Disassembler<?, ?> disassembler = getDisassembler();
     final BufferedInputStream inputStream = new BufferedInputStream(new ByteArrayInputStream(bytes));
     disassembler.scanAndPrint(inputStream, new NullOutputStream());
   }
