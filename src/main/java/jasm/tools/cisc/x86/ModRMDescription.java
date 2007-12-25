@@ -13,20 +13,20 @@ import java.util.List;
 
 public final class ModRMDescription extends InstructionDescription {
 
-    private final ModRMGroup.Opcode _opcode;
-    private final String _name;
+  private final ModRMGroup.Opcode _opcode;
+  private final String _name;
 
-    public ModRMDescription(ModRMGroup.Opcode opcode, String name, List<Object> specifications) {
-        super(specifications);
-        _opcode = opcode;
-        _name = name;
-    }
+  public ModRMDescription(ModRMGroup.Opcode opcode, String name, List<Object> specifications) {
+    super(specifications);
+    _opcode = opcode;
+    _name = name;
+  }
 
-    public ModRMGroup.Opcode opcode() {
-        return _opcode;
-    }
+  public ModRMGroup.Opcode opcode() {
+    return _opcode;
+  }
 
-    public String name() {
-        return _name;
-    }
+  public String name() {
+    return _name;
+  }
 }

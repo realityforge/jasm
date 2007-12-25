@@ -10,21 +10,20 @@ package jasm.tools.cisc.x86;
 
 public enum OperandTypeCode {
 
-    a,
-    b,
-    d,
-    dq,
-    d_q,
-    p,
-    pd,
-    ps,
-    q,
-    s,
-    sd,
-    ss,
-    v,
-    w,
-    y, // we made this one up: a double word if operand size 32, a quad word if 64, undefined if 16
-    z;
-
+  a,
+  b,
+  d,
+  dq,
+  d_q,
+  p,
+  pd,
+  ps,
+  q,
+  s,
+  sd,
+  ss,
+  v,
+  w,
+  y, // we made this one up: a double word if operand size 32, a quad word if 64, undefined if 16
+  z
 }

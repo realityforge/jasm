@@ -11,11 +11,12 @@ package jasm.tools.cisc.x86;
 import jasm.WordWidth;
 import jasm.tools.AddressParameter;
 
-public final class X86AddressParameter extends X86NumericalParameter implements AddressParameter {
+public final class X86AddressParameter
+    extends X86NumericalParameter
+    implements AddressParameter {
 
-    public X86AddressParameter(X86Operand.Designation designation, WordWidth width) {
-        super(designation, width);
-        setVariableName("m" + width().numberOfBits());
-    }
-
+  public X86AddressParameter(X86Operand.Designation designation, WordWidth width) {
+    super(designation, width);
+    setVariableName("m" + width().numberOfBits());
+  }
 }

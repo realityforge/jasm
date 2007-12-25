@@ -20,80 +20,80 @@ import jasm.tools.cisc.TemplateNotNeededException;
  */
 public final class OpcodeAssessor extends X86InstructionDescriptionAdapter {
 
-    private final InstructionAssessment _instructionFamily;
+  private final InstructionAssessment _instructionFamily;
 
-    public OpcodeAssessor(InstructionAssessment instructionFamily) {
-        super();
-        _instructionFamily = instructionFamily;
-    }
+  public OpcodeAssessor(InstructionAssessment instructionFamily) {
+    super();
+    _instructionFamily = instructionFamily;
+  }
 
-    @Override
-    public final void visitOperandCode(OperandCode operandCode, X86Operand.Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) {
-        switch (operandCode.operandTypeCode()) {
-            case a:
-            case d_q:
-            case p:
-            case s:
-            case v:
-            case z:
-                _instructionFamily.haveOperandSizeVariants();
-                break;
-            default:
-                break;
-        }
-        switch (operandCode.addressingMethodCode()) {
-            case A:
-            case E:
-            case M:
-            case O:
-            case Q:
-            case W:
-                _instructionFamily.haveAddressSizeVariants();
-                break;
-            default:
-                break;
-        }
-        switch (operandCode.addressingMethodCode()) {
-            case C:
-            case D:
-            case E:
-            case G:
-            case M:
-            case P:
-            case PR:
-            case Q:
-            case R:
-            case S:
-            case V:
-            case VR:
-            case T:
-            case W:
-                _instructionFamily.haveModRMByte();
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
-    public final void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, X86Operand.Designation position, ImplicitOperand.ExternalPresence externalPresence) {
+  @Override
+  public final void visitOperandCode(OperandCode operandCode, X86Operand.Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) {
+    switch (operandCode.operandTypeCode()) {
+      case a:
+      case d_q:
+      case p:
+      case s:
+      case v:
+      case z:
         _instructionFamily.haveOperandSizeVariants();
+        break;
+      default:
+        break;
     }
-
-    @Override
-    public final void visitModRMGroup(ModRMGroup modRMGroup) {
-        _instructionFamily.setModRMGroup(modRMGroup);
+    switch (operandCode.addressingMethodCode()) {
+      case A:
+      case E:
+      case M:
+      case O:
+      case Q:
+      case W:
+        _instructionFamily.haveAddressSizeVariants();
+        break;
+      default:
+        break;
     }
-
-    @Override
-    public final void visitModCase(X86TemplateContext.ModCase modCase) throws TemplateNotNeededException {
+    switch (operandCode.addressingMethodCode()) {
+      case C:
+      case D:
+      case E:
+      case G:
+      case M:
+      case P:
+      case PR:
+      case Q:
+      case R:
+      case S:
+      case V:
+      case VR:
+      case T:
+      case W:
         _instructionFamily.haveModRMByte();
+        break;
+      default:
+        break;
     }
+  }
 
-    @Override
-    public final void visitString(String s) {
-        if (s.startsWith("J") || s.startsWith("j")) {
-            _instructionFamily.beJump();
-        }
+  @Override
+  public final void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, X86Operand.Designation position, ImplicitOperand.ExternalPresence externalPresence) {
+    _instructionFamily.haveOperandSizeVariants();
+  }
+
+  @Override
+  public final void visitModRMGroup(ModRMGroup modRMGroup) {
+    _instructionFamily.setModRMGroup(modRMGroup);
+  }
+
+  @Override
+  public final void visitModCase(X86TemplateContext.ModCase modCase) throws TemplateNotNeededException {
+    _instructionFamily.haveModRMByte();
+  }
+
+  @Override
+  public final void visitString(String s) {
+    if (s.startsWith("J") || s.startsWith("j")) {
+      _instructionFamily.beJump();
     }
+  }
 }

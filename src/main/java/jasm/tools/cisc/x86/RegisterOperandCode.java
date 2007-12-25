@@ -12,15 +12,14 @@ import jasm.tools.ExternalOmission;
 
 public enum RegisterOperandCode {
 
-    eAX, eCX, eDX, eBX, eSP, eBP, eSI, eDI,
-    rAX, rCX, rDX, rBX, rSP, rBP, rSI, rDI;
+  eAX, eCX, eDX, eBX, eSP, eBP, eSI, eDI,
+  rAX, rCX, rDX, rBX, rSP, rBP, rSI, rDI;
 
-    public int id() {
-        return ordinal() % 8;
-    }
+  public int id() {
+    return ordinal() % 8;
+  }
 
-    public ExternalOmission omitExternally() {
-        return new ExternalOmission(this);
-    }
-
+  public ExternalOmission omitExternally() {
+    return new ExternalOmission(this);
+  }
 }
