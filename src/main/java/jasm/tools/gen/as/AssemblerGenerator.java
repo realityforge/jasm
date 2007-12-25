@@ -24,7 +24,7 @@ import jasm.tools.Parameter;
 import jasm.tools.Template;
 import jasm.tools.Trace;
 import jasm.tools.util.IndentWriter;
-import jasm.util.CollectionUtil;
+import jasm.tools.util.CollectionUtil;
 import jasm.util.HexUtil;
 import jasm.util.StaticLoophole;
 import java.io.BufferedReader;

@@ -11,7 +11,7 @@ package jasm.tools.risc;
 import jasm.tools.InstructionConstraint;
 import jasm.tools.InstructionDescription;
 import jasm.tools.risc.field.RiscField;
-import jasm.util.ProgramError;
+import jasm.tools.util.ProgramError;
 import java.util.List;
 
 public interface RiscInstructionDescriptionVisitor {

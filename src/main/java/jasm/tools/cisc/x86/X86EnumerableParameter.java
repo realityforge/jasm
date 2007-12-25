@@ -12,7 +12,7 @@ import jasm.Argument;
 import jasm.EnumerableArgument;
 import jasm.SymbolSet;
 import jasm.tools.EnumerableParameter;
-import jasm.util.ProgramError;
+import jasm.tools.util.ProgramError;
 import java.util.Collections;
 
 public final class X86EnumerableParameter<EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument> extends X86Parameter implements EnumerableParameter {

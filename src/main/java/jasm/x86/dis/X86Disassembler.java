@@ -29,7 +29,6 @@ import jasm.tools.cisc.x86.X86Opcode;
 import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
 import jasm.tools.cisc.x86.X86TemplateContext;
-import jasm.util.CollectionUtil;
 import jasm.util.EndianUtil;
 import jasm.util.HexByte;
 import jasm.util.StaticLoophole;
@@ -283,7 +282,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
               }
               arguments = result;
             }
-            if (-1 == CollectionUtil.indexOfIdentical(arguments, null)) {
+            if (-1 == indexOfNull(arguments)) {
               final Assembler assembler = createAssembler(_currentOffset);
               assembly().assemble(assembler, template, arguments);
               final byte[] bytes = assembler.toByteArray();
@@ -314,6 +313,17 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
       return disassembledInstruction;
     }
     throw new AssemblyException("unknown instruction");
+  }
+
+  private static int indexOfNull(List<?> list) {
+    int i = 0;
+    for (Object element : list) {
+      if (element == null) {
+        return i;
+      }
+      ++i;
+    }
+    return -1;
   }
 
   private static final int MORE_THAN_ANY_INSTRUCTION_LENGTH = 100;

@@ -9,7 +9,7 @@
 package jasm.tools.cisc.x86;
 
 import jasm.WordWidth;
-import jasm.util.ProgramError;
+import jasm.tools.util.ProgramError;
 
 /**
  * A bundle of choices one can make when creating a template.

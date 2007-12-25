@@ -12,7 +12,7 @@ import jasm.WordWidth;
 import jasm.tools.cisc.x86.X86InstructionDescriptionVisitor;
 import jasm.tools.risc.RiscInstructionDescriptionVisitor;
 import jasm.tools.risc.field.InputOperandField;
-import jasm.util.ProgramError;
+import jasm.tools.util.ProgramError;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

@@ -13,11 +13,11 @@ import jasm.tools.InstructionDescription;
 import jasm.tools.OffsetParameter;
 import jasm.tools.Operand;
 import jasm.tools.Template;
+import jasm.tools.util.ProgramError;
 import jasm.tools.risc.field.OperandField;
 import jasm.tools.risc.field.OptionField;
 import jasm.tools.risc.field.ReservedField;
 import jasm.tools.risc.field.RiscField;
-import jasm.util.ProgramError;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -21,7 +21,7 @@ import jasm.tools.util.IndentWriter;
 import jasm.util.ArrayUtil;
 import jasm.util.Enums;
 import jasm.util.HexUtil;
-import jasm.util.ProgramError;
+import jasm.tools.util.ProgramError;
 import jasm.util.StaticLoophole;
 import java.io.PrintWriter;
 import java.io.StringWriter;

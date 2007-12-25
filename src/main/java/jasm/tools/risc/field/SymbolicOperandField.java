@@ -16,10 +16,10 @@ import jasm.tools.AssemblyTestComponent;
 import jasm.tools.Expression;
 import jasm.tools.TestArgumentExclusion;
 import jasm.tools.WrappableSpecification;
+import jasm.tools.util.CollectionUtil;
 import jasm.tools.risc.RiscConstant;
 import jasm.tools.risc.bitRange.BitRange;
 import jasm.tools.risc.bitRange.BitRangeOrder;
-import jasm.util.CollectionUtil;
 import jasm.util.StaticLoophole;
 import java.util.Collections;
 

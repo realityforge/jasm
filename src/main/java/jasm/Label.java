@@ -8,8 +8,6 @@
  */
 package jasm;
 
-import jasm.util.ProgramError;
-
 /**
  * Assembler labels for symbolic addressing.
  *
@@ -97,17 +95,12 @@ public final class Label implements Argument {
    * Must only be called if this label has been {@link #fix32 fixed}.
    */
   public final int address32() throws AssemblyException {
-    switch (_state) {
-      case FIXED_32: {
-        return _address32;
-      }
-      case FIXED_64: {
-        ProgramError.unexpected("64-bit address in 32-bit assembler");
-        return -1;
-      }
-      default: {
-        throw new AssemblyException("unassigned or unfixed label");
-      }
+    if (State.FIXED_32 == _state) {
+      return _address32;
+    } else if (State.FIXED_64 == _state) {
+      throw new AssemblyException("64-bit address in 32-bit assembler");
+    } else {
+      throw new AssemblyException("unassigned or unfixed label");
     }
   }
 
@@ -115,28 +108,21 @@ public final class Label implements Argument {
    * Must only be called if this label has been {@link #fix64 fixed}.
    */
   public final long address64() throws AssemblyException {
-    switch (_state) {
-      case FIXED_64: {
-        return _address64;
-      }
-      case FIXED_32: {
-        ProgramError.unexpected("32-bit address in 64-bit assembler");
-        return -1;
-      }
-      default: {
-        throw new AssemblyException("unassigned or unfixed label");
-      }
+    if (State.FIXED_64 == _state) {
+      return _address64;
+    } else if (State.FIXED_32 == _state) {
+      throw new AssemblyException("32-bit address in 64-bit assembler");
+    } else {
+      throw new AssemblyException("unassigned or unfixed label");
     }
   }
 
   public final String externalValue() {
-    ProgramError.unexpected();
-    return null;
+    throw new UnsupportedOperationException();
   }
 
   public final String disassembledValue() {
-    ProgramError.unexpected();
-    return null;
+    throw new UnsupportedOperationException();
   }
 
   public final long asLong() {
@@ -160,8 +146,7 @@ public final class Label implements Argument {
         case FIXED_64:
           return _address64 == label._address64;
         default:
-          ProgramError.unexpected();
-          return false;
+          throw new IllegalStateException();
       }
     }
     return false;

@@ -9,8 +9,8 @@
 package jasm.tools;
 
 import jasm.Argument;
-import jasm.util.CollectionUtil;
-import jasm.util.ProgramError;
+import jasm.tools.util.ProgramError;
+import jasm.tools.util.CollectionUtil;
 import java.lang.reflect.Method;
 import java.util.List;
 

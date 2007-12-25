@@ -6,12 +6,14 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.util;
+package jasm.tools.util;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import jasm.util.StaticLoophole;
+import jasm.util.ArrayUtil;
 
 public final class CollectionUtil {
   /**

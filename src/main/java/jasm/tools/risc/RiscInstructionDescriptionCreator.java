@@ -17,7 +17,7 @@ import jasm.tools.risc.bitRange.OmittedBitRange;
 import jasm.tools.risc.field.OperandField;
 import jasm.tools.risc.field.OptionField;
 import jasm.tools.risc.field.RiscField;
-import jasm.util.ProgramError;
+import jasm.tools.util.ProgramError;
 import jasm.util.StaticLoophole;
 import java.util.ArrayList;
 import java.util.Iterator;

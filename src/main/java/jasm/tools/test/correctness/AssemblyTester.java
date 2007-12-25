@@ -20,7 +20,7 @@ import jasm.tools.AssemblyTestComponent;
 import jasm.tools.Parameter;
 import jasm.tools.Template;
 import jasm.tools.util.IndentWriter;
-import jasm.util.ProgramError;
+import jasm.tools.util.ProgramError;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;

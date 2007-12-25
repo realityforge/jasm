@@ -8,7 +8,7 @@
  */
 package jasm.tools.test.correctness;
 
-import jasm.util.ProgramError;
+import jasm.tools.util.ProgramError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;

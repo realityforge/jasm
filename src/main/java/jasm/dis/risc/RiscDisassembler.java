@@ -20,7 +20,6 @@ import jasm.tools.risc.RiscAssembly;
 import jasm.tools.risc.RiscTemplate;
 import jasm.tools.risc.field.OperandField;
 import jasm.util.EndianUtil;
-import jasm.util.ProgramWarning;
 import jasm.util.StaticLoophole;
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -109,7 +108,7 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
                     result.add(disassembledInstruction);
                   }
                 } catch (AssemblyException assemblyException) {
-                  ProgramWarning.message("could not assemble matching instruction: " + template);
+                  System.err.println("WARNING: could not assemble matching instruction: " + template);
                 }
               }
             }

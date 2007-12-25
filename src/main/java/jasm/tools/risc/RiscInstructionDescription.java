@@ -9,9 +9,9 @@
 package jasm.tools.risc;
 
 import jasm.tools.InstructionDescription;
+import jasm.tools.util.ProgramError;
 import jasm.tools.risc.field.InputOperandField;
 import jasm.tools.risc.field.RiscField;
-import jasm.util.ProgramError;
 import java.util.List;
 
 public final class RiscInstructionDescription extends InstructionDescription {

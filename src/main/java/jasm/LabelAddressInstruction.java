@@ -8,8 +8,6 @@
  */
 package jasm;
 
-import jasm.util.ProgramError;
-
 public abstract class LabelAddressInstruction extends LabelInstruction {
 
   protected LabelAddressInstruction(Assembler assembler, int startOffset, int endOffset, Label label) {
@@ -27,8 +25,7 @@ public abstract class LabelAddressInstruction extends LabelInstruction {
         return assembler.address(label());
       }
       case FIXED_64: {
-        ProgramError.unexpected("64-bit address requested for 32-bit assembler");
-        return -1;
+        throw new IllegalStateException("64-bit address requested for 32-bit assembler");
       }
       default: {
         throw new AssemblyException("unassigned label");
@@ -46,8 +43,7 @@ public abstract class LabelAddressInstruction extends LabelInstruction {
         return assembler.address(label());
       }
       case FIXED_32: {
-        ProgramError.unexpected("32-bit address requested for 64-bit assembler");
-        return -1;
+        throw new IllegalStateException("32-bit address requested for 64-bit assembler");
       }
       default: {
         throw new AssemblyException("unassigned label");

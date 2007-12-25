@@ -8,7 +8,7 @@
  */
 package jasm.tools.risc.bitRange;
 
-import jasm.util.ProgramError;
+import jasm.tools.util.ProgramError;
 
 /**
  * A {@code BitRange} is a specification of how a field's value is encoded in the

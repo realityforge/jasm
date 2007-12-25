@@ -8,7 +8,6 @@
  */
 package jasm.tools.test.correctness;
 
-import jasm.util.ProgramWarning;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -89,11 +88,11 @@ final class ExternalAssembler {
       };
       for (File file : directory.listFiles(filter)) {
         if (!file.delete()) {
-          ProgramWarning.message("could not delete temporary file: " + file.getAbsolutePath());
+          System.err.println("WARNING: could not delete temporary file: " + file.getAbsolutePath());
         }
       }
     } catch (IOException ioException) {
-      ProgramWarning.message("could not delete temporary files");
+      System.err.println("WARNING: could not delete temporary files");
     }
   }
 }

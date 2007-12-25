@@ -12,7 +12,7 @@ import jasm.Argument;
 import jasm.tools.AssemblyTestComponent;
 import jasm.tools.TestArgumentExclusion;
 import jasm.tools.WrappableSpecification;
-import jasm.util.CollectionUtil;
+import jasm.tools.util.CollectionUtil;
 
 public enum FloatingPointOperandCode implements WrappableSpecification {
     bytes_2(""),

@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.util;
+package jasm.tools.util;
 
 public final class ProgramError extends Error {
   private static final long serialVersionUID = 0;

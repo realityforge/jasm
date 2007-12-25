@@ -12,7 +12,7 @@ import jasm.Argument;
 import jasm.tools.ArgumentRange;
 import jasm.tools.Parameter;
 import jasm.tools.Template;
-import jasm.util.CollectionUtil;
+import jasm.tools.util.CollectionUtil;
 import jasm.util.StaticLoophole;
 import java.util.Arrays;
 import java.util.Iterator;

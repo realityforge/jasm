@@ -14,7 +14,7 @@ import jasm.tools.risc.Option;
 import jasm.tools.risc.RiscConstant;
 import jasm.tools.risc.bitRange.BitRange;
 import jasm.tools.risc.bitRange.BitRangeOrder;
-import jasm.util.ProgramError;
+import jasm.tools.util.ProgramError;
 import jasm.util.StaticLoophole;
 import java.util.ArrayList;
 

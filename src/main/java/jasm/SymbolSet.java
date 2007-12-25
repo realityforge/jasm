@@ -9,7 +9,6 @@
 package jasm;
 
 import jasm.util.NamedField;
-import jasm.util.ProgramError;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -39,11 +38,13 @@ public class SymbolSet<Symbol_Type extends Symbol>
       // This test ensures that values passed for symbolic parameters of methods in the
       // generated assemblers are guaranteed to be legal (assuming client code does not
       // inject its own classes into the package where the symbol classes are defined).
-      ProgramError.unexpected("type of assembler symbol can have values constructed outside of defining package: " + symbolType);
+      throw new IllegalStateException("type of assembler symbol can have values constructed outside of defining package: " + symbolType);
     }
     _symbolType = symbolType;
     _symbols = symbols;
-    ProgramError.check(!_symbols.isEmpty());
+    if (_symbols.isEmpty()) {
+      throw new IllegalStateException("Attempted to create SymbolSet with no symbols for " + symbolType);
+    }
   }
 
   /**
