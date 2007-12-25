@@ -26,6 +26,7 @@ public abstract class Assembly<Template_Type extends Template> {
 
   private final InstructionSet _instructionSet;
   private final Class<Template_Type> _templateType;
+  private List<Template_Type> _templates;
 
   protected Assembly(InstructionSet instructionSet, Class<Template_Type> templateType) {
     _instructionSet = instructionSet;
@@ -41,8 +42,6 @@ public abstract class Assembly<Template_Type extends Template> {
   }
 
   protected abstract List<Template_Type> createTemplates();
-
-  private List<Template_Type> _templates;
 
   public final List<Template_Type> templates() {
     if (_templates == null) {
