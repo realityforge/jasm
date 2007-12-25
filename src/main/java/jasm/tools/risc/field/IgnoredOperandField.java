@@ -24,5 +24,4 @@ public final class IgnoredOperandField extends ImmediateOperandField {
     final BitRange bitRange = BitRange.create(bits, BitRangeOrder.DESCENDING);
     return new IgnoredOperandField(bitRange);
   }
-
 }

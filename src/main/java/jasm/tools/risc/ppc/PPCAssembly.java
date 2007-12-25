@@ -14,6 +14,8 @@ import java.util.List;
 
 public final class PPCAssembly extends RiscAssembly<PPCTemplate> {
 
+  public static final PPCAssembly ASSEMBLY = new PPCAssembly();
+
   private static final boolean GENERATING_64BIT_INSTRUCTIONS = true;
   private static final boolean GENERATING_POWER5_INSTRUCTIONS = false;
 
@@ -47,6 +49,4 @@ public final class PPCAssembly extends RiscAssembly<PPCTemplate> {
     creator.createTemplates(new SyntheticInstructions(creator));
     return creator.templates();
   }
-
-  public static final PPCAssembly ASSEMBLY = new PPCAssembly();
 }

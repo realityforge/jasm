@@ -30,5 +30,4 @@ public final class BranchDisplacementOperandField extends AlignedImmediateOperan
     field.setVariableName("label");
     return field;
   }
-
 }

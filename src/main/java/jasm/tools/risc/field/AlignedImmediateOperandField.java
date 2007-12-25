@@ -9,7 +9,6 @@
 package jasm.tools.risc.field;
 
 import jasm.Argument;
-import jasm.AssemblyException;
 import jasm.tools.Immediate32Argument;
 import jasm.tools.Template;
 import jasm.tools.risc.bitRange.BitRange;
@@ -58,19 +57,6 @@ public class AlignedImmediateOperandField extends ImmediateOperandField {
   @Override
   public final int zeroes() {
     return _zeroes;
-  }
-
-  /**
-   * Converts an argument value to the operand value that does not include bits for the
-   * implied low-order 0 bits that the aligned argument value is guaranteed to contain.
-   * For example, if this field represents a 4-byte aligned value, then {@code argumentToOperand(536) == 134}.
-   */
-  private int argumentToOperand(int value) throws AssemblyException {
-    final int p = grain();
-    if (value % p != 0) {
-      throw new AssemblyException("unaligned immediate operand: " + value);
-    }
-    return value / p;
   }
 
   /**

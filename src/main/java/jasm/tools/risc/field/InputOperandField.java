@@ -65,5 +65,4 @@ public final class InputOperandField extends OperandField<ImmediateArgument> {
   public final ArgumentRange argumentRange() {
     return _argumentRange;
   }
-
 }

@@ -26,5 +26,4 @@ public final class ReservedField extends RiscField {
     final BitRange bitRange = BitRange.create(bits, BitRangeOrder.DESCENDING);
     return new ReservedField(bitRange);
   }
-
 }
