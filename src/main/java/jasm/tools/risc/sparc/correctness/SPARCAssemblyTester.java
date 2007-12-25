@@ -17,7 +17,6 @@ import jasm.tools.risc.sparc.SPARCAssembly;
 import jasm.tools.risc.sparc.SPARCExternalInstruction;
 import jasm.tools.risc.sparc.SPARCTemplate;
 import jasm.tools.util.IndentWriter;
-import jasm.tools.util.ProgramError;
 import jasm.util.EndianUtil;
 import java.io.IOException;
 import java.io.InputStream;
@@ -70,7 +69,7 @@ public abstract class SPARCAssemblyTester<DisassembledInstruction_Type extends D
     protected final byte[] readExternalInstruction(PushbackInputStream externalInputStream, SPARCTemplate template, byte[] internalBytes) throws IOException {
         final byte[] result = super.readExternalInstruction(externalInputStream, template, internalBytes);
         if (!readNop(externalInputStream)) { // read potential DCTI slot place holder contents - see above
-            ProgramError.unexpected("nop missing after external instruction");
+            throw new IllegalStateException("nop missing after external instruction");
         }
         return result;
     }

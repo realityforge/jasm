@@ -13,7 +13,6 @@ import jasm.tools.InstructionDescription;
 import jasm.tools.OffsetParameter;
 import jasm.tools.Operand;
 import jasm.tools.Template;
-import jasm.tools.util.ProgramError;
 import jasm.tools.risc.field.OperandField;
 import jasm.tools.risc.field.OptionField;
 import jasm.tools.risc.field.ReservedField;
@@ -63,7 +62,7 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
             _opcode |= field.bitRange().assembleUnsignedInt(value);
             _opcodeMask |= field.bitRange().instructionMask();
         } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-            ProgramError.unexpected("operand for constant field " + field.name() + " does not fit: " + value);
+            throw new IllegalStateException("operand for constant field " + field.name() + " does not fit: " + value);
         }
     }
 
@@ -82,7 +81,7 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
         } else if (field instanceof ReservedField) {
             organizeConstant(field, 0);
         } else {
-            ProgramError.unexpected("unknown or unallowed type of field: " + field);
+            throw new IllegalStateException("unknown or unallowed type of field: " + field);
         }
     }
 
@@ -131,7 +130,7 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
             _opcode |= option.field().bitRange().assembleUnsignedInt(option.value());
             _opcodeMask |= option.field().bitRange().instructionMask();
         } catch (IndexOutOfBoundsException e) {
-            ProgramError.unexpected("Option: " + option.name() + " does not fit in field " + option.field().name());
+            throw new IllegalStateException("Option: " + option.name() + " does not fit in field " + option.field().name());
         }
 
         if (option.isRedundant()) {

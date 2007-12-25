@@ -15,7 +15,6 @@ import jasm.tools.InstructionConstraint;
 import jasm.tools.InstructionDescription;
 import jasm.tools.TestArgumentExclusion;
 import jasm.tools.cisc.TemplateNotNeededException;
-import jasm.tools.util.ProgramError;
 import jasm.util.HexByte;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
@@ -112,8 +111,7 @@ public interface X86InstructionDescriptionVisitor {
         final ExternalOmission omission = (ExternalOmission) specification;
         return visitSpecification(visitor, omission.wrappedSpecification(), designation, argumentRange, testArgumentExclusion, ExternalPresence.OMITTED);
       } else {
-        ProgramError.unexpected("unknown instruction description specification: " + specification);
-        return false;
+        throw new IllegalStateException("unknown instruction description specification: " + specification);
       }
     }
 

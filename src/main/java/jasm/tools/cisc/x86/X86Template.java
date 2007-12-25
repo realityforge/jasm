@@ -12,15 +12,14 @@ import jasm.EnumerableArgument;
 import jasm.SymbolSet;
 import jasm.WordWidth;
 import jasm.tools.ArgumentRange;
+import jasm.tools.ExternalPresence;
 import jasm.tools.Immediate8Argument;
 import jasm.tools.InstructionConstraint;
 import jasm.tools.InstructionDescription;
 import jasm.tools.Template;
 import jasm.tools.TestArgumentExclusion;
 import jasm.tools.Trace;
-import jasm.tools.ExternalPresence;
 import jasm.tools.cisc.TemplateNotNeededException;
-import jasm.tools.util.ProgramError;
 import jasm.util.HexByte;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
@@ -250,8 +249,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
         break;
       }
       default: {
-        ProgramError.unexpected("don't know what to do with addressing method code: " + addressingMethodCode);
-        break;
+        throw new IllegalStateException("don't know what to do with addressing method code: " + addressingMethodCode);
       }
     }
   }
@@ -274,10 +272,8 @@ public abstract class X86Template extends Template implements X86InstructionDesc
           case BITS_64:
             return "q";
           default:
-            ProgramError.unexpected();
-            break;
+            throw new IllegalStateException();
         }
-        break;
       default:
         break;
     }
@@ -286,7 +282,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
 
   private void checkSuffix(String newSuffix, String oldSuffix) {
     if (oldSuffix != null) {
-      ProgramError.check(newSuffix.equals(oldSuffix), "conflicting operand type codes specified: " + newSuffix + " vs. " + oldSuffix);
+      if(!newSuffix.equals(oldSuffix)) throw new IllegalStateException("conflicting operand type codes specified: " + newSuffix + " vs. " + oldSuffix);
     }
   }
 

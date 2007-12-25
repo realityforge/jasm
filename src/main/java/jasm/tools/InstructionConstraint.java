@@ -10,7 +10,6 @@ package jasm.tools;
 
 import jasm.Argument;
 import jasm.SymbolicArgument;
-import jasm.tools.util.ProgramError;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -215,7 +214,7 @@ public interface InstructionConstraint {
     /**
      * Gets a reference to a Java method that returns a boolean. This is a convenience wrapper for
      * {@link Class#getDeclaredMethod} that converts the checked {@link NoSuchMethodException} into a
-     * {@link ProgramError}.
+     * {@link IllegalStateException}.
      * <p/>
      * The method must have a boolean return type and only accept parameter types corresponding to the unboxed types
      * of a generated assembler method.
@@ -224,8 +223,7 @@ public interface InstructionConstraint {
       try {
         return declaringClass.getDeclaredMethod(methodName, parameterTypes);
       } catch (NoSuchMethodException e) {
-        ProgramError.unexpected("constraint method not found: " + declaringClass + "." + methodName + "(" + Arrays.asList(parameterTypes) + ")");
-        return null;
+        throw new IllegalStateException("constraint method not found: " + declaringClass + "." + methodName + "(" + Arrays.asList(parameterTypes) + ")");
       }
     }
 
@@ -239,9 +237,10 @@ public interface InstructionConstraint {
      *                        is by position.
      */
     public static InstructionConstraint makePredicate(final Method predicateMethod, final Parameter... parameters) throws IllegalArgumentException {
-      ProgramError.check(predicateMethod.getReturnType() == Boolean.TYPE, "predicate method must return a boolean");
+      if(!(predicateMethod.getReturnType() == Boolean.TYPE)) throw new IllegalStateException("predicate method must return a boolean");
       final boolean isStatic = Modifier.isStatic(predicateMethod.getModifiers());
-      ProgramError.check(predicateMethod.getParameterTypes().length == (isStatic ? parameters.length : parameters.length - 1), "parameter count != method ");
+      boolean condition = predicateMethod.getParameterTypes().length == (isStatic ? parameters.length : parameters.length - 1);
+      if(!condition) throw new IllegalStateException("parameter count != method ");
       return new InstructionConstraint() {
 
         /**
@@ -282,13 +281,12 @@ public interface InstructionConstraint {
           try {
             return (Boolean) predicateMethod.invoke(receiver, objects);
           } catch (IllegalArgumentException illegalArgumentException) {
-            ProgramError.unexpected("argument type mismatch", illegalArgumentException);
+            throw new IllegalStateException("argument type mismatch", illegalArgumentException);
           } catch (IllegalAccessException illegalAccessException) {
-            ProgramError.unexpected("illegal access to predicate method unexpected", illegalAccessException);
+            throw new IllegalStateException("illegal access to predicate method unexpected", illegalAccessException);
           } catch (InvocationTargetException invocationTargetException) {
-            ProgramError.unexpected(invocationTargetException);
+            throw new IllegalStateException(invocationTargetException);
           }
-          return false;
         }
 
         /**

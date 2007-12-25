@@ -18,7 +18,6 @@ import jasm.tools.Assembly;
 import jasm.tools.Parameter;
 import jasm.tools.gen.as.AssemblerGenerator;
 import jasm.tools.util.IndentWriter;
-import jasm.tools.util.ProgramError;
 import jasm.util.ArrayUtil;
 import jasm.util.Enums;
 import jasm.util.HexUtil;
@@ -67,8 +66,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
         return parameter;
       }
     }
-    ProgramError.unexpected("found no parameter of type: " + parameterType);
-    return null;
+    throw new IllegalStateException("found no parameter of type: " + parameterType);
   }
 
   private void printCallWithByteDisplacement(IndentWriter writer, Template_Type template, Class argumentType) {
@@ -279,7 +277,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
         } else if (parameter instanceof X86EnumerableParameter) {
           printAppendedEnumerableParameter(writer, (X86EnumerableParameter) parameter);
         } else {
-          ProgramError.unexpected("appended parameter of unexpected type: " + parameter);
+          throw new IllegalStateException("appended parameter of unexpected type: " + parameter);
         }
       }
     }

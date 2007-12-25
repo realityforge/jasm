@@ -22,7 +22,6 @@ import jasm.tools.cisc.x86.X86Template;
 import jasm.tools.cisc.x86.ModCase;
 import jasm.tools.cisc.x86.RMCase;
 import jasm.tools.util.IndentWriter;
-import jasm.tools.util.ProgramError;
 import jasm.util.HexUtil;
 
 /**
@@ -174,8 +173,7 @@ public final class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Te
                         printModVariant(writer, template, AMD64IndirectRegister64.RBP_INDIRECT, AMD64IndirectRegister64.R13_INDIRECT);
                         break;
                     default:
-                        ProgramError.unexpected();
-                        break;
+                        throw new IllegalStateException();
                 }
                 break;
             }
@@ -190,8 +188,7 @@ public final class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Te
                                 printModVariant(writer, template, AMD64BaseRegister64.RBP_BASE, AMD64BaseRegister64.R13_BASE);
                                 break;
                             default:
-                                ProgramError.unexpected();
-                                break;
+                                throw new IllegalStateException();
                         }
                         break;
                     default:
@@ -224,8 +221,7 @@ public final class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Te
                         printSibVariant(writer, template, AMD64IndirectRegister64.RSP_INDIRECT, AMD64IndirectRegister64.R12_INDIRECT);
                         break;
                     default:
-                        ProgramError.unexpected();
-                        break;
+                        throw new IllegalStateException();
                 }
                 break;
             }

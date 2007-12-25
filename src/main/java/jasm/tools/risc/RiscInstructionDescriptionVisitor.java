@@ -11,7 +11,6 @@ package jasm.tools.risc;
 import jasm.tools.InstructionConstraint;
 import jasm.tools.InstructionDescription;
 import jasm.tools.risc.field.RiscField;
-import jasm.tools.util.ProgramError;
 import java.util.List;
 
 public interface RiscInstructionDescriptionVisitor {
@@ -38,7 +37,7 @@ public interface RiscInstructionDescriptionVisitor {
             } else if (specification instanceof InstructionConstraint) {
                 visitor.visitConstraint((InstructionConstraint) specification);
             } else {
-                ProgramError.unexpected("unknown instructionDescription specification: " + specification);
+                throw new IllegalStateException("unknown instructionDescription specification: " + specification);
             }
         }
 

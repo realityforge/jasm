@@ -17,7 +17,6 @@ import jasm.tools.Immediate8Argument;
 import jasm.tools.ImmediateArgument;
 import jasm.tools.ImmediateParameter;
 import jasm.tools.Parameter;
-import jasm.tools.util.ProgramError;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -43,36 +42,30 @@ public abstract class X86NumericalParameter extends X86Parameter implements Para
   }
 
   public final Iterable<? extends ImmediateArgument> getLegalTestArguments() {
-    try {
-      switch (_width) {
-        case BITS_8:
-          return Arrays.asList(new Immediate8Argument(Byte.MIN_VALUE),
-                               new Immediate8Argument((byte) -1),
-                               new Immediate8Argument((byte) 2),
-                               new Immediate8Argument(Byte.MAX_VALUE));
-        case BITS_16:
-          return Arrays.asList(new Immediate16Argument(Short.MIN_VALUE),
-                               new Immediate16Argument((short) (Byte.MIN_VALUE - 1)),
-                               new Immediate16Argument((short) (Byte.MAX_VALUE + 1)),
-                               new Immediate16Argument(Short.MAX_VALUE));
-        case BITS_32:
-          return Arrays.asList(new Immediate32Argument(Integer.MIN_VALUE),
-                               new Immediate32Argument(Short.MIN_VALUE - 1),
-                               new Immediate32Argument(Short.MAX_VALUE + 1),
-                               new Immediate32Argument(Integer.MAX_VALUE));
-        case BITS_64:
-          return Arrays.asList(new Immediate64Argument(Long.MIN_VALUE),
-                               new Immediate64Argument(Integer.MIN_VALUE - 1L),
-                               new Immediate64Argument(Integer.MAX_VALUE + 1L),
-                               new Immediate64Argument(Long.MAX_VALUE));
-        default:
-          ProgramError.unexpected();
-          return null;
-      }
-    } catch (Throwable throwable) {
-      ProgramError.unexpected("could not generate test argument for: " + this, throwable);
+    switch (_width) {
+      case BITS_8:
+        return Arrays.asList(new Immediate8Argument(Byte.MIN_VALUE),
+                             new Immediate8Argument((byte) -1),
+                             new Immediate8Argument((byte) 2),
+                             new Immediate8Argument(Byte.MAX_VALUE));
+      case BITS_16:
+        return Arrays.asList(new Immediate16Argument(Short.MIN_VALUE),
+                             new Immediate16Argument((short) (Byte.MIN_VALUE - 1)),
+                             new Immediate16Argument((short) (Byte.MAX_VALUE + 1)),
+                             new Immediate16Argument(Short.MAX_VALUE));
+      case BITS_32:
+        return Arrays.asList(new Immediate32Argument(Integer.MIN_VALUE),
+                             new Immediate32Argument(Short.MIN_VALUE - 1),
+                             new Immediate32Argument(Short.MAX_VALUE + 1),
+                             new Immediate32Argument(Integer.MAX_VALUE));
+      case BITS_64:
+        return Arrays.asList(new Immediate64Argument(Long.MIN_VALUE),
+                             new Immediate64Argument(Integer.MIN_VALUE - 1L),
+                             new Immediate64Argument(Integer.MAX_VALUE + 1L),
+                             new Immediate64Argument(Long.MAX_VALUE));
+      default:
+        throw new IllegalStateException();
     }
-    return null;
   }
 
   public final Iterable<? extends Argument> getIllegalTestArguments() {

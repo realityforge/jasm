@@ -10,7 +10,6 @@ package jasm.tools.risc;
 
 import jasm.tools.InstructionDescription;
 import jasm.tools.risc.field.OptionField;
-import jasm.tools.util.ProgramError;
 import jasm.util.StaticLoophole;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -88,7 +87,7 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
                             found = true;
                         }
                     }
-                    ProgramError.check(found);
+                  if(!found) throw new IllegalStateException("Program Error");
                 }
             }
         }

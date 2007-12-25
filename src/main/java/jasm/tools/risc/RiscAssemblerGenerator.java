@@ -24,7 +24,6 @@ import jasm.tools.risc.field.OperandField;
 import jasm.tools.util.IndentWriter;
 import jasm.tools.util.CollectionUtil;
 import jasm.util.HexUtil;
-import jasm.tools.util.ProgramError;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -158,7 +157,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
             } else if (value instanceof ImmediateArgument) {
                 expression = Long.toString(value.asLong());
             } else {
-                ProgramError.unexpected("unknown type of disassembled value: " + value.getClass().getName());
+                throw new IllegalStateException("unknown type of disassembled value: " + value.getClass().getName());
             }
         }
         if ((syntheticTemplate.opcodeMask() & rawOperandMask) != rawOperandMask) {

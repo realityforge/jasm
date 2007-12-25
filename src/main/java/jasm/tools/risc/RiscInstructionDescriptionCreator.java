@@ -17,7 +17,6 @@ import jasm.tools.risc.bitRange.OmittedBitRange;
 import jasm.tools.risc.field.OperandField;
 import jasm.tools.risc.field.OptionField;
 import jasm.tools.risc.field.RiscField;
-import jasm.tools.util.ProgramError;
 import jasm.util.StaticLoophole;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,8 +42,7 @@ public abstract class RiscInstructionDescriptionCreator extends InstructionDescr
                 return i;
             }
         }
-        ProgramError.unexpected("template instruction description without name");
-        return -1;
+        throw new IllegalStateException("template instruction description without name");
     }
 
     private void setFirstString(List<Object> specifications, String value) {
@@ -132,7 +130,8 @@ public abstract class RiscInstructionDescriptionCreator extends InstructionDescr
                 }
             }
         }
-        ProgramError.check(!instructionDescriptions.isEmpty());
-        return new RiscInstructionDescriptionModifier(instructionDescriptions);
+      boolean condition = !instructionDescriptions.isEmpty();
+      if(!condition) throw new IllegalStateException("Program Error");
+      return new RiscInstructionDescriptionModifier(instructionDescriptions);
     }
 }

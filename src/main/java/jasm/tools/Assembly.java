@@ -13,7 +13,6 @@ import jasm.Assembler;
 import jasm.AssemblyException;
 import jasm.InstructionSet;
 import jasm.Label;
-import jasm.tools.util.ProgramError;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -72,9 +71,8 @@ public abstract class Assembly<Template_Type extends Template> {
     try {
       return assembler.getClass().getMethod(template.assemblerMethodName(), parameterTypes);
     } catch (Throwable throwable) {
-      ProgramError.unexpected("could not find assembler method for template: " + this);
+      throw new IllegalStateException("could not find assembler method for template: " + this);
     }
-    return null;
   }
 
   private Method getAssemblerMethod(Assembler assembler, Template_Type template, List<Argument> arguments) {
@@ -100,9 +98,9 @@ public abstract class Assembly<Template_Type extends Template> {
     try {
       assemblerMethod.invoke(assembler, objects);
     } catch (IllegalArgumentException illegalArgumentException) {
-      ProgramError.unexpected("argument type mismatch", illegalArgumentException);
+      throw new IllegalStateException("argument type mismatch", illegalArgumentException);
     } catch (IllegalAccessException illegalAccessException) {
-      ProgramError.unexpected("illegal access to assembler method unexpected", illegalAccessException);
+      throw new IllegalStateException("illegal access to assembler method unexpected", illegalAccessException);
     } catch (InvocationTargetException invocationTargetException) {
       final Throwable target = invocationTargetException.getTargetException();
       if (target instanceof AssemblyException) {
@@ -111,7 +109,7 @@ public abstract class Assembly<Template_Type extends Template> {
       if (target instanceof IllegalArgumentException) {
         throw (IllegalArgumentException) target;
       }
-      ProgramError.unexpected(invocationTargetException);
+      throw new IllegalStateException(invocationTargetException);
     }
   }
 }

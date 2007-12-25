@@ -20,7 +20,6 @@ import jasm.tools.AssemblyTestComponent;
 import jasm.tools.Parameter;
 import jasm.tools.Template;
 import jasm.tools.util.IndentWriter;
-import jasm.tools.util.ProgramError;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
@@ -283,7 +282,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
                            DisassembledInstruction.toHexString(disassembledInstruction.bytes()));
         ++matchNumber;
       }
-      ProgramError.unexpected("mismatch between internal assembler and disassembler");
+      throw new IllegalStateException("mismatch between internal assembler and disassembler");
     }
     disassemblyStream.close();
   }
@@ -295,7 +294,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     // Process legal test cases
     final ArgumentListIterator<Template_Type> argumentLists =
         new ArgumentListIterator<Template_Type>(this, template, TestCaseLegality.LEGAL);
-    ProgramError.check(argumentLists.hasNext(), "no test cases were generated for template: " + template);
+    if(!argumentLists.hasNext()) throw new IllegalStateException("no test cases were generated for template: " + template);
     File binaryFile = null;
     PushbackInputStream externalInputStream = null;
     if (testingExternally) {
@@ -304,7 +303,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
       binaryFile = getExternalAssembler().assemble(sourceFile, assemblerCommand());
       externalInputStream = new PushbackInputStream(new BufferedInputStream(new FileInputStream(binaryFile)));
       if (!findStart(externalInputStream)) {
-        ProgramError.unexpected("could not find start sequence in: " + binaryFile.getAbsolutePath());
+        throw new IllegalStateException("could not find start sequence in: " + binaryFile.getAbsolutePath());
       }
     }
 
@@ -339,7 +338,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
             System.err.println("external result: " + DisassembledInstruction.toHexString(externalResult));
             System.err.println("internal result fields: " + disassembleFields(template, internalResult));
             System.err.println("external result fields: " + disassembleFields(template, externalResult));
-            ProgramError.unexpected("mismatch between internal and external assembler");
+            throw new IllegalStateException("mismatch between internal and external assembler");
           }
         }
       }
@@ -358,7 +357,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     if (testingExternally) {
       for (int i = 0; i < NOOP_COUNT; i++) {
         if (!readNop(externalInputStream)) {
-          ProgramError.unexpected("end pattern missing in: " + binaryFile.getAbsolutePath());
+          throw new IllegalStateException("end pattern missing in: " + binaryFile.getAbsolutePath());
         }
       }
       externalInputStream.close();
@@ -391,7 +390,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
         final int tcn = illegalTestCaseNumber - 1;
         final String msg = "illegal test case " + tcn + " did not throw an exception. arguments: " + argumentList;
         notice(template, msg);
-        ProgramError.unexpected("failed illegal test case");
+        throw new IllegalStateException("failed illegal test case");
       }
     }
     return illegalTestCaseNumber;
@@ -436,7 +435,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
       for (Template_Type template : errors) {
         System.err.println("    " + template);
       }
-      ProgramError.unexpected(errors.size() + " templates failed testing: see previous stack dumps in test output");
+      throw new IllegalStateException(errors.size() + " templates failed testing: see previous stack dumps in test output");
     }
   }
 

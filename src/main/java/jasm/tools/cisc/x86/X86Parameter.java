@@ -12,7 +12,6 @@ import jasm.Argument;
 import jasm.tools.ArgumentRange;
 import jasm.tools.Parameter;
 import jasm.tools.TestArgumentExclusion;
-import jasm.tools.util.ProgramError;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -62,7 +61,7 @@ public abstract class X86Parameter extends X86Operand implements Parameter {
         _excludedExternalTestArguments = testArgumentExclusion.arguments();
         break;
       default:
-        ProgramError.unexpected();
+        throw new IllegalStateException();
     }
   }
 

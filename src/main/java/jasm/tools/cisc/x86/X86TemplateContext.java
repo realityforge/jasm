@@ -9,7 +9,6 @@
 package jasm.tools.cisc.x86;
 
 import jasm.WordWidth;
-import jasm.tools.util.ProgramError;
 
 /**
  * A bundle of choices one can make when creating a template.
@@ -88,7 +87,7 @@ public final class X86TemplateContext implements Cloneable {
     try {
       return (X86TemplateContext) super.clone();
     } catch (CloneNotSupportedException cloneNotSupportedException) {
-      throw new ProgramError("clone() failed", cloneNotSupportedException);
+      throw new IllegalStateException("clone() failed", cloneNotSupportedException);
     }
   }
 

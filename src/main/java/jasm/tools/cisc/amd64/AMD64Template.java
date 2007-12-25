@@ -23,11 +23,12 @@ import jasm.amd64.AMD64IndirectRegister64;
 import jasm.amd64.AMD64XMMComparison;
 import jasm.amd64.AMD64XMMRegister;
 import jasm.tools.ArgumentRange;
-import jasm.tools.TestArgumentExclusion;
 import jasm.tools.ExternalPresence;
-import jasm.tools.util.ProgramError;
+import jasm.tools.TestArgumentExclusion;
 import jasm.tools.cisc.TemplateNotNeededException;
+import jasm.tools.cisc.x86.Designation;
 import jasm.tools.cisc.x86.InstructionAssessment;
+import jasm.tools.cisc.x86.ModCase;
 import jasm.tools.cisc.x86.OperandCode;
 import jasm.tools.cisc.x86.ParameterPlace;
 import jasm.tools.cisc.x86.RegisterOperandCode;
@@ -40,8 +41,6 @@ import jasm.tools.cisc.x86.X86InstructionDescription;
 import jasm.tools.cisc.x86.X86OffsetParameter;
 import jasm.tools.cisc.x86.X86Template;
 import jasm.tools.cisc.x86.X86TemplateContext;
-import jasm.tools.cisc.x86.ModCase;
-import jasm.tools.cisc.x86.Designation;
 import jasm.x86.ControlRegister;
 import jasm.x86.DebugRegister;
 import jasm.x86.GeneralRegister;
@@ -70,8 +69,7 @@ public final class AMD64Template extends X86Template {
                         addEnumerableParameter(designation, ParameterPlace.SIB_BASE_REXB, AMD64BaseRegister64.SYMBOLS);
                         break;
                     default:
-                        ProgramError.unexpected();
-                        break;
+                        throw new IllegalStateException();
                 }
                 break;
             }
@@ -83,8 +81,7 @@ public final class AMD64Template extends X86Template {
                         break;
                     }
                     default: {
-                        ProgramError.unexpected("no special SIB base for mod != 0");
-                        break;
+                        throw new IllegalStateException("no special SIB base for mod != 0");
                     }
                 }
                 break;
@@ -101,8 +98,7 @@ public final class AMD64Template extends X86Template {
                         addEnumerableParameter(designation, ParameterPlace.SIB_INDEX_REXX, AMD64IndexRegister64.SYMBOLS);
                         break;
                     default:
-                        ProgramError.unexpected();
-                        break;
+                        throw new IllegalStateException();
                 }
                 break;
             case NONE:
@@ -128,8 +124,7 @@ public final class AMD64Template extends X86Template {
                                 addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64IndirectRegister64.SYMBOLS);
                                 break;
                             default:
-                                ProgramError.unexpected();
-                                break;
+                                throw new IllegalStateException();
                         }
                         break;
                     case SWORD:
@@ -175,8 +170,7 @@ public final class AMD64Template extends X86Template {
                                 addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64IndirectRegister64.SYMBOLS);
                                 break;
                             default:
-                                ProgramError.unexpected();
-                                break;
+                                throw new IllegalStateException();
                         }
                         break;
                     case SIB:
@@ -197,8 +191,7 @@ public final class AMD64Template extends X86Template {
                         addParameter(new X86DisplacementParameter(designation, WordWidth.BITS_32));
                         break;
                     default:
-                        ProgramError.unexpected();
-                        break;
+                        throw new IllegalStateException();
                 }
                 switch (context().rmCase()) {
                     case NORMAL:
@@ -211,8 +204,7 @@ public final class AMD64Template extends X86Template {
                                 addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64IndirectRegister64.SYMBOLS);
                                 break;
                             default:
-                                ProgramError.unexpected();
-                                break;
+                                throw new IllegalStateException();
                         }
                         break;
                     case SIB:
@@ -274,8 +266,7 @@ public final class AMD64Template extends X86Template {
                         organize_E(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister64.SYMBOLS, testArgumentExclusion);
                         break;
                     default:
-                        ProgramError.unexpected();
-                        break;
+                        throw new IllegalStateException();
                 }
                 break;
             }
@@ -323,8 +314,7 @@ public final class AMD64Template extends X86Template {
                         addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister64.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     default:
-                        ProgramError.unexpected();
-                        break;
+                        throw new IllegalStateException();
                 }
                 break;
             }
@@ -342,8 +332,7 @@ public final class AMD64Template extends X86Template {
                         addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64GeneralRegister32.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     default:
-                        ProgramError.unexpected();
-                        break;
+                        throw new IllegalStateException();
                 }
                 break;
             }
@@ -391,8 +380,7 @@ public final class AMD64Template extends X86Template {
                         addParameter(new X86OffsetParameter(designation, WordWidth.BITS_64));
                         break;
                     default:
-                        ProgramError.unexpected();
-                        break;
+                        throw new IllegalStateException();
                 }
                 break;
             }
@@ -409,8 +397,7 @@ public final class AMD64Template extends X86Template {
                         addParameter(new X86OffsetParameter(designation, WordWidth.BITS_32));
                         break;
                     default:
-                        ProgramError.unexpected();
-                        break;
+                        throw new IllegalStateException();
                 }
                 break;
             }
@@ -462,8 +449,7 @@ public final class AMD64Template extends X86Template {
                         addEnumerableParameter(designation, place, AMD64GeneralRegister64.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     default:
-                        ProgramError.unexpected();
-                        break;
+                        throw new IllegalStateException();
                 }
                 break;
             case Ob:
@@ -478,8 +464,7 @@ public final class AMD64Template extends X86Template {
                         addParameter(new X86AddressParameter(designation, WordWidth.BITS_64), argumentRange);
                         break;
                     default:
-                        ProgramError.unexpected();
-                        break;
+                        throw new IllegalStateException();
                 }
                 break;
             }
@@ -525,8 +510,7 @@ public final class AMD64Template extends X86Template {
                         addEnumerableParameter(designation, ParameterPlace.MOD_RM_REXB, AMD64GeneralRegister64.SYMBOLS).excludeTestArguments(testArgumentExclusion);
                         break;
                     default:
-                        ProgramError.unexpected();
-                        break;
+                        throw new IllegalStateException();
                 }
                 break;
             case Sw: {
@@ -590,8 +574,7 @@ public final class AMD64Template extends X86Template {
                 break;
             }
             default:
-                ProgramError.unexpected("undefined operand code: " + operandCode);
-                break;
+                throw new IllegalStateException("undefined operand code: " + operandCode);
         }
     }
 
@@ -607,8 +590,7 @@ public final class AMD64Template extends X86Template {
                 addImplicitOperand(new X86ImplicitOperand(designation, externalPresence, AMD64GeneralRegister64.values()[registerOperandCode.id()]));
                 break;
             default:
-                ProgramError.unexpected();
-                break;
+                throw new IllegalStateException();
         }
     }
 

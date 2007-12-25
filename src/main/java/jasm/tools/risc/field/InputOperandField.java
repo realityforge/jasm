@@ -13,7 +13,6 @@ import jasm.tools.ArgumentRange;
 import jasm.tools.ImmediateArgument;
 import jasm.tools.risc.bitRange.BitRange;
 import jasm.tools.risc.bitRange.BitRangeOrder;
-import jasm.tools.util.ProgramError;
 import java.util.Collections;
 
 /**
@@ -38,8 +37,7 @@ public final class InputOperandField extends OperandField<ImmediateArgument> {
 
     @Override
     public final ImmediateArgument disassemble(int instruction) {
-        ProgramError.unexpected();
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     public final Class type() {

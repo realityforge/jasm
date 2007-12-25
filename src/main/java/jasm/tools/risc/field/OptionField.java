@@ -14,7 +14,6 @@ import jasm.tools.risc.Option;
 import jasm.tools.risc.RiscConstant;
 import jasm.tools.risc.bitRange.BitRange;
 import jasm.tools.risc.bitRange.BitRangeOrder;
-import jasm.tools.util.ProgramError;
 import jasm.util.StaticLoophole;
 import java.util.ArrayList;
 
@@ -77,7 +76,7 @@ public final class OptionField extends RiscField {
         final Option newOption = new Option(name, value, externalName, result);
         for (Option option : _options) {
             if (option.equals(newOption)) {
-                ProgramError.unexpected("duplicate option: " + option);
+                throw new IllegalStateException("duplicate option: " + option);
             }
         }
         result._options.add(newOption);

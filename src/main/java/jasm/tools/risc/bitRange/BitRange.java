@@ -8,8 +8,6 @@
  */
 package jasm.tools.risc.bitRange;
 
-import jasm.tools.util.ProgramError;
-
 /**
  * A {@code BitRange} is a specification of how a field's value is encoded in the
  * bit positions in an instruction. The bit positions are not necessarily contiguous.
@@ -56,8 +54,7 @@ public abstract class BitRange {
             }
             // else this is an error; fall through
         }
-        ProgramError.unexpected("invalid bit range");
-        return null;
+        throw new IllegalStateException("invalid bit range");
     }
 
     /**

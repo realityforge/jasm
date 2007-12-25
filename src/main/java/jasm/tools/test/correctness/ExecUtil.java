@@ -8,7 +8,6 @@
  */
 package jasm.tools.test.correctness;
 
-import jasm.tools.util.ProgramError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -49,7 +48,7 @@ final class ExecUtil {
           new Redirector(process, in, process.getOutputStream(), command + " [stdin]", Integer.MAX_VALUE);
       final int exitValue = process.waitFor();
       if (exitValue != 0) {
-        ProgramError.unexpected("execution of command failed: " + command + " [exit code = " + exitValue + "]");
+        throw new IllegalStateException("execution of command failed: " + command + " [exit code = " + exitValue + "]");
       }
     } finally {
       if (null != stderr) stderr.close();

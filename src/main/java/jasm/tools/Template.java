@@ -9,7 +9,6 @@
 package jasm.tools;
 
 import jasm.Argument;
-import jasm.tools.util.ProgramError;
 import jasm.tools.util.CollectionUtil;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -56,7 +55,7 @@ public abstract class Template implements Cloneable, Comparable<Template> {
    */
   protected final void setLabelParameterIndex() {
     if (_labelParameterIndex != -1) {
-      ProgramError.unexpected("a template can have at most one label parameter");
+      throw new IllegalStateException("a template can have at most one label parameter");
     }
     _labelParameterIndex = parameters().size();
   }
@@ -99,7 +98,8 @@ public abstract class Template implements Cloneable, Comparable<Template> {
     final List<? extends Parameter> parameters = parameters();
     assert arguments.size() == parameters.size();
     final int index = CollectionUtil.indexOfIdentical(parameters, parameter);
-    ProgramError.check(index != -1, parameter + " is not a parameter of " + externalName());
+    boolean condition = index != -1;
+    if(!condition) throw new IllegalStateException(parameter + " is not a parameter of " + externalName());
     return arguments.get(index);
   }
 
@@ -119,9 +119,8 @@ public abstract class Template implements Cloneable, Comparable<Template> {
       result._instructionDescription = _instructionDescription.clone();
       return result;
     } catch (CloneNotSupportedException cloneNotSupportedException) {
-      ProgramError.unexpected(cloneNotSupportedException);
+      throw new IllegalStateException(cloneNotSupportedException);
     }
-    return null;
   }
 
   public final int compareTo(Template other) {

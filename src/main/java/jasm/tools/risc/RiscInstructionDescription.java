@@ -9,7 +9,6 @@
 package jasm.tools.risc;
 
 import jasm.tools.InstructionDescription;
-import jasm.tools.util.ProgramError;
 import jasm.tools.risc.field.InputOperandField;
 import jasm.tools.risc.field.RiscField;
 import java.util.List;
@@ -38,13 +37,13 @@ public final class RiscInstructionDescription extends InstructionDescription {
             bits += field.bitRange().encodedWidth();
             final int fieldMask = field.bitRange().instructionMask();
             if ((fieldMask & mask) != 0) {
-                ProgramError.unexpected("RISC instruction field defines bits also defined by another field: " + field.name() + "[" + field.bitRange() + "]");
+                throw new IllegalStateException("RISC instruction field defines bits also defined by another field: " + field.name() + "[" + field.bitRange() + "]");
             }
             mask |= fieldMask;
         }
 
         if (bits != 32) {
-            ProgramError.unexpected("RISC instruction description describes " + bits + " instruction field bits: " + specifications);
+            throw new IllegalStateException("RISC instruction description describes " + bits + " instruction field bits: " + specifications);
         }
     }
 

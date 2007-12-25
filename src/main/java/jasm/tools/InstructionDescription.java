@@ -12,7 +12,6 @@ import jasm.WordWidth;
 import jasm.tools.cisc.x86.X86InstructionDescriptionVisitor;
 import jasm.tools.risc.RiscInstructionDescriptionVisitor;
 import jasm.tools.risc.field.InputOperandField;
-import jasm.tools.util.ProgramError;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -155,9 +154,8 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
       clone._serial = ++_nextSerial;
       return clone;
     } catch (CloneNotSupportedException cloneNotSupportedException) {
-      ProgramError.unexpected(cloneNotSupportedException);
+      throw new IllegalStateException(cloneNotSupportedException);
     }
-    return null;
   }
 
   @Override
