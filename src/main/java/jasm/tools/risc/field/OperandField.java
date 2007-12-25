@@ -10,7 +10,7 @@ package jasm.tools.risc.field;
 
 import jasm.Argument;
 import jasm.ExternalMnemonicSuffixArgument;
-import jasm.tools.Expression;
+import jasm.tools.risc.field.Expression;
 import jasm.tools.Parameter;
 import jasm.tools.Template;
 import jasm.tools.risc.RiscConstant;

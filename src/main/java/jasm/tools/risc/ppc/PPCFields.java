@@ -23,7 +23,7 @@ import jasm.ppc.FPR;
 import jasm.ppc.GPR;
 import jasm.ppc.SPR;
 import jasm.ppc.ZeroOrRegister;
-import jasm.tools.Expression;
+import jasm.tools.risc.field.Expression;
 import jasm.tools.ImmediateArgument;
 import jasm.tools.InstructionConstraint;
 import static jasm.tools.InstructionConstraint.Static.lt;

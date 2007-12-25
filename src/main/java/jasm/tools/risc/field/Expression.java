@@ -6,9 +6,11 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.tools;
+package jasm.tools.risc.field;
 
 import jasm.Argument;
+import jasm.tools.Template;
+import jasm.tools.Parameter;
 import java.util.List;
 
 /**
@@ -35,7 +37,7 @@ public interface Expression {
     /**
      * Evaluates a given expression term to a {@code long} value.
      *
-     * @param term a {@link Number}, {@link Expression} or {@link Parameter} instance
+     * @param term a {@link Number}, {@link Expression} or {@link jasm.tools.Parameter} instance
      */
     public static long evaluateTerm(Object term, Template template, List<Argument> arguments) {
       if (term instanceof Number) {

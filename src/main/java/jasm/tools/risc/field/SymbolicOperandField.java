@@ -13,7 +13,7 @@ import jasm.SymbolSet;
 import jasm.SymbolicArgument;
 import jasm.tools.ArgumentRange;
 import jasm.tools.AssemblyTestComponent;
-import jasm.tools.Expression;
+import jasm.tools.risc.field.Expression;
 import jasm.tools.TestArgumentExclusion;
 import jasm.tools.WrappableSpecification;
 import jasm.tools.util.CollectionUtil;

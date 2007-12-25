@@ -22,7 +22,7 @@ import jasm.sparc.PrivilegedRegister;
 import jasm.sparc.QFPR;
 import jasm.sparc.SFPR;
 import jasm.sparc.StateRegister;
-import jasm.tools.Expression;
+import jasm.tools.risc.field.Expression;
 import jasm.tools.risc.RiscConstant;
 import jasm.tools.risc.field.BranchDisplacementOperandField;
 import jasm.tools.risc.field.ConstantField;

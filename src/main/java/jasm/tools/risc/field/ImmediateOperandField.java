@@ -10,7 +10,7 @@ package jasm.tools.risc.field;
 
 import jasm.Argument;
 import jasm.tools.ArgumentRange;
-import jasm.tools.Expression;
+import jasm.tools.risc.field.Expression;
 import jasm.tools.Immediate32Argument;
 import jasm.tools.ImmediateArgument;
 import jasm.tools.ImmediateParameter;
