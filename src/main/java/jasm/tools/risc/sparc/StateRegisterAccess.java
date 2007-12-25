@@ -22,22 +22,22 @@ import static jasm.tools.risc.sparc.SPARCFields.simm13;
 
 public final class StateRegisterAccess extends SPARCInstructionDescriptionCreator {
 
-    private void create_A43() {
-        define("rd", op(0x2), op3(0x28), rs1_state, i(0), res_12_0, rd);
-    }
+  private void create_A43() {
+    define("rd", op(0x2), op3(0x28), rs1_state, i(0), res_12_0, rd);
+  }
 
-    private void create_A62() {
-        define("wr", op(0x2), op3(0x30), rs1, i(0), res_12_5, rs2, rd_state);
-        define("wr", op(0x2), op3(0x30), rs1, i(1), simm13, rd_state);
-    }
+  private void create_A62() {
+    define("wr", op(0x2), op3(0x30), rs1, i(0), res_12_5, rs2, rd_state);
+    define("wr", op(0x2), op3(0x30), rs1, i(1), simm13, rd_state);
+  }
 
-    StateRegisterAccess(SPARCTemplateCreator templateCreator) {
-        super(templateCreator);
+  StateRegisterAccess(SPARCTemplateCreator templateCreator) {
+    super(templateCreator);
 
-        setCurrentArchitectureManualSection("A.43");
-        create_A43();
+    setCurrentArchitectureManualSection("A.43");
+    create_A43();
 
-        setCurrentArchitectureManualSection("A.62");
-        create_A62();
-    }
+    setCurrentArchitectureManualSection("A.62");
+    create_A62();
+  }
 }

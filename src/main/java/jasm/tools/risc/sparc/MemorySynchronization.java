@@ -19,23 +19,23 @@ import static jasm.tools.risc.sparc.SPARCFields.res_29_25;
 
 final class MemorySynchronization extends SPARCInstructionDescriptionCreator {
 
-    private void create_A32() {
-        define("membar", op(0x2), res_29_25, op3(0x28), bits_18_14(0xf), i(1), res_12_7, membarMask);
+  private void create_A32() {
+    define("membar", op(0x2), res_29_25, op3(0x28), bits_18_14(0xf), i(1), res_12_7, membarMask);
+  }
+
+  private void create_A51() {
+    if (assembly().generatingDeprecatedInstructions()) {
+      define("stbar", op(0x2), res_29_25, op3(0x28), bits_18_14(0xf), i(0), res_12_0);
     }
+  }
 
-    private void create_A51() {
-        if (assembly().generatingDeprecatedInstructions()) {
-            define("stbar", op(0x2), res_29_25, op3(0x28), bits_18_14(0xf), i(0), res_12_0);
-        }
-    }
+  MemorySynchronization(SPARCTemplateCreator templateCreator) {
+    super(templateCreator);
 
-    MemorySynchronization(SPARCTemplateCreator templateCreator) {
-        super(templateCreator);
+    setCurrentArchitectureManualSection("A.32");
+    create_A32();
 
-        setCurrentArchitectureManualSection("A.32");
-        create_A32();
-
-        setCurrentArchitectureManualSection("A.51");
-        create_A51();
-    }
+    setCurrentArchitectureManualSection("A.51");
+    create_A51();
+  }
 }

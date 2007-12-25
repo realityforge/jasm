@@ -19,18 +19,18 @@ import java.util.EnumSet;
 
 public final class SPARC32AssemblyTester extends SPARCAssemblyTester<SPARC32DisassembledInstruction> {
 
-    public SPARC32AssemblyTester(EnumSet<AssemblyTestComponent> components) {
-        super(SPARCAssembly.ASSEMBLY, WordWidth.BITS_32, components);
-    }
+  public SPARC32AssemblyTester(EnumSet<AssemblyTestComponent> components) {
+    super(SPARCAssembly.ASSEMBLY, WordWidth.BITS_32, components);
+  }
 
-    @Override
-    protected final Assembler createTestAssembler() {
-        return new SPARC32Assembler(0);
-    }
+  @Override
+  protected final Assembler createTestAssembler() {
+    return new SPARC32Assembler(0);
+  }
 
-    @Override
-    protected final SPARC32Disassembler createTestDisassembler() {
-        return new SPARC32Disassembler(0);
-    }
+  @Override
+  protected final SPARC32Disassembler createTestDisassembler() {
+    return new SPARC32Disassembler(0);
+  }
 
 }

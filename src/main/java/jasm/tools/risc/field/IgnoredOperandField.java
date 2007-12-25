@@ -16,13 +16,13 @@ import jasm.tools.risc.bitRange.BitRangeOrder;
  */
 public final class IgnoredOperandField extends ImmediateOperandField {
 
-    public IgnoredOperandField(BitRange bitRange) {
-        super(bitRange);
-    }
+  public IgnoredOperandField(BitRange bitRange) {
+    super(bitRange);
+  }
 
   public static IgnoredOperandField createDescendingIgnored(int... bits) {
-        final BitRange bitRange = BitRange.create(bits, BitRangeOrder.DESCENDING);
-        return new IgnoredOperandField(bitRange);
-    }
+    final BitRange bitRange = BitRange.create(bits, BitRangeOrder.DESCENDING);
+    return new IgnoredOperandField(bitRange);
+  }
 
 }

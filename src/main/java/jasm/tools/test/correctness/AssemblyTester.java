@@ -294,7 +294,8 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     // Process legal test cases
     final ArgumentListIterator<Template_Type> argumentLists =
         new ArgumentListIterator<Template_Type>(this, template, TestCaseLegality.LEGAL);
-    if(!argumentLists.hasNext()) throw new IllegalStateException("no test cases were generated for template: " + template);
+    if (!argumentLists.hasNext())
+      throw new IllegalStateException("no test cases were generated for template: " + template);
     File binaryFile = null;
     PushbackInputStream externalInputStream = null;
     if (testingExternally) {

@@ -22,48 +22,48 @@ import java.util.Collections;
  */
 public final class InputOperandField extends OperandField<ImmediateArgument> {
 
-    private final Iterable< ? extends Argument> _testArguments;
-    private final ArgumentRange _argumentRange;
+  private final Iterable<? extends Argument> _testArguments;
+  private final ArgumentRange _argumentRange;
 
-    public InputOperandField(Iterable< ? extends Argument> testArguments, ArgumentRange argumentRange) {
-        super(BitRange.create(new int[] {-1}, BitRangeOrder.DESCENDING));
-        _testArguments = testArguments;
-        _argumentRange = argumentRange;
-    }
+  public InputOperandField(Iterable<? extends Argument> testArguments, ArgumentRange argumentRange) {
+    super(BitRange.create(new int[]{-1}, BitRangeOrder.DESCENDING));
+    _testArguments = testArguments;
+    _argumentRange = argumentRange;
+  }
 
-    public static InputOperandField create(OperandField valueRangeProvider) {
-        return new InputOperandField(valueRangeProvider.getLegalTestArguments(), valueRangeProvider.argumentRange());
-    }
+  public static InputOperandField create(OperandField valueRangeProvider) {
+    return new InputOperandField(valueRangeProvider.getLegalTestArguments(), valueRangeProvider.argumentRange());
+  }
 
-    @Override
-    public final ImmediateArgument disassemble(int instruction) {
-        throw new UnsupportedOperationException();
-    }
+  @Override
+  public final ImmediateArgument disassemble(int instruction) {
+    throw new UnsupportedOperationException();
+  }
 
-    public final Class type() {
-        return int.class;
-    }
+  public final Class type() {
+    return int.class;
+  }
 
-    public final String valueString() {
-        return variableName();
-    }
+  public final String valueString() {
+    return variableName();
+  }
 
-    @Override
-    public final InputOperandField setVariableName(String name) {
-        super.setVariableName(name);
-        return this;
-    }
+  @Override
+  public final InputOperandField setVariableName(String name) {
+    super.setVariableName(name);
+    return this;
+  }
 
-    public final Iterable< ? extends Argument> getLegalTestArguments() {
-        return _testArguments;
-    }
+  public final Iterable<? extends Argument> getLegalTestArguments() {
+    return _testArguments;
+  }
 
-    public final Iterable<? extends Argument> getIllegalTestArguments() {
-      return Collections.emptySet();
-    }
+  public final Iterable<? extends Argument> getIllegalTestArguments() {
+    return Collections.emptySet();
+  }
 
-    public final ArgumentRange argumentRange() {
-        return _argumentRange;
-    }
+  public final ArgumentRange argumentRange() {
+    return _argumentRange;
+  }
 
 }

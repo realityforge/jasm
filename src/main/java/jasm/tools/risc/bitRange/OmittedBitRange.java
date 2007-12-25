@@ -16,84 +16,84 @@ package jasm.tools.risc.bitRange;
  */
 public final class OmittedBitRange extends ContiguousBitRange {
 
-    private int _width;
+  private int _width;
 
-    OmittedBitRange(int width) {
-        super();
-        _width = width;
-        assert width > 0;
+  OmittedBitRange(int width) {
+    super();
+    _width = width;
+    assert width > 0;
+  }
+
+  @Override
+  public final int width() {
+    return _width;
+  }
+
+  @Override
+  public final int encodedWidth() {
+    return 0;
+  }
+
+  @Override
+  public final BitRange move(boolean left, int bits) {
+    return this;
+  }
+
+  /* Accessing */
+
+  @Override
+  public final int instructionMask() {
+    return 0;
+  }
+
+  @Override
+  public final int numberOfLessSignificantBits() {
+    return 32;
+  }
+
+  @Override
+  public final boolean equals(Object other) {
+    if (!(other instanceof OmittedBitRange)) {
+      throw new Error("Invalid argument type\n");
     }
+    final OmittedBitRange omittedBitRange = (OmittedBitRange) other;
+    return _width == omittedBitRange._width;
+  }
 
-    @Override
-    public final int width() {
-        return _width;
-    }
+  @Override
+  public final int hashCode() {
+    return _width;
+  }
 
-    @Override
-    public final int encodedWidth() {
-        return 0;
-    }
+  /* Extracting */
+  @Override
+  public final int extractSignedInt(int syllable) {
+    return 0;
+  }
 
-    @Override
-    public final BitRange move(boolean left, int bits) {
-        return this;
-    }
+  @Override
+  public final int extractUnsignedInt(int syllable) {
+    return 0;
+  }
 
-    /* Accessing */
+  /* Inserting */
+  @Override
+  public final int assembleUncheckedSignedInt(int signedInt) {
+    return 0;
+  }
 
-    @Override
-    public final int instructionMask() {
-        return 0;
-    }
+  @Override
+  public final int assembleUncheckedUnsignedInt(int unsignedInt) {
+    return 0;
+  }
 
-    @Override
-    public final int numberOfLessSignificantBits() {
-        return 32;
-    }
+  @Override
+  public final String encodingString(String value, boolean signed, boolean checked) {
+    return "";
+  }
 
-    @Override
-    public final boolean equals(Object other) {
-        if (!(other instanceof OmittedBitRange)) {
-            throw new Error("Invalid argument type\n");
-        }
-        final OmittedBitRange omittedBitRange = (OmittedBitRange) other;
-        return _width == omittedBitRange._width;
-    }
-
-    @Override
-    public final int hashCode() {
-        return _width;
-    }
-
-    /* Extracting */
-    @Override
-    public final int extractSignedInt(int syllable) {
-        return 0;
-    }
-
-    @Override
-    public final int extractUnsignedInt(int syllable) {
-        return 0;
-    }
-
-    /* Inserting */
-    @Override
-    public final int assembleUncheckedSignedInt(int signedInt) {
-        return 0;
-    }
-
-    @Override
-    public final int assembleUncheckedUnsignedInt(int unsignedInt) {
-        return 0;
-    }
-
-    @Override
-    public final String encodingString(String value, boolean signed, boolean checked) {
-        return "";
-    }
-
-    @Override
-    public final String toString() {
-        return "omit" + _width;
-    }
+  @Override
+  public final String toString() {
+    return "omit" + _width;
+  }
 }

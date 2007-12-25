@@ -13,43 +13,43 @@ import jasm.tools.risc.field.RiscField;
 
 public final class RiscConstant {
 
-    private final RiscField _field;
-    private final int _value;
+  private final RiscField _field;
+  private final int _value;
 
-    public RiscConstant(RiscField field, Argument argument) {
-        _field = field;
-        _value = (int) argument.asLong();
-    }
+  public RiscConstant(RiscField field, Argument argument) {
+    _field = field;
+    _value = (int) argument.asLong();
+  }
 
-    public RiscConstant(RiscField field, int value) {
-        _field = field;
-        _value = value;
-    }
+  public RiscConstant(RiscField field, int value) {
+    _field = field;
+    _value = value;
+  }
 
-    public final RiscField field() {
-        return _field;
-    }
+  public final RiscField field() {
+    return _field;
+  }
 
-    public final int value() {
-        return _value;
-    }
+  public final int value() {
+    return _value;
+  }
 
-    @Override
-    public final boolean equals(Object other) {
-        if (other instanceof RiscConstant) {
-            final RiscConstant riscConstant = (RiscConstant) other;
-            return _field.equals(riscConstant._field) && _value == riscConstant._value;
-        }
-        return false;
+  @Override
+  public final boolean equals(Object other) {
+    if (other instanceof RiscConstant) {
+      final RiscConstant riscConstant = (RiscConstant) other;
+      return _field.equals(riscConstant._field) && _value == riscConstant._value;
     }
+    return false;
+  }
 
-    @Override
-    public final int hashCode() {
-        return _field.hashCode() ^ _value;
-    }
+  @Override
+  public final int hashCode() {
+    return _field.hashCode() ^ _value;
+  }
 
-    @Override
-    public final String toString() {
-        return _field.toString() + "(" + _value + ")";
-    }
+  @Override
+  public final String toString() {
+    return _field.toString() + "(" + _value + ")";
+  }
 }

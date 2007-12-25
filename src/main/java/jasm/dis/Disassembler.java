@@ -107,8 +107,8 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
         final ImmediateArgument immediateArgument = (ImmediateArgument) disassembledInstruction.arguments().get(parameterIndex);
         final Parameter parameter = template.parameters().get(parameterIndex);
         final int offset = (parameter instanceof OffsetParameter) ?
-            (int) immediateArgument.asLong() + disassembledInstruction.offsetForRelativeAddressing() :
-            disassembledInstruction.addressToOffset(immediateArgument);
+                           (int) immediateArgument.asLong() + disassembledInstruction.offsetForRelativeAddressing() :
+                           disassembledInstruction.addressToOffset(immediateArgument);
         final int targetInstructionIndex = findTargetInstructionIndex(offset, disassembledInstructions);
         if (targetInstructionIndex >= 0 && labels[targetInstructionIndex] == null) {
           labels[targetInstructionIndex] = new DisassembledLabel(targetInstructionIndex);

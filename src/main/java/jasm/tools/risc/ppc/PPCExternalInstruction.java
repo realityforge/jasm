@@ -19,17 +19,17 @@ import java.util.List;
  */
 public final class PPCExternalInstruction extends RiscExternalInstruction {
 
-    public PPCExternalInstruction(PPCTemplate template, List<Argument> arguments) {
-        super(template, arguments);
-    }
+  public PPCExternalInstruction(PPCTemplate template, List<Argument> arguments) {
+    super(template, arguments);
+  }
 
   public PPCExternalInstruction(PPCTemplate template, List<Argument> arguments, int offset, List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
-        super(template, arguments, offset, labels, globalLabelMapper);
-    }
+    super(template, arguments, offset, labels, globalLabelMapper);
+  }
 
-    @Override
-    public final boolean isAbsoluteBranch() {
-        // An absolute branch instruction in PowerPC has an AA field with its bit set
-      return _template.optionFields().contains(PPCFields.aa) && (_template.opcode() & PPCFields.aa.bitRange().instructionMask()) != 0;
-    }
+  @Override
+  public final boolean isAbsoluteBranch() {
+    // An absolute branch instruction in PowerPC has an AA field with its bit set
+    return _template.optionFields().contains(PPCFields.aa) && (_template.opcode() & PPCFields.aa.bitRange().instructionMask()) != 0;
+  }
 }

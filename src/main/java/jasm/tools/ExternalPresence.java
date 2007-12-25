@@ -9,7 +9,7 @@
 package jasm.tools;
 
 /**
-   * Determines whether the operand is to be omitted or explicitly stated in external syntax.
+ * Determines whether the operand is to be omitted or explicitly stated in external syntax.
  */
 public enum ExternalPresence {
   OMITTED, EXPLICIT

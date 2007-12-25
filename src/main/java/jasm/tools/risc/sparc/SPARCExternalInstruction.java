@@ -19,17 +19,17 @@ import java.util.List;
  */
 public final class SPARCExternalInstruction extends RiscExternalInstruction {
 
-    public SPARCExternalInstruction(SPARCTemplate template, List<Argument> arguments) {
-        super(template, arguments);
-    }
+  public SPARCExternalInstruction(SPARCTemplate template, List<Argument> arguments) {
+    super(template, arguments);
+  }
 
   public SPARCExternalInstruction(SPARCTemplate template, List<Argument> arguments, int offset, List<DisassembledLabel> labels, GlobalLabelMapper globalLabelMapper) {
-        super(template, arguments, offset, labels, globalLabelMapper);
-    }
+    super(template, arguments, offset, labels, globalLabelMapper);
+  }
 
-    @Override
-    public final boolean isAbsoluteBranch() {
-        // There are no branch instructions in SPARC whose target address is not PC relative
-        return false;
-    }
+  @Override
+  public final boolean isAbsoluteBranch() {
+    // There are no branch instructions in SPARC whose target address is not PC relative
+    return false;
+  }
 }

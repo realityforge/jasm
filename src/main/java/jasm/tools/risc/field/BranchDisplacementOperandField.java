@@ -14,21 +14,21 @@ import jasm.tools.risc.bitRange.BitRangeOrder;
 
 public final class BranchDisplacementOperandField extends AlignedImmediateOperandField implements OffsetParameter {
 
-    public BranchDisplacementOperandField(BitRange bitRange) {
-        super(bitRange, 2);
-        setSignDependentOperations(SignDependentOperations.SIGNED);
-    }
+  public BranchDisplacementOperandField(BitRange bitRange) {
+    super(bitRange, 2);
+    setSignDependentOperations(SignDependentOperations.SIGNED);
+  }
 
-    public static BranchDisplacementOperandField createAscendingBranchDisplacementOperandField(int... bits) {
-        final BitRange bitRange = BitRange.create(bits, BitRangeOrder.ASCENDING);
-        return new BranchDisplacementOperandField(bitRange);
-    }
+  public static BranchDisplacementOperandField createAscendingBranchDisplacementOperandField(int... bits) {
+    final BitRange bitRange = BitRange.create(bits, BitRangeOrder.ASCENDING);
+    return new BranchDisplacementOperandField(bitRange);
+  }
 
-    public static BranchDisplacementOperandField createDescendingBranchDisplacementOperandField(int... bits) {
-        final BitRange bitRange = BitRange.create(bits, BitRangeOrder.DESCENDING);
-        final BranchDisplacementOperandField field = new BranchDisplacementOperandField(bitRange);
-        field.setVariableName("label");
-        return field;
-    }
+  public static BranchDisplacementOperandField createDescendingBranchDisplacementOperandField(int... bits) {
+    final BitRange bitRange = BitRange.create(bits, BitRangeOrder.DESCENDING);
+    final BranchDisplacementOperandField field = new BranchDisplacementOperandField(bitRange);
+    field.setVariableName("label");
+    return field;
+  }
 
 }

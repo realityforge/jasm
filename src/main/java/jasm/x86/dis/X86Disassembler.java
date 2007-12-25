@@ -21,6 +21,9 @@ import jasm.tools.Immediate16Argument;
 import jasm.tools.Immediate32Argument;
 import jasm.tools.Immediate64Argument;
 import jasm.tools.Immediate8Argument;
+import jasm.tools.cisc.x86.ModCase;
+import jasm.tools.cisc.x86.RMCase;
+import jasm.tools.cisc.x86.SibBaseCase;
 import jasm.tools.cisc.x86.X86Assembly;
 import jasm.tools.cisc.x86.X86EnumerableParameter;
 import jasm.tools.cisc.x86.X86Field;
@@ -28,9 +31,6 @@ import jasm.tools.cisc.x86.X86NumericalParameter;
 import jasm.tools.cisc.x86.X86Opcode;
 import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
-import jasm.tools.cisc.x86.ModCase;
-import jasm.tools.cisc.x86.RMCase;
-import jasm.tools.cisc.x86.SibBaseCase;
 import jasm.util.EndianUtil;
 import jasm.util.HexByte;
 import jasm.util.StaticLoophole;
@@ -72,8 +72,8 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
         if (hexByte == X86Opcode.ADDRESS_SIZE) {
           header._hasAddressSizePrefix = true;
         } else if (hexByte == X86Opcode.OPERAND_SIZE ||
-            hexByte == X86Opcode.REPE ||
-            hexByte == X86Opcode.REPNE) {
+                   hexByte == X86Opcode.REPE ||
+                   hexByte == X86Opcode.REPNE) {
           header._instructionSelectionPrefix = hexByte;
         } else if (isRexPrefix(hexByte)) {
           header._rexPrefix = hexByte;
@@ -260,8 +260,8 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
               if (modVariantParameterIndex >= 0) {
                 final Template_Type modVariantTemplate =
                     X86Assembly.getModVariantTemplate(templates,
-                        template,
-                        template.parameters().get(modVariantParameterIndex).type());
+                                                      template,
+                                                      template.parameters().get(modVariantParameterIndex).type());
                 arguments = scanArguments(stream, modVariantTemplate, header, modRMByte, sibByte);
               }
             }

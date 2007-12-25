@@ -22,23 +22,23 @@ import static jasm.tools.risc.sparc.SPARCFields.simm13;
 
 public final class PrivilegedRegisterAccess extends SPARCInstructionDescriptionCreator {
 
-    private void create_A42() {
-        define("rdpr", op(0x2), op3(0x2a), res_13_0, rs1PrivReg, rd);
-    }
+  private void create_A42() {
+    define("rdpr", op(0x2), op3(0x2a), res_13_0, rs1PrivReg, rd);
+  }
 
-    private void create_A61() {
-        final Object[] head = {op(0x2), op3(0x32), rs1};
-        define("wrpr", head, i(0), res_12_5, rs2, rdPrivReg);
-        define("wrpr", head, i(1), simm13, rdPrivReg);
-    }
+  private void create_A61() {
+    final Object[] head = {op(0x2), op3(0x32), rs1};
+    define("wrpr", head, i(0), res_12_5, rs2, rdPrivReg);
+    define("wrpr", head, i(1), simm13, rdPrivReg);
+  }
 
-    PrivilegedRegisterAccess(SPARCTemplateCreator templateCreator) {
-        super(templateCreator);
+  PrivilegedRegisterAccess(SPARCTemplateCreator templateCreator) {
+    super(templateCreator);
 
-        setCurrentArchitectureManualSection("A.42");
-        create_A42();
+    setCurrentArchitectureManualSection("A.42");
+    create_A42();
 
-        setCurrentArchitectureManualSection("A.61");
-        create_A61();
-    }
+    setCurrentArchitectureManualSection("A.61");
+    create_A61();
+  }
 }

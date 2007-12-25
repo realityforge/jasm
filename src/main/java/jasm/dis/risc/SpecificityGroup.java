@@ -32,6 +32,6 @@ public final class SpecificityGroup<Template_Type extends RiscTemplate> {
   public String toString() {
     return
         "[SpecificityGroup specificity=" + _specificity +
-            ", opcodeMaskGroups=" + _opcodeMaskGroups + "]";
+        ", opcodeMaskGroups=" + _opcodeMaskGroups + "]";
   }
 }

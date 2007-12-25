@@ -10,8 +10,8 @@ package jasm.tools.risc.bitRange;
 
 public abstract class ContiguousBitRange extends BitRange {
 
-    protected ContiguousBitRange() {
-        super();
-    }
+  protected ContiguousBitRange() {
+    super();
+  }
 
 }

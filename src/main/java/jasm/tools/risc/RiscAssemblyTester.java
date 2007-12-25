@@ -21,35 +21,35 @@ import java.util.EnumSet;
 import java.util.List;
 
 public abstract class RiscAssemblyTester<Template_Type extends RiscTemplate, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
-                          extends AssemblyTester<Template_Type, DisassembledInstruction_Type> {
+    extends AssemblyTester<Template_Type, DisassembledInstruction_Type> {
 
-    public RiscAssemblyTester(Assembly<Template_Type> assembly, WordWidth addressWidth, EnumSet<AssemblyTestComponent> components) {
-        super(assembly, addressWidth, components);
-    }
+  public RiscAssemblyTester(Assembly<Template_Type> assembly, WordWidth addressWidth, EnumSet<AssemblyTestComponent> components) {
+    super(assembly, addressWidth, components);
+  }
 
-    @Override
-    protected byte[] readExternalInstruction(PushbackInputStream externalInputStream, Template_Type template, byte[] internalBytes) throws IOException {
-        final byte[] result = new byte[4];
-        if (externalInputStream.read(result) != 4) {
-            throw new IOException("end of file before end of instruction");
-        }
-        return result;
+  @Override
+  protected byte[] readExternalInstruction(PushbackInputStream externalInputStream, Template_Type template, byte[] internalBytes) throws IOException {
+    final byte[] result = new byte[4];
+    if (externalInputStream.read(result) != 4) {
+      throw new IOException("end of file before end of instruction");
     }
+    return result;
+  }
 
-    @Override
-    protected final String disassembleFields(Template_Type template, byte[] assembledInstruction) {
-        return new RiscFieldDisassembler<Template_Type>(template, assembledInstruction).toString();
-    }
+  @Override
+  protected final String disassembleFields(Template_Type template, byte[] assembledInstruction) {
+    return new RiscFieldDisassembler<Template_Type>(template, assembledInstruction).toString();
+  }
 
-    @Override
-    protected final boolean isLegalArgumentList(Template_Type template, List<Argument> arguments) {
-        final List<InstructionConstraint> constraints = template.instructionDescription().constraints();
-        for (InstructionConstraint constraint : constraints) {
-            if (!(constraint.check(template, arguments))) {
-                return false;
-            }
-        }
-        return true;
+  @Override
+  protected final boolean isLegalArgumentList(Template_Type template, List<Argument> arguments) {
+    final List<InstructionConstraint> constraints = template.instructionDescription().constraints();
+    for (InstructionConstraint constraint : constraints) {
+      if (!(constraint.check(template, arguments))) {
+        return false;
+      }
     }
+    return true;
+  }
 
 }

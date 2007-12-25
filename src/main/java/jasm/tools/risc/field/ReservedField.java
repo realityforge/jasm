@@ -13,18 +13,18 @@ import jasm.tools.risc.bitRange.BitRangeOrder;
 
 public final class ReservedField extends RiscField {
 
-    public ReservedField(BitRange bitRange) {
-        super(bitRange);
-    }
+  public ReservedField(BitRange bitRange) {
+    super(bitRange);
+  }
 
-    public static ReservedField createAscending(int... bits) {
-        final BitRange bitRange = BitRange.create(bits, BitRangeOrder.ASCENDING);
-        return new ReservedField(bitRange);
-    }
+  public static ReservedField createAscending(int... bits) {
+    final BitRange bitRange = BitRange.create(bits, BitRangeOrder.ASCENDING);
+    return new ReservedField(bitRange);
+  }
 
-    public static ReservedField createDescending(int... bits) {
-        final BitRange bitRange = BitRange.create(bits, BitRangeOrder.DESCENDING);
-        return new ReservedField(bitRange);
-    }
+  public static ReservedField createDescending(int... bits) {
+    final BitRange bitRange = BitRange.create(bits, BitRangeOrder.DESCENDING);
+    return new ReservedField(bitRange);
+  }
 
 }

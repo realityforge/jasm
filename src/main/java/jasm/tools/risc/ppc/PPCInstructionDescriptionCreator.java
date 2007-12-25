@@ -17,30 +17,30 @@ import java.util.List;
 
 public abstract class PPCInstructionDescriptionCreator extends RiscInstructionDescriptionCreator {
 
-    protected PPCInstructionDescriptionCreator(PPCTemplateCreator templateCreator) {
-        super(PPCAssembly.ASSEMBLY, templateCreator);
-    }
+  protected PPCInstructionDescriptionCreator(PPCTemplateCreator templateCreator) {
+    super(PPCAssembly.ASSEMBLY, templateCreator);
+  }
 
-    @Override
-    public final PPCAssembly assembly() {
-        final Assembly assembly = super.assembly();
-        return (PPCAssembly) assembly;
-    }
+  @Override
+  public final PPCAssembly assembly() {
+    final Assembly assembly = super.assembly();
+    return (PPCAssembly) assembly;
+  }
 
-    protected final RiscInstructionDescription define64(Object... specifications) {
-        return (assembly().generating64BitInstructions()) ? define(specifications) : null;
-    }
+  protected final RiscInstructionDescription define64(Object... specifications) {
+    return (assembly().generating64BitInstructions()) ? define(specifications) : null;
+  }
 
-    protected final RiscInstructionDescription defineP5(Object... specifications) {
-        return (assembly().generatingPower5Instructions()) ? define(specifications) : null;
-    }
+  protected final RiscInstructionDescription defineP5(Object... specifications) {
+    return (assembly().generatingPower5Instructions()) ? define(specifications) : null;
+  }
 
-    protected final RiscInstructionDescriptionModifier synthesize64(String name, String templateName, Object... patterns) {
-      if ((assembly().generating64BitInstructions())) {
-        return synthesize(name, templateName, patterns);
-      } else {
-        final List<RiscInstructionDescription> sequence = Collections.emptyList();
-        return new RiscInstructionDescriptionModifier(sequence);
-      }
+  protected final RiscInstructionDescriptionModifier synthesize64(String name, String templateName, Object... patterns) {
+    if ((assembly().generating64BitInstructions())) {
+      return synthesize(name, templateName, patterns);
+    } else {
+      final List<RiscInstructionDescription> sequence = Collections.emptyList();
+      return new RiscInstructionDescriptionModifier(sequence);
     }
+  }
 }

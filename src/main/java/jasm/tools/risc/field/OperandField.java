@@ -10,7 +10,6 @@ package jasm.tools.risc.field;
 
 import jasm.Argument;
 import jasm.ExternalMnemonicSuffixArgument;
-import jasm.tools.risc.field.Expression;
 import jasm.tools.Parameter;
 import jasm.tools.Template;
 import jasm.tools.risc.RiscConstant;
@@ -26,122 +25,122 @@ import java.util.Set;
  * it's {@link #type value type} implements {@link ExternalMnemonicSuffixArgument} in which
  * case, the field's value is represented as a suffix of the mnemonic in the external assembler syntax.
  */
-public abstract class OperandField<Argument_Type extends Argument> extends RiscField implements Parameter, Expression  {
+public abstract class OperandField<Argument_Type extends Argument> extends RiscField implements Parameter, Expression {
 
-    private SignDependentOperations _signDependentOperations;
+  private SignDependentOperations _signDependentOperations;
 
-    protected OperandField(BitRange bitRange) {
-        super(bitRange);
-        _signDependentOperations = SignDependentOperations.UNSIGNED;
-    }
+  protected OperandField(BitRange bitRange) {
+    super(bitRange);
+    _signDependentOperations = SignDependentOperations.UNSIGNED;
+  }
 
-    public final RiscConstant constant(int value) {
-        return new RiscConstant(new ConstantField(name(), bitRange()), value);
-    }
+  public final RiscConstant constant(int value) {
+    return new RiscConstant(new ConstantField(name(), bitRange()), value);
+  }
 
-    protected final SignDependentOperations signDependentOperations() {
-        return _signDependentOperations;
-    }
+  protected final SignDependentOperations signDependentOperations() {
+    return _signDependentOperations;
+  }
 
-    protected final void setSignDependentOperations(SignDependentOperations signDependentOperations) {
-        _signDependentOperations = signDependentOperations;
-    }
+  protected final void setSignDependentOperations(SignDependentOperations signDependentOperations) {
+    _signDependentOperations = signDependentOperations;
+  }
 
-    public int maxArgumentValue() {
-        return _signDependentOperations.maxArgumentValue(bitRange());
-    }
+  public int maxArgumentValue() {
+    return _signDependentOperations.maxArgumentValue(bitRange());
+  }
 
-    public int minArgumentValue() {
-        return _signDependentOperations.minArgumentValue(bitRange());
-    }
+  public int minArgumentValue() {
+    return _signDependentOperations.minArgumentValue(bitRange());
+  }
 
   public final int extract(int instruction) {
-        return _signDependentOperations.extract(instruction, bitRange());
+    return _signDependentOperations.extract(instruction, bitRange());
+  }
+
+  public abstract Argument_Type disassemble(int instruction);
+
+  /**
+   * @return the minimal difference between any two potential operands
+   */
+  public final int grain() {
+    return 1 << zeroes();
+  }
+
+  /**
+   * @return implied zeroes to be "appended" to respective operands
+   */
+  public int zeroes() {
+    return 0;
+  }
+
+  @Override
+  public final OperandField<Argument_Type> clone() {
+    return StaticLoophole.cast(super.clone());
+  }
+
+  public OperandField<Argument_Type> beSigned() {
+    final OperandField<Argument_Type> result = clone();
+    result.setSignDependentOperations(SignDependentOperations.SIGNED);
+    return result;
+  }
+
+  public OperandField<Argument_Type> beSignedOrUnsigned() {
+    final OperandField<Argument_Type> result = clone();
+    result.setSignDependentOperations(SignDependentOperations.SIGNED_OR_UNSIGNED);
+    return result;
+  }
+
+  public final boolean isSigned() {
+    return _signDependentOperations == SignDependentOperations.SIGNED;
+  }
+
+  private String _variableName;
+
+  public final String variableName() {
+    if (_variableName != null) {
+      return _variableName;
     }
+    return name();
+  }
 
-    public abstract Argument_Type disassemble(int instruction);
-
-    /**
-     * @return the minimal difference between any two potential operands
-     */
-    public final int grain() {
-        return 1 << zeroes();
-    }
-
-    /**
-     * @return implied zeroes to be "appended" to respective operands
-     */
-    public int zeroes() {
-        return 0;
-    }
-
-    @Override
-    public final OperandField<Argument_Type> clone() {
-        return StaticLoophole.cast(super.clone());
-    }
-
-    public OperandField<Argument_Type> beSigned() {
-        final OperandField<Argument_Type> result = clone();
-        result.setSignDependentOperations(SignDependentOperations.SIGNED);
-        return result;
-    }
-
-    public OperandField<Argument_Type> beSignedOrUnsigned() {
-        final OperandField<Argument_Type> result = clone();
-        result.setSignDependentOperations(SignDependentOperations.SIGNED_OR_UNSIGNED);
-        return result;
-    }
-
-    public final boolean isSigned() {
-        return _signDependentOperations == SignDependentOperations.SIGNED;
-    }
-
-    private String _variableName;
-
-    public final String variableName() {
-        if (_variableName != null) {
-            return _variableName;
-        }
-        return name();
-    }
-
-    public OperandField<Argument_Type> setVariableName(String name) {
-        _variableName = name;
-        return this;
-    }
+  public OperandField<Argument_Type> setVariableName(String name) {
+    _variableName = name;
+    return this;
+  }
 
   private Set<Argument> _excludedDisassemblerTestArguments = Collections.emptySet();
 
   public final Set<Argument> excludedDisassemblerTestArguments() {
-        return _excludedDisassemblerTestArguments;
-    }
+    return _excludedDisassemblerTestArguments;
+  }
 
-    private Set<Argument> _excludedExternalTestArguments = Collections.emptySet();
+  private Set<Argument> _excludedExternalTestArguments = Collections.emptySet();
 
   public final Set<Argument> excludedExternalTestArguments() {
-        return _excludedExternalTestArguments;
-    }
+    return _excludedExternalTestArguments;
+  }
 
-    public final int compareTo(Parameter other) {
-        return type().getName().compareTo(other.type().getName());
-    }
+  public final int compareTo(Parameter other) {
+    return type().getName().compareTo(other.type().getName());
+  }
 
-    public final long evaluate(Template template, List<Argument> arguments) {
-        if (boundTo() != null) {
-            return boundTo().evaluate(template, arguments);
-        }
-        return template.bindingFor(this, arguments).asLong();
+  public final long evaluate(Template template, List<Argument> arguments) {
+    if (boundTo() != null) {
+      return boundTo().evaluate(template, arguments);
     }
+    return template.bindingFor(this, arguments).asLong();
+  }
 
-    private Expression _expression;
+  private Expression _expression;
 
-    public OperandField<Argument_Type> bindTo(Expression expression) {
-        final OperandField<Argument_Type> result = clone();
-        result._expression = expression;
-        return result;
-    }
+  public OperandField<Argument_Type> bindTo(Expression expression) {
+    final OperandField<Argument_Type> result = clone();
+    result._expression = expression;
+    return result;
+  }
 
-    public final Expression boundTo() {
-        return _expression;
-    }
+  public final Expression boundTo() {
+    return _expression;
+  }
 }

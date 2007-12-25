@@ -8,27 +8,26 @@
  */
 package jasm.tools.risc.bitRange;
 
-
 /**
  * The bit range order of an instruction set is how the bit positions of instruction fields
  * are specified in the architecture manual.
  */
 public enum BitRangeOrder {
 
-    DESCENDING {
-        @Override
-        public SimpleBitRange createSimpleBitRange(int firstBitIndex, int lastBitIndex) {
-            return new DescendingBitRange(firstBitIndex, lastBitIndex);
-        }
-    },
+  DESCENDING {
+    @Override
+    public SimpleBitRange createSimpleBitRange(int firstBitIndex, int lastBitIndex) {
+      return new DescendingBitRange(firstBitIndex, lastBitIndex);
+    }
+  },
 
-    ASCENDING {
-        @Override
-        public SimpleBitRange createSimpleBitRange(int firstBitIndex, int lastBitIndex) {
-            return new AscendingBitRange(firstBitIndex, lastBitIndex);
-        }
-    };
+  ASCENDING {
+    @Override
+    public SimpleBitRange createSimpleBitRange(int firstBitIndex, int lastBitIndex) {
+      return new AscendingBitRange(firstBitIndex, lastBitIndex);
+    }
+  };
 
-    public abstract SimpleBitRange createSimpleBitRange(int firstBitIndex, int lastBitIndex);
+  public abstract SimpleBitRange createSimpleBitRange(int firstBitIndex, int lastBitIndex);
 
 }

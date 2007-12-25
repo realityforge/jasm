@@ -237,10 +237,11 @@ public interface InstructionConstraint {
      *                        is by position.
      */
     public static InstructionConstraint makePredicate(final Method predicateMethod, final Parameter... parameters) throws IllegalArgumentException {
-      if(!(predicateMethod.getReturnType() == Boolean.TYPE)) throw new IllegalStateException("predicate method must return a boolean");
+      if (!(predicateMethod.getReturnType() == Boolean.TYPE))
+        throw new IllegalStateException("predicate method must return a boolean");
       final boolean isStatic = Modifier.isStatic(predicateMethod.getModifiers());
       boolean condition = predicateMethod.getParameterTypes().length == (isStatic ? parameters.length : parameters.length - 1);
-      if(!condition) throw new IllegalStateException("parameter count != method ");
+      if (!condition) throw new IllegalStateException("parameter count != method ");
       return new InstructionConstraint() {
 
         /**

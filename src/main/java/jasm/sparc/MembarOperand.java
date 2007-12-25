@@ -54,7 +54,7 @@ public final class MembarOperand extends AbstractSymbolicArgument {
 
   public static final SymbolSet<MembarOperand> SYMBOLS =
       new SymbolSet<MembarOperand>(MembarOperand.class,
-          Arrays.asList(NO_MEMBAR, LOAD_LOAD, STORE_LOAD, LOAD_STORE, STORE_STORE, LOOKASIDE, MEM_ISSUE, SYNC)) {
+                                   Arrays.asList(NO_MEMBAR, LOAD_LOAD, STORE_LOAD, LOAD_STORE, STORE_STORE, LOOKASIDE, MEM_ISSUE, SYNC)) {
 
         public MembarOperand fromValue(int value) {
           MembarOperand result = NO_MEMBAR;

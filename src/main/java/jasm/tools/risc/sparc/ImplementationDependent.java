@@ -14,15 +14,15 @@ import static jasm.tools.risc.sparc.SPARCFields.op3;
 
 public final class ImplementationDependent extends SPARCInstructionDescriptionCreator {
 
-    private void create_A23() {
-        define("impdep1", op(0x2), op3(0x36), impl_dep);
-        define("impdep2", op(0x2), op3(0x37), impl_dep);
-    }
+  private void create_A23() {
+    define("impdep1", op(0x2), op3(0x36), impl_dep);
+    define("impdep2", op(0x2), op3(0x37), impl_dep);
+  }
 
-    ImplementationDependent(SPARCTemplateCreator templateCreator) {
-        super(templateCreator);
+  ImplementationDependent(SPARCTemplateCreator templateCreator) {
+    super(templateCreator);
 
-        setCurrentArchitectureManualSection("A.23");
-        create_A23();
-    }
+    setCurrentArchitectureManualSection("A.23");
+    create_A23();
+  }
 }

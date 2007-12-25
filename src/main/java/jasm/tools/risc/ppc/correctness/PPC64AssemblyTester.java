@@ -19,18 +19,18 @@ import java.util.EnumSet;
 
 public final class PPC64AssemblyTester extends PPCAssemblyTester<PPC64DisassembledInstruction> {
 
-    public PPC64AssemblyTester(EnumSet<AssemblyTestComponent> components) {
-        super(PPCAssembly.ASSEMBLY, WordWidth.BITS_64, components);
-    }
+  public PPC64AssemblyTester(EnumSet<AssemblyTestComponent> components) {
+    super(PPCAssembly.ASSEMBLY, WordWidth.BITS_64, components);
+  }
 
-    @Override
-    protected final Assembler createTestAssembler() {
-        return new PPC64Assembler(0L);
-    }
+  @Override
+  protected final Assembler createTestAssembler() {
+    return new PPC64Assembler(0L);
+  }
 
-    @Override
-    protected final PPC64Disassembler createTestDisassembler() {
-        return new PPC64Disassembler(0L);
-    }
+  @Override
+  protected final PPC64Disassembler createTestDisassembler() {
+    return new PPC64Disassembler(0L);
+  }
 
 }

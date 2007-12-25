@@ -19,18 +19,18 @@ import java.util.EnumSet;
 
 public final class PPC32AssemblyTester extends PPCAssemblyTester<PPC32DisassembledInstruction> {
 
-    public PPC32AssemblyTester(EnumSet<AssemblyTestComponent> components) {
-        super(PPCAssembly.ASSEMBLY, WordWidth.BITS_32, components);
-    }
+  public PPC32AssemblyTester(EnumSet<AssemblyTestComponent> components) {
+    super(PPCAssembly.ASSEMBLY, WordWidth.BITS_32, components);
+  }
 
-    @Override
-    protected final Assembler createTestAssembler() {
-        return new PPC32Assembler(0);
-    }
+  @Override
+  protected final Assembler createTestAssembler() {
+    return new PPC32Assembler(0);
+  }
 
-    @Override
-    protected final PPC32Disassembler createTestDisassembler() {
-        return new PPC32Disassembler(0);
-    }
+  @Override
+  protected final PPC32Disassembler createTestDisassembler() {
+    return new PPC32Disassembler(0);
+  }
 
 }

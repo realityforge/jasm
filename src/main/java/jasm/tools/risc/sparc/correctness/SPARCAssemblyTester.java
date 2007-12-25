@@ -25,52 +25,52 @@ import java.util.EnumSet;
 import java.util.List;
 
 public abstract class SPARCAssemblyTester<DisassembledInstruction_Type extends DisassembledInstruction<SPARCTemplate>>
-                          extends RiscAssemblyTester<SPARCTemplate, DisassembledInstruction_Type> {
+    extends RiscAssemblyTester<SPARCTemplate, DisassembledInstruction_Type> {
 
-    public SPARCAssemblyTester(SPARCAssembly assembly, WordWidth addressWidth, EnumSet<AssemblyTestComponent> components) {
-        super(assembly, addressWidth, components);
+  public SPARCAssemblyTester(SPARCAssembly assembly, WordWidth addressWidth, EnumSet<AssemblyTestComponent> components) {
+    super(assembly, addressWidth, components);
+  }
+
+  @Override
+  public final SPARCAssembly assembly() {
+    return (SPARCAssembly) super.assembly();
+  }
+
+  @Override
+  protected final String assemblerCommand() {
+    return "as -xarch=v9a";
+  }
+
+  private SPARCTemplate _lastTemplate;
+
+  @Override
+  protected final void assembleExternally(IndentWriter writer, SPARCTemplate template, List<Argument> argumentList, String label) {
+
+    // This is a workaround for SPARC V9 ABI compliance checks: http://developers.sun.com/solaris/articles/sparcv9abi.html
+    if (_lastTemplate == null || template != _lastTemplate) {
+      writer.println(".register %g2,#scratch");
+      writer.println(".register %g3,#scratch");
+      writer.println(".register %g6,#scratch");
+      writer.println(".register %g7,#scratch");
+      _lastTemplate = template;
     }
+    final SPARCExternalInstruction instruction = new SPARCExternalInstruction(template, argumentList);
+    writer.println(instruction.toString());
+    writer.println("nop"); // fill potential DCTI slot with something - see below
+  }
 
-    @Override
-    public final SPARCAssembly assembly() {
-        return (SPARCAssembly) super.assembly();
+  @Override
+  protected final boolean readNop(InputStream stream) throws IOException {
+    final int instruction = EndianUtil.readBEInt(stream);
+    return instruction == 0x01000000;
+  }
+
+  @Override
+  protected final byte[] readExternalInstruction(PushbackInputStream externalInputStream, SPARCTemplate template, byte[] internalBytes) throws IOException {
+    final byte[] result = super.readExternalInstruction(externalInputStream, template, internalBytes);
+    if (!readNop(externalInputStream)) { // read potential DCTI slot place holder contents - see above
+      throw new IllegalStateException("nop missing after external instruction");
     }
-
-    @Override
-    protected final String assemblerCommand() {
-        return "as -xarch=v9a";
-    }
-
-    private SPARCTemplate _lastTemplate;
-
-    @Override
-    protected final void assembleExternally(IndentWriter writer, SPARCTemplate template, List<Argument> argumentList, String label) {
-
-        // This is a workaround for SPARC V9 ABI compliance checks: http://developers.sun.com/solaris/articles/sparcv9abi.html
-        if (_lastTemplate == null || template != _lastTemplate) {
-            writer.println(".register %g2,#scratch");
-            writer.println(".register %g3,#scratch");
-            writer.println(".register %g6,#scratch");
-            writer.println(".register %g7,#scratch");
-            _lastTemplate = template;
-        }
-        final SPARCExternalInstruction instruction = new SPARCExternalInstruction(template, argumentList);
-        writer.println(instruction.toString());
-        writer.println("nop"); // fill potential DCTI slot with something - see below
-    }
-
-    @Override
-    protected final boolean readNop(InputStream stream) throws IOException {
-        final int instruction = EndianUtil.readBEInt(stream);
-        return instruction == 0x01000000;
-    }
-
-    @Override
-    protected final byte[] readExternalInstruction(PushbackInputStream externalInputStream, SPARCTemplate template, byte[] internalBytes) throws IOException {
-        final byte[] result = super.readExternalInstruction(externalInputStream, template, internalBytes);
-        if (!readNop(externalInputStream)) { // read potential DCTI slot place holder contents - see above
-            throw new IllegalStateException("nop missing after external instruction");
-        }
-        return result;
-    }
+    return result;
+  }
 }

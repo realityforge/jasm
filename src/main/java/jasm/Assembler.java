@@ -33,13 +33,12 @@ public abstract class Assembler {
 
   public abstract InstructionSet instructionSet();
 
-
   protected final int currentOffset() {
     return _machineCodeIndex;
   }
 
   protected final void emitByte(byte value) {
-    if(_machineCodeIndex == _machineCode.length) {
+    if (_machineCodeIndex == _machineCode.length) {
       _machineCode = growMachineCode();
     }
     _machineCode[_machineCodeIndex++] = value;

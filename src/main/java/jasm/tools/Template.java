@@ -22,7 +22,9 @@ public abstract class Template implements Cloneable, Comparable<Template> {
   private InstructionDescription _instructionDescription;
   private int _labelParameterIndex = -1;
   protected Method _assemblerMethod;
-  /** The name of the Java method that will be created from this template. */
+  /**
+   * The name of the Java method that will be created from this template.
+   */
   private String _internalName;
 
   protected Template(InstructionDescription instructionDescription) {
@@ -99,7 +101,7 @@ public abstract class Template implements Cloneable, Comparable<Template> {
     assert arguments.size() == parameters.size();
     final int index = CollectionUtil.indexOfIdentical(parameters, parameter);
     boolean condition = index != -1;
-    if(!condition) throw new IllegalStateException(parameter + " is not a parameter of " + externalName());
+    if (!condition) throw new IllegalStateException(parameter + " is not a parameter of " + externalName());
     return arguments.get(index);
   }
 

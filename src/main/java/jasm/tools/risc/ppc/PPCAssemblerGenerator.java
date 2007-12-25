@@ -21,27 +21,27 @@ import java.util.Set;
 public final class PPCAssemblerGenerator
     extends RiscAssemblerGenerator<PPCTemplate> {
 
-    public PPCAssemblerGenerator() {
-        super(PPCAssembly.ASSEMBLY);
-    }
+  public PPCAssemblerGenerator() {
+    super(PPCAssembly.ASSEMBLY);
+  }
 
-    @Override
-    protected void printRawImports(IndentWriter writer, Set<String> packages) {
-        super.printRawImports(writer, packages);
-        writer.println("import static " + GPR.class.getName() + ".*;");
-    }
+  @Override
+  protected void printRawImports(IndentWriter writer, Set<String> packages) {
+    super.printRawImports(writer, packages);
+    writer.println("import static " + GPR.class.getName() + ".*;");
+  }
 
-    @Override
-    protected Class<? extends Assembler> endiannessSpecificAssemblerClass() {
-        return BigEndianAssembler.class;
-    }
+  @Override
+  protected Class<? extends Assembler> endiannessSpecificAssemblerClass() {
+    return BigEndianAssembler.class;
+  }
 
-    @Override
-    protected String getJavadocManualReference(PPCTemplate template) {
-        String section = template.instructionDescription().architectureManualSection();
-        if (section.indexOf("[Book ") == -1) {
-            section += " [Book 1]";
-        }
-        return "\"<a href=\"http://www.ibm.com/developerworks/eserver/library/es-archguide-v2.html\">PowerPC Architecture Book, Version 2.02</a> - Section " + section + "\"";
+  @Override
+  protected String getJavadocManualReference(PPCTemplate template) {
+    String section = template.instructionDescription().architectureManualSection();
+    if (section.indexOf("[Book ") == -1) {
+      section += " [Book 1]";
     }
+    return "\"<a href=\"http://www.ibm.com/developerworks/eserver/library/es-archguide-v2.html\">PowerPC Architecture Book, Version 2.02</a> - Section " + section + "\"";
+  }
 }

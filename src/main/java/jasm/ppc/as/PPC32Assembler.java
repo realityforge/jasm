@@ -24,7 +24,7 @@ public final class PPC32Assembler extends PPCAssembler implements Assembler32 {
     this(Config.DEFAULT_INITIAL_MACHINE_CODE_SIZE, startAddress);
   }
 
-  public PPC32Assembler(int initialMachineCodeCapacity,int startAddress) {
+  public PPC32Assembler(int initialMachineCodeCapacity, int startAddress) {
     super(initialMachineCodeCapacity);
     _startAddress = startAddress;
   }

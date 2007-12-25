@@ -9,8 +9,8 @@
 package jasm.tools.risc.field;
 
 import jasm.Argument;
-import jasm.tools.Template;
 import jasm.tools.Parameter;
+import jasm.tools.Template;
 import java.util.List;
 
 /**

@@ -10,7 +10,7 @@ package jasm;
 
 /**
  * Assembler labels for symbolic addressing.
- *
+ * <p/>
  * This class provides combined functionality for both 32-bit and 64-bit address spaces.
  * The respective assembler narrows the usable interface to either.
  *

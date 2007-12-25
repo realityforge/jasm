@@ -16,48 +16,47 @@ import java.util.List;
  */
 public final class RiscInstructionDescriptionModifier {
 
-    private final List<RiscInstructionDescription> _instructionDescriptions;
+  private final List<RiscInstructionDescription> _instructionDescriptions;
 
-    public RiscInstructionDescriptionModifier(List<RiscInstructionDescription> instructionDescriptions) {
-        _instructionDescriptions = instructionDescriptions;
-    }
+  public RiscInstructionDescriptionModifier(List<RiscInstructionDescription> instructionDescriptions) {
+    _instructionDescriptions = instructionDescriptions;
+  }
 
-    /**
-     * Replaces a specification in the set of instruction descriptions.
-     *
-     * @param before  the specification to be replaced (matched with {@link Object#equals})
-     * @param after   the replacement value
-     */
-    public final RiscInstructionDescriptionModifier replace(Object before, Object after) {
-        for (RiscInstructionDescription instructionDescription : _instructionDescriptions) {
-            final List<Object> specifications = instructionDescription.specifications();
-            for (int i = 0; i < specifications.size(); i++) {
-                if (specifications.get(i).equals(before)) {
-                    specifications.set(i, after);
-                }
-            }
+  /**
+   * Replaces a specification in the set of instruction descriptions.
+   *
+   * @param before the specification to be replaced (matched with {@link Object#equals})
+   * @param after  the replacement value
+   */
+  public final RiscInstructionDescriptionModifier replace(Object before, Object after) {
+    for (RiscInstructionDescription instructionDescription : _instructionDescriptions) {
+      final List<Object> specifications = instructionDescription.specifications();
+      for (int i = 0; i < specifications.size(); i++) {
+        if (specifications.get(i).equals(before)) {
+          specifications.set(i, after);
         }
-        return this;
+      }
     }
+    return this;
+  }
 
-
-    public final RiscInstructionDescriptionModifier swap(Object a, Object b) {
-        for (RiscInstructionDescription instructionDescription : _instructionDescriptions) {
-            final List<Object> specifications = instructionDescription.specifications();
-            final int aIndex = CollectionUtil.indexOfIdentical(specifications, a);
-            final int bIndex = CollectionUtil.indexOfIdentical(specifications, b);
-            if (aIndex != -1 && bIndex != -1) {
-                specifications.set(aIndex, b);
-                specifications.set(bIndex, a);
-            }
-        }
-        return this;
+  public final RiscInstructionDescriptionModifier swap(Object a, Object b) {
+    for (RiscInstructionDescription instructionDescription : _instructionDescriptions) {
+      final List<Object> specifications = instructionDescription.specifications();
+      final int aIndex = CollectionUtil.indexOfIdentical(specifications, a);
+      final int bIndex = CollectionUtil.indexOfIdentical(specifications, b);
+      if (aIndex != -1 && bIndex != -1) {
+        specifications.set(aIndex, b);
+        specifications.set(bIndex, a);
+      }
     }
+    return this;
+  }
 
-    public final RiscInstructionDescriptionModifier setExternalName(String externalName) {
-        for (RiscInstructionDescription instructionDescription : _instructionDescriptions) {
-            instructionDescription.setExternalName(externalName);
-        }
-        return this;
+  public final RiscInstructionDescriptionModifier setExternalName(String externalName) {
+    for (RiscInstructionDescription instructionDescription : _instructionDescriptions) {
+      instructionDescription.setExternalName(externalName);
     }
+    return this;
+  }
 }
