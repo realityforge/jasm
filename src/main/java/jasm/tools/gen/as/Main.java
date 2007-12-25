@@ -140,8 +140,6 @@ public final class Main {
     if (!processArgs(args)) {
       System.exit(0);
     }
-    System.out.println("Assembler Generator Starting");
-    System.out.println();
     try {
       Trace.on(_verbosity);
       final AssemblerGenerator<?> generator = newAssembly();
