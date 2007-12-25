@@ -222,12 +222,6 @@ public abstract class Assembler {
     return label.address64();
   }
 
-  protected final void checkConstraint(boolean passed, String expression) {
-    if (!passed) {
-      constraintFailed(expression);
-    }
-  }
-
   protected final void constraintFailed(final String expression) {
     throw new IllegalArgumentException(expression);
   }
