@@ -6,15 +6,11 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.tools.cisc.x86;
+package jasm.tools;
 
-import jasm.WordWidth;
-
-public final class X86ImmediateParameter
-    extends X86NumericalParameter {
-
-  public X86ImmediateParameter(Designation designation, WordWidth width) {
-    super(designation, width);
-    setVariableName("imm" + width.numberOfBits());
-  }
+/**
+   * Determines whether the operand is to be omitted or explicitly stated in external syntax.
+ */
+public enum ExternalPresence {
+  OMITTED, EXPLICIT
 }

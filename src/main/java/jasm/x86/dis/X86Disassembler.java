@@ -28,7 +28,9 @@ import jasm.tools.cisc.x86.X86NumericalParameter;
 import jasm.tools.cisc.x86.X86Opcode;
 import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
-import jasm.tools.cisc.x86.X86TemplateContext;
+import jasm.tools.cisc.x86.ModCase;
+import jasm.tools.cisc.x86.RMCase;
+import jasm.tools.cisc.x86.SibBaseCase;
 import jasm.util.EndianUtil;
 import jasm.util.HexByte;
 import jasm.util.StaticLoophole;
@@ -171,14 +173,14 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
   }
 
   private int getModVariantParameterIndex(Template_Type template, byte modRMByte, byte sibByte) {
-    if (template.modCase() == X86TemplateContext.ModCase.MOD_0 && X86Field.MOD.extract(modRMByte) != X86TemplateContext.ModCase.MOD_0.value()) {
+    if (template.modCase() == ModCase.MOD_0 && X86Field.MOD.extract(modRMByte) != ModCase.MOD_0.value()) {
       switch (template.rmCase()) {
         case NORMAL:
           if (template.addressSizeAttribute() == WordWidth.BITS_16) {
-            if (X86Field.RM.extract(modRMByte) != X86TemplateContext.RMCase.SWORD.value()) {
+            if (X86Field.RM.extract(modRMByte) != RMCase.SWORD.value()) {
               return -1;
             }
-          } else if (X86Field.RM.extract(modRMByte) != X86TemplateContext.RMCase.SDWORD.value()) {
+          } else if (X86Field.RM.extract(modRMByte) != RMCase.SDWORD.value()) {
             return -1;
           }
           for (int i = 0; i < template.parameters().size(); i++) {
@@ -192,7 +194,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
           }
           break;
         case SIB:
-          if (template.sibBaseCase() == X86TemplateContext.SibBaseCase.GENERAL_REGISTER && X86Field.BASE.extract(sibByte) == 5) {
+          if (template.sibBaseCase() == SibBaseCase.GENERAL_REGISTER && X86Field.BASE.extract(sibByte) == 5) {
             for (int i = 0; i < template.parameters().size(); i++) {
               switch (template.parameters().get(i).place()) {
                 case SIB_BASE_REXB:
@@ -218,8 +220,8 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
     if (template.hasSibByte()) {
       return EndianUtil.readByte(stream);
     }
-    if (template.hasModRMByte() && X86Field.RM.extract(modRMByte) == X86TemplateContext.RMCase.SIB.value() &&
-        X86Field.MOD.extract(modRMByte) != X86TemplateContext.ModCase.MOD_3.value()) {
+    if (template.hasModRMByte() && X86Field.RM.extract(modRMByte) == RMCase.SIB.value() &&
+        X86Field.MOD.extract(modRMByte) != ModCase.MOD_3.value()) {
       return EndianUtil.readByte(stream);
     }
     return 0;

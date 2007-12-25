@@ -13,7 +13,8 @@ import jasm.ia32.IA32BaseRegister32;
 import jasm.ia32.IA32IndirectRegister16;
 import jasm.ia32.IA32IndirectRegister32;
 import jasm.tools.cisc.x86.X86AssemblerGenerator;
-import jasm.tools.cisc.x86.X86TemplateContext;
+import jasm.tools.cisc.x86.ModCase;
+import jasm.tools.cisc.x86.RMCase;
 import jasm.tools.util.IndentWriter;
 
 /**
@@ -28,7 +29,7 @@ public final class IA32AssemblerGenerator
 
     @Override
     protected final void printModVariants(IndentWriter stream, IA32Template template) {
-        if (template.modCase() != X86TemplateContext.ModCase.MOD_0) {
+        if (template.modCase() != ModCase.MOD_0) {
             return;
         }
         switch (template.rmCase()) {
@@ -61,8 +62,8 @@ public final class IA32AssemblerGenerator
 
     @Override
     protected final void printSibVariants(IndentWriter stream, IA32Template template) {
-        if (template.modCase() != null && template.modCase() != X86TemplateContext.ModCase.MOD_3 &&
-                                          template.rmCase() == X86TemplateContext.RMCase.NORMAL &&
+        if (template.modCase() != null && template.modCase() != ModCase.MOD_3 &&
+                                          template.rmCase() == RMCase.NORMAL &&
                                           template.addressSizeAttribute() == WordWidth.BITS_32) {
             printSibVariant(stream, template, IA32IndirectRegister32.ESP_INDIRECT);
         }

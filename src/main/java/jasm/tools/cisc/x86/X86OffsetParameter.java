@@ -11,10 +11,12 @@ package jasm.tools.cisc.x86;
 import jasm.WordWidth;
 import jasm.tools.OffsetParameter;
 
-public class X86OffsetParameter extends X86NumericalParameter implements OffsetParameter {
-
-    public X86OffsetParameter(X86Operand.Designation designation, WordWidth width) {
-        super(designation, width);
-        setVariableName("rel" + width.numberOfBits());
-    }
+public class X86OffsetParameter
+    extends X86NumericalParameter
+    implements OffsetParameter {
+  
+  public X86OffsetParameter(Designation designation, WordWidth width) {
+    super(designation, width);
+    setVariableName("rel" + width.numberOfBits());
+  }
 }

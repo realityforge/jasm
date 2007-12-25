@@ -9,8 +9,8 @@
 package jasm.tools.cisc.x86;
 
 import jasm.tools.ArgumentRange;
-import jasm.tools.ImplicitOperand;
 import jasm.tools.TestArgumentExclusion;
+import jasm.tools.ExternalPresence;
 import jasm.tools.cisc.TemplateNotNeededException;
 
 /**
@@ -28,7 +28,7 @@ public final class OpcodeAssessor extends X86InstructionDescriptionAdapter {
   }
 
   @Override
-  public final void visitOperandCode(OperandCode operandCode, X86Operand.Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) {
+  public final void visitOperandCode(OperandCode operandCode, Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) {
     switch (operandCode.operandTypeCode()) {
       case a:
       case d_q:
@@ -76,7 +76,7 @@ public final class OpcodeAssessor extends X86InstructionDescriptionAdapter {
   }
 
   @Override
-  public final void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, X86Operand.Designation position, ImplicitOperand.ExternalPresence externalPresence) {
+  public final void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, Designation position, ExternalPresence externalPresence) {
     _instructionFamily.haveOperandSizeVariants();
   }
 
@@ -86,7 +86,7 @@ public final class OpcodeAssessor extends X86InstructionDescriptionAdapter {
   }
 
   @Override
-  public final void visitModCase(X86TemplateContext.ModCase modCase) throws TemplateNotNeededException {
+  public final void visitModCase(ModCase modCase) throws TemplateNotNeededException {
     _instructionFamily.haveModRMByte();
   }
 

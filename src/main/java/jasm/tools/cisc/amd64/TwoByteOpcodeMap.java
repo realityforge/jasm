@@ -70,7 +70,7 @@ import static jasm.tools.cisc.x86.OperandCode.Wq;
 import static jasm.tools.cisc.x86.OperandCode.Wsd;
 import static jasm.tools.cisc.x86.OperandCode.Wss;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
-import jasm.tools.cisc.x86.X86TemplateContext;
+import jasm.tools.cisc.x86.ModCase;
 import static jasm.util.HexByte._00;
 import static jasm.util.HexByte._01;
 import static jasm.util.HexByte._02;
@@ -680,7 +680,7 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
         define(_0F, _AC, "SHRD", Ev, Gv, Ib);
         define(_0F, _AD, "SHRD", Ev, Gv, CL);
         define(_0F, _AE, GROUP_15a);
-        define(_0F, _AE, GROUP_15b, X86TemplateContext.ModCase.MOD_3);
+        define(_0F, _AE, GROUP_15b, ModCase.MOD_3);
         define(_0F, _AF, "IMUL", Gv, Ev);
 
         define(_0F, _B9, GROUP_10);

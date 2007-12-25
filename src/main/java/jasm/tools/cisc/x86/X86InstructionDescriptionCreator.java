@@ -12,14 +12,15 @@ import jasm.tools.Assembly;
 import jasm.tools.InstructionDescriptionCreator;
 import java.util.List;
 
-public class X86InstructionDescriptionCreator extends InstructionDescriptionCreator<X86InstructionDescription> {
+public class X86InstructionDescriptionCreator
+    extends InstructionDescriptionCreator<X86InstructionDescription> {
 
-    public X86InstructionDescriptionCreator(Assembly<? extends X86Template> assembly) {
-        super(assembly);
-    }
+  public X86InstructionDescriptionCreator(Assembly<? extends X86Template> assembly) {
+    super(assembly);
+  }
 
-    @Override
-    protected final X86InstructionDescription createInstructionDescription(List<Object> specifications) {
-        return new X86InstructionDescription(specifications);
-    }
+  @Override
+  protected final X86InstructionDescription createInstructionDescription(List<Object> specifications) {
+    return new X86InstructionDescription(specifications);
+  }
 }

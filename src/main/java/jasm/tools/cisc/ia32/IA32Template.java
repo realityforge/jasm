@@ -17,8 +17,8 @@ import jasm.ia32.IA32IndexRegister32;
 import jasm.ia32.IA32IndirectRegister16;
 import jasm.ia32.IA32IndirectRegister32;
 import jasm.tools.ArgumentRange;
-import jasm.tools.ImplicitOperand;
 import jasm.tools.TestArgumentExclusion;
+import jasm.tools.ExternalPresence;
 import jasm.tools.util.ProgramError;
 import jasm.tools.cisc.TemplateNotNeededException;
 import jasm.tools.cisc.x86.InstructionAssessment;
@@ -32,9 +32,10 @@ import jasm.tools.cisc.x86.X86ImmediateParameter;
 import jasm.tools.cisc.x86.X86ImplicitOperand;
 import jasm.tools.cisc.x86.X86InstructionDescription;
 import jasm.tools.cisc.x86.X86OffsetParameter;
-import jasm.tools.cisc.x86.X86Operand;
 import jasm.tools.cisc.x86.X86Template;
 import jasm.tools.cisc.x86.X86TemplateContext;
+import jasm.tools.cisc.x86.ModCase;
+import jasm.tools.cisc.x86.Designation;
 import jasm.x86.ControlRegister;
 import jasm.x86.DebugRegister;
 import jasm.x86.MMXRegister;
@@ -47,7 +48,7 @@ public final class IA32Template extends X86Template {
         super(instructionDescription, serial, instructionFamily, context);
     }
 
-    private void addSib(X86Operand.Designation designation) throws TemplateNotNeededException {
+    private void addSib(Designation designation) throws TemplateNotNeededException {
         assert context().addressSizeAttribute() != WordWidth.BITS_16;
         haveSibByte();
         switch (context().sibBaseCase()) {
@@ -97,7 +98,7 @@ public final class IA32Template extends X86Template {
     }
 
     @Override
-    protected final void organize_M(X86Operand.Designation designation) throws TemplateNotNeededException {
+    protected final void organize_M(Designation designation) throws TemplateNotNeededException {
         switch (context().modCase()) {
             case MOD_0: {
                 switch (context().rmCase()) {
@@ -225,7 +226,7 @@ public final class IA32Template extends X86Template {
         }
     }
 
-    public final void visitOperandCode(OperandCode operandCode, X86Operand.Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion)
+    public final void visitOperandCode(OperandCode operandCode, Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion)
         throws TemplateNotNeededException {
         switch (operandCode) {
             case Ap:
@@ -410,7 +411,7 @@ public final class IA32Template extends X86Template {
                 break;
             }
             case PRq: {
-                if (context().modCase() != X86TemplateContext.ModCase.MOD_3) {
+                if (context().modCase() != ModCase.MOD_3) {
                     throw new TemplateNotNeededException();
                 }
                 addEnumerableParameter(designation, ParameterPlace.MOD_RM, MMXRegister.SYMBOLS).excludeTestArguments(testArgumentExclusion);
@@ -422,7 +423,7 @@ public final class IA32Template extends X86Template {
                 break;
             }
             case Rd: {
-                if (context().modCase() != X86TemplateContext.ModCase.MOD_3) {
+                if (context().modCase() != ModCase.MOD_3) {
                     throw new TemplateNotNeededException();
                 }
                 addEnumerableParameter(designation, ParameterPlace.MOD_RM, IA32GeneralRegister32.SYMBOLS).excludeTestArguments(
@@ -430,7 +431,7 @@ public final class IA32Template extends X86Template {
                 break;
             }
             case Rv:
-                if (context().modCase() != X86TemplateContext.ModCase.MOD_3) {
+                if (context().modCase() != ModCase.MOD_3) {
                     throw new TemplateNotNeededException();
                 }
                 switch (context().operandSizeAttribute()) {
@@ -465,7 +466,7 @@ public final class IA32Template extends X86Template {
         }
     }
 
-    public final void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, X86Operand.Designation designation, ImplicitOperand.ExternalPresence externalPresence) {
+    public final void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, Designation designation, ExternalPresence externalPresence) {
         switch (operandSizeAttribute()) {
             case BITS_16:
                 addImplicitOperand(new X86ImplicitOperand(designation, externalPresence, IA32GeneralRegister16.values()[registerOperandCode.id()]));

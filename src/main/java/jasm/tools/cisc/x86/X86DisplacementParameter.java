@@ -10,15 +10,15 @@ package jasm.tools.cisc.x86;
 
 import jasm.WordWidth;
 
-public final class X86DisplacementParameter extends X86OffsetParameter {
+public final class X86DisplacementParameter
+    extends X86OffsetParameter {
 
-    public X86DisplacementParameter(X86Operand.Designation designation, WordWidth width) {
-        super(designation, width);
-    }
+  public X86DisplacementParameter(Designation designation, WordWidth width) {
+    super(designation, width);
+  }
 
-    @Override
-    public final String variableName() {
-        return "disp" + width().numberOfBits();
-    }
-
+  @Override
+  public final String variableName() {
+    return "disp" + width().numberOfBits();
+  }
 }

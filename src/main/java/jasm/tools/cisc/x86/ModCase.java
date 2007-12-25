@@ -8,13 +8,10 @@
  */
 package jasm.tools.cisc.x86;
 
-import jasm.WordWidth;
+public enum ModCase {
+  MOD_0, MOD_1, MOD_2, MOD_3;
 
-public final class X86ImmediateParameter
-    extends X86NumericalParameter {
-
-  public X86ImmediateParameter(Designation designation, WordWidth width) {
-    super(designation, width);
-    setVariableName("imm" + width.numberOfBits());
+  public int value() {
+    return ordinal();
   }
 }

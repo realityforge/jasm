@@ -8,13 +8,16 @@
  */
 package jasm.tools.cisc.x86;
 
-import jasm.WordWidth;
+public enum RMCase {
+  NORMAL(0), SIB(4), SWORD(6), SDWORD(5);
 
-public final class X86ImmediateParameter
-    extends X86NumericalParameter {
+  private final int _rmFieldValue;
 
-  public X86ImmediateParameter(Designation designation, WordWidth width) {
-    super(designation, width);
-    setVariableName("imm" + width.numberOfBits());
+  private RMCase(int rmFieldValue) {
+    _rmFieldValue = rmFieldValue;
+  }
+
+  public int value() {
+    return _rmFieldValue;
   }
 }

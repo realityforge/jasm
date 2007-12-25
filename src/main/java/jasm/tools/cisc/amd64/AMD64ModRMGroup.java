@@ -44,7 +44,7 @@ import static jasm.tools.cisc.x86.OperandCode.PRq;
 import static jasm.tools.cisc.x86.OperandCode.Rv;
 import static jasm.tools.cisc.x86.OperandCode.VRdq;
 import static jasm.tools.cisc.x86.OperandTypeCode.v;
-import jasm.tools.cisc.x86.X86TemplateContext;
+import jasm.tools.cisc.x86.ModCase;
 import java.util.Arrays;
 
 /**
@@ -132,7 +132,7 @@ public enum AMD64ModRMGroup implements ModRMGroup {
     ),
     GROUP_7b(
         modRM(ModRMGroup.Opcode._4, "SMSW", Rv),
-        modRM(ModRMGroup.Opcode._7, "SWAPGS", X86TemplateContext.ModCase.MOD_3)    // r/m field == 0
+        modRM(ModRMGroup.Opcode._7, "SWAPGS", ModCase.MOD_3)    // r/m field == 0
         // modRM(ModRMGroup.Opcode._7, "RDTSCP", X86TemplateContext.ModCase.MOD_3) // r/m field == 1
     ),
     GROUP_8(

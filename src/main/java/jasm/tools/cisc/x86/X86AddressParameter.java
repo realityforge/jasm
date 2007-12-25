@@ -15,7 +15,7 @@ public final class X86AddressParameter
     extends X86NumericalParameter
     implements AddressParameter {
 
-  public X86AddressParameter(X86Operand.Designation designation, WordWidth width) {
+  public X86AddressParameter(Designation designation, WordWidth width) {
     super(designation, width);
     setVariableName("m" + width().numberOfBits());
   }

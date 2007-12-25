@@ -23,7 +23,7 @@ import jasm.tools.cisc.x86.X86OffsetParameter;
 import jasm.tools.cisc.x86.X86Operand;
 import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
-import jasm.tools.cisc.x86.X86TemplateContext;
+import jasm.tools.cisc.x86.RMCase;
 import jasm.util.StringUtil;
 import jasm.x86.IndirectRegister;
 import jasm.x86.Scale;
@@ -185,7 +185,7 @@ public abstract class X86DisassembledInstruction<Template_Type extends X86Templa
       if (label != null) {
         offset = label.name() + ": " + offset;
       }
-      if (template().addressSizeAttribute() == WordWidth.BITS_64 && template().rmCase() == X86TemplateContext.RMCase.SDWORD) {
+      if (template().addressSizeAttribute() == WordWidth.BITS_64 && template().rmCase() == RMCase.SDWORD) {
         return "[" + offset + "]"; // RIP
       }
       return offset;

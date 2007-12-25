@@ -204,7 +204,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
 
   private void printSibByte(IndentWriter writer, Template_Type template) {
     writer.print("byte " + SIB_BYTE_NAME + " = ");
-    if (template.sibBaseCase() == X86TemplateContext.SibBaseCase.SPECIAL) {
+    if (template.sibBaseCase() == SibBaseCase.SPECIAL) {
       writer.println("(byte) (5 << " + X86Field.BASE.shift() + "); // base field");
     } else {
       writer.println("(byte) 0;");

@@ -15,6 +15,7 @@ import jasm.tools.Assembly;
 import jasm.tools.AssemblyTestComponent;
 import jasm.tools.ImmediateArgument;
 import jasm.tools.ImplicitOperand;
+import jasm.tools.ExternalPresence;
 import jasm.tools.cisc.x86.ParameterPlace;
 import jasm.tools.cisc.x86.X86AddressParameter;
 import jasm.tools.cisc.x86.X86Assembly;
@@ -25,7 +26,7 @@ import jasm.tools.cisc.x86.X86Opcode;
 import jasm.tools.cisc.x86.X86Operand;
 import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
-import jasm.tools.cisc.x86.X86TemplateContext;
+import jasm.tools.cisc.x86.RMCase;
 import jasm.tools.test.correctness.AssemblyTester;
 import jasm.tools.util.IndentWriter;
 import jasm.util.HexByte;
@@ -64,7 +65,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
         final X86Operand operand = operands.remove();
         if (operand instanceof ImplicitOperand) {
             final ImplicitOperand implicitOperand = (ImplicitOperand) operand;
-            if (implicitOperand.externalPresence() == ImplicitOperand.ExternalPresence.OMITTED) {
+            if (implicitOperand.externalPresence() == ExternalPresence.OMITTED) {
                 return "";
             }
             final Argument argument = implicitOperand.argument();
@@ -106,7 +107,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
             }
         }
         if (parameter instanceof X86OffsetParameter) {
-            if (template.addressSizeAttribute() == WordWidth.BITS_64 && template.rmCase() == X86TemplateContext.RMCase.SDWORD) {
+            if (template.addressSizeAttribute() == WordWidth.BITS_64 && template.rmCase() == RMCase.SDWORD) {
                 return argument.externalValue() + "(%rip)";
             }
             final ImmediateArgument immediateArgument = (ImmediateArgument) argument;

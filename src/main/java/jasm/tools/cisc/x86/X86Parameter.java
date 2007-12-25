@@ -28,7 +28,7 @@ public abstract class X86Parameter extends X86Operand implements Parameter {
   private Set<Argument> _excludedDisassemblerTestArguments = new HashSet<Argument>();
   private Set<Argument> _excludedExternalTestArguments = new HashSet<Argument>();
 
-  protected X86Parameter(X86Operand.Designation designation, ParameterPlace place) {
+  protected X86Parameter(Designation designation, ParameterPlace place) {
     super(designation);
     _place = place;
   }

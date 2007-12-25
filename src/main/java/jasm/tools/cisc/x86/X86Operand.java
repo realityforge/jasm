@@ -14,19 +14,13 @@ import jasm.tools.Operand;
  * Description of an assembly instruction operand.
  */
 public abstract class X86Operand implements Operand {
+  private Designation _designation;
 
-    public enum Designation {
-        DESTINATION, SOURCE, OTHER
-    }
+  protected X86Operand(Designation designation) {
+    _designation = designation;
+  }
 
-    private Designation _designation;
-
-    protected X86Operand(Designation designation) {
-        _designation = designation;
-    }
-
-    public final Designation designation() {
-        return _designation;
-    }
-
+  public final Designation designation() {
+    return _designation;
+  }
 }

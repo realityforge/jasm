@@ -25,7 +25,7 @@ public abstract class X86NumericalParameter extends X86Parameter implements Para
 
   private final WordWidth _width;
 
-  public X86NumericalParameter(X86Operand.Designation designation, WordWidth width) {
+  public X86NumericalParameter(Designation designation, WordWidth width) {
     super(designation, ParameterPlace.APPEND);
     _width = width;
   }

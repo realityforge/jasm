@@ -19,7 +19,8 @@ import jasm.tools.cisc.x86.X86Field;
 import jasm.tools.cisc.x86.X86Opcode;
 import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
-import jasm.tools.cisc.x86.X86TemplateContext;
+import jasm.tools.cisc.x86.ModCase;
+import jasm.tools.cisc.x86.RMCase;
 import jasm.tools.util.IndentWriter;
 import jasm.tools.util.ProgramError;
 import jasm.util.HexUtil;
@@ -160,7 +161,7 @@ public final class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Te
 
     @Override
     protected final void printModVariants(IndentWriter writer, AMD64Template template) {
-        if (template.modCase() != X86TemplateContext.ModCase.MOD_0 || template.parameters().size() == 0) {
+        if (template.modCase() != ModCase.MOD_0 || template.parameters().size() == 0) {
             return;
         }
         switch (template.rmCase()) {
@@ -207,8 +208,8 @@ public final class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Te
     @Override
     protected final void printSibVariants(IndentWriter writer, AMD64Template template) {
         if (template.parameters().size() == 0 ||
-                        template.modCase() == null || template.modCase() == X86TemplateContext.ModCase.MOD_3 ||
-                template.rmCase() != X86TemplateContext.RMCase.NORMAL) {
+                        template.modCase() == null || template.modCase() == ModCase.MOD_3 ||
+                template.rmCase() != RMCase.NORMAL) {
             return;
         }
         switch (template.modCase()) {
