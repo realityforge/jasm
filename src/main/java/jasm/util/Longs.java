@@ -22,5 +22,4 @@ public final class Longs {
   public static int numberOfEffectiveUnsignedBits(long unsigned) {
     return 64 - Long.numberOfLeadingZeros(unsigned);
   }
-
 }
