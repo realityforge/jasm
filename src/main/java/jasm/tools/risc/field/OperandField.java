@@ -28,6 +28,10 @@ import java.util.Set;
 public abstract class OperandField<Argument_Type extends Argument> extends RiscField implements Parameter, Expression {
 
   private SignDependentOperations _signDependentOperations;
+  private String _variableName;
+  private Set<Argument> _excludedDisassemblerTestArguments = Collections.emptySet();
+  private Set<Argument> _excludedExternalTestArguments = Collections.emptySet();
+  private Expression _expression;
 
   protected OperandField(BitRange bitRange) {
     super(bitRange);
@@ -95,8 +99,6 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
     return _signDependentOperations == SignDependentOperations.SIGNED;
   }
 
-  private String _variableName;
-
   public final String variableName() {
     if (_variableName != null) {
       return _variableName;
@@ -109,13 +111,9 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
     return this;
   }
 
-  private Set<Argument> _excludedDisassemblerTestArguments = Collections.emptySet();
-
   public final Set<Argument> excludedDisassemblerTestArguments() {
     return _excludedDisassemblerTestArguments;
   }
-
-  private Set<Argument> _excludedExternalTestArguments = Collections.emptySet();
 
   public final Set<Argument> excludedExternalTestArguments() {
     return _excludedExternalTestArguments;
@@ -131,8 +129,6 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
     }
     return template.bindingFor(this, arguments).asLong();
   }
-
-  private Expression _expression;
 
   public OperandField<Argument_Type> bindTo(Expression expression) {
     final OperandField<Argument_Type> result = clone();
