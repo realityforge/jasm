@@ -31,6 +31,9 @@ import java.util.ArrayList;
  */
 public final class OptionField extends RiscField {
 
+  private Option _defaultOption;
+  private ArrayList<Option> _options = new ArrayList<Option>();
+
   public OptionField(BitRange bitRange) {
     super(bitRange);
   }
@@ -44,13 +47,9 @@ public final class OptionField extends RiscField {
     return new RiscConstant(this, value);
   }
 
-  protected Option _defaultOption;
-
   public final Option defaultOption() {
     return _defaultOption;
   }
-
-  protected ArrayList<Option> _options = new ArrayList<Option>();
 
   public final Iterable<Option> options() {
     return _options;
