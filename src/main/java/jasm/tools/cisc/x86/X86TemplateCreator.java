@@ -142,7 +142,7 @@ public abstract class X86TemplateCreator<Template_Type extends X86Template> {
             if (_addressWidth == WordWidth.BITS_64) {
                 createTemplatesForModCases(WordWidth.BITS_64);
             }
-            if (X86Assembly.are16BitOffsetsSupported() || !_instructionAssessment.isJump()) {
+            if (X86Config.are16BitOffsetsSupported() || !_instructionAssessment.isJump()) {
                 createTemplatesForModCases(WordWidth.BITS_16);
             }
         }
@@ -150,12 +150,12 @@ public abstract class X86TemplateCreator<Template_Type extends X86Template> {
 
     private void createTemplatesForAddressSizeAttribute() {
         if (_instructionDescription.requiredAddressSize() != null) {
-            if (X86Assembly.are16BitAddressesSupported() || _instructionDescription.requiredAddressSize() == _addressWidth) {
+            if (X86Config.are16BitAddressesSupported() || _instructionDescription.requiredAddressSize() == _addressWidth) {
                 createTemplatesForOperandSizeAttribute(_instructionDescription.requiredAddressSize());
             }
         } else {
             createTemplatesForOperandSizeAttribute(_addressWidth);
-            if (X86Assembly.are16BitAddressesSupported() && _instructionAssessment.hasAddressSizeVariants()) {
+            if (X86Config.are16BitAddressesSupported() && _instructionAssessment.hasAddressSizeVariants()) {
                 createTemplatesForOperandSizeAttribute(WordWidth.fromInt(_addressWidth.numberOfBits() / 2));
             }
         }

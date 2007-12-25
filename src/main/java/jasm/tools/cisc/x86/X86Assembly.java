@@ -14,30 +14,9 @@ import jasm.tools.util.ProgramError;
 
 public abstract class X86Assembly<Template_Type extends X86Template>
     extends Assembly<Template_Type> {
-  /** Whether to support 16 bit addressing. */
-  private static boolean c_are16BitAddressesSupported;
-
-  /** Whether to support 16 bit addressing. */
-  private static boolean c_are16BitOffsetsSupported;
 
   public X86Assembly(InstructionSet instructionSet, Class<Template_Type> templateType) {
     super(instructionSet, templateType);
-  }
-
-  public static boolean are16BitAddressesSupported() {
-    return c_are16BitAddressesSupported;
-  }
-
-  public static void support16BitAddresses() {
-    c_are16BitAddressesSupported = true;
-  }
-
-  public static boolean are16BitOffsetsSupported() {
-    return c_are16BitOffsetsSupported;
-  }
-
-  public static void support16BitOffsets() {
-    c_are16BitOffsetsSupported = true;
   }
 
   private static <Template_Type extends X86Template> boolean parametersMatching(Template_Type original, Template_Type candidate, Class argumentType) {

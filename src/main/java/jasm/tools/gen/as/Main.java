@@ -9,7 +9,7 @@
 package jasm.tools.gen.as;
 
 import jasm.tools.Trace;
-import jasm.tools.cisc.x86.X86Assembly;
+import jasm.tools.cisc.x86.X86Config;
 import java.io.File;
 import java.util.List;
 import org.realityforge.cli.ArgsParser;
@@ -143,8 +143,8 @@ public final class Main {
       Trace.on(_verbosity);
       final AssemblerGenerator<?> generator = newAssembly();
       if (null != _sourceDirectory) generator.setSourceDirectory(_sourceDirectory);
-      if (_16bitAddresses) X86Assembly.support16BitAddresses();
-      if (_16bitOffsets) X86Assembly.support16BitOffsets();
+      if (_16bitAddresses) X86Config.support16BitAddresses();
+      if (_16bitOffsets) X86Config.support16BitOffsets();
       generator.generate();
     } catch (Throwable e) {
       e.printStackTrace();
