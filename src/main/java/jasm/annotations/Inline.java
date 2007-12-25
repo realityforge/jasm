@@ -14,7 +14,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * An annotation to indicate that method SHOULD be inlined by the optimizing compiler.
+ * An annotation to indicate that method SHOULD be inlined by a optimizing compiler.
  * Duplication of the @Inline annotations in projects such as Jikes RVM but decoupled
  * from any VM implementation.
  */
