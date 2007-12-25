@@ -12,9 +12,7 @@ import jasm.tools.InstructionDescription;
 import jasm.tools.risc.field.OptionField;
 import jasm.util.ProgramError;
 import jasm.util.StaticLoophole;
-import jasm.util.ArrayUtil;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
