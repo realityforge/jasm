@@ -10,7 +10,6 @@ package jasm;
 
 import jasm.annotations.NoInline;
 import jasm.util.Longs;
-import java.io.IOException;
 import java.util.LinkedList;
 
 /**
@@ -158,7 +157,7 @@ public abstract class Assembler {
     }
   }
 
-  private byte[] writeOutput() throws IOException, AssemblyException {
+  private byte[] writeOutput() throws AssemblyException {
     _selectingLabelInstructions = false;
 
     final int size;
@@ -198,7 +197,7 @@ public abstract class Assembler {
    *
    * @throws AssemblyException if there any problem with binding labels to addresses
    */
-  public final byte[] toByteArray() throws AssemblyException, IOException {
+  public final byte[] toByteArray() throws AssemblyException {
     gatherLabels();
     updateSpanDependentLabelInstructions();
     return writeOutput();
