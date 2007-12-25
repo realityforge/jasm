@@ -167,9 +167,6 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
 
   @Override
   public final boolean equals(Object object) {
-    if (object instanceof InstructionDescription) {
-      return _serial == ((InstructionDescription) object)._serial;
-    }
-    return false;
+    return object instanceof InstructionDescription && _serial == ((InstructionDescription) object)._serial;
   }
 }
