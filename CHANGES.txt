@@ -9,7 +9,7 @@ are relatively sparse. The main changes involved refactoring the code base to re
 use of the custom collection framework and other non-essential or unused code. The
 refactoring also focused on simplifying the codebase where possible to reduce the
 cost of future maintanence. The aim was not to introduce major functional changes in
-this release. The code being optimized
+this release. The code also saw significant performance improvements.
 
 For full details of the changes: svn log -r1:XXXXXXX
 
