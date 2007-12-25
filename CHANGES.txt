@@ -9,7 +9,7 @@ are relatively sparse. The main changes involved refactoring the code base to re
 use of the custom collection framework and other non-essential or unused code. The
 refactoring also focused on simplifying the codebase where possible to reduce the
 cost of future maintanence. The aim was not to introduce major functional changes in
-this release.
+this release. The code being optimized
 
 For full details of the changes: svn log -r1:XXXXXXX
 
@@ -19,6 +19,10 @@ For full details of the changes: svn log -r1:XXXXXXX
              test. See http://code.google.com/p/jasm/wiki/Testing for further details.
     * [16] - Guard constraint checking in assemblers by Config.ENABLE_CONSTRAINT_CHECKS to make it
              easy to disable in performance sensitive scenarios.
+    * [17] - Remove some inefficencies that exist in the way the assembler generates machine code. Rather
+             than copying the data multiple times through a synchronized methods the machine code is copied
+             once into the output array. The code runs in 60% of the time when assemblying small machine
+             code arrays and much much faster for larger machine code arrays.
     * [18] - Mark methods in the ia32 and amd64 assemblers with @Inline if they SHOULD be inlined
     * [19] - Pass symbolic operands by value rather than by reference within the ia32 assembler
 
