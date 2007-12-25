@@ -8,12 +8,9 @@
  */
 package jasm;
 
-import jasm.util.Longs;
-import jasm.util.ProgramError;
 import jasm.annotations.NoInline;
-import java.io.ByteArrayOutputStream;
+import jasm.util.Longs;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.LinkedList;
 
 /**
@@ -161,32 +158,39 @@ public abstract class Assembler {
     }
   }
 
-  private void writeOutput(OutputStream outputStream) throws IOException, AssemblyException {
+  private byte[] writeOutput() throws IOException, AssemblyException {
     _selectingLabelInstructions = false;
-    int offset = 0;
+
+    final int size;
+    if (_labelInstructions.size() > 0) {
+      final LabelInstruction lastEnd = _labelInstructions.getLast();
+      size = (lastEnd.endOffset() + _machineCodeIndex - lastEnd.initialEndOffset());
+    } else {
+      size = _machineCodeIndex;
+    }
+
+    final byte[] output = new byte[size];
+
+    int mcOffset = 0;
+    int outputOffset = 0;
     for (LabelInstruction labelInstruction : _labelInstructions) {
-      outputStream.write(_machineCode, offset, labelInstruction.initialStartOffset() - offset);
+      //Copy content prior to current label but after last label
+      final int preDataLength = labelInstruction.initialStartOffset() - mcOffset;
+      System.arraycopy(_machineCode, mcOffset, output, outputOffset, preDataLength);
+      outputOffset += preDataLength;
+
       //UGLY hackery.
       // We assemble the label instruction at the end of our machineCode
       // to figure out length then we roll it back by reseting the machineCodeIndex
       final int oldMCI = _machineCodeIndex;
       labelInstruction.assemble();
-      outputStream.write(_machineCode, oldMCI, _machineCodeIndex - oldMCI);
+      System.arraycopy(_machineCode, oldMCI, output, outputOffset, _machineCodeIndex - oldMCI);
+      outputOffset += _machineCodeIndex - oldMCI;
       _machineCodeIndex = oldMCI;
-      offset = labelInstruction.initialEndOffset();
+      mcOffset = labelInstruction.initialEndOffset();
     }
-    outputStream.write(_machineCode, offset, _machineCodeIndex - offset);
-  }
-
-  /**
-   * Writes the object code assembled so far to a given output stream.
-   *
-   * @throws AssemblyException if there any problem with binding labels to addresses
-   */
-  public final void output(OutputStream outputStream) throws IOException, AssemblyException {
-    gatherLabels();
-    updateSpanDependentLabelInstructions();
-    writeOutput(outputStream);
+    System.arraycopy(_machineCode, mcOffset, output, outputOffset, _machineCodeIndex - mcOffset);
+    return output;
   }
 
   /**
@@ -194,16 +198,10 @@ public abstract class Assembler {
    *
    * @throws AssemblyException if there any problem with binding labels to addresses
    */
-  public final byte[] toByteArray() throws AssemblyException {
-    final ByteArrayOutputStream stream = new ByteArrayOutputStream();
-    try {
-      output(stream);
-      stream.close();
-      return stream.toByteArray();
-    } catch (IOException ioException) {
-      ProgramError.unexpected("IOException during output to byte array", ioException);
-    }
-    return new byte[0];
+  public final byte[] toByteArray() throws AssemblyException, IOException {
+    gatherLabels();
+    updateSpanDependentLabelInstructions();
+    return writeOutput();
   }
 
   protected final void fixLabel32(Label label, int address32) {
