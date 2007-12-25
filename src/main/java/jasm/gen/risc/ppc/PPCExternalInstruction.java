@@ -19,7 +19,7 @@ import java.util.List;
  */
 public final class PPCExternalInstruction extends RiscExternalInstruction {
 
-    PPCExternalInstruction(PPCTemplate template, List<Argument> arguments) {
+    public PPCExternalInstruction(PPCTemplate template, List<Argument> arguments) {
         super(template, arguments);
     }
 

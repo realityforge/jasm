@@ -14,7 +14,7 @@ import jasm.dis.DisassembledInstruction;
 import jasm.gen.Assembly;
 import jasm.gen.AssemblyTestComponent;
 import jasm.gen.InstructionConstraint;
-import jasm.gen.test.AssemblyTester;
+import jasm.gen.test.correctness.AssemblyTester;
 import java.io.IOException;
 import java.io.PushbackInputStream;
 import java.util.EnumSet;

@@ -19,7 +19,7 @@ import java.util.List;
  */
 public final class SPARCExternalInstruction extends RiscExternalInstruction {
 
-    SPARCExternalInstruction(SPARCTemplate template, List<Argument> arguments) {
+    public SPARCExternalInstruction(SPARCTemplate template, List<Argument> arguments) {
         super(template, arguments);
     }
 

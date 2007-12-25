@@ -640,7 +640,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     emitByte(writer, "((byte) " + HexUtil.toHexLiteral(value) + ")");
   }
 
-  protected final void generate() throws Exception {
+  public final void generate() throws Exception {
     if (!generateRawAssemblerClass()) {
       Trace.line(1, "unmodified: " + _rawAssemblerClassName);
     }
