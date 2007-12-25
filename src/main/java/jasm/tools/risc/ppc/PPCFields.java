@@ -8,6 +8,21 @@
  */
 package jasm.tools.risc.ppc;
 
+import jasm.ppc.BOOperand;
+import static jasm.ppc.BOOperand.CRFalse;
+import static jasm.ppc.BOOperand.CRTrue;
+import static jasm.ppc.BOOperand.CTRNonZero;
+import static jasm.ppc.BOOperand.CTRNonZero_CRFalse;
+import static jasm.ppc.BOOperand.CTRNonZero_CRTrue;
+import static jasm.ppc.BOOperand.CTRZero;
+import static jasm.ppc.BOOperand.CTRZero_CRFalse;
+import static jasm.ppc.BOOperand.CTRZero_CRTrue;
+import jasm.ppc.BranchPredictionBits;
+import jasm.ppc.CRF;
+import jasm.ppc.FPR;
+import jasm.ppc.GPR;
+import jasm.ppc.SPR;
+import jasm.ppc.ZeroOrRegister;
 import jasm.tools.Expression;
 import jasm.tools.ImmediateArgument;
 import jasm.tools.InstructionConstraint;
@@ -24,21 +39,6 @@ import jasm.tools.risc.field.OperandField;
 import jasm.tools.risc.field.OptionField;
 import jasm.tools.risc.field.ReservedField;
 import jasm.tools.risc.field.SymbolicOperandField;
-import jasm.ppc.BOOperand;
-import static jasm.ppc.BOOperand.CRFalse;
-import static jasm.ppc.BOOperand.CRTrue;
-import static jasm.ppc.BOOperand.CTRNonZero;
-import static jasm.ppc.BOOperand.CTRNonZero_CRFalse;
-import static jasm.ppc.BOOperand.CTRNonZero_CRTrue;
-import static jasm.ppc.BOOperand.CTRZero;
-import static jasm.ppc.BOOperand.CTRZero_CRFalse;
-import static jasm.ppc.BOOperand.CTRZero_CRTrue;
-import jasm.ppc.BranchPredictionBits;
-import jasm.ppc.CRF;
-import jasm.ppc.FPR;
-import jasm.ppc.GPR;
-import jasm.ppc.SPR;
-import jasm.ppc.ZeroOrRegister;
 import jasm.util.NamedField;
 
 /**

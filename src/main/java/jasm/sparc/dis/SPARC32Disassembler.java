@@ -11,9 +11,9 @@ package jasm.sparc.dis;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.WordWidth;
+import jasm.sparc.as.SPARC32Assembler;
 import jasm.tools.risc.sparc.SPARCAssembly;
 import jasm.tools.risc.sparc.SPARCTemplate;
-import jasm.sparc.as.SPARC32Assembler;
 import java.util.List;
 
 public final class SPARC32Disassembler extends SPARCDisassembler<SPARC32DisassembledInstruction> {

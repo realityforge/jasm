@@ -10,9 +10,9 @@ package jasm.amd64.as;
 
 import jasm.Assembler64;
 import jasm.AssemblyException;
+import jasm.Config;
 import jasm.InstructionSet;
 import jasm.Label;
-import jasm.Config;
 
 /**
  * Instantiate this class to assemble AMD64 instructions.

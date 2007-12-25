@@ -8,9 +8,9 @@
  */
 package jasm.tools.cisc.x86;
 
+import static jasm.ia32.IA32GeneralRegister16.AX;
 import jasm.tools.Assembly;
 import static jasm.tools.cisc.x86.FloatingPointOperandCode.ST_i;
-import static jasm.ia32.IA32GeneralRegister16.AX;
 import static jasm.util.HexByte._C0;
 import static jasm.util.HexByte._C8;
 import static jasm.util.HexByte._D0;

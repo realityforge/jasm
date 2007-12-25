@@ -9,12 +9,12 @@
 package jasm.tools.risc.ppc.performance;
 
 import jasm.Label;
-import jasm.tools.test.performance.PerformanceTester;
 import jasm.ppc.BranchPredictionBits;
 import jasm.ppc.CRF;
 import jasm.ppc.GPR;
 import jasm.ppc.Zero;
 import jasm.ppc.as.PPCAssembler;
+import jasm.tools.test.performance.PerformanceTester;
 
 public abstract class PPCPerformanceTester
     extends PerformanceTester {

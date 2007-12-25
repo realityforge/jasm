@@ -10,11 +10,11 @@ package jasm.tools.risc.ppc.correctness;
 
 import jasm.Assembler;
 import jasm.WordWidth;
-import jasm.tools.AssemblyTestComponent;
-import jasm.tools.risc.ppc.PPCAssembly;
 import jasm.ppc.as.PPC32Assembler;
 import jasm.ppc.dis.PPC32DisassembledInstruction;
 import jasm.ppc.dis.PPC32Disassembler;
+import jasm.tools.AssemblyTestComponent;
+import jasm.tools.risc.ppc.PPCAssembly;
 import java.util.EnumSet;
 
 public final class PPC32AssemblyTester extends PPCAssemblyTester<PPC32DisassembledInstruction> {

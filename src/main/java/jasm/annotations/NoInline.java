@@ -1,9 +1,9 @@
 package jasm.annotations;
 
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.lang.annotation.ElementType;
 
 /**
  * An annotation to indicate that method SHOULD NOT be inlined by a optimizing compiler.

@@ -8,6 +8,23 @@
  */
 package jasm.tools.cisc.ia32;
 
+import static jasm.ia32.IA32GeneralRegister16.AX;
+import static jasm.ia32.IA32GeneralRegister16.BP;
+import static jasm.ia32.IA32GeneralRegister16.BX;
+import static jasm.ia32.IA32GeneralRegister16.CX;
+import static jasm.ia32.IA32GeneralRegister16.DI;
+import static jasm.ia32.IA32GeneralRegister16.DX;
+import static jasm.ia32.IA32GeneralRegister16.SI;
+import static jasm.ia32.IA32GeneralRegister16.SP;
+import static jasm.ia32.IA32GeneralRegister32.EAX;
+import static jasm.ia32.IA32GeneralRegister32.EBP;
+import static jasm.ia32.IA32GeneralRegister32.EBX;
+import static jasm.ia32.IA32GeneralRegister32.ECX;
+import static jasm.ia32.IA32GeneralRegister32.EDI;
+import static jasm.ia32.IA32GeneralRegister32.EDX;
+import static jasm.ia32.IA32GeneralRegister32.ESI;
+import static jasm.ia32.IA32GeneralRegister32.ESP;
+import static jasm.ia32.IA32GeneralRegister8.AL;
 import jasm.tools.ExternalOmission;
 import static jasm.tools.cisc.x86.AddressingMethodCode.M;
 import static jasm.tools.cisc.x86.FloatingPointOperandCode.bytes_14_28;
@@ -35,23 +52,6 @@ import static jasm.tools.cisc.x86.OperandCode.PRq;
 import static jasm.tools.cisc.x86.OperandCode.Rv;
 import static jasm.tools.cisc.x86.OperandTypeCode.v;
 import static jasm.tools.cisc.x86.RegisterOperandCode.eAX;
-import static jasm.ia32.IA32GeneralRegister16.AX;
-import static jasm.ia32.IA32GeneralRegister16.BP;
-import static jasm.ia32.IA32GeneralRegister16.BX;
-import static jasm.ia32.IA32GeneralRegister16.CX;
-import static jasm.ia32.IA32GeneralRegister16.DI;
-import static jasm.ia32.IA32GeneralRegister16.DX;
-import static jasm.ia32.IA32GeneralRegister16.SI;
-import static jasm.ia32.IA32GeneralRegister16.SP;
-import static jasm.ia32.IA32GeneralRegister32.EAX;
-import static jasm.ia32.IA32GeneralRegister32.EBP;
-import static jasm.ia32.IA32GeneralRegister32.EBX;
-import static jasm.ia32.IA32GeneralRegister32.ECX;
-import static jasm.ia32.IA32GeneralRegister32.EDI;
-import static jasm.ia32.IA32GeneralRegister32.EDX;
-import static jasm.ia32.IA32GeneralRegister32.ESI;
-import static jasm.ia32.IA32GeneralRegister32.ESP;
-import static jasm.ia32.IA32GeneralRegister8.AL;
 import java.util.Arrays;
 
 /**

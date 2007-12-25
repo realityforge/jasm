@@ -8,6 +8,9 @@
  */
 package jasm.tools.risc.ppc;
 
+import jasm.ppc.CRF;
+import jasm.ppc.GPR;
+import jasm.ppc.ZeroOrRegister;
 import jasm.tools.InstructionConstraint;
 import static jasm.tools.InstructionConstraint.Static.ne;
 import static jasm.tools.risc.ppc.PPCFields.aa;
@@ -80,9 +83,6 @@ import static jasm.tools.risc.ppc.PPCFields.xo_26_30;
 import static jasm.tools.risc.ppc.PPCFields.xo_27_29;
 import static jasm.tools.risc.ppc.PPCFields.xo_27_30;
 import static jasm.tools.risc.ppc.PPCFields.xo_30_31;
-import jasm.ppc.CRF;
-import jasm.ppc.GPR;
-import jasm.ppc.ZeroOrRegister;
 import java.lang.reflect.Method;
 
 /**

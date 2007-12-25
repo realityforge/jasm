@@ -9,12 +9,12 @@
 package jasm.tools.cisc.ia32;
 
 import jasm.WordWidth;
-import jasm.tools.cisc.x86.X86AssemblerGenerator;
-import jasm.tools.cisc.x86.X86TemplateContext;
-import jasm.tools.util.IndentWriter;
 import jasm.ia32.IA32BaseRegister32;
 import jasm.ia32.IA32IndirectRegister16;
 import jasm.ia32.IA32IndirectRegister32;
+import jasm.tools.cisc.x86.X86AssemblerGenerator;
+import jasm.tools.cisc.x86.X86TemplateContext;
+import jasm.tools.util.IndentWriter;
 
 /**
  * Run this program to generate the IA32RawAssembler and IA32LabelAssembler classes.

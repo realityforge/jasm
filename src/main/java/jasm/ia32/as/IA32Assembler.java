@@ -10,9 +10,9 @@ package jasm.ia32.as;
 
 import jasm.Assembler32;
 import jasm.AssemblyException;
+import jasm.Config;
 import jasm.InstructionSet;
 import jasm.Label;
-import jasm.Config;
 
 /**
  * Instatiate this class to assemble IA32 instructions.

@@ -8,6 +8,7 @@
  */
 package jasm.tools.cisc.ia32;
 
+import static jasm.ia32.IA32GeneralRegister8.CL;
 import static jasm.tools.cisc.ia32.IA32ModRMGroup.GROUP_10;
 import static jasm.tools.cisc.ia32.IA32ModRMGroup.GROUP_11;
 import static jasm.tools.cisc.ia32.IA32ModRMGroup.GROUP_12;
@@ -36,7 +37,6 @@ import static jasm.tools.cisc.x86.OperandCode.Qd;
 import static jasm.tools.cisc.x86.OperandCode.Qq;
 import static jasm.tools.cisc.x86.OperandCode.Rd;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
-import static jasm.ia32.IA32GeneralRegister8.CL;
 import static jasm.util.HexByte._00;
 import static jasm.util.HexByte._01;
 import static jasm.util.HexByte._02;

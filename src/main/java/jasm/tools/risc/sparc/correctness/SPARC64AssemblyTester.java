@@ -10,11 +10,11 @@ package jasm.tools.risc.sparc.correctness;
 
 import jasm.Assembler;
 import jasm.WordWidth;
-import jasm.tools.AssemblyTestComponent;
-import jasm.tools.risc.sparc.SPARCAssembly;
 import jasm.sparc.as.SPARC64Assembler;
 import jasm.sparc.dis.SPARC64DisassembledInstruction;
 import jasm.sparc.dis.SPARC64Disassembler;
+import jasm.tools.AssemblyTestComponent;
+import jasm.tools.risc.sparc.SPARCAssembly;
 import java.util.EnumSet;
 
 public final class SPARC64AssemblyTester extends SPARCAssemblyTester<SPARC64DisassembledInstruction> {

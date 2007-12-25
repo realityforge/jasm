@@ -9,7 +9,6 @@
 package jasm.tools.risc.sparc.performance;
 
 import jasm.Label;
-import jasm.tools.test.performance.PerformanceTester;
 import static jasm.sparc.AnnulBit.A;
 import static jasm.sparc.BranchPredictionBit.PT;
 import static jasm.sparc.GPR.G0;
@@ -27,6 +26,7 @@ import static jasm.sparc.MembarOperand.LOAD_STORE;
 import static jasm.sparc.MembarOperand.NO_MEMBAR;
 import jasm.sparc.StateRegister;
 import jasm.sparc.as.SPARCAssembler;
+import jasm.tools.test.performance.PerformanceTester;
 
 public abstract class SPARCPerformanceTester
     extends PerformanceTester {

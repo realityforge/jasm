@@ -8,14 +8,6 @@
  */
 package jasm.tools.risc.sparc;
 
-import jasm.tools.Expression;
-import jasm.tools.risc.RiscConstant;
-import jasm.tools.risc.field.BranchDisplacementOperandField;
-import jasm.tools.risc.field.ConstantField;
-import jasm.tools.risc.field.IgnoredOperandField;
-import jasm.tools.risc.field.ImmediateOperandField;
-import jasm.tools.risc.field.ReservedField;
-import jasm.tools.risc.field.SymbolicOperandField;
 import jasm.sparc.AnnulBit;
 import jasm.sparc.BPr;
 import jasm.sparc.Bicc;
@@ -30,6 +22,14 @@ import jasm.sparc.PrivilegedRegister;
 import jasm.sparc.QFPR;
 import jasm.sparc.SFPR;
 import jasm.sparc.StateRegister;
+import jasm.tools.Expression;
+import jasm.tools.risc.RiscConstant;
+import jasm.tools.risc.field.BranchDisplacementOperandField;
+import jasm.tools.risc.field.ConstantField;
+import jasm.tools.risc.field.IgnoredOperandField;
+import jasm.tools.risc.field.ImmediateOperandField;
+import jasm.tools.risc.field.ReservedField;
+import jasm.tools.risc.field.SymbolicOperandField;
 import jasm.util.NamedField;
 
 /**

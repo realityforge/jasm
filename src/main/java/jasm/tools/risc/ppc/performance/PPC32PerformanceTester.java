@@ -9,8 +9,8 @@
 package jasm.tools.risc.ppc.performance;
 
 import jasm.dis.Disassembler;
-import jasm.ppc.dis.PPC32Disassembler;
 import jasm.ppc.as.PPC32Assembler;
+import jasm.ppc.dis.PPC32Disassembler;
 
 public class PPC32PerformanceTester
     extends PPCPerformanceTester {

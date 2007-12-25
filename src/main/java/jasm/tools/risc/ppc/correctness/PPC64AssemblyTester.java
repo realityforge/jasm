@@ -10,11 +10,11 @@ package jasm.tools.risc.ppc.correctness;
 
 import jasm.Assembler;
 import jasm.WordWidth;
-import jasm.tools.AssemblyTestComponent;
-import jasm.tools.risc.ppc.PPCAssembly;
 import jasm.ppc.as.PPC64Assembler;
 import jasm.ppc.dis.PPC64DisassembledInstruction;
 import jasm.ppc.dis.PPC64Disassembler;
+import jasm.tools.AssemblyTestComponent;
+import jasm.tools.risc.ppc.PPCAssembly;
 import java.util.EnumSet;
 
 public final class PPC64AssemblyTester extends PPCAssemblyTester<PPC64DisassembledInstruction> {

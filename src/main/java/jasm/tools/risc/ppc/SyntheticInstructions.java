@@ -8,6 +8,10 @@
  */
 package jasm.tools.risc.ppc;
 
+import static jasm.ppc.BOOperand.Always;
+import jasm.ppc.CRF;
+import jasm.ppc.GPR;
+import jasm.ppc.Zero;
 import static jasm.tools.Expression.Static.add;
 import static jasm.tools.Expression.Static.neg;
 import static jasm.tools.Expression.Static.sub;
@@ -63,10 +67,6 @@ import static jasm.tools.risc.ppc.PPCFields.to_option;
 import static jasm.tools.risc.ppc.PPCFields.ui;
 import static jasm.tools.risc.ppc.PPCFields.value;
 import static jasm.tools.risc.ppc.PPCFields.xo_21_30;
-import static jasm.ppc.BOOperand.Always;
-import jasm.ppc.CRF;
-import jasm.ppc.GPR;
-import jasm.ppc.Zero;
 
 /**
  * The definitions of the synthetic PowerPC instructions.

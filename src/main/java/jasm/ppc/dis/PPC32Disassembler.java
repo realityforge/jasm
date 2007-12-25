@@ -11,9 +11,9 @@ package jasm.ppc.dis;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.WordWidth;
+import jasm.ppc.as.PPC32Assembler;
 import jasm.tools.risc.ppc.PPCAssembly;
 import jasm.tools.risc.ppc.PPCTemplate;
-import jasm.ppc.as.PPC32Assembler;
 import java.util.List;
 
 public final class PPC32Disassembler extends PPCDisassembler<PPC32DisassembledInstruction> {

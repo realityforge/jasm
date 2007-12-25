@@ -10,9 +10,9 @@ package jasm.tools.risc.ppc;
 
 import jasm.Assembler;
 import jasm.BigEndianAssembler;
+import jasm.ppc.GPR;
 import jasm.tools.risc.RiscAssemblerGenerator;
 import jasm.tools.util.IndentWriter;
-import jasm.ppc.GPR;
 import java.util.Set;
 
 /**

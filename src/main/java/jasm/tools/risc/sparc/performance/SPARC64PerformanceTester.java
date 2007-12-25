@@ -9,8 +9,8 @@
 package jasm.tools.risc.sparc.performance;
 
 import jasm.dis.Disassembler;
-import jasm.sparc.dis.SPARC64Disassembler;
 import jasm.sparc.as.SPARC64Assembler;
+import jasm.sparc.dis.SPARC64Disassembler;
 
 public class SPARC64PerformanceTester
     extends SPARCPerformanceTester {

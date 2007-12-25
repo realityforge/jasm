@@ -8,6 +8,11 @@
  */
 package jasm.tools.risc.sparc;
 
+import static jasm.sparc.AnnulBit.NO_A;
+import jasm.sparc.BPr;
+import jasm.sparc.Bicc;
+import static jasm.sparc.BranchPredictionBit.PT;
+import jasm.sparc.FBfcc;
 import static jasm.tools.risc.sparc.SPARCFields.a;
 import static jasm.tools.risc.sparc.SPARCFields.bits_18_14;
 import static jasm.tools.risc.sparc.SPARCFields.bits_24_22;
@@ -40,11 +45,6 @@ import static jasm.tools.risc.sparc.SPARCFields.rs2;
 import static jasm.tools.risc.sparc.SPARCFields.simm13;
 import static jasm.tools.risc.sparc.SPARCFields.swTrapNumber;
 import static jasm.tools.risc.sparc.SPARCFields.tcc;
-import static jasm.sparc.AnnulBit.NO_A;
-import jasm.sparc.BPr;
-import jasm.sparc.Bicc;
-import static jasm.sparc.BranchPredictionBit.PT;
-import jasm.sparc.FBfcc;
 
 final class ControlTransfer extends SPARCInstructionDescriptionCreator {
 

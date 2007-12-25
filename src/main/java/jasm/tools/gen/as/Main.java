@@ -8,9 +8,8 @@
  */
 package jasm.tools.gen.as;
 
-import jasm.tools.cisc.x86.X86Assembly;
 import jasm.tools.Trace;
-import jasm.tools.gen.as.AssemblerGenerator;
+import jasm.tools.cisc.x86.X86Assembly;
 import java.io.File;
 import java.util.List;
 import org.realityforge.cli.ArgsParser;

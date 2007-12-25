@@ -10,8 +10,8 @@ package jasm.sparc.as;
 
 import jasm.Assembler32;
 import jasm.AssemblyException;
-import jasm.Label;
 import jasm.Config;
+import jasm.Label;
 
 /**
  * The concrete class for a 32-bit SPARC assembler.

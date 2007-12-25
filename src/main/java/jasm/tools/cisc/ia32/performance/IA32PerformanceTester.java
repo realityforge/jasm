@@ -8,25 +8,25 @@
  */
 package jasm.tools.cisc.ia32.performance;
 
-import jasm.dis.Disassembler;
-import jasm.tools.test.performance.PerformanceTester;
-import jasm.ia32.dis.IA32Disassembler;
-import jasm.ia32.as.IA32Assembler;
-import static jasm.ia32.IA32GeneralRegister32.EDX;
-import static jasm.ia32.IA32GeneralRegister32.EAX;
-import static jasm.ia32.IA32GeneralRegister32.EBX;
-import static jasm.ia32.IA32GeneralRegister32.EBP;
-import static jasm.ia32.IA32GeneralRegister32.EDI;
-import static jasm.ia32.IA32GeneralRegister8.BL;
-import static jasm.ia32.IA32GeneralRegister8.CL;
-import static jasm.ia32.IA32GeneralRegister8.AH;
-import static jasm.ia32.IA32GeneralRegister8.BH;
-import static jasm.ia32.IA32GeneralRegister8.AL;
-import static jasm.ia32.IA32GeneralRegister8.CH;
-import static jasm.ia32.IA32GeneralRegister8.DL;
 import jasm.Label;
-import static jasm.x86.Scale.SCALE_2;
+import jasm.dis.Disassembler;
+import static jasm.ia32.IA32GeneralRegister32.EAX;
+import static jasm.ia32.IA32GeneralRegister32.EBP;
+import static jasm.ia32.IA32GeneralRegister32.EBX;
+import static jasm.ia32.IA32GeneralRegister32.EDI;
+import static jasm.ia32.IA32GeneralRegister32.EDX;
+import static jasm.ia32.IA32GeneralRegister8.AH;
+import static jasm.ia32.IA32GeneralRegister8.AL;
+import static jasm.ia32.IA32GeneralRegister8.BH;
+import static jasm.ia32.IA32GeneralRegister8.BL;
+import static jasm.ia32.IA32GeneralRegister8.CH;
+import static jasm.ia32.IA32GeneralRegister8.CL;
+import static jasm.ia32.IA32GeneralRegister8.DL;
+import jasm.ia32.as.IA32Assembler;
+import jasm.ia32.dis.IA32Disassembler;
+import jasm.tools.test.performance.PerformanceTester;
 import static jasm.x86.Scale.SCALE_1;
+import static jasm.x86.Scale.SCALE_2;
 import static jasm.x86.Scale.SCALE_4;
 
 public class IA32PerformanceTester

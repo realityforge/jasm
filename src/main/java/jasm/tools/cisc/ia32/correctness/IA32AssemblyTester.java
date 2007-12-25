@@ -11,13 +11,13 @@ package jasm.tools.cisc.ia32.correctness;
 import jasm.Argument;
 import jasm.Assembler;
 import jasm.WordWidth;
-import jasm.tools.AssemblyTestComponent;
-import jasm.tools.cisc.x86.correctness.X86AssemblyTester;
-import jasm.tools.cisc.ia32.IA32Template;
-import jasm.tools.cisc.ia32.IA32Assembly;
 import jasm.ia32.as.IA32Assembler;
 import jasm.ia32.dis.IA32DisassembledInstruction;
 import jasm.ia32.dis.IA32Disassembler;
+import jasm.tools.AssemblyTestComponent;
+import jasm.tools.cisc.ia32.IA32Assembly;
+import jasm.tools.cisc.ia32.IA32Template;
+import jasm.tools.cisc.x86.correctness.X86AssemblyTester;
 import java.util.EnumSet;
 import java.util.List;
 

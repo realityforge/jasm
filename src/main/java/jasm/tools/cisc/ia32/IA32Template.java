@@ -9,6 +9,13 @@
 package jasm.tools.cisc.ia32;
 
 import jasm.WordWidth;
+import jasm.ia32.IA32BaseRegister32;
+import jasm.ia32.IA32GeneralRegister16;
+import jasm.ia32.IA32GeneralRegister32;
+import jasm.ia32.IA32GeneralRegister8;
+import jasm.ia32.IA32IndexRegister32;
+import jasm.ia32.IA32IndirectRegister16;
+import jasm.ia32.IA32IndirectRegister32;
 import jasm.tools.ArgumentRange;
 import jasm.tools.ImplicitOperand;
 import jasm.tools.TestArgumentExclusion;
@@ -27,13 +34,6 @@ import jasm.tools.cisc.x86.X86OffsetParameter;
 import jasm.tools.cisc.x86.X86Operand;
 import jasm.tools.cisc.x86.X86Template;
 import jasm.tools.cisc.x86.X86TemplateContext;
-import jasm.ia32.IA32BaseRegister32;
-import jasm.ia32.IA32GeneralRegister16;
-import jasm.ia32.IA32GeneralRegister32;
-import jasm.ia32.IA32GeneralRegister8;
-import jasm.ia32.IA32IndexRegister32;
-import jasm.ia32.IA32IndirectRegister16;
-import jasm.ia32.IA32IndirectRegister32;
 import jasm.util.ProgramError;
 import jasm.x86.ControlRegister;
 import jasm.x86.DebugRegister;

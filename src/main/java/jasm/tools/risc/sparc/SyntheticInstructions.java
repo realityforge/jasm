@@ -8,6 +8,13 @@
  */
 package jasm.tools.risc.sparc;
 
+import static jasm.sparc.AnnulBit.A;
+import static jasm.sparc.BranchPredictionBit.PT;
+import static jasm.sparc.GPR.G0;
+import static jasm.sparc.GPR.I7;
+import static jasm.sparc.GPR.O7;
+import static jasm.sparc.ICCOperand.XCC;
+import jasm.sparc.StateRegister;
 import static jasm.tools.InstructionConstraint.Static.getPredicateMethod;
 import static jasm.tools.InstructionConstraint.Static.makePredicate;
 import static jasm.tools.risc.sparc.SPARCFields.a;
@@ -22,13 +29,6 @@ import static jasm.tools.risc.sparc.SPARCFields.rs1;
 import static jasm.tools.risc.sparc.SPARCFields.rs1_state;
 import static jasm.tools.risc.sparc.SPARCFields.rs2;
 import static jasm.tools.risc.sparc.SPARCFields.simm13;
-import static jasm.sparc.AnnulBit.A;
-import static jasm.sparc.BranchPredictionBit.PT;
-import static jasm.sparc.GPR.G0;
-import static jasm.sparc.GPR.I7;
-import static jasm.sparc.GPR.O7;
-import static jasm.sparc.ICCOperand.XCC;
-import jasm.sparc.StateRegister;
 
 /**
  * Simple synthetic SPARC instructions.
