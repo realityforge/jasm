@@ -60,11 +60,6 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     return _addressWidth;
   }
 
-  @Override
-  protected final Class<? extends Assembler> parentAssemblerClass() {
-    return X86Assembler.class;
-  }
-
   protected final X86Parameter getParameter(Template_Type template, Class parameterType) {
     for (X86Parameter parameter : template.parameters()) {
       if (parameter.type() == parameterType) {

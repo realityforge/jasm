@@ -8,12 +8,14 @@
  */
 package jasm.tools.cisc.amd64;
 
+import jasm.Assembler;
 import jasm.WordWidth;
 import jasm.amd64.AMD64BaseRegister32;
 import jasm.amd64.AMD64BaseRegister64;
 import jasm.amd64.AMD64GeneralRegister8;
 import jasm.amd64.AMD64IndirectRegister32;
 import jasm.amd64.AMD64IndirectRegister64;
+import jasm.amd64.as.AbstractAMD64Assembler;
 import jasm.tools.cisc.x86.ModCase;
 import jasm.tools.cisc.x86.RMCase;
 import jasm.tools.cisc.x86.X86AssemblerGenerator;
@@ -29,6 +31,11 @@ public final class AMD64AssemblerGenerator
 
   public AMD64AssemblerGenerator() {
     super(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64, false);
+  }
+
+  @Override
+  protected final Class<? extends Assembler> parentAssemblerClass() {
+    return AbstractAMD64Assembler.class;
   }
 
   private boolean isWBitRequired(final X86Template template) {

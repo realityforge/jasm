@@ -9,6 +9,8 @@
 package jasm.tools.cisc.ia32;
 
 import jasm.WordWidth;
+import jasm.Assembler;
+import jasm.x86.as.X86Assembler;
 import jasm.ia32.IA32BaseRegister32;
 import jasm.ia32.IA32IndirectRegister16;
 import jasm.ia32.IA32IndirectRegister32;
@@ -25,6 +27,11 @@ public final class IA32AssemblerGenerator
 
   public IA32AssemblerGenerator() {
     super(IA32Assembly.ASSEMBLY, WordWidth.BITS_32, true);
+  }
+
+  @Override
+  protected final Class<? extends Assembler> parentAssemblerClass() {
+    return X86Assembler.class;
   }
 
   @Override
