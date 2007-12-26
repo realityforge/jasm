@@ -34,9 +34,14 @@ import java.util.Set;
 
 public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     extends AssemblerGenerator<Template_Type> {
+  private static final String OPCODE1_VARIABLE_NAME = "opcode1";
+  private static final String OPCODE2_VARIABLE_NAME = "opcode2";
+  private static final String MODRM_GROUP_OPCODE_VARIABLE_NAME = "modRmOpcode";
 
   private final WordWidth _addressWidth;
   private final boolean _promoteEnumerableParameters;
+  private final Map<String, String> _subroutineToName = new HashMap<String, String>();
+  private int _subroutineSerial;
 
   protected X86AssemblerGenerator(Assembly<Template_Type> assembly,
                                   WordWidth addressWidth,
@@ -277,8 +282,6 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     }
   }
 
-  private int _subroutineSerial;
-
   private String createSubroutineName() {
     ++_subroutineSerial;
     String number = Integer.toString(_subroutineSerial);
@@ -287,11 +290,6 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     }
     return "assemble" + number;
   }
-
-  private Map<String, String> _subroutineToName = new HashMap<String, String>();
-  private static final String OPCODE1_VARIABLE_NAME = "opcode1";
-  private static final String OPCODE2_VARIABLE_NAME = "opcode2";
-  private static final String MODRM_GROUP_OPCODE_VARIABLE_NAME = "modRmOpcode";
 
   private void printSubroutine(IndentWriter writer, Template_Type template) {
     writer.print("(byte ");
