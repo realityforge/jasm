@@ -32,7 +32,7 @@ public final class PPCAssemblerGenerator
   }
 
   @Override
-  protected Class<? extends Assembler> endiannessSpecificAssemblerClass() {
+  protected Class<? extends Assembler> parentAssemblerClass() {
     return BigEndianAssembler.class;
   }
 

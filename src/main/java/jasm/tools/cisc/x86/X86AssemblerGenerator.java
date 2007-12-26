@@ -12,7 +12,6 @@ import jasm.Assembler;
 import jasm.EnumerableArgument;
 import jasm.LabelAddressInstruction;
 import jasm.LabelOffsetInstruction;
-import jasm.LittleEndianAssembler;
 import jasm.WordWidth;
 import jasm.tools.Assembly;
 import jasm.tools.Parameter;
@@ -22,6 +21,7 @@ import jasm.util.ArrayUtil;
 import jasm.util.Enums;
 import jasm.util.HexUtil;
 import jasm.util.StaticLoophole;
+import jasm.x86.as.X86Assembler;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -63,8 +63,8 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
   }
 
   @Override
-  protected final Class<? extends Assembler> endiannessSpecificAssemblerClass() {
-    return LittleEndianAssembler.class;
+  protected final Class<? extends Assembler> parentAssemblerClass() {
+    return X86Assembler.class;
   }
 
   protected final X86Parameter getParameter(Template_Type template, Class parameterType) {

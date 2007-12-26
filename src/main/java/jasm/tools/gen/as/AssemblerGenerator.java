@@ -193,7 +193,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     return packages;
   }
 
-  protected abstract Class<? extends Assembler> endiannessSpecificAssemblerClass();
+  protected abstract Class<? extends Assembler> parentAssemblerClass();
 
   private List<Template_Type> _templates;
 
@@ -325,7 +325,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     importPackages.add(Inline.class.getPackage().getName());
     printRawImports(writer, importPackages);
     writer.println();
-    writer.println("public abstract class " + _rawAssemblerClassSimpleName + " extends " + endiannessSpecificAssemblerClass().getSimpleName() + " {");
+    writer.println("public abstract class " + _rawAssemblerClassSimpleName + " extends " + parentAssemblerClass().getSimpleName() + " {");
     writer.println();
     writer.indent();
     printAssemblerConstructor(writer, _rawAssemblerClassSimpleName);

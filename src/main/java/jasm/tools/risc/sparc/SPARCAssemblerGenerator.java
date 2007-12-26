@@ -19,7 +19,7 @@ public final class SPARCAssemblerGenerator extends RiscAssemblerGenerator<SPARCT
   }
 
   @Override
-  protected Class<? extends Assembler> endiannessSpecificAssemblerClass() {
+  protected Class<? extends Assembler> parentAssemblerClass() {
     return BigEndianAssembler.class;
   }
 
