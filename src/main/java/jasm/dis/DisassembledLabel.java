@@ -12,11 +12,13 @@ package jasm.dis;
  * A label deduced from one or more disassembled instructions.
  */
 public final class DisassembledLabel {
+  private static final String PREFIX = "L";
 
   private final int _instructionIndex;
+  private int _serial = -1;
+  private int _offset = -1;
 
   public DisassembledLabel(int instructionIndex) {
-    super();
     _instructionIndex = instructionIndex;
   }
 
@@ -24,11 +26,7 @@ public final class DisassembledLabel {
     return _instructionIndex;
   }
 
-  public static final String PREFIX = "L";
-
-  private int _serial = -1;
-
-  public final void setSerial(int index) {
+  final void setSerial(int index) {
     _serial = index;
   }
 
@@ -36,9 +34,7 @@ public final class DisassembledLabel {
     return PREFIX + _serial;
   }
 
-  private int _offset = -1;
-
-  public final void bind(int offset) {
+  final void bind(int offset) {
     _offset = offset;
   }
 
