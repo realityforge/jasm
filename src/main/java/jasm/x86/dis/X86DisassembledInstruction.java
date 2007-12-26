@@ -33,79 +33,97 @@ import java.util.Queue;
 
 /**
  * An x86 instruction, given as an x86 template and a sequence of arguments.
- * <p/>
- * The string representation for disassembler output has the following format,
+ *
+ * <p>The string representation for disassembler output has the following format,
  * which borrows from both Intel and AT&T syntax and differs from either
- * regarding indirect addressing and indexing.
+ * regarding indirect addressing and indexing.</p>
+ *
+ * <p>Operand order follows Intel syntax:</p>
  * <p/>
- * Operand order follows Intel syntax:
- * <p/>
+ * <pre>
  * mnemonic argument
  * mnemonic destination, source
  * mnemonic argument1, argument2, argument3
- * <p/>
- * Some mnemonics may have operand size suffixes as in AT&T (gas) syntax.
+ * </pre>
+ *
+ * <p>Some mnemonics may have operand size suffixes as in AT&T (gas) syntax.</p>
+ *
+ * <pre>
  * Suffix    Intel size     Java size    # bits
  * ------    -----------    ---------    ------
  * b         byte           byte          8
  * w         word           short        16
  * l         long word      int          32
  * q         quad word      long         64
- * <p/>
- * Using this AT&T syntax feature, there is no need for operand size indicators
- * (e.g. DWORD PTR) for pointers as in Intel syntax.
- * <p/>
- * Registers etc. are named as in Intel syntax,
- * in lower case without AT&T's "%" prefix.
- * <p/>
- * Indexing is indicated by '[' and ']', similiar to array access in the Java(TM) Programming Language:
- * <p/>
- * base[index], e.g. eax[ebx]
- * <p/>
- * Indirect access looks like indexing without a base (or with implicit base 0):
- * <p/>
- * [indirect], e.g. [ecx]
- * <p/>
- * Displacements are added/subtracted from the index/indirect operand:
- * <p/>
+ * </pre>
+ *
+ * <p>Using this AT&T syntax feature, there is no need for operand size indicators
+ * (e.g. DWORD PTR) for pointers as in Intel syntax.</p>
+ *
+ * <p>Registers etc. are named as in Intel syntax, in lower case without
+ * AT&T's "%" prefix.</p>
+ *
+ * <p>Indexing is indicated by '[' and ']', similiar to array access in the Java(TM)
+ * Programming Language:</p>
+ *
+ * <pre>base[index], e.g. eax[ebx]</pre>
+ *
+ * <p>Indirect access looks like indexing without a base (or with implicit base 0):</p>
+ *
+ * <pre>[indirect], e.g. [ecx]</pre>
+ *
+ * <p>Displacements are added/subtracted from the index/indirect operand:</p>
+ * <pre>
  * base[index + displacement], e.g. ebp[eax - 12]
  * [indirect + displacement], e.g. [esi + 100]
- * <p/>
- * Scale is displayed as multiplication of the index:
- * <p/>
+ * </pre>
+ *
+ * <p>Scale is displayed as multiplication of the index:</p>
+ * <pre>
  * [base[index * scale] or base[index * scale + displacement], e.g. ecx[ebx * 4 + 10]
- * <p/>
- * A scale of 1 is left implicit, i.e. not printed.
- * Scale literals are the unsigned decimal integer numbers 2, 4, 8.
- * <p/>
- * Displacement literals are signed decimal integer numbers.
- * <p/>
- * Direct memory references (pointer literals) are unsigned hexadecimal integer numbers, e.g.:
- * <p/>
- * [0x12345678], 0x12345678[eax]
- * <p/>
- * Immediate operands are unsigned hexadecimal integer numbers, e.g.:
- * <p/>
- * 0x12, 0xffff, 0x0, 0x123456789abcdef
- * <p/>
- * Offset operands are signed decimal integer numbers, like displacements, but without space between the sign and the number, e.g.:
- * <p/>
+ * </pre>
+ *
+ * <p>A scale of 1 is left implicit, i.e. not printed. Scale literals are the
+ * unsigned decimal integer numbers 2, 4, 8.</p>
+ *
+ * <p>Displacement literals are signed decimal integer numbers.</p>
+ *
+ * <p>Direct memory references (pointer literals) are unsigned hexadecimal integer numbers, e.g.:</p>
+ *
+ * <pre>[0x12345678], 0x12345678[eax]</pre>
+ *
+ * <p>Immediate operands are unsigned hexadecimal integer numbers, e.g.:</p>
+ *
+ * <pre>0x12, 0xffff, 0x0, 0x123456789abcdef</pre>
+ *
+ * <p>Offset operands are signed decimal integer numbers, like displacements, but without space between
+ * the sign and the number, e.g.:</p>
+ *
+ * <pre>
  * jmp +12
  * call -2048
- * <p/>
- * RIP (Relative to Instruction Pointer) addressing is a combination of an offset operand and indirect addressing, e.g.:
- * <p/>
+ * </pre>
+ *
+ * <p>RIP (Relative to Instruction Pointer) addressing is a combination of an offset operand
+ * and indirect addressing, e.g.:</p>
+ *
+ * <pre>
  * add [+20], eax
  * mov ebx, [-200]
- * <p/>
- * The disassembler displays synthetic labels for all target addresses
- * within the disassembled address range that hit the start address of an instruction.
- * Operands that coincide with such a label are displayed with the respective Label prepended. e.g.:
- * <p/>
+ * </pre>
+ *
+ * <p>The disassembler displays synthetic labels for all target addresses within
+ * the disassembled address range that hit the start address of an instruction.
+ * Operands that coincide with such a label are displayed with the respective
+ * Label prepended. e.g.:</p>
+ *
+ * <pre>
  * jmp L1: +100
  * adc [L2: +128], ESI
+ * </pre>
  */
-public abstract class X86DisassembledInstruction<Template_Type extends X86Template> extends DisassembledInstruction<Template_Type> {
+public abstract class X86DisassembledInstruction<Template_Type extends X86Template>
+    extends DisassembledInstruction<Template_Type> {
 
   protected X86DisassembledInstruction(int offset, byte[] bytes, Template_Type template, List<Argument> arguments) {
     super(offset, bytes, template, arguments);
