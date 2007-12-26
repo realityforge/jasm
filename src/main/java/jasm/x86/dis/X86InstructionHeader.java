@@ -10,7 +10,7 @@ package jasm.x86.dis;
 
 import jasm.WordWidth;
 import jasm.tools.Assembly;
-import jasm.tools.cisc.x86.X86Opcode;
+import jasm.tools.cisc.x86.X86InstructionPrefix;
 import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
 import jasm.util.HexByte;
@@ -48,7 +48,7 @@ public final class X86InstructionHeader {
     _instructionSelectionPrefix = template.instructionSelectionPrefix();
     if (template.operandSizeAttribute() == WordWidth.BITS_16) {
       assert _instructionSelectionPrefix == null;
-      _instructionSelectionPrefix = X86Opcode.OPERAND_SIZE;
+      _instructionSelectionPrefix = X86InstructionPrefix.OPERAND_SIZE.getValue();
     }
     _opcode1 = template.opcode1();
     _opcode2 = template.opcode2();

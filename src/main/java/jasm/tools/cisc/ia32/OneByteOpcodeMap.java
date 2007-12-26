@@ -77,7 +77,6 @@ import static jasm.tools.cisc.x86.OperandTypeCode.v;
 import static jasm.tools.cisc.x86.RegisterOperandCode.eAX;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
 import jasm.tools.cisc.x86.X86InstructionPrefix;
-import static jasm.tools.cisc.x86.X86Opcode.FWAIT;
 import static jasm.util.HexByte._00;
 import static jasm.util.HexByte._01;
 import static jasm.util.HexByte._02;
@@ -271,6 +270,7 @@ import static jasm.util.HexByte._FC;
 import static jasm.util.HexByte._FD;
 import static jasm.util.HexByte._FE;
 import static jasm.util.HexByte._FF;
+import static jasm.util.HexByte._9B;
 import static jasm.x86.SegmentRegister.CS;
 import static jasm.x86.SegmentRegister.DS;
 import static jasm.x86.SegmentRegister.ES;
@@ -474,7 +474,7 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_99, "CWD").requireOperandSize(WordWidth.BITS_16);
     define(_99, "CDQ").requireOperandSize(WordWidth.BITS_32);
     define(_9A, "CALL", Ap);
-    define(FWAIT, "FWAIT"); // 'wait' is a Java keyword, so we use the alternate mnemonic, which is more accurately named anyhow
+    define(_9B, "FWAIT"); // 'wait' is a Java keyword, so we use the alternate mnemonic, which is more accurately named anyhow
     define(_9C, "PUSHF", v, Fv);
     define(_9D, "POPF", v, Fv);
     define(_9E, "SAHF");

@@ -22,6 +22,7 @@ import jasm.tools.cisc.x86.X86AddressParameter;
 import jasm.tools.cisc.x86.X86Assembly;
 import jasm.tools.cisc.x86.X86DisplacementParameter;
 import jasm.tools.cisc.x86.X86ImmediateParameter;
+import jasm.tools.cisc.x86.X86InstructionPrefix;
 import jasm.tools.cisc.x86.X86OffsetParameter;
 import jasm.tools.cisc.x86.X86Opcode;
 import jasm.tools.cisc.x86.X86Operand;
@@ -29,8 +30,8 @@ import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
 import jasm.tools.test.correctness.AssemblyTester;
 import jasm.tools.util.IndentWriter;
-import jasm.util.HexByte;
 import jasm.util.StaticLoophole;
+import jasm.util.HexByte;
 import jasm.x86.IndirectRegister;
 import java.io.IOException;
 import java.io.InputStream;
@@ -175,7 +176,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
     if (X86Opcode.isFloatingPointEscape(template.opcode1())) {
       // We skip FWAIT instructions that the external assembler may inject before floating point operations
       final int externalOpcode = externalInputStream.read();
-      if (externalOpcode != X86Opcode.FWAIT.ordinal()) {
+      if (externalOpcode != HexByte._9B.ordinal()) {
         externalInputStream.unread(externalOpcode);
       }
     }
@@ -184,23 +185,23 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
     final WordWidth externalCodeSizeAttribute = template.externalCodeSizeAttribute();
     if (externalCodeSizeAttribute != null && externalCodeSizeAttribute != addressWidth()) {
       if (template.addressSizeAttribute() == externalCodeSizeAttribute) {
-        assert internalBytes[0] == X86Opcode.ADDRESS_SIZE.byteValue();
-        externalBytes[i++] = X86Opcode.ADDRESS_SIZE.byteValue();
+        assert internalBytes[0] == X86InstructionPrefix.ADDRESS_SIZE.getValue().byteValue();
+        externalBytes[i++] = X86InstructionPrefix.ADDRESS_SIZE.getValue().byteValue();
       } else {
-        assert internalBytes[0] != X86Opcode.ADDRESS_SIZE.byteValue();
+        assert internalBytes[0] != X86InstructionPrefix.ADDRESS_SIZE.getValue().byteValue();
         final int externalOpcode = externalInputStream.read();
-        if (externalOpcode != X86Opcode.ADDRESS_SIZE.ordinal()) {
+        if (externalOpcode != X86InstructionPrefix.ADDRESS_SIZE.getValue().ordinal()) {
           externalInputStream.unread(externalOpcode);
         }
       }
-      if (template.instructionSelectionPrefix() != X86Opcode.OPERAND_SIZE) {
+      if (template.instructionSelectionPrefix() != X86InstructionPrefix.OPERAND_SIZE.getValue()) {
         if (template.operandSizeAttribute() == externalCodeSizeAttribute && externalCodeSizeAttribute == WordWidth.BITS_16) {
-          assert internalBytes[i] == X86Opcode.OPERAND_SIZE.byteValue();
-          externalBytes[i++] = X86Opcode.OPERAND_SIZE.byteValue();
+          assert internalBytes[i] == X86InstructionPrefix.OPERAND_SIZE.getValue().byteValue();
+          externalBytes[i++] = X86InstructionPrefix.OPERAND_SIZE.getValue().byteValue();
         } else if (template.operandSizeAttribute() != WordWidth.BITS_16) {
-          assert internalBytes[i] != X86Opcode.OPERAND_SIZE.byteValue();
+          assert internalBytes[i] != X86InstructionPrefix.OPERAND_SIZE.getValue().byteValue();
           final int externalOpcode = externalInputStream.read();
-          if (externalOpcode != X86Opcode.OPERAND_SIZE.ordinal()) {
+          if (externalOpcode != X86InstructionPrefix.OPERAND_SIZE.ordinal()) {
             externalInputStream.unread(externalOpcode);
           }
         }

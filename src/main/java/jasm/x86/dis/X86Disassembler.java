@@ -70,7 +70,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
     do {
       final HexByte hexByte = HexByte.values()[byteValue];
       if (header._opcode1 == null) {
-        if (hexByte == X86Opcode.ADDRESS_SIZE) {
+        if (hexByte == X86InstructionPrefix.ADDRESS_SIZE.getValue()) {
           header._hasAddressSizePrefix = true;
         } else if (hexByte == X86InstructionPrefix.OPERAND_SIZE.getValue() ||
                    hexByte == X86InstructionPrefix.REPE.getValue() ||

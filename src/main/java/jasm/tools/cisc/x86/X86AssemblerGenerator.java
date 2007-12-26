@@ -117,11 +117,11 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
 
   protected void printPrefixes(IndentWriter writer, Template_Type template) {
     if (template.addressSizeAttribute() != addressWidth()) {
-      emitByte(writer, X86Opcode.ADDRESS_SIZE.byteValue());
+      emitByte(writer, X86InstructionPrefix.ADDRESS_SIZE.getValue().byteValue());
       writer.println(" // address size prefix");
     }
     if (template.operandSizeAttribute() == WordWidth.BITS_16) {
-      emitByte(writer, X86Opcode.OPERAND_SIZE.byteValue());
+      emitByte(writer, X86InstructionPrefix.OPERAND_SIZE.getValue().byteValue());
       writer.println(" // operand size prefix");
     }
     if (template.instructionSelectionPrefix() != null) {

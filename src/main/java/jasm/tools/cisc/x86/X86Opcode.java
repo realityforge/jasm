@@ -9,9 +9,6 @@
 package jasm.tools.cisc.x86;
 
 import jasm.util.HexByte;
-import static jasm.util.HexByte._66;
-import static jasm.util.HexByte._67;
-import static jasm.util.HexByte._9B;
 import static jasm.util.HexByte._D8;
 import static jasm.util.HexByte._D9;
 import static jasm.util.HexByte._DA;
@@ -26,11 +23,10 @@ import java.util.EnumSet;
  * x86 instruction prefix bytes.
  */
 public final class X86Opcode {
-  public static final HexByte OPERAND_SIZE = _66;
-  public static final HexByte ADDRESS_SIZE = _67;
-  public static final HexByte FWAIT = _9B;
+  private static final EnumSet<HexByte> FP_ESCAPE =
+      EnumSet.of(_D8, _D9, _DA, _DB, _DC, _DD, _DE, _DF);
 
   public static boolean isFloatingPointEscape(HexByte opcode) {
-    return EnumSet.of(_D8, _D9, _DA, _DB, _DC, _DD, _DE, _DF).contains(opcode);
+    return FP_ESCAPE.contains(opcode);
   }
 }

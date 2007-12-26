@@ -71,7 +71,6 @@ import static jasm.tools.cisc.x86.RegisterOperandCode.eAX;
 import static jasm.tools.cisc.x86.RegisterOperandCode.rAX;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
 import jasm.tools.cisc.x86.X86InstructionPrefix;
-import static jasm.tools.cisc.x86.X86Opcode.FWAIT;
 import static jasm.util.HexByte._00;
 import static jasm.util.HexByte._01;
 import static jasm.util.HexByte._02;
@@ -166,6 +165,7 @@ import static jasm.util.HexByte._8F;
 import static jasm.util.HexByte._90;
 import static jasm.util.HexByte._98;
 import static jasm.util.HexByte._99;
+import static jasm.util.HexByte._9B;
 import static jasm.util.HexByte._9C;
 import static jasm.util.HexByte._9D;
 import static jasm.util.HexByte._9E;
@@ -412,7 +412,7 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_98, "CDQE").requireOperandSize(WordWidth.BITS_64);
     define(_99, "CDQ").requireOperandSize(WordWidth.BITS_32);
     define(_99, "CQO").requireOperandSize(WordWidth.BITS_64);
-    define(FWAIT, "FWAIT"); // 'wait' is a Java keyword, so we use the alternate mnemonic, which is more accurately named anyhow
+    define(_9B, "FWAIT"); // 'wait' is a Java keyword, so we use the alternate mnemonic, which is more accurately named anyhow
     define(_9C, "PUSHF", v, Fv).setDefaultOperandSize(WordWidth.BITS_64);
     define(_9D, "POPF", v, Fv).setDefaultOperandSize(WordWidth.BITS_64);
     define(_9E, "SAHF").beNotExternallyTestable(); // not available by gas, depends on CPUID
