@@ -18,6 +18,8 @@ public final class X86InstructionDescription
   private boolean _isExternalOperandOrderingInverted = true;
   private WordWidth _defaultOperandSize = WordWidth.BITS_32;
   private X86InstructionPrefix _mandatoryPrefix;
+  /** true if instruction is a prefix. */
+  private boolean _aPrefix;
 
   public X86InstructionDescription(List<Object> specifications) {
     super(specifications);
@@ -46,6 +48,16 @@ public final class X86InstructionDescription
 
   public X86InstructionDescription setDefaultOperandSize(WordWidth defaultOperandSize) {
     _defaultOperandSize = defaultOperandSize;
+    return this;
+  }
+
+  public boolean isAPrefix() {
+    return _aPrefix;
+  }
+
+  public X86InstructionDescription beAPrefix() {
+    _aPrefix = true;
+    beNotExternallyTestable();
     return this;
   }
 }

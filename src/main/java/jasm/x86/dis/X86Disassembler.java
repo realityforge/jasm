@@ -31,6 +31,7 @@ import jasm.tools.cisc.x86.X86NumericalParameter;
 import jasm.tools.cisc.x86.X86Opcode;
 import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
+import jasm.tools.cisc.x86.X86InstructionPrefix;
 import jasm.util.EndianUtil;
 import jasm.util.HexByte;
 import jasm.util.StaticLoophole;
@@ -71,9 +72,9 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
       if (header._opcode1 == null) {
         if (hexByte == X86Opcode.ADDRESS_SIZE) {
           header._hasAddressSizePrefix = true;
-        } else if (hexByte == X86Opcode.OPERAND_SIZE ||
-                   hexByte == X86Opcode.REPE ||
-                   hexByte == X86Opcode.REPNE) {
+        } else if (hexByte == X86InstructionPrefix.OPERAND_SIZE.getValue() ||
+                   hexByte == X86InstructionPrefix.REPE.getValue() ||
+                   hexByte == X86InstructionPrefix.REPNE.getValue()) {
           header._instructionSelectionPrefix = hexByte;
         } else if (isRexPrefix(hexByte)) {
           header._rexPrefix = hexByte;
@@ -304,7 +305,8 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
         }
       }
     }
-    if (header._instructionSelectionPrefix == X86Opcode.REPE || header._instructionSelectionPrefix == X86Opcode.REPNE) {
+    if (header._instructionSelectionPrefix == X86InstructionPrefix.REPE.getValue() ||
+        header._instructionSelectionPrefix == X86InstructionPrefix.REPNE.getValue()) {
       final X86InstructionHeader prefixHeader = new X86InstructionHeader();
       prefixHeader._opcode1 = header._instructionSelectionPrefix;
       final LinkedList<Template_Type> prefixTemplates = headerToTemplates().get(prefixHeader);

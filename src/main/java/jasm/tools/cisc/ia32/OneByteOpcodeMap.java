@@ -54,6 +54,8 @@ import static jasm.tools.cisc.x86.OperandCode.Ev;
 import static jasm.tools.cisc.x86.OperandCode.Ew;
 import static jasm.tools.cisc.x86.OperandCode.Fv;
 import static jasm.tools.cisc.x86.OperandCode.Gb;
+import static jasm.tools.cisc.x86.OperandCode.Gob;
+import static jasm.tools.cisc.x86.OperandCode.Gov;
 import static jasm.tools.cisc.x86.OperandCode.Gv;
 import static jasm.tools.cisc.x86.OperandCode.Gw;
 import static jasm.tools.cisc.x86.OperandCode.Ib;
@@ -63,8 +65,6 @@ import static jasm.tools.cisc.x86.OperandCode.Jb;
 import static jasm.tools.cisc.x86.OperandCode.Jv;
 import static jasm.tools.cisc.x86.OperandCode.Ma;
 import static jasm.tools.cisc.x86.OperandCode.Mp;
-import static jasm.tools.cisc.x86.OperandCode.Gob;
-import static jasm.tools.cisc.x86.OperandCode.Gov;
 import static jasm.tools.cisc.x86.OperandCode.Ob;
 import static jasm.tools.cisc.x86.OperandCode.Ov;
 import static jasm.tools.cisc.x86.OperandCode.Sw;
@@ -76,18 +76,8 @@ import static jasm.tools.cisc.x86.OperandTypeCode.b;
 import static jasm.tools.cisc.x86.OperandTypeCode.v;
 import static jasm.tools.cisc.x86.RegisterOperandCode.eAX;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
-import static jasm.tools.cisc.x86.X86Opcode.ADDRESS_SIZE;
+import jasm.tools.cisc.x86.X86InstructionPrefix;
 import static jasm.tools.cisc.x86.X86Opcode.FWAIT;
-import static jasm.tools.cisc.x86.X86Opcode.LOCK;
-import static jasm.tools.cisc.x86.X86Opcode.OPERAND_SIZE;
-import static jasm.tools.cisc.x86.X86Opcode.REPE;
-import static jasm.tools.cisc.x86.X86Opcode.REPNE;
-import static jasm.tools.cisc.x86.X86Opcode.SEG_CS;
-import static jasm.tools.cisc.x86.X86Opcode.SEG_DS;
-import static jasm.tools.cisc.x86.X86Opcode.SEG_ES;
-import static jasm.tools.cisc.x86.X86Opcode.SEG_FS;
-import static jasm.tools.cisc.x86.X86Opcode.SEG_GS;
-import static jasm.tools.cisc.x86.X86Opcode.SEG_SS;
 import static jasm.util.HexByte._00;
 import static jasm.util.HexByte._01;
 import static jasm.util.HexByte._02;
@@ -316,7 +306,7 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_23, "AND", Gv, Ev);
     define(_24, "AND", AL, Ib);
     define(_25, "AND", eAX, Iv);
-    define(SEG_ES, "SEG_ES").beNotExternallyTestable(); // prefix
+    define(X86InstructionPrefix.SEG_ES.getValue(), "SEG_ES").beAPrefix();
     define(_27, "DAA");
 
     define(_30, "XOR", Eb, Gb);
@@ -325,7 +315,7 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_33, "XOR", Gv, Ev);
     define(_34, "XOR", AL, Ib);
     define(_35, "XOR", eAX, Iv);
-    define(SEG_SS, "SEG_SS").beNotExternallyTestable(); // prefix
+    define(X86InstructionPrefix.SEG_SS.getValue(), "SEG_SS").beAPrefix();
     define(_37, "AAA");
 
     define(_40, "INC", Gov);
@@ -338,10 +328,10 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_61, "POPAD").requireOperandSize(WordWidth.BITS_32).setExternalName("popa");
     define(_62, "BOUND", Gv, Ma).revertExternalOperandOrdering();
     define(_63, "ARPL", Ew, Gw);
-    define(SEG_FS, "SEG_FS").beNotExternallyTestable(); // prefix
-    define(SEG_GS, "SEG_GS").beNotExternallyTestable(); // prefix
-    define(OPERAND_SIZE, "OPERAND_SIZE").beNotDisassemblable().beNotExternallyTestable(); // prefix
-    define(ADDRESS_SIZE, "ADDRESS_SIZE").beNotDisassemblable().beNotExternallyTestable(); // prefix
+    define(X86InstructionPrefix.SEG_FS.getValue(), "SEG_FS").beAPrefix();
+    define(X86InstructionPrefix.SEG_GS.getValue(), "SEG_GS").beAPrefix();
+    define(X86InstructionPrefix.OPERAND_SIZE.getValue(), "OPERAND_SIZE").beNotDisassemblable().beAPrefix();
+    define(X86InstructionPrefix.ADDRESS_SIZE.getValue(), "ADDRESS_SIZE").beNotDisassemblable().beAPrefix();
 
     define(_70, "JO", Jb);
     define(_71, "JNO", Jb);
@@ -403,9 +393,9 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_E6, "OUT", Ib, AL);
     define(_E7, "OUT", Ib, eAX);
 
-    define(LOCK, "LOCK").beNotExternallyTestable(); // prefix
-    define(REPNE, "REPNE").beNotExternallyTestable(); // prefix
-    define(REPE, "REPE").beNotExternallyTestable(); // prefix
+    define(X86InstructionPrefix.LOCK.getValue(), "LOCK").beAPrefix();
+    define(X86InstructionPrefix.REPNE.getValue(), "REPNE").beAPrefix();
+    define(X86InstructionPrefix.REPE.getValue(), "REPE").beAPrefix();
     define(_F4, "HLT");
     define(_F5, "CMC");
     define(_F6, GROUP_3b, b);
@@ -436,7 +426,7 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_2B, "SUB", Gv, Ev);
     define(_2C, "SUB", AL, Ib);
     define(_2D, "SUB", eAX, Iv);
-    define(SEG_CS, "SEG_CS").beNotExternallyTestable(); // prefix
+    define(X86InstructionPrefix.SEG_CS.getValue(), "SEG_CS").beAPrefix();
     define(_2F, "DAS");
 
     define(_38, "CMP", Eb, Gb);
@@ -445,7 +435,7 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_3B, "CMP", Gv, Ev);
     define(_3C, "CMP", AL, Ib);
     define(_3D, "CMP", eAX, Iv);
-    define(SEG_DS, "SEG_DS").beNotExternallyTestable(); // prefix
+    define(X86InstructionPrefix.SEG_DS.getValue(), "SEG_DS").beAPrefix();
     define(_3F, "AAS");
 
     define(_48, "DEC", Gov);

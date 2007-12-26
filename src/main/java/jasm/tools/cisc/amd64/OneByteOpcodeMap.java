@@ -46,6 +46,8 @@ import static jasm.tools.cisc.x86.OperandCode.Ev;
 import static jasm.tools.cisc.x86.OperandCode.Ew;
 import static jasm.tools.cisc.x86.OperandCode.Fv;
 import static jasm.tools.cisc.x86.OperandCode.Gb;
+import static jasm.tools.cisc.x86.OperandCode.Gob;
+import static jasm.tools.cisc.x86.OperandCode.Gov;
 import static jasm.tools.cisc.x86.OperandCode.Gq;
 import static jasm.tools.cisc.x86.OperandCode.Gv;
 import static jasm.tools.cisc.x86.OperandCode.Ib;
@@ -54,8 +56,6 @@ import static jasm.tools.cisc.x86.OperandCode.Iw;
 import static jasm.tools.cisc.x86.OperandCode.Iz;
 import static jasm.tools.cisc.x86.OperandCode.Jb;
 import static jasm.tools.cisc.x86.OperandCode.Jz;
-import static jasm.tools.cisc.x86.OperandCode.Gob;
-import static jasm.tools.cisc.x86.OperandCode.Gov;
 import static jasm.tools.cisc.x86.OperandCode.Ob;
 import static jasm.tools.cisc.x86.OperandCode.Ov;
 import static jasm.tools.cisc.x86.OperandCode.Sw;
@@ -70,15 +70,8 @@ import static jasm.tools.cisc.x86.OperandTypeCode.v;
 import static jasm.tools.cisc.x86.RegisterOperandCode.eAX;
 import static jasm.tools.cisc.x86.RegisterOperandCode.rAX;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
-import static jasm.tools.cisc.x86.X86Opcode.ADDRESS_SIZE;
+import jasm.tools.cisc.x86.X86InstructionPrefix;
 import static jasm.tools.cisc.x86.X86Opcode.FWAIT;
-import static jasm.tools.cisc.x86.X86Opcode.LOCK;
-import static jasm.tools.cisc.x86.X86Opcode.OPERAND_SIZE;
-import static jasm.tools.cisc.x86.X86Opcode.REPE;
-import static jasm.tools.cisc.x86.X86Opcode.REPNE;
-import static jasm.tools.cisc.x86.X86Opcode.SEG_CS;
-import static jasm.tools.cisc.x86.X86Opcode.SEG_FS;
-import static jasm.tools.cisc.x86.X86Opcode.SEG_GS;
 import static jasm.util.HexByte._00;
 import static jasm.util.HexByte._01;
 import static jasm.util.HexByte._02;
@@ -286,10 +279,10 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_63, "MOVSXD", Gq, Ed).requireOperandSize(WordWidth.BITS_64).beNotExternallyTestable(); // REX.W == 1, gas does not seem to know it
     define(_63, "MOVZXD", Gq, Ed).requireOperandSize(WordWidth.BITS_32).beNotExternallyTestable(); // REX.W == 0, we made this extra mnemonic up
 
-    define(SEG_FS, "SEG_FS").beNotExternallyTestable(); // prefix
-    define(SEG_GS, "SEG_GS").beNotExternallyTestable(); // prefix
-    define(OPERAND_SIZE, "OPERAND_SIZE").beNotDisassemblable().beNotExternallyTestable(); // prefix
-    define(ADDRESS_SIZE, "ADDRESS_SIZE").beNotDisassemblable().beNotExternallyTestable(); // prefix
+    define(X86InstructionPrefix.SEG_FS.getValue(), "SEG_FS").beAPrefix();
+    define(X86InstructionPrefix.SEG_GS.getValue(), "SEG_GS").beAPrefix();
+    define(X86InstructionPrefix.OPERAND_SIZE.getValue(), "OPERAND_SIZE").beNotDisassemblable().beAPrefix();
+    define(X86InstructionPrefix.ADDRESS_SIZE.getValue(), "ADDRESS_SIZE").beNotDisassemblable().beAPrefix();
 
     define(_70, "JO", Jb).setDefaultOperandSize(WordWidth.BITS_64);
     define(_71, "JNO", Jb).setDefaultOperandSize(WordWidth.BITS_64);
@@ -345,10 +338,10 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_E6, "OUT", Ib, AL);
     define(_E7, "OUT", Ib, eAX);
 
-    define(LOCK, "LOCK").beNotExternallyTestable(); // prefix
+    define(X86InstructionPrefix.LOCK.getValue(), "LOCK").beAPrefix();
     define(_F1, "INT", 1).beNotExternallyTestable(); // is this correct? - gas uses 0xCD
-    define(REPNE, "REPNE").beNotExternallyTestable(); // prefix
-    define(REPE, "REPE").beNotExternallyTestable(); // prefix
+    define(X86InstructionPrefix.REPNE.getValue(), "REPNE").beAPrefix();
+    define(X86InstructionPrefix.REPE.getValue(), "REPE").beAPrefix();
     define(_F4, "HLT");
     define(_F5, "CMC");
     define(_F6, GROUP_3b, b);
@@ -376,7 +369,7 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_2B, "SUB", Gv, Ev);
     define(_2C, "SUB", AL, Ib);
     define(_2D, "SUB", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
-    define(SEG_CS, "SEG_CS").beNotExternallyTestable(); // prefix
+    define(X86InstructionPrefix.SEG_CS.getValue(), "SEG_CS").beAPrefix();
     define(_2F, "DAS").beNotExternallyTestable(); // not defined in 64 bit mode and so 'as -64' rejects it
 
     define(_38, "CMP", Eb, Gb);
