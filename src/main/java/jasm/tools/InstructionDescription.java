@@ -27,6 +27,7 @@ import java.util.List;
  * the {@code visit...} methods in the {@link RiscInstructionDescriptionVisitor}
  * and {@link X86InstructionDescriptionVisitor} classes.
  */
+@SuppressWarnings({"RedundantTypeArguments"})
 public abstract class InstructionDescription<InstructionDescription_Type extends InstructionDescription<InstructionDescription_Type>>
     implements Iterable<Object>, Cloneable {
 
@@ -82,8 +83,7 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
 
   public final InstructionDescription_Type setArchitectureManualSection(String section) {
     _architectureManualSection = section;
-    final InstructionDescription_Type type = StaticLoophole.<InstructionDescription_Type>cast(this);
-    return type;
+    return StaticLoophole.<InstructionDescription_Type>cast(this);
   }
 
   public final String architectureManualSection() {
@@ -96,8 +96,7 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
 
   public final InstructionDescription_Type setExternalName(String externalName) {
     _externalName = externalName;
-    final InstructionDescription_Type type = StaticLoophole.<InstructionDescription_Type>cast(this);
-    return type;
+    return StaticLoophole.<InstructionDescription_Type>cast(this);
   }
 
   /**
@@ -113,8 +112,7 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
 
   public final InstructionDescription_Type beNotDisassemblable() {
     _isDisassemblable = false;
-    final InstructionDescription_Type type = StaticLoophole.<InstructionDescription_Type>cast(this);
-    return type;
+    return StaticLoophole.<InstructionDescription_Type>cast(this);
   }
 
   public boolean isSynthetic() {
@@ -127,8 +125,7 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
 
   public final InstructionDescription_Type beNotExternallyTestable() {
     _isExternallyTestable = false;
-    final InstructionDescription_Type type = StaticLoophole.<InstructionDescription_Type>cast(this);
-    return type;
+    return StaticLoophole.<InstructionDescription_Type>cast(this);
   }
 
   public final WordWidth requiredAddressSize() {
@@ -137,8 +134,7 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
 
   public final InstructionDescription_Type requireAddressSize(WordWidth requiredAddressSize) {
     _requiredAddressSize = requiredAddressSize;
-    final InstructionDescription_Type type = StaticLoophole.<InstructionDescription_Type>cast(this);
-    return type;
+    return StaticLoophole.<InstructionDescription_Type>cast(this);
   }
 
   public final WordWidth requiredOperandSize() {
@@ -147,8 +143,7 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
 
   public final InstructionDescription_Type requireOperandSize(WordWidth requiredOperandSize) {
     _requiredOperandSize = requiredOperandSize;
-    final InstructionDescription_Type type = StaticLoophole.<InstructionDescription_Type>cast(this);
-    return type;
+    return StaticLoophole.<InstructionDescription_Type>cast(this);
   }
 
   public final Iterator<Object> iterator() {
