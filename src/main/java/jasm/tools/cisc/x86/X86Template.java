@@ -386,7 +386,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     } else if (_opcode2 == null) {
       _opcode2 = hexByte;
     } else {
-      if (hexByte == HexByte._66 && _context.operandSizeAttribute() == WordWidth.BITS_16) {
+      if (hexByte == X86Opcode.OPERAND_SIZE && _context.operandSizeAttribute() == WordWidth.BITS_16) {
         throw new TemplateNotNeededException();
       }
       assert _instructionSelectionPrefix == null;

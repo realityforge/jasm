@@ -193,7 +193,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
           externalInputStream.unread(externalOpcode);
         }
       }
-      if (template.instructionSelectionPrefix() != HexByte._66) {
+      if (template.instructionSelectionPrefix() != X86Opcode.OPERAND_SIZE) {
         if (template.operandSizeAttribute() == externalCodeSizeAttribute && externalCodeSizeAttribute == WordWidth.BITS_16) {
           assert internalBytes[i] == X86Opcode.OPERAND_SIZE.byteValue();
           externalBytes[i++] = X86Opcode.OPERAND_SIZE.byteValue();
