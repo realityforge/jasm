@@ -31,7 +31,8 @@ public abstract class InstructionDescriptionCreator<InstructionDescription_Type 
   protected abstract InstructionDescription_Type createInstructionDescription(List<Object> specifications);
 
   protected final InstructionDescription_Type defineInstructionDescription(List<Object> specifications) {
-    final InstructionDescription_Type instructionDescription = createInstructionDescription(specifications);
+    final InstructionDescription_Type instructionDescription =
+        createInstructionDescription(specifications);
     _instructionDescriptions.addLast(instructionDescription);
     instructionDescription.setArchitectureManualSection(_currentArchitectureManualSection);
     return instructionDescription;

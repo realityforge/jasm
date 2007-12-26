@@ -40,6 +40,7 @@ import static jasm.tools.cisc.x86.OperandCode.Ew;
 import static jasm.tools.cisc.x86.OperandCode.Gb;
 import static jasm.tools.cisc.x86.OperandCode.Gd;
 import static jasm.tools.cisc.x86.OperandCode.Gd_q;
+import static jasm.tools.cisc.x86.OperandCode.God_q;
 import static jasm.tools.cisc.x86.OperandCode.Gv;
 import static jasm.tools.cisc.x86.OperandCode.ICb;
 import static jasm.tools.cisc.x86.OperandCode.Ib;
@@ -48,7 +49,6 @@ import static jasm.tools.cisc.x86.OperandCode.Mb;
 import static jasm.tools.cisc.x86.OperandCode.Md_q;
 import static jasm.tools.cisc.x86.OperandCode.Mdq;
 import static jasm.tools.cisc.x86.OperandCode.Mq;
-import static jasm.tools.cisc.x86.OperandCode.God_q;
 import static jasm.tools.cisc.x86.OperandCode.PRq;
 import static jasm.tools.cisc.x86.OperandCode.Pq;
 import static jasm.tools.cisc.x86.OperandCode.Qd;
@@ -71,6 +71,7 @@ import static jasm.tools.cisc.x86.OperandCode.Wq;
 import static jasm.tools.cisc.x86.OperandCode.Wsd;
 import static jasm.tools.cisc.x86.OperandCode.Wss;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
+import jasm.tools.cisc.x86.X86InstructionPrefix;
 import static jasm.util.HexByte._00;
 import static jasm.util.HexByte._01;
 import static jasm.util.HexByte._02;
@@ -320,14 +321,14 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _16, "MOVHPS", Vps, Mq);
     define(_0F, _17, "MOVHPS", Mq, Vps); // MOVLHPS ??
 
-    define(_66, _0F, _10, "MOVUPD", Vpd, Wpd);
-    define(_66, _0F, _11, "MOVUPD", Wpd, Vpd);
-    define(_66, _0F, _12, "MOVLPD", Vsd, Mq);
-    define(_66, _0F, _13, "MOVLPD", Mq, Vsd);
-    define(_66, _0F, _14, "UNPCKLPD", Vpd, Wq);
-    define(_66, _0F, _15, "UNPCKHPD", Vpd, Wq);
-    define(_66, _0F, _16, "MOVHPD", Vsd, Mq);
-    define(_66, _0F, _17, "MOVHPD", Mq, Vsd);
+    define(_66, _0F, _10, "MOVUPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _11, "MOVUPD", Wpd, Vpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _12, "MOVLPD", Vsd, Mq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _13, "MOVLPD", Mq, Vsd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _14, "UNPCKLPD", Vpd, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _15, "UNPCKHPD", Vpd, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _16, "MOVHPD", Vsd, Mq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _17, "MOVHPD", Mq, Vsd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
 
     define(_F2, _0F, _10, "MOVSD", Vdq, Wsd);
     define(_F2, _0F, _10, "MOVSD", Vsd, Wsd);
@@ -367,12 +368,12 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _56, "ORPS", Vps, Wps);
     define(_0F, _57, "XORPS", Vps, Wps);
 
-    define(_66, _0F, _50, "MOVMSKPD", Gd, Upd);
-    define(_66, _0F, _51, "SQRTPD", Vpd, Wpd);
-    define(_66, _0F, _54, "ANDPD", Vpd, Wpd);
-    define(_66, _0F, _55, "ANDNPD", Vpd, Wpd);
-    define(_66, _0F, _56, "ORPD", Vpd, Wpd);
-    define(_66, _0F, _57, "XORPD", Vpd, Wpd);
+    define(_66, _0F, _50, "MOVMSKPD", Gd, Upd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _51, "SQRTPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _54, "ANDPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _55, "ANDNPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _56, "ORPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _57, "XORPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
 
     define(_F2, _0F, _51, "SQRTSD", Vsd, Wsd);
 
@@ -389,14 +390,14 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _66, "PCMPGTD", Pq, Qq);
     define(_0F, _67, "PACKUSWB", Pq, Qq);
 
-    define(_66, _0F, _60, "PUNPCKLBW", Vdq, Wq);
-    define(_66, _0F, _61, "PUNPCKLWD", Vdq, Wq);
-    define(_66, _0F, _62, "PUNPCKLDQ", Vdq, Wq);
-    define(_66, _0F, _63, "PACKSSWB", Vdq, Wdq);
-    define(_66, _0F, _64, "PCMPGTB", Vdq, Wdq);
-    define(_66, _0F, _65, "PCMPGTW", Vdq, Wdq);
-    define(_66, _0F, _66, "PCMPGTD", Vdq, Wdq);
-    define(_66, _0F, _67, "PACKUSWB", Vdq, Wdq);
+    define(_66, _0F, _60, "PUNPCKLBW", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _61, "PUNPCKLWD", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _62, "PUNPCKLDQ", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _63, "PACKSSWB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _64, "PCMPGTB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _65, "PCMPGTW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _66, "PCMPGTD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _67, "PACKUSWB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
 
     define(_0F, _70, "PSHUFW", Pq, Qq, Ib);
     define(_0F, _71, GROUP_12a);
@@ -407,13 +408,13 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _76, "PCMPEQD", Pq, Qq);
     define(_0F, _77, "EMMS");
 
-    define(_66, _0F, _70, "PSHUFD", Vdq, Wdq, Ib);
-    define(_66, _0F, _71, GROUP_12b);
-    define(_66, _0F, _72, GROUP_13b);
-    define(_66, _0F, _73, GROUP_14b);
-    define(_66, _0F, _74, "PCMPEQB", Vdq, Wdq);
-    define(_66, _0F, _75, "PCMPEQW", Vdq, Wdq);
-    define(_66, _0F, _76, "PCMPEQD", Vdq, Wdq);
+    define(_66, _0F, _70, "PSHUFD", Vdq, Wdq, Ib).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _71, GROUP_12b).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _72, GROUP_13b).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _73, GROUP_14b).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _74, "PCMPEQB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _75, "PCMPEQW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _76, "PCMPEQD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
 
     define(_F2, _0F, _70, "PSHUFLW", Vq, Wq, Ib);
 
@@ -463,10 +464,11 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _C7, GROUP_9a).requireAddressSize(WordWidth.BITS_32); // depends on CPUID
     define(_0F, _C7, GROUP_9b).requireAddressSize(WordWidth.BITS_64).beNotExternallyTestable(); // depends on CPUID, rejected by gas on Opteron
 
-    define(_66, _0F, _C2, "CMPPD", Vpd, Wpd, ICb);
-    define(_66, _0F, _C4, "PINSRW", Vdq, Ed, Ib).requireOperandSize(WordWidth.BITS_32); // Ed instead of Ew to mimic intended Gd/Mw
-    define(_66, _0F, _C5, "PEXTRW", Gd, Udq, Ib);
-    define(_66, _0F, _C6, "SHUFPD", Vpd, Wpd, Ib);
+    define(_66, _0F, _C2, "CMPPD", Vpd, Wpd, ICb).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _C4, "PINSRW", Vdq, Ed, Ib).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE).
+        requireOperandSize(WordWidth.BITS_32); // Ed instead of Ew to mimic intended Gd/Mw
+    define(_66, _0F, _C5, "PEXTRW", Gd, Udq, Ib).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _C6, "SHUFPD", Vpd, Wpd, Ib).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
 
     define(_F2, _0F, _C2, "CMPSD", Vsd, Wsd, ICb);
 
@@ -479,14 +481,16 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _D5, "PMULLW", Pq, Qq);
     define(_0F, _D7, "PMOVMSKB", Gd, PRq);
 
-    define(_66, _0F, _D0, "ADDSUBPD", Vpd, Wpd);
-    define(_66, _0F, _D1, "PSRLW", Vdq, Wdq);
-    define(_66, _0F, _D2, "PSRLD", Vdq, Wdq);
-    define(_66, _0F, _D3, "PSRLQ", Vdq, Wdq);
-    define(_66, _0F, _D4, "PADDQ", Vdq, Wdq);
-    define(_66, _0F, _D5, "PMULLW", Vdq, Wdq);
-    define(_66, _0F, _D6, "MOVQ", Wq.excludeExternalTestArguments(AMD64XMMRegister.SYMBOLS), Vq); // gas uses F3 0F 7E for reg-reg
-    define(_66, _0F, _D7, "PMOVMSKB", Gd, Udq);
+    define(_66, _0F, _D0, "ADDSUBPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _D1, "PSRLW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _D2, "PSRLD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _D3, "PSRLQ", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _D4, "PADDQ", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _D5, "PMULLW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _D6, "MOVQ",
+           Wq.excludeExternalTestArguments(AMD64XMMRegister.SYMBOLS), Vq) // gas uses F3 0F 7E for reg-reg
+        .setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _D7, "PMOVMSKB", Gd, Udq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
 
     define(_F2, _0F, _D6, "MOVDQ2Q", Pq, Uq);
 
@@ -500,14 +504,15 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _E5, "PMULHW", Pq, Qq);
     define(_0F, _E7, "MOVNTQ", Mq, Pq);
 
-    define(_66, _0F, _E0, "PAVGB", Vdq, Wdq);
-    define(_66, _0F, _E1, "PSRAW", Vdq, Wdq);
-    define(_66, _0F, _E2, "PSRAD", Vdq, Wdq);
-    define(_66, _0F, _E3, "PAVGW", Vdq, Wdq);
-    define(_66, _0F, _E4, "PMULHUW", Vdq, Wdq);
-    define(_66, _0F, _E5, "PMULHW", Vdq, Wdq);
-    define(_66, _0F, _E6, "CVTTPD2DQ", Vq, Wpd);
-    define(_66, _0F, _E7, "MVNTDQ", Mdq, Vdq).beNotExternallyTestable(); // gas does not know it
+    define(_66, _0F, _E0, "PAVGB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _E1, "PSRAW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _E2, "PSRAD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _E3, "PAVGW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _E4, "PMULHUW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _E5, "PMULHW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _E6, "CVTTPD2DQ", Vq, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _E7, "MVNTDQ", Mdq, Vdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE).
+        beNotExternallyTestable(); // gas does not know it
 
     define(_F2, _0F, _E6, "CVTPD2DQ", Vq, Wpd);
 
@@ -521,13 +526,13 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _F6, "PSADBW", Pq, Qq);
     define(_0F, _F7, "MASKMOVQ", Pq, PRq);
 
-    define(_66, _0F, _F1, "PSLLW", Vdq, Wdq);
-    define(_66, _0F, _F2, "PSLLD", Vdq, Wdq);
-    define(_66, _0F, _F3, "PSLLQ", Vdq, Wdq);
-    define(_66, _0F, _F4, "PMULUDQ", Vdq, Wdq);
-    define(_66, _0F, _F5, "PMADDWD", Vdq, Wdq);
-    define(_66, _0F, _F6, "PSADBW", Vdq, Wdq);
-    define(_66, _0F, _F7, "MASKMOVDQU", Vdq, Udq);
+    define(_66, _0F, _F1, "PSLLW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _F2, "PSLLD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _F3, "PSLLQ", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _F4, "PMULUDQ", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _F5, "PMADDWD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _F6, "PSADBW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _F7, "MASKMOVDQU", Vdq, Udq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
 
     define(_F2, _0F, _F0, "LDDQU", Vpd, Mdq);
   }
@@ -562,14 +567,14 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _2E, "UCOMISS", Vss, Wss);
     define(_0F, _2F, "COMISS", Vps, Wps);
 
-    define(_66, _0F, _28, "MOVAPD", Vpd, Wpd);
-    define(_66, _0F, _29, "MOVAPD", Wpd, Vpd);
-    define(_66, _0F, _2A, "CVTPI2PD", Vpd, Qq);
-    define(_66, _0F, _2B, "MOVNTPD", Mdq, Vpd);
-    define(_66, _0F, _2C, "CVTTPD2PI", Pq, Wpd);
-    define(_66, _0F, _2D, "CVTPD2PI", Pq, Wpd);
-    define(_66, _0F, _2E, "UCOMISD", Vsd, Wsd);
-    define(_66, _0F, _2F, "COMISD", Vpd, Wsd);
+    define(_66, _0F, _28, "MOVAPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _29, "MOVAPD", Wpd, Vpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _2A, "CVTPI2PD", Vpd, Qq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _2B, "MOVNTPD", Mdq, Vpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _2C, "CVTTPD2PI", Pq, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _2D, "CVTPD2PI", Pq, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _2E, "UCOMISD", Vsd, Wsd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _2F, "COMISD", Vpd, Wsd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
 
     define(_F2, _0F, _2A, "CVTSI2SD", Vsd, Ed_q);
     define(_F2, _0F, _2C, "CVTTSD2SI", Gd_q, Wsd);
@@ -597,14 +602,14 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _5E, "DIVPS", Vps, Wps);
     define(_0F, _5F, "MAXPS", Vps, Wps);
 
-    define(_66, _0F, _58, "ADDPD", Vpd, Wpd);
-    define(_66, _0F, _59, "MULPD", Vpd, Wpd);
-    define(_66, _0F, _5A, "CVTPD2PS", Vps, Wpd);
-    define(_66, _0F, _5B, "CVTPS2DQ", Vdq, Wps);
-    define(_66, _0F, _5C, "SUBPD", Vpd, Wpd);
-    define(_66, _0F, _5D, "MINPD", Vpd, Wpd);
-    define(_66, _0F, _5E, "DIVPD", Vpd, Wpd);
-    define(_66, _0F, _5F, "MAXPD", Vpd, Wpd);
+    define(_66, _0F, _58, "ADDPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _59, "MULPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _5A, "CVTPD2PS", Vps, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _5B, "CVTPS2DQ", Vdq, Wps).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _5C, "SUBPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _5D, "MINPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _5E, "DIVPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _5F, "MAXPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
 
     define(_F2, _0F, _58, "ADDSD", Vsd, Wsd);
     define(_F2, _0F, _59, "MULSD", Vsd, Wsd);
@@ -630,24 +635,28 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _6E, "MOVD", Pq, Ed_q).beNotExternallyTestable(); // gas does not feature suffix to distinguish operand width
     define(_0F, _6F, "MOVQ", Pq, Qq);
 
-    define(_66, _0F, _68, "PUNPCKHBW", Vdq, Wq);
-    define(_66, _0F, _69, "PUNPCKHWD", Vdq, Wq);
-    define(_66, _0F, _6A, "PUNPCKHDQ", Vdq, Wq);
-    define(_66, _0F, _6B, "PACKSSDW", Vdq, Wdq);
-    define(_66, _0F, _6C, "PUNPCKLQDQ", Vdq, Wq);
-    define(_66, _0F, _6D, "PUNPCKHQDQ", Vdq, Wq);
-    define(_66, _0F, _6E, "MOVD", Vdq, Ed_q).beNotExternallyTestable(); // gas does not feature suffix to distinguish operand width
-    define(_66, _0F, _6F, "MOVDQA", Vdq, Wdq);
+    define(_66, _0F, _68, "PUNPCKHBW", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _69, "PUNPCKHWD", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _6A, "PUNPCKHDQ", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _6B, "PACKSSDW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _6C, "PUNPCKLQDQ", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _6D, "PUNPCKHQDQ", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _6E, "MOVD", Vdq, Ed_q).
+        setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE).
+        beNotExternallyTestable(); // gas does not feature suffix to distinguish operand width
+    define(_66, _0F, _6F, "MOVDQA", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
 
     define(_F3, _0F, _6F, "MOVDQU", Vdq, Wdq);
 
     define(_0F, _7E, "MOVD", Ed_q, Pq).beNotExternallyTestable(); // gas does not allow feature to distinguish operand width
     define(_0F, _7F, "MOVQ", Qq, Pq);
 
-    define(_66, _0F, _7C, "HADDPD", Vpd, Wpd);
-    define(_66, _0F, _7D, "HSUBPD", Vpd, Wpd);
-    define(_66, _0F, _7E, "MOVD", Ed_q, Vdq).beNotExternallyTestable(); // gas does not feature suffix to distinguish operand width
-    define(_66, _0F, _7F, "MOVDQA", Wdq, Vdq);
+    define(_66, _0F, _7C, "HADDPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _7D, "HSUBPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _7E, "MOVD", Ed_q, Vdq).
+        setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE).
+        beNotExternallyTestable(); // gas does not feature suffix to distinguish operand width
+    define(_66, _0F, _7F, "MOVDQA", Wdq, Vdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
 
     define(_F2, _0F, _7C, "HADDPS", Vps, Wps);
     define(_F2, _0F, _7D, "HSUBPS", Vps, Wps);
@@ -702,14 +711,14 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _DE, "PMAXUB", Pq, Qq);
     define(_0F, _DF, "PANDN", Pq, Qq);
 
-    define(_66, _0F, _D8, "PSUBUSB", Vdq, Wdq);
-    define(_66, _0F, _D9, "PSUBUSW", Vdq, Wdq);
-    define(_66, _0F, _DA, "PMINUB", Vdq, Wdq);
-    define(_66, _0F, _DB, "PAND", Vdq, Wdq);
-    define(_66, _0F, _DC, "PADDUSB", Vdq, Wdq);
-    define(_66, _0F, _DD, "PADDUSW", Vdq, Wdq);
-    define(_66, _0F, _DE, "PMAXUB", Vdq, Wdq);
-    define(_66, _0F, _DF, "PANDN", Vdq, Wdq);
+    define(_66, _0F, _D8, "PSUBUSB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _D9, "PSUBUSW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _DA, "PMINUB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _DB, "PAND", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _DC, "PADDUSB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _DD, "PADDUSW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _DE, "PMAXUB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _DF, "PANDN", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
 
     define(_0F, _E8, "PSUBSB", Pq, Qq);
     define(_0F, _E9, "PSUBSW", Pq, Qq);
@@ -720,14 +729,14 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _EE, "PMAXSW", Pq, Qq);
     define(_0F, _EF, "PXOR", Pq, Qq);
 
-    define(_66, _0F, _E8, "PSUBSB", Vdq, Wdq);
-    define(_66, _0F, _E9, "PSUBSW", Vdq, Wdq);
-    define(_66, _0F, _EA, "PMINSW", Vdq, Wdq);
-    define(_66, _0F, _EB, "POR", Vdq, Wdq);
-    define(_66, _0F, _EC, "PADDSB", Vdq, Wdq);
-    define(_66, _0F, _ED, "PADDSW", Vdq, Wdq);
-    define(_66, _0F, _EE, "PMAXSW", Vdq, Wdq);
-    define(_66, _0F, _EF, "PXOR", Vdq, Wdq);
+    define(_66, _0F, _E8, "PSUBSB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _E9, "PSUBSW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _EA, "PMINSW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _EB, "POR", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _EC, "PADDSB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _ED, "PADDSW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _EE, "PMAXSW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _EF, "PXOR", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
 
     define(_0F, _F8, "PSUBB", Pq, Qq);
     define(_0F, _F9, "PSUBW", Pq, Qq);
@@ -737,13 +746,13 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _FD, "PADDW", Pq, Qq);
     define(_0F, _FE, "PADDD", Pq, Qq);
 
-    define(_66, _0F, _F8, "PSUBB", Vdq, Wdq);
-    define(_66, _0F, _F9, "PSUBW", Vdq, Wdq);
-    define(_66, _0F, _FA, "PSUBD", Vdq, Wdq);
-    define(_66, _0F, _FB, "PSUBQ", Vdq, Wdq);
-    define(_66, _0F, _FC, "PADDB", Vdq, Wdq);
-    define(_66, _0F, _FD, "PADDW", Vdq, Wdq);
-    define(_66, _0F, _FE, "PADDD", Vdq, Wdq);
+    define(_66, _0F, _F8, "PSUBB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _F9, "PSUBW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _FA, "PSUBD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _FB, "PSUBQ", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _FC, "PADDB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _FD, "PADDW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    define(_66, _0F, _FE, "PADDD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
   }
 
   TwoByteOpcodeMap() {
