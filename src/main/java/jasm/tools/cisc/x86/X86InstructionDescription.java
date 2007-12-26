@@ -15,11 +15,12 @@ import java.util.List;
 public final class X86InstructionDescription
     extends InstructionDescription {
 
+  private boolean _isExternalOperandOrderingInverted = true;
+  private WordWidth _defaultOperandSize = WordWidth.BITS_32;
+
   public X86InstructionDescription(List<Object> specifications) {
     super(specifications);
   }
-
-  private boolean _isExternalOperandOrderingInverted = true;
 
   public boolean isExternalOperandOrderingInverted() {
     return _isExternalOperandOrderingInverted;
@@ -29,8 +30,6 @@ public final class X86InstructionDescription
     _isExternalOperandOrderingInverted = false;
   }
 
-  private WordWidth _defaultOperandSize = WordWidth.BITS_32;
-
   public WordWidth defaultOperandSize() {
     return _defaultOperandSize;
   }
@@ -39,5 +38,4 @@ public final class X86InstructionDescription
     _defaultOperandSize = defaultOperandSize;
     return this;
   }
-
 }
