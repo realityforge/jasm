@@ -1,7 +1,9 @@
 package jasm.x86.as;
 
 import jasm.LittleEndianAssembler;
+import jasm.amd64.AMD64GeneralRegister8;
 import jasm.annotations.Inline;
+import jasm.annotations.NoInline;
 
 public abstract class X86Assembler
     extends LittleEndianAssembler {
@@ -10,7 +12,14 @@ public abstract class X86Assembler
     super(initialMachineCodeCapacity);
   }
 
-  //TODO: Move into AbstractAMD64Assembler
+  //TODO: Move next two into AbstractAMD64Assembler
+  @NoInline
+  protected final void checkRexCompatibility(final AMD64GeneralRegister8 register) {
+    if (register.isHighByte()) {
+      throw new IllegalArgumentException("Cannot encode " + register.name() + " in the presence of a REX prefix");
+    }
+  }
+
   @Inline
   protected final void emitRexPrefix(final boolean force,
                                      final boolean wBit,

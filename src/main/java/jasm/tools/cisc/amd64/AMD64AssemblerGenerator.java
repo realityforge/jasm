@@ -37,13 +37,9 @@ public final class AMD64AssemblerGenerator
   }
 
   private void checkGeneralRegister8Values(IndentWriter writer, X86Template template) {
-    for (X86Parameter parameter : template.parameters()) {
-      if (parameter.type() == AMD64GeneralRegister8.class) {
-        writer.println("if (Config.ENABLE_CONSTRAINT_CHECKS && " + parameter.variableName() + ".isHighByte()) {");
-        writer.indent();
-        writer.println("throw new IllegalArgumentException(\"Cannot encode \" + " + parameter.variableName() + ".name() + \" in the presence of a REX prefix\");");
-        writer.outdent();
-        writer.println("}");
+    for (X86Parameter p : template.parameters()) {
+      if (p.type() == AMD64GeneralRegister8.class) {
+        writer.println("if (Config.ENABLE_CONSTRAINT_CHECKS) checkRexCompatibility(" + p.variableName() + ");");
       }
     }
   }
