@@ -125,7 +125,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
       writer.println(" // operand size prefix");
     }
     if (template.instructionSelectionPrefix() != null) {
-      emitByte(writer, template.instructionSelectionPrefix().byteValue());
+      emitByte(writer, template.instructionSelectionPrefix().getValue().byteValue());
       writer.println(" // instruction selection prefix");
     }
   }

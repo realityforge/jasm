@@ -36,7 +36,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
   private final InstructionAssessment _instructionFamily;
   private boolean _hasSibByte;
   private final X86TemplateContext _context;
-  private final HexByte _instructionSelectionPrefix;
+  private final X86InstructionPrefix _instructionSelectionPrefix;
   private HexByte _opcode1;
   private HexByte _opcode2;
   private ModRMGroup _modRMGroup;
@@ -49,8 +49,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
   protected X86Template(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {
     super(instructionDescription, serial);
     _instructionFamily = instructionFamily;
-    final X86InstructionPrefix prefix = instructionDescription.getMandatoryPrefix();
-    _instructionSelectionPrefix = ( prefix != null ) ? prefix.getValue() : null;
+    _instructionSelectionPrefix = instructionDescription.getMandatoryPrefix();
     _context = context;
     Trace.line(2, "template #" + serial + ": " + context);
   }
@@ -64,7 +63,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     return _context;
   }
 
-  public final HexByte instructionSelectionPrefix() {
+  public final X86InstructionPrefix instructionSelectionPrefix() {
     return _instructionSelectionPrefix;
   }
 
@@ -147,13 +146,21 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     return result;
   }
 
+  private String format(X86InstructionPrefix parameter) {
+    return parameter == null ? "" : parameter.getValue().toString() + ", ";
+  }
+
   private String format(HexByte parameter) {
     return parameter == null ? "" : parameter.toString() + ", ";
   }
 
   @Override
   public final String toString() {
-    return "<X86Template #" + serial() + ": " + internalName() + " " + format(_instructionSelectionPrefix) + format(_opcode1) + format(_opcode2) + _operands + ">";
+    return "<X86Template #" + serial() + ": " + internalName() + " " +
+           format(_instructionSelectionPrefix) +
+           format(_opcode1) +
+           format(_opcode2) +
+           _operands + ">";
   }
 
   private String _namePrefix = "";

@@ -72,10 +72,12 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
       if (header._opcode1 == null) {
         if (hexByte == X86InstructionPrefix.ADDRESS_SIZE.getValue()) {
           header._hasAddressSizePrefix = true;
-        } else if (hexByte == X86InstructionPrefix.OPERAND_SIZE.getValue() ||
-                   hexByte == X86InstructionPrefix.REPE.getValue() ||
-                   hexByte == X86InstructionPrefix.REPNE.getValue()) {
-          header._instructionSelectionPrefix = hexByte;
+        } else if (hexByte == X86InstructionPrefix.OPERAND_SIZE.getValue() ) {
+          header._instructionSelectionPrefix = X86InstructionPrefix.OPERAND_SIZE;
+        } else if (hexByte == X86InstructionPrefix.REPE.getValue() ) {
+          header._instructionSelectionPrefix = X86InstructionPrefix.REPE;
+        } else if (hexByte == X86InstructionPrefix.REPNE.getValue()) {
+          header._instructionSelectionPrefix = X86InstructionPrefix.REPNE;
         } else if (isRexPrefix(hexByte)) {
           header._rexPrefix = hexByte;
         } else {
@@ -305,13 +307,13 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
         }
       }
     }
-    if (header._instructionSelectionPrefix == X86InstructionPrefix.REPE.getValue() ||
-        header._instructionSelectionPrefix == X86InstructionPrefix.REPNE.getValue()) {
+    if (header._instructionSelectionPrefix == X86InstructionPrefix.REPE ||
+        header._instructionSelectionPrefix == X86InstructionPrefix.REPNE) {
       final X86InstructionHeader prefixHeader = new X86InstructionHeader();
-      prefixHeader._opcode1 = header._instructionSelectionPrefix;
+      prefixHeader._opcode1 = header._instructionSelectionPrefix.getValue();
       final LinkedList<Template_Type> prefixTemplates = headerToTemplates().get(prefixHeader);
       final Template_Type template = prefixTemplates.getFirst();
-      final byte[] bytes = new byte[]{header._instructionSelectionPrefix.byteValue()};
+      final byte[] bytes = new byte[]{header._instructionSelectionPrefix.getValue().byteValue()};
       final List<Argument> arguments = Collections.emptyList();
       final DisassembledInstruction_Type disassembledInstruction =
           createDisassembledInstruction(_currentOffset, bytes, template, arguments);

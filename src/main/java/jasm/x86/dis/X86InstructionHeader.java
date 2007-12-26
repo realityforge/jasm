@@ -26,7 +26,7 @@ public final class X86InstructionHeader {
 
   boolean _hasAddressSizePrefix;
   HexByte _rexPrefix;
-  HexByte _instructionSelectionPrefix;
+  X86InstructionPrefix _instructionSelectionPrefix;
   HexByte _opcode1;
   HexByte _opcode2;
 
@@ -48,7 +48,7 @@ public final class X86InstructionHeader {
     _instructionSelectionPrefix = template.instructionSelectionPrefix();
     if (template.operandSizeAttribute() == WordWidth.BITS_16) {
       assert _instructionSelectionPrefix == null;
-      _instructionSelectionPrefix = X86InstructionPrefix.OPERAND_SIZE.getValue();
+      _instructionSelectionPrefix = X86InstructionPrefix.OPERAND_SIZE;
     }
     _opcode1 = template.opcode1();
     _opcode2 = template.opcode2();
