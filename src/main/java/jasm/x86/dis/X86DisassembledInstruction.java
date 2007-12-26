@@ -161,7 +161,7 @@ public abstract class X86DisassembledInstruction<Template_Type extends X86Templa
     final X86Parameter parameter = (X86Parameter) operand;
     final Argument argument = arguments.remove();
     if (parameter instanceof X86DisplacementParameter) {
-      assert parameter.place() == ParameterPlace.APPEND;
+      assert parameter.place() == ParameterPlace.DISPLACEMENT;
       final X86Parameter nextParameter = (X86Parameter) operands.element();
       String prefix = "";
       if (IndirectRegister.class.isAssignableFrom(nextParameter.type())) {

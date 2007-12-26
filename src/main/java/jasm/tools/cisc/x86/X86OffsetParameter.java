@@ -16,7 +16,7 @@ public class X86OffsetParameter
     implements OffsetParameter {
 
   public X86OffsetParameter(Designation designation, WordWidth width) {
-    super(designation, width);
+    super(designation, width, ParameterPlace.DISPLACEMENT);
     setVariableName("rel" + width.numberOfBits());
   }
 }

@@ -271,14 +271,12 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
 
   private void printAppendedParameter(IndentWriter writer, Template_Type template) {
     for (X86Parameter parameter : template.parameters()) {
-      if (parameter.place() == ParameterPlace.APPEND) {
-        if (parameter instanceof X86NumericalParameter) {
-          printImmediateParameter(writer, (X86NumericalParameter) parameter);
-        } else if (parameter instanceof X86EnumerableParameter) {
-          printAppendedEnumerableParameter(writer, (X86EnumerableParameter) parameter);
-        } else {
-          throw new IllegalStateException("appended parameter of unexpected type: " + parameter);
-        }
+      if (parameter.place() == ParameterPlace.IMMEDIATE ||
+          parameter.place() == ParameterPlace.DISPLACEMENT) {
+        printImmediateParameter(writer, (X86NumericalParameter) parameter);
+      }
+      else if (parameter.place() == ParameterPlace.APPEND) {
+        printAppendedEnumerableParameter(writer, (X86EnumerableParameter) parameter);
       }
     }
   }

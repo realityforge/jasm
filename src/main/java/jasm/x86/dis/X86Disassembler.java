@@ -125,13 +125,8 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
         case SIB_SCALE:
           value = X86Field.SCALE.extract(sibByte);
           break;
-        case APPEND:
-          if (parameter instanceof X86EnumerableParameter) {
-            final X86EnumerableParameter enumerableParameter = (X86EnumerableParameter) parameter;
-            final SymbolSet symbolSet = enumerableParameter.getSymbolSet();
-            arguments.add((Argument) symbolSet.fromValue(EndianUtil.readByte(stream)));
-            continue;
-          }
+        case IMMEDIATE:
+        case DISPLACEMENT:
           final X86NumericalParameter numericalParameter = (X86NumericalParameter) parameter;
           switch (numericalParameter.width()) {
             case BITS_8:
@@ -148,6 +143,13 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
               break;
           }
           continue;
+
+        case APPEND:
+          final X86EnumerableParameter enumerableParameter = (X86EnumerableParameter) parameter;
+          final SymbolSet symbolSet = enumerableParameter.getSymbolSet();
+          arguments.add((Argument) symbolSet.fromValue(EndianUtil.readByte(stream)));
+          continue;
+
         case OPCODE1_REXB:
           value = X86Field.extractRexValue(X86Field.REX_B_BIT_INDEX, rexByte);
           // fall through...

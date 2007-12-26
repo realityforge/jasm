@@ -14,7 +14,7 @@ public final class X86ImmediateParameter
     extends X86NumericalParameter {
 
   public X86ImmediateParameter(Designation designation, WordWidth width) {
-    super(designation, width);
+    super(designation, width, ParameterPlace.IMMEDIATE);
     setVariableName("imm" + width.numberOfBits());
   }
 }

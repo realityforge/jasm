@@ -19,9 +19,9 @@ public final class X86EnumerableParameter<EnumerableArgument_Type extends Enum<E
     implements EnumerableParameter {
   private final SymbolSet<EnumerableArgument_Type> _symbolSet;
 
-  public X86EnumerableParameter(Designation designation, ParameterPlace place, SymbolSet<EnumerableArgument_Type> enumerator) {
+  public X86EnumerableParameter(Designation designation, ParameterPlace place, SymbolSet<EnumerableArgument_Type> symbolSet) {
     super(designation, place);
-    _symbolSet = enumerator;
+    _symbolSet = symbolSet;
     switch (place) {
       case MOD_REG:
       case MOD_REG_REXR:
@@ -41,7 +41,7 @@ public final class X86EnumerableParameter<EnumerableArgument_Type extends Enum<E
         setVariableName("base");
         break;
       case APPEND:
-        setVariableName(enumerator.type().getSimpleName().toLowerCase());
+        setVariableName(symbolSet.type().getSimpleName().toLowerCase());
         break;
       case OPCODE1:
       case OPCODE1_REXB:

@@ -77,7 +77,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template, Disas
     final X86Parameter parameter = (X86Parameter) operand;
     final Argument argument = arguments.remove();
     if (parameter instanceof X86DisplacementParameter) {
-      assert parameter.place() == ParameterPlace.APPEND;
+      assert parameter.place() == ParameterPlace.DISPLACEMENT;
       final ImmediateArgument immediateArgument = (ImmediateArgument) argument;
       String prefix = immediateArgument.signedExternalValue() + "(";
       final X86Parameter nextParameter = (X86Parameter) operands.element();

@@ -21,6 +21,10 @@ public enum ParameterPlace {
   SIB_INDEX_REXX("SIB index field extension by REX.X bit"),
   SIB_BASE("base field of the SIB byte"),
   SIB_BASE_REXB("SIB base field extension by REX.B bit"),
+  DISPLACEMENT("address displacement of 1, 2 or 4 bytes"),
+  IMMEDIATE("immediate data of 1, 2, or 4 bytes"),
+  //Append is enumerated value that is turned into an immediate byte
+  //Only used when synthesizing cmpps variants
   APPEND("appended to the instruction"),
   OPCODE1("added to the first opcode"),
   OPCODE1_REXB("opcode1 extension by REX.B bit"),
