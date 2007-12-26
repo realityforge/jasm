@@ -249,18 +249,14 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
   protected abstract void printSibVariants(IndentWriter writer, Template_Type template);
 
   private void printImmediateParameter(IndentWriter writer, X86NumericalParameter parameter) {
-    if (parameter.width() == WordWidth.BITS_8) {
-      emitByte(writer, parameter.variableName());
-      writer.println(" // appended");
-    } else {
-      writer.println("// appended:");
-      for (int i = 0; i < parameter.width().numberOfBytes(); i++) {
-        if (i > 0) {
-          writer.println(parameter.variableName() + " >>= 8;");
-        }
-        emitByte(writer, "(byte) (" + parameter.variableName() + " & 0xff)");
-        writer.println();
-      }
+    switch (parameter.width().numberOfBytes() )
+    {
+      case 8: writer.println("emitLong(" + parameter.variableName() + ");"); break;
+      case 4: writer.println("emitInt(" + parameter.variableName() + ");"); break;
+      case 2: writer.println("emitShort(" + parameter.variableName() + ");"); break;
+      case 1: writer.println("emitByte(" + parameter.variableName() + ");"); break;
+      default:
+        throw new IllegalStateException("Unexpected byte count: " + parameter.width().numberOfBytes());
     }
   }
 
@@ -293,7 +289,6 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
   }
 
   private Map<String, String> _subroutineToName = new HashMap<String, String>();
-
   private static final String OPCODE1_VARIABLE_NAME = "opcode1";
   private static final String OPCODE2_VARIABLE_NAME = "opcode2";
   private static final String MODRM_GROUP_OPCODE_VARIABLE_NAME = "modRmOpcode";

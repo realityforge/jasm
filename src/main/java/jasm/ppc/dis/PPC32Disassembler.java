@@ -32,6 +32,6 @@ public final class PPC32Disassembler extends PPCDisassembler<PPC32DisassembledIn
 
   @Override
   protected final Assembler createAssembler(int offset) {
-    return new PPC32Assembler(10, _startAddress + offset);
+    return new PPC32Assembler(_startAddress + offset);
   }
 }

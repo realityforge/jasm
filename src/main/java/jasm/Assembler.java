@@ -20,7 +20,7 @@ public abstract class Assembler {
    * The minimum size needs to be big enough that an instruction will fit in code size.
    * (15 is the maximum size of ia32 instruction).
    */
-  private static final int MINIMUM_MACHINE_CODE_SIZE = 15;
+  public static final int MINIMUM_MACHINE_CODE_SIZE = 15;
 
   private final LinkedList<LabelInstruction> _labelInstructions = new LinkedList<LabelInstruction>();
   private final LinkedList<LabelOffsetInstruction> _spanDependentLabelInstructions = new LinkedList<LabelOffsetInstruction>();
@@ -66,6 +66,71 @@ public abstract class Assembler {
   protected abstract void emitInt(int intValue);
 
   protected abstract void emitLong(long longValue);
+
+  protected final void emitLEShort(short shortValue) {
+    if (_machineCodeIndex  + 2 >= _machineCode.length) {
+      _machineCode = growMachineCode();
+    }
+    _machineCode[_machineCodeIndex++] = (byte) (shortValue & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) (shortValue >> 8);
+  }
+
+  protected final void emitLEInt(int intValue) {
+    if (_machineCodeIndex + 4 >= _machineCode.length) {
+      _machineCode = growMachineCode();
+    }
+    _machineCode[_machineCodeIndex++] = (byte) (intValue & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((intValue >> 8) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((intValue >> 16) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((intValue >> 24) & 0xFF);
+  }
+
+  protected final void emitLELong(long longValue) {
+    if (_machineCodeIndex + 8 >= _machineCode.length) {
+      _machineCode = growMachineCode();
+    }
+    _machineCode[_machineCodeIndex++] = (byte) (longValue & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((longValue >> 8) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((longValue >> 16) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((longValue >> 24) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((longValue >> 32) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((longValue >> 40) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((longValue >> 48) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((longValue >> 56) & 0xFF);
+  }
+
+  protected final void emitBEShort(short value) {
+    if (_machineCodeIndex  + 2 >= _machineCode.length) {
+      _machineCode = growMachineCode();
+    }
+    _machineCode[_machineCodeIndex++] = (byte) ((value >> 8) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) (value & 0xFF);
+  }
+
+  protected final void emitBEInt(int value) {
+    if (_machineCodeIndex + 4 >= _machineCode.length) {
+      _machineCode = growMachineCode();
+    }
+    _machineCode[_machineCodeIndex++] = (byte) ((value >> 24) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((value >> 16) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((value >> 8) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) (value & 0xFF);
+  }
+
+  protected final void emitBELong(long value) {
+    if (_machineCodeIndex + 8 >= _machineCode.length) {
+      _machineCode = growMachineCode();
+    }
+    _machineCode[_machineCodeIndex++] = (byte) ((value >> 56) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((value >> 48) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((value >> 40) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((value >> 32) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((value >> 24) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((value >> 16) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) ((value >> 8) & 0xFF);
+    _machineCode[_machineCodeIndex++] = (byte) (value & 0xFF);
+
+  }
 
   final boolean selectingLabelInstructions() {
     return _selectingLabelInstructions;

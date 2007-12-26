@@ -8,6 +8,8 @@
  */
 package jasm;
 
+import jasm.annotations.Inline;
+
 public abstract class BigEndianAssembler extends Assembler {
 
   protected BigEndianAssembler(final int initialMachineCodeCapacity) {
@@ -15,20 +17,20 @@ public abstract class BigEndianAssembler extends Assembler {
   }
 
   @Override
-  protected final void emitShort(short shortValue) {
-    emitByte((byte) (shortValue >> 8));
-    emitByte((byte) (shortValue & 0xff));
+  @Inline
+  protected final void emitShort(short value) {
+    emitBEShort(value);
   }
 
   @Override
-  protected final void emitInt(int intValue) {
-    emitShort((short) (intValue >> 16));
-    emitShort((short) (intValue & 0xffff));
+  @Inline
+  protected final void emitInt(int value) {
+    emitBEInt(value);
   }
 
   @Override
-  protected final void emitLong(long longValue) {
-    emitInt((int) (longValue >> 32));
-    emitInt((int) (longValue & 0xffffffffL));
+  @Inline
+  protected final void emitLong(long value) {
+    emitBELong(value);
   }
 }

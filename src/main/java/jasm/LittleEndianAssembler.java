@@ -8,6 +8,8 @@
  */
 package jasm;
 
+import jasm.annotations.Inline;
+
 public abstract class LittleEndianAssembler extends Assembler {
 
   protected LittleEndianAssembler(final int initialMachineCodeCapacity) {
@@ -15,20 +17,19 @@ public abstract class LittleEndianAssembler extends Assembler {
   }
 
   @Override
-  protected final void emitShort(short shortValue) {
-    emitByte((byte) (shortValue & 0xff));
-    emitByte((byte) (shortValue >> 8));
+  protected final void emitShort(short value) {
+    emitLEShort(value);
   }
 
   @Override
-  protected final void emitInt(int intValue) {
-    emitShort((short) (intValue & 0xffff));
-    emitShort((short) (intValue >> 16));
+  @Inline
+  protected final void emitInt(int value) {
+    emitLEInt(value);
   }
 
   @Override
-  protected final void emitLong(long longValue) {
-    emitInt((int) (longValue & 0xffffffffL));
-    emitInt((int) (longValue >> 32));
+  @Inline
+  protected final void emitLong(long value) {
+    emitLELong(value);
   }
 }
