@@ -17,41 +17,29 @@ import jasm.amd64.AMD64IndirectRegister64;
 import jasm.tools.cisc.x86.ModCase;
 import jasm.tools.cisc.x86.RMCase;
 import jasm.tools.cisc.x86.X86AssemblerGenerator;
-import jasm.tools.cisc.x86.X86Field;
 import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
-import jasm.tools.cisc.x86.X86RexPrefix;
 import jasm.tools.util.IndentWriter;
-import jasm.util.HexUtil;
 
 /**
  * Run this program to generate the AMD64RawAssembler and AMD64LabelAssembler classes.
  */
-public final class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Template> {
-
-  private static final String REX_BYTE_NAME = "rex";
+public final class AMD64AssemblerGenerator
+    extends X86AssemblerGenerator<AMD64Template> {
 
   public AMD64AssemblerGenerator() {
     super(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64, false);
   }
 
-  private String basicRexValue(X86Template template) {
-    if (template.operandSizeAttribute() == WordWidth.BITS_64 &&
-        template.instructionDescription().defaultOperandSize() != WordWidth.BITS_64) {
-      return HexUtil.toHexLiteral((byte) (X86RexPrefix.REX_MIN.ordinal() + (1 << X86Field.REX_W_BIT_INDEX)));
-    }
-    return HexUtil.toHexLiteral((byte) X86RexPrefix.REX_MIN.ordinal());
-  }
-
-  private void printUnconditionalRexBit(IndentWriter writer, X86Parameter parameter, int bitIndex) {
-    writer.print(REX_BYTE_NAME + " |= (" + parameter.valueString() + " & 8) >> " + (3 - bitIndex) + ";");
-    writer.println(" // " + parameter.place().comment());
+  private boolean isWBitRequired(final X86Template template) {
+    return template.operandSizeAttribute() == WordWidth.BITS_64 &&
+           template.instructionDescription().defaultOperandSize() != WordWidth.BITS_64;
   }
 
   private void checkGeneralRegister8Values(IndentWriter writer, X86Template template) {
     for (X86Parameter parameter : template.parameters()) {
       if (parameter.type() == AMD64GeneralRegister8.class) {
-        writer.println("if (" + parameter.variableName() + ".isHighByte()) {");
+        writer.println("if (Config.ENABLE_CONSTRAINT_CHECKS && " + parameter.variableName() + ".isHighByte()) {");
         writer.indent();
         writer.println("throw new IllegalArgumentException(\"Cannot encode \" + " + parameter.variableName() + ".name() + \" in the presence of a REX prefix\");");
         writer.outdent();
@@ -60,85 +48,120 @@ public final class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Te
     }
   }
 
+  private boolean needsToAddConstraintsFoGeneralRegister8Values(X86Template template) {
+    for (X86Parameter parameter : template.parameters()) {
+      if (parameter.type() == AMD64GeneralRegister8.class) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
   private void printUnconditionalRexPrefix(IndentWriter writer, X86Template template) {
-    writer.println("byte " + REX_BYTE_NAME + " = (byte) " + basicRexValue(template) + ";");
+    String rBit = "false";
+    String bBit = "false";
+    String xBit = "false";
+
     for (X86Parameter parameter : template.parameters()) {
       switch (parameter.place()) {
         case MOD_REG_REXR:
-          printUnconditionalRexBit(writer, parameter, X86Field.REX_R_BIT_INDEX);
+          rBit = "(" + parameter.valueString() + " & 8) != 0";
           break;
         case MOD_RM_REXB:
         case SIB_BASE_REXB:
         case OPCODE1_REXB:
         case OPCODE2_REXB:
-          printUnconditionalRexBit(writer, parameter, X86Field.REX_B_BIT_INDEX);
+          bBit = "(" + parameter.valueString() + " & 8) != 0";
           break;
         case SIB_INDEX_REXX:
-          printUnconditionalRexBit(writer, parameter, X86Field.REX_X_BIT_INDEX);
+          xBit = "(" + parameter.valueString() + " & 8) != 0";
           break;
         default:
           break;
       }
     }
     checkGeneralRegister8Values(writer, template);
-    emitByte(writer, REX_BYTE_NAME);
-    writer.println();
+    writer.println("emitRexPrefix(false, true, " + rBit + "," + bBit + "," + xBit + ");");
   }
 
-  private void printConditionalRexBit(IndentWriter writer, X86Template template, X86Parameter parameter, int bitIndex) {
+  private String genForceCheck(final X86Parameter parameter) {
     if (parameter.type() == AMD64GeneralRegister8.class) {
-      writer.println("if (" + parameter.variableName() + ".requiresRexPrefix()) {");
-      writer.indent();
-      writer.println(REX_BYTE_NAME + " |= " + basicRexValue(template) + ";");
-      writer.println("if (" + parameter.valueString() + " >= 8) {");
-      writer.indent();
-      writer.println(REX_BYTE_NAME + " |= 1 << " + bitIndex + "; // " + parameter.place().comment());
-      writer.outdent();
-      writer.println("}");
-      writer.outdent();
-      writer.println("}");
-    } else {
-      writer.println("if (" + parameter.valueString() + " >= 8) {");
-      writer.indent();
-      writer.println(REX_BYTE_NAME + " |= (1 << " + bitIndex + ") + " + basicRexValue(template) + "; // " + parameter.place().comment());
-      writer.outdent();
-      writer.println("}");
+      return "if (" + parameter.variableName() + ".requiresRexPrefix()) force = true;";
     }
+    return "";
   }
 
   private void printConditionalRexPrefix(IndentWriter writer, X86Template template) {
-    writer.println("byte " + REX_BYTE_NAME + " = (byte) 0;");
+    String rBit = null;
+    String bBit = null;
+    String xBit = null;
+
+    String force = "";
     for (X86Parameter parameter : template.parameters()) {
       switch (parameter.place()) {
         case MOD_REG_REXR:
-          printConditionalRexBit(writer, template, parameter, X86Field.REX_R_BIT_INDEX);
+          force += genForceCheck(parameter);
+          rBit = "(" + parameter.valueString() + " >= 8)";
           break;
         case MOD_RM_REXB:
         case SIB_BASE_REXB:
         case OPCODE1_REXB:
         case OPCODE2_REXB:
-          printConditionalRexBit(writer, template, parameter, X86Field.REX_B_BIT_INDEX);
+          force += genForceCheck(parameter);
+          bBit = "(" + parameter.valueString() + " >= 8)";
           break;
         case SIB_INDEX_REXX:
-          printConditionalRexBit(writer, template, parameter, X86Field.REX_X_BIT_INDEX);
+          force += genForceCheck(parameter);
+          xBit = "(" + parameter.valueString() + " >= 8)";
           break;
         default:
           break;
       }
     }
-    writer.println("if (" + REX_BYTE_NAME + " != (byte) 0) {");
-    writer.indent();
-    checkGeneralRegister8Values(writer, template);
-    emitByte(writer, REX_BYTE_NAME);
-    writer.println();
-    writer.outdent();
-    writer.println("}");
+
+    final boolean maybeForce = force.length() > 0;
+    if(maybeForce) writer.println("boolean force = false;");
+    writer.println(force);
+
+    if (needsToAddConstraintsFoGeneralRegister8Values(template) &&
+        (maybeForce || null != rBit || null != bBit || null != xBit)) {
+      String separator = "";
+      writer.print("if (");
+      if (maybeForce) {
+        writer.print("force");
+        separator = " || ";
+      }
+      if (null != rBit) {
+        writer.print(separator + rBit);
+        separator = " || ";
+      }
+      if (null != bBit) {
+        writer.print(separator + bBit);
+        separator = " || ";
+      }
+      if (null != xBit) { writer.print(separator + xBit); }
+
+      writer.println(") {");
+      writer.indent();
+      checkGeneralRegister8Values(writer, template);
+      writer.println();
+      writer.outdent();
+      writer.println("}");
+    }
+
+    final String forceString = maybeForce ? "force" : "false";
+    if( null == rBit ) rBit = "false";
+    if( null == rBit ) rBit = "false";
+    if( null == bBit ) bBit = "false";
+    if( null == xBit ) xBit = "false";
+    writer.println("emitRexPrefix(" + forceString + ",false," + rBit + "," + bBit + "," + xBit + ");");
   }
 
   @Override
   protected final void printPrefixes(IndentWriter writer, AMD64Template template) {
     super.printPrefixes(writer, template);
-    if (template.operandSizeAttribute() == WordWidth.BITS_64 && template.instructionDescription().defaultOperandSize() != WordWidth.BITS_64) {
+    if (isWBitRequired(template)) {
       printUnconditionalRexPrefix(writer, template);
     } else {
       for (X86Parameter parameter : template.parameters()) {
