@@ -13,7 +13,7 @@ import jasm.tools.InstructionDescription;
 import java.util.List;
 
 public final class X86InstructionDescription
-    extends InstructionDescription {
+    extends InstructionDescription<X86InstructionDescription> {
 
   private boolean _isExternalOperandOrderingInverted = true;
   private WordWidth _defaultOperandSize = WordWidth.BITS_32;

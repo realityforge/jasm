@@ -47,7 +47,7 @@ public interface RiscInstructionDescriptionVisitor {
       }
     }
 
-    public static void visitInstructionDescription(RiscInstructionDescriptionVisitor visitor, InstructionDescription instructionDescription) {
+    public static void visitInstructionDescription(RiscInstructionDescriptionVisitor visitor, InstructionDescription<?> instructionDescription) {
       visitSpecifications(visitor, instructionDescription.specifications());
     }
   }

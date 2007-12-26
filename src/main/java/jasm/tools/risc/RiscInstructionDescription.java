@@ -13,7 +13,8 @@ import jasm.tools.risc.field.InputOperandField;
 import jasm.tools.risc.field.RiscField;
 import java.util.List;
 
-public final class RiscInstructionDescription extends InstructionDescription {
+public final class RiscInstructionDescription
+    extends InstructionDescription<RiscInstructionDescription> {
 
   RiscInstructionDescription(List<Object> specifications) {
     super(specifications);
@@ -58,5 +59,4 @@ public final class RiscInstructionDescription extends InstructionDescription {
   public boolean isSynthetic() {
     return _synthetic;
   }
-
 }

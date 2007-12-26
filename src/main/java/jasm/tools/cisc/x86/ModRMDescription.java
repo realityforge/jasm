@@ -11,7 +11,8 @@ package jasm.tools.cisc.x86;
 import jasm.tools.InstructionDescription;
 import java.util.List;
 
-public final class ModRMDescription extends InstructionDescription {
+public final class ModRMDescription
+    extends InstructionDescription<ModRMDescription> {
 
   private final ModRMGroup.Opcode _opcode;
   private final String _name;

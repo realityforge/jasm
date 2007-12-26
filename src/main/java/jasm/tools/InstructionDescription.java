@@ -9,6 +9,7 @@
 package jasm.tools;
 
 import jasm.WordWidth;
+import jasm.util.StaticLoophole;
 import jasm.tools.cisc.x86.X86InstructionDescriptionVisitor;
 import jasm.tools.risc.RiscInstructionDescriptionVisitor;
 import jasm.tools.risc.field.InputOperandField;
@@ -26,7 +27,8 @@ import java.util.List;
  * the {@code visit...} methods in the {@link RiscInstructionDescriptionVisitor}
  * and {@link X86InstructionDescriptionVisitor} classes.
  */
-public abstract class InstructionDescription implements Iterable<Object>, Cloneable {
+public abstract class InstructionDescription<InstructionDescription_Type extends InstructionDescription<InstructionDescription_Type>>
+    implements Iterable<Object>, Cloneable {
 
   private static int _nextSerial;
   private List<InstructionConstraint> _constraints;
@@ -78,9 +80,10 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
     return _constraints;
   }
 
-  public final InstructionDescription setArchitectureManualSection(String section) {
+  public final InstructionDescription_Type setArchitectureManualSection(String section) {
     _architectureManualSection = section;
-    return this;
+    final InstructionDescription_Type type = StaticLoophole.<InstructionDescription_Type>cast(this);
+    return type;
   }
 
   public final String architectureManualSection() {
@@ -91,9 +94,10 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
     return _externalName;
   }
 
-  public final InstructionDescription setExternalName(String externalName) {
+  public final InstructionDescription_Type setExternalName(String externalName) {
     _externalName = externalName;
-    return this;
+    final InstructionDescription_Type type = StaticLoophole.<InstructionDescription_Type>cast(this);
+    return type;
   }
 
   /**
@@ -107,9 +111,10 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
     return _isDisassemblable;
   }
 
-  public final InstructionDescription beNotDisassemblable() {
+  public final InstructionDescription_Type beNotDisassemblable() {
     _isDisassemblable = false;
-    return this;
+    final InstructionDescription_Type type = StaticLoophole.<InstructionDescription_Type>cast(this);
+    return type;
   }
 
   public boolean isSynthetic() {
@@ -120,27 +125,30 @@ public abstract class InstructionDescription implements Iterable<Object>, Clonea
     return _isExternallyTestable;
   }
 
-  public final InstructionDescription beNotExternallyTestable() {
+  public final InstructionDescription_Type beNotExternallyTestable() {
     _isExternallyTestable = false;
-    return this;
+    final InstructionDescription_Type type = StaticLoophole.<InstructionDescription_Type>cast(this);
+    return type;
   }
 
   public final WordWidth requiredAddressSize() {
     return _requiredAddressSize;
   }
 
-  public final InstructionDescription requireAddressSize(WordWidth requiredAddressSize) {
+  public final InstructionDescription_Type requireAddressSize(WordWidth requiredAddressSize) {
     _requiredAddressSize = requiredAddressSize;
-    return this;
+    final InstructionDescription_Type type = StaticLoophole.<InstructionDescription_Type>cast(this);
+    return type;
   }
 
   public final WordWidth requiredOperandSize() {
     return _requiredOperandSize;
   }
 
-  public final InstructionDescription requireOperandSize(WordWidth requiredOperandSize) {
+  public final InstructionDescription_Type requireOperandSize(WordWidth requiredOperandSize) {
     _requiredOperandSize = requiredOperandSize;
-    return this;
+    final InstructionDescription_Type type = StaticLoophole.<InstructionDescription_Type>cast(this);
+    return type;
   }
 
   public final Iterator<Object> iterator() {

@@ -44,7 +44,7 @@ public abstract class Template implements Cloneable, Comparable<Template> {
     _serial = serial;
   }
 
-  public InstructionDescription instructionDescription() {
+  public InstructionDescription<?> instructionDescription() {
     return _instructionDescription;
   }
 
