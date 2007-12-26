@@ -45,7 +45,7 @@ public final class IA32Disassembler extends X86Disassembler<IA32Template, IA32Di
 
   @Override
   protected final Assembler createAssembler(int offset) {
-    return new IA32Assembler(10, _startAddress + offset);
+    return new IA32Assembler(_startAddress + offset);
   }
 
   private static Map<X86InstructionHeader, LinkedList<IA32Template>> _headerToTemplates =

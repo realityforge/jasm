@@ -32,6 +32,6 @@ public final class SPARC32Disassembler extends SPARCDisassembler<SPARC32Disassem
 
   @Override
   protected final Assembler createAssembler(int offset) {
-    return new SPARC32Assembler(10, _startAddress + offset);
+    return new SPARC32Assembler(_startAddress + offset);
   }
 }
