@@ -37,8 +37,6 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
   private static final String OPCODE1_VARIABLE_NAME = "opcode1";
   private static final String OPCODE2_VARIABLE_NAME = "opcode2";
   private static final String MODRM_GROUP_OPCODE_VARIABLE_NAME = "modRmOpcode";
-  private static final String MODRM_BYTE_VARIABLE_NAME = "modRMByte";
-  private static final String SIB_BYTE_NAME = "sibByte";
 
   private final WordWidth _addressWidth;
   private final boolean _promoteEnumerableParameters;
@@ -164,20 +162,19 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
   }
 
   private void printModRMByte(IndentWriter writer, Template_Type template) {
-    writer.print("byte " + MODRM_BYTE_VARIABLE_NAME + " = (byte) ((" + template.modCase().ordinal() + " << " + X86Field.MOD.shift() + ")");
-    if (template.modRMGroupOpcode() != null) {
-      writer.print(" | (" + MODRM_GROUP_OPCODE_VARIABLE_NAME + " << " + X86Field.REG.shift() + ")");
+    String mod = String.valueOf(template.modCase().ordinal());
+    String rm = "0";
+    String reg = "0";
+
+    final ModRMGroup.Opcode opcode = template.modRMGroupOpcode();
+    if (opcode != null) {
+      reg = MODRM_GROUP_OPCODE_VARIABLE_NAME;
     }
-    writer.print("); // mod field");
-    if (template.modRMGroupOpcode() != null) {
-      writer.print(", group opcode in reg field");
-    }
-    writer.println();
     switch (template.rmCase()) {
       case SIB:
       case SWORD:
       case SDWORD: {
-        writer.println(MODRM_BYTE_VARIABLE_NAME + " |= " + template.rmCase().value() + " << " + X86Field.RM.shift() + "; // rm field");
+        rm = String.valueOf(template.rmCase().value());
         break;
       }
       default:
@@ -187,48 +184,43 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
       switch (parameter.place()) {
         case MOD_REG:
         case MOD_REG_REXR: {
-          writer.println(MODRM_BYTE_VARIABLE_NAME + " |= (" + subroutineEnumUse(parameter) + " & 7) << " + X86Field.REG.shift() + "; // reg field");
+          reg = subroutineEnumUse(parameter);
           break;
         }
         case MOD_RM:
         case MOD_RM_REXB: {
-          writer.println(MODRM_BYTE_VARIABLE_NAME + " |= (" + subroutineEnumUse(parameter) + " & 7) << " + X86Field.RM.shift() + "; // rm field");
+          rm = subroutineEnumUse(parameter);
           break;
         }
         default:
           break;
       }
     }
-    emitByte(writer, MODRM_BYTE_VARIABLE_NAME);
-    writer.println();
+    writer.println("emitModRM(" + mod + "," + rm + "," + reg + ");");
   }
 
   private void printSibByte(IndentWriter writer, Template_Type template) {
-    writer.print("byte " + SIB_BYTE_NAME + " = ");
-    if (template.sibBaseCase() == SibBaseCase.SPECIAL) {
-      writer.println("(byte) (5 << " + X86Field.BASE.shift() + "); // base field");
-    } else {
-      writer.println("(byte) 0;");
-    }
+    String base = (template.sibBaseCase() == SibBaseCase.SPECIAL) ? "5" : "0";
+    String index = "0";
+    String scale = "0";
     for (X86Parameter parameter : template.parameters()) {
       switch (parameter.place()) {
         case SIB_BASE:
         case SIB_BASE_REXB:
-          writer.println(SIB_BYTE_NAME + " |= (" + subroutineEnumUse(parameter) + " & 7) << " + X86Field.BASE.shift() + "; // base field");
+          base += " | " + subroutineEnumUse(parameter);
           break;
         case SIB_INDEX:
         case SIB_INDEX_REXX:
-          writer.println(SIB_BYTE_NAME + " |= (" + subroutineEnumUse(parameter) + " & 7) << " + X86Field.INDEX.shift() + "; // index field");
+          index = subroutineEnumUse(parameter);
           break;
         case SIB_SCALE:
-          writer.println(SIB_BYTE_NAME + " |= " + subroutineEnumUse(parameter) + " << " + X86Field.SCALE.shift() + "; // scale field");
+          scale = subroutineEnumUse(parameter);
           break;
         default:
           break;
       }
     }
-    emitByte(writer, SIB_BYTE_NAME);
-    writer.println();
+    writer.println("emitSibByte(" + base + "," + index + "," + scale + ");");
   }
 
   protected final <Argument_Type extends Enum<Argument_Type> & EnumerableArgument>
@@ -531,3 +523,4 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     return writer.lineCount() - startLineCount;
   }
 }
+

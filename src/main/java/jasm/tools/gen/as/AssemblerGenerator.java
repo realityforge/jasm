@@ -322,6 +322,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     printClassHeader(writer);
     final Set<String> importPackages = getImportPackages(templates());
     importPackages.add(Assembler.class.getPackage().getName()); // for the assembler's super class
+    importPackages.add(parentAssemblerClass().getPackage().getName()); // for the assembler's super class
     importPackages.add(Inline.class.getPackage().getName());
     printRawImports(writer, importPackages);
     writer.println();
