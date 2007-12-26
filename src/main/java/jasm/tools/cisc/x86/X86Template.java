@@ -36,7 +36,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
   private final InstructionAssessment _instructionFamily;
   private boolean _hasSibByte;
   private final X86TemplateContext _context;
-  private HexByte _instructionSelectionPrefix;
+  private final HexByte _instructionSelectionPrefix;
   private HexByte _opcode1;
   private HexByte _opcode2;
   private ModRMGroup _modRMGroup;
@@ -49,6 +49,8 @@ public abstract class X86Template extends Template implements X86InstructionDesc
   protected X86Template(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {
     super(instructionDescription, serial);
     _instructionFamily = instructionFamily;
+    final X86InstructionPrefix prefix = instructionDescription.getMandatoryPrefix();
+    _instructionSelectionPrefix = ( prefix != null ) ? prefix.getValue() : null;
     _context = context;
     Trace.line(2, "template #" + serial + ": " + context);
   }
@@ -386,13 +388,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     } else if (_opcode2 == null) {
       _opcode2 = hexByte;
     } else {
-      if (hexByte == X86Opcode.OPERAND_SIZE && _context.operandSizeAttribute() == WordWidth.BITS_16) {
-        throw new TemplateNotNeededException();
-      }
-      assert _instructionSelectionPrefix == null;
-      _instructionSelectionPrefix = _opcode1;
-      _opcode1 = _opcode2;
-      _opcode2 = hexByte;
+      throw new IllegalStateException("Unexpected byte " + hexByte);
     }
   }
 
