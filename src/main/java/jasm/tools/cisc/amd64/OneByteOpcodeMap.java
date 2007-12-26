@@ -54,8 +54,8 @@ import static jasm.tools.cisc.x86.OperandCode.Iw;
 import static jasm.tools.cisc.x86.OperandCode.Iz;
 import static jasm.tools.cisc.x86.OperandCode.Jb;
 import static jasm.tools.cisc.x86.OperandCode.Jz;
-import static jasm.tools.cisc.x86.OperandCode.Nb;
-import static jasm.tools.cisc.x86.OperandCode.Nv;
+import static jasm.tools.cisc.x86.OperandCode.Gob;
+import static jasm.tools.cisc.x86.OperandCode.Gov;
 import static jasm.tools.cisc.x86.OperandCode.Ob;
 import static jasm.tools.cisc.x86.OperandCode.Ov;
 import static jasm.tools.cisc.x86.OperandCode.Sw;
@@ -281,7 +281,7 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_34, "XOR", AL, Ib);
     define(_35, "XOR", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
 
-    define(_50, "PUSH", Nv).setDefaultOperandSize(WordWidth.BITS_64);
+    define(_50, "PUSH", Gov).setDefaultOperandSize(WordWidth.BITS_64);
 
     define(_63, "MOVSXD", Gq, Ed).requireOperandSize(WordWidth.BITS_64).beNotExternallyTestable(); // REX.W == 1, gas does not seem to know it
     define(_63, "MOVZXD", Gq, Ed).requireOperandSize(WordWidth.BITS_32).beNotExternallyTestable(); // REX.W == 0, we made this extra mnemonic up
@@ -309,7 +309,7 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_87, "XCHG", Ev.excludeExternalTestArguments(AX, EAX, RAX), Gv.excludeExternalTestArguments(AX, EAX, RAX));
 
     define(_90, "NOP");
-    define(_90, "XCHG", Nv.excludeDisassemblerTestArguments(AX, EAX, RAX), rAX).beNotExternallyTestable();
+    define(_90, "XCHG", Gov.excludeDisassemblerTestArguments(AX, EAX, RAX), rAX).beNotExternallyTestable();
 
     define(_A0, "MOV", AL, Ob).beNotExternallyTestable();
     define(_A1, "MOV", rAX, Ov).beNotExternallyTestable();
@@ -320,7 +320,7 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_A6, "CMPS", Yb, Xb);
     define(_A7, "CMPS", Yv, Xv);
 
-    define(_B0, "MOV", Nb, Ib);
+    define(_B0, "MOV", Gob, Ib);
 
     define(_C0, GROUP_2, b, Eb, Ib);
     define(_C1, GROUP_2, v, Ev, Ib);
@@ -386,7 +386,7 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_3C, "CMP", AL, Ib);
     define(_3D, "CMP", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
 
-    define(_58, "POP", Nv).setDefaultOperandSize(WordWidth.BITS_64);
+    define(_58, "POP", Gov).setDefaultOperandSize(WordWidth.BITS_64);
 
     define(_68, "PUSH", Iz.externalRange(Short.MAX_VALUE + 1, Integer.MAX_VALUE)).setDefaultOperandSize(WordWidth.BITS_64); // cannot test 16-bit version, because gas does not generate it
     define(_69, "IMUL", Gv, Ev, Iz.externalRange(0, Integer.MAX_VALUE));
@@ -434,7 +434,7 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_AE, "SCAS", Yb);
     define(_AF, "SCAS", Yv);
 
-    define(_B8, "MOV", Nv, Iv);
+    define(_B8, "MOV", Gov, Iv);
 
     define(_C8, "ENTER", Iw, Ib).setDefaultOperandSize(WordWidth.BITS_64).revertExternalOperandOrdering();
     define(_C9, "LEAVE").setDefaultOperandSize(WordWidth.BITS_64);

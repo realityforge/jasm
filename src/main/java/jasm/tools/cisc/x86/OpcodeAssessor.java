@@ -65,8 +65,7 @@ public final class OpcodeAssessor extends X86InstructionDescriptionAdapter {
       case R:
       case S:
       case V:
-      case VR:
-      case T:
+      case U:
       case W:
         _instructionFamily.haveModRMByte();
         break;

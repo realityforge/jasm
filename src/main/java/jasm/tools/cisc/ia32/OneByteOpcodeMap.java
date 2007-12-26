@@ -63,8 +63,8 @@ import static jasm.tools.cisc.x86.OperandCode.Jb;
 import static jasm.tools.cisc.x86.OperandCode.Jv;
 import static jasm.tools.cisc.x86.OperandCode.Ma;
 import static jasm.tools.cisc.x86.OperandCode.Mp;
-import static jasm.tools.cisc.x86.OperandCode.Nb;
-import static jasm.tools.cisc.x86.OperandCode.Nv;
+import static jasm.tools.cisc.x86.OperandCode.Gob;
+import static jasm.tools.cisc.x86.OperandCode.Gov;
 import static jasm.tools.cisc.x86.OperandCode.Ob;
 import static jasm.tools.cisc.x86.OperandCode.Ov;
 import static jasm.tools.cisc.x86.OperandCode.Sw;
@@ -328,9 +328,9 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(SEG_SS, "SEG_SS").beNotExternallyTestable(); // prefix
     define(_37, "AAA");
 
-    define(_40, "INC", Nv);
+    define(_40, "INC", Gov);
 
-    define(_50, "PUSH", Nv);
+    define(_50, "PUSH", Gov);
 
     define(_60, "PUSHA").requireOperandSize(WordWidth.BITS_16).beNotExternallyTestable(); // gas does not emit the operand size prefix
     define(_60, "PUSHAD").requireOperandSize(WordWidth.BITS_32).setExternalName("pusha");
@@ -362,7 +362,7 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_87, "XCHG", Ev.excludeExternalTestArguments(AX, EAX), Gv.excludeExternalTestArguments(AX, EAX));
 
     define(_90, "NOP");
-    define(_90, "XCHG", Nv.excludeDisassemblerTestArguments(AX, EAX), eAX);
+    define(_90, "XCHG", Gov.excludeDisassemblerTestArguments(AX, EAX), eAX);
 
     define(_A0, "MOV", AL, Ob);
     define(_A1, "MOV", eAX, Ov);
@@ -373,7 +373,7 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_A6, "CMPS", Yb, Xb);
     define(_A7, "CMPS", Yv, Xv);
 
-    define(_B0, "MOV", Nb, Ib);
+    define(_B0, "MOV", Gob, Ib);
 
     define(_C0, GROUP_2, b, Eb, Ib);
     define(_C1, GROUP_2, v, Ev, Ib);
@@ -448,9 +448,9 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(SEG_DS, "SEG_DS").beNotExternallyTestable(); // prefix
     define(_3F, "AAS");
 
-    define(_48, "DEC", Nv);
+    define(_48, "DEC", Gov);
 
-    define(_58, "POP", Nv);
+    define(_58, "POP", Gov);
 
     define(_68, "PUSH", Iv);
     define(_69, "IMUL", Gv, Ev, Iv);
@@ -499,7 +499,7 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_AE, "SCAS", Yb);
     define(_AF, "SCAS", Yv);
 
-    define(_B8, "MOV", Nv, Iv);
+    define(_B8, "MOV", Gov, Iv);
 
     define(_C8, "ENTER", Iw, Ib).revertExternalOperandOrdering();
     define(_C9, "LEAVE");

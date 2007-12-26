@@ -48,16 +48,16 @@ import static jasm.tools.cisc.x86.OperandCode.Mb;
 import static jasm.tools.cisc.x86.OperandCode.Md_q;
 import static jasm.tools.cisc.x86.OperandCode.Mdq;
 import static jasm.tools.cisc.x86.OperandCode.Mq;
-import static jasm.tools.cisc.x86.OperandCode.Nd_q;
+import static jasm.tools.cisc.x86.OperandCode.God_q;
 import static jasm.tools.cisc.x86.OperandCode.PRq;
 import static jasm.tools.cisc.x86.OperandCode.Pq;
 import static jasm.tools.cisc.x86.OperandCode.Qd;
 import static jasm.tools.cisc.x86.OperandCode.Qq;
 import static jasm.tools.cisc.x86.OperandCode.Rq;
-import static jasm.tools.cisc.x86.OperandCode.VRdq;
-import static jasm.tools.cisc.x86.OperandCode.VRpd;
-import static jasm.tools.cisc.x86.OperandCode.VRps;
-import static jasm.tools.cisc.x86.OperandCode.VRq;
+import static jasm.tools.cisc.x86.OperandCode.Udq;
+import static jasm.tools.cisc.x86.OperandCode.Upd;
+import static jasm.tools.cisc.x86.OperandCode.Ups;
+import static jasm.tools.cisc.x86.OperandCode.Uq;
 import static jasm.tools.cisc.x86.OperandCode.Vdq;
 import static jasm.tools.cisc.x86.OperandCode.Vpd;
 import static jasm.tools.cisc.x86.OperandCode.Vps;
@@ -358,7 +358,7 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _46, "CMOVBE", Gv, Ev);
     define(_0F, _47, "CMOVA", Gv, Ev);
 
-    define(_0F, _50, "MOVMSKPS", Gd, VRps);
+    define(_0F, _50, "MOVMSKPS", Gd, Ups);
     define(_0F, _51, "SQRTPS", Vps, Wps);
     define(_0F, _52, "RSQRTPS", Vps, Wps);
     define(_0F, _53, "RCPPS", Vps, Wps);
@@ -367,7 +367,7 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _56, "ORPS", Vps, Wps);
     define(_0F, _57, "XORPS", Vps, Wps);
 
-    define(_66, _0F, _50, "MOVMSKPD", Gd, VRpd);
+    define(_66, _0F, _50, "MOVMSKPD", Gd, Upd);
     define(_66, _0F, _51, "SQRTPD", Vpd, Wpd);
     define(_66, _0F, _54, "ANDPD", Vpd, Wpd);
     define(_66, _0F, _55, "ANDNPD", Vpd, Wpd);
@@ -465,7 +465,7 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
 
     define(_66, _0F, _C2, "CMPPD", Vpd, Wpd, ICb);
     define(_66, _0F, _C4, "PINSRW", Vdq, Ed, Ib).requireOperandSize(WordWidth.BITS_32); // Ed instead of Ew to mimic intended Gd/Mw
-    define(_66, _0F, _C5, "PEXTRW", Gd, VRdq, Ib);
+    define(_66, _0F, _C5, "PEXTRW", Gd, Udq, Ib);
     define(_66, _0F, _C6, "SHUFPD", Vpd, Wpd, Ib);
 
     define(_F2, _0F, _C2, "CMPSD", Vsd, Wsd, ICb);
@@ -486,9 +486,9 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_66, _0F, _D4, "PADDQ", Vdq, Wdq);
     define(_66, _0F, _D5, "PMULLW", Vdq, Wdq);
     define(_66, _0F, _D6, "MOVQ", Wq.excludeExternalTestArguments(AMD64XMMRegister.SYMBOLS), Vq); // gas uses F3 0F 7E for reg-reg
-    define(_66, _0F, _D7, "PMOVMSKB", Gd, VRdq);
+    define(_66, _0F, _D7, "PMOVMSKB", Gd, Udq);
 
-    define(_F2, _0F, _D6, "MOVDQ2Q", Pq, VRq);
+    define(_F2, _0F, _D6, "MOVDQ2Q", Pq, Uq);
 
     define(_F3, _0F, _D6, "MOVQ2DQ", Vdq, PRq);
 
@@ -527,7 +527,7 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_66, _0F, _F4, "PMULUDQ", Vdq, Wdq);
     define(_66, _0F, _F5, "PMADDWD", Vdq, Wdq);
     define(_66, _0F, _F6, "PSADBW", Vdq, Wdq);
-    define(_66, _0F, _F7, "MASKMOVDQU", Vdq, VRdq);
+    define(_66, _0F, _F7, "MASKMOVDQU", Vdq, Udq);
 
     define(_F2, _0F, _F0, "LDDQU", Vpd, Mdq);
   }
@@ -691,7 +691,7 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _BE, "MOVSXB", Gv, Eb).setExternalName("movsx");
     define(_0F, _BF, "MOVSXW", Gd_q, Ew).beNotExternallyTestable(); // gas unnecessarily prepends the operand size prefix 0x66
 
-    define(_0F, _C8, "BSWAP", Nd_q);
+    define(_0F, _C8, "BSWAP", God_q);
 
     define(_0F, _D8, "PSUBUSB", Pq, Qq);
     define(_0F, _D9, "PSUBUSW", Pq, Qq);

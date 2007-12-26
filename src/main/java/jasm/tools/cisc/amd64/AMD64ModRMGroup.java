@@ -43,7 +43,7 @@ import static jasm.tools.cisc.x86.OperandCode.Ms;
 import static jasm.tools.cisc.x86.OperandCode.Mw;
 import static jasm.tools.cisc.x86.OperandCode.PRq;
 import static jasm.tools.cisc.x86.OperandCode.Rv;
-import static jasm.tools.cisc.x86.OperandCode.VRdq;
+import static jasm.tools.cisc.x86.OperandCode.Udq;
 import static jasm.tools.cisc.x86.OperandTypeCode.v;
 import java.util.Arrays;
 
@@ -159,9 +159,9 @@ public enum AMD64ModRMGroup implements ModRMGroup {
       modRM(ModRMGroup.Opcode._6, "PSLLW", PRq, Ib)
   ),
   GROUP_12b(
-      modRM(ModRMGroup.Opcode._2, "PSRLW", VRdq, Ib),
-      modRM(ModRMGroup.Opcode._4, "PSRAW", VRdq, Ib),
-      modRM(ModRMGroup.Opcode._6, "PSLLW", VRdq, Ib)
+      modRM(ModRMGroup.Opcode._2, "PSRLW", Udq, Ib),
+      modRM(ModRMGroup.Opcode._4, "PSRAW", Udq, Ib),
+      modRM(ModRMGroup.Opcode._6, "PSLLW", Udq, Ib)
   ),
   GROUP_13a(
       modRM(ModRMGroup.Opcode._2, "PSRLD", PRq, Ib),
@@ -169,19 +169,19 @@ public enum AMD64ModRMGroup implements ModRMGroup {
       modRM(ModRMGroup.Opcode._6, "PSLLD", PRq, Ib)
   ),
   GROUP_13b(
-      modRM(ModRMGroup.Opcode._2, "PSRLD", VRdq, Ib),
-      modRM(ModRMGroup.Opcode._4, "PSRAD", VRdq, Ib),
-      modRM(ModRMGroup.Opcode._6, "PSLLD", VRdq, Ib)
+      modRM(ModRMGroup.Opcode._2, "PSRLD", Udq, Ib),
+      modRM(ModRMGroup.Opcode._4, "PSRAD", Udq, Ib),
+      modRM(ModRMGroup.Opcode._6, "PSLLD", Udq, Ib)
   ),
   GROUP_14a(
       modRM(ModRMGroup.Opcode._2, "PSRLQ", PRq, Ib),
       modRM(ModRMGroup.Opcode._6, "PSLLQ", PRq, Ib)
   ),
   GROUP_14b(
-      modRM(ModRMGroup.Opcode._2, "PSRLQ", VRdq, Ib),
-      modRM(ModRMGroup.Opcode._3, "PSRLDQ", VRdq, Ib),
-      modRM(ModRMGroup.Opcode._6, "PSLLQ", VRdq, Ib),
-      modRM(ModRMGroup.Opcode._7, "PSLLDQ", VRdq, Ib)
+      modRM(ModRMGroup.Opcode._2, "PSRLQ", Udq, Ib),
+      modRM(ModRMGroup.Opcode._3, "PSRLDQ", Udq, Ib),
+      modRM(ModRMGroup.Opcode._6, "PSLLQ", Udq, Ib),
+      modRM(ModRMGroup.Opcode._7, "PSLLDQ", Udq, Ib)
   ),
   GROUP_15a(
       modRM(ModRMGroup.Opcode._0, "FXSAVE", M),

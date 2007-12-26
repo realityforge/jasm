@@ -24,7 +24,7 @@ import static jasm.tools.cisc.x86.AddressingMethodCode.I;
 import static jasm.tools.cisc.x86.AddressingMethodCode.IC;
 import static jasm.tools.cisc.x86.AddressingMethodCode.J;
 import static jasm.tools.cisc.x86.AddressingMethodCode.M;
-import static jasm.tools.cisc.x86.AddressingMethodCode.N;
+import static jasm.tools.cisc.x86.AddressingMethodCode.Go;
 import static jasm.tools.cisc.x86.AddressingMethodCode.O;
 import static jasm.tools.cisc.x86.AddressingMethodCode.P;
 import static jasm.tools.cisc.x86.AddressingMethodCode.PR;
@@ -32,7 +32,7 @@ import static jasm.tools.cisc.x86.AddressingMethodCode.Q;
 import static jasm.tools.cisc.x86.AddressingMethodCode.R;
 import static jasm.tools.cisc.x86.AddressingMethodCode.S;
 import static jasm.tools.cisc.x86.AddressingMethodCode.V;
-import static jasm.tools.cisc.x86.AddressingMethodCode.VR;
+import static jasm.tools.cisc.x86.AddressingMethodCode.U;
 import static jasm.tools.cisc.x86.AddressingMethodCode.W;
 import static jasm.tools.cisc.x86.AddressingMethodCode.X;
 import static jasm.tools.cisc.x86.AddressingMethodCode.Y;
@@ -94,10 +94,10 @@ public enum OperandCode implements WrappableSpecification {
   Ms(M, s),
   Mv(M, v),
   Mw(M, w),
-  Nb(N, b),
-  Nd(N, d),
-  Nd_q(N, d_q),
-  Nv(N, v),
+  Gob(Go, b),
+  God(Go, d),
+  God_q(Go, d_q),
+  Gov(Go, v),
   Ob(O, b),
   Ov(O, v),
   Pd(P, d),
@@ -110,16 +110,16 @@ public enum OperandCode implements WrappableSpecification {
   Rq(R, q),
   Rv(R, v),
   Sw(S, w),
+  Udq(U, dq),
+  Upd(U, pd),
+  Ups(U, ps),
+  Uq(U, q),
   Vdq(V, dq),
   Vpd(V, pd),
   Vps(V, ps),
   Vq(V, q),
   Vsd(V, sd),
   Vss(V, ss),
-  VRdq(VR, dq),
-  VRpd(VR, pd),
-  VRps(VR, ps),
-  VRq(VR, q),
   Wdq(W, dq),
   Wpd(W, pd),
   Wps(W, ps),

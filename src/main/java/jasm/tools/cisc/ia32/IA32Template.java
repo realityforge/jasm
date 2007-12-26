@@ -351,16 +351,16 @@ public final class IA32Template extends X86Template {
         organize_M(designation);
         break;
       }
-      case Nb: {
+      case Gob: {
         addEnumerableParameter(designation, ParameterPlace.OPCODE1, IA32GeneralRegister8.SYMBOLS).excludeTestArguments(
             testArgumentExclusion);
         break;
       }
-      case Nd:
+      case God:
         addEnumerableParameter(designation, ParameterPlace.OPCODE2, IA32GeneralRegister32.SYMBOLS).excludeTestArguments(
             testArgumentExclusion);
         break;
-      case Nv:
+      case Gov:
         final ParameterPlace place = (opcode2() != null) ? ParameterPlace.OPCODE2 : ParameterPlace.OPCODE1;
         switch (context().operandSizeAttribute()) {
           case BITS_16:

@@ -418,11 +418,11 @@ public final class AMD64Template extends X86Template {
         organize_M(designation);
         break;
       }
-      case Nb: {
+      case Gob: {
         addEnumerableParameter(designation, ParameterPlace.OPCODE1_REXB, AMD64GeneralRegister8.SYMBOLS).excludeTestArguments(testArgumentExclusion);
         break;
       }
-      case Nd_q: {
+      case God_q: {
         final ParameterPlace place = (opcode2() != null) ? ParameterPlace.OPCODE2_REXB : ParameterPlace.OPCODE1_REXB;
         switch (context().operandSizeAttribute()) {
           case BITS_32:
@@ -436,7 +436,7 @@ public final class AMD64Template extends X86Template {
         }
         break;
       }
-      case Nv:
+      case Gov:
         final ParameterPlace place = (opcode2() != null) ? ParameterPlace.OPCODE2_REXB : ParameterPlace.OPCODE1_REXB;
         switch (context().operandSizeAttribute()) {
           case BITS_16:
@@ -526,10 +526,10 @@ public final class AMD64Template extends X86Template {
         addEnumerableParameter(designation, ParameterPlace.MOD_REG_REXR, AMD64XMMRegister.SYMBOLS).excludeTestArguments(testArgumentExclusion);
         break;
       }
-      case VRq:
-      case VRdq:
-      case VRpd:
-      case VRps: {
+      case Uq:
+      case Udq:
+      case Upd:
+      case Ups: {
         if (context().modCase() != ModCase.MOD_3) {
           throw new TemplateNotNeededException();
         }

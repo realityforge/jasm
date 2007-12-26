@@ -30,7 +30,7 @@ import static jasm.tools.cisc.x86.OperandCode.Gv;
 import static jasm.tools.cisc.x86.OperandCode.Ib;
 import static jasm.tools.cisc.x86.OperandCode.Jv;
 import static jasm.tools.cisc.x86.OperandCode.Mp;
-import static jasm.tools.cisc.x86.OperandCode.Nd;
+import static jasm.tools.cisc.x86.OperandCode.God;
 import static jasm.tools.cisc.x86.OperandCode.Pd;
 import static jasm.tools.cisc.x86.OperandCode.Pq;
 import static jasm.tools.cisc.x86.OperandCode.Qd;
@@ -351,7 +351,7 @@ final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0F, _BE, "MOVSXB", Gv, Eb).setExternalName("movsx");
     define(_0F, _BF, "MOVSXW", Gv, Ew).beNotExternallyTestable(); // gas unnecessarily prepends the operand size prefix 0x66
 
-    define(_0F, _C8, "BSWAP", Nd);
+    define(_0F, _C8, "BSWAP", God);
 
     define(_0F, _D8, "PSUBUSB", Pq, Qq);
     define(_0F, _D9, "PSUBUSW", Pq, Qq);
