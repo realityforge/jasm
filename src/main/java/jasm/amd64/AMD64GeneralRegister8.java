@@ -13,7 +13,8 @@ import jasm.WordWidth;
 import jasm.x86.GeneralRegister;
 
 public enum AMD64GeneralRegister8 implements GeneralRegister {
-
+  //Need to keep these fields in the order they appear as the
+  //ordinal value is used in requiresRexPrefix(int)
   AL(0, false),
   CL(1, false),
   DL(2, false),
@@ -63,7 +64,12 @@ public enum AMD64GeneralRegister8 implements GeneralRegister {
   }
 
   public boolean requiresRexPrefix() {
-    return _value >= 4 && !_isHighByte;
+    //return _value >= 4 && !_isHighByte;
+    return requiresRexPrefix(ordinal());
+  }
+
+  public static boolean requiresRexPrefix(final int ordinal) {
+    return ordinal >= 4 && ordinal < 16;
   }
 
   public WordWidth width() {
