@@ -37,6 +37,8 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
   private static final String OPCODE1_VARIABLE_NAME = "opcode1";
   private static final String OPCODE2_VARIABLE_NAME = "opcode2";
   private static final String MODRM_GROUP_OPCODE_VARIABLE_NAME = "modRmOpcode";
+  private static final String MODRM_BYTE_VARIABLE_NAME = "modRMByte";
+  private static final String SIB_BYTE_NAME = "sibByte";
 
   private final WordWidth _addressWidth;
   private final boolean _promoteEnumerableParameters;
@@ -161,8 +163,6 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     }
   }
 
-  private static final String MODRM_BYTE_VARIABLE_NAME = "modRMByte";
-
   private void printModRMByte(IndentWriter writer, Template_Type template) {
     writer.print("byte " + MODRM_BYTE_VARIABLE_NAME + " = (byte) ((" + template.modCase().ordinal() + " << " + X86Field.MOD.shift() + ")");
     if (template.modRMGroupOpcode() != null) {
@@ -202,8 +202,6 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     emitByte(writer, MODRM_BYTE_VARIABLE_NAME);
     writer.println();
   }
-
-  private static final String SIB_BYTE_NAME = "sibByte";
 
   private void printSibByte(IndentWriter writer, Template_Type template) {
     writer.print("byte " + SIB_BYTE_NAME + " = ");
