@@ -31,6 +31,7 @@ import static jasm.util.HexByte._DF;
 import static jasm.util.HexByte._F0;
 import static jasm.util.HexByte._F2;
 import static jasm.util.HexByte._F3;
+import jasm.tools.cisc.x86.X86RexPrefix;
 import java.util.EnumSet;
 
 /**
@@ -51,10 +52,6 @@ public final class X86Opcode {
   public static final HexByte LOCK = _F0;
   public static final HexByte REPNE = _F2;
   public static final HexByte REPE = _F3;
-
-  public static boolean isRexPrefix(HexByte opcode) {
-    return X86Opcode.REX_MIN.ordinal() <= opcode.ordinal() && opcode.ordinal() <= X86Opcode.REX_MAX.ordinal();
-  }
 
   public static boolean isFloatingPointEscape(HexByte opcode) {
     return EnumSet.of(_D8, _D9, _DA, _DB, _DC, _DD, _DE, _DF).contains(opcode);

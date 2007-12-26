@@ -18,9 +18,9 @@ import jasm.tools.cisc.x86.ModCase;
 import jasm.tools.cisc.x86.RMCase;
 import jasm.tools.cisc.x86.X86AssemblerGenerator;
 import jasm.tools.cisc.x86.X86Field;
-import jasm.tools.cisc.x86.X86Opcode;
 import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
+import jasm.tools.cisc.x86.X86RexPrefix;
 import jasm.tools.util.IndentWriter;
 import jasm.util.HexUtil;
 
@@ -36,11 +36,11 @@ public final class AMD64AssemblerGenerator extends X86AssemblerGenerator<AMD64Te
   }
 
   private String basicRexValue(X86Template template) {
-    if (template.operandSizeAttribute() == WordWidth.BITS_64 && template.instructionDescription().defaultOperandSize() != WordWidth
-        .BITS_64) {
-      return HexUtil.toHexLiteral((byte) (X86Opcode.REX_MIN.ordinal() + (1 << X86Field.REX_W_BIT_INDEX)));
+    if (template.operandSizeAttribute() == WordWidth.BITS_64 &&
+        template.instructionDescription().defaultOperandSize() != WordWidth.BITS_64) {
+      return HexUtil.toHexLiteral((byte) (X86RexPrefix.REX_MIN.ordinal() + (1 << X86Field.REX_W_BIT_INDEX)));
     }
-    return HexUtil.toHexLiteral((byte) X86Opcode.REX_MIN.ordinal());
+    return HexUtil.toHexLiteral((byte) X86RexPrefix.REX_MIN.ordinal());
   }
 
   private void printUnconditionalRexBit(IndentWriter writer, X86Parameter parameter, int bitIndex) {

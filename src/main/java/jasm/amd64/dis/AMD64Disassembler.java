@@ -14,7 +14,7 @@ import jasm.WordWidth;
 import jasm.amd64.as.AMD64Assembler;
 import jasm.tools.cisc.amd64.AMD64Assembly;
 import jasm.tools.cisc.amd64.AMD64Template;
-import jasm.tools.cisc.x86.X86Opcode;
+import jasm.tools.cisc.x86.X86RexPrefix;
 import jasm.util.HexByte;
 import jasm.x86.dis.X86Disassembler;
 import jasm.x86.dis.X86InstructionHeader;
@@ -36,7 +36,7 @@ public final class AMD64Disassembler extends X86Disassembler<AMD64Template, AMD6
 
   @Override
   protected final boolean isRexPrefix(HexByte opcode) {
-    return X86Opcode.isRexPrefix(opcode);
+    return X86RexPrefix.isRexPrefix(opcode);
   }
 
   @Override
