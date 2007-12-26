@@ -16,6 +16,11 @@ import java.util.LinkedList;
  * Super class of generated assemblers.
  */
 public abstract class Assembler {
+  /**
+   * The minimum size needs to be big enough that an instruction will fit in code size.
+   * (15 is the maximum size of ia32 instruction).
+   */
+  private static final int MINIMUM_MACHINE_CODE_SIZE = 15;
 
   private final LinkedList<LabelInstruction> _labelInstructions = new LinkedList<LabelInstruction>();
   private final LinkedList<LabelOffsetInstruction> _spanDependentLabelInstructions = new LinkedList<LabelOffsetInstruction>();
@@ -28,9 +33,10 @@ public abstract class Assembler {
   private byte[] _machineCode;
 
   protected Assembler(final int initialMachineCodeCapacity) {
-    //Enforce constraint required by emit*Long
-    if( initialMachineCodeCapacity < 8 ) {
-      throw new IllegalArgumentException("initialMachineCodeCapacity MUST be 8 or more");
+    if( initialMachineCodeCapacity < MINIMUM_MACHINE_CODE_SIZE) {
+      final String message =
+          "initialMachineCodeCapacity MUST be at least " + MINIMUM_MACHINE_CODE_SIZE;
+      throw new IllegalArgumentException(message);
     }
     _machineCode = new byte[initialMachineCodeCapacity];
   }
