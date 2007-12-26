@@ -34,10 +34,6 @@ import java.util.List;
  */
 public abstract class Disassembler<Template_Type extends Template, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>> {
 
-  public enum AbstractionPreference {
-    RAW, SYNTHETIC
-  }
-
   private static final String SPACE = "   ";
   private static final int NUMBER_OF_INSTRUCTION_CHARS = 48;
 

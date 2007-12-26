@@ -14,6 +14,7 @@ import jasm.AssemblyException;
 import jasm.WordWidth;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.Disassembler;
+import jasm.dis.AbstractionPreference;
 import jasm.tools.ArgumentRange;
 import jasm.tools.Assembly;
 import jasm.tools.AssemblyTestComponent;
@@ -244,7 +245,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
       throws IOException, AssemblyException {
     final BufferedInputStream disassemblyStream = new BufferedInputStream(new ByteArrayInputStream(internalResult));
     final Disassembler<Template_Type, DisassembledInstruction_Type> disassembler = createTestDisassembler();
-    disassembler.setAbstractionPreference(template.instructionDescription().isSynthetic() ? Disassembler.AbstractionPreference.SYNTHETIC : Disassembler.AbstractionPreference.RAW);
+    disassembler.setAbstractionPreference(template.instructionDescription().isSynthetic() ? AbstractionPreference.SYNTHETIC : AbstractionPreference.RAW);
     disassembler.setExpectedNumberOfArguments(argumentList.size());
     final List<DisassembledInstruction_Type> disassembledInstructions =
         disassembler.scanOneInstruction(disassemblyStream);

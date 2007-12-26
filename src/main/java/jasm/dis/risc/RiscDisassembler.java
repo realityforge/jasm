@@ -14,6 +14,7 @@ import jasm.AssemblyException;
 import jasm.WordWidth;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.Disassembler;
+import jasm.dis.AbstractionPreference;
 import jasm.tools.Assembly;
 import jasm.tools.InstructionConstraint;
 import jasm.tools.risc.RiscAssembly;
