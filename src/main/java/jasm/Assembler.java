@@ -28,6 +28,10 @@ public abstract class Assembler {
   private byte[] _machineCode;
 
   protected Assembler(final int initialMachineCodeCapacity) {
+    //Enforce constraint required by emit*Long
+    if( initialMachineCodeCapacity < 8 ) {
+      throw new IllegalArgumentException("initialMachineCodeCapacity MUST be 8 or more");
+    }
     _machineCode = new byte[initialMachineCodeCapacity];
   }
 
