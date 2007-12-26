@@ -128,8 +128,8 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
         case APPEND:
           if (parameter instanceof X86EnumerableParameter) {
             final X86EnumerableParameter enumerableParameter = (X86EnumerableParameter) parameter;
-            final SymbolSet enumerator = enumerableParameter.enumerator();
-            arguments.add((Argument) enumerator.fromValue(EndianUtil.readByte(stream)));
+            final SymbolSet symbolSet = enumerableParameter.getSymbolSet();
+            arguments.add((Argument) symbolSet.fromValue(EndianUtil.readByte(stream)));
             continue;
           }
           final X86NumericalParameter numericalParameter = (X86NumericalParameter) parameter;
@@ -162,11 +162,11 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
           break;
       }
       final X86EnumerableParameter enumerableParameter = (X86EnumerableParameter) parameter;
-      final SymbolSet enumerator = enumerableParameter.enumerator();
-      if (enumerator == AMD64GeneralRegister8.SYMBOLS) {
+      final SymbolSet symbolSet = enumerableParameter.getSymbolSet();
+      if (symbolSet == AMD64GeneralRegister8.SYMBOLS) {
         arguments.add(AMD64GeneralRegister8.fromValue(value, header._rexPrefix != null));
       } else {
-        arguments.add((Argument) enumerator.fromValue(value));
+        arguments.add((Argument) symbolSet.fromValue(value));
       }
     }
     return arguments;

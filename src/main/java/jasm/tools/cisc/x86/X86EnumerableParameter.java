@@ -14,13 +14,14 @@ import jasm.SymbolSet;
 import jasm.tools.EnumerableParameter;
 import java.util.Collections;
 
-public final class X86EnumerableParameter<EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument> extends X86Parameter implements EnumerableParameter {
-
-  private final SymbolSet<EnumerableArgument_Type> _enumerator;
+public final class X86EnumerableParameter<EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument>
+    extends X86Parameter
+    implements EnumerableParameter {
+  private final SymbolSet<EnumerableArgument_Type> _symbolSet;
 
   public X86EnumerableParameter(Designation designation, ParameterPlace place, SymbolSet<EnumerableArgument_Type> enumerator) {
     super(designation, place);
-    _enumerator = enumerator;
+    _symbolSet = enumerator;
     switch (place) {
       case MOD_REG:
       case MOD_REG_REXR:
@@ -55,12 +56,12 @@ public final class X86EnumerableParameter<EnumerableArgument_Type extends Enum<E
     }
   }
 
-  public final SymbolSet<EnumerableArgument_Type> enumerator() {
-    return _enumerator;
+  public final SymbolSet<EnumerableArgument_Type> getSymbolSet() {
+    return _symbolSet;
   }
 
   public final Class type() {
-    return _enumerator.type();
+    return _symbolSet.type();
   }
 
   public final String valueString() {
@@ -68,7 +69,7 @@ public final class X86EnumerableParameter<EnumerableArgument_Type extends Enum<E
   }
 
   public final Iterable<EnumerableArgument_Type> getLegalTestArguments() {
-    return _enumerator;
+    return _symbolSet;
   }
 
   public final Iterable<? extends Argument> getIllegalTestArguments() {
