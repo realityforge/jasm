@@ -386,7 +386,6 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     writer.indent();
     final String subroutineName = makeSubroutine(template);
     writer.print(subroutineName + "(");
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXX
     if (template.opcode2() != null) {
       writer.print("(byte) " + HexUtil.toHexLiteral(template.opcode2().byteValue()));
     } else {
