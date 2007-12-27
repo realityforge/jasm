@@ -77,7 +77,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     _sortAssemblerMethods = sortAssemblerMethods;
   }
 
-  public Assembly<Template_Type> assembly() {
+  public final Assembly<Template_Type> assembly() {
     return _assembly;
   }
 
@@ -118,7 +118,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     printImports(writer, packages);
   }
 
-  protected final void printLabelImports(IndentWriter writer, Set<String> packages) {
+  protected void printLabelImports(IndentWriter writer, Set<String> packages) {
     printImports(writer, packages);
   }
 

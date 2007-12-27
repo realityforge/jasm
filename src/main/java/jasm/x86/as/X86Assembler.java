@@ -2,6 +2,7 @@ package jasm.x86.as;
 
 import jasm.LittleEndianAssembler;
 import jasm.annotations.Inline;
+import jasm.tools.cisc.x86.X86InstructionPrefix;
 
 public abstract class X86Assembler
     extends LittleEndianAssembler {
@@ -11,8 +12,22 @@ public abstract class X86Assembler
   }
 
   @Inline
-  protected final void emitOpcode2(final boolean operandSizePrefix, final byte opcode2) {
-    if (operandSizePrefix) emitByte(((byte) 0x66)); // operand size prefix
+  protected final void emitPrefix(final X86InstructionPrefix prefix) {
+    emitByte(prefix.getValue().byteValue());
+  }
+
+  @Inline
+  protected final void emitAddressSizePrefix() {
+    emitPrefix(X86InstructionPrefix.ADDRESS_SIZE);
+  }
+
+  @Inline
+  protected final void emitOperandSizePrefix() {
+    emitPrefix(X86InstructionPrefix.OPERAND_SIZE);
+  }
+
+  @Inline
+  protected final void emitOpcode2(final byte opcode2) {
     emitByte((byte) (0x0F)); // opcode1
     emitByte(opcode2);
   }

@@ -52,7 +52,7 @@ public final class X86EnumerableParameter<EnumerableArgument_Type extends Enum<E
         setVariableName("st_i");
         break;
       default:
-        throw new IllegalStateException();
+        throw new IllegalStateException("Unexpected place: " + place);
     }
   }
 

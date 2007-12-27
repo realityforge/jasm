@@ -28,7 +28,7 @@ public final class AMD64AssemblerGenerator
     extends X86AssemblerGenerator<AMD64Template> {
 
   public AMD64AssemblerGenerator() {
-    super(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64, false);
+    super(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);
   }
 
   @Override
@@ -66,16 +66,16 @@ public final class AMD64AssemblerGenerator
     for (X86Parameter parameter : template.parameters()) {
       switch (parameter.place()) {
         case MOD_REG_REXR:
-          rBit = "(" + parameter.valueString() + " & 8) != 0";
+          rBit = "(" + asValueInSubroutine(parameter) + " & 8) != 0";
           break;
         case MOD_RM_REXB:
         case SIB_BASE_REXB:
         case OPCODE1_REXB:
         case OPCODE2_REXB:
-          bBit = "(" + parameter.valueString() + " & 8) != 0";
+          bBit = "(" + asValueInSubroutine(parameter) + " & 8) != 0";
           break;
         case SIB_INDEX_REXX:
-          xBit = "(" + parameter.valueString() + " & 8) != 0";
+          xBit = "(" + asValueInSubroutine(parameter) + " & 8) != 0";
           break;
         default:
           break;
@@ -102,18 +102,18 @@ public final class AMD64AssemblerGenerator
       switch (parameter.place()) {
         case MOD_REG_REXR:
           force += genForceCheck(parameter);
-          rBit = "(" + parameter.valueString() + " >= 8)";
+          rBit = "(" + asValueInSubroutine(parameter) + " >= 8)";
           break;
         case MOD_RM_REXB:
         case SIB_BASE_REXB:
         case OPCODE1_REXB:
         case OPCODE2_REXB:
           force += genForceCheck(parameter);
-          bBit = "(" + parameter.valueString() + " >= 8)";
+          bBit = "(" + asValueInSubroutine(parameter) + " >= 8)";
           break;
         case SIB_INDEX_REXX:
           force += genForceCheck(parameter);
-          xBit = "(" + parameter.valueString() + " >= 8)";
+          xBit = "(" + asValueInSubroutine(parameter) + " >= 8)";
           break;
         default:
           break;
@@ -121,8 +121,10 @@ public final class AMD64AssemblerGenerator
     }
 
     final boolean maybeForce = force.length() > 0;
-    if (maybeForce) writer.println("boolean force = false;");
-    writer.println(force);
+    if (maybeForce) {
+      writer.println("boolean force = false;");
+      writer.println(force);
+    }
 
     if (needsToAddConstraintsFoGeneralRegister8Values(template) &&
         (maybeForce || null != rBit || null != bBit || null != xBit)) {

@@ -24,7 +24,7 @@ public final class IA32AssemblerGenerator
     extends X86AssemblerGenerator<IA32Template> {
 
   public IA32AssemblerGenerator() {
-    super(IA32Assembly.ASSEMBLY, WordWidth.BITS_32, true);
+    super(IA32Assembly.ASSEMBLY, WordWidth.BITS_32);
   }
 
   @Override
