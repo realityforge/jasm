@@ -11,9 +11,7 @@ package jasm.tools.risc.field;
 import jasm.tools.risc.bitRange.BitRange;
 import jasm.tools.risc.bitRange.BitRangeOrder;
 
-/**
- * A field that contains an immediate value that is ignored by the hardware.
- */
+/** A field that contains an immediate value that is ignored by the hardware. */
 public final class IgnoredOperandField extends ImmediateOperandField {
 
   public IgnoredOperandField(BitRange bitRange) {

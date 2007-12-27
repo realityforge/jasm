@@ -34,9 +34,7 @@ public final class Label implements Argument {
 
   private int _offset;
 
-  /**
-   * Must only be called when the label is bound!
-   */
+  /** Must only be called when the label is bound! */
   public final int offset() throws AssemblyException {
     if (_state != State.BOUND) {
       throw new AssemblyException("unassigned or unbound label");
@@ -91,9 +89,7 @@ public final class Label implements Argument {
     _state = State.FIXED_64;
   }
 
-  /**
-   * Must only be called if this label has been {@link #fix32 fixed}.
-   */
+  /** Must only be called if this label has been {@link #fix32 fixed}. */
   public final int address32() throws AssemblyException {
     if (State.FIXED_32 == _state) {
       return _address32;
@@ -104,9 +100,7 @@ public final class Label implements Argument {
     }
   }
 
-  /**
-   * Must only be called if this label has been {@link #fix64 fixed}.
-   */
+  /** Must only be called if this label has been {@link #fix64 fixed}. */
   public final long address64() throws AssemblyException {
     if (State.FIXED_64 == _state) {
       return _address64;

@@ -32,8 +32,6 @@ public interface AssemblyInstructionEditor {
   /**
    * Replace the value of the immediate displacement in a load/store instruction.
    * The original instruction must have an immediate displacement operand that can hold 8-bit immediate value.
-   *
-   * @param disp8
    */
   void fixDisplacement(WordWidth displacementWidth, boolean withIndex, byte disp8);
 
@@ -41,7 +39,6 @@ public interface AssemblyInstructionEditor {
    * Replace the value of the immediate displacement in a load/store instruction.
    * The original instruction must have an immediate displacement operand that can hold 32-bit immediate value.
    *
-   * @param disp32
    * @throws AssemblyException if the replacement is not allowed (e.g., the instruction is
    *                           not a load/store with immediate displacement parameter).
    */

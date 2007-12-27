@@ -19,14 +19,10 @@ import java.util.List;
  * value is encoded into an operand field.
  */
 public interface Expression {
-  /**
-   * Evaluates the expression given a template and a set of arguments.
-   */
+  /** Evaluates the expression given a template and a set of arguments. */
   long evaluate(Template template, List<Argument> arguments);
 
-  /**
-   * @return a Java expression that performs the {@link #evaluate evaluation}
-   */
+  /** @return a Java expression that performs the {@link #evaluate evaluation} */
   String valueString();
 
   public static final class Static {

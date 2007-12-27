@@ -19,9 +19,7 @@ import jasm.tools.cisc.x86.X86AssemblerGenerator;
 import jasm.tools.util.IndentWriter;
 import jasm.x86.as.X86Assembler;
 
-/**
- * Run this program to generate the IA32RawAssembler and IA32LabelAssembler classes.
- */
+/** Run this program to generate the IA32RawAssembler and IA32LabelAssembler classes. */
 public final class IA32AssemblerGenerator
     extends X86AssemblerGenerator<IA32Template> {
 

@@ -13,11 +13,9 @@ import jasm.WordWidth;
 import jasm.x86.GeneralRegister;
 import jasm.x86.IndirectRegister;
 
-/**
- * Aliases for 64-bit AMD64 general registers to be used for indirect addressing.
- */
-public enum AMD64IndirectRegister64 implements GeneralRegister, IndirectRegister {
-
+/** Aliases for 64-bit AMD64 general registers to be used for indirect addressing. */
+public enum AMD64IndirectRegister64
+    implements GeneralRegister, IndirectRegister {
   RAX_INDIRECT,
   RCX_INDIRECT,
   RDX_INDIRECT,
@@ -34,6 +32,8 @@ public enum AMD64IndirectRegister64 implements GeneralRegister, IndirectRegister
   R13_INDIRECT,
   R14_INDIRECT,
   R15_INDIRECT;
+
+  public static final SymbolSet<AMD64IndirectRegister64> SYMBOLS = SymbolSet.fromEnum(AMD64IndirectRegister64.class);
 
   public static AMD64IndirectRegister64 from(GeneralRegister generalRegister) {
     return values()[generalRegister.id()];
@@ -62,6 +62,4 @@ public enum AMD64IndirectRegister64 implements GeneralRegister, IndirectRegister
   public String disassembledValue() {
     return AMD64GeneralRegister64.from(this).disassembledValue();
   }
-
-  public static final SymbolSet<AMD64IndirectRegister64> SYMBOLS = SymbolSet.fromEnum(AMD64IndirectRegister64.class);
 }

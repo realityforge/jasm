@@ -14,10 +14,10 @@ import jasm.Config;
 import jasm.InstructionSet;
 import jasm.Label;
 
-/**
- * Instatiate this class to assemble IA32 instructions.
- */
-public final class IA32Assembler extends IA32LabelAssembler implements Assembler32 {
+/** Instatiate this class to assemble IA32 instructions. */
+public final class IA32Assembler
+    extends IA32LabelAssembler
+    implements Assembler32 {
 
   private final int _startAddress; // address of first instruction
 

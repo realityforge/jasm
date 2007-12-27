@@ -24,6 +24,8 @@ public enum IA32IndirectRegister16 implements GeneralRegister, IndirectRegister 
   BP_INDIRECT(IA32GeneralRegister16.BP.id(), "%bp", "bp"),
   BX_INDIRECT(IA32GeneralRegister16.BX.id(), "%bx", "bx");
 
+  public static final SymbolSet<IA32IndirectRegister16> SYMBOLS = SymbolSet.fromEnum(IA32IndirectRegister16.class);
+
   private final int _id;
   private final String _externalValue;
   private final String _disassembledValue;
@@ -66,6 +68,4 @@ public enum IA32IndirectRegister16 implements GeneralRegister, IndirectRegister 
   public String disassembledValue() {
     return _disassembledValue;
   }
-
-  public static final SymbolSet<IA32IndirectRegister16> SYMBOLS = SymbolSet.fromEnum(IA32IndirectRegister16.class);
 }

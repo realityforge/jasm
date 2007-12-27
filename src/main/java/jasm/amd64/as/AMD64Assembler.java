@@ -14,10 +14,10 @@ import jasm.Config;
 import jasm.InstructionSet;
 import jasm.Label;
 
-/**
- * Instantiate this class to assemble AMD64 instructions.
- */
-public class AMD64Assembler extends AMD64LabelAssembler implements Assembler64 {
+/** Instantiate this class to assemble AMD64 instructions. */
+public class AMD64Assembler
+    extends AMD64LabelAssembler
+    implements Assembler64 {
 
   private final long _startAddress; // address of first instruction
 

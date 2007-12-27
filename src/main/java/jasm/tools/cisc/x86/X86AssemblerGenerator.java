@@ -93,8 +93,8 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
            argument.name() + (_promoteEnumerableParameters ? ".value()" : "");
   }
 
-  protected final <Argument_Type extends Enum<Argument_Type> & EnumerableArgument> void printModVariant(IndentWriter writer,
-                                                                                                        final Template_Type template, Argument_Type... arguments) {
+  protected final <Argument_Type extends EnumerableArgument> void printModVariant(IndentWriter writer,
+                                                                                  final Template_Type template, Argument_Type... arguments) {
     final Class argumentType = arguments[0].getClass();
     final X86Parameter parameter = getParameter(template, argumentType);
     writer.print("if (");
@@ -239,12 +239,19 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
   protected abstract void printSibVariants(IndentWriter writer, Template_Type template);
 
   private void printImmediateParameter(IndentWriter writer, X86NumericalParameter parameter) {
-    switch (parameter.width().numberOfBytes() )
-    {
-      case 8: writer.println("emitLong(" + parameter.variableName() + ");"); break;
-      case 4: writer.println("emitInt(" + parameter.variableName() + ");"); break;
-      case 2: writer.println("emitShort(" + parameter.variableName() + ");"); break;
-      case 1: writer.println("emitByte(" + parameter.variableName() + ");"); break;
+    switch (parameter.width().numberOfBytes()) {
+      case 8:
+        writer.println("emitLong(" + parameter.variableName() + ");");
+        break;
+      case 4:
+        writer.println("emitInt(" + parameter.variableName() + ");");
+        break;
+      case 2:
+        writer.println("emitShort(" + parameter.variableName() + ");");
+        break;
+      case 1:
+        writer.println("emitByte(" + parameter.variableName() + ");");
+        break;
       default:
         throw new IllegalStateException("Unexpected byte count: " + parameter.width().numberOfBytes());
     }
@@ -260,8 +267,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
       if (parameter.place() == ParameterPlace.IMMEDIATE ||
           parameter.place() == ParameterPlace.DISPLACEMENT) {
         printImmediateParameter(writer, (X86NumericalParameter) parameter);
-      }
-      else if (parameter.place() == ParameterPlace.APPEND) {
+      } else if (parameter.place() == ParameterPlace.APPEND) {
         printAppendedEnumerableParameter(writer, (X86EnumerableParameter) parameter);
       }
     }

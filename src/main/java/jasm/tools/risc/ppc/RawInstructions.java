@@ -16,9 +16,7 @@ import static jasm.tools.InstructionConstraint.Static.ne;
 import static jasm.tools.risc.ppc.PPCFields.*;
 import java.lang.reflect.Method;
 
-/**
- * The definitions of the raw (i.e. non-synthetic) PowerPC instructions.
- */
+/** The definitions of the raw (i.e. non-synthetic) PowerPC instructions. */
 public final class RawInstructions extends PPCInstructionDescriptionCreator {
 
   RawInstructions(PPCTemplateCreator templateCreator) {

@@ -47,9 +47,7 @@ public class SymbolSet<Symbol_Type extends Symbol>
     }
   }
 
-  /**
-   * @return the concrete type of the symbols in the group
-   */
+  /** @return the concrete type of the symbols in the group */
   public final Class<Symbol_Type> type() {
     return _symbolType;
   }

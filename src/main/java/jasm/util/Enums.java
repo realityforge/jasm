@@ -12,9 +12,7 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 
-/**
- * Additional dealings with Enum types.
- */
+/** Additional dealings with Enum types. */
 public final class Enums {
   /**
    * A "power sequence" is like a "power set" (the set of all possible subsets),

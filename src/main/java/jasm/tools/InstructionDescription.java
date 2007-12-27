@@ -40,9 +40,7 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
   private boolean _isExternallyTestable = true;
   private WordWidth _requiredAddressSize;
   private WordWidth _requiredOperandSize;
-  /**
-   * The components of the description.
-   */
+  /** The components of the description. */
   private final List<Object> _specifications;
 
   public InstructionDescription(List<Object> specifications) {
@@ -58,16 +56,12 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
     return _serial;
   }
 
-  /**
-   * @return the objects from which this description is composed
-   */
+  /** @return the objects from which this description is composed */
   public final List<Object> specifications() {
     return _specifications;
   }
 
-  /**
-   * @return the {@link InstructionConstraint} instances (if any) within this description
-   */
+  /** @return the {@link InstructionConstraint} instances (if any) within this description */
   public final List<InstructionConstraint> constraints() {
     if (_constraints == null) {
       final ArrayList<InstructionConstraint> result = new ArrayList<InstructionConstraint>();

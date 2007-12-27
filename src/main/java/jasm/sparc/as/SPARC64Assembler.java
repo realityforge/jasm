@@ -13,9 +13,7 @@ import jasm.AssemblyException;
 import jasm.Config;
 import jasm.Label;
 
-/**
- * The concrete class for a 64-bit SPARC assembler.
- */
+/** The concrete class for a 64-bit SPARC assembler. */
 public final class SPARC64Assembler extends SPARCAssembler implements Assembler64 {
 
   private final long _startAddress; // address of first instruction

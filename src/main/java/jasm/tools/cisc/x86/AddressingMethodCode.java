@@ -8,9 +8,7 @@
  */
 package jasm.tools.cisc.x86;
 
-/**
- * See section A.2.1 for further details.
- */
+/** See section A.2.1 for further details. */
 public enum AddressingMethodCode {
   /** Direct address. No ModR/M byte or SIB. */
   A,

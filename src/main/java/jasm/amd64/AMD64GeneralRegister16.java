@@ -12,10 +12,12 @@ import jasm.SymbolSet;
 import jasm.WordWidth;
 import jasm.x86.GeneralRegister;
 
-public enum AMD64GeneralRegister16 implements GeneralRegister {
-
+public enum AMD64GeneralRegister16
+    implements GeneralRegister {
   // Note: keep the order such that 'value()' can rely on ordinals:
   AX, CX, DX, BX, SP, BP, SI, DI, R8W, R9W, R10W, R11W, R12W, R13W, R14W, R15W;
+
+  public static final SymbolSet<AMD64GeneralRegister16> SYMBOLS = SymbolSet.fromEnum(AMD64GeneralRegister16.class);
 
   public static AMD64GeneralRegister16 from(GeneralRegister generalRegister) {
     return values()[generalRegister.id()];
@@ -44,6 +46,4 @@ public enum AMD64GeneralRegister16 implements GeneralRegister {
   public String disassembledValue() {
     return name().toLowerCase();
   }
-
-  public static final SymbolSet<AMD64GeneralRegister16> SYMBOLS = SymbolSet.fromEnum(AMD64GeneralRegister16.class);
 }

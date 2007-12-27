@@ -8,9 +8,7 @@
  */
 package jasm.dis;
 
-/**
- * A label deduced from one or more disassembled instructions.
- */
+/** A label deduced from one or more disassembled instructions. */
 public final class DisassembledLabel {
   private static final String PREFIX = "L";
 

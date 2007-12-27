@@ -18,9 +18,7 @@ import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
 import jasm.x86.SegmentRegister;
 
-/**
- * Empty default implementations for X86InstructionDescriptionVisitor.
- */
+/** Empty default implementations for X86InstructionDescriptionVisitor. */
 public class X86InstructionDescriptionAdapter
     implements X86InstructionDescriptionVisitor {
 

@@ -8,8 +8,7 @@
  */
 package jasm;
 
-/**
- * An argument that is a symbol.
- */
-public interface SymbolicArgument extends Argument, Symbol {
+/** An argument that is a symbol. */
+public interface SymbolicArgument
+    extends Argument, Symbol {
 }

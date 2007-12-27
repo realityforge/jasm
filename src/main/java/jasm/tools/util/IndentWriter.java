@@ -11,9 +11,7 @@ package jasm.tools.util;
 import java.io.PrintWriter;
 import java.io.Writer;
 
-/**
- * A line oriented character writer that indents line output on the left.
- */
+/** A line oriented character writer that indents line output on the left. */
 public final class IndentWriter {
 
   private final PrintWriter _writer;

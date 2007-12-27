@@ -15,6 +15,8 @@ public enum Scale implements EnumerableArgument {
 
   SCALE_1, SCALE_2, SCALE_4, SCALE_8;
 
+  public static final SymbolSet<Scale> SYMBOLS = SymbolSet.fromEnum(Scale.class);
+
   public int value() {
     return ordinal();
   }
@@ -30,6 +32,4 @@ public enum Scale implements EnumerableArgument {
   public String disassembledValue() {
     return name().substring(name().length() - 1);
   }
-
-  public static final SymbolSet<Scale> SYMBOLS = SymbolSet.fromEnum(Scale.class);
 }

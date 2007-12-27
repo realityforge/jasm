@@ -19,9 +19,7 @@ import static jasm.tools.InstructionConstraint.Static.getPredicateMethod;
 import static jasm.tools.InstructionConstraint.Static.makePredicate;
 import static jasm.tools.risc.sparc.SPARCFields.*;
 
-/**
- * Simple synthetic SPARC instructions.
- */
+/** Simple synthetic SPARC instructions. */
 final class SyntheticInstructions extends SPARCInstructionDescriptionCreator {
 
   private void create_A39() {

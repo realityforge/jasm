@@ -22,10 +22,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Instantiate this class to disassemble AMD64 instruction streams.
- */
-public final class AMD64Disassembler extends X86Disassembler<AMD64Template, AMD64DisassembledInstruction> {
+/** Instantiate this class to disassemble AMD64 instruction streams. */
+public final class AMD64Disassembler
+    extends X86Disassembler<AMD64Template, AMD64DisassembledInstruction> {
 
   private final long _startAddress;
 

@@ -11,9 +11,11 @@ package jasm.x86;
 import jasm.EnumerableArgument;
 import jasm.SymbolSet;
 
-public enum TestRegister implements EnumerableArgument {
-
+public enum TestRegister
+    implements EnumerableArgument {
   TR3(3), TR4(4), TR5(5), TR6(6), TR7(7);
+
+  public static final SymbolSet<TestRegister> SYMBOLS = SymbolSet.fromEnum(TestRegister.class);
 
   private final int _number;
 
@@ -36,6 +38,4 @@ public enum TestRegister implements EnumerableArgument {
   public String disassembledValue() {
     return name().toLowerCase();
   }
-
-  public static final SymbolSet<TestRegister> SYMBOLS = SymbolSet.fromEnum(TestRegister.class);
 }

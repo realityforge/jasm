@@ -44,9 +44,7 @@ final class ArgumentListIterator<Template_Type extends Template> implements Iter
   private int _iterations;
   private AssemblyTester<Template_Type, ?> tester;
 
-  /**
-   * Creates an iterator over a set of test cases for a given template.
-   */
+  /** Creates an iterator over a set of test cases for a given template. */
   ArgumentListIterator(final AssemblyTester<Template_Type, ?> tester, Template_Type template,
                        TestCaseLegality testCaseLegality) {
     this.tester = tester;
@@ -60,9 +58,7 @@ final class ArgumentListIterator<Template_Type extends Template> implements Iter
     _hasNext = advance();
   }
 
-  /**
-   * @return the number of times {@link #next} has been invoked on this iterator without throwing a NoSuchElementException.
-   */
+  /** @return the number of times {@link #next} has been invoked on this iterator without throwing a NoSuchElementException. */
   public final int iterations() {
     return _iterations;
   }

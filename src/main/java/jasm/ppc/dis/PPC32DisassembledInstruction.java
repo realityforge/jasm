@@ -14,7 +14,9 @@ import jasm.tools.ImmediateArgument;
 import jasm.tools.risc.ppc.PPCTemplate;
 import java.util.List;
 
-public final class PPC32DisassembledInstruction extends PPCDisassembledInstruction implements Address32Instruction {
+public final class PPC32DisassembledInstruction
+    extends PPCDisassembledInstruction
+    implements Address32Instruction {
 
   private final Address32Instruction.Mixin _addressInstruction;
 

@@ -13,10 +13,10 @@ import jasm.AssemblyException;
 import jasm.Config;
 import jasm.Label;
 
-/**
- * The concrete class for a 32-bit PowerPC assembler.
- */
-public final class PPC32Assembler extends PPCAssembler implements Assembler32 {
+/** The concrete class for a 32-bit PowerPC assembler. */
+public final class PPC32Assembler
+    extends PPCAssembler
+    implements Assembler32 {
 
   private final int _startAddress; // address of first instruction
 

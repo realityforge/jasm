@@ -11,9 +11,7 @@ package jasm;
 import jasm.util.Ints;
 import jasm.util.Longs;
 
-/**
- * A word width value describes many bits there are in a machine word.
- */
+/** A word width value describes many bits there are in a machine word. */
 public enum WordWidth {
 
   BITS_8(8, byte.class),
@@ -71,30 +69,22 @@ public enum WordWidth {
     return WordWidth.BITS_64;
   }
 
-  /**
-   * @return which word width is minimally required to represent all the non-one bits in the signed argument, and a sign bit
-   */
+  /** @return which word width is minimally required to represent all the non-one bits in the signed argument, and a sign bit */
   public static WordWidth signedEffective(int signed) {
     return fromInt(Ints.numberOfEffectiveSignedBits(signed));
   }
 
-  /**
-   * @return which word width is minimally required to represent all the non-zero bits in the unsigned argument
-   */
+  /** @return which word width is minimally required to represent all the non-zero bits in the unsigned argument */
   public static WordWidth unsignedEffective(int unsigned) {
     return fromInt(Ints.numberOfEffectiveUnsignedBits(unsigned));
   }
 
-  /**
-   * @return which word width is minimally required to represent all the non-one bits in the signed argument, and a sign bit
-   */
+  /** @return which word width is minimally required to represent all the non-one bits in the signed argument, and a sign bit */
   public static WordWidth signedEffective(long signed) {
     return fromInt(Longs.numberOfEffectiveSignedBits(signed));
   }
 
-  /**
-   * @return which word width is minimally required to represent all the non-zero bits in the unsigned argument
-   */
+  /** @return which word width is minimally required to represent all the non-zero bits in the unsigned argument */
   public static WordWidth unsignedEffective(long unsigned) {
     return fromInt(Longs.numberOfEffectiveUnsignedBits(unsigned));
   }

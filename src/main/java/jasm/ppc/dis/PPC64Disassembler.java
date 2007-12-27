@@ -16,7 +16,8 @@ import jasm.tools.risc.ppc.PPCAssembly;
 import jasm.tools.risc.ppc.PPCTemplate;
 import java.util.List;
 
-public final class PPC64Disassembler extends PPCDisassembler<PPC64DisassembledInstruction> {
+public final class PPC64Disassembler
+    extends PPCDisassembler<PPC64DisassembledInstruction> {
 
   private final long _startAddress;
 

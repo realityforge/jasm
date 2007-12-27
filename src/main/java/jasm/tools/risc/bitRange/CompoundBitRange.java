@@ -11,9 +11,7 @@ package jasm.tools.risc.bitRange;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
- * A range of bits that is composed of several disjoint subranges.
- */
+/** A range of bits that is composed of several disjoint subranges. */
 public final class CompoundBitRange extends BitRange {
 
   public CompoundBitRange() {

@@ -11,29 +11,18 @@ package jasm.ppc;
 import jasm.AbstractSymbolicArgument;
 import jasm.SymbolSet;
 
-/**
- * Special Purpose Registers.
- */
-public final class SPR extends AbstractSymbolicArgument {
+/** Special Purpose Registers. */
+public final class SPR
+    extends AbstractSymbolicArgument {
+  /** Denotes the Fixed-Point Exception Register. */
+  public static final SPR XER = new SPR(1);
+  /** Denotes the Link Register. */
+  public static final SPR LR = new SPR(8);
+  /** Denotes the Count Register. */
+  public static final SPR CTR = new SPR(9);
+  public static final SymbolSet<SPR> SYMBOLS = SymbolSet.fromStaticFields(SPR.class);
 
   private SPR(int value) {
     super(value);
   }
-
-  /**
-   * Denotes the Fixed-Point Exception Register.
-   */
-  public static final SPR XER = new SPR(1);
-
-  /**
-   * Denotes the Link Register.
-   */
-  public static final SPR LR = new SPR(8);
-
-  /**
-   * Denotes the Count Register.
-   */
-  public static final SPR CTR = new SPR(9);
-
-  public static final SymbolSet<SPR> SYMBOLS = SymbolSet.fromStaticFields(SPR.class);
 }

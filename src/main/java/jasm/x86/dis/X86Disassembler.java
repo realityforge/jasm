@@ -72,9 +72,9 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
       if (header._opcode1 == null) {
         if (hexByte == X86InstructionPrefix.ADDRESS_SIZE.getValue()) {
           header._hasAddressSizePrefix = true;
-        } else if (hexByte == X86InstructionPrefix.OPERAND_SIZE.getValue() ) {
+        } else if (hexByte == X86InstructionPrefix.OPERAND_SIZE.getValue()) {
           header._instructionSelectionPrefix = X86InstructionPrefix.OPERAND_SIZE;
-        } else if (hexByte == X86InstructionPrefix.REPE.getValue() ) {
+        } else if (hexByte == X86InstructionPrefix.REPE.getValue()) {
           header._instructionSelectionPrefix = X86InstructionPrefix.REPE;
         } else if (hexByte == X86InstructionPrefix.REPNE.getValue()) {
           header._instructionSelectionPrefix = X86InstructionPrefix.REPNE;

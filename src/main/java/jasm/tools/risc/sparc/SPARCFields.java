@@ -32,9 +32,7 @@ import jasm.tools.risc.field.ReservedField;
 import jasm.tools.risc.field.SymbolicOperandField;
 import jasm.util.NamedField;
 
-/**
- * The fields used in defining the SPARC instruction templates.
- */
+/** The fields used in defining the SPARC instruction templates. */
 public final class SPARCFields {
 
   private SPARCFields() {

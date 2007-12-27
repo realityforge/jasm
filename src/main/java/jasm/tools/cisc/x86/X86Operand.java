@@ -10,9 +10,7 @@ package jasm.tools.cisc.x86;
 
 import jasm.tools.Operand;
 
-/**
- * Description of an assembly instruction operand.
- */
+/** Description of an assembly instruction operand. */
 public abstract class X86Operand implements Operand {
   private Designation _designation;
 

@@ -21,10 +21,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Instantiate this class to disassemble IA32 instruction streams.
- */
-public final class IA32Disassembler extends X86Disassembler<IA32Template, IA32DisassembledInstruction> {
+/** Instantiate this class to disassemble IA32 instruction streams. */
+public final class IA32Disassembler
+    extends X86Disassembler<IA32Template, IA32DisassembledInstruction> {
 
   private final int _startAddress;
 

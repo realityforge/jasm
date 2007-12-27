@@ -36,6 +36,8 @@ public enum AMD64GeneralRegister8 implements GeneralRegister {
   DH(6, true),
   BH(7, true);
 
+  public static final SymbolSet<AMD64GeneralRegister8> SYMBOLS = SymbolSet.fromEnum(AMD64GeneralRegister8.class);
+
   private final int _value;
   private final boolean _isHighByte;
 
@@ -95,6 +97,4 @@ public enum AMD64GeneralRegister8 implements GeneralRegister {
   public String disassembledValue() {
     return name().toLowerCase();
   }
-
-  public static final SymbolSet<AMD64GeneralRegister8> SYMBOLS = SymbolSet.fromEnum(AMD64GeneralRegister8.class);
 }

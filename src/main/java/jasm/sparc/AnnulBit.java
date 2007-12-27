@@ -22,14 +22,10 @@ public final class AnnulBit extends OptionSuffixSymbolicArgument {
     super(value, externalMnemonicSuffix);
   }
 
-  /**
-   * The annul bit is not set.
-   */
+  /** The annul bit is not set. */
   public static final AnnulBit NO_A = new AnnulBit(0, "");
 
-  /**
-   * The annul bit is set.
-   */
+  /** The annul bit is set. */
   public static final AnnulBit A = new AnnulBit(1, ",a");
 
   public static final SymbolSet<AnnulBit> SYMBOLS = SymbolSet.fromStaticFields(AnnulBit.class);

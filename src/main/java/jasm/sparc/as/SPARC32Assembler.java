@@ -13,9 +13,7 @@ import jasm.AssemblyException;
 import jasm.Config;
 import jasm.Label;
 
-/**
- * The concrete class for a 32-bit SPARC assembler.
- */
+/** The concrete class for a 32-bit SPARC assembler. */
 public final class SPARC32Assembler extends SPARCAssembler implements Assembler32 {
 
   private final int _startAddress; // address of first instruction

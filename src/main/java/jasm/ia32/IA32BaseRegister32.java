@@ -12,7 +12,8 @@ import jasm.SymbolSet;
 import jasm.WordWidth;
 import jasm.x86.GeneralRegister;
 
-public enum IA32BaseRegister32 implements GeneralRegister {
+public enum IA32BaseRegister32
+    implements GeneralRegister {
 
   EAX_BASE,
   ECX_BASE,
@@ -22,6 +23,8 @@ public enum IA32BaseRegister32 implements GeneralRegister {
   EBP_BASE,
   ESI_BASE,
   EDI_BASE;
+
+  public static final SymbolSet<IA32BaseRegister32> SYMBOLS = SymbolSet.fromEnum(IA32BaseRegister32.class);
 
   public static IA32BaseRegister32 from(GeneralRegister generalRegister) {
     return values()[generalRegister.id()];
@@ -50,6 +53,4 @@ public enum IA32BaseRegister32 implements GeneralRegister {
   public String disassembledValue() {
     return IA32GeneralRegister32.from(this).disassembledValue();
   }
-
-  public static final SymbolSet<IA32BaseRegister32> SYMBOLS = SymbolSet.fromEnum(IA32BaseRegister32.class);
 }

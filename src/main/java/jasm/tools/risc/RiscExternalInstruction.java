@@ -106,9 +106,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
 
   protected abstract boolean isAbsoluteBranch();
 
-  /**
-   * @return the symbol used to represent the value of the current location counter
-   */
+  /** @return the symbol used to represent the value of the current location counter */
   protected final String locationCounterSymbol() {
     return ".";
   }

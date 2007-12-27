@@ -70,9 +70,7 @@ public abstract class BitRange {
    */
   public abstract int encodedWidth();
 
-  /**
-   * @return the number of bits that would be less significant than those specified by this bit range
-   */
+  /** @return the number of bits that would be less significant than those specified by this bit range */
   public abstract int numberOfLessSignificantBits();
 
   /*
@@ -86,9 +84,7 @@ public abstract class BitRange {
     return (1 << width) - 1;
   }
 
-  /**
-   * @return a mask with the bits of this range set to 1 in the actually addressed bit positions
-   */
+  /** @return a mask with the bits of this range set to 1 in the actually addressed bit positions */
   public abstract int instructionMask();
 
   @Override

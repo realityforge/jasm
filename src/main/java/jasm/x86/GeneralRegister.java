@@ -14,9 +14,9 @@ import jasm.WordWidth;
 public interface GeneralRegister
     extends EnumerableArgument {
 
-  WordWidth width();
-
   int INVALID_ID = Integer.MIN_VALUE;
+
+  WordWidth width();
 
   int id();
 }

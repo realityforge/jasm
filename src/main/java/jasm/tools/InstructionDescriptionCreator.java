@@ -13,9 +13,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Wraps mere object arrays into instruction descriptions.
- */
+/** Wraps mere object arrays into instruction descriptions. */
 public abstract class InstructionDescriptionCreator<InstructionDescription_Type extends InstructionDescription> {
 
   private final Assembly _assembly;

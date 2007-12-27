@@ -11,9 +11,7 @@ package jasm.sparc;
 import jasm.AbstractSymbolicArgument;
 import jasm.SymbolSet;
 
-/**
- * The class defining the symbolic identifiers for the general purpose registers.
- */
+/** The class defining the symbolic identifiers for the general purpose registers. */
 public class GPR extends AbstractSymbolicArgument {
 
   GPR(int value) {

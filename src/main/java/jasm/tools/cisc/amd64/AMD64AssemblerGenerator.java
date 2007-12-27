@@ -23,9 +23,7 @@ import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
 import jasm.tools.util.IndentWriter;
 
-/**
- * Run this program to generate the AMD64RawAssembler and AMD64LabelAssembler classes.
- */
+/** Run this program to generate the AMD64RawAssembler and AMD64LabelAssembler classes. */
 public final class AMD64AssemblerGenerator
     extends X86AssemblerGenerator<AMD64Template> {
 
@@ -59,7 +57,6 @@ public final class AMD64AssemblerGenerator
     }
     return false;
   }
-
 
   private void printUnconditionalRexPrefix(IndentWriter writer, X86Template template) {
     String rBit = "false";
@@ -124,7 +121,7 @@ public final class AMD64AssemblerGenerator
     }
 
     final boolean maybeForce = force.length() > 0;
-    if(maybeForce) writer.println("boolean force = false;");
+    if (maybeForce) writer.println("boolean force = false;");
     writer.println(force);
 
     if (needsToAddConstraintsFoGeneralRegister8Values(template) &&
@@ -154,10 +151,10 @@ public final class AMD64AssemblerGenerator
     }
 
     final String forceString = maybeForce ? "force" : "false";
-    if( null == rBit ) rBit = "false";
-    if( null == rBit ) rBit = "false";
-    if( null == bBit ) bBit = "false";
-    if( null == xBit ) xBit = "false";
+    if (null == rBit) rBit = "false";
+    if (null == rBit) rBit = "false";
+    if (null == bBit) bBit = "false";
+    if (null == xBit) xBit = "false";
     writer.println("emitRexPrefix(" + forceString + ",false," + rBit + "," + bBit + "," + xBit + ");");
   }
 

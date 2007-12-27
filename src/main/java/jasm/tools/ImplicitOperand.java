@@ -10,9 +10,7 @@ package jasm.tools;
 
 import jasm.Argument;
 
-/**
- * An operand that does not correspond to a parameter.
- */
+/** An operand that does not correspond to a parameter. */
 public interface ImplicitOperand extends Operand {
 
   Argument argument();

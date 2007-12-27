@@ -129,9 +129,7 @@ public final class Main {
     return true;
   }
 
-  /**
-   * Print out a usage statement
-   */
+  /** Print out a usage statement */
   private static void printUsage() {
     final String lineSeparator = System.getProperty("line.separator");
 

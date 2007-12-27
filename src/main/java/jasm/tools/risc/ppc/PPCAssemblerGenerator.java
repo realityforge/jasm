@@ -15,9 +15,7 @@ import jasm.tools.risc.RiscAssemblerGenerator;
 import jasm.tools.util.IndentWriter;
 import java.util.Set;
 
-/**
- * The program entry point for the PowerPC assembler generator.
- */
+/** The program entry point for the PowerPC assembler generator. */
 public final class PPCAssemblerGenerator
     extends RiscAssemblerGenerator<PPCTemplate> {
 

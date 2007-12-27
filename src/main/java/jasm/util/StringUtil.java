@@ -8,9 +8,7 @@
  */
 package jasm.util;
 
-/**
- * Additional String-related operations.
- */
+/** Additional String-related operations. */
 public final class StringUtil {
   public static String times(char ch, int nTimes) {
     if (nTimes <= 0) {

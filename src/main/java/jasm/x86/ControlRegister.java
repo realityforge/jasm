@@ -11,9 +11,12 @@ package jasm.x86;
 import jasm.EnumerableArgument;
 import jasm.SymbolSet;
 
-public enum ControlRegister implements EnumerableArgument {
+public enum ControlRegister
+    implements EnumerableArgument {
 
   CR0(0), CR2(2), CR3(3);
+
+  public static final SymbolSet<ControlRegister> SYMBOLS = SymbolSet.fromEnum(ControlRegister.class);
 
   private final int _number;
 
@@ -36,6 +39,4 @@ public enum ControlRegister implements EnumerableArgument {
   public String disassembledValue() {
     return name().toLowerCase();
   }
-
-  public static final SymbolSet<ControlRegister> SYMBOLS = SymbolSet.fromEnum(ControlRegister.class);
 }

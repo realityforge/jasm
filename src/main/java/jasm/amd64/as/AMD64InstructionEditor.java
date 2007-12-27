@@ -12,10 +12,10 @@ import jasm.AssemblyException;
 import jasm.AssemblyInstructionEditor;
 import jasm.WordWidth;
 
-/**
- * Facility to patch AMD64 assembly instructions.
- */
-public final class AMD64InstructionEditor extends AMD64Assembler implements AssemblyInstructionEditor {
+/** Facility to patch AMD64 assembly instructions. */
+public final class AMD64InstructionEditor
+    extends AMD64Assembler
+    implements AssemblyInstructionEditor {
   // Buffer holding the instruction to edit
   final byte[] _instruction;
   // Offset to the first byte of the instruction

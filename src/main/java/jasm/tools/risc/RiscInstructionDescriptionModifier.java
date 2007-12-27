@@ -11,9 +11,7 @@ package jasm.tools.risc;
 import jasm.tools.util.CollectionUtil;
 import java.util.List;
 
-/**
- * This class provides a mechanism for making modifications to a set of RISC instruction descriptions.
- */
+/** This class provides a mechanism for making modifications to a set of RISC instruction descriptions. */
 public final class RiscInstructionDescriptionModifier {
 
   private final List<RiscInstructionDescription> _instructionDescriptions;

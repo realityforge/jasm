@@ -11,14 +11,16 @@ package jasm.x86;
 import jasm.EnumerableArgument;
 import jasm.SymbolSet;
 
-public enum SegmentRegister implements EnumerableArgument {
-
+public enum SegmentRegister
+    implements EnumerableArgument {
   ES,
   CS,
   SS,
   DS,
   FS,
   GS;
+
+  public static final SymbolSet<SegmentRegister> SYMBOLS = SymbolSet.fromEnum(SegmentRegister.class);
 
   public int value() {
     return ordinal();
@@ -35,6 +37,4 @@ public enum SegmentRegister implements EnumerableArgument {
   public String disassembledValue() {
     return name().toLowerCase();
   }
-
-  public static final SymbolSet<SegmentRegister> SYMBOLS = SymbolSet.fromEnum(SegmentRegister.class);
 }

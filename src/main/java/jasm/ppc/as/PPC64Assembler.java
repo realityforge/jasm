@@ -13,10 +13,10 @@ import jasm.AssemblyException;
 import jasm.Config;
 import jasm.Label;
 
-/**
- * The concrete class for a 64-bit PowerPC assembler.
- */
-public final class PPC64Assembler extends PPCAssembler implements Assembler64 {
+/** The concrete class for a 64-bit PowerPC assembler. */
+public final class PPC64Assembler
+    extends PPCAssembler
+    implements Assembler64 {
 
   private final long _startAddress; // address of first instruction
 

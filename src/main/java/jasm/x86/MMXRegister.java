@@ -11,9 +11,12 @@ package jasm.x86;
 import jasm.EnumerableArgument;
 import jasm.SymbolSet;
 
-public enum MMXRegister implements EnumerableArgument {
+public enum MMXRegister
+    implements EnumerableArgument {
 
   MM0, MM1, MM2, MM3, MM4, MM5, MM6, MM7;
+
+  public static final SymbolSet<MMXRegister> SYMBOLS = SymbolSet.fromEnum(MMXRegister.class);
 
   public int value() {
     return ordinal();
@@ -30,6 +33,4 @@ public enum MMXRegister implements EnumerableArgument {
   public String disassembledValue() {
     return name().toLowerCase();
   }
-
-  public static final SymbolSet<MMXRegister> SYMBOLS = SymbolSet.fromEnum(MMXRegister.class);
 }

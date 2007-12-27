@@ -217,7 +217,7 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_D4, "PADDQ", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
     defineTwoByte(_D5, "PMULLW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
     defineTwoByte(_D6, "MOVQ",
-           Wq.excludeExternalTestArguments(AMD64XMMRegister.SYMBOLS), Vq) // gas uses F3 0F 7E for reg-reg
+                  Wq.excludeExternalTestArguments(AMD64XMMRegister.SYMBOLS), Vq) // gas uses F3 0F 7E for reg-reg
         .setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
     defineTwoByte(_D7, "PMOVMSKB", Gd, Udq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
 

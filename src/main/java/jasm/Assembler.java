@@ -12,9 +12,7 @@ import jasm.annotations.NoInline;
 import jasm.util.Longs;
 import java.util.LinkedList;
 
-/**
- * Super class of generated assemblers.
- */
+/** Super class of generated assemblers. */
 public abstract class Assembler {
   /**
    * The minimum size needs to be big enough that an instruction will fit in code size.
@@ -33,7 +31,7 @@ public abstract class Assembler {
   private byte[] _machineCode;
 
   protected Assembler(final int initialMachineCodeCapacity) {
-    if( initialMachineCodeCapacity < MINIMUM_MACHINE_CODE_SIZE) {
+    if (initialMachineCodeCapacity < MINIMUM_MACHINE_CODE_SIZE) {
       final String message =
           "initialMachineCodeCapacity MUST be at least " + MINIMUM_MACHINE_CODE_SIZE;
       throw new IllegalArgumentException(message);
@@ -68,7 +66,7 @@ public abstract class Assembler {
   protected abstract void emitLong(long longValue);
 
   protected final void emitLEShort(short shortValue) {
-    if (_machineCodeIndex  + 2 >= _machineCode.length) {
+    if (_machineCodeIndex + 2 >= _machineCode.length) {
       _machineCode = growMachineCode();
     }
     _machineCode[_machineCodeIndex++] = (byte) (shortValue & 0xFF);
@@ -100,7 +98,7 @@ public abstract class Assembler {
   }
 
   protected final void emitBEShort(short value) {
-    if (_machineCodeIndex  + 2 >= _machineCode.length) {
+    if (_machineCodeIndex + 2 >= _machineCode.length) {
       _machineCode = growMachineCode();
     }
     _machineCode[_machineCodeIndex++] = (byte) ((value >> 8) & 0xFF);
@@ -297,11 +295,7 @@ public abstract class Assembler {
     throw new IllegalArgumentException(expression);
   }
 
-  /**
-   * Calculate the difference between a Label and an offset within our assembled code.
-   *
-   * @throws AssemblyException
-   */
+  /** Calculate the difference between a Label and an offset within our assembled code. */
   public final int labelOffsetRelative(Label label, int offset) throws AssemblyException {
     switch (label.state()) {
       case BOUND: {
@@ -329,8 +323,6 @@ public abstract class Assembler {
    * Calculate the difference between a Label and an instruction.
    * Different CPUs have different conventions for which end of an
    * instruction to measure from.
-   *
-   * @throws AssemblyException
    */
   public final int labelOffsetInstructionRelative(Label label, AssemblyInstruction instruction) throws AssemblyException {
     switch (instructionSet().relativeAddressing()) {

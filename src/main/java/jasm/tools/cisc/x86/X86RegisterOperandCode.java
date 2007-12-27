@@ -105,7 +105,7 @@ public enum X86RegisterOperandCode {
 
   X86RegisterOperandCode(final WordWidth width,
                          final int regField,
-                         final boolean rexB ) {
+                         final boolean rexB) {
     _width = width;
     _regField = regField;
     _rexB = rexB;

@@ -15,7 +15,9 @@ import jasm.tools.cisc.amd64.AMD64Template;
 import jasm.x86.dis.X86DisassembledInstruction;
 import java.util.List;
 
-public final class AMD64DisassembledInstruction extends X86DisassembledInstruction<AMD64Template> implements Address64Instruction {
+public final class AMD64DisassembledInstruction
+    extends X86DisassembledInstruction<AMD64Template>
+    implements Address64Instruction {
 
   private final Address64Instruction.Mixin _addressInstruction;
 

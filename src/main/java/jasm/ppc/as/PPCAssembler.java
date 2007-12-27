@@ -14,7 +14,8 @@ import jasm.InstructionSet;
  * The base class for the 32-bit and 64-bit PowerPC assemblers. This class also defines
  * the more complex synthetic PowerPC instructions.
  */
-public abstract class PPCAssembler extends PPCLabelAssembler {
+public abstract class PPCAssembler
+    extends PPCLabelAssembler {
 
   protected PPCAssembler(int initialMachineCodeCapacity) {
     super(initialMachineCodeCapacity);

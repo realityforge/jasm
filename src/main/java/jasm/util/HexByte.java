@@ -8,9 +8,7 @@
  */
 package jasm.util;
 
-/**
- * Finally: byte literals!
- */
+/** Finally: byte literals! */
 public enum HexByte {
   _00, _01, _02, _03, _04, _05, _06, _07, _08, _09, _0A, _0B, _0C, _0D, _0E, _0F,
   _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _1A, _1B, _1C, _1D, _1E, _1F,

@@ -13,11 +13,14 @@ import jasm.WordWidth;
 import jasm.x86.GeneralRegister;
 import java.util.EnumSet;
 
-public enum IA32GeneralRegister32 implements GeneralRegister {
-
+public enum IA32GeneralRegister32
+    implements GeneralRegister {
   // Note: keep the order such that 'value()' can rely on ordinals:
-
   EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI;
+
+  public static final SymbolSet<IA32GeneralRegister32> SYMBOLS = SymbolSet.fromEnum(IA32GeneralRegister32.class);
+  public static final SymbolSet<IA32GeneralRegister32> SYMBOLS_WITHOUT_EBP =
+      SymbolSet.fromCollection(IA32GeneralRegister32.class, EnumSet.complementOf(EnumSet.of(EBP)));
 
   public static IA32GeneralRegister32 from(GeneralRegister generalRegister) {
     return values()[generalRegister.id()];
@@ -58,9 +61,4 @@ public enum IA32GeneralRegister32 implements GeneralRegister {
   public String disassembledValue() {
     return name().toLowerCase();
   }
-
-  public static final SymbolSet<IA32GeneralRegister32> SYMBOLS = SymbolSet.fromEnum(IA32GeneralRegister32.class);
-
-  public static final SymbolSet<IA32GeneralRegister32> SYMBOLS_WITHOUT_EBP =
-      SymbolSet.fromCollection(IA32GeneralRegister32.class, EnumSet.complementOf(EnumSet.of(EBP)));
 }

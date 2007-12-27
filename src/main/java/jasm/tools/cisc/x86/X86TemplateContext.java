@@ -10,9 +10,7 @@ package jasm.tools.cisc.x86;
 
 import jasm.WordWidth;
 
-/**
- * A bundle of choices one can make when creating a template.
- */
+/** A bundle of choices one can make when creating a template. */
 public final class X86TemplateContext implements Cloneable {
   private WordWidth _addressSizeAttribute;
   private WordWidth _operandSizeAttribute;

@@ -114,9 +114,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     return _addressWidth;
   }
 
-  /**
-   * Determines if a given set of arguments for a given template is legal.
-   */
+  /** Determines if a given set of arguments for a given template is legal. */
   protected abstract boolean isLegalArgumentList(Template_Type template, List<Argument> arguments);
 
   protected abstract void assembleExternally(IndentWriter stream, Template_Type template,

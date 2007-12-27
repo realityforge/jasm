@@ -8,18 +8,11 @@
  */
 package jasm;
 
-/**
- * A symbol is an immutable binding of a name to a value.
- */
+/** A symbol is an immutable binding of a name to a value. */
 public interface Symbol {
-
-  /**
-   * @return the name of the symbol
-   */
+  /** @return the name of the symbol */
   String name();
 
-  /**
-   * @return the value of the symbol
-   */
+  /** @return the value of the symbol */
   int value();
 }

@@ -52,9 +52,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Source code generator for both the raw assembler and the label assembler.
- */
+/** Source code generator for both the raw assembler and the label assembler. */
 public abstract class AssemblerGenerator<Template_Type extends Template> {
 
   private final Assembly<Template_Type> _assembly;

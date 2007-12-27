@@ -11,20 +11,9 @@ package jasm.ppc;
 import jasm.SymbolSet;
 import java.util.Arrays;
 
-/**
- * The general purpose registers.
- */
-public final class GPR extends ZeroOrRegister {
-
-  private GPR(String name, int value) {
-    super(name, value);
-  }
-
-  @Override
-  public String externalValue() {
-    return name().toLowerCase();
-  }
-
+/** The general purpose registers. */
+public final class GPR
+    extends ZeroOrRegister {
   public static final GPR R0 = new GPR("R0", 0);
   public static final GPR SP = new GPR("R1", 1);     // Stack pointer register
   public static final GPR RTOC = new GPR("R2", 2);   // Table Of Contents register
@@ -59,4 +48,13 @@ public final class GPR extends ZeroOrRegister {
   public static final GPR R31 = new GPR("R31", 31);
 
   public static final SymbolSet<GPR> GPR_SYMBOLS = SymbolSet.fromCollection(GPR.class, Arrays.asList(R0, SP, RTOC, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12, R13, R14, R15, R16, R17, R18, R20, R21, R22, R23, R24, R25, R26, R27, R28, R29, R30, R31));
+
+  private GPR(String name, int value) {
+    super(name, value);
+  }
+
+  @Override
+  public String externalValue() {
+    return name().toLowerCase();
+  }
 }

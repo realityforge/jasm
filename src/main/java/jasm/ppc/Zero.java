@@ -8,10 +8,9 @@
  */
 package jasm.ppc;
 
-/**
- * The type of the constant {@link #ZERO} that can be used as a GPR in certain instructions.
- */
-public final class Zero extends ZeroOrRegister {
+/** The type of the constant {@link #ZERO} that can be used as a GPR in certain instructions. */
+public final class Zero
+    extends ZeroOrRegister {
 
   public static final Zero ZERO = new Zero();
 

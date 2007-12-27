@@ -8,10 +8,10 @@
  */
 package jasm;
 
-/**
- * An argument that corresponds to an optional mnemonic suffix in the external assembler syntax.
- */
-public abstract class OptionSuffixSymbolicArgument extends AbstractSymbolicArgument implements ExternalMnemonicSuffixArgument {
+/** An argument that corresponds to an optional mnemonic suffix in the external assembler syntax. */
+public abstract class OptionSuffixSymbolicArgument
+    extends AbstractSymbolicArgument
+    implements ExternalMnemonicSuffixArgument {
 
   private final String _externalMnemonicSuffix;
 

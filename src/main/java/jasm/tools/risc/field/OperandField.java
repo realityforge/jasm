@@ -64,16 +64,12 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
 
   public abstract Argument_Type disassemble(int instruction);
 
-  /**
-   * @return the minimal difference between any two potential operands
-   */
+  /** @return the minimal difference between any two potential operands */
   public final int grain() {
     return 1 << zeroes();
   }
 
-  /**
-   * @return implied zeroes to be "appended" to respective operands
-   */
+  /** @return implied zeroes to be "appended" to respective operands */
   public int zeroes() {
     return 0;
   }

@@ -35,14 +35,10 @@ public interface InstructionConstraint {
    */
   boolean check(Template template, List<Argument> arguments);
 
-  /**
-   * @return a Java expression that performs the {@link #check check}
-   */
+  /** @return a Java expression that performs the {@link #check check} */
   String asJavaExpression();
 
-  /**
-   * Determines if this constraint has {@code parameter} as one of its terms.
-   */
+  /** Determines if this constraint has {@code parameter} as one of its terms. */
   boolean referencesParameter(Parameter parameter);
 
   /**
@@ -65,9 +61,7 @@ public interface InstructionConstraint {
 
   public static final class Static {
 
-    /**
-     * Creates an instruction constraint between two parameters such that their values cannot be the same.
-     */
+    /** Creates an instruction constraint between two parameters such that their values cannot be the same. */
     public static InstructionConstraint ne(final Parameter first, final Parameter second) {
       return new SimpleInstructionConstraint() {
 
@@ -85,9 +79,7 @@ public interface InstructionConstraint {
       };
     }
 
-    /**
-     * Creates an instruction constraint on a parameter such that it must not be a given symbol.
-     */
+    /** Creates an instruction constraint on a parameter such that it must not be a given symbol. */
     public static InstructionConstraint ne(final Parameter first, final SymbolicArgument symbol) {
       return new SimpleInstructionConstraint() {
 
@@ -149,9 +141,7 @@ public interface InstructionConstraint {
       };
     }
 
-    /**
-     * Creates an instruction constraint on a given parameter such that its value is greater than a given value.
-     */
+    /** Creates an instruction constraint on a given parameter such that its value is greater than a given value. */
     public static InstructionConstraint gt(final Parameter first, final long value) {
       return new SimpleInstructionConstraint() {
 
@@ -170,9 +160,7 @@ public interface InstructionConstraint {
       };
     }
 
-    /**
-     * Creates an instruction constraint on a given parameter such that its value is less than a given value.
-     */
+    /** Creates an instruction constraint on a given parameter such that its value is less than a given value. */
     public static InstructionConstraint lt(final Parameter first, final long value) {
       return new SimpleInstructionConstraint() {
 
@@ -191,9 +179,7 @@ public interface InstructionConstraint {
       };
     }
 
-    /**
-     * Creates an instruction constraint on a given parameter such that its value must not be equal to a given value.
-     */
+    /** Creates an instruction constraint on a given parameter such that its value must not be equal to a given value. */
     public static InstructionConstraint ne(final Parameter parameter, final long value) {
       return new SimpleInstructionConstraint() {
 

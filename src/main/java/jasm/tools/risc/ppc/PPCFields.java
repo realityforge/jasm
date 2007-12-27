@@ -41,14 +41,10 @@ import jasm.tools.risc.field.ReservedField;
 import jasm.tools.risc.field.SymbolicOperandField;
 import jasm.util.NamedField;
 
-/**
- * The fields used in defining the PowerPC instruction templates.
- */
+/** The fields used in defining the PowerPC instruction templates. */
 final class PPCFields {
 
-  /**
-   * RA field that can also accept the constant 0.
-   */
+  /** RA field that can also accept the constant 0. */
   public static final SymbolicOperandField<ZeroOrRegister> ra0 =
       SymbolicOperandField.createAscending(ZeroOrRegister.symbols(), 11, 15).setVariableName("ra");
 
@@ -56,23 +52,17 @@ final class PPCFields {
     return ra0.constant(value);
   }
 
-  /**
-   * RA field that can only accept GPR symbols.
-   */
+  /** RA field that can only accept GPR symbols. */
   public static final SymbolicOperandField<GPR> ra = SymbolicOperandField.createAscending(GPR.GPR_SYMBOLS, 11, 15);
 
   public static RiscConstant ra(GPR value) {
     return ra.constant(value);
   }
 
-  /**
-   * GPR symbol RA field with constraint: RA != GPR.R0.
-   */
+  /** GPR symbol RA field with constraint: RA != GPR.R0. */
   public static final Object[] ra_notR0 = {ra, ne(ra, GPR.R0)};
 
-  /**
-   * GPR symbol or 0 RA field with constraint: RA != GPR.R0.
-   */
+  /** GPR symbol or 0 RA field with constraint: RA != GPR.R0. */
   public static final Object[] ra0_notR0 = {ra0, ne(ra0, GPR.R0)};
 
   public static final SymbolicOperandField<GPR> rb = SymbolicOperandField.createAscending(GPR.GPR_SYMBOLS, 16, 20);
@@ -92,14 +82,10 @@ final class PPCFields {
   public static final SymbolicOperandField<GPR> rs = SymbolicOperandField.createAscending(GPR.GPR_SYMBOLS, 6, 10);
   public static final SymbolicOperandField<GPR> rt = SymbolicOperandField.createAscending(GPR.GPR_SYMBOLS, 6, 10);
 
-  /**
-   * GPR symbol RA field with constraint: RA != GPR.R0 && RA != RT.
-   */
+  /** GPR symbol RA field with constraint: RA != GPR.R0 && RA != RT. */
   public static final Object[] ra_notR0_notRT = {ra, ne(ra, GPR.R0), ne(ra, rt)};
 
-  /**
-   * GCP symbol or 0 RA field with constraint: RA != GPR.R0 && RA < RT.
-   */
+  /** GCP symbol or 0 RA field with constraint: RA != GPR.R0 && RA < RT. */
   public static final Object[] ra0_notR0_ltRT = {ra0, ne(ra0, GPR.R0), lt(ra0, rt)};
 
   public static final SymbolicOperandField<CRF> bf = SymbolicOperandField.createAscending(CRF.SYMBOLS, 6, 8);
@@ -399,50 +385,36 @@ final class PPCFields {
       withOption("un", boTrue(CRF.UN)).
       withOption("nu", boFalse(CRF.UN));
 
-  /**
-   * An OptionField for the BO values that are in terms of the Count Register (CTR) and a bit in the Condition Register (CR).
-   */
+  /** An OptionField for the BO values that are in terms of the Count Register (CTR) and a bit in the Condition Register (CR). */
   public static final OptionField bo_CTR_and_CR = OptionField.createAscending(6, 10).
       withOption("dnzt", CTRNonZero_CRTrue).
       withOption("dnzf", CTRNonZero_CRFalse).
       withOption("dzt", CTRZero_CRTrue).
       withOption("dzf", CTRZero_CRFalse);
 
-  /**
-   * An OptionField for the BO values that are only in terms of the Count Register (CTR) and don't include the prediction bits.
-   */
+  /** An OptionField for the BO values that are only in terms of the Count Register (CTR) and don't include the prediction bits. */
   public static final OptionField bo_CTR = OptionField.createAscending(6, 6, 8, 9).
       withOption("dnz", CTRNonZero.valueWithoutPredictionBits()).
       withOption("dz", CTRZero.valueWithoutPredictionBits());
 
-  /**
-   * An OperandField for the prediction bits in the BO values that are only in terms of a bit in the Condition Register (CR).
-   */
+  /** An OperandField for the prediction bits in the BO values that are only in terms of a bit in the Condition Register (CR). */
   public static final SymbolicOperandField<BranchPredictionBits> bo_CR_prediction = SymbolicOperandField.createAscending(BranchPredictionBits.SYMBOLS, 9, 10).setVariableName("prediction");
 
-  /**
-   * An OperandField for the prediction bits in the BO values that are only in terms of a bit in the Count Register (CTR).
-   */
+  /** An OperandField for the prediction bits in the BO values that are only in terms of a bit in the Count Register (CTR). */
   public static final SymbolicOperandField<BranchPredictionBits> bo_CTR_prediction = SymbolicOperandField.createAscending(BranchPredictionBits.SYMBOLS, 7, 7, 10, 10).setVariableName("prediction");
 
-  /**
-   * An OptionField for the prediction bits in the BO values that are only in terms of a bit in the Condition Register (CR).
-   */
+  /** An OptionField for the prediction bits in the BO values that are only in terms of a bit in the Condition Register (CR). */
   public static final OptionField bo_CTR_prediction_option = OptionField.createAscending(9, 10).
       withOption("", BranchPredictionBits.NONE).
       withOption("_pt", BranchPredictionBits.PT).
       withOption("_pn", BranchPredictionBits.PN);
 
-  /**
-   * An OptionField for the BO values that are only in terms of a bit in the Condition Register (CR) and don't include the prediction bits.
-   */
+  /** An OptionField for the BO values that are only in terms of a bit in the Condition Register (CR) and don't include the prediction bits. */
   public static final OptionField bo_CR = OptionField.createAscending(6, 8).
       withOption("t", CRTrue.valueWithoutPredictionBits()).
       withOption("f", CRFalse.valueWithoutPredictionBits());
 
-  /**
-   * An OptionField for the prediction bits in the BO values that are only in terms of a bit in the Condition Register (CR).
-   */
+  /** An OptionField for the prediction bits in the BO values that are only in terms of a bit in the Condition Register (CR). */
   public static final OptionField bo_CR_prediction_option = OptionField.createAscending(7, 7, 10, 10).
       withOption("", BranchPredictionBits.NONE).
       withOption("_pt", BranchPredictionBits.PT).

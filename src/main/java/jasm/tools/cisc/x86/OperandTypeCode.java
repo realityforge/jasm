@@ -8,9 +8,7 @@
  */
 package jasm.tools.cisc.x86;
 
-/**
- * See section A.2.2
- */
+/** See section A.2.2 */
 public enum OperandTypeCode {
   /**
    * Two one-word operands in memory or two double-word operands in memory,

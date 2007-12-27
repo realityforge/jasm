@@ -16,7 +16,7 @@ public final class X86AddressParameter
     implements AddressParameter {
 
   public X86AddressParameter(Designation designation, WordWidth width) {
-    super(designation, width,ParameterPlace.DISPLACEMENT);
+    super(designation, width, ParameterPlace.DISPLACEMENT);
     setVariableName("m" + width().numberOfBits());
   }
 }

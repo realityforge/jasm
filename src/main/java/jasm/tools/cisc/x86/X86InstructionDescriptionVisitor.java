@@ -55,10 +55,7 @@ public interface X86InstructionDescriptionVisitor {
   void visitInstructionConstraint(InstructionConstraint constraint);
 
   public static final class Static {
-    /**
-     * @return whether the specification constitutes an operand
-     * @throws TemplateNotNeededException
-     */
+    /** @return whether the specification constitutes an operand */
     private static boolean visitSpecification(X86InstructionDescriptionVisitor visitor, Object specification,
                                               final Designation designation, ArgumentRange argumentRange,
                                               final TestArgumentExclusion testArgumentExclusion, ExternalPresence externalPresence) throws TemplateNotNeededException {
@@ -115,9 +112,7 @@ public interface X86InstructionDescriptionVisitor {
       }
     }
 
-    /**
-     * @return whether this instruction description is to be used to create a template in the given context
-     */
+    /** @return whether this instruction description is to be used to create a template in the given context */
     public static boolean visitInstructionDescription(X86InstructionDescriptionVisitor visitor, InstructionDescription instructionDescription) {
       try {
         int designationIndex = 0;

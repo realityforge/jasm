@@ -26,9 +26,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A field that contains an immediate value.
- */
+/** A field that contains an immediate value. */
 public class ImmediateOperandField extends OperandField<ImmediateArgument> implements ImmediateParameter, WrappableSpecification, InstructionConstraint {
 
   public String asJavaExpression() {

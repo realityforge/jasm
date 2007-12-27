@@ -11,8 +11,8 @@ package jasm.amd64;
 import jasm.EnumerableArgument;
 import jasm.SymbolSet;
 
-public enum AMD64XMMComparison implements EnumerableArgument {
-
+public enum AMD64XMMComparison
+    implements EnumerableArgument {
   EQUAL,
   LESS_THAN,
   GREATER_THAN,
@@ -22,6 +22,8 @@ public enum AMD64XMMComparison implements EnumerableArgument {
   NOT_LESS_THAN,
   NOT_LESS_THAN_OR_EQUAL,
   ORDERED;
+
+  public static final SymbolSet<AMD64XMMComparison> SYMBOLS = SymbolSet.fromEnum(AMD64XMMComparison.class);
 
   public int value() {
     return ordinal();
@@ -38,6 +40,4 @@ public enum AMD64XMMComparison implements EnumerableArgument {
   public String disassembledValue() {
     return name().toLowerCase();
   }
-
-  public static final SymbolSet<AMD64XMMComparison> SYMBOLS = SymbolSet.fromEnum(AMD64XMMComparison.class);
 }

@@ -23,6 +23,8 @@ public enum IA32IndirectRegister32 implements GeneralRegister, IndirectRegister 
   ESI_INDIRECT,
   EDI_INDIRECT;
 
+  public static final SymbolSet<IA32IndirectRegister32> SYMBOLS = SymbolSet.fromEnum(IA32IndirectRegister32.class);
+
   public static IA32IndirectRegister32 from(GeneralRegister generalRegister) {
     return values()[generalRegister.id()];
   }
@@ -50,6 +52,4 @@ public enum IA32IndirectRegister32 implements GeneralRegister, IndirectRegister 
   public String disassembledValue() {
     return IA32GeneralRegister32.from(this).disassembledValue();
   }
-
-  public static final SymbolSet<IA32IndirectRegister32> SYMBOLS = SymbolSet.fromEnum(IA32IndirectRegister32.class);
 }

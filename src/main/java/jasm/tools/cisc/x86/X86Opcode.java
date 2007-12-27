@@ -12,9 +12,7 @@ import jasm.util.HexByte;
 import static jasm.util.HexByte.*;
 import java.util.EnumSet;
 
-/**
- * x86 instruction prefix bytes.
- */
+/** x86 instruction prefix bytes. */
 public final class X86Opcode {
   private static final EnumSet<HexByte> FP_ESCAPE =
       EnumSet.of(_D8, _D9, _DA, _DB, _DC, _DD, _DE, _DF);

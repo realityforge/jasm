@@ -12,9 +12,7 @@ import jasm.SymbolSet;
 import jasm.SymbolicArgument;
 import jasm.util.Nameable;
 
-/**
- * The double-precision (64-bit) floating-point registers.
- */
+/** The double-precision (64-bit) floating-point registers. */
 public interface DFPR extends Nameable, SymbolicArgument {
 
   DFPR F0 = FPR.F0;

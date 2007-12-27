@@ -54,6 +54,7 @@ public enum X86InstructionPrefix implements Symbol {
   public int getGroup() {
     return _group;
   }
+
   public HexByte getValue() {
     return _value;
   }

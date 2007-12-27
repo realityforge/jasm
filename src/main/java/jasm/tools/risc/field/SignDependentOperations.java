@@ -146,10 +146,7 @@ public enum SignDependentOperations {
 
   public abstract int maxArgumentValue(BitRange bitRange);
 
-  /**
-   * @return instruction
-   * @throws IndexOutOfBoundsException
-   */
+  /** @return instruction */
   public abstract int assemble(int value, BitRange bitRange) throws IndexOutOfBoundsException;
 
   public abstract int extract(int instruction, BitRange bitRange);

@@ -23,6 +23,8 @@ public enum IA32IndexRegister32 implements GeneralRegister {
   ESI_INDEX,
   EDI_INDEX;
 
+  public static final SymbolSet<IA32IndexRegister32> SYMBOLS = SymbolSet.fromEnum(IA32IndexRegister32.class);
+
   public static IA32IndexRegister32 from(GeneralRegister generalRegister) {
     int ordinal = generalRegister.id();
     if (ordinal >= IA32GeneralRegister32.ESP.id()) {
@@ -58,6 +60,4 @@ public enum IA32IndexRegister32 implements GeneralRegister {
   public String disassembledValue() {
     return IA32GeneralRegister32.from(this).disassembledValue();
   }
-
-  public static final SymbolSet<IA32IndexRegister32> SYMBOLS = SymbolSet.fromEnum(IA32IndexRegister32.class);
 }

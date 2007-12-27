@@ -13,9 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-/**
- * Additonal methods that one could expect in java.util.Arrays.
- */
+/** Additonal methods that one could expect in java.util.Arrays. */
 public final class ArrayUtil {
   public static <Element_Type> Element_Type[] create(Class<?> elementType, int length) {
     final Object array = Array.newInstance(elementType, length);

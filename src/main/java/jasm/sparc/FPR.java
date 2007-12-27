@@ -10,9 +10,7 @@ package jasm.sparc;
 
 import jasm.AbstractSymbolicArgument;
 
-/**
- * The class defining the symbolic identifiers for the floating-point registers.
- */
+/** The class defining the symbolic identifiers for the floating-point registers. */
 class FPR extends AbstractSymbolicArgument {
 
   FPR(int value) {

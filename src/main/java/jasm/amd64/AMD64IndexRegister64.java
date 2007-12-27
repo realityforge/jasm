@@ -12,11 +12,9 @@ import jasm.SymbolSet;
 import jasm.WordWidth;
 import jasm.x86.GeneralRegister;
 
-/**
- * Aliases for 64-bit AMD64 general registers to be used as index registers.
- */
-public enum AMD64IndexRegister64 implements GeneralRegister {
-
+/** Aliases for 64-bit AMD64 general registers to be used as index registers. */
+public enum AMD64IndexRegister64
+    implements GeneralRegister {
   RAX_INDEX,
   RCX_INDEX,
   RDX_INDEX,
@@ -33,6 +31,8 @@ public enum AMD64IndexRegister64 implements GeneralRegister {
   R13_INDEX,
   R14_INDEX,
   R15_INDEX;
+
+  public static final SymbolSet<AMD64IndexRegister64> SYMBOLS = SymbolSet.fromEnum(AMD64IndexRegister64.class);
 
   public static AMD64IndexRegister64 from(GeneralRegister generalRegister) {
     int ordinal = generalRegister.id();
@@ -69,6 +69,4 @@ public enum AMD64IndexRegister64 implements GeneralRegister {
   public String disassembledValue() {
     return AMD64GeneralRegister64.from(this).disassembledValue();
   }
-
-  public static final SymbolSet<AMD64IndexRegister64> SYMBOLS = SymbolSet.fromEnum(AMD64IndexRegister64.class);
 }

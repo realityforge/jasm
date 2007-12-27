@@ -8,8 +8,6 @@
  */
 package jasm.tools;
 
-/**
- * Parameters with enumerable arguments.
- */
+/** Parameters with enumerable arguments. */
 public interface EnumerableParameter extends Parameter {
 }

@@ -8,9 +8,7 @@
  */
 package jasm;
 
-/**
- * Assemblers for 32-bit address spaces.
- */
+/** Assemblers for 32-bit address spaces. */
 public interface Assembler32 {
 
   /**

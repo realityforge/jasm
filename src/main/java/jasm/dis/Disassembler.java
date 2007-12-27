@@ -114,9 +114,7 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
     return labels;
   }
 
-  /**
-   * Assigns serial numbers to these labels and calculates the maximum number of chars needed to print any one of these labels.
-   */
+  /** Assigns serial numbers to these labels and calculates the maximum number of chars needed to print any one of these labels. */
   private int updateLabels(List<DisassembledLabel> labels, List<DisassembledInstruction_Type> disassembledInstructions) {
     int result = 0;
     int serial = 1;

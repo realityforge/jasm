@@ -8,9 +8,7 @@
  */
 package jasm.util;
 
-/**
- * Additonal methods that one might want in java.lang.Long.
- */
+/** Additonal methods that one might want in java.lang.Long. */
 public final class Longs {
   public static int numberOfEffectiveSignedBits(long signed) {
     if (signed >= 0) {

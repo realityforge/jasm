@@ -13,10 +13,12 @@ import jasm.SymbolSet;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * The super type of all the {@link GPR General Purpose Registers} and the constant {@link Zero#ZERO}.
- */
-public abstract class ZeroOrRegister extends AbstractSymbolicArgument {
+/** The super type of all the {@link GPR General Purpose Registers} and the constant {@link Zero#ZERO}. */
+public abstract class ZeroOrRegister
+    extends AbstractSymbolicArgument {
+
+  // This must be lazily constructed to avoid dependency on the GPR class initializer
+  private static SymbolSet<ZeroOrRegister> _symbols;
 
   ZeroOrRegister(String name, int value) {
     super(name, value);
@@ -50,7 +52,4 @@ public abstract class ZeroOrRegister extends AbstractSymbolicArgument {
     }
     return _symbols;
   }
-
-  // This must be lazily constructed to avoid dependency on the GPR class initializer
-  private static SymbolSet<ZeroOrRegister> _symbols;
 }

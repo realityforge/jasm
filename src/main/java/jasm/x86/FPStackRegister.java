@@ -32,6 +32,8 @@ public enum FPStackRegister implements EnumerableArgument {
     }
   };
 
+  public static final SymbolSet<FPStackRegister> SYMBOLS = SymbolSet.fromEnum(FPStackRegister.class);
+
   private final int _value;
 
   private FPStackRegister(int value) {
@@ -53,6 +55,4 @@ public enum FPStackRegister implements EnumerableArgument {
   public String disassembledValue() {
     return "st(" + value() + ")";
   }
-
-  public static final SymbolSet<FPStackRegister> SYMBOLS = SymbolSet.fromEnum(FPStackRegister.class);
 }

@@ -11,19 +11,13 @@ package jasm.tools;
 import jasm.Argument;
 import java.util.Set;
 
-/**
- * An operand that represents a formal parameter of an assembler method.
- */
+/** An operand that represents a formal parameter of an assembler method. */
 public interface Parameter extends Operand, Comparable<Parameter> {
 
-  /**
-   * @return source code variable name
-   */
+  /** @return source code variable name */
   String variableName();
 
-  /**
-   * @return source code for raw int value access
-   */
+  /** @return source code for raw int value access */
   String valueString();
 
   Iterable<? extends Argument> getLegalTestArguments();

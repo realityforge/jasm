@@ -11,9 +11,7 @@ package jasm.tools.risc.field;
 import jasm.tools.risc.bitRange.BitRange;
 import jasm.util.NamedField;
 
-/**
- * A field describes a bit range and how it relates to an operand.
- */
+/** A field describes a bit range and how it relates to an operand. */
 public abstract class RiscField
     extends NamedField
     implements Cloneable {

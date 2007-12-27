@@ -12,11 +12,9 @@ import jasm.SymbolSet;
 import jasm.WordWidth;
 import jasm.x86.GeneralRegister;
 
-/**
- * Aliases for 64-bit AMD64 general registers to be used as base registers.
- */
-public enum AMD64BaseRegister64 implements GeneralRegister {
-
+/** Aliases for 64-bit AMD64 general registers to be used as base registers. */
+public enum AMD64BaseRegister64
+    implements GeneralRegister {
   RAX_BASE,
   RCX_BASE,
   RDX_BASE,
@@ -33,6 +31,8 @@ public enum AMD64BaseRegister64 implements GeneralRegister {
   R13_BASE,
   R14_BASE,
   R15_BASE;
+
+  public static final SymbolSet<AMD64BaseRegister64> SYMBOLS = SymbolSet.fromEnum(AMD64BaseRegister64.class);
 
   public static AMD64BaseRegister64 from(GeneralRegister generalRegister) {
     return values()[generalRegister.id()];
@@ -61,6 +61,4 @@ public enum AMD64BaseRegister64 implements GeneralRegister {
   public String disassembledValue() {
     return AMD64GeneralRegister64.from(this).disassembledValue();
   }
-
-  public static final SymbolSet<AMD64BaseRegister64> SYMBOLS = SymbolSet.fromEnum(AMD64BaseRegister64.class);
 }

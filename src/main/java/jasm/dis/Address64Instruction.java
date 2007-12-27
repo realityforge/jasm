@@ -11,9 +11,7 @@ package jasm.dis;
 import jasm.tools.ImmediateArgument;
 import jasm.util.HexUtil;
 
-/**
- * Mixin delegation style (for lack of multiple class inheritance in the Java(TM) Programming Language).
- */
+/** Mixin delegation style (for lack of multiple class inheritance in the Java(TM) Programming Language). */
 public interface Address64Instruction extends AddressInstruction {
 
   long address();

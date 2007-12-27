@@ -14,10 +14,9 @@ import jasm.tools.ImmediateArgument;
 import jasm.tools.Template;
 import java.util.List;
 
-/**
- * A assembly instruction in internal format, combined with the bytes that it was disassembled from.
- */
-public abstract class DisassembledInstruction<Template_Type extends Template> implements AssemblyInstruction, AddressInstruction {
+/** A assembly instruction in internal format, combined with the bytes that it was disassembled from. */
+public abstract class DisassembledInstruction<Template_Type extends Template>
+    implements AssemblyInstruction, AddressInstruction {
 
   private final int _startOffset;
   private final byte[] _bytes;

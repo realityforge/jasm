@@ -20,24 +20,16 @@ import jasm.tools.risc.field.OptionField;
  */
 public final class Option {
 
-  /**
-   * The addition to the assembler method's name used to specify this option value.
-   */
+  /** The addition to the assembler method's name used to specify this option value. */
   protected final String _name;
 
-  /**
-   * The addition to the external assembler syntax used to specify this option value.
-   */
+  /** The addition to the external assembler syntax used to specify this option value. */
   protected final String _externalName;
 
-  /**
-   * The value of the option.
-   */
+  /** The value of the option. */
   protected final int _value;
 
-  /**
-   * The field to which this option applies.
-   */
+  /** The field to which this option applies. */
   private final OptionField _field;
 
   public final String name() {

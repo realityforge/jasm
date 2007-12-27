@@ -8,19 +8,13 @@
  */
 package jasm;
 
-/**
- * A runtime argument to an assembler method.
- */
+/** A runtime argument to an assembler method. */
 public interface Argument {
 
-  /**
-   * @return the external assembler syntax for this argument
-   */
+  /** @return the external assembler syntax for this argument */
   String externalValue();
 
-  /**
-   * @return the disassembler syntax for this argument
-   */
+  /** @return the disassembler syntax for this argument */
   String disassembledValue();
 
   /**

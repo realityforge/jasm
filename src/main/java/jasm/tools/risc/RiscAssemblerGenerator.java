@@ -100,9 +100,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
     return writer.lineCount() - startLineCount;
   }
 
-  /**
-   * Prints the reference to the raw method from which a synthetic method was defined.
-   */
+  /** Prints the reference to the raw method from which a synthetic method was defined. */
   @Override
   protected final void printExtraMethodJavadoc(IndentWriter writer, Template_Type template, ArrayList<String> extraLinks) {
     if (template.instructionDescription().isSynthetic()) {

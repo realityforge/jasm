@@ -8,9 +8,7 @@
  */
 package jasm.tools.risc.bitRange;
 
-/**
- * A bit range that has its most significant bit on the left and its least significant bit on the right.
- */
+/** A bit range that has its most significant bit on the left and its least significant bit on the right. */
 public final class DescendingBitRange extends SimpleBitRange {
 
   public DescendingBitRange(int firstIndex, int lastIndex) {

@@ -18,9 +18,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * An assembly framework, instantiated once per instruction set.
- */
+/** An assembly framework, instantiated once per instruction set. */
 public abstract class Assembly<Template_Type extends Template> {
 
   private final InstructionSet _instructionSet;

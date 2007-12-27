@@ -12,9 +12,7 @@ import jasm.AbstractSymbolicArgument;
 import jasm.SymbolSet;
 import java.util.Arrays;
 
-/**
- * The components of the argument to the Memory Barrier (i.e. {@code membar}) instruction.
- */
+/** The components of the argument to the Memory Barrier (i.e. {@code membar}) instruction. */
 public final class MembarOperand extends AbstractSymbolicArgument {
 
   private String _externalName;

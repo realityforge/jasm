@@ -8,14 +8,10 @@
  */
 package jasm.tools;
 
-/**
- * The set of tests that can be performed against a generated assembler.
- */
+/** The set of tests that can be performed against a generated assembler. */
 public enum AssemblyTestComponent {
 
-  /**
-   * Tests that the output of the assembler can be disassembled.
-   */
+  /** Tests that the output of the assembler can be disassembled. */
   DISASSEMBLER,
 
   /**

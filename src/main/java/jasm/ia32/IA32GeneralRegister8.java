@@ -16,13 +16,14 @@ public enum IA32GeneralRegister8 implements GeneralRegister {
   // Note: keep the order such that 'value()' can rely on ordinals:
   AL, CL, DL, BL, AH, CH, DH, BH;
 
+  public static final SymbolSet<IA32GeneralRegister8> SYMBOLS = SymbolSet.fromEnum(IA32GeneralRegister8.class);
+
   private static final IA32GeneralRegister8[] LOW_REGISTERS = {AL, CL, DL, BL};
+  private static final IA32GeneralRegister8[] HIGH_REGISTERS = {AH, CH, DH, BH};
 
   public static IA32GeneralRegister8 lowFrom(GeneralRegister generalRegister) {
     return LOW_REGISTERS[generalRegister.id()];
   }
-
-  private static final IA32GeneralRegister8[] HIGH_REGISTERS = {AH, CH, DH, BH};
 
   public static IA32GeneralRegister8 highFrom(GeneralRegister generalRegister) {
     return HIGH_REGISTERS[generalRegister.id()];
@@ -51,6 +52,4 @@ public enum IA32GeneralRegister8 implements GeneralRegister {
   public String disassembledValue() {
     return name().toLowerCase();
   }
-
-  public static final SymbolSet<IA32GeneralRegister8> SYMBOLS = SymbolSet.fromEnum(IA32GeneralRegister8.class);
 }

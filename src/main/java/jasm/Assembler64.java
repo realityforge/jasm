@@ -8,9 +8,7 @@
  */
 package jasm;
 
-/**
- * Assemblers for 64-bit address spaces.
- */
+/** Assemblers for 64-bit address spaces. */
 public interface Assembler64 {
 
   /**

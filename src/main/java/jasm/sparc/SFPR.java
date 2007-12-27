@@ -12,9 +12,7 @@ import jasm.SymbolSet;
 import jasm.SymbolicArgument;
 import jasm.util.Nameable;
 
-/**
- * The single-precision (32-bit) floating-point registers.
- */
+/** The single-precision (32-bit) floating-point registers. */
 public interface SFPR extends Nameable, SymbolicArgument {
   SFPR F0 = FPR.F0;
   SFPR F1 = FPR.F1;

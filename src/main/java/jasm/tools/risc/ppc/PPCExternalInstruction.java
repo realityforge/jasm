@@ -14,9 +14,7 @@ import jasm.dis.GlobalLabelMapper;
 import jasm.tools.risc.RiscExternalInstruction;
 import java.util.List;
 
-/**
- * Output of PowerPC instructions in external assembler format.
- */
+/** Output of PowerPC instructions in external assembler format. */
 public final class PPCExternalInstruction extends RiscExternalInstruction {
 
   public PPCExternalInstruction(PPCTemplate template, List<Argument> arguments) {

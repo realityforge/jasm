@@ -10,9 +10,7 @@ package jasm.sparc;
 
 import jasm.SymbolSet;
 
-/**
- * The quad-precision (128-bit) floating-point registers.
- */
+/** The quad-precision (128-bit) floating-point registers. */
 public interface QFPR extends DFPR {
   QFPR F0 = FPR.F0;
   QFPR F4 = FPR.F4;

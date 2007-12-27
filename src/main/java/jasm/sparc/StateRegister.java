@@ -11,9 +11,7 @@ package jasm.sparc;
 import jasm.AbstractSymbolicArgument;
 import jasm.SymbolSet;
 
-/**
- * The argument to the Write State Register and Read State Register instructions.
- */
+/** The argument to the Write State Register and Read State Register instructions. */
 public class StateRegister extends AbstractSymbolicArgument {
 
   StateRegister(int value) {
@@ -26,9 +24,7 @@ public class StateRegister extends AbstractSymbolicArgument {
     }
   }
 
-  /**
-   * @return true if this is the Y register or an Ancillary State register
-   */
+  /** @return true if this is the Y register or an Ancillary State register */
   public final boolean isYorASR() {
     return this == Y || value() >= 16 && value() <= 31;
   }

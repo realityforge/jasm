@@ -14,9 +14,7 @@ import jasm.dis.GlobalLabelMapper;
 import jasm.tools.risc.RiscExternalInstruction;
 import java.util.List;
 
-/**
- * Output of SPARC instructions in external assembler format.
- */
+/** Output of SPARC instructions in external assembler format. */
 public final class SPARCExternalInstruction extends RiscExternalInstruction {
 
   public SPARCExternalInstruction(SPARCTemplate template, List<Argument> arguments) {

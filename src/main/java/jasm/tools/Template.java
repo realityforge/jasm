@@ -13,18 +13,14 @@ import jasm.tools.util.CollectionUtil;
 import java.lang.reflect.Method;
 import java.util.List;
 
-/**
- * An internal representation of an assembler method.
- */
+/** An internal representation of an assembler method. */
 public abstract class Template implements Cloneable, Comparable<Template> {
 
   private int _serial = -1;
   private InstructionDescription _instructionDescription;
   private int _labelParameterIndex = -1;
   protected Method _assemblerMethod;
-  /**
-   * The name of the Java method that will be created from this template.
-   */
+  /** The name of the Java method that will be created from this template. */
   private String _internalName;
 
   protected Template(InstructionDescription instructionDescription) {
@@ -52,9 +48,7 @@ public abstract class Template implements Cloneable, Comparable<Template> {
     return _labelParameterIndex;
   }
 
-  /**
-   * Call this right before adding a parameter that may be represented by a label.
-   */
+  /** Call this right before adding a parameter that may be represented by a label. */
   protected final void setLabelParameterIndex() {
     if (_labelParameterIndex != -1) {
       throw new IllegalStateException("a template can have at most one label parameter");

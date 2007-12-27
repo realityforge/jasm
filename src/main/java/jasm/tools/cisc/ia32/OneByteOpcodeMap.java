@@ -26,9 +26,7 @@ import static jasm.x86.SegmentRegister.DS;
 import static jasm.x86.SegmentRegister.ES;
 import static jasm.x86.SegmentRegister.SS;
 
-/**
- * Representation of the ...
- */
+/** Representation of the ... */
 final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
 
   private void create_low() {

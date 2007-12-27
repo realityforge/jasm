@@ -8,9 +8,7 @@
  */
 package jasm.tools.cisc.x86;
 
-/**
- * The place/field into which the argument value passed to a parameter is to be assembled.
- */
+/** The place/field into which the argument value passed to a parameter is to be assembled. */
 public enum ParameterPlace {
   MOD_REG("reg field of the modR/M byte"),
   MOD_REG_REXR("mod field extension by REX.R bit"),
