@@ -45,6 +45,10 @@ public abstract class X86Template extends Template implements X86InstructionDesc
   private ArrayList<X86ImplicitOperand> _implicitOperands = new ArrayList<X86ImplicitOperand>(MAX_NUM_OF_IMPLICIT_OPERANDS);
   private ArrayList<X86Parameter> _parameters = new ArrayList<X86Parameter>(MAX_NUM_OF_PARAMETERS);
   protected boolean _isLabelMethodWritten;
+  private String _namePrefix = "";
+  private String _assemblerMethodName;
+  private String _internalOperandTypeSuffix;
+  private String _externalOperandTypeSuffix;
 
   protected X86Template(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {
     super(instructionDescription, serial);
@@ -163,15 +167,11 @@ public abstract class X86Template extends Template implements X86InstructionDesc
            _operands + ">";
   }
 
-  private String _namePrefix = "";
-
   protected final void useNamePrefix(String namePrefix) {
     if (_namePrefix.length() == 0) {
       _namePrefix = namePrefix;
     }
   }
-
-  private String _assemblerMethodName;
 
   @Override
   public final String assemblerMethodName() {
@@ -296,8 +296,6 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     }
   }
 
-  private String _externalOperandTypeSuffix;
-
   private void setExternalOperandTypeSuffix(String suffix) {
     checkSuffix(suffix, _externalOperandTypeSuffix);
     _externalOperandTypeSuffix = suffix;
@@ -306,8 +304,6 @@ public abstract class X86Template extends Template implements X86InstructionDesc
   protected final void setExternalOperandTypeSuffix(OperandTypeCode operandTypeCode) throws TemplateNotNeededException {
     setExternalOperandTypeSuffix(getOperandTypeSuffix(operandTypeCode));
   }
-
-  private String _internalOperandTypeSuffix;
 
   protected final void setOperandTypeSuffix(String suffix) {
     setExternalOperandTypeSuffix(suffix);
