@@ -227,7 +227,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
     parameter.excludeTestArguments(testArgumentExclusion);
   }
 
-  protected final <EnumerableArgument_Type extends EnumerableArgument> X86Parameter addEnumerableParameter(Designation designation, ParameterPlace parameterPlace,
+  protected final <EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument> X86Parameter addEnumerableParameter(Designation designation, ParameterPlace parameterPlace,
                                                                                                            final SymbolSet<EnumerableArgument_Type> enumerator) {
     return addParameter(new X86EnumerableParameter<EnumerableArgument_Type>(designation, parameterPlace, enumerator));
   }
