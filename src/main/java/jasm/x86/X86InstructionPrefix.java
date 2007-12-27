@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.tools.cisc.x86;
+package jasm.x86;
 
 import jasm.Symbol;
 import jasm.util.HexByte;

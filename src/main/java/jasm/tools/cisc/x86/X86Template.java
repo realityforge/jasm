@@ -24,6 +24,7 @@ import jasm.util.HexByte;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
 import jasm.x86.SegmentRegister;
+import jasm.x86.X86InstructionPrefix;
 import java.util.ArrayList;
 import java.util.List;
 

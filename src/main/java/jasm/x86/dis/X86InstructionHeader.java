@@ -10,7 +10,7 @@ package jasm.x86.dis;
 
 import jasm.WordWidth;
 import jasm.tools.Assembly;
-import jasm.tools.cisc.x86.X86InstructionPrefix;
+import jasm.x86.X86InstructionPrefix;
 import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
 import jasm.util.HexByte;

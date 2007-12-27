@@ -9,6 +9,7 @@
 package jasm.tools.cisc.x86;
 
 import jasm.WordWidth;
+import jasm.x86.X86InstructionPrefix;
 import jasm.tools.InstructionDescription;
 import jasm.tools.InstructionDescriptionCreator;
 import jasm.tools.Trace;

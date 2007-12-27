@@ -12,6 +12,7 @@ import jasm.EnumerableArgument;
 import jasm.LabelAddressInstruction;
 import jasm.LabelOffsetInstruction;
 import jasm.WordWidth;
+import jasm.x86.X86InstructionPrefix;
 import jasm.amd64.AMD64GeneralRegister8;
 import jasm.tools.Assembly;
 import jasm.tools.Parameter;

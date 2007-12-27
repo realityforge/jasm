@@ -22,7 +22,7 @@ import jasm.tools.cisc.x86.X86AddressParameter;
 import jasm.tools.cisc.x86.X86Assembly;
 import jasm.tools.cisc.x86.X86DisplacementParameter;
 import jasm.tools.cisc.x86.X86ImmediateParameter;
-import jasm.tools.cisc.x86.X86InstructionPrefix;
+import jasm.x86.X86InstructionPrefix;
 import jasm.tools.cisc.x86.X86OffsetParameter;
 import jasm.tools.cisc.x86.X86Opcode;
 import jasm.tools.cisc.x86.X86Operand;

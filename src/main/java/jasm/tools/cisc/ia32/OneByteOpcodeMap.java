@@ -18,7 +18,7 @@ import static jasm.tools.cisc.x86.OperandCode.*;
 import static jasm.tools.cisc.x86.OperandTypeCode.b;
 import static jasm.tools.cisc.x86.OperandTypeCode.v;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
-import jasm.tools.cisc.x86.X86InstructionPrefix;
+import jasm.x86.X86InstructionPrefix;
 import jasm.tools.cisc.x86.X86RegisterOperandCode;
 import static jasm.util.HexByte.*;
 import static jasm.x86.SegmentRegister.CS;

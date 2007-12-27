@@ -16,7 +16,7 @@ import jasm.tools.cisc.x86.ModCase;
 import static jasm.tools.cisc.x86.OperandCode.*;
 import jasm.tools.cisc.x86.X86InstructionDescription;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
-import jasm.tools.cisc.x86.X86InstructionPrefix;
+import jasm.x86.X86InstructionPrefix;
 import jasm.util.ArrayUtil;
 import static jasm.util.HexByte.*;
 import static jasm.x86.SegmentRegister.FS;
