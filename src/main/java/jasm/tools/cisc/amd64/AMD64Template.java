@@ -31,7 +31,6 @@ import jasm.tools.cisc.x86.InstructionAssessment;
 import jasm.tools.cisc.x86.ModCase;
 import jasm.tools.cisc.x86.OperandCode;
 import jasm.tools.cisc.x86.ParameterPlace;
-import jasm.tools.cisc.x86.RegisterOperandCode;
 import jasm.tools.cisc.x86.X86AddressParameter;
 import jasm.tools.cisc.x86.X86DisplacementParameter;
 import jasm.tools.cisc.x86.X86EnumerableParameter;
@@ -41,6 +40,7 @@ import jasm.tools.cisc.x86.X86InstructionDescription;
 import jasm.tools.cisc.x86.X86OffsetParameter;
 import jasm.tools.cisc.x86.X86Template;
 import jasm.tools.cisc.x86.X86TemplateContext;
+import jasm.tools.cisc.x86.X86RegisterOperandCode;
 import jasm.x86.ControlRegister;
 import jasm.x86.DebugRegister;
 import jasm.x86.GeneralRegister;
@@ -578,16 +578,16 @@ public final class AMD64Template extends X86Template {
     }
   }
 
-  public final void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, Designation designation, ExternalPresence externalPresence) {
+  public final void visitRegisterOperandCode(X86RegisterOperandCode registerOperandCode, Designation designation, ExternalPresence externalPresence) {
     switch (operandSizeAttribute()) {
       case BITS_16:
-        addImplicitOperand(new X86ImplicitOperand(designation, externalPresence, AMD64GeneralRegister16.values()[registerOperandCode.id()]));
+        addImplicitOperand(new X86ImplicitOperand(designation, externalPresence, AMD64GeneralRegister16.values()[registerOperandCode.regField()]));
         break;
       case BITS_32:
-        addImplicitOperand(new X86ImplicitOperand(designation, externalPresence, AMD64GeneralRegister32.values()[registerOperandCode.id()]));
+        addImplicitOperand(new X86ImplicitOperand(designation, externalPresence, AMD64GeneralRegister32.values()[registerOperandCode.regField()]));
         break;
       case BITS_64:
-        addImplicitOperand(new X86ImplicitOperand(designation, externalPresence, AMD64GeneralRegister64.values()[registerOperandCode.id()]));
+        addImplicitOperand(new X86ImplicitOperand(designation, externalPresence, AMD64GeneralRegister64.values()[registerOperandCode.regField()]));
         break;
       default:
         throw new IllegalStateException();

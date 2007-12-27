@@ -51,7 +51,7 @@ import static jasm.tools.cisc.x86.OperandCode.Mw;
 import static jasm.tools.cisc.x86.OperandCode.PRq;
 import static jasm.tools.cisc.x86.OperandCode.Rv;
 import static jasm.tools.cisc.x86.OperandTypeCode.v;
-import static jasm.tools.cisc.x86.RegisterOperandCode.eAX;
+import jasm.tools.cisc.x86.X86RegisterOperandCode;
 import java.util.Arrays;
 
 /**
@@ -95,10 +95,10 @@ public enum IA32ModRMGroup implements ModRMGroup {
       modRM(ModRMGroup.Opcode._1, "TEST", Ev.excludeExternalTestArguments(AX, EAX), Iv),
       modRM(ModRMGroup.Opcode._2, "NOT", Ev),
       modRM(ModRMGroup.Opcode._3, "NEG", Ev),
-      modRM(ModRMGroup.Opcode._4, "MUL", Ev, eAX.omitExternally()),
-      modRM(ModRMGroup.Opcode._5, "IMUL", Ev, eAX.omitExternally()),
-      modRM(ModRMGroup.Opcode._6, "DIV", Ev, eAX.omitExternally()),
-      modRM(ModRMGroup.Opcode._7, "IDIV", Ev, eAX.omitExternally())
+      modRM(ModRMGroup.Opcode._4, "MUL", Ev, new ExternalOmission(X86RegisterOperandCode.EAX)),
+      modRM(ModRMGroup.Opcode._5, "IMUL", Ev, new ExternalOmission(X86RegisterOperandCode.EAX)),
+      modRM(ModRMGroup.Opcode._6, "DIV", Ev, new ExternalOmission(X86RegisterOperandCode.EAX)),
+      modRM(ModRMGroup.Opcode._7, "IDIV", Ev, new ExternalOmission(X86RegisterOperandCode.EAX))
   ),
   GROUP_4(
       modRM(ModRMGroup.Opcode._0, "INC"),

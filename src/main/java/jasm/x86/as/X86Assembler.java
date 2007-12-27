@@ -11,6 +11,13 @@ public abstract class X86Assembler
   }
 
   @Inline
+  protected final void emitOpcode2(final boolean operandSizePrefix, final byte opcode2) {
+    if (operandSizePrefix) emitByte(((byte) 0x66)); // operand size prefix
+    emitByte((byte) (0x0F)); // opcode1
+    emitByte(opcode2);
+  }
+
+  @Inline
   protected final void emitModRM(final int mod, final int rm, final int reg) {
     byte modRMByte = (byte) ((mod & 3) << 6); // mod field
     modRMByte |= (rm & 7); // rm field

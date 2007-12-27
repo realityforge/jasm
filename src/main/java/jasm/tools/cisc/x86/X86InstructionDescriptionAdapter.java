@@ -33,7 +33,7 @@ public class X86InstructionDescriptionAdapter
   public final void visitOperandTypeCode(OperandTypeCode operandTypeCode) {
   }
 
-  public void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, Designation designation, ExternalPresence externalPresence) {
+  public void visitRegisterOperandCode(X86RegisterOperandCode registerOperandCode, Designation designation, ExternalPresence externalPresence) {
   }
 
   public final void visitGeneralRegister(GeneralRegister generalRegister, Designation designation, ExternalPresence externalPresence) {

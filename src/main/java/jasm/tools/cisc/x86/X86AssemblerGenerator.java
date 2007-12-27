@@ -8,7 +8,6 @@
  */
 package jasm.tools.cisc.x86;
 
-import jasm.Assembler;
 import jasm.EnumerableArgument;
 import jasm.LabelAddressInstruction;
 import jasm.LabelOffsetInstruction;
@@ -21,7 +20,6 @@ import jasm.util.ArrayUtil;
 import jasm.util.Enums;
 import jasm.util.HexUtil;
 import jasm.util.StaticLoophole;
-import jasm.x86.as.X86Assembler;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -134,8 +132,10 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     return _promoteEnumerableParameters ? parameter.variableName() : parameter.valueString();
   }
 
-  private void printOpcode(IndentWriter writer, Template_Type template, String opcodeVarName,
-                           final ParameterPlace parameterPlace32, ParameterPlace parameterPlace64) {
+  private void printOpcode(IndentWriter writer, Template_Type template,
+                           String opcodeVarName,
+                           final ParameterPlace parameterPlace32,
+                           ParameterPlace parameterPlace64) {
     String comment = "";
     String opcodeVariableName = opcodeVarName;
     for (X86Parameter parameter : template.parameters()) {

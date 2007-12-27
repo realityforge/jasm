@@ -32,7 +32,7 @@ public interface X86InstructionDescriptionVisitor {
 
   void visitOperandTypeCode(OperandTypeCode operandTypeCode) throws TemplateNotNeededException;
 
-  void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, Designation designation, ExternalPresence externalPresence);
+  void visitRegisterOperandCode(X86RegisterOperandCode registerOperandCode, Designation designation, ExternalPresence externalPresence);
 
   void visitGeneralRegister(GeneralRegister generalRegister, Designation designation, ExternalPresence externalPresence);
 
@@ -71,8 +71,8 @@ public interface X86InstructionDescriptionVisitor {
       } else if (specification instanceof OperandTypeCode) {
         visitor.visitOperandTypeCode((OperandTypeCode) specification);
         return false;
-      } else if (specification instanceof RegisterOperandCode) {
-        visitor.visitRegisterOperandCode((RegisterOperandCode) specification, designation, externalPresence);
+      } else if (specification instanceof X86RegisterOperandCode) {
+        visitor.visitRegisterOperandCode((X86RegisterOperandCode) specification, designation, externalPresence);
         return true;
       } else if (specification instanceof GeneralRegister) {
         visitor.visitGeneralRegister((GeneralRegister) specification, designation, externalPresence);

@@ -67,10 +67,9 @@ import static jasm.tools.cisc.x86.OperandCode.Yv;
 import static jasm.tools.cisc.x86.OperandCode.Yz;
 import static jasm.tools.cisc.x86.OperandTypeCode.b;
 import static jasm.tools.cisc.x86.OperandTypeCode.v;
-import static jasm.tools.cisc.x86.RegisterOperandCode.eAX;
-import static jasm.tools.cisc.x86.RegisterOperandCode.rAX;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
 import jasm.tools.cisc.x86.X86InstructionPrefix;
+import jasm.tools.cisc.x86.X86RegisterOperandCode;
 import static jasm.util.HexByte._00;
 import static jasm.util.HexByte._01;
 import static jasm.util.HexByte._02;
@@ -251,28 +250,28 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_02, "ADD", Gb, Eb);
     define(_03, "ADD", Gv, Ev);
     define(_04, "ADD", AL, Ib);
-    define(_05, "ADD", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
+    define(_05, "ADD", X86RegisterOperandCode.RAX, Iz.externalRange(0, Integer.MAX_VALUE));
 
     define(_10, "ADC", Eb, Gb);
     define(_11, "ADC", Ev, Gv);
     define(_12, "ADC", Gb, Eb);
     define(_13, "ADC", Gv, Ev);
     define(_14, "ADC", AL, Ib);
-    define(_15, "ADC", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
+    define(_15, "ADC", X86RegisterOperandCode.RAX, Iz.externalRange(0, Integer.MAX_VALUE));
 
     define(_20, "AND", Eb, Gb);
     define(_21, "AND", Ev, Gv);
     define(_22, "AND", Gb, Eb);
     define(_23, "AND", Gv, Ev);
     define(_24, "AND", AL, Ib);
-    define(_25, "AND", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
+    define(_25, "AND", X86RegisterOperandCode.RAX, Iz.externalRange(0, Integer.MAX_VALUE));
 
     define(_30, "XOR", Eb, Gb);
     define(_31, "XOR", Ev, Gv);
     define(_32, "XOR", Gb, Eb);
     define(_33, "XOR", Gv, Ev);
     define(_34, "XOR", AL, Ib);
-    define(_35, "XOR", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
+    define(_35, "XOR", X86RegisterOperandCode.RAX, Iz.externalRange(0, Integer.MAX_VALUE));
 
     define(_50, "PUSH", Gov).setDefaultOperandSize(WordWidth.BITS_64);
 
@@ -302,12 +301,12 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_87, "XCHG", Ev.excludeExternalTestArguments(AX, EAX, RAX), Gv.excludeExternalTestArguments(AX, EAX, RAX));
 
     define(_90, "NOP");
-    define(_90, "XCHG", Gov.excludeDisassemblerTestArguments(AX, EAX, RAX), rAX).beNotExternallyTestable();
+    define(_90, "XCHG", Gov.excludeDisassemblerTestArguments(AX, EAX, RAX), X86RegisterOperandCode.RAX).beNotExternallyTestable();
 
     define(_A0, "MOV", AL, Ob).beNotExternallyTestable();
-    define(_A1, "MOV", rAX, Ov).beNotExternallyTestable();
+    define(_A1, "MOV", X86RegisterOperandCode.RAX, Ov).beNotExternallyTestable();
     define(_A2, "MOV", Ob, AL).beNotExternallyTestable();
-    define(_A3, "MOV", Ov, rAX).beNotExternallyTestable();
+    define(_A3, "MOV", Ov, X86RegisterOperandCode.RAX).beNotExternallyTestable();
     define(_A4, "MOVS", Yb, Xb);
     define(_A5, "MOVS", Yv, Xv);
     define(_A6, "CMPS", Yb, Xb);
@@ -334,9 +333,9 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_E3, "JECXZ", Jb).requireAddressSize(WordWidth.BITS_32);
     define(_E3, "JRCXZ", Jb).requireAddressSize(WordWidth.BITS_64);
     define(_E4, "IN", AL, Ib);
-    define(_E5, "IN", eAX, Ib);
+    define(_E5, "IN", X86RegisterOperandCode.EAX, Ib);
     define(_E6, "OUT", Ib, AL);
-    define(_E7, "OUT", Ib, eAX);
+    define(_E7, "OUT", Ib, X86RegisterOperandCode.EAX);
 
     define(X86InstructionPrefix.LOCK.getValue(), "LOCK").beAPrefix();
     define(_F1, "INT", 1).beNotExternallyTestable(); // is this correct? - gas uses 0xCD
@@ -354,21 +353,21 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_0A, "OR", Gb, Eb);
     define(_0B, "OR", Gv, Ev);
     define(_0C, "OR", AL, Ib);
-    define(_0D, "OR", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
+    define(_0D, "OR", X86RegisterOperandCode.RAX, Iz.externalRange(0, Integer.MAX_VALUE));
 
     define(_18, "SBB", Eb, Gb);
     define(_19, "SBB", Ev, Gv);
     define(_1A, "SBB", Gb, Eb);
     define(_1B, "SBB", Gv, Ev);
     define(_1C, "SBB", AL, Ib);
-    define(_1D, "SBB", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
+    define(_1D, "SBB", X86RegisterOperandCode.RAX, Iz.externalRange(0, Integer.MAX_VALUE));
 
     define(_28, "SUB", Eb, Gb);
     define(_29, "SUB", Ev, Gv);
     define(_2A, "SUB", Gb, Eb);
     define(_2B, "SUB", Gv, Ev);
     define(_2C, "SUB", AL, Ib);
-    define(_2D, "SUB", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
+    define(_2D, "SUB", X86RegisterOperandCode.RAX, Iz.externalRange(0, Integer.MAX_VALUE));
     define(X86InstructionPrefix.SEG_CS.getValue(), "SEG_CS").beAPrefix();
     define(_2F, "DAS").beNotExternallyTestable(); // not defined in 64 bit mode and so 'as -64' rejects it
 
@@ -377,7 +376,7 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_3A, "CMP", Gb, Eb);
     define(_3B, "CMP", Gv, Ev);
     define(_3C, "CMP", AL, Ib);
-    define(_3D, "CMP", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
+    define(_3D, "CMP", X86RegisterOperandCode.RAX, Iz.externalRange(0, Integer.MAX_VALUE));
 
     define(_58, "POP", Gov).setDefaultOperandSize(WordWidth.BITS_64);
 
@@ -419,7 +418,7 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_9F, "LAHF").beNotExternallyTestable(); // not available by gas, depends on CPUID
 
     define(_A8, "TEST", AL, Ib);
-    define(_A9, "TEST", rAX, Iz.externalRange(0, Integer.MAX_VALUE));
+    define(_A9, "TEST", X86RegisterOperandCode.RAX, Iz.externalRange(0, Integer.MAX_VALUE));
     define(_AA, "STOS", Yb);
     define(_AB, "STOS", Yv);
     define(_AC, "LODS", Xb);
@@ -452,9 +451,9 @@ public final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_E9, "JMP", Jz).setDefaultOperandSize(WordWidth.BITS_64);
     define(_EB, "JMP", Jb).setDefaultOperandSize(WordWidth.BITS_64);
     define(_EC, "IN", AL, DX);
-    define(_ED, "IN", eAX, DX);
+    define(_ED, "IN", X86RegisterOperandCode.EAX, DX);
     define(_EE, "OUT", DX, AL);
-    define(_EF, "OUT", DX, eAX);
+    define(_EF, "OUT", DX, X86RegisterOperandCode.EAX);
 
     define(_F8, "CLC");
     define(_F9, "STC");

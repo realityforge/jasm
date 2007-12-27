@@ -75,7 +75,7 @@ public final class OpcodeAssessor extends X86InstructionDescriptionAdapter {
   }
 
   @Override
-  public final void visitRegisterOperandCode(RegisterOperandCode registerOperandCode, Designation position, ExternalPresence externalPresence) {
+  public final void visitRegisterOperandCode(X86RegisterOperandCode registerOperandCode, Designation position, ExternalPresence externalPresence) {
     _instructionFamily.haveOperandSizeVariants();
   }
 
