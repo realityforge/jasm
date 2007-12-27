@@ -39,7 +39,7 @@
     <sequential>
       <delete dir="${generated.java}/jasm/@{isa}/as"/>
       <mkdir dir="${generated.java}/jasm/@{isa}/as"/>
-      <java classname="jasm.tools.gen.as.Main" classpath="${output.main.classes}:${cli.jar}" failonerror="true">
+      <java classname="jasm.tools.gen.as.Main" classpath="${output.main.classes}:${cli.jar}" failonerror="true" fork="true">
         <arg line="-d ${generated.java} --isa @{isa}"/>
       </java>
     </sequential>
