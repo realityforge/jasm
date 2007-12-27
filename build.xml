@@ -129,7 +129,6 @@
       </classpath>
       <batchtest todir="${output.unit.test.reports}">
         <fileset dir="${test.src.java}">
-          <exclude name="**/SpeedTest.java"/>
           <include name="**/*Test.java"/>
         </fileset>
       </batchtest>
