@@ -9,12 +9,12 @@
 package jasm.tools.cisc.amd64;
 
 import jasm.amd64.AMD64GeneralRegister16;
-import static jasm.amd64.AMD64GeneralRegister16.AX;
+import static jasm.amd64.AMD64GeneralRegister16.*;
 import jasm.amd64.AMD64GeneralRegister32;
-import static jasm.amd64.AMD64GeneralRegister32.EAX;
+import static jasm.amd64.AMD64GeneralRegister32.*;
 import jasm.amd64.AMD64GeneralRegister64;
-import static jasm.amd64.AMD64GeneralRegister64.RAX;
-import static jasm.amd64.AMD64GeneralRegister8.AL;
+import static jasm.amd64.AMD64GeneralRegister64.*;
+import static jasm.amd64.AMD64GeneralRegister8.*;
 import jasm.tools.ExternalOmission;
 import static jasm.tools.cisc.x86.AddressingMethodCode.M;
 import static jasm.tools.cisc.x86.FloatingPointOperandCode.bytes_14_28;
@@ -30,20 +30,7 @@ import static jasm.tools.cisc.x86.FloatingPointOperandCode.word_integer;
 import jasm.tools.cisc.x86.ModCase;
 import jasm.tools.cisc.x86.ModRMDescription;
 import jasm.tools.cisc.x86.ModRMGroup;
-import static jasm.tools.cisc.x86.OperandCode.Eb;
-import static jasm.tools.cisc.x86.OperandCode.Ev;
-import static jasm.tools.cisc.x86.OperandCode.Ew;
-import static jasm.tools.cisc.x86.OperandCode.Ib;
-import static jasm.tools.cisc.x86.OperandCode.Iz;
-import static jasm.tools.cisc.x86.OperandCode.Mb;
-import static jasm.tools.cisc.x86.OperandCode.Md;
-import static jasm.tools.cisc.x86.OperandCode.Mdq;
-import static jasm.tools.cisc.x86.OperandCode.Mq;
-import static jasm.tools.cisc.x86.OperandCode.Ms;
-import static jasm.tools.cisc.x86.OperandCode.Mw;
-import static jasm.tools.cisc.x86.OperandCode.PRq;
-import static jasm.tools.cisc.x86.OperandCode.Rv;
-import static jasm.tools.cisc.x86.OperandCode.Udq;
+import static jasm.tools.cisc.x86.OperandCode.*;
 import static jasm.tools.cisc.x86.OperandTypeCode.v;
 import java.util.Arrays;
 

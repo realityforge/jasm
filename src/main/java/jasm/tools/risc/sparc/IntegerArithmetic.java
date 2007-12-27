@@ -8,22 +8,7 @@
  */
 package jasm.tools.risc.sparc;
 
-import static jasm.tools.risc.sparc.SPARCFields.i;
-import static jasm.tools.risc.sparc.SPARCFields.imm22;
-import static jasm.tools.risc.sparc.SPARCFields.op;
-import static jasm.tools.risc.sparc.SPARCFields.op2;
-import static jasm.tools.risc.sparc.SPARCFields.op3;
-import static jasm.tools.risc.sparc.SPARCFields.rd;
-import static jasm.tools.risc.sparc.SPARCFields.res_11_5;
-import static jasm.tools.risc.sparc.SPARCFields.res_11_6;
-import static jasm.tools.risc.sparc.SPARCFields.res_12_5;
-import static jasm.tools.risc.sparc.SPARCFields.res_18_14;
-import static jasm.tools.risc.sparc.SPARCFields.rs1;
-import static jasm.tools.risc.sparc.SPARCFields.rs2;
-import static jasm.tools.risc.sparc.SPARCFields.shcnt32;
-import static jasm.tools.risc.sparc.SPARCFields.shcnt64;
-import static jasm.tools.risc.sparc.SPARCFields.simm13;
-import static jasm.tools.risc.sparc.SPARCFields.x;
+import static jasm.tools.risc.sparc.SPARCFields.*;
 
 final class IntegerArithmetic extends SPARCInstructionDescriptionCreator {
 

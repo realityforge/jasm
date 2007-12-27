@@ -8,21 +8,7 @@
  */
 package jasm.tools.risc.sparc;
 
-import static jasm.tools.risc.sparc.SPARCFields.dfrd;
-import static jasm.tools.risc.sparc.SPARCFields.fcn;
-import static jasm.tools.risc.sparc.SPARCFields.i;
-import static jasm.tools.risc.sparc.SPARCFields.immAsi;
-import static jasm.tools.risc.sparc.SPARCFields.op;
-import static jasm.tools.risc.sparc.SPARCFields.op3;
-import static jasm.tools.risc.sparc.SPARCFields.qfrd;
-import static jasm.tools.risc.sparc.SPARCFields.rd;
-import static jasm.tools.risc.sparc.SPARCFields.rd_even;
-import static jasm.tools.risc.sparc.SPARCFields.res_12_5;
-import static jasm.tools.risc.sparc.SPARCFields.res_29_25;
-import static jasm.tools.risc.sparc.SPARCFields.rs1;
-import static jasm.tools.risc.sparc.SPARCFields.rs2;
-import static jasm.tools.risc.sparc.SPARCFields.sfrd;
-import static jasm.tools.risc.sparc.SPARCFields.simm13;
+import static jasm.tools.risc.sparc.SPARCFields.*;
 
 final class MemoryAccess extends SPARCInstructionDescriptionCreator {
 

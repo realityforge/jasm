@@ -17,18 +17,7 @@ import static jasm.sparc.ICCOperand.XCC;
 import jasm.sparc.StateRegister;
 import static jasm.tools.InstructionConstraint.Static.getPredicateMethod;
 import static jasm.tools.InstructionConstraint.Static.makePredicate;
-import static jasm.tools.risc.sparc.SPARCFields.a;
-import static jasm.tools.risc.sparc.SPARCFields.cc;
-import static jasm.tools.risc.sparc.SPARCFields.i;
-import static jasm.tools.risc.sparc.SPARCFields.imm22;
-import static jasm.tools.risc.sparc.SPARCFields.immAsi;
-import static jasm.tools.risc.sparc.SPARCFields.p;
-import static jasm.tools.risc.sparc.SPARCFields.rd;
-import static jasm.tools.risc.sparc.SPARCFields.rd_state;
-import static jasm.tools.risc.sparc.SPARCFields.rs1;
-import static jasm.tools.risc.sparc.SPARCFields.rs1_state;
-import static jasm.tools.risc.sparc.SPARCFields.rs2;
-import static jasm.tools.risc.sparc.SPARCFields.simm13;
+import static jasm.tools.risc.sparc.SPARCFields.*;
 
 /**
  * Simple synthetic SPARC instructions.

@@ -8,19 +8,7 @@
  */
 package jasm.tools.risc.sparc;
 
-import static jasm.tools.risc.sparc.SPARCFields.fcnc;
-import static jasm.tools.risc.sparc.SPARCFields.i;
-import static jasm.tools.risc.sparc.SPARCFields.op;
-import static jasm.tools.risc.sparc.SPARCFields.op3;
-import static jasm.tools.risc.sparc.SPARCFields.rd;
-import static jasm.tools.risc.sparc.SPARCFields.res_12_0;
-import static jasm.tools.risc.sparc.SPARCFields.res_12_5;
-import static jasm.tools.risc.sparc.SPARCFields.res_18_0;
-import static jasm.tools.risc.sparc.SPARCFields.res_18_14;
-import static jasm.tools.risc.sparc.SPARCFields.res_29_25;
-import static jasm.tools.risc.sparc.SPARCFields.rs1;
-import static jasm.tools.risc.sparc.SPARCFields.rs2;
-import static jasm.tools.risc.sparc.SPARCFields.simm13;
+import static jasm.tools.risc.sparc.SPARCFields.*;
 
 public final class RegisterWindowManagement extends SPARCInstructionDescriptionCreator {
 

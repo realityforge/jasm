@@ -9,18 +9,9 @@
 package jasm.tools.cisc.amd64.performance;
 
 import jasm.Label;
-import static jasm.amd64.AMD64GeneralRegister32.EBX;
-import static jasm.amd64.AMD64GeneralRegister32.ECX;
-import static jasm.amd64.AMD64GeneralRegister64.RAX;
-import static jasm.amd64.AMD64GeneralRegister64.RBP;
-import static jasm.amd64.AMD64GeneralRegister64.RBX;
-import static jasm.amd64.AMD64GeneralRegister64.RCX;
-import static jasm.amd64.AMD64GeneralRegister64.RDX;
-import static jasm.amd64.AMD64GeneralRegister8.AH;
-import static jasm.amd64.AMD64GeneralRegister8.BH;
-import static jasm.amd64.AMD64GeneralRegister8.BL;
-import static jasm.amd64.AMD64GeneralRegister8.CL;
-import static jasm.amd64.AMD64GeneralRegister8.DL;
+import static jasm.amd64.AMD64GeneralRegister32.*;
+import static jasm.amd64.AMD64GeneralRegister64.*;
+import static jasm.amd64.AMD64GeneralRegister8.*;
 import static jasm.amd64.AMD64IndexRegister64.RBX_INDEX;
 import jasm.amd64.as.AMD64Assembler;
 import jasm.amd64.dis.AMD64Disassembler;

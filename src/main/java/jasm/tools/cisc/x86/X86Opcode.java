@@ -9,14 +9,7 @@
 package jasm.tools.cisc.x86;
 
 import jasm.util.HexByte;
-import static jasm.util.HexByte._D8;
-import static jasm.util.HexByte._D9;
-import static jasm.util.HexByte._DA;
-import static jasm.util.HexByte._DB;
-import static jasm.util.HexByte._DC;
-import static jasm.util.HexByte._DD;
-import static jasm.util.HexByte._DE;
-import static jasm.util.HexByte._DF;
+import static jasm.util.HexByte.*;
 import java.util.EnumSet;
 
 /**
