@@ -15,6 +15,7 @@ import jasm.WordWidth;
 import jasm.dis.AbstractionPreference;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.Disassembler;
+import jasm.dis.DecoderException;
 import jasm.tools.ArgumentRange;
 import jasm.tools.Assembly;
 import jasm.tools.AssemblyTestComponent;
@@ -240,7 +241,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
   }
 
   private void testDisassembler(Template_Type template, List<Argument> argumentList, byte[] internalResult)
-      throws IOException, AssemblyException {
+      throws IOException, AssemblyException, DecoderException {
     final BufferedInputStream disassemblyStream = new BufferedInputStream(new ByteArrayInputStream(internalResult));
     final Disassembler<Template_Type, DisassembledInstruction_Type> disassembler = createTestDisassembler();
     disassembler.setAbstractionPreference(template.instructionDescription().isSynthetic() ? AbstractionPreference.SYNTHETIC : AbstractionPreference.RAW);
@@ -286,7 +287,7 @@ public abstract class AssemblyTester<Template_Type extends Template, Disassemble
     disassemblyStream.close();
   }
 
-  private void testTemplate(final Template_Type template) throws IOException, AssemblyException {
+  private void testTemplate(final Template_Type template) throws IOException, AssemblyException, DecoderException {
     final boolean testingExternally =
         _components.contains(AssemblyTestComponent.EXTERNAL_ASSEMBLER) && template.isExternallyTestable();
 

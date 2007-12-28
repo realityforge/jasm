@@ -13,8 +13,8 @@ import jasm.Assembler;
 import jasm.AssemblyException;
 import jasm.SymbolSet;
 import jasm.WordWidth;
-import jasm.x86.X86InstructionPrefix;
 import jasm.amd64.AMD64GeneralRegister8;
+import jasm.dis.DecoderException;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.Disassembler;
 import jasm.tools.Assembly;
@@ -35,6 +35,7 @@ import jasm.tools.cisc.x86.X86Template;
 import jasm.util.EndianUtil;
 import jasm.util.HexByte;
 import jasm.util.StaticLoophole;
+import jasm.x86.X86InstructionPrefix;
 import java.io.BufferedInputStream;
 import java.io.EOFException;
 import java.io.IOException;
@@ -235,7 +236,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
   protected abstract Map<X86InstructionHeader, LinkedList<Template_Type>> headerToTemplates();
 
   private DisassembledInstruction_Type scanInstruction(BufferedInputStream stream, X86InstructionHeader header)
-      throws IOException, AssemblyException {
+      throws IOException, DecoderException {
     boolean isFloatingPointEscape = false;
     if (X86Opcode.isFloatingPointEscape(header._opcode1)) {
       final int byte2 = stream.read();
@@ -291,8 +292,13 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
             }
             if (-1 == indexOfNull(arguments)) {
               final Assembler assembler = createAssembler(_currentOffset);
-              assembly().assemble(assembler, template, arguments);
-              final byte[] bytes = assembler.toByteArray();
+              final byte[] bytes;
+              try {
+                assembly().assemble(assembler, template, arguments);
+                bytes = assembler.toByteArray();
+              } catch (AssemblyException e) {
+                throw new DecoderException("Error assembling decded instruction", e);
+              }
               stream.reset();
               if (startsWith(stream, bytes)) {
                 final DisassembledInstruction_Type disassembledInstruction =
@@ -320,7 +326,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
       _currentOffset++;
       return disassembledInstruction;
     }
-    throw new AssemblyException("unknown instruction");
+    throw new DecoderException("unknown instruction");
   }
 
   private static int indexOfNull(List<?> list) {
@@ -337,17 +343,19 @@ public abstract class X86Disassembler<Template_Type extends X86Template, Disasse
   private static final int MORE_THAN_ANY_INSTRUCTION_LENGTH = 100;
 
   @Override
-  public final List<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream) throws IOException, AssemblyException {
+  public final List<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream)
+      throws IOException, DecoderException {
     stream.mark(MORE_THAN_ANY_INSTRUCTION_LENGTH);
     final X86InstructionHeader header = scanInstructionHeader(stream);
     if (header == null) {
-      throw new AssemblyException("unknown instruction");
+      throw new DecoderException("unknown instruction");
     }
     return StaticLoophole.asList(scanInstruction(stream, header));
   }
 
   @Override
-  protected final List<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException {
+  protected final List<DisassembledInstruction_Type> scan(BufferedInputStream stream)
+      throws IOException, DecoderException {
     final ArrayList<DisassembledInstruction_Type> result = new ArrayList<DisassembledInstruction_Type>();
     while (true) {
       stream.mark(MORE_THAN_ANY_INSTRUCTION_LENGTH);

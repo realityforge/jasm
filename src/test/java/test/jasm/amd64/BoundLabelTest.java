@@ -11,6 +11,7 @@ package test.jasm.amd64;
 import jasm.Argument;
 import jasm.AssemblyException;
 import jasm.Label;
+import jasm.dis.DecoderException;
 import static jasm.amd64.AMD64GeneralRegister64.*;
 import jasm.amd64.as.AMD64Assembler;
 import jasm.amd64.dis.AMD64Disassembler;
@@ -84,13 +85,13 @@ public final class BoundLabelTest extends TestCase {
     return assembler.toByteArray();
   }
 
-  private void disassemble(long startAddress, byte[] bytes) throws IOException, AssemblyException {
+  private void disassemble(long startAddress, byte[] bytes) throws IOException, DecoderException {
     final AMD64Disassembler disassembler = new AMD64Disassembler(startAddress);
     final BufferedInputStream stream = new BufferedInputStream(new ByteArrayInputStream(bytes));
     disassembler.scanAndPrint(stream, System.out);
   }
 
-  public final void notest_allLabelInstructions() throws IOException, AssemblyException {
+  public final void notest_allLabelInstructions() throws Exception {
     final long startAddress = 0x0L;
 
     byte[] bytes = assemble(startAddress, 0);
@@ -103,7 +104,8 @@ public final class BoundLabelTest extends TestCase {
     disassemble(startAddress, bytes);
   }
 
-  public final void test_effectOfVariableInstructionLengthOnLabel() throws IOException, AssemblyException {
+  public final void test_effectOfVariableInstructionLengthOnLabel()
+      throws Exception {
     // Repeat with different assembled sizes of the 'jnz' instruction below:
     for (int n = 4; n < 2000; n += 128) {
       final long startAddress = 0x0L;

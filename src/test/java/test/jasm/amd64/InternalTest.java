@@ -26,8 +26,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import junit.framework.TestCase;
 
-public final class InternalTest extends TestCase {
-  private String disassemble(long startAddress, byte[] bytes) throws IOException, AssemblyException {
+public final class InternalTest
+    extends TestCase {
+
+  private String disassemble(long startAddress, byte[] bytes)
+      throws Exception {
     final AMD64Disassembler disassembler = new AMD64Disassembler(startAddress);
     final BufferedInputStream stream = new BufferedInputStream(new ByteArrayInputStream(bytes));
     final ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -35,7 +38,8 @@ public final class InternalTest extends TestCase {
     return new String(baos.toByteArray());
   }
 
-  private byte[] assemble1(long startAddress) throws Exception {
+  private byte[] assemble1(long startAddress)
+      throws Exception {
     final AMD64GeneralRegister64 myGPR = RAX;
     final AMD64Assembler asm = new AMD64Assembler(startAddress);
     final Label startLabel = new Label();

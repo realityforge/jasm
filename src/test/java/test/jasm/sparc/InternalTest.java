@@ -38,8 +38,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import junit.framework.TestCase;
 
-public final class InternalTest extends TestCase {
-  private byte[] assemble(SPARCAssembler asm) throws AssemblyException {
+public final class InternalTest
+    extends TestCase {
+
+  private byte[] assemble(SPARCAssembler asm)
+      throws Exception {
     asm.rd(StateRegister.PC, G1);
 
     asm.add(G0, I1, O2);
@@ -80,14 +83,17 @@ public final class InternalTest extends TestCase {
     return asm.toByteArray();
   }
 
-  private String disassemble(SPARCDisassembler disassembler, byte[] bytes) throws IOException, AssemblyException {
+  private String disassemble(SPARCDisassembler disassembler, byte[] bytes)
+      throws Exception {
     final BufferedInputStream stream = new BufferedInputStream(new ByteArrayInputStream(bytes));
     final ByteArrayOutputStream baos = new ByteArrayOutputStream();
     disassembler.scanAndPrint(stream, baos);
     return new String(baos.toByteArray());
   }
 
-  public final void test32() throws IOException, AssemblyException {
+  public final void test32()
+      throws Exception {
+
     final int startAddress = 0x12340000;
     final SPARC32Assembler assembler = new SPARC32Assembler(startAddress);
     final SPARC32Disassembler disassembler = new SPARC32Disassembler(startAddress);
@@ -115,7 +121,9 @@ public final class InternalTest extends TestCase {
     assertEquals(expected, output);
   }
 
-  public final void test64() throws IOException, AssemblyException {
+  public final void test64()
+      throws Exception {
+    
     final long startAddress = 0x1234567812340000L;
     final SPARC64Assembler assembler = new SPARC64Assembler(startAddress);
     final SPARC64Disassembler disassembler = new SPARC64Disassembler(startAddress);

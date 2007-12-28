@@ -10,9 +10,10 @@ package jasm.dis.risc;
 
 import jasm.Argument;
 import jasm.Assembler;
-import jasm.AssemblyException;
 import jasm.WordWidth;
+import jasm.AssemblyException;
 import jasm.dis.AbstractionPreference;
+import jasm.dis.DecoderException;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.Disassembler;
 import jasm.tools.Assembly;
@@ -86,7 +87,8 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
   }
 
   @Override
-  public final List<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream) throws IOException, AssemblyException {
+  public final List<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream)
+      throws IOException, DecoderException {
     final int instruction = EndianUtil.readBEInt(stream);
     final ArrayList<DisassembledInstruction_Type> result = new ArrayList<DisassembledInstruction_Type>();
     final byte[] instructionBytes = toBEBytes(instruction);
@@ -108,7 +110,7 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
                     final DisassembledInstruction_Type disassembledInstruction = createDisassembledInstruction(_currentOffset, bytes, template, arguments);
                     result.add(disassembledInstruction);
                   }
-                } catch (AssemblyException assemblyException) {
+                } catch (AssemblyException ae) {
                   System.err.println("WARNING: could not assemble matching instruction: " + template);
                 }
               }
@@ -122,14 +124,15 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate, Disas
       for (byte value : toBEBytes(instruction)) {
         s += String.format("%02X", value);
       }
-      throw new AssemblyException("instruction could not be disassembled: " + s);
+      throw new DecoderException("instruction could not be disassembled: " + s);
     }
     _currentOffset += 4;
     return result;
   }
 
   @Override
-  protected final List<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException {
+  protected final List<DisassembledInstruction_Type> scan(BufferedInputStream stream)
+      throws IOException, DecoderException {
     final ArrayList<DisassembledInstruction_Type> result = new ArrayList<DisassembledInstruction_Type>();
     try {
       while (true) {

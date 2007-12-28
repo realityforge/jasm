@@ -30,7 +30,8 @@ import java.io.IOException;
 import junit.framework.TestCase;
 
 public final class InternalTest extends TestCase {
-  private byte[] assemble(PPCAssembler asm) throws AssemblyException {
+
+  private byte[] assemble(PPCAssembler asm) throws Exception {
     final Label loop1 = new Label();
     final Label loop2 = new Label();
 
@@ -50,14 +51,14 @@ public final class InternalTest extends TestCase {
     return asm.toByteArray();
   }
 
-  private String disassemble(PPCDisassembler disassembler, byte[] bytes) throws IOException, AssemblyException {
+  private String disassemble(PPCDisassembler disassembler, byte[] bytes) throws Exception {
     final BufferedInputStream stream = new BufferedInputStream(new ByteArrayInputStream(bytes));
     final ByteArrayOutputStream baos = new ByteArrayOutputStream();
     disassembler.scanAndPrint(stream, baos);
     return new String(baos.toByteArray());
   }
 
-  public final void test32() throws IOException, AssemblyException {
+  public final void test32() throws Exception {
     final int startAddress = 0x12340000;
     final PPC32Assembler assembler = new PPC32Assembler(startAddress);
     final PPC32Disassembler disassembler = new PPC32Disassembler(startAddress);
@@ -76,7 +77,7 @@ public final class InternalTest extends TestCase {
     assertEquals(expected, output);
   }
 
-  public final void test64() throws IOException, AssemblyException {
+  public final void test64() throws Exception {
     final long startAddress = 0x1234567812340000L;
     final PPC64Assembler assembler = new PPC64Assembler(startAddress);
     final PPC64Disassembler disassembler = new PPC64Disassembler(startAddress);

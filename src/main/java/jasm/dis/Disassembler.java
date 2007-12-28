@@ -10,7 +10,6 @@ package jasm.dis;
 
 import jasm.Argument;
 import jasm.Assembler;
-import jasm.AssemblyException;
 import jasm.WordWidth;
 import jasm.tools.Assembly;
 import jasm.tools.ImmediateArgument;
@@ -67,7 +66,8 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
    *
    * @return the disassembled forms that match the first encoded instruction in {@code stream}
    */
-  public abstract List<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream) throws IOException, AssemblyException;
+  public abstract List<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream)
+      throws IOException, DecoderException;
 
   /**
    * Scans an instruction stream and disassembles the encoded instructions. If an encoded instruction has
@@ -77,7 +77,8 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
    * The {@link #scanOneInstruction} method can be used to obtain all the disassembled forms
    * for each instruction in an instruction stream.
    */
-  protected abstract List<DisassembledInstruction_Type> scan(BufferedInputStream stream) throws IOException, AssemblyException;
+  protected abstract List<DisassembledInstruction_Type> scan(BufferedInputStream stream)
+      throws IOException, DecoderException;
 
   private int findTargetInstructionIndex(int offset, List<DisassembledInstruction_Type> disassembledInstructions) {
     if (offset >= 0 && offset <= disassembledInstructions.get(disassembledInstructions.size() - 1).startOffset()) {
@@ -182,12 +183,16 @@ public abstract class Disassembler<Template_Type extends Template, DisassembledI
     }
   }
 
-  public final void scanAndPrint(BufferedInputStream bufferedInputStream, OutputStream outputStream, GlobalLabelMapper globalLabelMapper) throws IOException, AssemblyException {
+  public final void scanAndPrint(BufferedInputStream bufferedInputStream,
+                                 OutputStream outputStream,
+                                 GlobalLabelMapper globalLabelMapper)
+      throws IOException, DecoderException {
     final List<DisassembledInstruction_Type> disassembledInstructions = scan(bufferedInputStream);
     print(outputStream, disassembledInstructions, globalLabelMapper);
   }
 
-  public final void scanAndPrint(BufferedInputStream bufferedInputStream, OutputStream outputStream) throws IOException, AssemblyException {
+  public final void scanAndPrint(BufferedInputStream bufferedInputStream, OutputStream outputStream)
+      throws IOException, DecoderException {
     scanAndPrint(bufferedInputStream, outputStream, null);
   }
 
