@@ -94,13 +94,9 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     return _sourceDirectory;
   }
 
-  private void printPackageAffiliation(IndentWriter writer) {
-    writer.println("package " + _outputPackage + ";");
-  }
-
   private void printClassHeader(IndentWriter writer) {
     writer.println("/* Generated file. Do not edit. */");
-    printPackageAffiliation(writer);
+    writer.println("package " + _outputPackage + ";");
     writer.println();
   }
 
