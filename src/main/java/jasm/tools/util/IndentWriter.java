@@ -16,6 +16,9 @@ public final class IndentWriter {
 
   private final PrintWriter _writer;
   private int _lineCount;
+  private int _indentation = 4;
+  private int _prefix;
+  private boolean _isCurrentLineIndented;
 
   public IndentWriter(Writer writer) {
     _writer = (writer instanceof PrintWriter) ? (PrintWriter) writer : new PrintWriter(writer);
@@ -25,10 +28,6 @@ public final class IndentWriter {
     _writer.close();
   }
 
-  private int _indentation = 4;
-
-  private int _prefix;
-
   public void indent() {
     _prefix += _indentation;
   }
@@ -37,8 +36,6 @@ public final class IndentWriter {
     _prefix -= _indentation;
     assert _prefix >= 0;
   }
-
-  private boolean _isCurrentLineIndented;
 
   private void writeIndentation() {
     if (!_isCurrentLineIndented) {
