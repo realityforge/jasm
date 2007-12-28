@@ -21,6 +21,7 @@ import jasm.util.ArrayUtil;
 import jasm.util.Enums;
 import jasm.util.HexUtil;
 import jasm.x86.X86InstructionPrefix;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
   private static final String MODRM_GROUP_OPCODE_VARIABLE_NAME = "modRmOpcode";
 
   private final WordWidth _addressWidth;
-  private final Map<String, String> _subroutineToName = new HashMap<String, String>();
+  private final Map<String, Subroutine<Template_Type>> _subroutineMap = new HashMap<String, Subroutine<Template_Type>>();
   private int _subroutineSerial;
 
   protected X86AssemblerGenerator(Assembly<Template_Type> assembly,
@@ -48,8 +49,14 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     _addressWidth = addressWidth;
   }
 
-  public final WordWidth addressWidth() {
-    return _addressWidth;
+  @Override
+  protected void generateRawAssemblerClass(final String name) throws IOException {
+    //Generate all the subroutines at the start.
+    // If a subroutine is only used once then the code can be inlined.
+    for (Template_Type template : assembly().templates()) {
+      makeSubroutine(template);
+    }
+    super.generateRawAssemblerClass(name);
   }
 
   protected final X86Parameter getParameter(Template_Type template, Class parameterType) {
@@ -115,7 +122,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
   protected abstract void printModVariants(IndentWriter writer, Template_Type template);
 
   protected void printPrefixes(IndentWriter writer, Template_Type template) {
-    if (template.addressSizeAttribute() != addressWidth()) {
+    if (template.addressSizeAttribute() != _addressWidth) {
       writer.println("emitAddressSizePrefix();");
     }
     if (template.operandSizeAttribute() == WordWidth.BITS_16) {
@@ -273,17 +280,6 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
   }
 
   private void printSubroutine(IndentWriter writer, Template_Type template) {
-    writer.print("(byte ");
-    if (template.opcode2() != null) {
-      writer.print(OPCODE2_VARIABLE_NAME);
-    } else {
-      writer.print(OPCODE1_VARIABLE_NAME);
-    }
-    if (template.modRMGroupOpcode() != null) {
-      writer.print(", byte " + MODRM_GROUP_OPCODE_VARIABLE_NAME);
-    }
-    writer.print(formatParamList(template.parameters()));
-    writer.println(") {");
     writer.indent();
     writer.indent();
     printModVariants(writer, template);
@@ -320,9 +316,20 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
       }
     }
     printAppendedParameter(writer, template);
-    writer.outdent();
-    writer.println("}");
-    writer.outdent();
+  }
+
+  private void printSubRoutineArgList(final IndentWriter writer, final Template_Type template) {
+    writer.print("(byte ");
+    if (template.opcode2() != null) {
+      writer.print(OPCODE2_VARIABLE_NAME);
+    } else {
+      writer.print(OPCODE1_VARIABLE_NAME);
+    }
+    if (template.modRMGroupOpcode() != null) {
+      writer.print(", byte " + MODRM_GROUP_OPCODE_VARIABLE_NAME);
+    }
+    writer.print(formatParamList(template.parameters()));
+    writer.println(") {");
   }
 
   private String toOpCode(final String opCode, final X86Parameter p) {
@@ -368,13 +375,14 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
   private String makeSubroutine(Template_Type template) {
     final StringWriter stringWriter = new StringWriter();
     printSubroutine(new IndentWriter(new PrintWriter(stringWriter)), template);
-    final String subroutine = stringWriter.toString();
-    String name = _subroutineToName.get(subroutine);
-    if (name == null) {
-      name = createSubroutineName();
-      _subroutineToName.put(subroutine, name);
+    final String code = stringWriter.toString();
+    Subroutine<Template_Type> subroutine = _subroutineMap.get(code);
+    if (subroutine == null) {
+      subroutine = new Subroutine<Template_Type>(createSubroutineName(), code, template);
+      _subroutineMap.put(code, subroutine);
     }
-    return name;
+    subroutine.usageCount++;
+    return subroutine.name;
   }
 
   @Override
@@ -406,15 +414,20 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
 
   @Override
   protected final void printSubroutines(IndentWriter writer) {
-    final Set<String> subroutineSet = _subroutineToName.keySet();
-    final String[] subroutines = subroutineSet.toArray(new String[subroutineSet.size()]);
-    for (int i = 0; i < subroutines.length; i++) {
-      subroutines[i] = _subroutineToName.get(subroutines[i]) + subroutines[i];
-    }
-    Arrays.sort(subroutines);
-    for (String subroutine : subroutines) {
-      writer.print("private void " + subroutine);
+    final ArrayList<Subroutine<Template_Type>> subroutines = new ArrayList<Subroutine<Template_Type>>();
+    subroutines.addAll(_subroutineMap.values());
+    Collections.sort(subroutines);
+    for (Subroutine<Template_Type> subroutine : subroutines) {
       writer.println();
+      writer.resetIndentation();
+      writer.setIndentationLevel(1);
+      writer.print("private void " + subroutine.name);
+      printSubRoutineArgList(writer, subroutine.template);
+      writer.setIndentationLevel(0);
+      writer.print(subroutine.code);
+      writer.resetIndentation();
+      writer.setIndentationLevel(1);
+      writer.println("}");
     }
   }
 
@@ -549,7 +562,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
 
   @Override
   protected final void printLabelMethod(IndentWriter writer, Template_Type labelTemplate, List<Template_Type> labelTemplates) {
-    if (labelTemplate.addressSizeAttribute() == addressWidth()) {
+    if (labelTemplate.addressSizeAttribute() == _addressWidth) {
       if (!labelTemplate._isLabelMethodWritten) {
         final X86Parameter parameter = labelTemplate.parameters().get(labelTemplate.labelParameterIndex());
         if (parameter instanceof X86OffsetParameter) {

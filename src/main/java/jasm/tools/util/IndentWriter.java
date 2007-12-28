@@ -14,9 +14,8 @@ import java.io.Writer;
 /** A line oriented character writer that indents line output on the left. */
 public final class IndentWriter {
 
+  private static final int INDENTATION = 4;
   private final PrintWriter _writer;
-  private int _lineCount;
-  private int _indentation = 4;
   private int _prefix;
   private boolean _isCurrentLineIndented;
 
@@ -29,12 +28,21 @@ public final class IndentWriter {
   }
 
   public void indent() {
-    _prefix += _indentation;
+    _prefix += INDENTATION;
   }
 
   public void outdent() {
-    _prefix -= _indentation;
+    _prefix -= INDENTATION;
     assert _prefix >= 0;
+  }
+
+  public void resetIndentation() {
+    _isCurrentLineIndented = false;
+    _prefix = 0;
+  }
+
+  public void setIndentationLevel(final int level) {
+    _prefix = INDENTATION * level;
   }
 
   private void writeIndentation() {
@@ -54,17 +62,11 @@ public final class IndentWriter {
   public void println() {
     _writer.println();
     _isCurrentLineIndented = false;
-    ++_lineCount;
   }
 
   public void println(String s) {
     writeIndentation();
     _writer.println(s);
     _isCurrentLineIndented = false;
-    ++_lineCount;
-  }
-
-  public int lineCount() {
-    return _lineCount;
   }
 }

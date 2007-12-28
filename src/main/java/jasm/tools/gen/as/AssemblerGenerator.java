@@ -49,7 +49,6 @@ public abstract class AssemblerGenerator<Template_Type extends Template<Template
   protected IndentWriter fileProlog(final String name, final String parentClass, final Set<String> imports) throws IOException {
     final IndentWriter writer = super.fileProlog(name, parentClass, imports);
     printAssemblerConstructor(writer, name);
-    writer.println();
     return writer;
   }
 
@@ -284,8 +283,8 @@ public abstract class AssemblerGenerator<Template_Type extends Template<Template
     generateLabelAssemblerClass(isaName + "LabelAssembler", rawName);
   }
 
-  private void generateRawAssemblerClass(final String name) throws IOException {
-
+  protected void generateRawAssemblerClass(final String name)
+      throws IOException {
     final List<Template_Type> templates = templates();
     final Set<String> imports = getRawAssemblerImports(templates);
     final IndentWriter writer =
@@ -293,10 +292,10 @@ public abstract class AssemblerGenerator<Template_Type extends Template<Template
 
     final int templateCount = templates.size();
     for (int i = 0; i < templateCount; i++) {
+      writer.println();
       final Template_Type template = templates.get(i);
       printMethodComment(writer, template, i + 1);
       printMethod(writer, template);
-      writer.println();
     }
     printSubroutines(writer);
     fileEpilog(name, writer);
