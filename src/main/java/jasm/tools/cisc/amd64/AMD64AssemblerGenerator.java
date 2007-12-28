@@ -41,7 +41,7 @@ public final class AMD64AssemblerGenerator
            template.instructionDescription().defaultOperandSize() != WordWidth.BITS_64;
   }
 
-  private void checkGeneralRegister8Values(IndentWriter writer, X86Template template) {
+  private void checkGeneralRegister8Values(IndentWriter writer, AMD64Template template) {
     for (X86Parameter p : template.parameters()) {
       if (p.type() == AMD64GeneralRegister8.class) {
         writer.println("if (Config.ENABLE_CONSTRAINT_CHECKS) checkRexCompatibility(" + p.variableName() + ");");
@@ -49,7 +49,7 @@ public final class AMD64AssemblerGenerator
     }
   }
 
-  private boolean needsToAddConstraintsFoGeneralRegister8Values(X86Template template) {
+  private boolean needsToAddConstraintsFoGeneralRegister8Values(AMD64Template template) {
     for (X86Parameter parameter : template.parameters()) {
       if (parameter.type() == AMD64GeneralRegister8.class) {
         return true;
@@ -58,7 +58,7 @@ public final class AMD64AssemblerGenerator
     return false;
   }
 
-  private void printUnconditionalRexPrefix(IndentWriter writer, X86Template template) {
+  private void printUnconditionalRexPrefix(IndentWriter writer, AMD64Template template) {
     String rBit = "false";
     String bBit = "false";
     String xBit = "false";
@@ -92,7 +92,7 @@ public final class AMD64AssemblerGenerator
     return "";
   }
 
-  private void printConditionalRexPrefix(IndentWriter writer, X86Template template) {
+  private void printConditionalRexPrefix(IndentWriter writer, AMD64Template template) {
     String rBit = null;
     String bBit = null;
     String xBit = null;

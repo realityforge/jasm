@@ -119,7 +119,7 @@ public abstract class OperandField<Argument_Type extends Argument> extends RiscF
     return type().getName().compareTo(other.type().getName());
   }
 
-  public final long evaluate(Template template, List<Argument> arguments) {
+  public final long evaluate(Template<?> template, List<Argument> arguments) {
     if (boundTo() != null) {
       return boundTo().evaluate(template, arguments);
     }

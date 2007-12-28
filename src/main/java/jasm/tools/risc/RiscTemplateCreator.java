@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
+public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate<Template_Type>> {
 
   protected RiscTemplateCreator() {
   }
@@ -29,19 +29,18 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate> {
   protected abstract Template_Type createTemplate(InstructionDescription instructionDescription);
 
   public final List<Template_Type> createOptionTemplates(List<Template_Type> templates, OptionField optionField) {
-    final Class<Template_Type> templateType = null;
     final ArrayList<Template_Type> newTemplates = new ArrayList<Template_Type>();
     for (Template_Type template : templates) {
       Template_Type canonicalRepresentative = null;
       if (optionField.defaultOption() != null) {
-        canonicalRepresentative = StaticLoophole.cast(templateType, template.clone());
+        canonicalRepresentative = StaticLoophole.<Template_Type>cast(template.clone());
         canonicalRepresentative.organizeOption(optionField.defaultOption(), null);
       }
       for (Option option : optionField.options()) {
         if (option.equals(optionField.defaultOption())) {
           newTemplates.add(canonicalRepresentative);
         } else {
-          final Template_Type templateWithOption = StaticLoophole.cast(templateType, template.clone());
+          final Template_Type templateWithOption = StaticLoophole.<Template_Type>cast(template.clone());
           templateWithOption.organizeOption(option, canonicalRepresentative);
           newTemplates.add(templateWithOption);
         }

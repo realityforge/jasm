@@ -31,7 +31,7 @@ import java.util.List;
  *
  * @see DisassembledInstruction
  */
-public abstract class Disassembler<Template_Type extends Template, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>> {
+public abstract class Disassembler<Template_Type extends Template<Template_Type>, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>> {
 
   private static final String SPACE = "   ";
   private static final int NUMBER_OF_INSTRUCTION_CHARS = 48;

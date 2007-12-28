@@ -12,7 +12,7 @@ import jasm.Assembler;
 import jasm.BigEndianAssembler;
 import jasm.ppc.GPR;
 import jasm.tools.risc.RiscAssemblerGenerator;
-import jasm.tools.util.IndentWriter;
+import java.util.List;
 import java.util.Set;
 
 /** The program entry point for the PowerPC assembler generator. */
@@ -24,9 +24,10 @@ public final class PPCAssemblerGenerator
   }
 
   @Override
-  protected void printRawImports(IndentWriter writer, Set<String> packages) {
-    super.printRawImports(writer, packages);
-    writer.println("import static " + GPR.class.getName() + ".*;");
+  protected Set<String> getRawAssemblerImports(final List<PPCTemplate> templates) {
+    final Set<String> imports = super.getRawAssemblerImports(templates);
+    imports.add("static " + GPR.class.getName());
+    return imports;
   }
 
   @Override

@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class RiscDisassembler<Template_Type extends RiscTemplate, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
+public abstract class RiscDisassembler<Template_Type extends RiscTemplate<Template_Type>, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
     extends Disassembler<Template_Type, DisassembledInstruction_Type> {
 
   protected RiscDisassembler(Assembly<Template_Type> assembly, WordWidth addressWidth) {

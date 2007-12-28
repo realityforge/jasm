@@ -16,7 +16,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /** An explicit operand, specifying an assembler method parameter. */
-public abstract class X86Parameter extends X86Operand implements Parameter {
+public abstract class X86Parameter
+    extends X86Operand
+    implements Parameter {
 
   private final ParameterPlace _place;
   private String _variableName = "p";

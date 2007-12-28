@@ -20,7 +20,7 @@ import java.util.List;
  */
 public interface Expression {
   /** Evaluates the expression given a template and a set of arguments. */
-  long evaluate(Template template, List<Argument> arguments);
+  long evaluate(Template<?> template, List<Argument> arguments);
 
   /** @return a Java expression that performs the {@link #evaluate evaluation} */
   String valueString();
@@ -35,7 +35,7 @@ public interface Expression {
      *
      * @param term a {@link Number}, {@link Expression} or {@link jasm.tools.Parameter} instance
      */
-    public static long evaluateTerm(Object term, Template template, List<Argument> arguments) {
+    public static long evaluateTerm(Object term, Template<?> template, List<Argument> arguments) {
       if (term instanceof Number) {
         return ((Number) term).longValue();
       }
@@ -71,7 +71,7 @@ public interface Expression {
     public static Expression add(final Object first, final Object second) {
       return new Expression() {
 
-        public long evaluate(Template template, List<Argument> arguments) {
+        public long evaluate(Template<?> template, List<Argument> arguments) {
           return evaluateTerm(first, template, arguments) + evaluateTerm(second, template, arguments);
         }
 
@@ -90,7 +90,7 @@ public interface Expression {
     public static Expression sub(final Object first, final Object second) {
       return new Expression() {
 
-        public long evaluate(Template template, List<Argument> arguments) {
+        public long evaluate(Template<?> template, List<Argument> arguments) {
           return evaluateTerm(first, template, arguments) - evaluateTerm(second, template, arguments);
         }
 
@@ -108,7 +108,7 @@ public interface Expression {
     public static Expression neg(final Object term) {
       return new Expression() {
 
-        public long evaluate(Template template, List<Argument> arguments) {
+        public long evaluate(Template<?> template, List<Argument> arguments) {
           return -evaluateTerm(term, template, arguments);
         }
 

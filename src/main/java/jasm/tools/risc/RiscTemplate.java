@@ -20,11 +20,14 @@ import jasm.tools.risc.field.RiscField;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class RiscTemplate extends Template implements RiscInstructionDescriptionVisitor {
+public abstract class RiscTemplate<Template_Type extends RiscTemplate<Template_Type>>
+    extends Template<Template_Type>
+    implements RiscInstructionDescriptionVisitor {
 
   private final ArrayList<OperandField> _operandFields = new ArrayList<OperandField>();
   private final ArrayList<OptionField> _optionFields = new ArrayList<OptionField>();
   private final ArrayList<OperandField> _parameters = new ArrayList<OperandField>();
+  private RiscTemplate<Template_Type> _synthesizedFrom;
 
   private int _opcode;
   private int _opcodeMask;
@@ -39,14 +42,12 @@ public abstract class RiscTemplate extends Template implements RiscInstructionDe
     return (RiscInstructionDescription) super.instructionDescription();
   }
 
-  private RiscTemplate _synthesizedFrom;
-
-  public final void setSynthesizedFrom(RiscTemplate synthesizedFrom) {
+  public final void setSynthesizedFrom(RiscTemplate<Template_Type> synthesizedFrom) {
     assert instructionDescription().isSynthetic();
     _synthesizedFrom = synthesizedFrom;
   }
 
-  public final RiscTemplate synthesizedFrom() {
+  public final RiscTemplate<Template_Type> synthesizedFrom() {
     return _synthesizedFrom;
   }
 

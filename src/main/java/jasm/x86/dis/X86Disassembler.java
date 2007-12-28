@@ -51,7 +51,7 @@ import java.util.Map;
  * @see Disassembler
  * @see X86DisassembledInstruction
  */
-public abstract class X86Disassembler<Template_Type extends X86Template, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
+public abstract class X86Disassembler<Template_Type extends X86Template<Template_Type>, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
     extends Disassembler<Template_Type, DisassembledInstruction_Type> {
 
   private int _currentOffset;

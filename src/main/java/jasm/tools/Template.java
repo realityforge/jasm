@@ -14,7 +14,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 /** An internal representation of an assembler method. */
-public abstract class Template implements Cloneable, Comparable<Template> {
+public abstract class Template<Template_Type extends Template<Template_Type>>
+    implements Cloneable, Comparable<Template_Type> {
 
   private int _serial = -1;
   private InstructionDescription _instructionDescription;
@@ -119,7 +120,7 @@ public abstract class Template implements Cloneable, Comparable<Template> {
     }
   }
 
-  public final int compareTo(Template other) {
+  public final int compareTo(Template_Type other) {
     int result = _internalName.compareTo(other._internalName);
     if (result != 0) {
       return result;

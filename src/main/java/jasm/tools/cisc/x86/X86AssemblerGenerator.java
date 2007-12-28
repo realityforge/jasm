@@ -12,7 +12,6 @@ import jasm.EnumerableArgument;
 import jasm.LabelAddressInstruction;
 import jasm.LabelOffsetInstruction;
 import jasm.WordWidth;
-import jasm.x86.X86InstructionPrefix;
 import jasm.amd64.AMD64GeneralRegister8;
 import jasm.tools.Assembly;
 import jasm.tools.Parameter;
@@ -21,17 +20,19 @@ import jasm.tools.util.IndentWriter;
 import jasm.util.ArrayUtil;
 import jasm.util.Enums;
 import jasm.util.HexUtil;
+import jasm.x86.X86InstructionPrefix;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
+public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Template_Type>>
     extends AssemblerGenerator<Template_Type> {
   private static final String OPCODE1_VARIABLE_NAME = "opcode1";
   private static final String OPCODE2_VARIABLE_NAME = "opcode2";
@@ -42,8 +43,8 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
   private int _subroutineSerial;
 
   protected X86AssemblerGenerator(Assembly<Template_Type> assembly,
-                                  WordWidth addressWidth ) {
-    super(assembly, true);
+                                  WordWidth addressWidth) {
+    super(assembly, sort(assembly.templates()));
     _addressWidth = addressWidth;
   }
 
@@ -86,9 +87,11 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
            argument.name() + ".value()";
   }
 
-  protected void printRawImports(final IndentWriter writer, final Set<String> packages) {
-    packages.add(X86InstructionPrefix.class.getPackage().getName());
-    super.printRawImports(writer, packages);
+  @Override
+  protected Set<String> getRawAssemblerImports(final List<Template_Type> templates) {
+    final Set<String> imports = super.getRawAssemblerImports(templates);
+    imports.add(X86InstructionPrefix.class.getPackage().getName());
+    return imports;
   }
 
   protected final <Argument_Type extends EnumerableArgument> void printModVariant(IndentWriter writer,
@@ -375,8 +378,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
   }
 
   @Override
-  protected final int printMethod(IndentWriter writer, Template_Type template) {
-    final int startLineCount = writer.lineCount();
+  protected final void printMethod(IndentWriter writer, Template_Type template) {
     writer.print("@Inline");
     writer.println();
     writer.print("public final void ");
@@ -400,11 +402,10 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
     writer.println(");");
     writer.outdent();
     writer.println("}");
-    return writer.lineCount() - startLineCount;
   }
 
   @Override
-  protected final int printSubroutines(IndentWriter writer) {
+  protected final void printSubroutines(IndentWriter writer) {
     final Set<String> subroutineSet = _subroutineToName.keySet();
     final String[] subroutines = subroutineSet.toArray(new String[subroutineSet.size()]);
     for (int i = 0; i < subroutines.length; i++) {
@@ -415,7 +416,6 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
       writer.print("private void " + subroutine);
       writer.println();
     }
-    return subroutines.length;
   }
 
   private boolean parametersMatching(Template_Type candidate, Template_Type original) {
@@ -479,7 +479,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
 
   private void printOffsetLabelMethod(IndentWriter writer, Template_Type template, List<Template_Type> labelTemplates) {
     Template_Type thisTemplate = template;
-    final List<Parameter> parameters = printLabelMethodHead(writer, thisTemplate);
+    final List<? extends Parameter> parameters = printLabelMethodHead(writer, thisTemplate);
     final List<LabelWidthCase> labelWidthCases = getRelatedLabelTemplatesByWidth(thisTemplate, labelTemplates);
     thisTemplate = labelWidthCases.get(0)._template; // first use the template that will produce the least bytes
     writer.println("final int startOffset = currentOffset();");
@@ -525,7 +525,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
   }
 
   private void printAddressLabelMethod(IndentWriter writer, Template_Type template) {
-    final List<Parameter> parameters = printLabelMethodHead(writer, template);
+    final List<? extends Parameter> parameters = printLabelMethodHead(writer, template);
     template._isLabelMethodWritten = true;
     writer.println("final int startOffset = currentOffset();");
     printInitialRawCall(writer, template);
@@ -548,8 +548,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
   }
 
   @Override
-  protected final int printLabelMethod(IndentWriter writer, Template_Type labelTemplate, List<Template_Type> labelTemplates) {
-    final int startLineCount = writer.lineCount();
+  protected final void printLabelMethod(IndentWriter writer, Template_Type labelTemplate, List<Template_Type> labelTemplates) {
     if (labelTemplate.addressSizeAttribute() == addressWidth()) {
       if (!labelTemplate._isLabelMethodWritten) {
         final X86Parameter parameter = labelTemplate.parameters().get(labelTemplate.labelParameterIndex());
@@ -560,7 +559,14 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template>
         }
       }
     }
-    return writer.lineCount() - startLineCount;
+  }
+
+  //<Template_Type extends X86Template>
+  private static <Sort_Type extends X86Template<Sort_Type> & Comparable<Sort_Type>> List<Sort_Type> sort(final List<Sort_Type> templates) {
+    final ArrayList<Sort_Type> results = new ArrayList<Sort_Type>(templates.size());
+    results.addAll(templates);
+    Arrays.sort(templates.toArray());
+    Collections.sort(results);
+    return results;
   }
 }
-

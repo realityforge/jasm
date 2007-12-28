@@ -15,7 +15,7 @@ import jasm.tools.Template;
 import java.util.List;
 
 /** A assembly instruction in internal format, combined with the bytes that it was disassembled from. */
-public abstract class DisassembledInstruction<Template_Type extends Template>
+public abstract class DisassembledInstruction<Template_Type extends Template<Template_Type>>
     implements AssemblyInstruction, AddressInstruction {
 
   private final int _startOffset;

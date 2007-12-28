@@ -28,7 +28,9 @@ import jasm.x86.X86InstructionPrefix;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class X86Template extends Template implements X86InstructionDescriptionVisitor {
+public abstract class X86Template<Template_Type extends X86Template<Template_Type>>
+    extends Template<Template_Type>
+    implements X86InstructionDescriptionVisitor {
   // Defaults initial capacity for the ArrayLists below.
   private static final int MAX_NUM_OF_OPERANDS = 3;
   private static final int MAX_NUM_OF_IMPLICIT_OPERANDS = 3;
@@ -243,12 +245,12 @@ public abstract class X86Template extends Template implements X86InstructionDesc
   }
 
   @Override
-  public final List<X86Operand> operands() {
+  public final List<? extends X86Operand> operands() {
     return _operands;
   }
 
   @Override
-  public final List<X86Parameter> parameters() {
+  public final List<? extends X86Parameter> parameters() {
     return _parameters;
   }
 
@@ -402,7 +404,7 @@ public abstract class X86Template extends Template implements X86InstructionDesc
    *         are assumed to implement the same machine instruction semantics,
    *         though potentially denoting different machine codes
    */
-  public final boolean isRedundant(X86Template other) {
+  public final boolean isRedundant(X86Template<?> other) {
     if (!assemblerMethodName().equals(other.assemblerMethodName())) {
       return false;
     }

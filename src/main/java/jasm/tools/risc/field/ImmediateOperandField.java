@@ -27,14 +27,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** A field that contains an immediate value. */
-public class ImmediateOperandField extends OperandField<ImmediateArgument> implements ImmediateParameter, WrappableSpecification, InstructionConstraint {
+public class ImmediateOperandField
+    extends OperandField<ImmediateArgument>
+    implements ImmediateParameter, WrappableSpecification, InstructionConstraint {
 
   public String asJavaExpression() {
     final String value = valueString();
     return minArgumentValue() + " <= " + value + " && " + value + " <= " + maxArgumentValue();
   }
 
-  public boolean check(Template template, List<Argument> arguments) {
+  public boolean check(Template<?> template, List<Argument> arguments) {
     final long value = evaluate(template, arguments);
     return minArgumentValue() <= value && value <= maxArgumentValue();
   }

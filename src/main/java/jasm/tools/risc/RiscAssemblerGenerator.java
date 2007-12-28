@@ -27,10 +27,11 @@ import jasm.util.HexUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate> extends AssemblerGenerator<Template_Type> {
+public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate<Template_Type>>
+    extends AssemblerGenerator<Template_Type> {
 
   protected RiscAssemblerGenerator(Assembly<Template_Type> assembly) {
-    super(assembly, false);
+    super(assembly, assembly.templates());
   }
 
   private String encode(OperandField operandField, String val) {
@@ -43,8 +44,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
   }
 
   @Override
-  protected final int printMethod(IndentWriter writer, Template_Type template) {
-    final int startLineCount = writer.lineCount();
+  protected final void printMethod(IndentWriter writer, Template_Type template) {
     writer.print("public final void ");
     writer.print(template.assemblerMethodName() + "(");
     writer.print(formatParameterList("final ", template.parameters(), false));
@@ -69,21 +69,21 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
     writer.println("emitInt(instruction);");
     writer.outdent();
     writer.println("}");
-    return writer.lineCount() - startLineCount;
   }
 
-  private void printOffsetLabelMethod(IndentWriter writer, Template_Type template) {
-    final List<Parameter> parameters = printLabelMethodHead(writer, template);
+  @Override
+  protected final void printLabelMethod(IndentWriter writer, Template_Type labelTemplate, List<Template_Type> labelTemplates) {
+    final List<? extends Parameter> parameters = printLabelMethodHead(writer, labelTemplate);
     writer.println("emitInt(0); // instruction place holder");
     writer.print("new " + LabelOffsetInstruction.class.getSimpleName());
-    writer.println("(this, " + parameters.get(template.labelParameterIndex()).variableName() + ") {");
+    writer.println("(this, " + parameters.get(labelTemplate.labelParameterIndex()).variableName() + ") {");
     writer.indent();
     writer.println("@Override");
-    writer.println("protected int templateSerial() { return " + template.serial() + "; }");
+    writer.println("protected int templateSerial() { return " + labelTemplate.serial() + "; }");
     writer.println("@Override");
     writer.println("protected void assemble() throws AssemblyException {");
     writer.indent();
-    printRawCall(writer, template, parameters);
+    printRawCall(writer, labelTemplate, parameters);
     writer.outdent();
     writer.println("}");
     writer.outdent();
@@ -93,18 +93,13 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
     writer.println();
   }
 
-  @Override
-  protected final int printLabelMethod(IndentWriter writer, Template_Type labelTemplate, List<Template_Type> labelTemplates) {
-    final int startLineCount = writer.lineCount();
-    printOffsetLabelMethod(writer, labelTemplate);
-    return writer.lineCount() - startLineCount;
-  }
-
   /** Prints the reference to the raw method from which a synthetic method was defined. */
   @Override
-  protected final void printExtraMethodJavadoc(IndentWriter writer, Template_Type template, ArrayList<String> extraLinks) {
+  protected final void printExtraMethodJavadoc(IndentWriter writer,
+                                               Template_Type template,
+                                               ArrayList<String> extraLinks) {
     if (template.instructionDescription().isSynthetic()) {
-      final RiscTemplate rawTemplate = template.synthesizedFrom();
+      final RiscTemplate<Template_Type> rawTemplate = template.synthesizedFrom();
       final List<? extends Parameter> parameters = getParameters(rawTemplate);
       final String ref = rawTemplate.internalName() + "(" + formatParameterList("", parameters, true) + ")";
       writer.println(" * <p>");
@@ -131,7 +126,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate>
    * @param syntheticTemplate the synthetic instruction
    * @param rawOperand        a parameter of {@code rawTemplate}
    */
-  private String getRawOperandReplacement(RiscTemplate syntheticTemplate,
+  private String getRawOperandReplacement(RiscTemplate<Template_Type> syntheticTemplate,
                                           OperandField rawOperand) {
     if (-1 != CollectionUtil.indexOfIdentical(syntheticTemplate.operandFields(), rawOperand)) {
       if (rawOperand instanceof OffsetParameter && generatingLabelAssembler()) {

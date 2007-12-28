@@ -11,7 +11,8 @@ package jasm.tools.risc.ppc;
 import jasm.tools.InstructionDescription;
 import jasm.tools.risc.RiscTemplate;
 
-public final class PPCTemplate extends RiscTemplate {
+public final class PPCTemplate
+    extends RiscTemplate<PPCTemplate> {
   PPCTemplate(InstructionDescription instructionDescription) {
     super(instructionDescription);
   }

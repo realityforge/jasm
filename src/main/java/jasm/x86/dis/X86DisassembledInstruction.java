@@ -122,7 +122,7 @@ import java.util.Queue;
  * adc [L2: +128], ESI
  * </pre>
  */
-public abstract class X86DisassembledInstruction<Template_Type extends X86Template>
+public abstract class X86DisassembledInstruction<Template_Type extends X86Template<Template_Type>>
     extends DisassembledInstruction<Template_Type> {
 
   protected X86DisassembledInstruction(int offset, byte[] bytes, Template_Type template, List<Argument> arguments) {

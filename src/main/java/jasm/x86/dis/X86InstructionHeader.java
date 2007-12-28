@@ -10,10 +10,10 @@ package jasm.x86.dis;
 
 import jasm.WordWidth;
 import jasm.tools.Assembly;
-import jasm.x86.X86InstructionPrefix;
 import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
 import jasm.util.HexByte;
+import jasm.x86.X86InstructionPrefix;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -90,7 +90,7 @@ public final class X86InstructionHeader {
     return result;
   }
 
-  public static <Template_Type extends X86Template> Map<X86InstructionHeader, LinkedList<Template_Type>> createMapping(
+  public static <Template_Type extends X86Template<Template_Type>> Map<X86InstructionHeader, LinkedList<Template_Type>> createMapping(
       Assembly<Template_Type> assembly, WordWidth addressWidth) {
     final Map<X86InstructionHeader, LinkedList<Template_Type>> result =
         new HashMap<X86InstructionHeader, LinkedList<Template_Type>>();

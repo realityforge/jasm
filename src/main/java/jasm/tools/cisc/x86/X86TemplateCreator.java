@@ -16,7 +16,7 @@ import jasm.tools.Trace;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class X86TemplateCreator<Template_Type extends X86Template> {
+public abstract class X86TemplateCreator<Template_Type extends X86Template<Template_Type>> {
 
   private final WordWidth _addressWidth;
   private final ArrayList<Template_Type> _templates = new ArrayList<Template_Type>();
@@ -33,7 +33,7 @@ public abstract class X86TemplateCreator<Template_Type extends X86Template> {
     return _templates;
   }
 
-  private boolean isRedundant(X86Template template) {
+  private boolean isRedundant(Template_Type template) {
     for (X86Template other : templates()) {
       if (template.isRedundant(other)) {
         return true;

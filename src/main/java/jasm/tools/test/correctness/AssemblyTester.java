@@ -75,7 +75,7 @@ import java.util.Set;
  * for specifying illegal arguments lies in RISC assemblers' featuring immediate fields whose
  * ranges of legal values is not exactly described by a Java primitive type (e.g. int, short, char, etc).
  */
-public abstract class AssemblyTester<Template_Type extends Template, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>> {
+public abstract class AssemblyTester<Template_Type extends Template<Template_Type>, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>> {
 
   private static final int NOOP_COUNT = 10;
 

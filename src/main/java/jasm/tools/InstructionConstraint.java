@@ -33,7 +33,7 @@ public interface InstructionConstraint {
    * @param arguments the list of arguments to check
    * @return true if the argument list is valid, false otherwise
    */
-  boolean check(Template template, List<Argument> arguments);
+  boolean check(Template<?> template, List<Argument> arguments);
 
   /** @return a Java expression that performs the {@link #check check} */
   String asJavaExpression();
@@ -65,7 +65,7 @@ public interface InstructionConstraint {
     public static InstructionConstraint ne(final Parameter first, final Parameter second) {
       return new SimpleInstructionConstraint() {
 
-        public boolean check(Template template, List<Argument> arguments) {
+        public boolean check(Template<?> template, List<Argument> arguments) {
           return template.bindingFor(first, arguments).asLong() != template.bindingFor(second, arguments).asLong();
         }
 
@@ -83,7 +83,7 @@ public interface InstructionConstraint {
     public static InstructionConstraint ne(final Parameter first, final SymbolicArgument symbol) {
       return new SimpleInstructionConstraint() {
 
-        public boolean check(Template template, List<Argument> arguments) {
+        public boolean check(Template<?> template, List<Argument> arguments) {
           return template.bindingFor(first, arguments) != symbol;
         }
 
@@ -104,7 +104,7 @@ public interface InstructionConstraint {
     public static InstructionConstraint lt(final Parameter first, final Parameter second) {
       return new SimpleInstructionConstraint() {
 
-        public boolean check(Template template, List<Argument> arguments) {
+        public boolean check(Template<?> template, List<Argument> arguments) {
           return template.bindingFor(first, arguments).asLong() < template.bindingFor(second, arguments).asLong();
         }
 
@@ -126,7 +126,7 @@ public interface InstructionConstraint {
     public static InstructionConstraint le(final Parameter first, final Parameter second) {
       return new SimpleInstructionConstraint() {
 
-        public boolean check(Template template, List<Argument> arguments) {
+        public boolean check(Template<?> template, List<Argument> arguments) {
           return template.bindingFor(first, arguments).asLong() <= template.bindingFor(second, arguments).asLong();
         }
 
@@ -145,7 +145,7 @@ public interface InstructionConstraint {
     public static InstructionConstraint gt(final Parameter first, final long value) {
       return new SimpleInstructionConstraint() {
 
-        public boolean check(Template template, List<Argument> arguments) {
+        public boolean check(Template<?> template, List<Argument> arguments) {
           return template.bindingFor(first, arguments).asLong() > value;
         }
 
@@ -164,7 +164,7 @@ public interface InstructionConstraint {
     public static InstructionConstraint lt(final Parameter first, final long value) {
       return new SimpleInstructionConstraint() {
 
-        public boolean check(Template template, List<Argument> arguments) {
+        public boolean check(Template<?> template, List<Argument> arguments) {
           return template.bindingFor(first, arguments).asLong() < value;
         }
 
@@ -183,7 +183,7 @@ public interface InstructionConstraint {
     public static InstructionConstraint ne(final Parameter parameter, final long value) {
       return new SimpleInstructionConstraint() {
 
-        public boolean check(Template template, List<Argument> arguments) {
+        public boolean check(Template<?> template, List<Argument> arguments) {
           return template.bindingFor(parameter, arguments).asLong() != value;
         }
 
@@ -244,7 +244,7 @@ public interface InstructionConstraint {
          * @param arguments the actual values
          * @return true if the constraint held for {@code arguments}
          */
-        public boolean check(Template template, List<Argument> arguments) {
+        public boolean check(Template<?> template, List<Argument> arguments) {
           int parameterIndex;
           final Object receiver;
           final Object[] objects;

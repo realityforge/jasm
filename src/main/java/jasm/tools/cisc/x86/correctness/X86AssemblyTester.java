@@ -41,7 +41,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public abstract class X86AssemblyTester<Template_Type extends X86Template, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
+public abstract class X86AssemblyTester<Template_Type extends X86Template<Template_Type>, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
     extends AssemblyTester<Template_Type, DisassembledInstruction_Type> {
 
   public X86AssemblyTester(Assembly<Template_Type> assembly, WordWidth addressWidth, EnumSet<AssemblyTestComponent> components) {

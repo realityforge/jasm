@@ -36,7 +36,7 @@ public class AlignedImmediateOperandField extends ImmediateOperandField {
   }
 
   @Override
-  public final boolean check(Template template, List<Argument> arguments) {
+  public final boolean check(Template<?> template, List<Argument> arguments) {
     if (!super.check(template, arguments)) {
       return false;
     }

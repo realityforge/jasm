@@ -11,7 +11,8 @@ package jasm.tools.risc.sparc;
 import jasm.tools.InstructionDescription;
 import jasm.tools.risc.RiscTemplate;
 
-public final class SPARCTemplate extends RiscTemplate {
+public final class SPARCTemplate
+    extends RiscTemplate<SPARCTemplate> {
   SPARCTemplate(InstructionDescription instructionDescription) {
     super(instructionDescription);
   }

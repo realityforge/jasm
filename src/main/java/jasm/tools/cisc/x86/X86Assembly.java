@@ -10,26 +10,32 @@ package jasm.tools.cisc.x86;
 
 import jasm.InstructionSet;
 import jasm.tools.Assembly;
+import java.util.List;
 
-public abstract class X86Assembly<Template_Type extends X86Template>
+public abstract class X86Assembly<Template_Type extends X86Template<Template_Type>>
     extends Assembly<Template_Type> {
 
   public X86Assembly(InstructionSet instructionSet, Class<Template_Type> templateType) {
     super(instructionSet, templateType);
   }
 
-  private static <Template_Type extends X86Template> boolean parametersMatching(Template_Type original, Template_Type candidate, Class argumentType) {
+  private static <Template_Type extends X86Template<Template_Type>> boolean paramsMatch(final Template_Type original,
+                                                                                        final Template_Type candidate,
+                                                                                        Class argumentType) {
     int i = 0;
     int j = 0;
-    while (i < original.parameters().size()) {
-      final Class originalType = original.parameters().get(i).type();
-      Class candidateType = candidate.parameters().get(j).type();
+    final List<? extends X86Parameter> oParams = original.parameters();
+    final List<? extends X86Parameter> cParameters = candidate.parameters();
+    final int oParamCount = oParams.size();
+    while (i < oParamCount) {
+      final Class originalType = oParams.get(i).type();
+      Class candidateType = cParameters.get(j).type();
       if (originalType == argumentType) {
         if (candidateType != byte.class) {
           return false;
         }
         j++;
-        candidateType = candidate.parameters().get(j).type();
+        candidateType = cParameters.get(j).type();
       }
       if (originalType != candidateType) {
         return false;
@@ -40,14 +46,16 @@ public abstract class X86Assembly<Template_Type extends X86Template>
     return true;
   }
 
-  public static <Template_Type extends X86Template> Template_Type getModVariantTemplate(Iterable<Template_Type> templates, Template_Type original, Class argumentType) {
+  public static <Template_Type extends X86Template<Template_Type>> Template_Type getModVariantTemplate(Iterable<Template_Type> templates,
+                                                                                                       Template_Type original,
+                                                                                                       Class argumentType) {
     for (Template_Type candidate : templates) {
       if (candidate.opcode1() == original.opcode1() && candidate.opcode2() == original.opcode2() &&
           candidate.instructionSelectionPrefix() == original.instructionSelectionPrefix() &&
           candidate.modRMGroupOpcode() == original.modRMGroupOpcode() &&
           candidate.addressSizeAttribute() == original.addressSizeAttribute() &&
           candidate.operandSizeAttribute() == original.operandSizeAttribute() &&
-          parametersMatching(original, candidate, argumentType)) {
+          paramsMatch(original, candidate, argumentType)) {
         return candidate;
       }
     }
