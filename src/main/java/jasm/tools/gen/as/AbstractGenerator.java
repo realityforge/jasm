@@ -55,12 +55,11 @@ public abstract class AbstractGenerator {
     return writer;
   }
 
-  protected void fileEpilog(final String name,
-                            final IndentWriter writer) {
+  protected void fileEpilog(final String name, final IndentWriter writer) {
     writer.outdent();
     writer.println("}");
     writer.close();
-    Trace.line(1, "Generated " + name + ": " + " (" + writer.lineCount() + " lines)");
+    Trace.line(1, "Generated " + name);
   }
 
   protected final void emitByte(IndentWriter writer, String byteValue) {
