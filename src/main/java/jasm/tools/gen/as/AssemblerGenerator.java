@@ -99,7 +99,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
   }
 
   private void printClassHeader(IndentWriter writer) {
-    writer.println();
+    writer.println("/* Generated file. Do not edit. */");
     printPackageAffiliation(writer);
     writer.println();
   }
@@ -318,7 +318,8 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     final CharArraySource charArrayWriter = new CharArraySource((int) rawAssemblerFile.length());
     final IndentWriter writer = new IndentWriter(new PrintWriter(charArrayWriter));
     printClassHeader(writer);
-    final Set<String> importPackages = getImportPackages(templates());
+    final List<Template_Type> templates = templates();
+    final Set<String> importPackages = getImportPackages(templates);
     importPackages.add(Assembler.class.getPackage().getName()); // for the assembler's super class
     importPackages.add(parentAssemblerClass().getPackage().getName()); // for the assembler's super class
     importPackages.add(Inline.class.getPackage().getName());
@@ -333,8 +334,9 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
     int codeLineCount = 0;
     final Map<InstructionDescription, Integer> instructionDescriptions = new HashMap<InstructionDescription, Integer>();
     int maxTemplatesPerDescription = 0;
-    for (int i = 0; i < templates().size(); i++) {
-      final Template_Type template = templates().get(i);
+    final int templateCount = templates.size();
+    for (int i = 0; i < templateCount; i++) {
+      final Template_Type template = templates.get(i);
       printMethodComment(writer, template, i + 1);
       codeLineCount += printMethod(writer, template);
       writer.println();
@@ -357,8 +359,8 @@ public abstract class AssemblerGenerator<Template_Type extends Template> {
 
     Trace.line(1, "Generated raw assembler: " + _rawAssemblerClassSimpleName +
                   " [code line count=" + codeLineCount + ", total line count=" + writer.lineCount() +
-                  ", method count=" + (templates().size() + subroutineCount) +
-                  ", instruction templates=" + templates().size() + ", max templates per description=" + maxTemplatesPerDescription +
+                  ", method count=" + (templateCount + subroutineCount) +
+                  ", instruction templates=" + templateCount + ", max templates per description=" + maxTemplatesPerDescription +
                   "]");
 
     return markGeneratedContent(rawAssemblerFile, charArrayWriter);
