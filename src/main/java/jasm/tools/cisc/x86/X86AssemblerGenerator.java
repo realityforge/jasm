@@ -92,8 +92,6 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
         }
       }
     }
-
-    System.out.println("subroutineCount = " + (idSeq - 1));
   }
 
   protected final Subroutine<Template_Type> buildSubroutine(final Template_Type template,
