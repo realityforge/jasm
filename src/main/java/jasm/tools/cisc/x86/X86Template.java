@@ -47,11 +47,13 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   private ArrayList<X86Operand> _operands = new ArrayList<X86Operand>(MAX_NUM_OF_OPERANDS);
   private ArrayList<X86ImplicitOperand> _implicitOperands = new ArrayList<X86ImplicitOperand>(MAX_NUM_OF_IMPLICIT_OPERANDS);
   private ArrayList<X86Parameter> _parameters = new ArrayList<X86Parameter>(MAX_NUM_OF_PARAMETERS);
-  protected boolean _isLabelMethodWritten;
+  private boolean _isLabelMethodWritten;
   private String _namePrefix = "";
   private String _assemblerMethodName;
   private String _internalOperandTypeSuffix;
   private String _externalOperandTypeSuffix;
+  private WordWidth _externalCodeSizeAttribute;
+
 
   protected X86Template(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {
     super(instructionDescription, serial);
@@ -68,6 +70,14 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
 
   protected final X86TemplateContext context() {
     return _context;
+  }
+
+  public boolean isLabelMethodWritten() {
+    return _isLabelMethodWritten;
+  }
+
+  public void setLabelMethodWritten(final boolean labelMethodWritten) {
+    _isLabelMethodWritten = labelMethodWritten;
   }
 
   public final X86InstructionPrefix instructionSelectionPrefix() {
@@ -121,8 +131,6 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   public final WordWidth operandSizeAttribute() {
     return _context.operandSizeAttribute();
   }
-
-  private WordWidth _externalCodeSizeAttribute;
 
   public final WordWidth externalCodeSizeAttribute() {
     return _externalCodeSizeAttribute;
