@@ -58,7 +58,9 @@ public final class AMD64AssemblerGenerator
     return false;
   }
 
-  private void printUnconditionalRexPrefix(IndentWriter writer, AMD64Template template) {
+  private void printUnconditionalRexPrefix(final IndentWriter writer,
+                                           final AMD64Template template,
+                                           final boolean inSubroutine) {
     String rBit = "false";
     String bBit = "false";
     String xBit = "false";
@@ -66,16 +68,16 @@ public final class AMD64AssemblerGenerator
     for (X86Parameter parameter : template.parameters()) {
       switch (parameter.place()) {
         case MOD_REG_REXR:
-          rBit = "(" + asValueInSubroutine(parameter) + " & 8) != 0";
+          rBit = "(" + asValueInSubroutine(parameter, inSubroutine) + " & 8) != 0";
           break;
         case MOD_RM_REXB:
         case SIB_BASE_REXB:
         case OPCODE1_REXB:
         case OPCODE2_REXB:
-          bBit = "(" + asValueInSubroutine(parameter) + " & 8) != 0";
+          bBit = "(" + asValueInSubroutine(parameter, inSubroutine) + " & 8) != 0";
           break;
         case SIB_INDEX_REXX:
-          xBit = "(" + asValueInSubroutine(parameter) + " & 8) != 0";
+          xBit = "(" + asValueInSubroutine(parameter, inSubroutine) + " & 8) != 0";
           break;
         default:
           break;
@@ -92,7 +94,9 @@ public final class AMD64AssemblerGenerator
     return "";
   }
 
-  private void printConditionalRexPrefix(IndentWriter writer, AMD64Template template) {
+  private void printConditionalRexPrefix(final IndentWriter writer,
+                                         final AMD64Template template,
+                                         final boolean inSubroutine) {
     String rBit = null;
     String bBit = null;
     String xBit = null;
@@ -102,18 +106,18 @@ public final class AMD64AssemblerGenerator
       switch (parameter.place()) {
         case MOD_REG_REXR:
           force += genForceCheck(parameter);
-          rBit = "(" + asValueInSubroutine(parameter) + " >= 8)";
+          rBit = "(" + asValueInSubroutine(parameter, inSubroutine) + " >= 8)";
           break;
         case MOD_RM_REXB:
         case SIB_BASE_REXB:
         case OPCODE1_REXB:
         case OPCODE2_REXB:
           force += genForceCheck(parameter);
-          bBit = "(" + asValueInSubroutine(parameter) + " >= 8)";
+          bBit = "(" + asValueInSubroutine(parameter, inSubroutine) + " >= 8)";
           break;
         case SIB_INDEX_REXX:
           force += genForceCheck(parameter);
-          xBit = "(" + asValueInSubroutine(parameter) + " >= 8)";
+          xBit = "(" + asValueInSubroutine(parameter, inSubroutine) + " >= 8)";
           break;
         default:
           break;
@@ -161,10 +165,12 @@ public final class AMD64AssemblerGenerator
   }
 
   @Override
-  protected final void printPrefixes(IndentWriter writer, AMD64Template template) {
-    super.printPrefixes(writer, template);
+  protected final void printPrefixes(final IndentWriter writer,
+                                     final AMD64Template template,
+                                     final boolean inSubroutine) {
+    super.printPrefixes(writer, template, inSubroutine);
     if (isWBitRequired(template)) {
-      printUnconditionalRexPrefix(writer, template);
+      printUnconditionalRexPrefix(writer, template, inSubroutine);
     } else {
       for (X86Parameter parameter : template.parameters()) {
         switch (parameter.place()) {
@@ -174,7 +180,7 @@ public final class AMD64AssemblerGenerator
           case SIB_INDEX_REXX:
           case OPCODE1_REXB:
           case OPCODE2_REXB:
-            printConditionalRexPrefix(writer, template);
+            printConditionalRexPrefix(writer, template, inSubroutine);
             return;
           default:
             break;
@@ -184,7 +190,7 @@ public final class AMD64AssemblerGenerator
   }
 
   @Override
-  protected final void printModVariants(IndentWriter writer, AMD64Template template) {
+  protected final void printModVariants(IndentWriter writer, AMD64Template template, final boolean inSubroutine) {
     if (template.modCase() != ModCase.MOD_0 || template.parameters().size() == 0) {
       return;
     }
@@ -192,10 +198,10 @@ public final class AMD64AssemblerGenerator
       case NORMAL: {
         switch (template.addressSizeAttribute()) {
           case BITS_32:
-            printModVariant(writer, template, AMD64IndirectRegister32.EBP_INDIRECT);
+            printModVariant(writer, template, inSubroutine, AMD64IndirectRegister32.EBP_INDIRECT);
             break;
           case BITS_64:
-            printModVariant(writer, template, AMD64IndirectRegister64.RBP_INDIRECT, AMD64IndirectRegister64.R13_INDIRECT);
+            printModVariant(writer, template, inSubroutine, AMD64IndirectRegister64.RBP_INDIRECT, AMD64IndirectRegister64.R13_INDIRECT);
             break;
           default:
             throw new IllegalStateException();
@@ -207,10 +213,10 @@ public final class AMD64AssemblerGenerator
           case GENERAL_REGISTER:
             switch (template.addressSizeAttribute()) {
               case BITS_32:
-                printModVariant(writer, template, AMD64BaseRegister32.EBP_BASE);
+                printModVariant(writer, template, inSubroutine, AMD64BaseRegister32.EBP_BASE);
                 break;
               case BITS_64:
-                printModVariant(writer, template, AMD64BaseRegister64.RBP_BASE, AMD64BaseRegister64.R13_BASE);
+                printModVariant(writer, template, inSubroutine, AMD64BaseRegister64.RBP_BASE, AMD64BaseRegister64.R13_BASE);
                 break;
               default:
                 throw new IllegalStateException();
@@ -228,7 +234,7 @@ public final class AMD64AssemblerGenerator
   }
 
   @Override
-  protected final void printSibVariants(IndentWriter writer, AMD64Template template) {
+  protected final void printSibVariants(IndentWriter writer, AMD64Template template, final boolean inSubroutine) {
     if (template.parameters().size() == 0 ||
         template.modCase() == null || template.modCase() == ModCase.MOD_3 ||
         template.rmCase() != RMCase.NORMAL) {
@@ -240,10 +246,10 @@ public final class AMD64AssemblerGenerator
       case MOD_2: {
         switch (template.addressSizeAttribute()) {
           case BITS_32:
-            printSibVariant(writer, template, AMD64IndirectRegister32.ESP_INDIRECT);
+            printSibVariant(writer, template, inSubroutine, AMD64IndirectRegister32.ESP_INDIRECT);
             break;
           case BITS_64:
-            printSibVariant(writer, template, AMD64IndirectRegister64.RSP_INDIRECT, AMD64IndirectRegister64.R12_INDIRECT);
+            printSibVariant(writer, template, inSubroutine, AMD64IndirectRegister64.RSP_INDIRECT, AMD64IndirectRegister64.R12_INDIRECT);
             break;
           default:
             throw new IllegalStateException();

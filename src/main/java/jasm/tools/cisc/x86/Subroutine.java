@@ -8,21 +8,30 @@
  */
 package jasm.tools.cisc.x86;
 
-final class Subroutine<Template_Type extends X86Template<Template_Type>>
-    implements Comparable<Subroutine<Template_Type>> {
+import java.util.HashSet;
 
-  final String name;
-  final String code;
-  final Template_Type template;
-  int usageCount;
+public final class Subroutine<Template_Type extends X86Template<Template_Type>> {
 
-  Subroutine(String name, String code, Template_Type template) {
-    this.name = name;
-    this.code = code;
-    this.template = template;
+  final HashSet<Template_Type> templates = new HashSet<Template_Type>();
+  int id;
+  //set to true for mod variants (for the moment)
+  boolean required;
+
+  String name() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("assemble");
+    final String idString = Integer.toString(id);
+    final int size = idString.length();
+    for(int i = size; i < 4; i++ ) {
+      sb.append('0');
+    }
+    sb.append(idString);
+    return sb.toString();
   }
 
-  public int compareTo(final Subroutine o) {
-    return name.compareTo(o.name);
-  }
+  boolean required() { return required || templates.size() > 1; }
+
+  Template_Type template() { return templates.iterator().next(); }
+
+  public String toString() { return "[Subroutine id=" + id + " templateCount=" + templates.size() + "]"; }
 }

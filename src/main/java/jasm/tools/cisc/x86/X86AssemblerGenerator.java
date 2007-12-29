@@ -29,6 +29,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -40,8 +41,20 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
   private static final String MODRM_GROUP_OPCODE_VARIABLE_NAME = "modRmOpcode";
 
   private final WordWidth _addressWidth;
-  private final Map<String, Subroutine<Template_Type>> _subroutineMap = new HashMap<String, Subroutine<Template_Type>>();
-  private int _subroutineSerial;
+
+  /**
+   * The set of subroutines that are required.
+   * Only valid after {@link #classifySubroutines()} completed.
+   */
+  private final LinkedList<Subroutine<Template_Type>> _requiredSubroutines = new LinkedList<Subroutine<Template_Type>>();
+  /**
+   * The map of templates to subroutines for subroutines that are required.
+   * Only valid after {@link #classifySubroutines()} completed.
+   */
+  private final Map<Template_Type, Subroutine<Template_Type>> _templateToSubroutine = new HashMap<Template_Type, Subroutine<Template_Type>>();
+  /** Map of generated code to subroutine. Only used during {@link #buildSubroutines()}. */
+  private final Map<String, Subroutine<Template_Type>> _code2SubroutineMap = new HashMap<String, Subroutine<Template_Type>>();
+  private boolean _buildingRequiredSubroutineMaps;
 
   protected X86AssemblerGenerator(Assembly<Template_Type> assembly,
                                   WordWidth addressWidth) {
@@ -51,12 +64,49 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
 
   @Override
   protected void generateRawAssemblerClass(final String name) throws IOException {
-    //Generate all the subroutines at the start.
-    // If a subroutine is only used once then the code can be inlined.
-    for (Template_Type template : assembly().templates()) {
-      makeSubroutine(template);
-    }
+    buildSubroutines();
+    classifySubroutines();
     super.generateRawAssemblerClass(name);
+  }
+
+  //Generate all the subroutines at the start.
+  // If a subroutine is only used once then the code can be inlined.
+  private void buildSubroutines() {
+    _buildingRequiredSubroutineMaps = true;
+    _code2SubroutineMap.clear();
+    for (Template_Type template : assembly().templates()) {
+      buildSubroutine(template, false);
+    }
+    _buildingRequiredSubroutineMaps = false;
+  }
+
+  private void classifySubroutines() {
+    _templateToSubroutine.clear();
+    int idSeq = 1;
+    for (Subroutine<Template_Type> subroutine : _code2SubroutineMap.values()) {
+      if (subroutine.required()) {
+        subroutine.id = idSeq++;
+        _requiredSubroutines.add(subroutine);
+        for (Template_Type template : subroutine.templates) {
+          _templateToSubroutine.put(template, subroutine);
+        }
+      }
+    }
+
+    System.out.println("subroutineCount = " + (idSeq - 1));
+  }
+
+  protected final Subroutine<Template_Type> buildSubroutine(final Template_Type template,
+                                                            final boolean required) {
+    final String code = generateSubroutineCode(template, true);
+    Subroutine<Template_Type> subroutine = _code2SubroutineMap.get(code);
+    if (subroutine == null) {
+      subroutine = new Subroutine<Template_Type>();
+      _code2SubroutineMap.put(code, subroutine);
+    }
+    subroutine.required |= required;
+    subroutine.templates.add(template);
+    return subroutine;
   }
 
   protected final X86Parameter getParameter(Template_Type template, Class parameterType) {
@@ -68,30 +118,44 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     throw new IllegalStateException("found no parameter of type: " + parameterType);
   }
 
-  private void printCallWithByteDisplacement(IndentWriter writer, Template_Type template, Class argumentType) {
-    final Template_Type modVariantTemplate = X86Assembly.getModVariantTemplate(assembly().templates(), template, argumentType);
-    final String subroutineName = makeSubroutine(modVariantTemplate);
-    writer.print(subroutineName + "(");
-    if (template.opcode2() != null) {
-      writer.print(OPCODE2_VARIABLE_NAME);
-    } else {
-      writer.print(OPCODE1_VARIABLE_NAME);
+  private void printCallWithByteDisplacement(final IndentWriter writer,
+                                             final Template_Type template,
+                                             final Class argumentType,
+                                             final boolean inSubroutine) {
+    final Template_Type variant =
+        X86Assembly.getModVariantTemplate(assembly().templates(), template, argumentType);
+    Subroutine<Template_Type> subroutine = _templateToSubroutine.get(variant);
+    if (null == subroutine) {
+      if (_buildingRequiredSubroutineMaps) {
+        subroutine = buildSubroutine(variant, true);
+      } else {
+        throw new IllegalStateException("Missing subroutine for " + variant);
+      }
     }
-    if (template.modRMGroupOpcode() != null) {
-      writer.print(", " + MODRM_GROUP_OPCODE_VARIABLE_NAME);
+    writer.print(subroutine.name() + "( (byte)");
+    if (template.opcode2() != null) {
+      writer.print(opcode2Value(template, inSubroutine));
+    } else {
+      writer.print(opcodeValue(template, inSubroutine));
+    }
+    final ModRMGroup.Opcode opcode = template.modRMGroupOpcode();
+    if (opcode != null) {
+      writer.print(", (byte)" + HexUtil.toHexLiteral(opcode.byteValue()));
     }
     for (X86Parameter parameter : template.parameters()) {
       if (parameter.type() == argumentType) {
         writer.print(", (byte) 0");
       }
-      writer.print(", " + parameter.variableName());
+      final String value = passValue(parameter, inSubroutine);
+      writer.print(", " + value);
     }
     writer.println(");");
   }
 
-  protected final String asIdentifier(EnumerableArgument argument) {
+  protected final String asIdentifier(final EnumerableArgument argument,
+                                      final boolean inSubroutine) {
     return argument.getClass().getSimpleName() + "." +
-           argument.name() + ".value()";
+           argument.name() + (inSubroutine ? ".value()" : "");
   }
 
   @Override
@@ -101,27 +165,29 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     return imports;
   }
 
-  protected final <Argument_Type extends EnumerableArgument> void printModVariant(IndentWriter writer,
-                                                                                  final Template_Type template, Argument_Type... arguments) {
+  protected final <Argument_Type extends EnumerableArgument> void printModVariant(final IndentWriter writer,
+                                                                                  final Template_Type template,
+                                                                                  final boolean inSubroutine,
+                                                                                  final Argument_Type... arguments) {
     final Class argumentType = arguments[0].getClass();
     final X86Parameter parameter = getParameter(template, argumentType);
     writer.print("if (");
     String separator = "";
     for (EnumerableArgument argument : arguments) {
-      writer.print(separator + parameter.variableName() + " == " + asIdentifier(argument));
+      writer.print(separator + parameter.variableName() + " == " + asIdentifier(argument, inSubroutine));
       separator = " || ";
     }
     writer.println(") {");
     writer.indent();
-    printCallWithByteDisplacement(writer, template, argumentType);
+    printCallWithByteDisplacement(writer, template, argumentType, inSubroutine);
     writer.println("return;");
     writer.outdent();
     writer.println("}");
   }
 
-  protected abstract void printModVariants(IndentWriter writer, Template_Type template);
+  protected abstract void printModVariants(IndentWriter writer, Template_Type template, boolean inSubroutine);
 
-  protected void printPrefixes(IndentWriter writer, Template_Type template) {
+  protected void printPrefixes(IndentWriter writer, Template_Type template, final boolean inSubroutine) {
     if (template.addressSizeAttribute() != _addressWidth) {
       writer.println("emitAddressSizePrefix();");
     }
@@ -140,12 +206,18 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     }
   }
 
-  protected final String asValueInSubroutine(X86Parameter parameter) {
-    return (promoteParam(parameter)) ? parameter.variableName() : parameter.valueString();
+  protected final String asValueInSubroutine(final X86Parameter parameter,
+                                             final boolean inSubroutine) {
+    if (inSubroutine && promoteParam(parameter)) {
+      return parameter.variableName();
+    } else {
+      return parameter.valueString();
+    }
   }
 
-  protected final String asValueAtTopLevel(X86Parameter parameter) {
-    return (promoteParam(parameter)) ? parameter.valueString() : parameter.variableName();
+  protected final String passValue(final X86Parameter parameter,
+                                   final boolean inSubroutine) {
+    return (!inSubroutine && promoteParam(parameter)) ? parameter.valueString() : parameter.variableName();
   }
 
   private boolean promoteParam(final X86Parameter parameter) {
@@ -153,14 +225,16 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
              parameter.type() == AMD64GeneralRegister8.class);
   }
 
-  private void printModRMByte(IndentWriter writer, Template_Type template) {
+  private void printModRMByte(final IndentWriter writer,
+                              final Template_Type template,
+                              final boolean inSubroutine) {
     String mod = String.valueOf(template.modCase().ordinal());
     String rm = "0";
     String reg = "0";
 
     final ModRMGroup.Opcode opcode = template.modRMGroupOpcode();
     if (opcode != null) {
-      reg = MODRM_GROUP_OPCODE_VARIABLE_NAME;
+      reg = inSubroutine ? MODRM_GROUP_OPCODE_VARIABLE_NAME : HexUtil.toHexLiteral(opcode.byteValue());
     }
     switch (template.rmCase()) {
       case SIB:
@@ -176,12 +250,12 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
       switch (parameter.place()) {
         case MOD_REG:
         case MOD_REG_REXR: {
-          reg = asValueInSubroutine(parameter);
+          reg = asValueInSubroutine(parameter, inSubroutine);
           break;
         }
         case MOD_RM:
         case MOD_RM_REXB: {
-          rm = asValueInSubroutine(parameter);
+          rm = asValueInSubroutine(parameter, inSubroutine);
           break;
         }
         default:
@@ -191,7 +265,9 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     writer.println("emitModRM(" + mod + "," + rm + "," + reg + ");");
   }
 
-  private void printSibByte(IndentWriter writer, Template_Type template) {
+  private void printSibByte(final IndentWriter writer,
+                            final Template_Type template,
+                            final boolean inSubroutine) {
     String base = (template.sibBaseCase() == SibBaseCase.SPECIAL) ? "5" : "0";
     String index = "0";
     String scale = "0";
@@ -199,14 +275,14 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
       switch (parameter.place()) {
         case SIB_BASE:
         case SIB_BASE_REXB:
-          base += " | " + asValueInSubroutine(parameter);
+          base += " | " + asValueInSubroutine(parameter, inSubroutine);
           break;
         case SIB_INDEX:
         case SIB_INDEX_REXX:
-          index = asValueInSubroutine(parameter);
+          index = asValueInSubroutine(parameter, inSubroutine);
           break;
         case SIB_SCALE:
-          scale = asValueInSubroutine(parameter);
+          scale = asValueInSubroutine(parameter, inSubroutine);
           break;
         default:
           break;
@@ -216,13 +292,16 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
   }
 
   protected final <Argument_Type extends Enum<Argument_Type> & EnumerableArgument>
-  void printSibVariant(IndentWriter writer, Template_Type template, Argument_Type... arguments) {
+  void printSibVariant(final IndentWriter writer,
+                       final Template_Type template,
+                       final boolean inSubroutine,
+                       final Argument_Type... arguments) {
     final Class argumentType = arguments[0].getClass();
     final X86Parameter parameter = getParameter(template, argumentType);
     writer.print("if (");
     String separator = "";
     for (EnumerableArgument argument : arguments) {
-      writer.print(separator + parameter.variableName() + " == " + asIdentifier(argument));
+      writer.print(separator + parameter.variableName() + " == " + asIdentifier(argument, inSubroutine));
       separator = " || ";
     }
     writer.println(") {");
@@ -233,7 +312,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     writer.println("}");
   }
 
-  protected abstract void printSibVariants(IndentWriter writer, Template_Type template);
+  protected abstract void printSibVariants(IndentWriter writer, Template_Type template, final boolean inSubroutine);
 
   private void printImmediateParameter(IndentWriter writer, X86NumericalParameter parameter) {
     switch (parameter.width().numberOfBytes()) {
@@ -254,36 +333,30 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     }
   }
 
-  private void printAppendedEnumerableParameter(IndentWriter writer, X86EnumerableParameter parameter) {
-    emitByte(writer, "(byte) " + asValueInSubroutine(parameter));
-    writer.println(" // appended");
+  private void printAppendedEnumerableParameter(final IndentWriter writer,
+                                                final X86EnumerableParameter parameter,
+                                                final boolean inSubroutine) {
+    writer.println("emitByte((byte) " + asValueInSubroutine(parameter, inSubroutine) + ");");
   }
 
-  private void printAppendedParameter(IndentWriter writer, Template_Type template) {
+  private void printAppendedParameter(final IndentWriter writer,
+                                      final Template_Type template,
+                                      final boolean inSubroutine) {
     for (X86Parameter parameter : template.parameters()) {
       if (parameter.place() == ParameterPlace.IMMEDIATE ||
           parameter.place() == ParameterPlace.DISPLACEMENT) {
         printImmediateParameter(writer, (X86NumericalParameter) parameter);
       } else if (parameter.place() == ParameterPlace.APPEND) {
-        printAppendedEnumerableParameter(writer, (X86EnumerableParameter) parameter);
+        printAppendedEnumerableParameter(writer, (X86EnumerableParameter) parameter, inSubroutine);
       }
     }
   }
 
-  private String createSubroutineName() {
-    ++_subroutineSerial;
-    String number = Integer.toString(_subroutineSerial);
-    while (number.length() < 4) {
-      number = "0" + number;
-    }
-    return "assemble" + number;
-  }
-
-  private void printSubroutine(IndentWriter writer, Template_Type template) {
-    writer.indent();
-    writer.indent();
-    printModVariants(writer, template);
-    printPrefixes(writer, template);
+  private void printSubroutine(final IndentWriter writer,
+                               final Template_Type template,
+                               final boolean inSubroutine) {
+    printModVariants(writer, template, inSubroutine);
+    printPrefixes(writer, template, inSubroutine);
     if (template.opcode2() != null) {
       X86Parameter p = null;
       for (X86Parameter parameter : template.parameters()) {
@@ -294,7 +367,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
           break;
         }
       }
-      writer.println("emitOpcode2(" + toOpCode(OPCODE2_VARIABLE_NAME, p) + ");");
+      writer.println("emitOpcode2(" + toOpCode(opcode2Value(template, inSubroutine), p, inSubroutine) + ");");
     } else {
       X86Parameter p = null;
       for (X86Parameter parameter : template.parameters()) {
@@ -305,17 +378,27 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
           break;
         }
       }
-      writer.println("emitByte(" + toOpCode(OPCODE1_VARIABLE_NAME, p) + ");");
+      writer.println("emitByte(" + toOpCode(opcodeValue(template, inSubroutine), p, inSubroutine) + ");");
     }
     if (template.hasModRMByte()) {
-      printModRMByte(writer, template);
+      printModRMByte(writer, template, inSubroutine);
       if (template.hasSibByte()) {
-        printSibByte(writer, template);
+        printSibByte(writer, template, inSubroutine);
       } else {
-        printSibVariants(writer, template);
+        printSibVariants(writer, template, inSubroutine);
       }
     }
-    printAppendedParameter(writer, template);
+    printAppendedParameter(writer, template, inSubroutine);
+  }
+
+  private String opcodeValue(final Template_Type template,
+                             final boolean inSubroutine) {
+    return inSubroutine ? OPCODE1_VARIABLE_NAME : template.opcode1().toString();
+  }
+
+  private String opcode2Value(final Template_Type template,
+                              final boolean inSubroutine) {
+    return inSubroutine ? OPCODE2_VARIABLE_NAME : template.opcode2().toString();
   }
 
   private void printSubRoutineArgList(final IndentWriter writer, final Template_Type template) {
@@ -332,9 +415,11 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     writer.println(") {");
   }
 
-  private String toOpCode(final String opCode, final X86Parameter p) {
+  private String toOpCode(final String opCode,
+                          final X86Parameter p,
+                          final boolean inSubroutine) {
     if (null != p) {
-      return "(byte)( " + opCode + " + (" + asValueInSubroutine(p) + " & 7 ))";
+      return "(byte)( " + opCode + " + (" + asValueInSubroutine(p, inSubroutine) + " & 7 ))";
     } else {
       return "(byte)( " + opCode + " )";
     }
@@ -372,61 +457,55 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     return sb.toString();
   }
 
-  private String makeSubroutine(Template_Type template) {
+  private String generateSubroutineCode(final Template_Type template,
+                                        final boolean inSubroutine) {
     final StringWriter stringWriter = new StringWriter();
-    printSubroutine(new IndentWriter(new PrintWriter(stringWriter)), template);
-    final String code = stringWriter.toString();
-    Subroutine<Template_Type> subroutine = _subroutineMap.get(code);
-    if (subroutine == null) {
-      subroutine = new Subroutine<Template_Type>(createSubroutineName(), code, template);
-      _subroutineMap.put(code, subroutine);
-    }
-    subroutine.usageCount++;
-    return subroutine.name;
+    final IndentWriter writer = new IndentWriter(new PrintWriter(stringWriter));
+    printSubroutine(writer, template, inSubroutine);
+    return stringWriter.toString();
   }
 
   @Override
-  protected final void printMethod(IndentWriter writer, Template_Type template) {
-    writer.print("@Inline");
-    writer.println();
+  protected final void printMethod(final IndentWriter writer,
+                                   final Template_Type template) {
+    final Subroutine<Template_Type> subroutine = _templateToSubroutine.get(template);
+    if (null != subroutine) writer.println("@Inline");
     writer.print("public final void ");
     writer.print(template.assemblerMethodName() + "(");
     writer.print(formatParameterList("", template.parameters(), false));
     writer.println(") {");
     writer.indent();
-    final String subroutineName = makeSubroutine(template);
-    writer.print(subroutineName + "(");
-    if (template.opcode2() != null) {
-      writer.print("(byte) " + HexUtil.toHexLiteral(template.opcode2().byteValue()));
+    if (null != subroutine) {
+      writer.print(subroutine.name() + "(");
+      if (template.opcode2() != null) {
+        writer.print("(byte) " + HexUtil.toHexLiteral(template.opcode2().byteValue()));
+      } else {
+        writer.print("(byte) " + HexUtil.toHexLiteral(template.opcode1().byteValue()));
+      }
+      if (template.modRMGroupOpcode() != null) {
+        writer.print(", (byte) " + HexUtil.toHexLiteral(template.modRMGroupOpcode().byteValue()));
+      }
+      for (X86Parameter parameter : template.parameters()) {
+        writer.print(", " + passValue(parameter, false));
+      }
+      writer.println(");");
     } else {
-      writer.print("(byte) " + HexUtil.toHexLiteral(template.opcode1().byteValue()));
+      printSubroutine(writer, template, false);
     }
-    if (template.modRMGroupOpcode() != null) {
-      writer.print(", (byte) " + HexUtil.toHexLiteral(template.modRMGroupOpcode().byteValue()));
-    }
-    for (X86Parameter parameter : template.parameters()) {
-      writer.print(", " + asValueAtTopLevel(parameter));
-    }
-    writer.println(");");
     writer.outdent();
     writer.println("}");
   }
 
   @Override
   protected final void printSubroutines(IndentWriter writer) {
-    final ArrayList<Subroutine<Template_Type>> subroutines = new ArrayList<Subroutine<Template_Type>>();
-    subroutines.addAll(_subroutineMap.values());
-    Collections.sort(subroutines);
-    for (Subroutine<Template_Type> subroutine : subroutines) {
+    for (Subroutine<Template_Type> subroutine : _requiredSubroutines) {
       writer.println();
-      writer.resetIndentation();
-      writer.setIndentationLevel(1);
-      writer.print("private void " + subroutine.name);
-      printSubRoutineArgList(writer, subroutine.template);
-      writer.setIndentationLevel(0);
-      writer.print(subroutine.code);
-      writer.resetIndentation();
-      writer.setIndentationLevel(1);
+      writer.print("private void " + subroutine.name());
+      final Template_Type template = subroutine.template();
+      printSubRoutineArgList(writer, template);
+      writer.indent();
+      printSubroutine(writer, template, true);
+      writer.outdent();
       writer.println("}");
     }
   }
@@ -446,17 +525,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     return true;
   }
 
-  private final class LabelWidthCase {
-    private final WordWidth _width;
-    private final Template_Type _template;
-
-    private LabelWidthCase(WordWidth width, Template_Type template) {
-      _width = width;
-      _template = template;
-    }
-  }
-
-  private int getLabelWidthSequenceIndex(List<LabelWidthCase> labelWidthCases) {
+  private int getLabelWidthSequenceIndex(List<LabelWidthCase<Template_Type>> labelWidthCases) {
     final EnumSet<WordWidth> enumSet = EnumSet.noneOf(WordWidth.class);
     for (LabelWidthCase labelWidthCase : labelWidthCases) {
       enumSet.add(labelWidthCase._width);
@@ -464,9 +533,9 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     return Enums.powerSequenceIndex(enumSet);
   }
 
-  private List<LabelWidthCase> getRelatedLabelTemplatesByWidth(Template_Type template,
-                                                               List<Template_Type> labelTemplates) {
-    final LabelWidthCase[] array = ArrayUtil.create(LabelWidthCase.class, WordWidth.values().length);
+  private List<LabelWidthCase<Template_Type>> getRelatedLabelTemplatesByWidth(Template_Type template,
+                                                                              List<Template_Type> labelTemplates) {
+    final LabelWidthCase<Template_Type>[] array = ArrayUtil.create(LabelWidthCase.class, WordWidth.values().length);
     for (Template_Type t : labelTemplates) {
       if (t.assemblerMethodName().equals(template.assemblerMethodName()) &&
           t.labelParameterIndex() == template.labelParameterIndex() &&
@@ -474,13 +543,13 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
         final X86NumericalParameter numericalParameter =
             (X86NumericalParameter) t.parameters().get(template.labelParameterIndex());
         final WordWidth width = numericalParameter.width();
-        array[width.ordinal()] = new LabelWidthCase(width, t);
-        t._isLabelMethodWritten = true;
+        array[width.ordinal()] = new LabelWidthCase<Template_Type>(width, t);
+        t.setLabelMethodWritten(true);
       }
     }
     // Report the found cases in the order of ascending width:
-    final ArrayList<LabelWidthCase> result = new ArrayList<LabelWidthCase>();
-    for (final LabelWidthCase labelWidthCase : array) {
+    final ArrayList<LabelWidthCase<Template_Type>> result = new ArrayList<LabelWidthCase<Template_Type>>();
+    for (final LabelWidthCase<Template_Type> labelWidthCase : array) {
       if (labelWidthCase != null) {
         assert result.isEmpty() || labelWidthCase._width.greaterThan(result.get(result.size() - 1)._width);
         result.add(labelWidthCase);
@@ -493,7 +562,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
   private void printOffsetLabelMethod(IndentWriter writer, Template_Type template, List<Template_Type> labelTemplates) {
     Template_Type thisTemplate = template;
     final List<? extends Parameter> parameters = printLabelMethodHead(writer, thisTemplate);
-    final List<LabelWidthCase> labelWidthCases = getRelatedLabelTemplatesByWidth(thisTemplate, labelTemplates);
+    final List<LabelWidthCase<Template_Type>> labelWidthCases = getRelatedLabelTemplatesByWidth(thisTemplate, labelTemplates);
     thisTemplate = labelWidthCases.get(0)._template; // first use the template that will produce the least bytes
     writer.println("final int startOffset = currentOffset();");
     printInitialRawCall(writer, thisTemplate);
@@ -510,7 +579,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     } else {
       writer.println("switch (labelWidth()) {");
       writer.indent();
-      for (LabelWidthCase labelWidthCase : labelWidthCases) {
+      for (LabelWidthCase<Template_Type> labelWidthCase : labelWidthCases) {
         writer.println("case " + labelWidthCase._width.name() + ": {");
         writer.indent();
         printRawCall(writer, labelWidthCase._template, parameters);
@@ -539,7 +608,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
 
   private void printAddressLabelMethod(IndentWriter writer, Template_Type template) {
     final List<? extends Parameter> parameters = printLabelMethodHead(writer, template);
-    template._isLabelMethodWritten = true;
+    template.setLabelMethodWritten(true);
     writer.println("final int startOffset = currentOffset();");
     printInitialRawCall(writer, template);
     writer.print("new " + LabelAddressInstruction.class.getSimpleName());
@@ -563,7 +632,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
   @Override
   protected final void printLabelMethod(IndentWriter writer, Template_Type labelTemplate, List<Template_Type> labelTemplates) {
     if (labelTemplate.addressSizeAttribute() == _addressWidth) {
-      if (!labelTemplate._isLabelMethodWritten) {
+      if (!labelTemplate.isLabelMethodWritten()) {
         final X86Parameter parameter = labelTemplate.parameters().get(labelTemplate.labelParameterIndex());
         if (parameter instanceof X86OffsetParameter) {
           printOffsetLabelMethod(writer, labelTemplate, labelTemplates);
@@ -581,5 +650,9 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     Arrays.sort(templates.toArray());
     Collections.sort(results);
     return results;
+  }
+
+  protected final Template_Type lookupVariant(final Template_Type template, final Class type) {
+    return X86Assembly.getModVariantTemplate(assembly().templates(), template, type);
   }
 }

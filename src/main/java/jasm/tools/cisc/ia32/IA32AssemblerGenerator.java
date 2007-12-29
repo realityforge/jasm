@@ -33,7 +33,9 @@ public final class IA32AssemblerGenerator
   }
 
   @Override
-  protected final void printModVariants(IndentWriter stream, IA32Template template) {
+  protected final void printModVariants(final IndentWriter stream,
+                                        final IA32Template template,
+                                        final boolean inSubroutine) {
     if (template.modCase() != ModCase.MOD_0) {
       return;
     }
@@ -41,10 +43,10 @@ public final class IA32AssemblerGenerator
       case NORMAL: {
         switch (template.addressSizeAttribute()) {
           case BITS_16:
-            printModVariant(stream, template, IA32IndirectRegister16.BP_INDIRECT);
+            printModVariant(stream, template, inSubroutine, IA32IndirectRegister16.BP_INDIRECT);
             break;
           default:
-            printModVariant(stream, template, IA32IndirectRegister32.EBP_INDIRECT);
+            printModVariant(stream, template, inSubroutine, IA32IndirectRegister32.EBP_INDIRECT);
             break;
         }
         break;
@@ -52,7 +54,7 @@ public final class IA32AssemblerGenerator
       case SIB: {
         switch (template.sibBaseCase()) {
           case GENERAL_REGISTER:
-            printModVariant(stream, template, IA32BaseRegister32.EBP_BASE);
+            printModVariant(stream, template, inSubroutine, IA32BaseRegister32.EBP_BASE);
             break;
           default:
             break;
@@ -66,11 +68,13 @@ public final class IA32AssemblerGenerator
   }
 
   @Override
-  protected final void printSibVariants(IndentWriter stream, IA32Template template) {
+  protected final void printSibVariants(final IndentWriter stream,
+                                        final IA32Template template,
+                                        final boolean inSubroutine) {
     if (template.modCase() != null && template.modCase() != ModCase.MOD_3 &&
         template.rmCase() == RMCase.NORMAL &&
         template.addressSizeAttribute() == WordWidth.BITS_32) {
-      printSibVariant(stream, template, IA32IndirectRegister32.ESP_INDIRECT);
+      printSibVariant(stream, template, inSubroutine, IA32IndirectRegister32.ESP_INDIRECT);
     }
   }
 }
