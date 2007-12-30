@@ -14,33 +14,20 @@ import jasm.tools.TestArgumentExclusion;
 import jasm.tools.cisc.TemplateNotNeededException;
 
 /**
- * Used when pre-scanning instruction descriptions to assess variants within the respective instruction family.
- *
- * @see InstructionAssessment
+ * Used when pre-scanning instruction descriptions to assess variants
+ * within the respective instruction family.
  */
-public final class OpcodeAssessor extends X86InstructionDescriptionAdapter {
+final class OpcodeAssessor
+    extends X86InstructionDescriptionAdapter {
 
   private final InstructionAssessment _instructionFamily;
 
   public OpcodeAssessor(InstructionAssessment instructionFamily) {
-    super();
     _instructionFamily = instructionFamily;
   }
 
   @Override
   public final void visitOperandCode(OperandCode operandCode, Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) {
-    switch (operandCode.operandTypeCode()) {
-      case a:
-      case d_q:
-      case p:
-      case s:
-      case v:
-      case z:
-        _instructionFamily.haveOperandSizeVariants();
-        break;
-      default:
-        break;
-    }
     switch (operandCode.addressingMethodCode()) {
       case A:
       case E:
@@ -72,11 +59,6 @@ public final class OpcodeAssessor extends X86InstructionDescriptionAdapter {
       default:
         break;
     }
-  }
-
-  @Override
-  public final void visitRegisterOperandCode(X86RegisterOperandCode registerOperandCode, Designation position, ExternalPresence externalPresence) {
-    _instructionFamily.haveOperandSizeVariants();
   }
 
   @Override

@@ -36,7 +36,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   private static final int MAX_NUM_OF_IMPLICIT_OPERANDS = 3;
   private static final int MAX_NUM_OF_PARAMETERS = 3;
 
-  private final InstructionAssessment _instructionFamily;
+  private final boolean _hasModRMByte;
   private boolean _hasSibByte;
   private final X86TemplateContext _context;
   private final X86InstructionPrefix _instructionSelectionPrefix;
@@ -55,9 +55,12 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   private WordWidth _externalCodeSizeAttribute;
 
 
-  protected X86Template(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {
+  protected X86Template(X86InstructionDescription instructionDescription,
+                        int serial,
+                        boolean hasModRMByte,
+                        X86TemplateContext context) {
     super(instructionDescription, serial);
-    _instructionFamily = instructionFamily;
+    _hasModRMByte = hasModRMByte;
     _instructionSelectionPrefix = instructionDescription.getMandatoryPrefix();
     _context = context;
     Trace.line(2, "template #" + serial + ": " + context);
@@ -93,7 +96,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final boolean hasModRMByte() {
-    return _instructionFamily.hasModRMByte();
+    return _hasModRMByte;
   }
 
   public final ModCase modCase() {

@@ -9,7 +9,6 @@
 package jasm.tools.cisc.ia32;
 
 import jasm.WordWidth;
-import jasm.tools.cisc.x86.InstructionAssessment;
 import jasm.tools.cisc.x86.X86InstructionDescription;
 import jasm.tools.cisc.x86.X86TemplateContext;
 import jasm.tools.cisc.x86.X86TemplateCreator;
@@ -21,7 +20,10 @@ public final class IA32TemplateCreator extends X86TemplateCreator<IA32Template> 
   }
 
   @Override
-  protected final IA32Template createTemplate(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {
-    return new IA32Template(instructionDescription, serial, instructionFamily, context);
+  protected final IA32Template createTemplate(X86InstructionDescription instructionDescription,
+                                              int serial,
+                                              boolean hasModRMByte,
+                                              X86TemplateContext context) {
+    return new IA32Template(instructionDescription, serial, hasModRMByte, context);
   }
 }

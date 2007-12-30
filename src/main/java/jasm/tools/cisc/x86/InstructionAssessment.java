@@ -13,55 +13,43 @@ package jasm.tools.cisc.x86;
  *
  * @see OpcodeAssessor
  */
-public final class InstructionAssessment {
+final class InstructionAssessment {
 
   private boolean _hasAddressSizeVariants;
-  private boolean _hasOperandSizeVariants;
   private boolean _hasModRMByte;
   private ModRMGroup _modRMGroup;
   private boolean _isJump;
 
-  public InstructionAssessment() {
-  }
-
-  public final void haveAddressSizeVariants() {
+  final void haveAddressSizeVariants() {
     _hasAddressSizeVariants = true;
   }
 
-  public final boolean hasAddressSizeVariants() {
+  final boolean hasAddressSizeVariants() {
     return _hasAddressSizeVariants;
   }
 
-  public final void haveOperandSizeVariants() {
-    _hasOperandSizeVariants = true;
-  }
-
-  public final boolean hasOperandSizeVariants() {
-    return _hasOperandSizeVariants;
-  }
-
-  public final void haveModRMByte() {
+  final void haveModRMByte() {
     _hasModRMByte = true;
   }
 
-  public final boolean hasModRMByte() {
+  final boolean hasModRMByte() {
     return _hasModRMByte;
   }
 
-  public final void setModRMGroup(ModRMGroup modRMGroup) {
+  final void setModRMGroup(ModRMGroup modRMGroup) {
     _modRMGroup = modRMGroup;
     _hasModRMByte = modRMGroup != null;
   }
 
-  public final ModRMGroup modRMGroup() {
+  final ModRMGroup modRMGroup() {
     return _modRMGroup;
   }
 
-  public final void beJump() {
+  final void beJump() {
     _isJump = true;
   }
 
-  public final boolean isJump() {
+  final boolean isJump() {
     return _isJump;
   }
 }

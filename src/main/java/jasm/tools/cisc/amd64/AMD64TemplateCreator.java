@@ -9,7 +9,6 @@
 package jasm.tools.cisc.amd64;
 
 import jasm.WordWidth;
-import jasm.tools.cisc.x86.InstructionAssessment;
 import jasm.tools.cisc.x86.X86InstructionDescription;
 import jasm.tools.cisc.x86.X86TemplateContext;
 import jasm.tools.cisc.x86.X86TemplateCreator;
@@ -22,7 +21,10 @@ public final class AMD64TemplateCreator
   }
 
   @Override
-  protected final AMD64Template createTemplate(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {
-    return new AMD64Template(instructionDescription, serial, instructionFamily, context);
+  protected final AMD64Template createTemplate(X86InstructionDescription instructionDescription,
+                                               int serial,
+                                               boolean hasModRMByte,
+                                               X86TemplateContext context) {
+    return new AMD64Template(instructionDescription, serial, hasModRMByte, context);
   }
 }

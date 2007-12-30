@@ -21,7 +21,6 @@ import jasm.tools.ExternalPresence;
 import jasm.tools.TestArgumentExclusion;
 import jasm.tools.cisc.TemplateNotNeededException;
 import jasm.tools.cisc.x86.Designation;
-import jasm.tools.cisc.x86.InstructionAssessment;
 import jasm.tools.cisc.x86.ModCase;
 import jasm.tools.cisc.x86.OperandCode;
 import jasm.tools.cisc.x86.ParameterPlace;
@@ -44,8 +43,11 @@ import jasm.x86.SegmentRegister;
 public final class IA32Template
     extends X86Template<IA32Template> {
 
-  IA32Template(X86InstructionDescription instructionDescription, int serial, InstructionAssessment instructionFamily, X86TemplateContext context) {
-    super(instructionDescription, serial, instructionFamily, context);
+  IA32Template(X86InstructionDescription instructionDescription,
+               int serial,
+               boolean hasModRMByte,
+               X86TemplateContext context) {
+    super(instructionDescription, serial, hasModRMByte, context);
   }
 
   private void addSib(Designation designation) throws TemplateNotNeededException {
