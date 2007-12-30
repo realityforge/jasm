@@ -31,7 +31,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate<
     extends AssemblerGenerator<Template_Type> {
 
   protected RiscAssemblerGenerator(Assembly<Template_Type> assembly) {
-    super(assembly, assembly.templates());
+    super(assembly);
   }
 
   private String encode(OperandField operandField, String val) {

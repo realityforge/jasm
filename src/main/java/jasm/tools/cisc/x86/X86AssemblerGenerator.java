@@ -25,8 +25,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -58,7 +56,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
 
   protected X86AssemblerGenerator(Assembly<Template_Type> assembly,
                                   WordWidth addressWidth) {
-    super(assembly, sort(assembly.templates()));
+    super(assembly);
     _addressWidth = addressWidth;
   }
 
@@ -644,15 +642,6 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
         }
       }
     }
-  }
-
-  //<Template_Type extends X86Template>
-  private static <Sort_Type extends X86Template<Sort_Type> & Comparable<Sort_Type>> List<Sort_Type> sort(final List<Sort_Type> templates) {
-    final ArrayList<Sort_Type> results = new ArrayList<Sort_Type>(templates.size());
-    results.addAll(templates);
-    Arrays.sort(templates.toArray());
-    Collections.sort(results);
-    return results;
   }
 
   protected final Template_Type lookupVariant(final Template_Type template, final Class type) {

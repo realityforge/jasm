@@ -26,6 +26,8 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,11 +41,10 @@ public abstract class AssemblerGenerator<Template_Type extends Template<Template
 
   private boolean _generatingLabelAssembler;
 
-  protected AssemblerGenerator(Assembly<Template_Type> assembly,
-                               List<Template_Type> templates) {
+  protected AssemblerGenerator(Assembly<Template_Type> assembly) {
     super(new File("."), "jasm." + assembly.instructionSet().name().toLowerCase() + ".as");
     _assembly = assembly;
-    _templates = templates;
+    _templates = sort(assembly.templates());
   }
 
   protected IndentWriter fileProlog(final String name, final String parentClass, final Set<String> imports) throws IOException {
@@ -347,5 +348,13 @@ public abstract class AssemblerGenerator<Template_Type extends Template<Template
       }
     }
     return packages;
+  }
+
+  private static <Sort_Type extends Template<Sort_Type> & Comparable<Sort_Type>> List<Sort_Type> sort(final List<Sort_Type> templates) {
+    final ArrayList<Sort_Type> results = new ArrayList<Sort_Type>(templates.size());
+    results.addAll(templates);
+    Arrays.sort(templates.toArray());
+    Collections.sort(results);
+    return results;
   }
 }
