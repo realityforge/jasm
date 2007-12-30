@@ -242,15 +242,14 @@ public abstract class AssemblyTester<Template_Type extends Template<Template_Typ
 
   private void testDisassembler(Template_Type template, List<Argument> argumentList, byte[] internalResult)
       throws IOException, AssemblyException, DecoderException {
-    final BufferedInputStream disassemblyStream = new BufferedInputStream(new ByteArrayInputStream(internalResult));
+    final BufferedInputStream input = new BufferedInputStream(new ByteArrayInputStream(internalResult));
     final Disassembler<Template_Type, DisassembledInstruction_Type> disassembler = createTestDisassembler();
     disassembler.setAbstractionPreference(template.instructionDescription().isSynthetic() ? AbstractionPreference.SYNTHETIC : AbstractionPreference.RAW);
     disassembler.setExpectedNumberOfArguments(argumentList.size());
-    final List<DisassembledInstruction_Type> disassembledInstructions =
-        disassembler.scanOneInstruction(disassemblyStream);
+    final List<DisassembledInstruction_Type> instructions = disassembler.scanOneInstruction(input);
 
     boolean matchFound = false;
-    for (DisassembledInstruction_Type disassembledInstruction : disassembledInstructions) {
+    for (DisassembledInstruction_Type disassembledInstruction : instructions) {
       matchFound =
           matchFound ||
           (disassembledInstruction.template().isEquivalentTo(template) &&
@@ -258,19 +257,19 @@ public abstract class AssemblyTester<Template_Type extends Template<Template_Typ
            Arrays.equals(disassembledInstruction.bytes(), internalResult));
     }
 
-    if (disassemblyStream.available() != 0 || !matchFound) {
+    if (input.available() != 0 || !matchFound) {
       System.out.println("internal disassembler test failed - " +
-                         disassembledInstructions.size() +
+                         instructions.size() +
                          " false matches found:");
-      if (disassemblyStream.available() != 0) {
+      if (input.available() != 0) {
         System.out.print("extra bytes at end of disassembly stream:");
-        for (final int b = disassemblyStream.read(); b != -1;) {
+        for (final int b = input.read(); b != -1;) {
           System.out.print(" 0x" + Integer.toHexString(b));
         }
         System.out.println();
       }
       int matchNumber = 1;
-      for (DisassembledInstruction_Type disassembledInstruction : disassembledInstructions) {
+      for (DisassembledInstruction_Type disassembledInstruction : instructions) {
         System.out.println();
         System.out.println("False match number " + matchNumber + ":");
         System.out.println("    assembled template: " + template);
@@ -284,7 +283,7 @@ public abstract class AssemblyTester<Template_Type extends Template<Template_Typ
       }
       throw new IllegalStateException("mismatch between internal assembler and disassembler");
     }
-    disassemblyStream.close();
+    input.close();
   }
 
   private void testTemplate(final Template_Type template) throws IOException, AssemblyException, DecoderException {
