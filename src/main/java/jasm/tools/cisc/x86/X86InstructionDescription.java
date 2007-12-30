@@ -59,6 +59,7 @@ public final class X86InstructionDescription
   public X86InstructionDescription beAPrefix() {
     _aPrefix = true;
     beNotExternallyTestable();
+    beNotDisassemblable();
     return this;
   }
 }
