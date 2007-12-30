@@ -82,9 +82,13 @@ public final class Main {
           return false;
 
         case ISA_OPT:
-          _isa = ISADef.valueOf(option.getArgument().toUpperCase());
+          _isa = ISADef.valueOf(option.getArgument());
           if (null == _isa) {
             System.out.println("Unknown isa: " + option.getArgument());
+            System.out.println("Available ISAs:");
+            for (ISADef isa : ISADef.values()) {
+              System.out.println("\t" + isa.name());
+            }
           }
           break;
 

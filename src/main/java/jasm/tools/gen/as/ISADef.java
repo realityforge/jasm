@@ -9,10 +9,10 @@
 package jasm.tools.gen.as;
 
 enum ISADef {
-  AMD64("jasm.tools.cisc.amd64.AMD64AssemblerGenerator"),
-  IA32("jasm.tools.cisc.ia32.IA32AssemblerGenerator"),
-  PPC("jasm.tools.risc.ppc.PPCAssemblerGenerator"),
-  SPARC("jasm.tools.risc.sparc.SPARCAssemblerGenerator");
+  amd64("jasm.tools.cisc.amd64.AMD64AssemblerGenerator"),
+  ia32("jasm.tools.cisc.ia32.IA32AssemblerGenerator"),
+  ppc("jasm.tools.risc.ppc.PPCAssemblerGenerator"),
+  sparc("jasm.tools.risc.sparc.SPARCAssemblerGenerator");
 
   private final String _generatorClassname;
 
