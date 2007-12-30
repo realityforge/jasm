@@ -365,7 +365,12 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
           break;
         }
       }
-      writer.println("emitOpcode2(" + toOpCode(opcode2Value(template, inSubroutine), p, inSubroutine) + ");");
+      if (X86Opcode.isStandardOpcode2Prefix(template.opcode1())) {
+        writer.println("emitOpcode2(" + toOpCode(opcode2Value(template, inSubroutine), p, inSubroutine) + ");");
+      } else {
+        writer.println("emitByte((byte)" + template.opcode1().toString() + ");");
+        writer.println("emitByte(" + toOpCode(opcode2Value(template, inSubroutine), p, inSubroutine) + ");");
+      }
     } else {
       X86Parameter p = null;
       for (X86Parameter parameter : template.parameters()) {
