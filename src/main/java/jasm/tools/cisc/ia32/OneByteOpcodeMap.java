@@ -9,6 +9,7 @@
 package jasm.tools.cisc.ia32;
 
 import jasm.WordWidth;
+import static jasm.WordWidth.*;
 import static jasm.ia32.IA32GeneralRegister16.*;
 import static jasm.ia32.IA32GeneralRegister32.*;
 import static jasm.ia32.IA32GeneralRegister8.*;
@@ -20,10 +21,7 @@ import static jasm.tools.cisc.x86.OperandTypeCode.v;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
 import jasm.tools.cisc.x86.X86RegisterOperandCode;
 import static jasm.util.HexByte.*;
-import static jasm.x86.SegmentRegister.CS;
-import static jasm.x86.SegmentRegister.DS;
-import static jasm.x86.SegmentRegister.ES;
-import static jasm.x86.SegmentRegister.SS;
+import static jasm.x86.SegmentRegister.*;
 import jasm.x86.X86InstructionPrefix;
 
 /** Representation of the ... */
@@ -70,9 +68,9 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
 
     define(_50, "PUSH", Gov);
 
-    define(_60, "PUSHA").requireOperandSize(WordWidth.BITS_16).beNotExternallyTestable(); // gas does not emit the operand size prefix
+    define(_60, "PUSHA").requireOperandSize(BITS_16).beNotExternallyTestable(); // gas does not emit the operand size prefix
     define(_60, "PUSHAD").requireOperandSize(WordWidth.BITS_32).setExternalName("pusha");
-    define(_61, "POPA").requireOperandSize(WordWidth.BITS_16).beNotExternallyTestable(); // gas does not emit the operand size prefix
+    define(_61, "POPA").requireOperandSize(BITS_16).beNotExternallyTestable(); // gas does not emit the operand size prefix
     define(_61, "POPAD").requireOperandSize(WordWidth.BITS_32).setExternalName("popa");
     define(_62, "BOUND", Gv, Ma).revertExternalOperandOrdering();
     define(_63, "ARPL", Ew, Gw);
@@ -134,7 +132,7 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_E0, "LOOPNE", Jb);
     define(_E1, "LOOPE", Jb);
     define(_E2, "LOOP", Jb);
-    define(_E3, "JCXZ", Jb).requireAddressSize(WordWidth.BITS_16);
+    define(_E3, "JCXZ", Jb).requireAddressSize(BITS_16);
     define(_E3, "JECXZ", Jb).requireAddressSize(WordWidth.BITS_32);
     define(_E4, "IN", AL, Ib);
     define(_E5, "IN", X86RegisterOperandCode.EAX, Ib);
@@ -217,9 +215,9 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_8E, "MOV", Sw, Ew.excludeExternalTestArguments(AX, CX, DX, BX, SP, BP, SI, DI)); // gas may needlessly insert OPERAND_SIZE prefix
     define(_8F, "POP", Ev.excludeExternalTestArguments(AX, CX, DX, BX, SP, BP, SI, DI, EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI));
 
-    define(_98, "CBW").requireOperandSize(WordWidth.BITS_16);
+    define(_98, "CBW").requireOperandSize(BITS_16);
     define(_98, "CWDE").requireOperandSize(WordWidth.BITS_32);
-    define(_99, "CWD").requireOperandSize(WordWidth.BITS_16);
+    define(_99, "CWD").requireOperandSize(BITS_16);
     define(_99, "CDQ").requireOperandSize(WordWidth.BITS_32);
     define(_9A, "CALL", Ap);
     define(_9B, "FWAIT"); // 'wait' is a Java keyword, so we use the alternate mnemonic, which is more accurately named anyhow
@@ -258,7 +256,8 @@ final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {
     define(_DF, FP_DF);
 
     define(_E8, "CALL", Jv);
-    define(_E9, "JMP", Jv);
+    define(_E9, "JMP", Jv).requireOperandSize(BITS_16);
+    define(_E9, "JMP", Jv).requireOperandSize(BITS_32);
     define(_EA, "JMP", Ap);
     define(_EB, "JMP", Jb);
     define(_EC, "IN", AL, DX);
