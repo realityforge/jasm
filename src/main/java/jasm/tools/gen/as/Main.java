@@ -84,7 +84,7 @@ public final class Main {
         case ISA_OPT:
           _isa = ISADef.valueOf(option.getArgument());
           if (null == _isa) {
-            System.out.println("Unknown isa: " + option.getArgument());
+            System.out.println("Unknown ISA: " + option.getArgument());
             System.out.println("Available ISAs:");
             for (ISADef isa : ISADef.values()) {
               System.out.println("\t" + isa.name());
@@ -145,7 +145,7 @@ public final class Main {
     }
     try {
       Trace.on(_verbosity);
-      final AssemblerGenerator<?> generator = newAssembly();
+      final AssemblerGenerator<?> generator = newGenerator();
       if (null != _sourceDirectory) generator.setSourceDirectory(_sourceDirectory);
       if (_16bitAddresses) X86Config.support16BitAddresses();
       if (_16bitOffsets) X86Config.support16BitOffsets();
@@ -157,7 +157,7 @@ public final class Main {
     System.exit(0);
   }
 
-  private static AssemblerGenerator<?> newAssembly() throws Exception {
+  private static AssemblerGenerator<?> newGenerator() throws Exception {
     final String classname = _isa.getGeneratorClassname();
     return (AssemblerGenerator<?>) Class.forName(classname).newInstance();
   }
