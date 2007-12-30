@@ -8,7 +8,7 @@
  */
 package jasm.tools.cisc.amd64;
 
-import jasm.WordWidth;
+import static jasm.WordWidth.*;
 import static jasm.amd64.AMD64GeneralRegister8.*;
 import jasm.amd64.AMD64XMMRegister;
 import static jasm.tools.cisc.amd64.AMD64ModRMGroup.*;
@@ -18,10 +18,10 @@ import jasm.tools.cisc.x86.X86InstructionDescription;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
 import jasm.util.ArrayUtil;
 import static jasm.util.HexByte.*;
-import static jasm.x86.SegmentRegister.FS;
-import static jasm.x86.SegmentRegister.GS;
-import jasm.x86.X86InstructionPrefix;
+import static jasm.x86.SegmentRegister.*;
+import static jasm.x86.X86InstructionPrefix.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
 
@@ -50,24 +50,24 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_16, "MOVHPS", Vps, Mq);
     defineTwoByte(_17, "MOVHPS", Mq, Vps); // MOVLHPS ??
 
-    defineTwoByte(_10, "MOVUPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_11, "MOVUPD", Wpd, Vpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_12, "MOVLPD", Vsd, Mq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_13, "MOVLPD", Mq, Vsd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_14, "UNPCKLPD", Vpd, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_15, "UNPCKHPD", Vpd, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_16, "MOVHPD", Vsd, Mq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_17, "MOVHPD", Mq, Vsd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_10, "MOVUPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_11, "MOVUPD", Wpd, Vpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_12, "MOVLPD", Vsd, Mq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_13, "MOVLPD", Mq, Vsd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_14, "UNPCKLPD", Vpd, Wq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_15, "UNPCKHPD", Vpd, Wq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_16, "MOVHPD", Vsd, Mq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_17, "MOVHPD", Mq, Vsd).setMandatoryPrefix(OPERAND_SIZE);
 
-    defineTwoByte(_10, "MOVSD", Vdq, Wsd).setMandatoryPrefix(X86InstructionPrefix.REPNE);
-    defineTwoByte(_10, "MOVSD", Vsd, Wsd).setMandatoryPrefix(X86InstructionPrefix.REPNE);
-    defineTwoByte(_11, "MOVSD", Wsd, Vsd).setMandatoryPrefix(X86InstructionPrefix.REPNE);
-    defineTwoByte(_12, "MOVDDUP", Vpd, Wsd).setMandatoryPrefix(X86InstructionPrefix.REPNE);
+    defineTwoByte(_10, "MOVSD", Vdq, Wsd).setMandatoryPrefix(REPNE);
+    defineTwoByte(_10, "MOVSD", Vsd, Wsd).setMandatoryPrefix(REPNE);
+    defineTwoByte(_11, "MOVSD", Wsd, Vsd).setMandatoryPrefix(REPNE);
+    defineTwoByte(_12, "MOVDDUP", Vpd, Wsd).setMandatoryPrefix(REPNE);
 
-    defineTwoByte(_10, "MOVSS", Vdq, Wss).setMandatoryPrefix(X86InstructionPrefix.REPE);
-    defineTwoByte(_10, "MOVSS", Vss, Wss).setMandatoryPrefix(X86InstructionPrefix.REPE);
-    defineTwoByte(_11, "MOVSS", Wss, Vss).setMandatoryPrefix(X86InstructionPrefix.REPE);
-    defineTwoByte(_12, "MOVSLDUP", Vps, Wps).setMandatoryPrefix(X86InstructionPrefix.REPE);
+    defineTwoByte(_10, "MOVSS", Vdq, Wss).setMandatoryPrefix(REPE);
+    defineTwoByte(_10, "MOVSS", Vss, Wss).setMandatoryPrefix(REPE);
+    defineTwoByte(_11, "MOVSS", Wss, Vss).setMandatoryPrefix(REPE);
+    defineTwoByte(_12, "MOVSLDUP", Vps, Wps).setMandatoryPrefix(REPE);
 
     defineTwoByte(_20, "MOV", Rq, Cq);
     defineTwoByte(_21, "MOV", Rq, Dq);
@@ -97,18 +97,18 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_56, "ORPS", Vps, Wps);
     defineTwoByte(_57, "XORPS", Vps, Wps);
 
-    defineTwoByte(_50, "MOVMSKPD", Gd, Upd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_51, "SQRTPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_54, "ANDPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_55, "ANDNPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_56, "ORPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_57, "XORPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_50, "MOVMSKPD", Gd, Upd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_51, "SQRTPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_54, "ANDPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_55, "ANDNPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_56, "ORPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_57, "XORPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
 
-    defineTwoByte(_51, "SQRTSD", Vsd, Wsd).setMandatoryPrefix(X86InstructionPrefix.REPNE);
+    defineTwoByte(_51, "SQRTSD", Vsd, Wsd).setMandatoryPrefix(REPNE);
 
-    defineTwoByte(_51, "SQRTSS", Vss, Wss).setMandatoryPrefix(X86InstructionPrefix.REPE);
-    defineTwoByte(_52, "RSQRTSS", Vss, Wss).setMandatoryPrefix(X86InstructionPrefix.REPE);
-    defineTwoByte(_53, "RCPSS", Vss, Wss).setMandatoryPrefix(X86InstructionPrefix.REPE);
+    defineTwoByte(_51, "SQRTSS", Vss, Wss).setMandatoryPrefix(REPE);
+    defineTwoByte(_52, "RSQRTSS", Vss, Wss).setMandatoryPrefix(REPE);
+    defineTwoByte(_53, "RCPSS", Vss, Wss).setMandatoryPrefix(REPE);
 
     defineTwoByte(_60, "PUNPCKLBW", Pq, Qd);
     defineTwoByte(_61, "PUNPCKLWD", Pq, Qd);
@@ -119,14 +119,14 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_66, "PCMPGTD", Pq, Qq);
     defineTwoByte(_67, "PACKUSWB", Pq, Qq);
 
-    defineTwoByte(_60, "PUNPCKLBW", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_61, "PUNPCKLWD", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_62, "PUNPCKLDQ", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_63, "PACKSSWB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_64, "PCMPGTB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_65, "PCMPGTW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_66, "PCMPGTD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_67, "PACKUSWB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_60, "PUNPCKLBW", Vdq, Wq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_61, "PUNPCKLWD", Vdq, Wq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_62, "PUNPCKLDQ", Vdq, Wq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_63, "PACKSSWB", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_64, "PCMPGTB", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_65, "PCMPGTW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_66, "PCMPGTD", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_67, "PACKUSWB", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
 
     defineTwoByte(_70, "PSHUFW", Pq, Qq, Ib);
     defineTwoByte(_71, GROUP_12a);
@@ -137,26 +137,26 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_76, "PCMPEQD", Pq, Qq);
     defineTwoByte(_77, "EMMS");
 
-    defineTwoByte(_70, "PSHUFD", Vdq, Wdq, Ib).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_71, GROUP_12b).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_72, GROUP_13b).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_73, GROUP_14b).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_74, "PCMPEQB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_75, "PCMPEQW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_76, "PCMPEQD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_70, "PSHUFD", Vdq, Wdq, Ib).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_71, GROUP_12b).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_72, GROUP_13b).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_73, GROUP_14b).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_74, "PCMPEQB", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_75, "PCMPEQW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_76, "PCMPEQD", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
 
-    defineTwoByte(_70, "PSHUFLW", Vq, Wq, Ib).setMandatoryPrefix(X86InstructionPrefix.REPNE);
+    defineTwoByte(_70, "PSHUFLW", Vq, Wq, Ib).setMandatoryPrefix(REPNE);
 
-    defineTwoByte(_70, "PSHUFHW", Vq, Wq, Ib).setMandatoryPrefix(X86InstructionPrefix.REPE);
+    defineTwoByte(_70, "PSHUFHW", Vq, Wq, Ib).setMandatoryPrefix(REPE);
 
-    defineTwoByte(_80, "JO", Jz).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_81, "JNO", Jz).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_82, "JB", Jz).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_83, "JNB", Jz).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_84, "JZ", Jz).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_85, "JNZ", Jz).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_86, "JBE", Jz).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_87, "JNBE", Jz).setDefaultOperandSize(WordWidth.BITS_64);
+    defineTwoByte(_80, "JO", Jz).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_81, "JNO", Jz).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_82, "JB", Jz).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_83, "JNB", Jz).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_84, "JZ", Jz).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_85, "JNZ", Jz).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_86, "JBE", Jz).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_87, "JNBE", Jz).setDefaultOperandSize(BITS_64);
 
     defineTwoByte(_90, "SETO", Eb);
     defineTwoByte(_91, "SETNO", Eb);
@@ -167,8 +167,8 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_96, "SETBE", Eb);
     defineTwoByte(_97, "SETNBE", Eb);
 
-    defineTwoByte(_A0, "PUSH", FS).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_A1, "POP", FS).setDefaultOperandSize(WordWidth.BITS_64);
+    defineTwoByte(_A0, "PUSH", FS).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_A1, "POP", FS).setDefaultOperandSize(BITS_64);
     defineTwoByte(_A2, "CPUID");
     defineTwoByte(_A3, "BT", Ev, Gv);
     defineTwoByte(_A4, "SHLD", Ev, Gv, Ib);
@@ -187,21 +187,21 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_C1, "XADD", Ev, Gv);
     defineTwoByte(_C2, "CMPPS", Vps, Wps, ICb);
     defineTwoByte(_C3, "MOVNTI", Md_q, Gd_q);
-    defineTwoByte(_C4, "PINSRW", Pq, Ed, Ib).requireOperandSize(WordWidth.BITS_32); // Ed instead of Ew to mimic intended Gd/Mw
+    defineTwoByte(_C4, "PINSRW", Pq, Ed, Ib).requireOperandSize(BITS_32); // Ed instead of Ew to mimic intended Gd/Mw
     defineTwoByte(_C5, "PEXTRW", Gd, PRq, Ib);
     defineTwoByte(_C6, "SHUFPS", Vps, Wps, Ib);
-    defineTwoByte(_C7, GROUP_9a).requireAddressSize(WordWidth.BITS_32); // depends on CPUID
-    defineTwoByte(_C7, GROUP_9b).requireAddressSize(WordWidth.BITS_64).beNotExternallyTestable(); // depends on CPUID, rejected by gas on Opteron
+    defineTwoByte(_C7, GROUP_9a).requireAddressSize(BITS_32); // depends on CPUID
+    defineTwoByte(_C7, GROUP_9b).requireAddressSize(BITS_64).beNotExternallyTestable(); // depends on CPUID, rejected by gas on Opteron
 
-    defineTwoByte(_C2, "CMPPD", Vpd, Wpd, ICb).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_C4, "PINSRW", Vdq, Ed, Ib).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE).
-        requireOperandSize(WordWidth.BITS_32); // Ed instead of Ew to mimic intended Gd/Mw
-    defineTwoByte(_C5, "PEXTRW", Gd, Udq, Ib).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_C6, "SHUFPD", Vpd, Wpd, Ib).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_C2, "CMPPD", Vpd, Wpd, ICb).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_C4, "PINSRW", Vdq, Ed, Ib).setMandatoryPrefix(OPERAND_SIZE).
+        requireOperandSize(BITS_32); // Ed instead of Ew to mimic intended Gd/Mw
+    defineTwoByte(_C5, "PEXTRW", Gd, Udq, Ib).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_C6, "SHUFPD", Vpd, Wpd, Ib).setMandatoryPrefix(OPERAND_SIZE);
 
-    defineTwoByte(_C2, "CMPSD", Vsd, Wsd, ICb).setMandatoryPrefix(X86InstructionPrefix.REPNE);
+    defineTwoByte(_C2, "CMPSD", Vsd, Wsd, ICb).setMandatoryPrefix(REPNE);
 
-    defineTwoByte(_C2, "CMPSS", Vss, Wss, ICb).setMandatoryPrefix(X86InstructionPrefix.REPE);
+    defineTwoByte(_C2, "CMPSS", Vss, Wss, ICb).setMandatoryPrefix(REPE);
 
     defineTwoByte(_D1, "PSRLW", Pq, Qq);
     defineTwoByte(_D2, "PSRLD", Pq, Qq);
@@ -210,20 +210,20 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_D5, "PMULLW", Pq, Qq);
     defineTwoByte(_D7, "PMOVMSKB", Gd, PRq);
 
-    defineTwoByte(_D0, "ADDSUBPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_D1, "PSRLW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_D2, "PSRLD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_D3, "PSRLQ", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_D4, "PADDQ", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_D5, "PMULLW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_D0, "ADDSUBPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_D1, "PSRLW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_D2, "PSRLD", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_D3, "PSRLQ", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_D4, "PADDQ", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_D5, "PMULLW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
     defineTwoByte(_D6, "MOVQ",
                   Wq.excludeExternalTestArguments(AMD64XMMRegister.SYMBOLS), Vq) // gas uses F3 0F 7E for reg-reg
-        .setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_D7, "PMOVMSKB", Gd, Udq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+        .setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_D7, "PMOVMSKB", Gd, Udq).setMandatoryPrefix(OPERAND_SIZE);
 
-    defineTwoByte(_D6, "MOVDQ2Q", Pq, Uq).setMandatoryPrefix(X86InstructionPrefix.REPNE);
+    defineTwoByte(_D6, "MOVDQ2Q", Pq, Uq).setMandatoryPrefix(REPNE);
 
-    defineTwoByte(_D6, "MOVQ2DQ", Vdq, PRq).setMandatoryPrefix(X86InstructionPrefix.REPE);
+    defineTwoByte(_D6, "MOVQ2DQ", Vdq, PRq).setMandatoryPrefix(REPE);
 
     defineTwoByte(_E0, "PAVGB", Pq, Qq);
     defineTwoByte(_E1, "PSRAW", Pq, Qq);
@@ -233,19 +233,19 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_E5, "PMULHW", Pq, Qq);
     defineTwoByte(_E7, "MOVNTQ", Mq, Pq);
 
-    defineTwoByte(_E0, "PAVGB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_E1, "PSRAW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_E2, "PSRAD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_E3, "PAVGW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_E4, "PMULHUW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_E5, "PMULHW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_E6, "CVTTPD2DQ", Vq, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_E7, "MVNTDQ", Mdq, Vdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE).
+    defineTwoByte(_E0, "PAVGB", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_E1, "PSRAW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_E2, "PSRAD", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_E3, "PAVGW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_E4, "PMULHUW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_E5, "PMULHW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_E6, "CVTTPD2DQ", Vq, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_E7, "MVNTDQ", Mdq, Vdq).setMandatoryPrefix(OPERAND_SIZE).
         beNotExternallyTestable(); // gas does not know it
 
-    defineTwoByte(_E6, "CVTPD2DQ", Vq, Wpd).setMandatoryPrefix(X86InstructionPrefix.REPNE);
+    defineTwoByte(_E6, "CVTPD2DQ", Vq, Wpd).setMandatoryPrefix(REPNE);
 
-    defineTwoByte(_E6, "CVTDQ2PD", Vpd, Wq).setMandatoryPrefix(X86InstructionPrefix.REPE);
+    defineTwoByte(_E6, "CVTDQ2PD", Vpd, Wq).setMandatoryPrefix(REPE);
 
     defineTwoByte(_F1, "PSLLW", Pq, Qq);
     defineTwoByte(_F2, "PSLLD", Pq, Qq);
@@ -255,15 +255,15 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_F6, "PSADBW", Pq, Qq);
     defineTwoByte(_F7, "MASKMOVQ", Pq, PRq);
 
-    defineTwoByte(_F1, "PSLLW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_F2, "PSLLD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_F3, "PSLLQ", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_F4, "PMULUDQ", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_F5, "PMADDWD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_F6, "PSADBW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_F7, "MASKMOVDQU", Vdq, Udq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_F1, "PSLLW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_F2, "PSLLD", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_F3, "PSLLQ", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_F4, "PMULUDQ", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_F5, "PMADDWD", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_F6, "PSADBW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_F7, "MASKMOVDQU", Vdq, Udq).setMandatoryPrefix(OPERAND_SIZE);
 
-    defineTwoByte(_F0, "LDDQU", Vpd, Mdq).setMandatoryPrefix(X86InstructionPrefix.REPNE);
+    defineTwoByte(_F0, "LDDQU", Vpd, Mdq).setMandatoryPrefix(REPNE);
   }
 
   /**
@@ -296,22 +296,22 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_2E, "UCOMISS", Vss, Wss);
     defineTwoByte(_2F, "COMISS", Vps, Wps);
 
-    defineTwoByte(_28, "MOVAPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_29, "MOVAPD", Wpd, Vpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_2A, "CVTPI2PD", Vpd, Qq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_2B, "MOVNTPD", Mdq, Vpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_2C, "CVTTPD2PI", Pq, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_2D, "CVTPD2PI", Pq, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_2E, "UCOMISD", Vsd, Wsd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_2F, "COMISD", Vpd, Wsd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_28, "MOVAPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_29, "MOVAPD", Wpd, Vpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_2A, "CVTPI2PD", Vpd, Qq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_2B, "MOVNTPD", Mdq, Vpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_2C, "CVTTPD2PI", Pq, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_2D, "CVTPD2PI", Pq, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_2E, "UCOMISD", Vsd, Wsd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_2F, "COMISD", Vpd, Wsd).setMandatoryPrefix(OPERAND_SIZE);
 
-    defineTwoByte(_2A, "CVTSI2SD", Vsd, Ed_q).setMandatoryPrefix(X86InstructionPrefix.REPNE);
-    defineTwoByte(_2C, "CVTTSD2SI", Gd_q, Wsd).setMandatoryPrefix(X86InstructionPrefix.REPNE);
-    defineTwoByte(_2D, "CVTSD2SI", Gd_q, Wsd).setMandatoryPrefix(X86InstructionPrefix.REPNE);
+    defineTwoByte(_2A, "CVTSI2SD", Vsd, Ed_q).setMandatoryPrefix(REPNE);
+    defineTwoByte(_2C, "CVTTSD2SI", Gd_q, Wsd).setMandatoryPrefix(REPNE);
+    defineTwoByte(_2D, "CVTSD2SI", Gd_q, Wsd).setMandatoryPrefix(REPNE);
 
-    defineTwoByte(_2A, "CVTSI2SS", Vss, Ed_q).setMandatoryPrefix(X86InstructionPrefix.REPE);
-    defineTwoByte(_2C, "CVTTSS2SI", Gd_q, Wss).setMandatoryPrefix(X86InstructionPrefix.REPE);
-    defineTwoByte(_2D, "CVTSS2SI", Gd_q, Wss).setMandatoryPrefix(X86InstructionPrefix.REPE);
+    defineTwoByte(_2A, "CVTSI2SS", Vss, Ed_q).setMandatoryPrefix(REPE);
+    defineTwoByte(_2C, "CVTTSS2SI", Gd_q, Wss).setMandatoryPrefix(REPE);
+    defineTwoByte(_2D, "CVTSS2SI", Gd_q, Wss).setMandatoryPrefix(REPE);
 
     defineTwoByte(_48, "CMOVS", Gv, Ev);
     defineTwoByte(_49, "CMOVNS", Gv, Ev);
@@ -331,31 +331,31 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_5E, "DIVPS", Vps, Wps);
     defineTwoByte(_5F, "MAXPS", Vps, Wps);
 
-    defineTwoByte(_58, "ADDPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_59, "MULPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_5A, "CVTPD2PS", Vps, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_5B, "CVTPS2DQ", Vdq, Wps).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_5C, "SUBPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_5D, "MINPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_5E, "DIVPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_5F, "MAXPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_58, "ADDPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_59, "MULPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_5A, "CVTPD2PS", Vps, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_5B, "CVTPS2DQ", Vdq, Wps).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_5C, "SUBPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_5D, "MINPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_5E, "DIVPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_5F, "MAXPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
 
-    defineTwoByte(_58, "ADDSD", Vsd, Wsd).setMandatoryPrefix(X86InstructionPrefix.REPNE);
-    defineTwoByte(_59, "MULSD", Vsd, Wsd).setMandatoryPrefix(X86InstructionPrefix.REPNE);
-    defineTwoByte(_5A, "CVTSD2SS", Vss, Wsd).setMandatoryPrefix(X86InstructionPrefix.REPNE);
-    defineTwoByte(_5C, "SUBSD", Vsd, Wsd).setMandatoryPrefix(X86InstructionPrefix.REPNE);
-    defineTwoByte(_5D, "MINSD", Vsd, Wsd).setMandatoryPrefix(X86InstructionPrefix.REPNE);
-    defineTwoByte(_5E, "DIVSD", Vsd, Wsd).setMandatoryPrefix(X86InstructionPrefix.REPNE);
-    defineTwoByte(_5F, "MAXSD", Vsd, Wsd).setMandatoryPrefix(X86InstructionPrefix.REPNE);
+    defineTwoByte(_58, "ADDSD", Vsd, Wsd).setMandatoryPrefix(REPNE);
+    defineTwoByte(_59, "MULSD", Vsd, Wsd).setMandatoryPrefix(REPNE);
+    defineTwoByte(_5A, "CVTSD2SS", Vss, Wsd).setMandatoryPrefix(REPNE);
+    defineTwoByte(_5C, "SUBSD", Vsd, Wsd).setMandatoryPrefix(REPNE);
+    defineTwoByte(_5D, "MINSD", Vsd, Wsd).setMandatoryPrefix(REPNE);
+    defineTwoByte(_5E, "DIVSD", Vsd, Wsd).setMandatoryPrefix(REPNE);
+    defineTwoByte(_5F, "MAXSD", Vsd, Wsd).setMandatoryPrefix(REPNE);
 
-    defineTwoByte(_58, "ADDSS", Vss, Wss).setMandatoryPrefix(X86InstructionPrefix.REPE);
-    defineTwoByte(_59, "MULSS", Vss, Wss).setMandatoryPrefix(X86InstructionPrefix.REPE);
-    defineTwoByte(_5A, "CVTSS2SD", Vsd, Wss).setMandatoryPrefix(X86InstructionPrefix.REPE);
-    defineTwoByte(_5B, "CVTTPS2DQ", Vdq, Wps).setMandatoryPrefix(X86InstructionPrefix.REPE);
-    defineTwoByte(_5C, "SUBSS", Vss, Wss).setMandatoryPrefix(X86InstructionPrefix.REPE);
-    defineTwoByte(_5D, "MINSS", Vss, Wss).setMandatoryPrefix(X86InstructionPrefix.REPE);
-    defineTwoByte(_5E, "DIVSS", Vss, Wss).setMandatoryPrefix(X86InstructionPrefix.REPE);
-    defineTwoByte(_5F, "MAXSS", Vss, Wss).setMandatoryPrefix(X86InstructionPrefix.REPE);
+    defineTwoByte(_58, "ADDSS", Vss, Wss).setMandatoryPrefix(REPE);
+    defineTwoByte(_59, "MULSS", Vss, Wss).setMandatoryPrefix(REPE);
+    defineTwoByte(_5A, "CVTSS2SD", Vsd, Wss).setMandatoryPrefix(REPE);
+    defineTwoByte(_5B, "CVTTPS2DQ", Vdq, Wps).setMandatoryPrefix(REPE);
+    defineTwoByte(_5C, "SUBSS", Vss, Wss).setMandatoryPrefix(REPE);
+    defineTwoByte(_5D, "MINSS", Vss, Wss).setMandatoryPrefix(REPE);
+    defineTwoByte(_5E, "DIVSS", Vss, Wss).setMandatoryPrefix(REPE);
+    defineTwoByte(_5F, "MAXSS", Vss, Wss).setMandatoryPrefix(REPE);
 
     defineTwoByte(_68, "PUNPCKHBW", Pq, Qd);
     defineTwoByte(_69, "PUNPCKHWD", Pq, Qd);
@@ -364,43 +364,43 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_6E, "MOVD", Pq, Ed_q).beNotExternallyTestable(); // gas does not feature suffix to distinguish operand width
     defineTwoByte(_6F, "MOVQ", Pq, Qq);
 
-    defineTwoByte(_68, "PUNPCKHBW", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_69, "PUNPCKHWD", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_6A, "PUNPCKHDQ", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_6B, "PACKSSDW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_6C, "PUNPCKLQDQ", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_6D, "PUNPCKHQDQ", Vdq, Wq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_68, "PUNPCKHBW", Vdq, Wq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_69, "PUNPCKHWD", Vdq, Wq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_6A, "PUNPCKHDQ", Vdq, Wq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_6B, "PACKSSDW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_6C, "PUNPCKLQDQ", Vdq, Wq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_6D, "PUNPCKHQDQ", Vdq, Wq).setMandatoryPrefix(OPERAND_SIZE);
     defineTwoByte(_6E, "MOVD", Vdq, Ed_q).
-        setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE).
+        setMandatoryPrefix(OPERAND_SIZE).
         beNotExternallyTestable(); // gas does not feature suffix to distinguish operand width
-    defineTwoByte(_6F, "MOVDQA", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_6F, "MOVDQA", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
 
-    defineTwoByte(_6F, "MOVDQU", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.REPE);
+    defineTwoByte(_6F, "MOVDQU", Vdq, Wdq).setMandatoryPrefix(REPE);
 
     defineTwoByte(_7E, "MOVD", Ed_q, Pq).beNotExternallyTestable(); // gas does not allow feature to distinguish operand width
     defineTwoByte(_7F, "MOVQ", Qq, Pq);
 
-    defineTwoByte(_7C, "HADDPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_7D, "HSUBPD", Vpd, Wpd).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_7C, "HADDPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_7D, "HSUBPD", Vpd, Wpd).setMandatoryPrefix(OPERAND_SIZE);
     defineTwoByte(_7E, "MOVD", Ed_q, Vdq).
-        setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE).
+        setMandatoryPrefix(OPERAND_SIZE).
         beNotExternallyTestable(); // gas does not feature suffix to distinguish operand width
-    defineTwoByte(_7F, "MOVDQA", Wdq, Vdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_7F, "MOVDQA", Wdq, Vdq).setMandatoryPrefix(OPERAND_SIZE);
 
-    defineTwoByte(_7C, "HADDPS", Vps, Wps).setMandatoryPrefix(X86InstructionPrefix.REPNE);
-    defineTwoByte(_7D, "HSUBPS", Vps, Wps).setMandatoryPrefix(X86InstructionPrefix.REPNE);
+    defineTwoByte(_7C, "HADDPS", Vps, Wps).setMandatoryPrefix(REPNE);
+    defineTwoByte(_7D, "HSUBPS", Vps, Wps).setMandatoryPrefix(REPNE);
 
-    defineTwoByte(_7E, "MOVQ", Vq, Wq).setMandatoryPrefix(X86InstructionPrefix.REPE);
-    defineTwoByte(_7F, "MOVDQU", Wdq, Vdq).setMandatoryPrefix(X86InstructionPrefix.REPE);
+    defineTwoByte(_7E, "MOVQ", Vq, Wq).setMandatoryPrefix(REPE);
+    defineTwoByte(_7F, "MOVDQU", Wdq, Vdq).setMandatoryPrefix(REPE);
 
-    defineTwoByte(_88, "JS", Jz).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_89, "JNS", Jz).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_8A, "JP", Jz).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_8B, "JNP", Jz).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_8C, "JL", Jz).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_8D, "JNL", Jz).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_8E, "JLE", Jz).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_8F, "JNLE", Jz).setDefaultOperandSize(WordWidth.BITS_64);
+    defineTwoByte(_88, "JS", Jz).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_89, "JNS", Jz).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_8A, "JP", Jz).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_8B, "JNP", Jz).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_8C, "JL", Jz).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_8D, "JNL", Jz).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_8E, "JLE", Jz).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_8F, "JNLE", Jz).setDefaultOperandSize(BITS_64);
 
     defineTwoByte(_98, "SETS", Eb);
     defineTwoByte(_99, "SETNS", Eb);
@@ -411,8 +411,8 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_9E, "SETLE", Eb);
     defineTwoByte(_9F, "SETNLE", Eb);
 
-    defineTwoByte(_A8, "PUSH", GS).setDefaultOperandSize(WordWidth.BITS_64);
-    defineTwoByte(_A9, "POP", GS).setDefaultOperandSize(WordWidth.BITS_64);
+    defineTwoByte(_A8, "PUSH", GS).setDefaultOperandSize(BITS_64);
+    defineTwoByte(_A9, "POP", GS).setDefaultOperandSize(BITS_64);
     defineTwoByte(_AA, "RSM");
     defineTwoByte(_AB, "BTS", Ev, Gv);
     defineTwoByte(_AC, "SHRD", Ev, Gv, Ib);
@@ -440,14 +440,14 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_DE, "PMAXUB", Pq, Qq);
     defineTwoByte(_DF, "PANDN", Pq, Qq);
 
-    defineTwoByte(_D8, "PSUBUSB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_D9, "PSUBUSW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_DA, "PMINUB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_DB, "PAND", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_DC, "PADDUSB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_DD, "PADDUSW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_DE, "PMAXUB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_DF, "PANDN", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_D8, "PSUBUSB", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_D9, "PSUBUSW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_DA, "PMINUB", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_DB, "PAND", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_DC, "PADDUSB", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_DD, "PADDUSW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_DE, "PMAXUB", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_DF, "PANDN", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
 
     defineTwoByte(_E8, "PSUBSB", Pq, Qq);
     defineTwoByte(_E9, "PSUBSW", Pq, Qq);
@@ -458,14 +458,14 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_EE, "PMAXSW", Pq, Qq);
     defineTwoByte(_EF, "PXOR", Pq, Qq);
 
-    defineTwoByte(_E8, "PSUBSB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_E9, "PSUBSW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_EA, "PMINSW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_EB, "POR", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_EC, "PADDSB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_ED, "PADDSW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_EE, "PMAXSW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_EF, "PXOR", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_E8, "PSUBSB", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_E9, "PSUBSW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_EA, "PMINSW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_EB, "POR", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_EC, "PADDSB", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_ED, "PADDSW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_EE, "PMAXSW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_EF, "PXOR", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
 
     defineTwoByte(_F8, "PSUBB", Pq, Qq);
     defineTwoByte(_F9, "PSUBW", Pq, Qq);
@@ -475,13 +475,13 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     defineTwoByte(_FD, "PADDW", Pq, Qq);
     defineTwoByte(_FE, "PADDD", Pq, Qq);
 
-    defineTwoByte(_F8, "PSUBB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_F9, "PSUBW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_FA, "PSUBD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_FB, "PSUBQ", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_FC, "PADDB", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_FD, "PADDW", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
-    defineTwoByte(_FE, "PADDD", Vdq, Wdq).setMandatoryPrefix(X86InstructionPrefix.OPERAND_SIZE);
+    defineTwoByte(_F8, "PSUBB", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_F9, "PSUBW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_FA, "PSUBD", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_FB, "PSUBQ", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_FC, "PADDB", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_FD, "PADDW", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
+    defineTwoByte(_FE, "PADDD", Vdq, Wdq).setMandatoryPrefix(OPERAND_SIZE);
   }
 
   TwoByteOpcodeMap() {
@@ -494,9 +494,7 @@ public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
     final Object[] objects = ArrayUtil.flatten(specifications);
     final ArrayList<Object> specs = new ArrayList<Object>(objects.length + 1);
     specs.add(_0F);
-    for (Object object : objects) {
-      specs.add(object);
-    }
+    specs.addAll(Arrays.asList(objects));
     return defineInstructionDescription(specs);
   }
 }
