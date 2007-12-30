@@ -2,7 +2,6 @@ package jasm.tools.gen.as;
 
 import jasm.tools.Trace;
 import jasm.tools.util.IndentWriter;
-import jasm.util.HexUtil;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -61,5 +60,4 @@ public abstract class AbstractGenerator {
     writer.close();
     Trace.line(1, "Generated " + name);
   }
-
 }
