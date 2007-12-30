@@ -31,6 +31,7 @@ import jasm.tools.cisc.x86.X86Field;
 import jasm.tools.cisc.x86.X86NumericalParameter;
 import jasm.tools.cisc.x86.X86Opcode;
 import jasm.tools.cisc.x86.X86Parameter;
+import jasm.tools.cisc.x86.X86RexPrefix;
 import jasm.tools.cisc.x86.X86Template;
 import jasm.util.EndianUtil;
 import jasm.util.HexByte;
@@ -39,12 +40,13 @@ import jasm.x86.X86InstructionPrefix;
 import java.io.BufferedInputStream;
 import java.io.EOFException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 /**
  * A disassembler for x86 instructions.
@@ -62,37 +64,70 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
     super(assembly, addressWidth);
   }
 
-  protected abstract boolean isRexPrefix(HexByte opcode);
+  private X86InstructionHeader decodeHeader(final InputStream stream)
+      throws IOException, DecoderException {
 
-  private X86InstructionHeader scanInstructionHeader(BufferedInputStream stream) throws IOException {
-    int byteValue = stream.read();
-    if (byteValue < 0) {
-      return null;
-    }
     final X86InstructionHeader header = new X86InstructionHeader();
-    do {
+    final X86InstructionPrefix[] prefixes = X86InstructionPrefix.values();
+
+    int byteValue;
+    boolean matched = false;
+    boolean checkedPrefixes = false;
+    while ((byteValue = stream.read()) != -1 && !matched) {
+      checkedPrefixes = true;
       final HexByte hexByte = HexByte.values()[byteValue];
-      if (header._opcode1 == null) {
-        if (hexByte == X86InstructionPrefix.ADDRESS_SIZE.getValue()) {
-          header._hasAddressSizePrefix = true;
-        } else if (hexByte == X86InstructionPrefix.OPERAND_SIZE.getValue()) {
-          header._instructionSelectionPrefix = X86InstructionPrefix.OPERAND_SIZE;
-        } else if (hexByte == X86InstructionPrefix.REPE.getValue()) {
-          header._instructionSelectionPrefix = X86InstructionPrefix.REPE;
-        } else if (hexByte == X86InstructionPrefix.REPNE.getValue()) {
-          header._instructionSelectionPrefix = X86InstructionPrefix.REPNE;
-        } else if (isRexPrefix(hexByte)) {
-          header._rexPrefix = hexByte;
-        } else {
-          header._opcode1 = hexByte;
-          if (!X86Opcode.isStandardOpcode2Prefix(hexByte)) return header;
+      for (X86InstructionPrefix prefix : prefixes) {
+        if (hexByte == prefix.getValue()) {
+          final int group = prefix.getGroup();
+          if (1 == group) {
+            if (null != header._group1Prefix) {
+              throw new DecoderException("Multiple group 1 prefixes specified");
+            }
+            header._group1Prefix = prefix;
+          } else if (2 == group) {
+            if (null != header._group2Prefix) {
+              throw new DecoderException("Multiple group 2 prefixes specified");
+            }
+            header._group2Prefix = prefix;
+          } else if (3 == group) {
+            if (header._hasOperandSizePrefix) {
+              throw new DecoderException("Multiple group 3 prefixes specified");
+            }
+            header._hasOperandSizePrefix = false;
+          } else { //group == 4
+            if (header._hasAddressSizePrefix) {
+              throw new DecoderException("Multiple group 4 prefixes specified");
+            }
+            header._hasAddressSizePrefix = false;
+          }
+          matched = true;
+          break;
         }
-      } else {
-        header._opcode2 = hexByte;
-        return header;
       }
+      if (!matched) break;
+    }
+    if (byteValue < 0) {
+      if (!checkedPrefixes) return null;
+      else throw new EOFException();
+    }
+
+    HexByte hexByte = HexByte.values()[byteValue];
+
+    //Decode rex prefix for amd64/ia32e
+    if (WordWidth.BITS_64 == addressWidth() && X86RexPrefix.isRexPrefix(hexByte)) {
+      header._rexPrefix = hexByte;
       byteValue = stream.read();
-    } while (byteValue >= 0);
+      if (-1 == byteValue) throw new EOFException();
+      hexByte = HexByte.values()[byteValue];
+    }
+
+    header._opcode1 = hexByte;
+    if (X86Opcode.isStandardOpcode2Prefix(hexByte)) {
+      byteValue = stream.read();
+      if (-1 == byteValue) throw new EOFException();
+      header._opcode2 = HexByte.values()[byteValue];
+    }
+
     return header;
   }
 
@@ -250,7 +285,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
       if (templates != null) {
         for (Template_Type template : templates) {
           stream.reset();
-          scanInstructionHeader(stream);
+          decodeHeader(stream);
           if (isFloatingPointEscape) {
             stream.read();
           }
@@ -313,13 +348,13 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
         }
       }
     }
-    if (header._instructionSelectionPrefix == X86InstructionPrefix.REPE ||
-        header._instructionSelectionPrefix == X86InstructionPrefix.REPNE) {
+    if (header._group1Prefix == X86InstructionPrefix.REPE ||
+        header._group1Prefix == X86InstructionPrefix.REPNE) {
       final X86InstructionHeader prefixHeader = new X86InstructionHeader();
-      prefixHeader._opcode1 = header._instructionSelectionPrefix.getValue();
+      prefixHeader._opcode1 = header._group1Prefix.getValue();
       final LinkedList<Template_Type> prefixTemplates = headerToTemplates().get(prefixHeader);
       final Template_Type template = prefixTemplates.getFirst();
-      final byte[] bytes = new byte[]{header._instructionSelectionPrefix.getValue().byteValue()};
+      final byte[] bytes = new byte[]{header._group1Prefix.getValue().byteValue()};
       final List<Argument> arguments = Collections.emptyList();
       final DisassembledInstruction_Type disassembledInstruction =
           createDisassembledInstruction(_currentOffset, bytes, template, arguments);
@@ -344,11 +379,13 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
   public final List<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream)
       throws IOException, DecoderException {
     stream.mark(MORE_THAN_ANY_INSTRUCTION_LENGTH);
-    final X86InstructionHeader header = scanInstructionHeader(stream);
+    final X86InstructionHeader header = decodeHeader(stream);
     if (header == null) {
       throw new DecoderException("unknown instruction");
     }
-    return StaticLoophole.asList(scanInstruction(stream, header));
+    final List<DisassembledInstruction_Type> x = StaticLoophole.asList(scanInstruction(stream, header));
+    System.out.println("x = " + x);
+    return x;
   }
 
   @Override
@@ -357,7 +394,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
     final ArrayList<DisassembledInstruction_Type> result = new ArrayList<DisassembledInstruction_Type>();
     while (true) {
       stream.mark(MORE_THAN_ANY_INSTRUCTION_LENGTH);
-      final X86InstructionHeader header = scanInstructionHeader(stream);
+      final X86InstructionHeader header = decodeHeader(stream);
       if (header == null) {
         return result;
       }
@@ -430,11 +467,8 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
                                                                                                               final WordWidth addressWidth) {
     final X86InstructionHeader header = new X86InstructionHeader();
     header._hasAddressSizePrefix = template.addressSizeAttribute() != addressWidth;
-    header._instructionSelectionPrefix = template.instructionSelectionPrefix();
-    if (template.operandSizeAttribute() == WordWidth.BITS_16) {
-      assert header._instructionSelectionPrefix == null;
-      header._instructionSelectionPrefix = X86InstructionPrefix.OPERAND_SIZE;
-    }
+    //template.instructionSelectionPrefix()
+    header._hasOperandSizePrefix = template.operandSizeAttribute() == WordWidth.BITS_16;
     header._opcode1 = template.opcode1();
     header._opcode2 = template.opcode2();
     return header;

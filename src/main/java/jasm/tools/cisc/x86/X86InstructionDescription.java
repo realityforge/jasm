@@ -19,7 +19,7 @@ public final class X86InstructionDescription
   private boolean _isExternalOperandOrderingInverted = true;
   private WordWidth _defaultOperandSize = WordWidth.BITS_32;
   private X86InstructionPrefix _mandatoryPrefix;
-  /** true if instruction is a prefix. */
+  /** true if descriptor represenets a a prefix rather than an instruction. */
   private boolean _aPrefix;
 
   public X86InstructionDescription(List<Object> specifications) {

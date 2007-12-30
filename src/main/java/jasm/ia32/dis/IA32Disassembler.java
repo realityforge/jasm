@@ -33,11 +33,6 @@ public final class IA32Disassembler
   }
 
   @Override
-  protected final boolean isRexPrefix(HexByte opcode) {
-    return false;
-  }
-
-  @Override
   protected final IA32DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, IA32Template template, List<Argument> arguments) {
     return new IA32DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
   }

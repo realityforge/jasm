@@ -34,11 +34,6 @@ public final class AMD64Disassembler
   }
 
   @Override
-  protected final boolean isRexPrefix(HexByte opcode) {
-    return X86RexPrefix.isRexPrefix(opcode);
-  }
-
-  @Override
   protected final AMD64DisassembledInstruction createDisassembledInstruction(int offset, byte[] bytes, AMD64Template template, List<Argument> arguments) {
     return new AMD64DisassembledInstruction(_startAddress, offset, bytes, template, arguments);
   }

@@ -18,20 +18,21 @@ import jasm.x86.X86InstructionPrefix;
 public final class X86InstructionHeader {
 
   boolean _hasAddressSizePrefix;
-  //boolean _hasOperandSizePrefix;
+  boolean _hasOperandSizePrefix;
   HexByte _rexPrefix;
-  X86InstructionPrefix _instructionSelectionPrefix;
-  //X86InstructionPrefix _group1Prefix;
-  //X86InstructionPrefix _group2Prefix;
+  X86InstructionPrefix _group1Prefix;
+  X86InstructionPrefix _group2Prefix;
   HexByte _opcode1;
   HexByte _opcode2;
   //HexByte _opCode3;
 
   @Override
   public String toString() {
-    return "X86InstructionHeader[AddressPrefix=" + _hasAddressSizePrefix +
-           ",rexPrefix=" + _rexPrefix +
-           ",instructionSelectionPrefix=" + _instructionSelectionPrefix +
+    return "X86InstructionHeader[rexPrefix=" + _rexPrefix +
+           ",group1Prefix=" + _group1Prefix +
+           ",group2Prefix=" + _group2Prefix +
+           ",OperandSizePrefix=" + _hasOperandSizePrefix +
+           ",AddressSizePrefix=" + _hasAddressSizePrefix +
            ",opcode1=" + _opcode1 +
            ",opcode2=" + _opcode2 +
            "]";
@@ -42,7 +43,9 @@ public final class X86InstructionHeader {
     if (other instanceof X86InstructionHeader) {
       final X86InstructionHeader header = (X86InstructionHeader) other;
       return _hasAddressSizePrefix == header._hasAddressSizePrefix &&
-             _instructionSelectionPrefix == header._instructionSelectionPrefix &&
+             _hasOperandSizePrefix == header._hasOperandSizePrefix &&
+             _group1Prefix == header._group1Prefix &&
+             _group2Prefix == header._group2Prefix &&
              _opcode1 == header._opcode1 &&
              _opcode2 == header._opcode2;
     }
@@ -52,8 +55,12 @@ public final class X86InstructionHeader {
   @Override
   public int hashCode() {
     int result = _hasAddressSizePrefix ? -1 : 1;
-    if (_instructionSelectionPrefix != null) {
-      result *= _instructionSelectionPrefix.ordinal();
+    result *= _hasOperandSizePrefix ? 13 : -11;
+    if (_group1Prefix != null) {
+      result *= _group1Prefix.ordinal();
+    }
+    if (_group2Prefix != null) {
+      result *= _group2Prefix.ordinal();
     }
     if (_opcode1 != null) {
       result *= _opcode1.ordinal();
@@ -61,8 +68,11 @@ public final class X86InstructionHeader {
     if (_opcode2 != null) {
       result ^= _opcode2.ordinal();
     }
-    if (_instructionSelectionPrefix != null) {
-      result += _instructionSelectionPrefix.ordinal() * 1024;
+    if (_group1Prefix != null) {
+      result += _group1Prefix.ordinal() * 1024;
+    }
+    if (_group2Prefix != null) {
+      result += _group2Prefix.ordinal() * 73;
     }
     if (_opcode2 != null) {
       result += _opcode2.ordinal() * 256;
