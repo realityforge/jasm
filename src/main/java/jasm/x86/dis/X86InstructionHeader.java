@@ -52,7 +52,7 @@ public final class X86InstructionHeader {
     return "X86InstructionHeader[rexPrefix=" + _rexPrefix +
            ",group1Prefix=" + _group1Prefix +
            ",group2Prefix=" + _group2Prefix +
-           ",OperandSizePrefix=" + _operandSizePrefix +
+           ",OperandSizePrefix=" + (_operandSizePrefix != null) +
            ",AddressSizePrefix=" + _hasAddressSizePrefix +
            ",opcode1=" + _opcode1 +
            ",opcode2=" + _opcode2 +
