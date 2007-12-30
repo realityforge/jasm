@@ -6,11 +6,13 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.tools.risc.sparc;
+package jasm.tools.risc.sparc.as;
 
 import jasm.Assembler;
 import jasm.BigEndianAssembler;
 import jasm.tools.risc.RiscAssemblerGenerator;
+import jasm.tools.risc.sparc.SPARCTemplate;
+import jasm.tools.risc.sparc.SPARCAssembly;
 
 public final class SPARCAssemblerGenerator extends RiscAssemblerGenerator<SPARCTemplate> {
 

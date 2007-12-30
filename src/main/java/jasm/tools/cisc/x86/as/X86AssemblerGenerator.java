@@ -6,7 +6,7 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.tools.cisc.x86;
+package jasm.tools.cisc.x86.as;
 
 import jasm.EnumerableArgument;
 import jasm.LabelAddressInstruction;
@@ -15,6 +15,17 @@ import jasm.WordWidth;
 import jasm.amd64.AMD64GeneralRegister8;
 import jasm.tools.Assembly;
 import jasm.tools.Parameter;
+import jasm.tools.cisc.x86.X86Template;
+import jasm.tools.cisc.x86.X86Parameter;
+import jasm.tools.cisc.x86.X86Assembly;
+import jasm.tools.cisc.x86.ModRMGroup;
+import jasm.tools.cisc.x86.X86EnumerableParameter;
+import jasm.tools.cisc.x86.SibBaseCase;
+import jasm.tools.cisc.x86.X86NumericalParameter;
+import jasm.tools.cisc.x86.ParameterPlace;
+import jasm.tools.cisc.x86.X86Opcode;
+import jasm.tools.cisc.x86.X86OffsetParameter;
+import jasm.tools.cisc.x86.X86AddressParameter;
 import jasm.tools.gen.as.AssemblerGenerator;
 import jasm.tools.util.IndentWriter;
 import jasm.util.ArrayUtil;

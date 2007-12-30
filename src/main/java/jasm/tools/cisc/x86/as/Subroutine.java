@@ -6,9 +6,10 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.tools.cisc.x86;
+package jasm.tools.cisc.x86.as;
 
 import java.util.HashSet;
+import jasm.tools.cisc.x86.X86Template;
 
 public final class Subroutine<Template_Type extends X86Template<Template_Type>> {
 

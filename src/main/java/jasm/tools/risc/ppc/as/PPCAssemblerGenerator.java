@@ -6,12 +6,14 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.tools.risc.ppc;
+package jasm.tools.risc.ppc.as;
 
 import jasm.Assembler;
 import jasm.BigEndianAssembler;
 import jasm.ppc.GPR;
 import jasm.tools.risc.RiscAssemblerGenerator;
+import jasm.tools.risc.ppc.PPCTemplate;
+import jasm.tools.risc.ppc.PPCAssembly;
 import java.util.List;
 import java.util.Set;
 

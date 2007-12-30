@@ -6,9 +6,10 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.tools.cisc.x86;
+package jasm.tools.cisc.x86.as;
 
 import jasm.WordWidth;
+import jasm.tools.cisc.x86.X86Template;
 
 final class LabelWidthCase<Template_Type extends X86Template<Template_Type>> {
   final WordWidth _width;
