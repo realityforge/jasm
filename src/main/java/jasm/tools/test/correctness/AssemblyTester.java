@@ -13,7 +13,6 @@ import jasm.Assembler;
 import jasm.AssemblyException;
 import jasm.WordWidth;
 import jasm.dis.AbstractionPreference;
-import jasm.dis.DecoderException;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.Disassembler;
 import jasm.tools.ArgumentRange;
@@ -241,8 +240,9 @@ public abstract class AssemblyTester<Template_Type extends Template<Template_Typ
   }
 
   private void testDisassembler(Template_Type template, List<Argument> argumentList, byte[] internalResult)
-      throws IOException, AssemblyException, DecoderException {
-    final BufferedInputStream input = new BufferedInputStream(new ByteArrayInputStream(internalResult));
+      throws Exception {
+    final BufferedInputStream input =
+        new BufferedInputStream(new ByteArrayInputStream(internalResult));
     final Disassembler<Template_Type, DisassembledInstruction_Type> disassembler = createTestDisassembler();
     disassembler.setAbstractionPreference(template.instructionDescription().isSynthetic() ? AbstractionPreference.SYNTHETIC : AbstractionPreference.RAW);
     disassembler.setExpectedNumberOfArguments(argumentList.size());
@@ -286,7 +286,9 @@ public abstract class AssemblyTester<Template_Type extends Template<Template_Typ
     input.close();
   }
 
-  private void testTemplate(final Template_Type template) throws IOException, AssemblyException, DecoderException {
+  private void testTemplate(final Template_Type template)
+      throws Exception {
+
     final boolean testingExternally =
         _components.contains(AssemblyTestComponent.EXTERNAL_ASSEMBLER) && template.isExternallyTestable();
 
@@ -320,12 +322,7 @@ public abstract class AssemblyTester<Template_Type extends Template<Template_Typ
       if (_components.contains(AssemblyTestComponent.DISASSEMBLER) &&
           template.isDisassemblable() &&
           !findExcludedDisassemblerTestArgument(template.parameters(), argumentList)) {
-
-        try {
-          testDisassembler(template, argumentList, internalResult);
-        } catch (IOException e) {
-          throw new AssemblyException(e.toString());
-        }
+        testDisassembler(template, argumentList, internalResult);
       }
 
       if (testingExternally && !findExcludedExternalTestArgument(template.parameters(), argumentList)) {
@@ -414,9 +411,7 @@ public abstract class AssemblyTester<Template_Type extends Template<Template_Typ
       if (state == TemplateSelector.State.DONE) { break; }
       if (state == TemplateSelector.State.SKIP) { continue; }
       try {
-        if (_createExternalSource) {
-          createExternalSource(template, stream);
-        }
+        if (_createExternalSource) createExternalSource(template, stream);
         testTemplate(template);
       } catch (Throwable throwable) {
         notice(template, "Failed tests.");

@@ -17,21 +17,42 @@ import jasm.x86.X86InstructionPrefix;
  */
 public final class X86InstructionHeader {
 
-  boolean _hasAddressSizePrefix;
-  boolean _hasOperandSizePrefix;
-  HexByte _rexPrefix;
-  X86InstructionPrefix _group1Prefix;
-  X86InstructionPrefix _group2Prefix;
-  HexByte _opcode1;
-  HexByte _opcode2;
-  //HexByte _opCode3;
+  private final boolean _hasAddressSizePrefix;
+  private final HexByte _rexPrefix;
+  private final X86InstructionPrefix _group1Prefix;
+  private final X86InstructionPrefix _group2Prefix;
+  /**
+   * This MUST be a object as the templates use the null version of
+   * this to indicate that any operand size should match.
+   */
+  private final X86InstructionPrefix _operandSizePrefix;
+  private final HexByte _opcode1;
+  private HexByte _opcode2;
+  //private final HexByte _opCode3;
+
+  public X86InstructionHeader(final HexByte opcode1,
+                              final HexByte opcode2,
+                              final boolean hasAddressSizePrefix,
+                              final X86InstructionPrefix operandSizePrefix,
+                              final HexByte rexPrefix,
+                              final X86InstructionPrefix group1Prefix,
+                              final X86InstructionPrefix group2Prefix) {
+    if (null == opcode1) throw new NullPointerException("opcode1");
+    _hasAddressSizePrefix = hasAddressSizePrefix;
+    _operandSizePrefix = operandSizePrefix;
+    _rexPrefix = rexPrefix;
+    _group1Prefix = group1Prefix;
+    _group2Prefix = group2Prefix;
+    _opcode1 = opcode1;
+    _opcode2 = opcode2;
+  }
 
   @Override
   public String toString() {
     return "X86InstructionHeader[rexPrefix=" + _rexPrefix +
            ",group1Prefix=" + _group1Prefix +
            ",group2Prefix=" + _group2Prefix +
-           ",OperandSizePrefix=" + _hasOperandSizePrefix +
+           ",OperandSizePrefix=" + _operandSizePrefix +
            ",AddressSizePrefix=" + _hasAddressSizePrefix +
            ",opcode1=" + _opcode1 +
            ",opcode2=" + _opcode2 +
@@ -43,7 +64,7 @@ public final class X86InstructionHeader {
     if (other instanceof X86InstructionHeader) {
       final X86InstructionHeader header = (X86InstructionHeader) other;
       return _hasAddressSizePrefix == header._hasAddressSizePrefix &&
-             _hasOperandSizePrefix == header._hasOperandSizePrefix &&
+             (_operandSizePrefix == header._operandSizePrefix) &&
              _group1Prefix == header._group1Prefix &&
              _group2Prefix == header._group2Prefix &&
              _opcode1 == header._opcode1 &&
@@ -55,7 +76,6 @@ public final class X86InstructionHeader {
   @Override
   public int hashCode() {
     int result = _hasAddressSizePrefix ? -1 : 1;
-    result *= _hasOperandSizePrefix ? 13 : -11;
     if (_group1Prefix != null) {
       result *= _group1Prefix.ordinal();
     }
@@ -74,6 +94,9 @@ public final class X86InstructionHeader {
     if (_group2Prefix != null) {
       result += _group2Prefix.ordinal() * 73;
     }
+    if (_operandSizePrefix != null) {
+      result += _operandSizePrefix.ordinal() * 137;
+    }
     if (_opcode2 != null) {
       result += _opcode2.ordinal() * 256;
     }
@@ -82,4 +105,36 @@ public final class X86InstructionHeader {
     }
     return result;
   }
+
+  public boolean hasAddressSizePrefix() {
+    return _hasAddressSizePrefix;
+  }
+
+  public boolean hasOperandSizePrefix() {
+    return null != _operandSizePrefix;
+  }
+
+  public HexByte rexPrefix() {
+    return _rexPrefix;
+  }
+
+  public X86InstructionPrefix group1Prefix() {
+    return _group1Prefix;
+  }
+
+  public X86InstructionPrefix group2Prefix() {
+    return _group2Prefix;
+  }
+
+  public HexByte opcode1() {
+    return _opcode1;
+  }
+
+  public HexByte opcode2() {
+    return _opcode2;
+  }
+
+  //TODO: Fix this ugly hack - this class should be immutable but due to the way we currently
+  //decode fp instructions it is not - eww!
+  public void fixOpcode2(final HexByte opcode2) { _opcode2 = opcode2; }
 }
