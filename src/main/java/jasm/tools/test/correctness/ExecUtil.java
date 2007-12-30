@@ -21,7 +21,7 @@ final class ExecUtil {
    * @param command the command line to execute
    */
   static void exec(String command) throws IOException, InterruptedException {
-    exec(command, System.out, System.err, System.in);
+    exec(command, System.out, System.out, System.in);
   }
 
   /**
@@ -126,9 +126,9 @@ final class ExecUtil {
         }
       } catch (Throwable throwable) {
         if (_name != null) {
-          System.err.println("Error while redirecting sub-process stream for \"" + _name + "\"");
+          System.out.println("Error while redirecting sub-process stream for \"" + _name + "\"");
         }
-        throwable.printStackTrace();
+        throwable.printStackTrace(System.out);
       }
     }
   }

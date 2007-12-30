@@ -88,11 +88,11 @@ final class ExternalAssembler {
       };
       for (File file : directory.listFiles(filter)) {
         if (!file.delete()) {
-          System.err.println("WARNING: could not delete temporary file: " + file.getAbsolutePath());
+          System.out.println("WARNING: could not delete temporary file: " + file.getAbsolutePath());
         }
       }
     } catch (IOException ioException) {
-      System.err.println("WARNING: could not delete temporary files");
+      System.out.println("WARNING: could not delete temporary files");
     }
   }
 }

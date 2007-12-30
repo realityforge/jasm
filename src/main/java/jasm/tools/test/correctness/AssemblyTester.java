@@ -259,26 +259,26 @@ public abstract class AssemblyTester<Template_Type extends Template<Template_Typ
     }
 
     if (disassemblyStream.available() != 0 || !matchFound) {
-      System.err.println("internal disassembler test failed - " +
+      System.out.println("internal disassembler test failed - " +
                          disassembledInstructions.size() +
                          " false matches found:");
       if (disassemblyStream.available() != 0) {
-        System.err.print("extra bytes at end of disassembly stream:");
+        System.out.print("extra bytes at end of disassembly stream:");
         for (final int b = disassemblyStream.read(); b != -1;) {
-          System.err.print(" 0x" + Integer.toHexString(b));
+          System.out.print(" 0x" + Integer.toHexString(b));
         }
-        System.err.println();
+        System.out.println();
       }
       int matchNumber = 1;
       for (DisassembledInstruction_Type disassembledInstruction : disassembledInstructions) {
-        System.err.println();
-        System.err.println("False match number " + matchNumber + ":");
-        System.err.println("    assembled template: " + template);
-        System.err.println(" disassembled template: " + disassembledInstruction.template());
-        System.err.println("   assembled arguments: " + argumentList);
-        System.err.println("disassembled arguments: " + disassembledInstruction.arguments());
-        System.err.println("       assembled bytes: " + DisassembledInstruction.toHexString(internalResult));
-        System.err.println("    disassembled bytes: " +
+        System.out.println();
+        System.out.println("False match number " + matchNumber + ":");
+        System.out.println("    assembled template: " + template);
+        System.out.println(" disassembled template: " + disassembledInstruction.template());
+        System.out.println("   assembled arguments: " + argumentList);
+        System.out.println("disassembled arguments: " + disassembledInstruction.arguments());
+        System.out.println("       assembled bytes: " + DisassembledInstruction.toHexString(internalResult));
+        System.out.println("    disassembled bytes: " +
                            DisassembledInstruction.toHexString(disassembledInstruction.bytes()));
         ++matchNumber;
       }
@@ -333,12 +333,12 @@ public abstract class AssemblyTester<Template_Type extends Template<Template_Typ
         final byte[] externalResult = readExternalInstruction(externalInputStream, template, internalResult);
         for (int i = 0; i < externalResult.length; i++) {
           if (internalResult[i] != externalResult[i]) {
-            System.err.println("external assembler test case " + testCaseCount + " failed for template: " + template);
-            System.err.println("arguments: " + argumentList);
-            System.err.println("internal result: " + DisassembledInstruction.toHexString(internalResult));
-            System.err.println("external result: " + DisassembledInstruction.toHexString(externalResult));
-            System.err.println("internal result fields: " + disassembleFields(template, internalResult));
-            System.err.println("external result fields: " + disassembleFields(template, externalResult));
+            System.out.println("external assembler test case " + testCaseCount + " failed for template: " + template);
+            System.out.println("arguments: " + argumentList);
+            System.out.println("internal result: " + DisassembledInstruction.toHexString(internalResult));
+            System.out.println("external result: " + DisassembledInstruction.toHexString(externalResult));
+            System.out.println("internal result fields: " + disassembleFields(template, internalResult));
+            System.out.println("external result fields: " + disassembleFields(template, externalResult));
             throw new IllegalStateException("mismatch between internal and external assembler");
           }
         }
@@ -366,7 +366,7 @@ public abstract class AssemblyTester<Template_Type extends Template<Template_Typ
   }
 
   private void notice(final Template_Type template, final String msg) {
-    System.err.println("template: " + template + " " + msg);
+    System.out.println("template: " + template + " " + msg);
   }
 
   private int testIllegalCases(final Template_Type template, final Set<String> uniqueExceptionMessages)
@@ -421,20 +421,20 @@ public abstract class AssemblyTester<Template_Type extends Template<Template_Typ
         testTemplate(template);
       } catch (Throwable throwable) {
         notice(template, "Failed tests.");
-        throwable.printStackTrace();
+        throwable.printStackTrace(System.out);
         errors.add(template);
       }
     }
 
     if (_createExternalSource) {
-      System.err.println("External source generated at: " + externalSourceFilename);
+      System.out.println("External source generated at: " + externalSourceFilename);
       stream.close();
     }
 
     if (!errors.isEmpty()) {
-      System.err.println("Errors occurred when testing the following templates:");
+      System.out.println("Errors occurred when testing the following templates:");
       for (Template_Type template : errors) {
-        System.err.println("    " + template);
+        System.out.println("    " + template);
       }
       throw new IllegalStateException(errors.size() + " templates failed testing: see previous stack dumps in test output");
     }

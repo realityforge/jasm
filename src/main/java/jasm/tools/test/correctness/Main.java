@@ -87,7 +87,7 @@ public final class Main {
   private static boolean processArgs(final String[] args) {
     final ArgsParser parser = new ArgsParser(args, OPTIONS);
     if (null != parser.getErrorString()) {
-      System.err.println("Error: " + parser.getErrorString());
+      System.out.println("Error: " + parser.getErrorString());
       return false;
     }
 
@@ -214,7 +214,7 @@ public final class Main {
       tester.setCreateExternalSource(_genSource);
       tester.run();
     } catch (Exception e) {
-      e.printStackTrace();
+      e.printStackTrace(System.out);
       System.exit(42);
     }
     System.exit(0);
