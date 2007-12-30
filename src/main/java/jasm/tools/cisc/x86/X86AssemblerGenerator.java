@@ -304,7 +304,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     }
     writer.println(") {");
     writer.indent();
-    emitByte(writer, (byte) 0x24);
+    writer.print("emitByte(((byte) " + HexUtil.toHexLiteral((byte) 0x24) + "));");
     writer.println(" // SIB byte");
     writer.outdent();
     writer.println("}");

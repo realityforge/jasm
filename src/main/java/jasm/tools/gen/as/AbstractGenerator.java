@@ -62,7 +62,4 @@ public abstract class AbstractGenerator {
     Trace.line(1, "Generated " + name);
   }
 
-  protected final void emitByte(IndentWriter writer, byte value) {
-    writer.print("emitByte(((byte) " + HexUtil.toHexLiteral(value) + "));");
-  }
 }
