@@ -9,12 +9,12 @@
 package jasm.tools.test.correctness;
 
 enum AssemblerDef {
-  AMD64("jasm.tools.cisc.amd64.correctness.AMD64AssemblyTester"),
-  IA32("jasm.tools.cisc.ia32.correctness.IA32AssemblyTester"),
-  PPC32("jasm.tools.risc.ppc.correctness.PPC32AssemblyTester"),
-  PPC64("jasm.tools.risc.ppc.correctness.PPC64AssemblyTester"),
-  SPARC32("jasm.tools.risc.sparc.correctness.SPARC32AssemblyTester"),
-  SPARC64("jasm.tools.risc.sparc.correctness.SPARC64AssemblyTester");
+  AMD64("jasm.tools.cisc.amd64.test.correctness.AMD64AssemblyTester"),
+  IA32("jasm.tools.cisc.ia32.test.correctness.IA32AssemblyTester"),
+  PPC32("jasm.tools.risc.ppc.test.correctness.PPC32AssemblyTester"),
+  PPC64("jasm.tools.risc.ppc.test.correctness.PPC64AssemblyTester"),
+  SPARC32("jasm.tools.risc.sparc.test.correctness.SPARC32AssemblyTester"),
+  SPARC64("jasm.tools.risc.sparc.test.correctness.SPARC64AssemblyTester");
 
   private final String _testerClassname;
 

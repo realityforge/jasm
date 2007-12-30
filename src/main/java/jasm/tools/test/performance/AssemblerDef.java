@@ -9,12 +9,12 @@
 package jasm.tools.test.performance;
 
 enum AssemblerDef {
-  AMD64("jasm.tools.cisc.amd64.performance.AMD64PerformanceTester"),
-  IA32("jasm.tools.cisc.ia32.performance.IA32PerformanceTester"),
-  PPC32("jasm.tools.risc.ppc.performance.PPC32PerformanceTester"),
-  PPC64("jasm.tools.risc.ppc.performance.PPC64PerformanceTester"),
-  SPARC32("jasm.tools.risc.sparc.performance.SPARC32PerformanceTester"),
-  SPARC64("jasm.tools.risc.sparc.performance.SPARC64PerformanceTester");
+  AMD64("jasm.tools.cisc.amd64.test.performance.AMD64PerformanceTester"),
+  IA32("jasm.tools.cisc.ia32.test.performance.IA32PerformanceTester"),
+  PPC32("jasm.tools.risc.ppc.test.performance.PPC32PerformanceTester"),
+  PPC64("jasm.tools.risc.ppc.test.performance.PPC64PerformanceTester"),
+  SPARC32("jasm.tools.risc.sparc.test.performance.SPARC32PerformanceTester"),
+  SPARC64("jasm.tools.risc.sparc.test.performance.SPARC64PerformanceTester");
 
   private final String _testerClassname;
 
