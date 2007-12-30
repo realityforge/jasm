@@ -25,10 +25,14 @@ import java.util.Map;
 public final class X86InstructionHeader {
 
   boolean _hasAddressSizePrefix;
+  //boolean _hasOperandSizePrefix;
   HexByte _rexPrefix;
   X86InstructionPrefix _instructionSelectionPrefix;
+  //X86InstructionPrefix _group1Prefix;
+  //X86InstructionPrefix _group2Prefix;
   HexByte _opcode1;
   HexByte _opcode2;
+  //HexByte _opCode3;
 
   X86InstructionHeader() {
   }
