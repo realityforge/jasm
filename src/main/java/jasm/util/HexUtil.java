@@ -20,4 +20,17 @@ public final class HexUtil {
   public static String toHexLiteral(byte value) {
     return String.format("0x%02X", value);
   }
+
+  public static String toHexLiteral(byte[] bytes) {
+    final StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < bytes.length; i ++) {
+      sb.append(HexUtil.toHexLiteral(bytes[i]));
+      if(i != 0 && i % 10 == 0 ){
+        sb.append( '\n' );
+      } else {
+        sb.append( ' ' );
+      }
+    }
+    return sb.toString();
+  }
 }
