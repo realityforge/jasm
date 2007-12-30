@@ -44,6 +44,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 /**
  * A disassembler for x86 instructions.
@@ -385,5 +386,57 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
     }
     bufferedInputStream.reset();
     return false;
+  }
+
+  protected static <Template_Type extends X86Template<Template_Type>> Map<X86InstructionHeader, LinkedList<Template_Type>> createMapping(
+      Assembly<Template_Type> assembly, WordWidth addressWidth) {
+    final Map<X86InstructionHeader, LinkedList<Template_Type>> result =
+        new HashMap<X86InstructionHeader, LinkedList<Template_Type>>();
+    for (Template_Type template : assembly.templates()) {
+      X86InstructionHeader header = newInstructionHeader(template, addressWidth);
+      LinkedList<Template_Type> matchingTemplates = result.get(header);
+      if (matchingTemplates == null) {
+        matchingTemplates = new LinkedList<Template_Type>();
+        result.put(header, matchingTemplates);
+      }
+      matchingTemplates.addLast(template);
+      for (X86Parameter parameter : template.parameters()) {
+        switch (parameter.place()) {
+          case OPCODE1_REXB:
+          case OPCODE1:
+            for (int i = 0; i < 8; i++) {
+              header = newInstructionHeader(template, addressWidth);
+              header._opcode1 = HexByte.values()[header._opcode1.ordinal() + i];
+              result.put(header, matchingTemplates);
+            }
+            break;
+          case OPCODE2_REXB:
+          case OPCODE2:
+            for (int i = 0; i < 8; i++) {
+              header = newInstructionHeader(template, addressWidth);
+              header._opcode2 = HexByte.values()[header._opcode2.ordinal() + i];
+              result.put(header, matchingTemplates);
+            }
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    return result;
+  }
+
+  private static <Template_Type extends X86Template<Template_Type>> X86InstructionHeader newInstructionHeader(final Template_Type template,
+                                                                                                              final WordWidth addressWidth) {
+    final X86InstructionHeader header = new X86InstructionHeader();
+    header._hasAddressSizePrefix = template.addressSizeAttribute() != addressWidth;
+    header._instructionSelectionPrefix = template.instructionSelectionPrefix();
+    if (template.operandSizeAttribute() == WordWidth.BITS_16) {
+      assert header._instructionSelectionPrefix == null;
+      header._instructionSelectionPrefix = X86InstructionPrefix.OPERAND_SIZE;
+    }
+    header._opcode1 = template.opcode1();
+    header._opcode2 = template.opcode2();
+    return header;
   }
 }

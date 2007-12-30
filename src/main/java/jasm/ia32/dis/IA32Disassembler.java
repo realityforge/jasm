@@ -48,7 +48,7 @@ public final class IA32Disassembler
   }
 
   private static Map<X86InstructionHeader, LinkedList<IA32Template>> _headerToTemplates =
-      X86InstructionHeader.createMapping(IA32Assembly.ASSEMBLY, WordWidth.BITS_32);
+      createMapping(IA32Assembly.ASSEMBLY, WordWidth.BITS_32);
 
   @Override
   protected final Map<X86InstructionHeader, LinkedList<IA32Template>> headerToTemplates() {

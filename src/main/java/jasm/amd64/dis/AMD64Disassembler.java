@@ -48,7 +48,8 @@ public final class AMD64Disassembler
     return new AMD64Assembler(_startAddress + offset);
   }
 
-  private static Map<X86InstructionHeader, LinkedList<AMD64Template>> _headerToTemplates = X86InstructionHeader.createMapping(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);
+  private static Map<X86InstructionHeader, LinkedList<AMD64Template>> _headerToTemplates =
+      createMapping(AMD64Assembly.ASSEMBLY, WordWidth.BITS_64);
 
   @Override
   protected final Map<X86InstructionHeader, LinkedList<AMD64Template>> headerToTemplates() {

@@ -8,15 +8,8 @@
  */
 package jasm.x86.dis;
 
-import jasm.WordWidth;
-import jasm.tools.Assembly;
-import jasm.tools.cisc.x86.X86Parameter;
-import jasm.tools.cisc.x86.X86Template;
 import jasm.util.HexByte;
 import jasm.x86.X86InstructionPrefix;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
 
 /**
  * Info about the first few bytes of an x86 instruction,
@@ -34,9 +27,6 @@ public final class X86InstructionHeader {
   HexByte _opcode2;
   //HexByte _opCode3;
 
-  X86InstructionHeader() {
-  }
-
   @Override
   public String toString() {
     return "X86InstructionHeader[AddressPrefix=" + _hasAddressSizePrefix +
@@ -45,17 +35,6 @@ public final class X86InstructionHeader {
            ",opcode1=" + _opcode1 +
            ",opcode2=" + _opcode2 +
            "]";
-  }
-
-  private X86InstructionHeader(WordWidth addressWidth, X86Template template) {
-    _hasAddressSizePrefix = template.addressSizeAttribute() != addressWidth;
-    _instructionSelectionPrefix = template.instructionSelectionPrefix();
-    if (template.operandSizeAttribute() == WordWidth.BITS_16) {
-      assert _instructionSelectionPrefix == null;
-      _instructionSelectionPrefix = X86InstructionPrefix.OPERAND_SIZE;
-    }
-    _opcode1 = template.opcode1();
-    _opcode2 = template.opcode2();
   }
 
   @Override
@@ -90,44 +69,6 @@ public final class X86InstructionHeader {
     }
     if (_opcode1 != null) {
       result += _opcode1.ordinal();
-    }
-    return result;
-  }
-
-  public static <Template_Type extends X86Template<Template_Type>> Map<X86InstructionHeader, LinkedList<Template_Type>> createMapping(
-      Assembly<Template_Type> assembly, WordWidth addressWidth) {
-    final Map<X86InstructionHeader, LinkedList<Template_Type>> result =
-        new HashMap<X86InstructionHeader, LinkedList<Template_Type>>();
-    for (Template_Type template : assembly.templates()) {
-      X86InstructionHeader header = new X86InstructionHeader(addressWidth, template);
-      LinkedList<Template_Type> matchingTemplates = result.get(header);
-      if (matchingTemplates == null) {
-        matchingTemplates = new LinkedList<Template_Type>();
-        result.put(header, matchingTemplates);
-      }
-      matchingTemplates.addLast(template);
-      for (X86Parameter parameter : template.parameters()) {
-        switch (parameter.place()) {
-          case OPCODE1_REXB:
-          case OPCODE1:
-            for (int i = 0; i < 8; i++) {
-              header = new X86InstructionHeader(addressWidth, template);
-              header._opcode1 = HexByte.values()[header._opcode1.ordinal() + i];
-              result.put(header, matchingTemplates);
-            }
-            break;
-          case OPCODE2_REXB:
-          case OPCODE2:
-            for (int i = 0; i < 8; i++) {
-              header = new X86InstructionHeader(addressWidth, template);
-              header._opcode2 = HexByte.values()[header._opcode2.ordinal() + i];
-              result.put(header, matchingTemplates);
-            }
-            break;
-          default:
-            break;
-        }
-      }
     }
     return result;
   }
