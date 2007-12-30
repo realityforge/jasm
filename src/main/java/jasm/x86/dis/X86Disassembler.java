@@ -31,7 +31,6 @@ import jasm.tools.cisc.x86.X86Field;
 import jasm.tools.cisc.x86.X86NumericalParameter;
 import jasm.tools.cisc.x86.X86Opcode;
 import jasm.tools.cisc.x86.X86Parameter;
-import jasm.tools.cisc.x86.X86RexPrefix;
 import jasm.tools.cisc.x86.X86Template;
 import jasm.util.EndianUtil;
 import jasm.util.HexByte;
@@ -120,7 +119,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
     HexByte hexByte = HexByte.values()[byteValue];
 
     //Decode rex prefix for amd64/ia32e
-    if (WordWidth.BITS_64 == addressWidth() && X86RexPrefix.isRexPrefix(hexByte)) {
+    if (WordWidth.BITS_64 == addressWidth() && X86Opcode.isRexPrefix(hexByte)) {
       rexPrefix = hexByte;
       byteValue = stream.read();
       if (-1 == byteValue) throw new EOFException();

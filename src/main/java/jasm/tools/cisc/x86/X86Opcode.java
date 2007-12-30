@@ -20,6 +20,8 @@ public final class X86Opcode {
   public static final HexByte OPCODE2_ESCAPE2 = _3A;
 
   public static final HexByte FP_WAIT = _9B;
+  public static final HexByte REX_MIN = _40;
+  public static final HexByte REX_MAX = _4F;
 
   public static boolean isStandardOpcode2Prefix(final HexByte opcode) {
     return opcode == OPCODE1_ESCAPE;
@@ -39,5 +41,9 @@ public final class X86Opcode {
             OPCODE2_ESCAPE1.byteValue() == opcode2.byteValue() ||
             OPCODE2_ESCAPE2.byteValue() == opcode2.byteValue()
         );
+  }
+
+  public static boolean isRexPrefix(HexByte opcode) {
+    return REX_MIN.ordinal() <= opcode.value() && opcode.ordinal() <= REX_MAX.value();
   }
 }
