@@ -41,7 +41,7 @@ public abstract class AssemblerGenerator<Template_Type extends Template<Template
 
   protected AssemblerGenerator(Assembly<Template_Type> assembly,
                                List<Template_Type> templates) {
-    super(new File("."), Assembler.class.getPackage().getName() + "." + assembly.instructionSet().name().toLowerCase() + ".as");
+    super(new File("."), "jasm." + assembly.instructionSet().name().toLowerCase() + ".as");
     _assembly = assembly;
     _templates = templates;
   }
