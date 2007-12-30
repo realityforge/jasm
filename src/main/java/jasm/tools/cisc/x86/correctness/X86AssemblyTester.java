@@ -22,7 +22,6 @@ import jasm.tools.cisc.x86.X86AddressParameter;
 import jasm.tools.cisc.x86.X86Assembly;
 import jasm.tools.cisc.x86.X86DisplacementParameter;
 import jasm.tools.cisc.x86.X86ImmediateParameter;
-import jasm.x86.X86InstructionPrefix;
 import jasm.tools.cisc.x86.X86OffsetParameter;
 import jasm.tools.cisc.x86.X86Opcode;
 import jasm.tools.cisc.x86.X86Operand;
@@ -30,9 +29,9 @@ import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
 import jasm.tools.test.correctness.AssemblyTester;
 import jasm.tools.util.IndentWriter;
-import jasm.util.HexByte;
 import jasm.util.StaticLoophole;
 import jasm.x86.IndirectRegister;
+import jasm.x86.X86InstructionPrefix;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;
@@ -176,7 +175,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template<Templa
     if (X86Opcode.isFloatingPointEscape(template.opcode1())) {
       // We skip FWAIT instructions that the external assembler may inject before floating point operations
       final int externalOpcode = externalInputStream.read();
-      if (externalOpcode != HexByte._9B.ordinal()) {
+      if (externalOpcode != X86Opcode.FP_WAIT.value()) {
         externalInputStream.unread(externalOpcode);
       }
     }
