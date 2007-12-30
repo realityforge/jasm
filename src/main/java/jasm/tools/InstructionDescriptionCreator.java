@@ -14,9 +14,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 /** Wraps mere object arrays into instruction descriptions. */
-public abstract class InstructionDescriptionCreator<InstructionDescription_Type extends InstructionDescription> {
+public abstract class InstructionDescriptionCreator<InstructionDescription_Type extends InstructionDescription<InstructionDescription_Type>> {
 
   private final Assembly _assembly;
+  private final LinkedList<InstructionDescription_Type> _descriptions = new LinkedList<InstructionDescription_Type>();
+  private String _currentArchitectureManualSection;
 
   protected InstructionDescriptionCreator(Assembly assembly) {
     _assembly = assembly;
@@ -29,21 +31,16 @@ public abstract class InstructionDescriptionCreator<InstructionDescription_Type 
   protected abstract InstructionDescription_Type createInstructionDescription(List<Object> specifications);
 
   protected final InstructionDescription_Type defineInstructionDescription(List<Object> specifications) {
-    final InstructionDescription_Type instructionDescription =
-        createInstructionDescription(specifications);
-    _instructionDescriptions.addLast(instructionDescription);
-    instructionDescription.setArchitectureManualSection(_currentArchitectureManualSection);
-    return instructionDescription;
+    final InstructionDescription_Type description = createInstructionDescription(specifications);
+    _descriptions.addLast(description);
+    description.setArchitectureManualSection(_currentArchitectureManualSection);
+    return description;
   }
-
-  private final LinkedList<InstructionDescription_Type> _instructionDescriptions = new LinkedList<InstructionDescription_Type>();
 
   protected InstructionDescription_Type define(Object... specifications) {
     final Object[] objects = ArrayUtil.flatten(specifications);
     return defineInstructionDescription(Arrays.asList(objects));
   }
-
-  private String _currentArchitectureManualSection;
 
   /**
    * Sets the name of the architecture manual section for which instruction descriptions are
@@ -54,6 +51,6 @@ public abstract class InstructionDescriptionCreator<InstructionDescription_Type 
   }
 
   public final LinkedList<InstructionDescription_Type> instructionDescriptions() {
-    return _instructionDescriptions;
+    return _descriptions;
   }
 }
