@@ -31,6 +31,10 @@ public enum HexByte {
     return (byte) ordinal();
   }
 
+  public int value() {
+    return ordinal();
+  }
+
   @Override
   public String toString() {
     return "0x" + name().substring(1);
