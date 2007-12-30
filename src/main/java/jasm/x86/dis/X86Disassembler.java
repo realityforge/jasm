@@ -54,6 +54,7 @@ import java.util.Map;
 public abstract class X86Disassembler<Template_Type extends X86Template<Template_Type>, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
     extends Disassembler<Template_Type, DisassembledInstruction_Type> {
 
+  private static final int MORE_THAN_ANY_INSTRUCTION_LENGTH = 100;
   private int _currentOffset;
 
   protected X86Disassembler(Assembly<Template_Type> assembly, WordWidth addressWidth) {
@@ -83,9 +84,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
           header._rexPrefix = hexByte;
         } else {
           header._opcode1 = hexByte;
-          if (hexByte != HexByte._0F) {
-            return header;
-          }
+          if (!X86Opcode.isStandardOpcode2Prefix(hexByte)) return header;
         }
       } else {
         header._opcode2 = hexByte;
@@ -326,7 +325,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
       _currentOffset++;
       return disassembledInstruction;
     }
-    throw new DecoderException("unknown instruction");
+    throw new DecoderException("unknown instruction: " + header);
   }
 
   private static int indexOfNull(List<?> list) {
@@ -339,8 +338,6 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
     }
     return -1;
   }
-
-  private static final int MORE_THAN_ANY_INSTRUCTION_LENGTH = 100;
 
   @Override
   public final List<DisassembledInstruction_Type> scanOneInstruction(BufferedInputStream stream)
