@@ -18,13 +18,13 @@ import static jasm.tools.cisc.x86.OperandCode.*;
 import static jasm.tools.cisc.x86.OperandTypeCode.b;
 import static jasm.tools.cisc.x86.OperandTypeCode.v;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
-import jasm.x86.X86InstructionPrefix;
 import jasm.tools.cisc.x86.X86RegisterOperandCode;
 import static jasm.util.HexByte.*;
 import static jasm.x86.SegmentRegister.CS;
 import static jasm.x86.SegmentRegister.DS;
 import static jasm.x86.SegmentRegister.ES;
 import static jasm.x86.SegmentRegister.SS;
+import jasm.x86.X86InstructionPrefix;
 
 /** Representation of the ... */
 final class OneByteOpcodeMap extends X86InstructionDescriptionCreator {

@@ -8,7 +8,6 @@
  */
 package test.jasm.ia32;
 
-import jasm.AssemblyException;
 import jasm.Label;
 import static jasm.ia32.IA32GeneralRegister16.*;
 import jasm.ia32.IA32GeneralRegister32;
@@ -24,7 +23,6 @@ import static jasm.x86.Scale.SCALE_8;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import junit.framework.TestCase;
 
 public final class InternalTest extends TestCase {

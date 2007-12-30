@@ -16,11 +16,11 @@ import jasm.tools.cisc.x86.ModCase;
 import static jasm.tools.cisc.x86.OperandCode.*;
 import jasm.tools.cisc.x86.X86InstructionDescription;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
-import jasm.x86.X86InstructionPrefix;
 import jasm.util.ArrayUtil;
 import static jasm.util.HexByte.*;
 import static jasm.x86.SegmentRegister.FS;
 import static jasm.x86.SegmentRegister.GS;
+import jasm.x86.X86InstructionPrefix;
 import java.util.ArrayList;
 
 public final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {

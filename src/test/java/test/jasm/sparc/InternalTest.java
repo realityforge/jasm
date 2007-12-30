@@ -8,7 +8,6 @@
  */
 package test.jasm.sparc;
 
-import jasm.AssemblyException;
 import jasm.Label;
 import static jasm.sparc.AnnulBit.A;
 import static jasm.sparc.BranchPredictionBit.PT;
@@ -35,7 +34,6 @@ import jasm.sparc.dis.SPARCDisassembler;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import junit.framework.TestCase;
 
 public final class InternalTest
@@ -123,7 +121,7 @@ public final class InternalTest
 
   public final void test64()
       throws Exception {
-    
+
     final long startAddress = 0x1234567812340000L;
     final SPARC64Assembler assembler = new SPARC64Assembler(startAddress);
     final SPARC64Disassembler disassembler = new SPARC64Disassembler(startAddress);

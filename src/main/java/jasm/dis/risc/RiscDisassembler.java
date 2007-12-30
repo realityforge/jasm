@@ -10,8 +10,8 @@ package jasm.dis.risc;
 
 import jasm.Argument;
 import jasm.Assembler;
-import jasm.WordWidth;
 import jasm.AssemblyException;
+import jasm.WordWidth;
 import jasm.dis.AbstractionPreference;
 import jasm.dis.DecoderException;
 import jasm.dis.DisassembledInstruction;

@@ -9,8 +9,8 @@
 package jasm.tools.cisc.x86;
 
 import jasm.WordWidth;
-import jasm.x86.X86InstructionPrefix;
 import jasm.tools.InstructionDescription;
+import jasm.x86.X86InstructionPrefix;
 import java.util.List;
 
 public final class X86InstructionDescription

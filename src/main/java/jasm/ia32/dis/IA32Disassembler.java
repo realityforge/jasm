@@ -14,7 +14,6 @@ import jasm.WordWidth;
 import jasm.ia32.as.IA32Assembler;
 import jasm.tools.cisc.ia32.IA32Assembly;
 import jasm.tools.cisc.ia32.IA32Template;
-import jasm.util.HexByte;
 import jasm.x86.dis.X86Disassembler;
 import jasm.x86.dis.X86InstructionHeader;
 import java.util.LinkedList;

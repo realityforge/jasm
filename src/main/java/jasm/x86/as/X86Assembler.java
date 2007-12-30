@@ -1,8 +1,8 @@
 package jasm.x86.as;
 
 import jasm.LittleEndianAssembler;
-import jasm.x86.X86InstructionPrefix;
 import jasm.annotations.Inline;
+import jasm.x86.X86InstructionPrefix;
 
 public abstract class X86Assembler
     extends LittleEndianAssembler {

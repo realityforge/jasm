@@ -8,7 +8,6 @@
  */
 package test.jasm.ppc;
 
-import jasm.AssemblyException;
 import jasm.Label;
 import static jasm.ppc.BranchPredictionBits.PN;
 import static jasm.ppc.CRF.CR0;
@@ -26,7 +25,6 @@ import jasm.ppc.dis.PPCDisassembler;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import junit.framework.TestCase;
 
 public final class InternalTest extends TestCase {

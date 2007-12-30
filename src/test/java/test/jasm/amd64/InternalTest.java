@@ -8,7 +8,6 @@
  */
 package test.jasm.amd64;
 
-import jasm.AssemblyException;
 import jasm.Label;
 import static jasm.amd64.AMD64GeneralRegister32.*;
 import jasm.amd64.AMD64GeneralRegister64;
@@ -23,7 +22,6 @@ import static jasm.x86.Scale.SCALE_8;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import junit.framework.TestCase;
 
 public final class InternalTest

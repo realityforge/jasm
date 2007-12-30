@@ -14,8 +14,6 @@ import jasm.WordWidth;
 import jasm.amd64.as.AMD64Assembler;
 import jasm.tools.cisc.amd64.AMD64Assembly;
 import jasm.tools.cisc.amd64.AMD64Template;
-import jasm.tools.cisc.x86.X86RexPrefix;
-import jasm.util.HexByte;
 import jasm.x86.dis.X86Disassembler;
 import jasm.x86.dis.X86InstructionHeader;
 import java.util.LinkedList;
