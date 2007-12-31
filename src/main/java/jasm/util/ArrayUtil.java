@@ -30,6 +30,6 @@ public final class ArrayUtil {
     for (Object element : sequence) {
       vector.add(element);
     }
-    return vector.toArray(StaticLoophole.create(Object.class, vector.size()));
+    return vector.toArray(StaticLoophole.createArray(Object.class, vector.size()));
   }
 }

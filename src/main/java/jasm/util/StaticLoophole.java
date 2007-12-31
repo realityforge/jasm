@@ -24,8 +24,7 @@ public final class StaticLoophole {
     return Arrays.asList(object);
   }
 
-  public static <Element_Type> Element_Type[] create(Class<?> elementType, int length) {
-    final Object array = Array.newInstance(elementType, length);
-    return cast(array);
+  public static <Element_Type> Element_Type[] createArray(Class<?> elementType, int length) {
+    return cast(Array.newInstance(elementType, length));
   }
 }

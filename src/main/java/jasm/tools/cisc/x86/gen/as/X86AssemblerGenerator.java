@@ -547,7 +547,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
 
   private List<LabelWidthCase<Template_Type>> getRelatedLabelTemplatesByWidth(Template_Type template,
                                                                               List<Template_Type> labelTemplates) {
-    final LabelWidthCase<Template_Type>[] array = StaticLoophole.create(LabelWidthCase.class, WordWidth.values().length);
+    final LabelWidthCase<Template_Type>[] array = StaticLoophole.createArray(LabelWidthCase.class, WordWidth.values().length);
     for (Template_Type t : labelTemplates) {
       if (t.assemblerMethodName().equals(template.assemblerMethodName()) &&
           t.labelParameterIndex() == template.labelParameterIndex() &&
