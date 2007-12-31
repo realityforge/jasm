@@ -11,7 +11,7 @@ package jasm.dis.risc;
 import jasm.tools.risc.RiscTemplate;
 import java.util.Collection;
 
-public final class SpecificityGroup<Template_Type extends RiscTemplate> {
+public final class SpecificityGroup<Template_Type extends RiscTemplate<Template_Type>> {
 
   private final int _specificity;
   private final Collection<OpcodeMaskGroup<Template_Type>> _opcodeMaskGroups;

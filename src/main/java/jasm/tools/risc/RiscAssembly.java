@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class RiscAssembly<Template_Type extends RiscTemplate> extends Assembly<Template_Type> {
+public abstract class RiscAssembly<Template_Type extends RiscTemplate<Template_Type>> extends Assembly<Template_Type> {
 
   private ArrayList<SpecificityGroup<Template_Type>> _specificityGroups;
 
