@@ -28,9 +28,9 @@ import jasm.tools.cisc.x86.X86OffsetParameter;
 import jasm.tools.cisc.x86.X86AddressParameter;
 import jasm.tools.gen.as.AssemblerGenerator;
 import jasm.tools.util.IndentWriter;
-import jasm.util.ArrayUtil;
 import jasm.util.Enums;
 import jasm.util.HexUtil;
+import jasm.util.StaticLoophole;
 import jasm.x86.X86InstructionPrefix;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -547,7 +547,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
 
   private List<LabelWidthCase<Template_Type>> getRelatedLabelTemplatesByWidth(Template_Type template,
                                                                               List<Template_Type> labelTemplates) {
-    final LabelWidthCase<Template_Type>[] array = ArrayUtil.create(LabelWidthCase.class, WordWidth.values().length);
+    final LabelWidthCase<Template_Type>[] array = StaticLoophole.create(LabelWidthCase.class, WordWidth.values().length);
     for (Template_Type t : labelTemplates) {
       if (t.assemblerMethodName().equals(template.assemblerMethodName()) &&
           t.labelParameterIndex() == template.labelParameterIndex() &&

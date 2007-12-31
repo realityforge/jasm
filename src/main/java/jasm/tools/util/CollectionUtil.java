@@ -8,7 +8,6 @@
  */
 package jasm.tools.util;
 
-import jasm.util.ArrayUtil;
 import jasm.util.StaticLoophole;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -33,7 +32,7 @@ public final class CollectionUtil {
   }
 
   public static <Element_Type> Element_Type[] toArray(List<? extends Element_Type> sequence, Class<Element_Type> elementType) {
-    final Element_Type[] array = StaticLoophole.cast(ArrayUtil.create(elementType, sequence.size()));
+    final Element_Type[] array = StaticLoophole.cast(StaticLoophole.create(elementType, sequence.size()));
     for (int i = 0; i < array.length; i++) {
       array[i] = sequence.get(i);
     }

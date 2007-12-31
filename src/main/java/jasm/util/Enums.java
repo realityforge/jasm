@@ -27,7 +27,7 @@ public final class Enums {
   public static <Enum_Type extends Enum<Enum_Type>> List<List<Enum_Type>> powerSequence(Class<Enum_Type> enumType) {
     final EnumSet<Enum_Type> values = EnumSet.allOf(enumType);
     final int nSubSets = (int) Math.pow(values.size(), 2);
-    final List<Enum_Type>[] results = ArrayUtil.create(List.class, nSubSets);
+    final List<Enum_Type>[] results = StaticLoophole.create(List.class, nSubSets);
     for (int subSetIndex = 0; subSetIndex < nSubSets; subSetIndex++) {
       final Object[] subSet = new Object[Integer.bitCount(subSetIndex)];
       int i = 0;

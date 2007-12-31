@@ -8,17 +8,12 @@
  */
 package jasm.util;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 /** Additonal methods that one could expect in java.util.Arrays. */
 public final class ArrayUtil {
-  public static <Element_Type> Element_Type[] create(Class<?> elementType, int length) {
-    final Object array = Array.newInstance(elementType, length);
-    return StaticLoophole.cast(array);
-  }
 
   public static Object[] flatten(Object[] array) {
     final ArrayList<Object> sequence = new ArrayList<Object>();
@@ -35,6 +30,6 @@ public final class ArrayUtil {
     for (Object element : sequence) {
       vector.add(element);
     }
-    return vector.toArray(create(Object.class, vector.size()));
+    return vector.toArray(StaticLoophole.create(Object.class, vector.size()));
   }
 }
