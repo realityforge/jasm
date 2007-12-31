@@ -34,7 +34,7 @@
     <delete dir="${output.dir}"/>
   </target>
 
-  <macrodef name="gen-asm">
+  <macrodef name="gen-as">
     <attribute name="isa"/>
     <sequential>
       <delete dir="${generated.java}/jasm/@{isa}/as"/>
@@ -72,10 +72,10 @@
           description="Generate the assemblers"
           depends="check-generated, compile-generators"
           unless="assemblers.generated">
-    <gen-asm isa="amd64"/>
-    <gen-asm isa="ia32"/>
-    <gen-asm isa="ppc"/>
-    <gen-asm isa="sparc"/>
+    <gen-as isa="amd64"/>
+    <gen-as isa="ia32"/>
+    <gen-as isa="ppc"/>
+    <gen-as isa="sparc"/>
   </target>
 
   <target name="compile" description="Compile the code" depends="generate-assemblers">
