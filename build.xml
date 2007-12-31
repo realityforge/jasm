@@ -39,7 +39,20 @@
     <sequential>
       <delete dir="${generated.java}/jasm/@{isa}/as"/>
       <mkdir dir="${generated.java}/jasm/@{isa}/as"/>
-      <java classname="jasm.tools.gen.as.Main" classpath="${output.main.classes}:${cli.jar}" failonerror="true" fork="true">
+      <java classname="jasm.tools.gen.as.Main" classpath="${output.main.classes}:${cli.jar}" failonerror="true"
+            fork="true">
+        <arg line="-d ${generated.java} --isa @{isa}"/>
+      </java>
+    </sequential>
+  </macrodef>
+
+  <macrodef name="gen-dis">
+    <attribute name="isa"/>
+    <sequential>
+      <delete dir="${generated.java}/jasm/@{isa}/dis2"/>
+      <mkdir dir="${generated.java}/jasm/@{isa}/dis2"/>
+      <java classname="jasm.tools.gen.dis.Main" classpath="${output.main.classes}:${cli.jar}" failonerror="true"
+            fork="true">
         <arg line="-d ${generated.java} --isa @{isa}"/>
       </java>
     </sequential>
@@ -66,6 +79,14 @@
     <!-- Check by looking to see if last file was generated -->
     <available property="assemblers.generated"
                file="${generated.java}/jasm/sparc/as/SPARCLabelAssembler.java"/>
+    <condition property="generate.disassemblers" value="true">
+      <and>
+        <not>
+          <available file="${generated.java}/jasm/sparc/dis2/SPARCDisassembler.java"/>
+        </not>
+        <isset property="gen.dis"/>
+      </and>
+    </condition>
   </target>
 
   <target name="generate-assemblers"
@@ -78,7 +99,14 @@
     <gen-as isa="sparc"/>
   </target>
 
-  <target name="compile" description="Compile the code" depends="generate-assemblers">
+  <target name="generate-disassemblers"
+          description="Generate the assemblers"
+          depends="check-generated, compile-generators"
+          if="generate.disassemblers">
+    <gen-dis isa="ia32"/>
+  </target>
+
+  <target name="compile" description="Compile the code" depends="generate-assemblers, generate-disassemblers">
     <mkdir dir="${output.main.classes}"/>
     <javac srcdir="${generated.java}:${main.src.java}"
            destdir="${output.main.classes}"
@@ -136,7 +164,8 @@
     <fail if="tests.failed" message="Tests failed."/>
   </target>
 
-  <target name="package" depends="unit-tests, compile-examples, compile" description="Package the code" unless="skip.tests">
+  <target name="package" depends="unit-tests, compile-examples, compile" description="Package the code"
+          unless="skip.tests">
     <jar jarfile="${output.jar}" basedir="${output.main.classes}"/>
   </target>
 
