@@ -21,6 +21,7 @@ import jasm.util.StaticLoophole;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Arrays;
 
 public abstract class RiscInstructionDescriptionCreator extends InstructionDescriptionCreator<RiscInstructionDescription> {
 
@@ -134,5 +135,21 @@ public abstract class RiscInstructionDescriptionCreator extends InstructionDescr
     boolean condition = !instructionDescriptions.isEmpty();
     if (!condition) throw new IllegalStateException("Program Error");
     return new RiscInstructionDescriptionModifier(instructionDescriptions);
+  }
+
+  protected RiscInstructionDescription define(Object... specifications) {
+    return super.define(flatten(specifications));
+  }
+
+  private static Object[] flatten(Object[] array) {
+    final ArrayList<Object> objects = new ArrayList<Object>();
+    for (Object outer : array) {
+      if (outer instanceof Object[]) {
+        objects.addAll(Arrays.asList(flatten((Object[]) outer)));
+      } else {
+        objects.add(outer);
+      }
+    }
+    return objects.toArray(StaticLoophole.createArray(Object.class, objects.size()));
   }
 }

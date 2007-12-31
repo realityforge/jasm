@@ -8,7 +8,6 @@
  */
 package jasm.tools;
 
-import jasm.util.ArrayUtil;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,8 +37,7 @@ public abstract class InstructionDescriptionCreator<InstructionDescription_Type 
   }
 
   protected InstructionDescription_Type define(Object... specifications) {
-    final Object[] objects = ArrayUtil.flatten(specifications);
-    return defineInstructionDescription(Arrays.asList(objects));
+    return defineInstructionDescription(Arrays.asList(specifications));
   }
 
   /**

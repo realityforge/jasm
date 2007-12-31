@@ -22,11 +22,10 @@ import static jasm.tools.cisc.ia32.IA32ModRMGroup.GROUP_9;
 import static jasm.tools.cisc.x86.OperandCode.*;
 import jasm.tools.cisc.x86.X86InstructionDescription;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
-import jasm.util.ArrayUtil;
 import static jasm.util.HexByte.*;
-import static jasm.x86.SegmentRegister.FS;
-import static jasm.x86.SegmentRegister.GS;
+import static jasm.x86.SegmentRegister.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
 
@@ -220,12 +219,9 @@ final class TwoByteOpcodeMap extends X86InstructionDescriptionCreator {
   }
 
   private X86InstructionDescription defineTwoByte(Object... specifications) {
-    final Object[] objects = ArrayUtil.flatten(specifications);
-    final ArrayList<Object> specs = new ArrayList<Object>(objects.length + 1);
+    final ArrayList<Object> specs = new ArrayList<Object>(specifications.length + 1);
     specs.add(_0F);
-    for (Object object : objects) {
-      specs.add(object);
-    }
+    specs.addAll(Arrays.asList(specifications));
     return defineInstructionDescription(specs);
   }
 }
