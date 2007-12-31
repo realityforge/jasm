@@ -36,7 +36,7 @@ public final class InternalTest extends TestCase {
     return new String(baos.toByteArray());
   }
 
-  public final void no_work_as_generated_operand_size_prefix_test_complex()
+  public final void test_complex()
       throws Exception {
     final int startAddress = 0x12358;
     final IA32GeneralRegister32 myGPR = EAX;
@@ -126,8 +126,77 @@ public final class InternalTest extends TestCase {
     asm.bindLabel(endLabel);
     final byte[] bytes = asm.toByteArray();
     final String output = disassemble(startAddress, bytes);
-    final String expected = "X";
-    System.out.println(output);
+    final String expected =
+        "0x00012358   000   L1:   jmp       L4: +291                                 [66 E9 23 01]\n" +
+        "0x0001235C   004         jmp       L1: -6                                   [EB FA]\n" +
+        "0x0001235E   006         call      L2: +42                                  [66 E8 2A 00]\n" +
+        "0x00012362   010         add       [edx], bl                                [00 1A]\n" +
+        "0x00012364   012         add       eax[ebx * 2], cl                         [00 0C 58]\n" +
+        "0x00012367   015         add       0x1234AB78[ebp], ah                      [00 24 2D 78 AB 34 12]\n" +
+        "0x0001236E   022         add       [0x12345678], bh                         [00 3D 78 56 34 12]\n" +
+        "0x00012374   028         add       [eax + 35], al                           [00 40 23]\n" +
+        "0x00012377   031         add       eax[ebx * 4 + 35], cl                    [00 4C 98 23]\n" +
+        "0x0001237B   035         add       [edi - 2023406815], ch                   [00 AF 21 43 65 87]\n" +
+        "0x00012381   041         add       eax[ebx - 2023406815], dl                [00 94 18 21 43 65 87]\n" +
+        "0x00012388   048         add       cl, dl                                   [00 D1]\n" +
+        "0x0001238A   050         add       [esi], edx                               [01 16]\n" +
+        "0x0001238C   052   L2:   add       eax[ebx * 8], ecx                        [01 0C D8]\n" +
+        "0x0001238F   055         add       0x12345678[edx], eax                     [01 04 15 78 56 34 12]\n" +
+        "0x00012396   062         add       [0x12345678], ebp                        [01 2D 78 56 34 12]\n" +
+        "0x0001239C   068         add       [eax + 22], ebx                          [01 58 16]\n" +
+        "0x0001239F   071         add       eax[ebx * 4 + 32], ecx                   [01 4C 98 20]\n" +
+        "0x000123A3   075         add       [edx - 2023406815], eax                  [01 82 21 43 65 87]\n" +
+        "0x000123A9   081         add       eax[ebx * 4 - 2023406815], ecx           [01 8C 98 21 43 65 87]\n" +
+        "0x000123B0   088         add       eax, eax                                 [01 C0]\n" +
+        "0x000123B2   090         jmp       L2: -40                                  [EB D8]\n" +
+        "0x000123B4   092         add       [ecx], dx                                [66 01 11]\n" +
+        "0x000123B7   095         add       eax[ebx * 2], dx                         [66 01 14 58]\n" +
+        "0x000123BB   099         add       0x12345678[edx], ax                      [66 01 04 15 78 56 34 12]\n" +
+        "0x000123C3   107         add       [0x12345678], bp                         [66 01 2D 78 56 34 12]\n" +
+        "0x000123CA   114         jmp       L3: +49                                  [EB 31]\n" +
+        "0x000123CC   116         add       [edx - 2023406815], ax                   [66 01 82 21 43 65 87]\n" +
+        "0x000123D3   123         add       eax[ebx * 4 + 32], cx                    [66 01 4C 98 20]\n" +
+        "0x000123D8   128         add       [edx - 2023406815], ax                   [66 01 82 21 43 65 87]\n" +
+        "0x000123DF   135         add       eax[ebx * 4 - 2023406815], cx            [66 01 8C 98 21 43 65 87]\n" +
+        "0x000123E7   143         add       bx, cx                                   [66 01 CB]\n" +
+        "0x000123EA   146         add       al, [eax]                                [02 00]\n" +
+        "0x000123EC   148         add       bx, eax[ebx * 4]                         [66 03 1C 98]\n" +
+        "0x000123F0   152         add       ah, 0x12345678[ebp]                      [02 24 2D 78 56 34 12]\n" +
+        "0x000123F7   159         add       dh, [0x12345678]                         [02 35 78 56 34 12]\n" +
+        "0x000123FD   165   L3:   add       bl, [eax + 22]                           [02 58 16]\n" +
+        "0x00012400   168         add       cl, eax[ebx * 4 + 32]                    [02 4C 98 20]\n" +
+        "0x00012404   172         add       al, [edx - 2023406815]                   [02 82 21 43 65 87]\n" +
+        "0x0001240A   178         add       al, eax[ebx * 4 - 2023406815]            [02 84 98 21 43 65 87]\n" +
+        "0x00012411   185         add       eax, [ecx]                               [03 01]\n" +
+        "0x00012413   187         jmp       L3: -24                                  [EB E8]\n" +
+        "0x00012415   189         call      L1: -193                                 [66 E8 3F FF]\n" +
+        "0x00012419   193         add       ebx, eax[ecx * 2]                        [03 1C 48]\n" +
+        "0x0001241C   196         add       esi, 0x12345678[eax]                     [03 34 05 78 56 34 12]\n" +
+        "0x00012423   203         add       esp, [0x12345678]                        [03 25 78 56 34 12]\n" +
+        "0x00012429   209         add       eax, [eax + 22]                          [03 40 16]\n" +
+        "0x0001242C   212         add       ecx, eax[ebx * 4 + 32]                   [03 4C 98 20]\n" +
+        "0x00012430   216         add       edx, [edx - 2018819295]                  [03 92 21 43 AB 87]\n" +
+        "0x00012436   222         add       ebx, eax[ebx * 4 - 2023406815]           [03 9C 98 21 43 65 87]\n" +
+        "0x0001243D   229         add       cx, [ebx]                                [66 03 0B]\n" +
+        "0x00012440   232         jmp       +83                                      [EB 53]\n" +
+        "0x00012442   234         add       bx, eax[ecx * 2]                         [66 03 1C 48]\n" +
+        "0x00012446   238         add       si, 0x12345678[eax]                      [66 03 34 05 78 56 34 12]\n" +
+        "0x0001244E   246         add       sp, [0x1234AB78]                         [66 03 25 78 AB 34 12]\n" +
+        "0x00012455   253         add       ax, [eax + 22]                           [66 03 40 16]\n" +
+        "0x00012459   257         add       cx, eax[ebx * 4 + 32]                    [66 03 4C 98 20]\n" +
+        "0x0001245E   262         add       dx, [edx - 2023406815]                   [66 03 92 21 43 65 87]\n" +
+        "0x00012465   269         add       bx, eax[ebx - 2018819295]                [66 03 9C 18 21 43 AB 87]\n" +
+        "0x0001246D   277         add       al, 0x8                                  [04 08]\n" +
+        "0x0001246F   279         addl      eax, 0x12344321                          [05 21 43 34 12]\n" +
+        "0x00012474   284         addw      ax, 0x1234                               [66 05 34 12]\n" +
+        "0x00012478   288         push      es                                       [06]\n" +
+        "0x00012479   289         addl      ecx, 0x7                                 [81 C1 07 00 00 00]\n" +
+        "0x0001247F   295   L4:   cmpl      [eax], 0x7                               [83 38 07]\n" +
+        "0x00012482   298         subl      ebx[ecx * 2 + 4], 0x5                    [81 6C 4B 04 05 00 00 00]\n" +
+        "0x0001248A   306         jmp       L4: -13                                  [EB F3]\n" +
+        "0x0001248C   308         call      +305344999                               [E8 E7 31 33 12]\n" +
+        "0x00012491   313         jmp       L1: -317                                 [66 E9 C3 FE]\n";
+
     assertEquals(expected, output);
   }
 
@@ -192,14 +261,14 @@ public final class InternalTest extends TestCase {
     assertEquals(expected, output);
   }
 
-  public final void failing_test_jmp_with_operand_size_prefix()
+  public final void test_jmp_with_operand_size_prefix()
       throws Exception {
     final int startAddress = 0x12358;
     final byte[] bytes = new byte[]{(byte) 0x66, (byte) 0xE9, (byte) 0x8B, (byte) 0x00};
     final String output = disassemble(startAddress, bytes);
-    //operand prefix causes failure - see issue jasm-9
+
     final String expected =
-        "0x00012358   00         jmp       L1: 139                                  [66 E9 8B 00]\n";
+        "0x00012358   0       jmp       +139                                     [66 E9 8B 00]\n";
     assertEquals(expected, output);
   }
 }
