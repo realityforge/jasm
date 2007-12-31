@@ -62,7 +62,7 @@ public enum CRF implements EnumerableArgument {
    *
    * @throws IllegalArgumentException if n is not between 0 and 3 inclusive
    */
-  public int bitFor(int n) {
+  private int bitFor(int n) {
     if (n < 0 || n > 3) {
       throw new IllegalArgumentException("bit specifier must be between 0 and 3");
     }
