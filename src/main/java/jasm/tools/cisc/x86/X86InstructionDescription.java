@@ -19,6 +19,8 @@ public final class X86InstructionDescription
   private boolean _isExternalOperandOrderingInverted = true;
   private WordWidth _defaultOperandSize = WordWidth.BITS_32;
   private X86InstructionPrefix _mandatoryPrefix;
+  private WordWidth _requiredAddressSize;
+  private WordWidth _requiredOperandSize;
   /** true if descriptor represenets a a prefix rather than an instruction. */
   private boolean _aPrefix;
 
@@ -60,6 +62,24 @@ public final class X86InstructionDescription
     _aPrefix = true;
     beNotExternallyTestable();
     beNotDisassemblable();
+    return this;
+  }
+
+  public final WordWidth requiredAddressSize() {
+    return _requiredAddressSize;
+  }
+
+  public final X86InstructionDescription requireAddressSize(WordWidth requiredAddressSize) {
+    _requiredAddressSize = requiredAddressSize;
+    return this;
+  }
+
+  public final WordWidth requiredOperandSize() {
+    return _requiredOperandSize;
+  }
+
+  public final X86InstructionDescription requireOperandSize(WordWidth requiredOperandSize) {
+    _requiredOperandSize = requiredOperandSize;
     return this;
   }
 }

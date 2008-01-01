@@ -8,7 +8,6 @@
  */
 package jasm.tools;
 
-import jasm.WordWidth;
 import jasm.tools.cisc.x86.X86InstructionDescriptionVisitor;
 import jasm.tools.risc.RiscInstructionDescriptionVisitor;
 import jasm.tools.risc.field.InputOperandField;
@@ -38,8 +37,6 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
   private String _externalName;
   private boolean _isDisassemblable = true;
   private boolean _isExternallyTestable = true;
-  private WordWidth _requiredAddressSize;
-  private WordWidth _requiredOperandSize;
   /** The components of the description. */
   private final List<Object> _specifications;
 
@@ -119,24 +116,6 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
 
   public final InstructionDescription_Type beNotExternallyTestable() {
     _isExternallyTestable = false;
-    return StaticLoophole.<InstructionDescription_Type>cast(this);
-  }
-
-  public final WordWidth requiredAddressSize() {
-    return _requiredAddressSize;
-  }
-
-  public final InstructionDescription_Type requireAddressSize(WordWidth requiredAddressSize) {
-    _requiredAddressSize = requiredAddressSize;
-    return StaticLoophole.<InstructionDescription_Type>cast(this);
-  }
-
-  public final WordWidth requiredOperandSize() {
-    return _requiredOperandSize;
-  }
-
-  public final InstructionDescription_Type requireOperandSize(WordWidth requiredOperandSize) {
-    _requiredOperandSize = requiredOperandSize;
     return StaticLoophole.<InstructionDescription_Type>cast(this);
   }
 
