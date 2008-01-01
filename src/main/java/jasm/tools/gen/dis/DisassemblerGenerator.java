@@ -10,7 +10,6 @@ package jasm.tools.gen.dis;
 
 import jasm.annotations.Inline;
 import jasm.tools.Assembly;
-import jasm.tools.Template;
 import jasm.tools.gen.as.AbstractGenerator;
 import jasm.tools.util.IndentWriter;
 import java.io.File;
@@ -19,12 +18,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 /** Source code generator for both the raw assembler and the label assembler. */
-public abstract class DisassemblerGenerator<Template_Type extends Template<Template_Type>>
+public abstract class DisassemblerGenerator<Assembly_Type extends Assembly<?>>
     extends AbstractGenerator {
 
-  private final Assembly<Template_Type> _assembly;
+  private final Assembly_Type _assembly;
 
-  protected DisassemblerGenerator(Assembly<Template_Type> assembly ) {
+  protected DisassemblerGenerator(Assembly_Type assembly ) {
     super(new File("."), "jasm." + assembly.instructionSet().name().toLowerCase() + ".dis2");
     _assembly = assembly;
   }
@@ -43,7 +42,7 @@ public abstract class DisassemblerGenerator<Template_Type extends Template<Templ
     writer.println("}");
   }
 
-  public final Assembly<Template_Type> assembly() {
+  public final Assembly_Type assembly() {
     return _assembly;
   }
 
