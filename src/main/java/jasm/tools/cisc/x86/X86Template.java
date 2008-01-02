@@ -383,16 +383,8 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
     addOperand(new X86ImplicitOperand(designation, ExternalPresence.EXPLICIT, fpStackRegister));
   }
 
-  public final void visitString(String string) {
-    throw new UnsupportedOperationException();
-  }
-
   public final void visitInteger(Integer integer, Designation designation) {
     addOperand(new X86ImplicitOperand(designation, ExternalPresence.EXPLICIT, new Immediate8Argument((byte) integer.intValue())));
-  }
-
-  public final void visitHexByte(HexByte hexByte) throws TemplateNotNeededException {
-    throw new UnsupportedOperationException();
   }
 
   /**

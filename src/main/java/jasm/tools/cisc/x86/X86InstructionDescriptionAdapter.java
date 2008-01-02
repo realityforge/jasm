@@ -52,15 +52,6 @@ public class X86InstructionDescriptionAdapter
   public final void visitFPStackRegister(FPStackRegister fpStackRegister, Designation designation) {
   }
 
-  public void visitString(String string) {
-  }
-
   public final void visitInteger(Integer integer, Designation designation) {
-  }
-
-  public final void visitHexByte(HexByte hexByte) {
-  }
-
-  public final void visitInstructionConstraint(InstructionConstraint constraint) {
   }
 }

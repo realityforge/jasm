@@ -14,7 +14,6 @@ import jasm.tools.ExternalPresence;
 import jasm.tools.InstructionDescription;
 import jasm.tools.TestArgumentExclusion;
 import jasm.tools.cisc.TemplateNotNeededException;
-import jasm.util.HexByte;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
 import jasm.x86.SegmentRegister;
@@ -47,11 +46,7 @@ public interface X86InstructionDescriptionVisitor {
 
   void visitFPStackRegister(FPStackRegister fpStackRegister, Designation designation);
 
-  void visitString(String string);
-
   void visitInteger(Integer integer, Designation designation);
-
-  void visitHexByte(HexByte hexByte) throws TemplateNotNeededException;
 
   public static final class Static {
     /** @return whether the specification constitutes an operand */
@@ -91,18 +86,12 @@ public interface X86InstructionDescriptionVisitor {
       } else if (specification instanceof FPStackRegister) {
         visitor.visitFPStackRegister((FPStackRegister) specification, designation);
         return true;
-      } else if (specification instanceof String) {
-        visitor.visitString((String) specification);
-        return false;
       } else if (specification instanceof Integer) {
         visitor.visitInteger((Integer) specification, designation);
         return true;
       } else if (specification instanceof ArgumentRange) {
         final ArgumentRange newArgumentRange = (ArgumentRange) specification;
         return visitSpecification(visitor, newArgumentRange.wrappedSpecification(), designation, newArgumentRange, testArgumentExclusion, externalPresence);
-      } else if (specification instanceof HexByte) {
-        visitor.visitHexByte((HexByte) specification);
-        return false;
       } else if (specification instanceof TestArgumentExclusion) {
         final TestArgumentExclusion exclusion = (TestArgumentExclusion) specification;
         return visitSpecification(visitor, exclusion.wrappedSpecification(), designation, argumentRange, exclusion, externalPresence);

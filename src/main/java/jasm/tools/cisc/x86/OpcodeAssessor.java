@@ -41,11 +41,4 @@ final class OpcodeAssessor
   public final void visitModCase(ModCase modCase) throws TemplateNotNeededException {
     _instructionFamily.haveModRMByte();
   }
-
-  @Override
-  public final void visitString(String s) {
-    if (s.startsWith("J") || s.startsWith("j")) {
-      _instructionFamily.beJump();
-    }
-  }
 }
