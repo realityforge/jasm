@@ -390,8 +390,6 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final void visitString(String string) {
-    //assert internalName() == null;
-    //setInternalName(string.toLowerCase());
     throw new UnsupportedOperationException();
   }
 
@@ -400,7 +398,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final void visitHexByte(HexByte hexByte) throws TemplateNotNeededException {
-    throw new IllegalStateException("Unexpected byte " + hexByte);
+    throw new UnsupportedOperationException();
   }
 
   /**
