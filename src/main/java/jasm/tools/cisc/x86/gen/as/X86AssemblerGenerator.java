@@ -18,7 +18,6 @@ import jasm.tools.Parameter;
 import jasm.tools.cisc.x86.X86Template;
 import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Assembly;
-import jasm.tools.cisc.x86.ModRMGroup;
 import jasm.tools.cisc.x86.X86EnumerableParameter;
 import jasm.tools.cisc.x86.SibBaseCase;
 import jasm.tools.cisc.x86.X86NumericalParameter;
@@ -26,6 +25,7 @@ import jasm.tools.cisc.x86.ParameterPlace;
 import jasm.tools.cisc.x86.X86Opcode;
 import jasm.tools.cisc.x86.X86OffsetParameter;
 import jasm.tools.cisc.x86.X86AddressParameter;
+import jasm.tools.cisc.x86.ModRMOpcode;
 import jasm.tools.gen.as.AssemblerGenerator;
 import jasm.tools.util.IndentWriter;
 import jasm.util.Enums;
@@ -145,9 +145,9 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     } else {
       writer.print(opcodeValue(template, inSubroutine));
     }
-    final ModRMGroup.Opcode opcode = template.modRMGroupOpcode();
+    final ModRMOpcode opcode = template.modRMGroupOpcode();
     if (opcode != null) {
-      writer.print(", (byte)" + HexUtil.toHexLiteral(opcode.byteValue()));
+      writer.print(", (byte)" + HexUtil.toHexLiteral(opcode.value()));
     }
     for (X86Parameter parameter : template.parameters()) {
       if (parameter.type() == argumentType) {
@@ -239,9 +239,9 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     String rm = "0";
     String reg = "0";
 
-    final ModRMGroup.Opcode opcode = template.modRMGroupOpcode();
+    final ModRMOpcode opcode = template.modRMGroupOpcode();
     if (opcode != null) {
-      reg = inSubroutine ? MODRM_GROUP_OPCODE_VARIABLE_NAME : HexUtil.toHexLiteral(opcode.byteValue());
+      reg = inSubroutine ? MODRM_GROUP_OPCODE_VARIABLE_NAME : HexUtil.toHexLiteral(opcode.value());
     }
     switch (template.rmCase()) {
       case SIB:
@@ -495,7 +495,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
         writer.print("(byte) " + HexUtil.toHexLiteral(template.opcode1().byteValue()));
       }
       if (template.modRMGroupOpcode() != null) {
-        writer.print(", (byte) " + HexUtil.toHexLiteral(template.modRMGroupOpcode().byteValue()));
+        writer.print(", (byte) " + HexUtil.toHexLiteral(template.modRMGroupOpcode().value()));
       }
       for (X86Parameter parameter : template.parameters()) {
         writer.print(", " + passValue(parameter, false));

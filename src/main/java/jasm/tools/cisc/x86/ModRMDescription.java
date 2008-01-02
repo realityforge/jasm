@@ -14,16 +14,16 @@ import java.util.List;
 public final class ModRMDescription
     extends InstructionDescription<ModRMDescription> {
 
-  private final ModRMGroup.Opcode _opcode;
+  private final ModRMOpcode _opcode;
   private final String _name;
 
-  public ModRMDescription(ModRMGroup.Opcode opcode, String name, List<Object> specifications) {
+  public ModRMDescription(ModRMOpcode opcode, String name, List<Object> specifications) {
     super(null, specifications);
     _opcode = opcode;
     _name = name;
   }
 
-  public ModRMGroup.Opcode opcode() {
+  public ModRMOpcode opcode() {
     return _opcode;
   }
 

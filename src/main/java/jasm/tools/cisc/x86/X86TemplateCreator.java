@@ -110,7 +110,7 @@ public abstract class X86TemplateCreator<Template_Type extends X86Template<Templ
 
   private void createTemplatesForModRMGroups() {
     if (_instructionAssessment.modRMGroup() != null) {
-      for (ModRMGroup.Opcode modRMGroupOpcode : ModRMGroup.Opcode.values()) {
+      for (ModRMOpcode modRMGroupOpcode : ModRMOpcode.values()) {
         _context = _context.clone();
         _context.setModRMGroupOpcode(modRMGroupOpcode);
         createTemplatesForRMCases();

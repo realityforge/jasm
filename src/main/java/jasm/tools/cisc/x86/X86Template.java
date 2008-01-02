@@ -41,7 +41,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   private final X86TemplateContext _context;
   private final X86InstructionPrefix _instructionSelectionPrefix;
   private ModRMGroup _modRMGroup;
-  private ModRMGroup.Opcode _modRMGroupOpcode;
+  private ModRMOpcode _modRMGroupOpcode;
   private ArrayList<X86Operand> _operands = new ArrayList<X86Operand>(MAX_NUM_OF_OPERANDS);
   private ArrayList<X86ImplicitOperand> _implicitOperands = new ArrayList<X86ImplicitOperand>(MAX_NUM_OF_IMPLICIT_OPERANDS);
   private ArrayList<X86Parameter> _parameters = new ArrayList<X86Parameter>(MAX_NUM_OF_PARAMETERS);
@@ -106,7 +106,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
     return _modRMGroup;
   }
 
-  public final ModRMGroup.Opcode modRMGroupOpcode() {
+  public final ModRMOpcode modRMGroupOpcode() {
     return _modRMGroupOpcode;
   }
 

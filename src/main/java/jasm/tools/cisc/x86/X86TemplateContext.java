@@ -14,7 +14,7 @@ import jasm.WordWidth;
 public final class X86TemplateContext implements Cloneable {
   private WordWidth _addressSizeAttribute;
   private WordWidth _operandSizeAttribute;
-  private ModRMGroup.Opcode _modRMGroupOpcode;
+  private ModRMOpcode _modRMGroupOpcode;
   private ModCase _modCase;
   private RMCase _rmCase;
   private SibIndexCase _sibIndexCase;
@@ -39,11 +39,11 @@ public final class X86TemplateContext implements Cloneable {
     _operandSizeAttribute = operandSizeAttribute;
   }
 
-  public final ModRMGroup.Opcode modRMGroupOpcode() {
+  public final ModRMOpcode modRMGroupOpcode() {
     return _modRMGroupOpcode;
   }
 
-  public final void setModRMGroupOpcode(ModRMGroup.Opcode modRMGroupOpcode) {
+  public final void setModRMGroupOpcode(ModRMOpcode modRMGroupOpcode) {
     _modRMGroupOpcode = modRMGroupOpcode;
   }
 
