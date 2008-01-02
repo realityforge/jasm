@@ -57,6 +57,8 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
                         boolean hasModRMByte,
                         X86TemplateContext context) {
     super(instructionDescription, serial);
+    final String name = instructionDescription.name();
+    if( null != name ) setInternalName(name.toLowerCase());
     _hasModRMByte = hasModRMByte;
     _instructionSelectionPrefix = instructionDescription.getMandatoryPrefix();
     _context = context;
@@ -388,8 +390,9 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final void visitString(String string) {
-    assert internalName() == null;
-    setInternalName(string.toLowerCase());
+    //assert internalName() == null;
+    //setInternalName(string.toLowerCase());
+    throw new UnsupportedOperationException();
   }
 
   public final void visitInteger(Integer integer, Designation designation) {

@@ -28,13 +28,16 @@ public final class X86InstructionDescription
   private final HexByte _opcode1;
   private final HexByte _opcode2;
   //private final HexByte _opcode3;
+  private final String _name;
 
   public X86InstructionDescription(final HexByte opcode1,
                                    final HexByte opcode2,
+                                   final String name,
                                    final List<Object> specifications) {
     super(null, specifications);
     _opcode1 = opcode1;
     _opcode2 = opcode2;
+    _name = name;
   }
 
   public HexByte opcode1() {
@@ -43,6 +46,10 @@ public final class X86InstructionDescription
 
   public HexByte opcode2() {
     return _opcode2;
+  }
+
+  public String name() {
+    return _name;
   }
 
   public boolean isExternalOperandOrderingInverted() {
