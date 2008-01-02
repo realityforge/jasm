@@ -10,7 +10,8 @@ package jasm.tools.risc.sparc.test.correctness;
 
 import jasm.Argument;
 import jasm.WordWidth;
-import jasm.dis.DisassembledInstruction;
+import jasm.dis.risc.RiscDisassembledInstruction;
+import jasm.sparc.dis.SPARCDisassembler;
 import jasm.tools.AssemblyTestComponent;
 import jasm.tools.risc.RiscAssemblyTester;
 import jasm.tools.risc.sparc.SPARCAssembly;
@@ -24,8 +25,8 @@ import java.io.PushbackInputStream;
 import java.util.EnumSet;
 import java.util.List;
 
-public abstract class SPARCAssemblyTester<DisassembledInstruction_Type extends DisassembledInstruction<SPARCTemplate>>
-    extends RiscAssemblyTester<SPARCTemplate, DisassembledInstruction_Type> {
+public abstract class SPARCAssemblyTester<DisassembledInstruction_Type extends RiscDisassembledInstruction<SPARCTemplate>>
+    extends RiscAssemblyTester<SPARCTemplate, DisassembledInstruction_Type, SPARCDisassembler<DisassembledInstruction_Type>> {
 
   public SPARCAssemblyTester(SPARCAssembly assembly, WordWidth addressWidth, EnumSet<AssemblyTestComponent> components) {
     super(assembly, addressWidth, components);

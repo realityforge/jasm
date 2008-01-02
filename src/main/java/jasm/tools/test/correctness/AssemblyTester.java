@@ -12,14 +12,16 @@ import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;
 import jasm.WordWidth;
-import jasm.dis.AbstractionPreference;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.Disassembler;
+import jasm.dis.risc.AbstractionPreference;
+import jasm.dis.risc.RiscDisassembler;
 import jasm.tools.ArgumentRange;
 import jasm.tools.Assembly;
 import jasm.tools.AssemblyTestComponent;
 import jasm.tools.Parameter;
 import jasm.tools.Template;
+import jasm.tools.risc.RiscInstructionDescription;
 import jasm.tools.util.IndentWriter;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
@@ -74,7 +76,9 @@ import java.util.Set;
  * for specifying illegal arguments lies in RISC assemblers' featuring immediate fields whose
  * ranges of legal values is not exactly described by a Java primitive type (e.g. int, short, char, etc).
  */
-public abstract class AssemblyTester<Template_Type extends Template<Template_Type>, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>> {
+public abstract class AssemblyTester<Template_Type extends Template<Template_Type>,
+    DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>,
+    Disassembler_Type extends Disassembler<Template_Type, DisassembledInstruction_Type>> {
 
   private static final int NOOP_COUNT = 10;
 
@@ -211,7 +215,7 @@ public abstract class AssemblyTester<Template_Type extends Template<Template_Typ
 
   protected abstract Assembler createTestAssembler();
 
-  protected abstract Disassembler<Template_Type, DisassembledInstruction_Type> createTestDisassembler();
+  protected abstract Disassembler_Type createTestDisassembler();
 
   /**
    * We use this more complicated comparison instead of 'Sequence.equals()',
@@ -243,8 +247,11 @@ public abstract class AssemblyTester<Template_Type extends Template<Template_Typ
       throws Exception {
     final BufferedInputStream input =
         new BufferedInputStream(new ByteArrayInputStream(internalResult));
-    final Disassembler<Template_Type, DisassembledInstruction_Type> disassembler = createTestDisassembler();
-    disassembler.setAbstractionPreference(template.instructionDescription().isSynthetic() ? AbstractionPreference.SYNTHETIC : AbstractionPreference.RAW);
+    final Disassembler_Type disassembler = createTestDisassembler();
+    if (disassembler instanceof RiscDisassembler) {
+      final RiscInstructionDescription description = (RiscInstructionDescription) template.instructionDescription();
+      ((RiscDisassembler) disassembler).setAbstractionPreference(description.isSynthetic() ? AbstractionPreference.SYNTHETIC : AbstractionPreference.RAW);
+    }
     disassembler.setExpectedNumberOfArguments(argumentList.size());
     final List<DisassembledInstruction_Type> instructions = disassembler.scanOneInstruction(input);
 

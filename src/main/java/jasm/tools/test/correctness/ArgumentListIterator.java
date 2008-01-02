@@ -29,7 +29,7 @@ import java.util.NoSuchElementException;
  * until {@code next()} is called again. That is, the same <code>Sequence<Argument></code>
  * object is returned by each call to {@code next()}, only its contents have changed.
  */
-final class ArgumentListIterator<Template_Type extends Template<Template_Type>> 
+final class ArgumentListIterator<Template_Type extends Template<Template_Type>>
     implements Iterator<List<Argument>> {
 
   private final Template_Type _template;
@@ -43,10 +43,10 @@ final class ArgumentListIterator<Template_Type extends Template<Template_Type>>
   private boolean _hasNext;
   private boolean _advanced;
   private int _iterations;
-  private AssemblyTester<Template_Type, ?> tester;
+  private AssemblyTester<Template_Type, ?, ?> tester;
 
   /** Creates an iterator over a set of test cases for a given template. */
-  ArgumentListIterator(final AssemblyTester<Template_Type, ?> tester,
+  ArgumentListIterator(final AssemblyTester<Template_Type, ?, ?> tester,
                        Template_Type template,
                        TestCaseLegality testCaseLegality) {
     this.tester = tester;

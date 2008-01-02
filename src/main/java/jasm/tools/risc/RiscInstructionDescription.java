@@ -9,12 +9,17 @@
 package jasm.tools.risc;
 
 import jasm.tools.InstructionDescription;
+import jasm.tools.InstructionConstraint;
 import jasm.tools.risc.field.InputOperandField;
 import jasm.tools.risc.field.RiscField;
 import java.util.List;
+import java.util.ArrayList;
 
 public final class RiscInstructionDescription
     extends InstructionDescription<RiscInstructionDescription> {
+
+  private boolean _synthetic;
+  private List<InstructionConstraint> _constraints;
 
   RiscInstructionDescription(final String architectureManualSection,
                              final List<Object> specifications) {
@@ -49,15 +54,26 @@ public final class RiscInstructionDescription
     }
   }
 
-  private boolean _synthetic;
-
   public InstructionDescription beSynthetic() {
     _synthetic = true;
     return this;
   }
 
-  @Override
   public boolean isSynthetic() {
     return _synthetic;
   }
+
+  /** @return the {@link InstructionConstraint} instances (if any) within this description */
+    public final List<InstructionConstraint> constraints() {
+      if (_constraints == null) {
+        final ArrayList<InstructionConstraint> result = new ArrayList<InstructionConstraint>();
+        for (Object element : specifications()) {
+          if (InstructionConstraint.class.isInstance(element)) {
+            result.add(InstructionConstraint.class.cast(element));
+          }
+        }
+        _constraints = result;
+      }
+      return _constraints;
+    }
 }

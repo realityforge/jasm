@@ -10,7 +10,8 @@ package jasm.tools.risc.ppc.test.correctness;
 
 import jasm.Argument;
 import jasm.WordWidth;
-import jasm.dis.DisassembledInstruction;
+import jasm.dis.risc.RiscDisassembledInstruction;
+import jasm.ppc.dis.PPCDisassembler;
 import jasm.tools.AssemblyTestComponent;
 import jasm.tools.risc.RiscAssemblyTester;
 import jasm.tools.risc.ppc.PPCAssembly;
@@ -24,8 +25,8 @@ import java.io.PushbackInputStream;
 import java.util.EnumSet;
 import java.util.List;
 
-public abstract class PPCAssemblyTester<DisassembledInstruction_Type extends DisassembledInstruction<PPCTemplate>>
-    extends RiscAssemblyTester<PPCTemplate, DisassembledInstruction_Type> {
+public abstract class PPCAssemblyTester<DisassembledInstruction_Type extends RiscDisassembledInstruction<PPCTemplate>>
+    extends RiscAssemblyTester<PPCTemplate, DisassembledInstruction_Type, PPCDisassembler<DisassembledInstruction_Type>> {
 
   public PPCAssemblyTester(PPCAssembly assembly, WordWidth addressWidth, EnumSet<AssemblyTestComponent> components) {
     super(assembly, addressWidth, components);

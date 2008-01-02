@@ -38,7 +38,6 @@ public abstract class Disassembler<Template_Type extends Template<Template_Type>
 
   private final Assembly<Template_Type> _assembly;
   private final WordWidth _addressWidth;
-  private AbstractionPreference _abstractionPreference = AbstractionPreference.SYNTHETIC;
   private boolean _isHeadingEnabled;
   private int _expectedNumberOfArguments = -1;
 
@@ -194,14 +193,6 @@ public abstract class Disassembler<Template_Type extends Template<Template_Type>
   public final void scanAndPrint(BufferedInputStream bufferedInputStream, OutputStream outputStream)
       throws IOException, DecoderException {
     scanAndPrint(bufferedInputStream, outputStream, null);
-  }
-
-  protected final AbstractionPreference abstractionPreference() {
-    return _abstractionPreference;
-  }
-
-  public final void setAbstractionPreference(AbstractionPreference abstractionPreference) {
-    _abstractionPreference = abstractionPreference;
   }
 
   protected final int expectedNumberOfArguments() {

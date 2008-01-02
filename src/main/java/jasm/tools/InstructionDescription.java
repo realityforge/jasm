@@ -31,7 +31,6 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
     implements Iterable<Object>, Cloneable {
 
   private static int _nextSerial;
-  private List<InstructionConstraint> _constraints;
   private int _serial;
   private final String _architectureManualSection;
   private String _externalName;
@@ -48,7 +47,7 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
   }
 
   public String toString() {
-    return "[InstructionDescription " + _externalName + " specifications=" + _specifications + ", constraints=" + constraints() + "]";
+    return "[InstructionDescription " + _externalName + " specifications=" + _specifications + "]";
   }
 
   public final int serial() {
@@ -58,20 +57,6 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
   /** @return the objects from which this description is composed */
   public final List<Object> specifications() {
     return _specifications;
-  }
-
-  /** @return the {@link InstructionConstraint} instances (if any) within this description */
-  public final List<InstructionConstraint> constraints() {
-    if (_constraints == null) {
-      final ArrayList<InstructionConstraint> result = new ArrayList<InstructionConstraint>();
-      for (Object element : _specifications) {
-        if (InstructionConstraint.class.isInstance(element)) {
-          result.add(InstructionConstraint.class.cast(element));
-        }
-      }
-      _constraints = result;
-    }
-    return _constraints;
   }
 
   public final String architectureManualSection() {
@@ -101,10 +86,6 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
   public final InstructionDescription_Type beNotDisassemblable() {
     _isDisassemblable = false;
     return StaticLoophole.<InstructionDescription_Type>cast(this);
-  }
-
-  public boolean isSynthetic() {
-    return false;
   }
 
   public final boolean isExternallyTestable() {

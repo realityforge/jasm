@@ -12,7 +12,6 @@ import jasm.Argument;
 import jasm.Assembler;
 import jasm.AssemblyException;
 import jasm.WordWidth;
-import jasm.dis.AbstractionPreference;
 import jasm.dis.DecoderException;
 import jasm.dis.DisassembledInstruction;
 import jasm.dis.Disassembler;
@@ -32,6 +31,9 @@ import java.util.List;
 public abstract class RiscDisassembler<Template_Type extends RiscTemplate<Template_Type>, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
     extends Disassembler<Template_Type, DisassembledInstruction_Type> {
 
+  private AbstractionPreference _abstractionPreference = AbstractionPreference.SYNTHETIC;
+  private int _currentOffset;
+
   protected RiscDisassembler(Assembly<Template_Type> assembly, WordWidth addressWidth) {
     super(assembly, addressWidth);
   }
@@ -41,7 +43,14 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate<Templa
     return StaticLoophole.cast(super.assembly());
   }
 
-  private int _currentOffset;
+  protected final AbstractionPreference abstractionPreference() {
+    return _abstractionPreference;
+  }
+
+  public final void setAbstractionPreference(AbstractionPreference abstractionPreference) {
+    _abstractionPreference = abstractionPreference;
+  }
+
 
   /**
    * Extract the value for each operand of a template from an encoded instruction whose opcode

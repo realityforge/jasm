@@ -129,17 +129,6 @@ public abstract class AssemblerGenerator<Template_Type extends Template<Template
     writer.print(template.externalName() + externalMnemonicSuffixes(parameters));
     writer.println("  }" + externalParameters(parameters));
     printExtraMethodJavadoc(writer, template, extraLinks);
-    final List<InstructionConstraint> constraints = template.instructionDescription().constraints();
-    if (!constraints.isEmpty()) {
-      writer.println(" * <p>");
-      for (InstructionConstraint constraint : constraints) {
-        final Method predicateMethod = constraint.predicateMethod();
-        if (predicateMethod != null) {
-          extraLinks.add(predicateMethod.getDeclaringClass().getName() + "#" + predicateMethod.getName());
-        }
-        writer.println(" * Constraint: {@code " + constraint.asJavaExpression() + "}<br />");
-      }
-    }
 
     if (!extraLinks.isEmpty()) {
       writer.println(" *");

@@ -10,7 +10,8 @@ package jasm.tools.risc;
 
 import jasm.Argument;
 import jasm.WordWidth;
-import jasm.dis.DisassembledInstruction;
+import jasm.dis.risc.RiscDisassembledInstruction;
+import jasm.dis.risc.RiscDisassembler;
 import jasm.tools.Assembly;
 import jasm.tools.AssemblyTestComponent;
 import jasm.tools.InstructionConstraint;
@@ -20,8 +21,10 @@ import java.io.PushbackInputStream;
 import java.util.EnumSet;
 import java.util.List;
 
-public abstract class RiscAssemblyTester<Template_Type extends RiscTemplate<Template_Type>, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
-    extends AssemblyTester<Template_Type, DisassembledInstruction_Type> {
+public abstract class RiscAssemblyTester<Template_Type extends RiscTemplate<Template_Type>, 
+    DisassembledInstruction_Type extends RiscDisassembledInstruction<Template_Type>,
+    RiscDisassembler_Type extends RiscDisassembler<Template_Type,DisassembledInstruction_Type>>
+    extends AssemblyTester<Template_Type, DisassembledInstruction_Type, RiscDisassembler_Type> {
 
   public RiscAssemblyTester(Assembly<Template_Type> assembly, WordWidth addressWidth, EnumSet<AssemblyTestComponent> components) {
     super(assembly, addressWidth, components);

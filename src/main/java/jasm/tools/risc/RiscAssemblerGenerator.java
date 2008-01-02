@@ -26,6 +26,7 @@ import jasm.tools.util.IndentWriter;
 import jasm.util.HexUtil;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.reflect.Method;
 
 public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate<Template_Type>>
     extends AssemblerGenerator<Template_Type> {
@@ -116,6 +117,17 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate<
       }
 
       writer.println(")}");
+    }
+    final List<InstructionConstraint> constraints = template.instructionDescription().constraints();
+    if (!constraints.isEmpty()) {
+      writer.println(" * <p>");
+      for (InstructionConstraint constraint : constraints) {
+        final Method predicateMethod = constraint.predicateMethod();
+        if (predicateMethod != null) {
+          extraLinks.add(predicateMethod.getDeclaringClass().getName() + "#" + predicateMethod.getName());
+        }
+        writer.println(" * Constraint: {@code " + constraint.asJavaExpression() + "}<br />");
+      }
     }
   }
 

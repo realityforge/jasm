@@ -10,7 +10,6 @@ package jasm.tools.cisc.x86.test.correctness;
 
 import jasm.Argument;
 import jasm.WordWidth;
-import jasm.dis.DisassembledInstruction;
 import jasm.tools.Assembly;
 import jasm.tools.AssemblyTestComponent;
 import jasm.tools.ExternalPresence;
@@ -32,6 +31,8 @@ import jasm.tools.util.IndentWriter;
 import jasm.util.StaticLoophole;
 import jasm.x86.IndirectRegister;
 import jasm.x86.X86InstructionPrefix;
+import jasm.x86.dis.X86DisassembledInstruction;
+import jasm.x86.dis.X86Disassembler;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;
@@ -40,8 +41,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public abstract class X86AssemblyTester<Template_Type extends X86Template<Template_Type>, DisassembledInstruction_Type extends DisassembledInstruction<Template_Type>>
-    extends AssemblyTester<Template_Type, DisassembledInstruction_Type> {
+public abstract class X86AssemblyTester<Template_Type extends X86Template<Template_Type>,
+    DisassembledInstruction_Type extends X86DisassembledInstruction<Template_Type>>
+    extends AssemblyTester<Template_Type, DisassembledInstruction_Type, X86Disassembler<Template_Type,DisassembledInstruction_Type>> {
 
   public X86AssemblyTester(Assembly<Template_Type> assembly, WordWidth addressWidth, EnumSet<AssemblyTestComponent> components) {
     super(assembly, addressWidth, components);

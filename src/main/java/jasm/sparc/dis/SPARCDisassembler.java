@@ -9,12 +9,12 @@
 package jasm.sparc.dis;
 
 import jasm.WordWidth;
-import jasm.dis.DisassembledInstruction;
+import jasm.dis.risc.RiscDisassembledInstruction;
 import jasm.dis.risc.RiscDisassembler;
 import jasm.tools.risc.sparc.SPARCAssembly;
 import jasm.tools.risc.sparc.SPARCTemplate;
 
-public abstract class SPARCDisassembler<DisassembledInstruction_Type extends DisassembledInstruction<SPARCTemplate>>
+public abstract class SPARCDisassembler<DisassembledInstruction_Type extends RiscDisassembledInstruction<SPARCTemplate>>
     extends RiscDisassembler<SPARCTemplate, DisassembledInstruction_Type> {
 
   protected SPARCDisassembler(SPARCAssembly assembly, WordWidth addressWidth) {
