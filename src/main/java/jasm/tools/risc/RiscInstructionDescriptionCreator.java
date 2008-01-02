@@ -23,19 +23,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Arrays;
 
-public abstract class RiscInstructionDescriptionCreator extends InstructionDescriptionCreator<RiscInstructionDescription> {
+public abstract class RiscInstructionDescriptionCreator
+    extends InstructionDescriptionCreator<RiscInstructionDescription> {
 
   protected final RiscTemplateCreator<? extends RiscTemplate> _templateCreator;
+  private String _currentArchitectureManualSection;
 
   protected RiscInstructionDescriptionCreator(Assembly assembly, RiscTemplateCreator<? extends RiscTemplate> templateCreator) {
     super(assembly);
     _templateCreator = templateCreator;
-  }
-
-  @Override
-  protected final RiscInstructionDescription createInstructionDescription(final String currentArchitectureManualSection,
-                                                                          List<Object> specifications) {
-    return new RiscInstructionDescription(currentArchitectureManualSection, specifications);
   }
 
   private int firstStringIndex(List<Object> specifications) {
@@ -138,10 +134,6 @@ public abstract class RiscInstructionDescriptionCreator extends InstructionDescr
     return new RiscInstructionDescriptionModifier(instructionDescriptions);
   }
 
-  protected RiscInstructionDescription define(Object... specifications) {
-    return super.define(flatten(specifications));
-  }
-
   private static Object[] flatten(Object[] array) {
     final ArrayList<Object> objects = new ArrayList<Object>();
     for (Object outer : array) {
@@ -152,5 +144,28 @@ public abstract class RiscInstructionDescriptionCreator extends InstructionDescr
       }
     }
     return objects.toArray(StaticLoophole.createArray(Object.class, objects.size()));
+  }
+
+  protected final RiscInstructionDescription defineInstructionDescription(List<Object> specifications) {
+    final RiscInstructionDescription description = new RiscInstructionDescription(_currentArchitectureManualSection, specifications);
+    registerDescription(description);
+    return description;
+  }
+
+  protected RiscInstructionDescription define(Object... specifications) {
+    return defineInstructionDescription(Arrays.asList(flatten(specifications)));
+  }
+
+  protected final RiscInstructionDescription createInstructionDescription(final String currentArchitectureManualSection,
+                                                                          List<Object> specifications) {
+    return new RiscInstructionDescription(currentArchitectureManualSection, specifications);
+  }
+
+  /**
+   * Sets the name of the architecture manual section for which instruction descriptions are
+   * currently being {@link #define defined}.
+   */
+  public final void setCurrentArchitectureManualSection(String section) {
+    _currentArchitectureManualSection = section;
   }
 }

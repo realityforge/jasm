@@ -10,6 +10,7 @@ package jasm.tools.cisc.x86;
 
 import jasm.WordWidth;
 import jasm.tools.InstructionDescription;
+import jasm.util.HexByte;
 import jasm.x86.X86InstructionPrefix;
 import java.util.List;
 
@@ -24,9 +25,24 @@ public final class X86InstructionDescription
   /** true if descriptor represenets a a prefix rather than an instruction. */
   private boolean _aPrefix;
 
-  public X86InstructionDescription(final String architectureManualSection,
+  private final HexByte _opcode1;
+  private final HexByte _opcode2;
+  //private final HexByte _opcode3;
+
+  public X86InstructionDescription(final HexByte opcode1,
+                                   final HexByte opcode2,
                                    final List<Object> specifications) {
-    super(architectureManualSection, specifications);
+    super(null, specifications);
+    _opcode1 = opcode1;
+    _opcode2 = opcode2;
+  }
+
+  public HexByte opcode1() {
+    return _opcode1;
+  }
+
+  public HexByte opcode2() {
+    return _opcode2;
   }
 
   public boolean isExternalOperandOrderingInverted() {

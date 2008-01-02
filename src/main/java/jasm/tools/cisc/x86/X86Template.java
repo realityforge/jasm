@@ -40,8 +40,6 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   private boolean _hasSibByte;
   private final X86TemplateContext _context;
   private final X86InstructionPrefix _instructionSelectionPrefix;
-  private HexByte _opcode1;
-  private HexByte _opcode2;
   private ModRMGroup _modRMGroup;
   private ModRMGroup.Opcode _modRMGroupOpcode;
   private ArrayList<X86Operand> _operands = new ArrayList<X86Operand>(MAX_NUM_OF_OPERANDS);
@@ -53,7 +51,6 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   private String _internalOperandTypeSuffix;
   private String _externalOperandTypeSuffix;
   private WordWidth _externalCodeSizeAttribute;
-
 
   protected X86Template(X86InstructionDescription instructionDescription,
                         int serial,
@@ -88,11 +85,11 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final HexByte opcode1() {
-    return _opcode1;
+    return instructionDescription().opcode1();
   }
 
   public final HexByte opcode2() {
-    return _opcode2;
+    return instructionDescription().opcode2();
   }
 
   public final boolean hasModRMByte() {
@@ -176,8 +173,8 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   public final String toString() {
     return "<X86Template #" + serial() + ": " + internalName() + " " +
            format(_instructionSelectionPrefix) +
-           format(_opcode1) +
-           format(_opcode2) +
+           format(instructionDescription().opcode1()) +
+           format(instructionDescription().opcode2()) +
            _operands + ">";
   }
 
@@ -242,7 +239,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   protected final <EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument> X86Parameter addEnumerableParameter(Designation designation, ParameterPlace parameterPlace,
-                                                                                                           final SymbolSet<EnumerableArgument_Type> enumerator) {
+                                                                                                                                           final SymbolSet<EnumerableArgument_Type> enumerator) {
     return addParameter(new X86EnumerableParameter<EnumerableArgument_Type>(designation, parameterPlace, enumerator));
   }
 
@@ -400,13 +397,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final void visitHexByte(HexByte hexByte) throws TemplateNotNeededException {
-    if (_opcode1 == null) {
-      _opcode1 = hexByte;
-    } else if (_opcode2 == null) {
-      _opcode2 = hexByte;
-    } else {
-      throw new IllegalStateException("Unexpected byte " + hexByte);
-    }
+    throw new IllegalStateException("Unexpected byte " + hexByte);
   }
 
   /**

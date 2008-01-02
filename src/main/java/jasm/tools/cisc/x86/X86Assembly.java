@@ -25,17 +25,18 @@ public abstract class X86Assembly<Template_Type extends X86Template<Template_Typ
     int i = 0;
     int j = 0;
     final List<? extends X86Parameter> oParams = original.parameters();
-    final List<? extends X86Parameter> cParameters = candidate.parameters();
+    final List<? extends X86Parameter> cParams = candidate.parameters();
     final int oParamCount = oParams.size();
-    while (i < oParamCount) {
+    final int cParamCount = cParams.size();
+    while (i < oParamCount && j < cParamCount) {
       final Class originalType = oParams.get(i).type();
-      Class candidateType = cParameters.get(j).type();
+      Class candidateType = cParams.get(j).type();
       if (originalType == argumentType) {
         if (candidateType != byte.class) {
           return false;
         }
         j++;
-        candidateType = cParameters.get(j).type();
+        candidateType = cParams.get(j).type();
       }
       if (originalType != candidateType) {
         return false;
