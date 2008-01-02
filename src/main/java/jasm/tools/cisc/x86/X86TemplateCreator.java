@@ -172,6 +172,10 @@ public abstract class X86TemplateCreator<Template_Type extends X86Template<Templ
       _instructionDescription = instructionDescription;
       _instructionAssessment = new InstructionAssessment();
       final OpcodeAssessor assessor = new OpcodeAssessor(_instructionAssessment);
+      if( instructionDescription.name().startsWith("j") )
+      {
+        _instructionAssessment.beJump();
+      }
       X86InstructionDescriptionVisitor.Static.visitInstructionDescription(assessor, _instructionDescription);
       _context = new X86TemplateContext();
       createTemplatesForAddressSizeAttribute();

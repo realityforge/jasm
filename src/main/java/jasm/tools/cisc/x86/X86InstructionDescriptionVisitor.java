@@ -11,7 +11,6 @@ package jasm.tools.cisc.x86;
 import jasm.tools.ArgumentRange;
 import jasm.tools.ExternalOmission;
 import jasm.tools.ExternalPresence;
-import jasm.tools.InstructionConstraint;
 import jasm.tools.InstructionDescription;
 import jasm.tools.TestArgumentExclusion;
 import jasm.tools.cisc.TemplateNotNeededException;
@@ -53,8 +52,6 @@ public interface X86InstructionDescriptionVisitor {
   void visitInteger(Integer integer, Designation designation);
 
   void visitHexByte(HexByte hexByte) throws TemplateNotNeededException;
-
-  void visitInstructionConstraint(InstructionConstraint constraint);
 
   public static final class Static {
     /** @return whether the specification constitutes an operand */

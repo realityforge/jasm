@@ -14,7 +14,6 @@ import jasm.WordWidth;
 import jasm.tools.ArgumentRange;
 import jasm.tools.ExternalPresence;
 import jasm.tools.Immediate8Argument;
-import jasm.tools.InstructionConstraint;
 import jasm.tools.InstructionDescription;
 import jasm.tools.Template;
 import jasm.tools.TestArgumentExclusion;
@@ -57,7 +56,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
                         X86TemplateContext context) {
     super(instructionDescription, serial);
     final String name = instructionDescription.name();
-    if (null != name) setInternalName(name.toLowerCase());
+    if (null != name) setInternalName(name);
     _hasModRMByte = hasModRMByte;
     _instructionSelectionPrefix = instructionDescription.getMandatoryPrefix();
     _context = context;
@@ -341,16 +340,13 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
       throw new TemplateNotNeededException();
     }
     _modRMGroupOpcode = instructionDescription.opcode();
-    setInternalName(instructionDescription.name().toLowerCase());
+    setInternalName(instructionDescription.name());
   }
 
   public final void visitModCase(ModCase modCase) throws TemplateNotNeededException {
     if (_context.modCase() != ModCase.MOD_3) {
       throw new TemplateNotNeededException();
     }
-  }
-
-  public final void visitInstructionConstraint(InstructionConstraint constraint) {
   }
 
   protected abstract void organize_M(Designation designation) throws TemplateNotNeededException;
