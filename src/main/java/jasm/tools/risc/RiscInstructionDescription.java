@@ -16,8 +16,9 @@ import java.util.List;
 public final class RiscInstructionDescription
     extends InstructionDescription<RiscInstructionDescription> {
 
-  RiscInstructionDescription(List<Object> specifications) {
-    super(specifications);
+  RiscInstructionDescription(final String architectureManualSection,
+                             final List<Object> specifications) {
+    super(architectureManualSection, specifications);
 
     int bits = 0;
     int mask = 0;

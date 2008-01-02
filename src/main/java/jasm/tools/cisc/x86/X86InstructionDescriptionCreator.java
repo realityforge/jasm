@@ -20,7 +20,8 @@ public class X86InstructionDescriptionCreator
   }
 
   @Override
-  protected final X86InstructionDescription createInstructionDescription(List<Object> specifications) {
-    return new X86InstructionDescription(specifications);
+  protected final X86InstructionDescription createInstructionDescription(final String currentArchitectureManualSection, 
+                                                                         List<Object> specifications) {
+    return new X86InstructionDescription(currentArchitectureManualSection, specifications);
   }
 }

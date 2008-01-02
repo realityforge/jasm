@@ -27,12 +27,11 @@ public abstract class InstructionDescriptionCreator<InstructionDescription_Type 
     return _assembly;
   }
 
-  protected abstract InstructionDescription_Type createInstructionDescription(List<Object> specifications);
+  protected abstract InstructionDescription_Type createInstructionDescription(final String currentArchitectureManualSection, List<Object> specifications);
 
   protected final InstructionDescription_Type defineInstructionDescription(List<Object> specifications) {
-    final InstructionDescription_Type description = createInstructionDescription(specifications);
+    final InstructionDescription_Type description = createInstructionDescription(_currentArchitectureManualSection, specifications);
     _descriptions.addLast(description);
-    description.setArchitectureManualSection(_currentArchitectureManualSection);
     return description;
   }
 

@@ -33,8 +33,9 @@ public abstract class RiscInstructionDescriptionCreator extends InstructionDescr
   }
 
   @Override
-  protected final RiscInstructionDescription createInstructionDescription(List<Object> specifications) {
-    return new RiscInstructionDescription(specifications);
+  protected final RiscInstructionDescription createInstructionDescription(final String currentArchitectureManualSection,
+                                                                          List<Object> specifications) {
+    return new RiscInstructionDescription(currentArchitectureManualSection, specifications);
   }
 
   private int firstStringIndex(List<Object> specifications) {

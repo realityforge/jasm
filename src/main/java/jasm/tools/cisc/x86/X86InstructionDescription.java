@@ -24,8 +24,9 @@ public final class X86InstructionDescription
   /** true if descriptor represenets a a prefix rather than an instruction. */
   private boolean _aPrefix;
 
-  public X86InstructionDescription(List<Object> specifications) {
-    super(specifications);
+  public X86InstructionDescription(final String architectureManualSection,
+                                   final List<Object> specifications) {
+    super(architectureManualSection, specifications);
   }
 
   public boolean isExternalOperandOrderingInverted() {

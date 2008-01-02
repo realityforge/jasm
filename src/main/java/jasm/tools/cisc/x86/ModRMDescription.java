@@ -18,7 +18,7 @@ public final class ModRMDescription
   private final String _name;
 
   public ModRMDescription(ModRMGroup.Opcode opcode, String name, List<Object> specifications) {
-    super(specifications);
+    super(architectureManualSection, specifications);
     _opcode = opcode;
     _name = name;
   }
