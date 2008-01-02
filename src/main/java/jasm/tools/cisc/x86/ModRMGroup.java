@@ -9,5 +9,5 @@
 package jasm.tools.cisc.x86;
 
 public interface ModRMGroup {
-  ModRMDescription getInstructionDescription(ModRMOpcode opcode);
+  ModRMDescription getDescription(ModRMOpcode opcode);
 }

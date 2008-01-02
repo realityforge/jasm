@@ -10,6 +10,7 @@ package jasm.tools.cisc.x86;
 
 import jasm.tools.InstructionDescription;
 import java.util.List;
+import java.util.Arrays;
 
 public final class ModRMDescription
     extends InstructionDescription<ModRMDescription> {
@@ -17,7 +18,21 @@ public final class ModRMDescription
   private final ModRMOpcode _opcode;
   private final String _name;
 
-  public ModRMDescription(ModRMOpcode opcode, String name, List<Object> specifications) {
+  public static ModRMDescription modRM(ModRMOpcode opcode, String name, Object... specifications) {
+    return new ModRMDescription(opcode, name, Arrays.asList(specifications));
+  }
+
+
+  public static ModRMDescription getDescriptionFrom(final ModRMOpcode opcode, final ModRMDescription[] descriptions) {
+    for (ModRMDescription instructionDescription : descriptions) {
+      if (instructionDescription.opcode() == opcode) {
+        return instructionDescription;
+      }
+    }
+    return null;
+  }
+
+  private ModRMDescription(ModRMOpcode opcode, String name, List<Object> specifications) {
     super(null, specifications);
     _opcode = opcode;
     _name = name;

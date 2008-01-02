@@ -24,20 +24,13 @@ import static jasm.tools.cisc.x86.FloatingPointOperandCode.short_integer;
 import static jasm.tools.cisc.x86.FloatingPointOperandCode.single_real;
 import static jasm.tools.cisc.x86.FloatingPointOperandCode.word_integer;
 import jasm.tools.cisc.x86.ModRMDescription;
+import static jasm.tools.cisc.x86.ModRMDescription.modRM;
 import jasm.tools.cisc.x86.ModRMGroup;
 import jasm.tools.cisc.x86.ModRMOpcode;
-import static jasm.tools.cisc.x86.ModRMOpcode._0;
-import static jasm.tools.cisc.x86.ModRMOpcode._1;
-import static jasm.tools.cisc.x86.ModRMOpcode._2;
-import static jasm.tools.cisc.x86.ModRMOpcode._3;
-import static jasm.tools.cisc.x86.ModRMOpcode._4;
-import static jasm.tools.cisc.x86.ModRMOpcode._5;
-import static jasm.tools.cisc.x86.ModRMOpcode._6;
-import static jasm.tools.cisc.x86.ModRMOpcode._7;
+import static jasm.tools.cisc.x86.ModRMOpcode.*;
 import static jasm.tools.cisc.x86.OperandCode.*;
 import static jasm.tools.cisc.x86.OperandTypeCode.v;
 import jasm.tools.cisc.x86.X86RegisterOperandCode;
-import java.util.Arrays;
 
 /**
  * See A-7 in the book.
@@ -229,22 +222,13 @@ public enum IA32ModRMGroup implements ModRMGroup {
       modRM(_7, "FISTP", long_integer)
   );
 
-  private static ModRMDescription modRM(ModRMOpcode opcode, String name, Object... specifications) {
-    return new ModRMDescription(opcode, name, Arrays.asList(specifications));
+  private final ModRMDescription[] _descriptions;
+
+  private IA32ModRMGroup(ModRMDescription... descriptions) {
+    _descriptions = descriptions;
   }
 
-  private final ModRMDescription[] _instructionDescriptions;
-
-  private IA32ModRMGroup(ModRMDescription... instructionDescriptions) {
-    _instructionDescriptions = instructionDescriptions;
-  }
-
-  public ModRMDescription getInstructionDescription(ModRMOpcode opcode) {
-    for (ModRMDescription instructionDescription : _instructionDescriptions) {
-      if (instructionDescription.opcode() == opcode) {
-        return instructionDescription;
-      }
-    }
-    return null;
+  public ModRMDescription getDescription(ModRMOpcode opcode) {
+    return ModRMDescription.getDescriptionFrom(opcode, _descriptions);
   }
 }

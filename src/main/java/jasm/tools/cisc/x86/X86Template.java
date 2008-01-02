@@ -218,7 +218,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
     if (_modRMGroup == null) {
       return null;
     }
-    return _modRMGroup.getInstructionDescription(_modRMGroupOpcode);
+    return _modRMGroup.getDescription(_modRMGroupOpcode);
   }
 
   protected final <Parameter_Type extends X86Parameter> Parameter_Type addParameter(Parameter_Type parameter) {
@@ -338,7 +338,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
 
   public final void visitModRMGroup(ModRMGroup modRMGroup) throws TemplateNotNeededException {
     _modRMGroup = modRMGroup;
-    final ModRMDescription instructionDescription = modRMGroup.getInstructionDescription(_context.modRMGroupOpcode());
+    final ModRMDescription instructionDescription = modRMGroup.getDescription(_context.modRMGroupOpcode());
     if (instructionDescription == null) {
       throw new TemplateNotNeededException();
     }
