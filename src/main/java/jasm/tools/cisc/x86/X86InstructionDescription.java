@@ -29,15 +29,22 @@ public final class X86InstructionDescription
   private final HexByte _opcode2;
   //private final HexByte _opcode3;
   private final String _name;
+  private final ModRMGroup _modRMGroup;
 
   public X86InstructionDescription(final HexByte opcode1,
                                    final HexByte opcode2,
                                    final String name,
+                                   final ModRMGroup modRMGroup,
                                    final List<Object> specifications) {
     super(null, specifications);
     _opcode1 = opcode1;
     _opcode2 = opcode2;
     _name = name;
+    _modRMGroup = modRMGroup;
+    if ((null == _name && null == _modRMGroup) ||
+        (null != _name && null != _modRMGroup)) {
+      throw new IllegalArgumentException("name and modRMGroup both specified");
+    }
   }
 
   public HexByte opcode1() {
@@ -50,6 +57,10 @@ public final class X86InstructionDescription
 
   public String name() {
     return _name;
+  }
+
+  public ModRMGroup modRMGroup() {
+    return _modRMGroup;
   }
 
   public boolean isExternalOperandOrderingInverted() {

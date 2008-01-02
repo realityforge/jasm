@@ -52,7 +52,8 @@ public abstract class X86TemplateCreator<Template_Type extends X86Template<Templ
     final Template_Type template = createTemplate(_instructionDescription, _serial, _instructionAssessment.hasModRMByte(), _context);
     if (X86InstructionDescriptionVisitor.Static.visitInstructionDescription(template, _instructionDescription)) {
       final InstructionDescription modRMInstructionDescription = template.modRMInstructionDescription();
-      if (modRMInstructionDescription != null && !X86InstructionDescriptionVisitor.Static.visitInstructionDescription(template, modRMInstructionDescription)) {
+      if (modRMInstructionDescription != null &&
+          !X86InstructionDescriptionVisitor.Static.visitInstructionDescription(template, modRMInstructionDescription)) {
         return;
       }
       if (!isRedundant(template)) {

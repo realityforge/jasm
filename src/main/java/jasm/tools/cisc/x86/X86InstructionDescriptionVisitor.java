@@ -19,6 +19,8 @@ import jasm.util.HexByte;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
 import jasm.x86.SegmentRegister;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Almost like the visitor pattern.
@@ -56,9 +58,12 @@ public interface X86InstructionDescriptionVisitor {
 
   public static final class Static {
     /** @return whether the specification constitutes an operand */
-    private static boolean visitSpecification(X86InstructionDescriptionVisitor visitor, Object specification,
-                                              final Designation designation, ArgumentRange argumentRange,
-                                              final TestArgumentExclusion testArgumentExclusion, ExternalPresence externalPresence) throws TemplateNotNeededException {
+    private static boolean visitSpecification(final X86InstructionDescriptionVisitor visitor,
+                                              final Object specification,
+                                              final Designation designation,
+                                              final ArgumentRange argumentRange,
+                                              final TestArgumentExclusion testArgumentExclusion,
+                                              final ExternalPresence externalPresence) throws TemplateNotNeededException {
       if (specification instanceof OperandCode) {
         visitor.visitOperandCode((OperandCode) specification, designation, argumentRange, testArgumentExclusion);
         return true;
@@ -113,10 +118,21 @@ public interface X86InstructionDescriptionVisitor {
     }
 
     /** @return whether this instruction description is to be used to create a template in the given context */
-    public static boolean visitInstructionDescription(X86InstructionDescriptionVisitor visitor, InstructionDescription instructionDescription) {
+    public static boolean visitInstructionDescription(X86InstructionDescriptionVisitor visitor,
+                                                      InstructionDescription<?> instructionDescription) {
       try {
         int designationIndex = 0;
-        for (Object specification : instructionDescription) {
+        final List<Object> specifications = instructionDescription.specifications();
+        final ArrayList<Object> specs = new ArrayList<Object>(specifications.size());
+        if (instructionDescription instanceof X86InstructionDescription) {
+          final ModRMGroup modRMGroup = ((X86InstructionDescription) instructionDescription).modRMGroup();
+          if (null != modRMGroup) {
+            specs.add(modRMGroup);
+          }
+        }
+        specs.addAll(specifications);
+
+        for (Object specification : specs) {
           final Designation designation = Designation.values()[designationIndex];
           if (visitSpecification(visitor, specification, designation, ArgumentRange.UNSPECIFIED, TestArgumentExclusion.NONE, ExternalPresence.EXPLICIT)) {
             designationIndex++;
