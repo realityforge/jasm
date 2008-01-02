@@ -27,37 +27,9 @@ final class OpcodeAssessor
 
   @Override
   public final void visitOperandCode(OperandCode operandCode, Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) {
-    switch (operandCode.addressingMethodCode()) {
-      case A:
-      case E:
-      case M:
-      case O:
-      case Q:
-      case W:
-        _instructionFamily.haveAddressSizeVariants();
-        break;
-      default:
-        break;
-    }
-    switch (operandCode.addressingMethodCode()) {
-      case C:
-      case D:
-      case E:
-      case G:
-      case M:
-      case P:
-      case PR:
-      case Q:
-      case R:
-      case S:
-      case V:
-      case U:
-      case W:
-        _instructionFamily.haveModRMByte();
-        break;
-      default:
-        break;
-    }
+    final AddressingMethodCode code = operandCode.addressingMethodCode();
+    if (code.hasAddressSizeVariants()) _instructionFamily.haveAddressSizeVariants();
+    if (code.hasModRMByte()) _instructionFamily.haveModRMByte();
   }
 
   @Override

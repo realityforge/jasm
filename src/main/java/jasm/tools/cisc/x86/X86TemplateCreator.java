@@ -172,8 +172,8 @@ public abstract class X86TemplateCreator<Template_Type extends X86Template<Templ
       _instructionDescription = instructionDescription;
       _instructionAssessment = new InstructionAssessment();
       final OpcodeAssessor assessor = new OpcodeAssessor(_instructionAssessment);
-      if( instructionDescription.name().startsWith("j") )
-      {
+      final String name = instructionDescription.name();
+      if (null != name && name.startsWith("j")) {
         _instructionAssessment.beJump();
       }
       X86InstructionDescriptionVisitor.Static.visitInstructionDescription(assessor, _instructionDescription);
