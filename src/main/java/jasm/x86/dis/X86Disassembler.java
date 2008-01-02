@@ -468,9 +468,9 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
         HexByte.values()[template.opcode2().value() + opcode2Modifier];
     final X86InstructionPrefix isp = template.instructionSelectionPrefix();
     X86InstructionPrefix operandSizePrefix = (isp == X86InstructionPrefix.OPERAND_SIZE) ? X86InstructionPrefix.OPERAND_SIZE : null;
-    if(template.operandSizeAttribute() == WordWidth.BITS_16) {
+    if (template.operandSizeAttribute() == WordWidth.BITS_16) {
       assert operandSizePrefix == null;
-      operandSizePrefix =  X86InstructionPrefix.OPERAND_SIZE;
+      operandSizePrefix = X86InstructionPrefix.OPERAND_SIZE;
     }
 
     return new X86InstructionHeader(opcode1,

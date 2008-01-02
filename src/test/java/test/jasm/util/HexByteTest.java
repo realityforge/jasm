@@ -12,9 +12,7 @@ import jasm.util.HexByte;
 import java.util.EnumSet;
 import junit.framework.TestCase;
 
-/**
- * Tests for {@link HexByte}.
- */
+/** Tests for {@link HexByte}. */
 public final class HexByteTest extends TestCase {
   public final void test_value() {
     final EnumSet<HexByte> enumSet = EnumSet.allOf(HexByte.class);

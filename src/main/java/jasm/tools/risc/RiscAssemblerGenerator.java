@@ -24,9 +24,9 @@ import jasm.tools.risc.field.OperandField;
 import jasm.tools.util.CollectionUtil;
 import jasm.tools.util.IndentWriter;
 import jasm.util.HexUtil;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.reflect.Method;
 
 public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate<Template_Type>>
     extends AssemblerGenerator<Template_Type> {

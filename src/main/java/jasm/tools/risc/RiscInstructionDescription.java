@@ -8,12 +8,12 @@
  */
 package jasm.tools.risc;
 
-import jasm.tools.InstructionDescription;
 import jasm.tools.InstructionConstraint;
+import jasm.tools.InstructionDescription;
 import jasm.tools.risc.field.InputOperandField;
 import jasm.tools.risc.field.RiscField;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public final class RiscInstructionDescription
     extends InstructionDescription<RiscInstructionDescription> {
@@ -64,16 +64,16 @@ public final class RiscInstructionDescription
   }
 
   /** @return the {@link InstructionConstraint} instances (if any) within this description */
-    public final List<InstructionConstraint> constraints() {
-      if (_constraints == null) {
-        final ArrayList<InstructionConstraint> result = new ArrayList<InstructionConstraint>();
-        for (Object element : specifications()) {
-          if (InstructionConstraint.class.isInstance(element)) {
-            result.add(InstructionConstraint.class.cast(element));
-          }
+  public final List<InstructionConstraint> constraints() {
+    if (_constraints == null) {
+      final ArrayList<InstructionConstraint> result = new ArrayList<InstructionConstraint>();
+      for (Object element : specifications()) {
+        if (InstructionConstraint.class.isInstance(element)) {
+          result.add(InstructionConstraint.class.cast(element));
         }
-        _constraints = result;
       }
-      return _constraints;
+      _constraints = result;
     }
+    return _constraints;
+  }
 }

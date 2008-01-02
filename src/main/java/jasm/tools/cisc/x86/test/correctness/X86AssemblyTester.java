@@ -43,7 +43,7 @@ import java.util.Queue;
 
 public abstract class X86AssemblyTester<Template_Type extends X86Template<Template_Type>,
     DisassembledInstruction_Type extends X86DisassembledInstruction<Template_Type>>
-    extends AssemblyTester<Template_Type, DisassembledInstruction_Type, X86Disassembler<Template_Type,DisassembledInstruction_Type>> {
+    extends AssemblyTester<Template_Type, DisassembledInstruction_Type, X86Disassembler<Template_Type, DisassembledInstruction_Type>> {
 
   public X86AssemblyTester(Assembly<Template_Type> assembly, WordWidth addressWidth, EnumSet<AssemblyTestComponent> components) {
     super(assembly, addressWidth, components);

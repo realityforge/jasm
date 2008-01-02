@@ -11,9 +11,7 @@ package test.jasm.util;
 import jasm.util.Longs;
 import junit.framework.TestCase;
 
-/**
- * Tests for {@link Longs}.
- */
+/** Tests for {@link Longs}. */
 public final class LongsTest extends TestCase {
   public final void test_numberOfEffectiveUnsignedBits() {
     assertTrue(Longs.numberOfEffectiveUnsignedBits(0L) == 0);

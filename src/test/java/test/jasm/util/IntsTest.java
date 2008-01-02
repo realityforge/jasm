@@ -11,9 +11,7 @@ package test.jasm.util;
 import jasm.util.Ints;
 import junit.framework.TestCase;
 
-/**
- * Tests for {@link Ints}.
- */
+/** Tests for {@link Ints}. */
 public final class IntsTest extends TestCase {
   public final void test_numberOfEffectiveUnsignedBits() {
     assertTrue(Ints.numberOfEffectiveUnsignedBits(0) == 0);

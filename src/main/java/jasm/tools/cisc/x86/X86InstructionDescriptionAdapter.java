@@ -10,10 +10,8 @@ package jasm.tools.cisc.x86;
 
 import jasm.tools.ArgumentRange;
 import jasm.tools.ExternalPresence;
-import jasm.tools.InstructionConstraint;
 import jasm.tools.TestArgumentExclusion;
 import jasm.tools.cisc.TemplateNotNeededException;
-import jasm.util.HexByte;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
 import jasm.x86.SegmentRegister;

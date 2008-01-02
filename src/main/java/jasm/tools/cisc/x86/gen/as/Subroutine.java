@@ -8,8 +8,8 @@
  */
 package jasm.tools.cisc.x86.gen.as;
 
-import java.util.HashSet;
 import jasm.tools.cisc.x86.X86Template;
+import java.util.HashSet;
 
 public final class Subroutine<Template_Type extends X86Template<Template_Type>> {
 
@@ -23,7 +23,7 @@ public final class Subroutine<Template_Type extends X86Template<Template_Type>> 
     sb.append("assemble");
     final String idString = Integer.toString(id);
     final int size = idString.length();
-    for(int i = size; i < 4; i++ ) {
+    for (int i = size; i < 4; i++) {
       sb.append('0');
     }
     sb.append(idString);

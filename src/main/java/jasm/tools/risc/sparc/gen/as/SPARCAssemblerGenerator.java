@@ -11,8 +11,8 @@ package jasm.tools.risc.sparc.gen.as;
 import jasm.Assembler;
 import jasm.BigEndianAssembler;
 import jasm.tools.risc.RiscAssemblerGenerator;
-import jasm.tools.risc.sparc.SPARCTemplate;
 import jasm.tools.risc.sparc.SPARCAssembly;
+import jasm.tools.risc.sparc.SPARCTemplate;
 
 public final class SPARCAssemblerGenerator extends RiscAssemblerGenerator<SPARCTemplate> {
 

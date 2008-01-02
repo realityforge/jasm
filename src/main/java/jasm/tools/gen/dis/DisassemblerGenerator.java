@@ -23,7 +23,7 @@ public abstract class DisassemblerGenerator<Assembly_Type extends Assembly<?>>
 
   private final Assembly_Type _assembly;
 
-  protected DisassemblerGenerator(Assembly_Type assembly ) {
+  protected DisassemblerGenerator(Assembly_Type assembly) {
     super(new File("."), "jasm." + assembly.instructionSet().name().toLowerCase() + ".dis2");
     _assembly = assembly;
   }

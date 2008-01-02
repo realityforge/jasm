@@ -9,10 +9,7 @@
 package jasm.tools.cisc.x86;
 
 import jasm.WordWidth;
-import static jasm.WordWidth.BITS_16;
-import static jasm.WordWidth.BITS_32;
-import static jasm.WordWidth.BITS_64;
-import static jasm.WordWidth.BITS_8;
+import static jasm.WordWidth.*;
 
 /**
  * Register codes associated with instructions.

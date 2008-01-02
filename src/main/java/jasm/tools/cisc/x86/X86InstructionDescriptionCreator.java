@@ -53,11 +53,10 @@ public class X86InstructionDescriptionCreator
   }
 
   private X86InstructionDescription defineInstruction(HexByte opcode1,
-                                                     HexByte opcode2,
-                                                     String name,
-                                                     ModRMGroup modRMGroup,
-                                                     Object... specifications )
-  {
+                                                      HexByte opcode2,
+                                                      String name,
+                                                      ModRMGroup modRMGroup,
+                                                      Object... specifications) {
     final X86InstructionDescription description =
         new X86InstructionDescription(opcode1,
                                       opcode2,

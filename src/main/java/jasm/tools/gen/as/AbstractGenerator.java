@@ -12,7 +12,7 @@ import java.util.Set;
 
 public abstract class AbstractGenerator {
   private final String _outputPackage;
-  private  File _sourceDirectory;
+  private File _sourceDirectory;
 
   protected AbstractGenerator(final File sourceDirectory, final String outputPackage) {
     _outputPackage = outputPackage;

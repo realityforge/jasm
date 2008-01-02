@@ -19,9 +19,9 @@ import jasm.tools.risc.field.OptionField;
 import jasm.tools.risc.field.RiscField;
 import jasm.util.StaticLoophole;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Arrays;
 
 public abstract class RiscInstructionDescriptionCreator
     extends InstructionDescriptionCreator<RiscInstructionDescription> {

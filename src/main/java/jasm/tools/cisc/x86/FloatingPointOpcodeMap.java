@@ -15,7 +15,7 @@ import static jasm.util.HexByte.*;
 import static jasm.x86.FPStackRegister.ST;
 import static jasm.x86.FPStackRegister.ST_0;
 
-public final class  FloatingPointOpcodeMap extends X86InstructionDescriptionCreator {
+public final class FloatingPointOpcodeMap extends X86InstructionDescriptionCreator {
 
   private void create_D8() {
     defineFP(_D8, _C0, "fadd", ST, ST_i);

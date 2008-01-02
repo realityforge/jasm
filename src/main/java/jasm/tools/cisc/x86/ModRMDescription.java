@@ -9,8 +9,8 @@
 package jasm.tools.cisc.x86;
 
 import jasm.tools.InstructionDescription;
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 
 public final class ModRMDescription
     extends InstructionDescription<ModRMDescription> {
@@ -21,7 +21,6 @@ public final class ModRMDescription
   public static ModRMDescription modRM(ModRMOpcode opcode, String name, Object... specifications) {
     return new ModRMDescription(opcode, name, Arrays.asList(specifications));
   }
-
 
   public static ModRMDescription getDescriptionFrom(final ModRMOpcode opcode, final ModRMDescription[] descriptions) {
     for (ModRMDescription instructionDescription : descriptions) {

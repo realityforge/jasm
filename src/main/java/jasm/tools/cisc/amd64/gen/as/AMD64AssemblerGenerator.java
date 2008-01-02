@@ -16,13 +16,13 @@ import jasm.amd64.AMD64GeneralRegister8;
 import jasm.amd64.AMD64IndirectRegister32;
 import jasm.amd64.AMD64IndirectRegister64;
 import jasm.amd64.as.AbstractAMD64Assembler;
+import jasm.tools.cisc.amd64.AMD64Assembly;
+import jasm.tools.cisc.amd64.AMD64Template;
 import jasm.tools.cisc.x86.ModCase;
 import jasm.tools.cisc.x86.RMCase;
-import jasm.tools.cisc.x86.gen.as.X86AssemblerGenerator;
 import jasm.tools.cisc.x86.X86Parameter;
 import jasm.tools.cisc.x86.X86Template;
-import jasm.tools.cisc.amd64.AMD64Template;
-import jasm.tools.cisc.amd64.AMD64Assembly;
+import jasm.tools.cisc.x86.gen.as.X86AssemblerGenerator;
 import jasm.tools.util.IndentWriter;
 
 /** Run this program to generate the AMD64RawAssembler and AMD64LabelAssembler classes. */

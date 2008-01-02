@@ -51,7 +51,6 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate<Templa
     _abstractionPreference = abstractionPreference;
   }
 
-
   /**
    * Extract the value for each operand of a template from an encoded instruction whose opcode
    * matches that of the template.

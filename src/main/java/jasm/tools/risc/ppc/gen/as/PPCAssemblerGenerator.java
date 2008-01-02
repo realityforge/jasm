@@ -12,8 +12,8 @@ import jasm.Assembler;
 import jasm.BigEndianAssembler;
 import jasm.ppc.GPR;
 import jasm.tools.risc.RiscAssemblerGenerator;
-import jasm.tools.risc.ppc.PPCTemplate;
 import jasm.tools.risc.ppc.PPCAssembly;
+import jasm.tools.risc.ppc.PPCTemplate;
 import java.util.List;
 import java.util.Set;
 

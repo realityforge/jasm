@@ -13,11 +13,11 @@ import jasm.WordWidth;
 import jasm.ia32.IA32BaseRegister32;
 import jasm.ia32.IA32IndirectRegister16;
 import jasm.ia32.IA32IndirectRegister32;
+import jasm.tools.cisc.ia32.IA32Assembly;
+import jasm.tools.cisc.ia32.IA32Template;
 import jasm.tools.cisc.x86.ModCase;
 import jasm.tools.cisc.x86.RMCase;
 import jasm.tools.cisc.x86.gen.as.X86AssemblerGenerator;
-import jasm.tools.cisc.ia32.IA32Template;
-import jasm.tools.cisc.ia32.IA32Assembly;
 import jasm.tools.util.IndentWriter;
 import jasm.x86.as.X86Assembler;
 

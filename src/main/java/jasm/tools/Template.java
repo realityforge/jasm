@@ -136,7 +136,7 @@ public abstract class Template<Template_Type extends Template<Template_Type>>
     }
     final int mySize = myParameters.size();
     final int otherSize = otherParameters.size();
-    return mySize<otherSize ? -1 : (mySize==otherSize ? 0 : 1);
+    return mySize < otherSize ? -1 : (mySize == otherSize ? 0 : 1);
   }
 
   public boolean isEquivalentTo(Template other) {

@@ -8,9 +8,9 @@
  */
 package jasm.util;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
-import java.lang.reflect.Array;
 
 /** Static type loophole that prevents "unchecked" compiler warnings but that does not circumvent dynamic type checks. */
 public final class StaticLoophole {

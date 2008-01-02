@@ -11,9 +11,7 @@ package test.jasm.util;
 import jasm.WordWidth;
 import junit.framework.TestCase;
 
-/**
- * Tests for {@link jasm.WordWidth}.
- */
+/** Tests for {@link jasm.WordWidth}. */
 public final class WordWidthTest extends TestCase {
   public final void test_fromInt() {
     assertTrue(WordWidth.fromInt(-1000) == WordWidth.BITS_8);
