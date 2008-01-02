@@ -221,12 +221,8 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
     return modRMGroup.getDescription(_modRMGroupOpcode);
   }
 
-  protected final <Parameter_Type extends X86Parameter> Parameter_Type addParameter(Parameter_Type parameter) {
-    return addOperand(parameter);
-  }
-
   protected final void addParameter(X86Parameter parameter, ArgumentRange argumentRange) {
-    addParameter(parameter);
+    addOperand(parameter);
     parameter.setArgumentRange(argumentRange);
   }
 
@@ -237,7 +233,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
 
   protected final <EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument> X86Parameter addEnumerableParameter(Designation designation, ParameterPlace parameterPlace,
                                                                                                                                            final SymbolSet<EnumerableArgument_Type> enumerator) {
-    return addParameter(new X86EnumerableParameter<EnumerableArgument_Type>(designation, parameterPlace, enumerator));
+    return addOperand(new X86EnumerableParameter<EnumerableArgument_Type>(designation, parameterPlace, enumerator));
   }
 
   protected final <Operand_Type extends X86Operand> Operand_Type addOperand(Operand_Type operand) {

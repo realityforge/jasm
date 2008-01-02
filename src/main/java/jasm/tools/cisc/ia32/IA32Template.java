@@ -75,7 +75,7 @@ public final class IA32Template
         switch (context().modCase()) {
           case MOD_0: {
             setLabelParameterIndex();
-            addParameter(new X86AddressParameter(designation, WordWidth.BITS_32));
+            addOperand(new X86AddressParameter(designation, WordWidth.BITS_32));
             break;
           }
           default: {
@@ -94,7 +94,7 @@ public final class IA32Template
         // so for now we do not produce them:
         throw new TemplateNotNeededException();
     }
-    addParameter(new X86EnumerableParameter<Scale>(designation, ParameterPlace.SIB_SCALE, Scale.SYMBOLS));
+    addOperand(new X86EnumerableParameter<Scale>(designation, ParameterPlace.SIB_SCALE, Scale.SYMBOLS));
   }
 
   @Override
@@ -118,7 +118,7 @@ public final class IA32Template
             switch (context().addressSizeAttribute()) {
               case BITS_16:
                 setExternalCodeSizeAttribute(context().addressSizeAttribute());
-                addParameter(new X86AddressParameter(designation, WordWidth.BITS_16));
+                addOperand(new X86AddressParameter(designation, WordWidth.BITS_16));
                 break;
               default:
                 throw new TemplateNotNeededException();
@@ -128,7 +128,7 @@ public final class IA32Template
             switch (context().addressSizeAttribute()) {
               case BITS_32:
                 setLabelParameterIndex();
-                addParameter(new X86AddressParameter(designation, WordWidth.BITS_32));
+                addOperand(new X86AddressParameter(designation, WordWidth.BITS_32));
                 break;
               default:
                 throw new TemplateNotNeededException();
@@ -147,7 +147,7 @@ public final class IA32Template
         break;
       }
       case MOD_1: {
-        addParameter(new X86DisplacementParameter(designation, WordWidth.BITS_8));
+        addOperand(new X86DisplacementParameter(designation, WordWidth.BITS_8));
         switch (context().rmCase()) {
           case NORMAL:
             switch (context().addressSizeAttribute()) {
@@ -178,10 +178,10 @@ public final class IA32Template
       case MOD_2: {
         switch (context().addressSizeAttribute()) {
           case BITS_16:
-            addParameter(new X86DisplacementParameter(designation, WordWidth.BITS_16));
+            addOperand(new X86DisplacementParameter(designation, WordWidth.BITS_16));
             break;
           case BITS_32:
-            addParameter(new X86DisplacementParameter(designation, WordWidth.BITS_32));
+            addOperand(new X86DisplacementParameter(designation, WordWidth.BITS_32));
             break;
           default:
             throw new IllegalStateException();
@@ -229,22 +229,22 @@ public final class IA32Template
         switch (context().addressSizeAttribute()) {
           case BITS_16:
             setExternalCodeSizeAttribute(context().addressSizeAttribute());
-            addParameter(new X86AddressParameter(designation, WordWidth.BITS_16));
+            addOperand(new X86AddressParameter(designation, WordWidth.BITS_16));
             break;
           case BITS_32:
             setLabelParameterIndex();
-            addParameter(new X86AddressParameter(designation, WordWidth.BITS_32));
+            addOperand(new X86AddressParameter(designation, WordWidth.BITS_32));
             break;
           default:
             throw new IllegalStateException();
         }
         break;
       case Cd: {
-        addParameter(new X86EnumerableParameter<ControlRegister>(designation, ParameterPlace.MOD_REG, ControlRegister.SYMBOLS));
+        addOperand(new X86EnumerableParameter<ControlRegister>(designation, ParameterPlace.MOD_REG, ControlRegister.SYMBOLS));
         break;
       }
       case Dd: {
-        addParameter(new X86EnumerableParameter<DebugRegister>(designation, ParameterPlace.MOD_REG, DebugRegister.SYMBOLS));
+        addOperand(new X86EnumerableParameter<DebugRegister>(designation, ParameterPlace.MOD_REG, DebugRegister.SYMBOLS));
         break;
       }
       case Eb: {
@@ -302,7 +302,7 @@ public final class IA32Template
       }
       case Ib: {
         final X86ImmediateParameter parameter = new X86ImmediateParameter(designation, WordWidth.BITS_8);
-        addParameter(parameter);
+        addOperand(parameter);
         parameter.setArgumentRange(argumentRange);
         parameter.excludeTestArguments(testArgumentExclusion);
         break;
@@ -310,7 +310,7 @@ public final class IA32Template
       case Iv: {
         setExternalOperandTypeSuffix(operandCode.operandTypeCode());
         final X86ImmediateParameter parameter = new X86ImmediateParameter(designation, context().operandSizeAttribute());
-        addParameter(parameter);
+        addOperand(parameter);
         parameter.setArgumentRange(argumentRange);
         parameter.excludeTestArguments(testArgumentExclusion);
         break;
@@ -318,7 +318,7 @@ public final class IA32Template
       case Iw: {
         setExternalCodeSizeAttribute(context().operandSizeAttribute());
         final X86ImmediateParameter parameter = new X86ImmediateParameter(designation, WordWidth.BITS_16);
-        addParameter(parameter);
+        addOperand(parameter);
         parameter.setArgumentRange(argumentRange);
         parameter.excludeTestArguments(testArgumentExclusion);
         break;
@@ -326,7 +326,7 @@ public final class IA32Template
       case Jb: {
         setExternalCodeSizeAttribute(context().addressSizeAttribute());
         setLabelParameterIndex();
-        addParameter(new X86OffsetParameter(designation, WordWidth.BITS_8));
+        addOperand(new X86OffsetParameter(designation, WordWidth.BITS_8));
         break;
       }
       case Jv: {
@@ -334,11 +334,11 @@ public final class IA32Template
           case BITS_16:
             setExternalCodeSizeAttribute(context().operandSizeAttribute());
             setLabelParameterIndex();
-            addParameter(new X86OffsetParameter(designation, WordWidth.BITS_16));
+            addOperand(new X86OffsetParameter(designation, WordWidth.BITS_16));
             break;
           case BITS_32:
             setLabelParameterIndex();
-            addParameter(new X86OffsetParameter(designation, WordWidth.BITS_32));
+            addOperand(new X86OffsetParameter(designation, WordWidth.BITS_32));
             break;
           default:
             throw new IllegalStateException();
@@ -383,11 +383,11 @@ public final class IA32Template
         switch (context().addressSizeAttribute()) {
           case BITS_16:
             setExternalCodeSizeAttribute(context().addressSizeAttribute());
-            addParameter(new X86AddressParameter(designation, WordWidth.BITS_16));
+            addOperand(new X86AddressParameter(designation, WordWidth.BITS_16));
             break;
           case BITS_32:
             setLabelParameterIndex();
-            addParameter(new X86AddressParameter(designation, WordWidth.BITS_32));
+            addOperand(new X86AddressParameter(designation, WordWidth.BITS_32));
             break;
           default:
             throw new IllegalStateException();
