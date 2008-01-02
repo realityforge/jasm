@@ -456,10 +456,10 @@ public final class IA32Template
   public final void visitRegisterOperandCode(X86RegisterOperandCode registerOperandCode, Designation designation, ExternalPresence externalPresence) {
     switch (operandSizeAttribute()) {
       case BITS_16:
-        addImplicitOperand(new X86ImplicitOperand(designation, externalPresence, IA32GeneralRegister16.values()[registerOperandCode.regField()]));
+        addOperand(new X86ImplicitOperand(designation, externalPresence, IA32GeneralRegister16.values()[registerOperandCode.regField()]));
         break;
       case BITS_32:
-        addImplicitOperand(new X86ImplicitOperand(designation, externalPresence, IA32GeneralRegister32.values()[registerOperandCode.regField()]));
+        addOperand(new X86ImplicitOperand(designation, externalPresence, IA32GeneralRegister32.values()[registerOperandCode.regField()]));
         break;
       default:
         throw new IllegalStateException();

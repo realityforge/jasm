@@ -40,7 +40,6 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   private boolean _hasSibByte;
   private final X86TemplateContext _context;
   private final X86InstructionPrefix _instructionSelectionPrefix;
-  private ModRMGroup _modRMGroup;
   private ModRMOpcode _modRMGroupOpcode;
   private ArrayList<X86Operand> _operands = new ArrayList<X86Operand>(MAX_NUM_OF_OPERANDS);
   private ArrayList<X86ImplicitOperand> _implicitOperands = new ArrayList<X86ImplicitOperand>(MAX_NUM_OF_IMPLICIT_OPERANDS);
@@ -58,7 +57,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
                         X86TemplateContext context) {
     super(instructionDescription, serial);
     final String name = instructionDescription.name();
-    if( null != name ) setInternalName(name.toLowerCase());
+    if (null != name) setInternalName(name.toLowerCase());
     _hasModRMByte = hasModRMByte;
     _instructionSelectionPrefix = instructionDescription.getMandatoryPrefix();
     _context = context;
@@ -103,7 +102,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final ModRMGroup modRMGroup() {
-    return _modRMGroup;
+    return instructionDescription().modRMGroup();
   }
 
   public final ModRMOpcode modRMGroupOpcode() {
@@ -215,19 +214,15 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final InstructionDescription modRMInstructionDescription() {
-    if (_modRMGroup == null) {
+    final ModRMGroup modRMGroup = instructionDescription().modRMGroup();
+    if (null == modRMGroup) {
       return null;
     }
-    return _modRMGroup.getDescription(_modRMGroupOpcode);
+    return modRMGroup.getDescription(_modRMGroupOpcode);
   }
 
   protected final <Parameter_Type extends X86Parameter> Parameter_Type addParameter(Parameter_Type parameter) {
-    _parameters.add(parameter);
-    _operands.add(parameter);
-    if (parameter instanceof X86AddressParameter) {
-      useNamePrefix("m_");
-    }
-    return parameter;
+    return addOperand(parameter);
   }
 
   protected final void addParameter(X86Parameter parameter, ArgumentRange argumentRange) {
@@ -245,9 +240,17 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
     return addParameter(new X86EnumerableParameter<EnumerableArgument_Type>(designation, parameterPlace, enumerator));
   }
 
-  protected final void addImplicitOperand(X86ImplicitOperand implicitOperand) {
-    _implicitOperands.add(implicitOperand);
-    _operands.add(implicitOperand);
+  protected final <Operand_Type extends X86Operand> Operand_Type addOperand(Operand_Type operand) {
+    if (operand instanceof X86ImplicitOperand) {
+      _implicitOperands.add((X86ImplicitOperand) operand);
+    } else if (operand instanceof X86Parameter) {
+      _parameters.add((X86Parameter) operand);
+      if (operand instanceof X86AddressParameter) {
+        useNamePrefix("m_");
+      }
+    }
+    _operands.add(operand);
+    return operand;
   }
 
   public final List<X86ImplicitOperand> implicitOperands() {
@@ -329,15 +332,14 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final void visitGeneralRegister(GeneralRegister generalRegister, Designation designation, ExternalPresence externalPresence) {
-    addImplicitOperand(new X86ImplicitOperand(designation, externalPresence, generalRegister));
+    addOperand(new X86ImplicitOperand(designation, externalPresence, generalRegister));
   }
 
   public final void visitSegmentRegister(SegmentRegister segmentRegister, Designation designation) {
-    addImplicitOperand(new X86ImplicitOperand(designation, ExternalPresence.EXPLICIT, segmentRegister));
+    addOperand(new X86ImplicitOperand(designation, ExternalPresence.EXPLICIT, segmentRegister));
   }
 
   public final void visitModRMGroup(ModRMGroup modRMGroup) throws TemplateNotNeededException {
-    _modRMGroup = modRMGroup;
     final ModRMDescription instructionDescription = modRMGroup.getDescription(_context.modRMGroupOpcode());
     if (instructionDescription == null) {
       throw new TemplateNotNeededException();
@@ -386,7 +388,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final void visitFPStackRegister(FPStackRegister fpStackRegister, Designation designation) {
-    addImplicitOperand(new X86ImplicitOperand(designation, ExternalPresence.EXPLICIT, fpStackRegister));
+    addOperand(new X86ImplicitOperand(designation, ExternalPresence.EXPLICIT, fpStackRegister));
   }
 
   public final void visitString(String string) {
@@ -394,7 +396,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final void visitInteger(Integer integer, Designation designation) {
-    addImplicitOperand(new X86ImplicitOperand(designation, ExternalPresence.EXPLICIT, new Immediate8Argument((byte) integer.intValue())));
+    addOperand(new X86ImplicitOperand(designation, ExternalPresence.EXPLICIT, new Immediate8Argument((byte) integer.intValue())));
   }
 
   public final void visitHexByte(HexByte hexByte) throws TemplateNotNeededException {
