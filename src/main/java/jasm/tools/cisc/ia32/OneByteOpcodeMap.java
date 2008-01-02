@@ -77,8 +77,8 @@ final class OneByteOpcodeMap
     define1B(_63, "ARPL", Ew, Gw);
     define1B(X86InstructionPrefix.SEG_FS.getValue(), "SEG_FS").beAPrefix();
     define1B(X86InstructionPrefix.SEG_GS.getValue(), "SEG_GS").beAPrefix();
-    define1B(X86InstructionPrefix.OPERAND_SIZE.getValue(), "OPERAND_SIZE").beNotDisassemblable().beAPrefix();
-    define1B(X86InstructionPrefix.ADDRESS_SIZE.getValue(), "ADDRESS_SIZE").beNotDisassemblable().beAPrefix();
+    define1B(X86InstructionPrefix.OPERAND_SIZE.getValue(), "OPERAND_SIZE").beAPrefix();
+    define1B(X86InstructionPrefix.ADDRESS_SIZE.getValue(), "ADDRESS_SIZE").beAPrefix();
 
     define1B(_70, "JO", Jb);
     define1B(_71, "JNO", Jb);
