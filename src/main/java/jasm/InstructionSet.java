@@ -38,11 +38,13 @@ public enum InstructionSet {
     _wordWidths = Collections.unmodifiableCollection(Arrays.asList(wordWidths));
   }
 
-  public Collection<WordWidth> getWordWidths() { return _wordWidths; }
+  public WordWidth[] wordWidths() { 
+    return _wordWidths.toArray(new WordWidth[_wordWidths.size()]);
+  }
 
-  public Category getCategory() { return _category; }
+  public Category category() { return _category; }
 
-  public Endianness getEndianness() { return _endianness; }
+  public Endianness endianness() { return _endianness; }
 
   public RelativeAddressing relativeAddressing() { return _relativeAddressing; }
 
