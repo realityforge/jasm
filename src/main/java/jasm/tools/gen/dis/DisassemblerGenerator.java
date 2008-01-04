@@ -29,20 +29,6 @@ public abstract class DisassemblerGenerator<Assembly_Type extends Assembly<?>>
     _assembly = assembly;
   }
 
-  protected IndentWriter fileProlog(final String name, final String parentClass, final Set<String> imports) throws IOException {
-    final IndentWriter writer = super.fileProlog(name, parentClass, imports);
-    printConstructor(writer, name);
-    return writer;
-  }
-
-  private void printConstructor(IndentWriter writer, String classSimpleName) {
-    writer.println("protected " + classSimpleName + "() {");
-    writer.indent();
-    writer.println("super(InstructionSet." + assembly().instructionSet().name() + ");");
-    writer.outdent();
-    writer.println("}");
-  }
-
   public final Assembly_Type assembly() {
     return _assembly;
   }
