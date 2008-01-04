@@ -12,6 +12,7 @@ import jasm.annotations.Inline;
 import jasm.tools.Assembly;
 import jasm.tools.gen.as.AbstractGenerator;
 import jasm.tools.util.IndentWriter;
+import jasm.x86.dis2.AbstractDisassembler;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;

@@ -6,16 +6,22 @@
  *  file distributed with this work for a copy of the License and information
  *  regarding copyright ownership.
  */
-package jasm.tools.gen.dis;
+package jasm.x86.dis2;
 
 import jasm.InstructionSet;
+import jasm.WordWidth;
 
 public abstract class AbstractDisassembler {
   private final InstructionSet _instructionSet;
+  private final WordWidth _addressWidth;
 
-  protected AbstractDisassembler(final InstructionSet instructionSet) {
+  protected AbstractDisassembler(final InstructionSet instructionSet,
+                                 final WordWidth addressWidth) {
     _instructionSet = instructionSet;
+    _addressWidth = addressWidth;
   }
 
   public final InstructionSet instructionSet() { return _instructionSet; }
+
+  public final WordWidth addressWidth() { return _addressWidth; }
 }
