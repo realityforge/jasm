@@ -286,9 +286,10 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
     boolean isFloatingPointEscape = false;
     if (X86Opcode.isFloatingPointEscape(header.opcode1())) {
       final int byte2 = stream.read();
-      if (byte2 >= 0xC0) {
+      final HexByte hexByte = HexByte.values()[byte2];
+      if (X86Opcode.isFloatingPointOpcode2(hexByte)) {
         isFloatingPointEscape = true;
-        header.fixOpcode2(HexByte.values()[byte2]);
+        header.fixOpcode2(hexByte);
       }
     }
     if (header.opcode1() != null) {

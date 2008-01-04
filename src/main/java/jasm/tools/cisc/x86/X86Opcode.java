@@ -32,6 +32,10 @@ public final class X86Opcode {
            opcode.value() <= FP_ESCAPE_MAX.value();
   }
 
+  public static boolean isFloatingPointOpcode2(HexByte opcode) {
+    return opcode.value() >= _C0.value();
+  }
+
   //Only used in experimental decoder atm
   public static boolean hasOpCode3(final HexByte opcode1,
                                    final HexByte opcode2) {
