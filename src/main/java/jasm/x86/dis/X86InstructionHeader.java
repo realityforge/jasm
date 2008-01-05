@@ -106,24 +106,8 @@ public final class X86InstructionHeader {
     return result;
   }
 
-  public boolean hasAddressSizePrefix() {
-    return _hasAddressSizePrefix;
-  }
-
-  public boolean hasOperandSizePrefix() {
-    return null != _operandSizePrefix;
-  }
-
   public HexByte rexPrefix() {
     return _rexPrefix;
-  }
-
-  public X86InstructionPrefix group1Prefix() {
-    return _group1Prefix;
-  }
-
-  public X86InstructionPrefix group2Prefix() {
-    return _group2Prefix;
   }
 
   public HexByte opcode1() {
