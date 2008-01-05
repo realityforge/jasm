@@ -13,6 +13,9 @@ import jasm.tools.Assembly;
 import jasm.tools.gen.as.AbstractGenerator;
 import jasm.tools.util.IndentWriter;
 import jasm.x86.dis2.AbstractDisassembler;
+import jasm.InstructionSet;
+import jasm.WordWidth;
+import jasm.dis.DecoderException;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
@@ -27,6 +30,27 @@ public abstract class DisassemblerGenerator<Assembly_Type extends Assembly<?>>
   protected DisassemblerGenerator(Assembly_Type assembly) {
     super(new File("."), "jasm." + assembly.instructionSet().name().toLowerCase() + ".dis2");
     _assembly = assembly;
+  }
+
+  protected IndentWriter fileProlog(final String name, final String parentClass, final Set<String> imports) throws IOException {
+    final IndentWriter writer = super.fileProlog(name, parentClass, imports);
+    printConstructor(writer, name);
+    return writer;
+  }
+
+  private void printConstructor(IndentWriter writer, String classSimpleName) {
+    final InstructionSet instructionSet = assembly().instructionSet();
+    final WordWidth[] wordWidths = instructionSet.wordWidths();
+    writer.print("protected " + classSimpleName + "(");
+    if (1 < wordWidths.length) writer.print("WordWidth addressSize");
+    writer.println(") {");
+    writer.indent();
+    writer.print("super(InstructionSet." + instructionSet.name());
+    if (1 == wordWidths.length) writer.print(", WordWidth." + wordWidths[0].name());
+    writer.println(");");
+    writer.outdent();
+    writer.println("}");
+    writer.println();
   }
 
   public final Assembly_Type assembly() {
@@ -47,7 +71,7 @@ public abstract class DisassemblerGenerator<Assembly_Type extends Assembly<?>>
       throws IOException {
     final Set<String> imports = getImports();
     final IndentWriter writer =
-        fileProlog(name, parentDisassemblerClass().getSimpleName(), imports);
+        fileProlog(name, parentDisassemblerClass().getName(), imports);
 
     generateBody(writer);
 
@@ -61,6 +85,8 @@ public abstract class DisassemblerGenerator<Assembly_Type extends Assembly<?>>
     imports.add("jasm");
     imports.add(parentDisassemblerClass().getPackage().getName());
     imports.add(Inline.class.getPackage().getName());
+    imports.add(DecoderException.class.getPackage().getName());
+    imports.add(IOException.class.getPackage().getName());
     return imports;
   }
 }
