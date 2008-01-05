@@ -140,7 +140,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
       }
     }
     writer.print(subroutine.name() + "( (byte)");
-    if (template.opcode2() != null) {
+    if (template.description().opcode2() != null) {
       writer.print(opcode2Value(template, inSubroutine));
     } else {
       writer.print(opcodeValue(template, inSubroutine));
@@ -199,10 +199,10 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
       writer.println("emitAddressSizePrefix();");
     }
     if (template.operandSizeAttribute() == WordWidth.BITS_16 ||
-        template.instructionDescription().hasOperandPrefix()) {
+        template.description().hasOperandPrefix()) {
       writer.println("emitOperandSizePrefix();");
     }
-    final X86InstructionPrefix group1Prefix = template.instructionDescription().mandatoryGroup1Prefix();
+    final X86InstructionPrefix group1Prefix = template.description().mandatoryGroup1Prefix();
     if (null != group1Prefix) writer.println("emitPrefix(X86InstructionPrefix." + group1Prefix.name() + ");");
   }
 
@@ -357,7 +357,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
                                final boolean inSubroutine) {
     printModVariants(writer, template, inSubroutine);
     printPrefixes(writer, template, inSubroutine);
-    if (template.opcode2() != null) {
+    if (template.description().opcode2() != null) {
       X86Parameter p = null;
       for (X86Parameter parameter : template.parameters()) {
         //Because we have several "faked" templates for instructions
@@ -367,10 +367,10 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
           break;
         }
       }
-      if (X86Opcode.isStandardOpcode2Prefix(template.opcode1())) {
+      if (X86Opcode.isStandardOpcode2Prefix(template.description().opcode1())) {
         writer.println("emitOpcode2(" + toOpCode(opcode2Value(template, inSubroutine), p, inSubroutine) + ");");
       } else {
-        writer.println("emitByte((byte)" + template.opcode1().toString() + ");");
+        writer.println("emitByte((byte)" + template.description().opcode1().toString() + ");");
         writer.println("emitByte(" + toOpCode(opcode2Value(template, inSubroutine), p, inSubroutine) + ");");
       }
     } else {
@@ -398,17 +398,17 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
 
   private String opcodeValue(final Template_Type template,
                              final boolean inSubroutine) {
-    return inSubroutine ? OPCODE1_VARIABLE_NAME : template.opcode1().toString();
+    return inSubroutine ? OPCODE1_VARIABLE_NAME : template.description().opcode1().toString();
   }
 
   private String opcode2Value(final Template_Type template,
                               final boolean inSubroutine) {
-    return inSubroutine ? OPCODE2_VARIABLE_NAME : template.opcode2().toString();
+    return inSubroutine ? OPCODE2_VARIABLE_NAME : template.description().opcode2().toString();
   }
 
   private void printSubRoutineArgList(final IndentWriter writer, final Template_Type template) {
     writer.print("(byte ");
-    if (template.opcode2() != null) {
+    if (template.description().opcode2() != null) {
       writer.print(OPCODE2_VARIABLE_NAME);
     } else {
       writer.print(OPCODE1_VARIABLE_NAME);
@@ -482,10 +482,10 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     writer.indent();
     if (null != subroutine) {
       writer.print(subroutine.name() + "(");
-      if (template.opcode2() != null) {
-        writer.print("(byte) " + HexUtil.toHexLiteral(template.opcode2().byteValue()));
+      if (template.description().opcode2() != null) {
+        writer.print("(byte) " + HexUtil.toHexLiteral(template.description().opcode2().byteValue()));
       } else {
-        writer.print("(byte) " + HexUtil.toHexLiteral(template.opcode1().byteValue()));
+        writer.print("(byte) " + HexUtil.toHexLiteral(template.description().opcode1().byteValue()));
       }
       if (template.modRMGroupOpcode() != null) {
         writer.print(", (byte) " + HexUtil.toHexLiteral(template.modRMGroupOpcode().value()));

@@ -174,7 +174,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template<Templa
 
   @Override
   protected final byte[] readExternalInstruction(PushbackInputStream externalInputStream, Template_Type template, byte[] internalBytes) throws IOException {
-    if (X86Opcode.isFloatingPointEscape(template.opcode1())) {
+    if (X86Opcode.isFloatingPointEscape(template.description().opcode1())) {
       // We skip FWAIT instructions that the external assembler may inject before floating point operations
       final int externalOpcode = externalInputStream.read();
       if (externalOpcode != X86Opcode.FP_WAIT.value()) {
@@ -195,7 +195,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template<Templa
           externalInputStream.unread(externalOpcode);
         }
       }
-      if (null == template.instructionDescription().operandPrefix()) {
+      if (null == template.description().operandPrefix()) {
         if (template.operandSizeAttribute() == externalCodeSizeAttribute && externalCodeSizeAttribute == WordWidth.BITS_16) {
           assert internalBytes[i] == X86InstructionPrefix.OPERAND_SIZE.getValue().byteValue();
           externalBytes[i++] = X86InstructionPrefix.OPERAND_SIZE.getValue().byteValue();
@@ -208,7 +208,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template<Templa
         }
       }
       if (externalCodeSizeAttribute != WordWidth.BITS_64 && template.operandSizeAttribute() == WordWidth.BITS_64 &&
-          template.instructionDescription().defaultOperandSize() != WordWidth.BITS_64) {
+          template.description().defaultOperandSize() != WordWidth.BITS_64) {
         assert 0x40 <= internalBytes[i] && internalBytes[i] <= 0x4F; // is REX prefix
         externalBytes[i] = internalBytes[i];
         i++;

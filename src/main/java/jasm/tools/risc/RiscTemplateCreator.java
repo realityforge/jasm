@@ -75,12 +75,12 @@ public abstract class RiscTemplateCreator<Template_Type extends RiscTemplate<Tem
         _nameToTemplates.add(template.internalName(), template);
 
         // Create the link to the non-synthetic instruction from which a synthetic instruction is derived.
-        if (template.instructionDescription().isSynthetic()) {
+        if (template.description().isSynthetic()) {
           boolean found = false;
           final Iterator<Template_Type> iterator = _nameToTemplates.iterator();
           while (iterator.hasNext() && !found) {
             final Template_Type rawTemplate = iterator.next();
-            if (!rawTemplate.instructionDescription().isSynthetic() && (template.opcodeMask() & rawTemplate.opcodeMask()) == rawTemplate.opcodeMask() &&
+            if (!rawTemplate.description().isSynthetic() && (template.opcodeMask() & rawTemplate.opcodeMask()) == rawTemplate.opcodeMask() &&
                 (template.opcode() & rawTemplate.opcodeMask()) == rawTemplate.opcode()) {
               template.setSynthesizedFrom(rawTemplate);
               found = true;

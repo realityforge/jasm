@@ -225,7 +225,7 @@ public final class IA32Template
       throws TemplateNotNeededException {
     switch (operandCode) {
       case Ap:
-        instructionDescription().beNotExternallyTestable(); // gas does not support cross-segment instructions
+        description().beNotExternallyTestable(); // gas does not support cross-segment instructions
         switch (context().addressSizeAttribute()) {
           case BITS_16:
             setExternalCodeSizeAttribute(context().addressSizeAttribute());
@@ -364,7 +364,7 @@ public final class IA32Template
             testArgumentExclusion);
         break;
       case Gov:
-        final ParameterPlace place = (opcode2() != null) ? ParameterPlace.OPCODE2 : ParameterPlace.OPCODE1;
+        final ParameterPlace place = (description().opcode2() != null) ? ParameterPlace.OPCODE2 : ParameterPlace.OPCODE1;
         switch (context().operandSizeAttribute()) {
           case BITS_16:
             addEnumerableParameter(designation, place, IA32GeneralRegister16.SYMBOLS).excludeTestArguments(

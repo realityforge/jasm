@@ -38,12 +38,12 @@ public abstract class RiscTemplate<Template_Type extends RiscTemplate<Template_T
   }
 
   @Override
-  public final RiscInstructionDescription instructionDescription() {
-    return (RiscInstructionDescription) super.instructionDescription();
+  public final RiscInstructionDescription description() {
+    return (RiscInstructionDescription) super.description();
   }
 
   public final void setSynthesizedFrom(RiscTemplate<Template_Type> synthesizedFrom) {
-    assert instructionDescription().isSynthetic();
+    assert description().isSynthetic();
     _synthesizedFrom = synthesizedFrom;
   }
 
@@ -125,7 +125,7 @@ public abstract class RiscTemplate<Template_Type extends RiscTemplate<Template_T
   }
 
   public final void organizeOption(Option option, RiscTemplate canonicalRepresentative) {
-    instructionDescription().setExternalName(externalName() + option.externalName());
+    description().setExternalName(externalName() + option.externalName());
     setInternalName(internalName() + option.name());
     try {
       _opcode |= option.field().bitRange().assembleUnsignedInt(option.value());

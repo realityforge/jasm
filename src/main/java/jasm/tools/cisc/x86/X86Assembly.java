@@ -51,9 +51,9 @@ public abstract class X86Assembly<Template_Type extends X86Template<Template_Typ
                                                                                                        Template_Type original,
                                                                                                        Class argumentType) {
     for (Template_Type candidate : templates) {
-      if (candidate.opcode1() == original.opcode1() && candidate.opcode2() == original.opcode2() &&
-          candidate.instructionDescription().operandPrefix() == original.instructionDescription().operandPrefix() &&
-          candidate.instructionDescription().mandatoryGroup1Prefix() == candidate.instructionDescription().mandatoryGroup1Prefix() &&
+      if (candidate.description().opcode1() == original.description().opcode1() && candidate.description().opcode2() == original.description().opcode2() &&
+          candidate.description().operandPrefix() == original.description().operandPrefix() &&
+          candidate.description().mandatoryGroup1Prefix() == candidate.description().mandatoryGroup1Prefix() &&
           candidate.modRMGroupOpcode() == original.modRMGroupOpcode() &&
           candidate.addressSizeAttribute() == original.addressSizeAttribute() &&
           candidate.operandSizeAttribute() == original.operandSizeAttribute() &&

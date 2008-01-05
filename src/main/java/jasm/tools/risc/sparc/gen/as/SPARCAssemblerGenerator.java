@@ -29,7 +29,7 @@ public final class SPARCAssemblerGenerator extends RiscAssemblerGenerator<SPARCT
   protected String getJavadocManualReference(SPARCTemplate template) {
     return
         "\"<a href=\"http://developers.sun.com/solaris/articles/sparcv9.pdf\">The SPARC Architecture Manual, Version 9</a> - Section " +
-        template.instructionDescription().architectureManualSection() +
+        template.description().architectureManualSection() +
         "\"";
   }
 }

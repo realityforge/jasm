@@ -54,7 +54,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate<
     writer.println("int instruction = " + HexUtil.toHexLiteral(template.opcode()) + ";");
 
     // Print argument constraint checking statements
-    final List<InstructionConstraint> constraints = template.instructionDescription().constraints();
+    final List<InstructionConstraint> constraints = template.description().constraints();
     for (InstructionConstraint constraint : constraints) {
       final String constraintExpr = constraint.asJavaExpression();
       writer.println("if( Config.ENABLE_CONSTRAINT_CHECKS && !(" + constraintExpr + ")) constraintFailed(\"" + constraintExpr + "\");");
@@ -99,7 +99,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate<
   protected final void printExtraMethodJavadoc(IndentWriter writer,
                                                Template_Type template,
                                                ArrayList<String> extraLinks) {
-    if (template.instructionDescription().isSynthetic()) {
+    if (template.description().isSynthetic()) {
       final RiscTemplate<Template_Type> rawTemplate = template.synthesizedFrom();
       final List<? extends Parameter> parameters = getParameters(rawTemplate);
       final String ref = rawTemplate.internalName() + "(" + formatParameterList("", parameters, true) + ")";
@@ -118,7 +118,7 @@ public abstract class RiscAssemblerGenerator<Template_Type extends RiscTemplate<
 
       writer.println(")}");
     }
-    final List<InstructionConstraint> constraints = template.instructionDescription().constraints();
+    final List<InstructionConstraint> constraints = template.description().constraints();
     if (!constraints.isEmpty()) {
       writer.println(" * <p>");
       for (InstructionConstraint constraint : constraints) {

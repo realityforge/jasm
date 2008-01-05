@@ -35,7 +35,7 @@ final class RiscFieldDisassembler<Template_Type extends Template> implements Ris
   public final String toString() {
     if (_string == null) {
       _string = "";
-      RiscInstructionDescriptionVisitor.Static.visitInstructionDescription(this, _template.instructionDescription());
+      RiscInstructionDescriptionVisitor.Static.visitInstructionDescription(this, _template.description());
     }
     return _string;
   }

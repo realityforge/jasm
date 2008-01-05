@@ -90,7 +90,7 @@ public abstract class RiscExternalInstruction implements RiscInstructionDescript
   public final String operands() {
     if (_operandsString == null) {
       _operandsString = "";
-      RiscInstructionDescriptionVisitor.Static.visitInstructionDescription(this, _template.instructionDescription());
+      RiscInstructionDescriptionVisitor.Static.visitInstructionDescription(this, _template.description());
     }
     return _operandsString;
   }

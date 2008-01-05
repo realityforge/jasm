@@ -249,7 +249,7 @@ public abstract class AssemblyTester<Template_Type extends Template<Template_Typ
         new BufferedInputStream(new ByteArrayInputStream(internalResult));
     final Disassembler_Type disassembler = createTestDisassembler();
     if (disassembler instanceof RiscDisassembler) {
-      final RiscInstructionDescription description = (RiscInstructionDescription) template.instructionDescription();
+      final RiscInstructionDescription description = (RiscInstructionDescription) template.description();
       ((RiscDisassembler) disassembler).setAbstractionPreference(description.isSynthetic() ? AbstractionPreference.SYNTHETIC : AbstractionPreference.RAW);
     }
     disassembler.setExpectedNumberOfArguments(argumentList.size());

@@ -62,8 +62,8 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   @Override
-  public final X86InstructionDescription instructionDescription() {
-    return (X86InstructionDescription) super.instructionDescription();
+  public final X86InstructionDescription description() {
+    return (X86InstructionDescription) super.description();
   }
 
   protected final X86TemplateContext context() {
@@ -78,24 +78,12 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
     _isLabelMethodWritten = labelMethodWritten;
   }
 
-  public final HexByte opcode1() {
-    return instructionDescription().opcode1();
-  }
-
-  public final HexByte opcode2() {
-    return instructionDescription().opcode2();
-  }
-
   public final boolean hasModRMByte() {
     return _hasModRMByte;
   }
 
   public final ModCase modCase() {
     return _context.modCase();
-  }
-
-  public final ModRMGroup modRMGroup() {
-    return instructionDescription().modRMGroup();
   }
 
   public final ModRMOpcode modRMGroupOpcode() {
@@ -145,8 +133,8 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
 
   @Override
   public final String externalName() {
-    if (instructionDescription().externalName() != null) {
-      return instructionDescription().externalName();
+    if (description().externalName() != null) {
+      return description().externalName();
     }
     String result = super.internalName();
     if (_externalOperandTypeSuffix != null) {
@@ -166,10 +154,10 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   @Override
   public final String toString() {
     return "<X86Template #" + serial() + ": " + internalName() + " " +
-           format(instructionDescription().mandatoryGroup1Prefix()) +
-           format(instructionDescription().hasOperandPrefix()? X86InstructionPrefix.OPERAND_SIZE : null) +
-           format(instructionDescription().opcode1()) +
-           format(instructionDescription().opcode2()) +
+           format(description().mandatoryGroup1Prefix()) +
+           format(description().hasOperandPrefix()? X86InstructionPrefix.OPERAND_SIZE : null) +
+           format(description().opcode1()) +
+           format(description().opcode2()) +
            _operands + ">";
   }
 
@@ -204,11 +192,11 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final boolean isExternalOperandOrderingInverted() {
-    return instructionDescription().isExternalOperandOrderingInverted();
+    return description().isExternalOperandOrderingInverted();
   }
 
   public final InstructionDescription modRMInstructionDescription() {
-    final ModRMGroup modRMGroup = instructionDescription().modRMGroup();
+    final ModRMGroup modRMGroup = description().modRMGroup();
     if (null == modRMGroup) {
       return null;
     }

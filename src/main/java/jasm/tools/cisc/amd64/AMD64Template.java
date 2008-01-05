@@ -426,7 +426,7 @@ public final class AMD64Template
         break;
       }
       case God_q: {
-        final ParameterPlace place = (opcode2() != null) ? ParameterPlace.OPCODE2_REXB : ParameterPlace.OPCODE1_REXB;
+        final ParameterPlace place = (description().opcode2() != null) ? ParameterPlace.OPCODE2_REXB : ParameterPlace.OPCODE1_REXB;
         switch (context().operandSizeAttribute()) {
           case BITS_32:
             addEnumerableParameter(designation, place, AMD64GeneralRegister32.SYMBOLS).excludeTestArguments(testArgumentExclusion);
@@ -440,7 +440,7 @@ public final class AMD64Template
         break;
       }
       case Gov:
-        final ParameterPlace place = (opcode2() != null) ? ParameterPlace.OPCODE2_REXB : ParameterPlace.OPCODE1_REXB;
+        final ParameterPlace place = (description().opcode2() != null) ? ParameterPlace.OPCODE2_REXB : ParameterPlace.OPCODE1_REXB;
         switch (context().operandSizeAttribute()) {
           case BITS_16:
             addEnumerableParameter(designation, place, AMD64GeneralRegister16.SYMBOLS).excludeTestArguments(testArgumentExclusion);
@@ -598,7 +598,7 @@ public final class AMD64Template
   }
 
   public final boolean hasRexPrefix(List<Argument> arguments) {
-    if (instructionDescription().defaultOperandSize() == WordWidth.BITS_64) {
+    if (description().defaultOperandSize() == WordWidth.BITS_64) {
       return false;
     }
     if (operandSizeAttribute() == WordWidth.BITS_64) {

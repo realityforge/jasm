@@ -462,13 +462,13 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
                                                                                                               final WordWidth addressWidth,
                                                                                                               final int opcode1Modifier,
                                                                                                               final int opcode2Modifier) {
-    final HexByte opcode1 = HexByte.values()[template.opcode1().value() + opcode1Modifier];
+    final HexByte opcode1 = HexByte.values()[template.description().opcode1().value() + opcode1Modifier];
     final HexByte opcode2 =
-        (template.opcode2() == null) ?
+        (template.description().opcode2() == null) ?
         null :
-        HexByte.values()[template.opcode2().value() + opcode2Modifier];
+        HexByte.values()[template.description().opcode2().value() + opcode2Modifier];
 
-    final X86InstructionPrefix isp = template.instructionDescription().operandPrefix();
+    final X86InstructionPrefix isp = template.description().operandPrefix();
     X86InstructionPrefix operandSizePrefix = (isp != null) ? isp : null;
     if (template.operandSizeAttribute() == WordWidth.BITS_16) {
       assert operandSizePrefix == null;
@@ -480,7 +480,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
                                     template.addressSizeAttribute() != addressWidth,
                                     operandSizePrefix,
                                     null,
-                                    template.instructionDescription().mandatoryGroup1Prefix(),
+                                    template.description().mandatoryGroup1Prefix(),
                                     null);
   }
 }

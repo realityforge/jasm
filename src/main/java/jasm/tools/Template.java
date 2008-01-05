@@ -41,7 +41,7 @@ public abstract class Template<Template_Type extends Template<Template_Type>>
     _serial = serial;
   }
 
-  public InstructionDescription<?> instructionDescription() {
+  public InstructionDescription<?> description() {
     return _instructionDescription;
   }
 

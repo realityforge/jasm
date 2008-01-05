@@ -72,7 +72,7 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate<Templa
   }
 
   private boolean isLegalArgumentList(Template_Type template, List<Argument> arguments) {
-    final List<InstructionConstraint> constraints = template.instructionDescription().constraints();
+    final List<InstructionConstraint> constraints = template.description().constraints();
     for (InstructionConstraint constraint : constraints) {
       if (!(constraint.check(template, arguments))) {
         return false;
@@ -106,7 +106,7 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate<Templa
         for (Template_Type template : opcodeMaskGroup.templatesFor(opcode)) {
           // Skip synthetic instructions when preference is for raw instructions,
           // and skip instructions with a different number of arguments than requested if so (i.e. when running the AssemblyTester):
-          if (template != null && template.isDisassemblable() && ((abstractionPreference() == AbstractionPreference.SYNTHETIC) || !template.instructionDescription().isSynthetic())) {
+          if (template != null && template.isDisassemblable() && ((abstractionPreference() == AbstractionPreference.SYNTHETIC) || !template.description().isSynthetic())) {
             final List<Argument> arguments = disassemble(instruction, template);
             if (arguments != null && (expectedNumberOfArguments() < 0 || arguments.size() == expectedNumberOfArguments())) {
               if (isLegalArgumentList(template, arguments)) {
@@ -148,7 +148,7 @@ public abstract class RiscDisassembler<Template_Type extends RiscTemplate<Templa
         boolean foundSyntheticDisassembledInstruction = false;
         if (abstractionPreference() == AbstractionPreference.SYNTHETIC) {
           for (DisassembledInstruction_Type disassembledInstruction : disassembledInstructions) {
-            if (disassembledInstruction.template().instructionDescription().isSynthetic()) {
+            if (disassembledInstruction.template().description().isSynthetic()) {
               result.add(disassembledInstruction);
               foundSyntheticDisassembledInstruction = true;
               break;

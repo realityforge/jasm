@@ -40,7 +40,7 @@ public final class AMD64AssemblerGenerator
 
   private boolean isWBitRequired(final X86Template template) {
     return template.operandSizeAttribute() == WordWidth.BITS_64 &&
-           template.instructionDescription().defaultOperandSize() != WordWidth.BITS_64;
+           template.description().defaultOperandSize() != WordWidth.BITS_64;
   }
 
   private void checkGeneralRegister8Values(IndentWriter writer, AMD64Template template) {

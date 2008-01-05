@@ -92,7 +92,7 @@ public abstract class RiscInstructionDescriptionCreator
 
   private RiscInstructionDescription createSyntheticInstructionDescription(String name, RiscTemplate template, Object[] patterns) {
     final ArrayList<Object> specifications = new ArrayList<Object>();
-    specifications.addAll(template.instructionDescription().specifications());
+    specifications.addAll(template.description().specifications());
     for (Object pattern : patterns) {
       if (!updateSpecifications(specifications, pattern)) {
         // InstructionDescription with the same name, but different specifications, skip it:

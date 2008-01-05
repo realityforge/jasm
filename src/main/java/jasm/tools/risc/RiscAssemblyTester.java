@@ -46,7 +46,7 @@ public abstract class RiscAssemblyTester<Template_Type extends RiscTemplate<Temp
 
   @Override
   protected final boolean isLegalArgumentList(Template_Type template, List<Argument> arguments) {
-    final List<InstructionConstraint> constraints = template.instructionDescription().constraints();
+    final List<InstructionConstraint> constraints = template.description().constraints();
     for (InstructionConstraint constraint : constraints) {
       if (!(constraint.check(template, arguments))) {
         return false;

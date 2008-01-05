@@ -39,7 +39,7 @@ public final class PPCAssemblerGenerator
 
   @Override
   protected String getJavadocManualReference(PPCTemplate template) {
-    String section = template.instructionDescription().architectureManualSection();
+    String section = template.description().architectureManualSection();
     if (section.indexOf("[Book ") == -1) {
       section += " [Book 1]";
     }
