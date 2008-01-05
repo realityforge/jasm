@@ -103,7 +103,7 @@ public abstract class X86Disassembler<Template_Type extends X86Template<Template
             if (hasAddressSizePrefix) {
               throw new DecoderException("Multiple group 4 prefixes specified");
             }
-            hasAddressSizePrefix = false;
+            hasAddressSizePrefix = true;
           }
           matched = true;
           break;
