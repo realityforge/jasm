@@ -34,7 +34,6 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   private static final int MAX_NUM_OF_IMPLICIT_OPERANDS = 3;
   private static final int MAX_NUM_OF_PARAMETERS = 3;
 
-  private final boolean _hasModRMByte;
   private final X86TemplateContext _context;
   private ArrayList<X86Operand> _operands = new ArrayList<X86Operand>(MAX_NUM_OF_OPERANDS);
   private ArrayList<X86ImplicitOperand> _implicitOperands = new ArrayList<X86ImplicitOperand>(MAX_NUM_OF_IMPLICIT_OPERANDS);
@@ -47,12 +46,10 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
 
   protected X86Template(X86InstructionDescription instructionDescription,
                         int serial,
-                        boolean hasModRMByte,
                         X86TemplateContext context) {
     super(instructionDescription, serial);
     final String name = instructionDescription.name();
     if (null != name) setInternalName(name);
-    _hasModRMByte = hasModRMByte;
     _context = context;
     Trace.line(2, "template #" + serial + ": " + context);
   }
@@ -67,7 +64,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final boolean hasModRMByte() {
-    return _hasModRMByte;
+    return null != context().modCase();
   }
 
   public final ModCase modCase() {

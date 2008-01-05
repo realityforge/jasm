@@ -23,8 +23,7 @@ public final class AMD64TemplateCreator
   @Override
   protected final AMD64Template createTemplate(X86InstructionDescription instructionDescription,
                                                int serial,
-                                               boolean hasModRMByte,
                                                X86TemplateContext context) {
-    return new AMD64Template(instructionDescription, serial, hasModRMByte, context);
+    return new AMD64Template(instructionDescription, serial, context);
   }
 }

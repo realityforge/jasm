@@ -41,13 +41,13 @@ public abstract class X86TemplateCreator<Template_Type extends X86Template<Templ
     return false;
   }
 
-  protected abstract Template_Type createTemplate(X86InstructionDescription instructionDescription, int serial, boolean hasModRMByte, X86TemplateContext context);
+  protected abstract Template_Type createTemplate(X86InstructionDescription instructionDescription, int serial, X86TemplateContext context);
 
   private void createTemplate() {
     if (_instructionDescription.hasOperandPrefix() && _context.operandSizeAttribute() == WordWidth.BITS_16) {
       return;
     }
-    final Template_Type template = createTemplate(_instructionDescription, _serial, _instructionAssessment.hasModRMByte(), _context);
+    final Template_Type template = createTemplate(_instructionDescription, _serial, _context);
     if (X86InstructionDescriptionVisitor.Static.visitInstructionDescription(template, _instructionDescription)) {
       final InstructionDescription modRMInstructionDescription = template.modRMInstructionDescription();
       if (modRMInstructionDescription != null &&

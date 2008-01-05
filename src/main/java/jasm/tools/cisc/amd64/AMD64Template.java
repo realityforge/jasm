@@ -53,9 +53,8 @@ public final class AMD64Template
 
   AMD64Template(X86InstructionDescription instructionDescription,
                 int serial,
-                boolean hasModRMByte,
                 X86TemplateContext context) {
-    super(instructionDescription, serial, hasModRMByte, context);
+    super(instructionDescription, serial, context);
   }
 
   private void addSib(Designation designation) throws TemplateNotNeededException {

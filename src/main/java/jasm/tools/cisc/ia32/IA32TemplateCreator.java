@@ -22,8 +22,7 @@ public final class IA32TemplateCreator extends X86TemplateCreator<IA32Template> 
   @Override
   protected final IA32Template createTemplate(X86InstructionDescription instructionDescription,
                                               int serial,
-                                              boolean hasModRMByte,
                                               X86TemplateContext context) {
-    return new IA32Template(instructionDescription, serial, hasModRMByte, context);
+    return new IA32Template(instructionDescription, serial, context);
   }
 }
