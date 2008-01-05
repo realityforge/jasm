@@ -94,7 +94,7 @@ public final class X86InstructionDescription
   }
 
   public X86InstructionDescription mandatoryGroup1Prefix(X86InstructionPrefix mandatoryGroup1Prefix) {
-    if( mandatoryGroup1Prefix.getGroup() != 1 ) throw new IllegalArgumentException();
+    if (mandatoryGroup1Prefix.getGroup() != 1) throw new IllegalArgumentException();
     _mandatoryGroup1Prefix = mandatoryGroup1Prefix;
     return this;
   }

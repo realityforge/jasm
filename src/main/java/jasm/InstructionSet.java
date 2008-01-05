@@ -38,7 +38,7 @@ public enum InstructionSet {
     _wordWidths = Collections.unmodifiableCollection(Arrays.asList(wordWidths));
   }
 
-  public WordWidth[] wordWidths() { 
+  public WordWidth[] wordWidths() {
     return _wordWidths.toArray(new WordWidth[_wordWidths.size()]);
   }
 
