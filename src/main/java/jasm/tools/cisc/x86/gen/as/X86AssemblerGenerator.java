@@ -198,19 +198,12 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
     if (template.addressSizeAttribute() != _addressWidth) {
       writer.println("emitAddressSizePrefix();");
     }
-    if (template.operandSizeAttribute() == WordWidth.BITS_16) {
+    if (template.operandSizeAttribute() == WordWidth.BITS_16 ||
+        template.instructionDescription().hasOperandPrefix()) {
       writer.println("emitOperandSizePrefix();");
     }
-    final X86InstructionPrefix prefix = template.instructionSelectionPrefix();
-    if (prefix != null) {
-      if (prefix == X86InstructionPrefix.OPERAND_SIZE) {
-        writer.println("emitOperandSizePrefix();");
-      } else if (prefix == X86InstructionPrefix.ADDRESS_SIZE) {
-        writer.println("emitAddressSizePrefix();");
-      } else {
-        writer.println("emitPrefix(X86InstructionPrefix." + prefix.name() + ");");
-      }
-    }
+    final X86InstructionPrefix group1Prefix = template.instructionDescription().mandatoryGroup1Prefix();
+    if (null != group1Prefix) writer.println("emitPrefix(X86InstructionPrefix." + group1Prefix.name() + ");");
   }
 
   protected final String asValueInSubroutine(final X86Parameter parameter,

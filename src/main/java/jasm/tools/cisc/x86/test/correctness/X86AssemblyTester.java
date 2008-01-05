@@ -195,7 +195,7 @@ public abstract class X86AssemblyTester<Template_Type extends X86Template<Templa
           externalInputStream.unread(externalOpcode);
         }
       }
-      if (template.instructionSelectionPrefix() != X86InstructionPrefix.OPERAND_SIZE) {
+      if (null == template.instructionDescription().operandPrefix()) {
         if (template.operandSizeAttribute() == externalCodeSizeAttribute && externalCodeSizeAttribute == WordWidth.BITS_16) {
           assert internalBytes[i] == X86InstructionPrefix.OPERAND_SIZE.getValue().byteValue();
           externalBytes[i++] = X86InstructionPrefix.OPERAND_SIZE.getValue().byteValue();

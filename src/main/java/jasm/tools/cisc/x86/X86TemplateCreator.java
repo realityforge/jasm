@@ -12,7 +12,6 @@ import jasm.WordWidth;
 import jasm.tools.InstructionDescription;
 import jasm.tools.InstructionDescriptionCreator;
 import jasm.tools.Trace;
-import jasm.x86.X86InstructionPrefix;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,8 +44,7 @@ public abstract class X86TemplateCreator<Template_Type extends X86Template<Templ
   protected abstract Template_Type createTemplate(X86InstructionDescription instructionDescription, int serial, boolean hasModRMByte, X86TemplateContext context);
 
   private void createTemplate() {
-    if (_instructionDescription.getMandatoryPrefix() == X86InstructionPrefix.OPERAND_SIZE &&
-        _context.operandSizeAttribute() == WordWidth.BITS_16) {
+    if (_instructionDescription.hasOperandPrefix() && _context.operandSizeAttribute() == WordWidth.BITS_16) {
       return;
     }
     final Template_Type template = createTemplate(_instructionDescription, _serial, _instructionAssessment.hasModRMByte(), _context);

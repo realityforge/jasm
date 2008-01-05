@@ -78,10 +78,6 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
     _isLabelMethodWritten = labelMethodWritten;
   }
 
-  public final X86InstructionPrefix instructionSelectionPrefix() {
-    return instructionDescription().getMandatoryPrefix();
-  }
-
   public final HexByte opcode1() {
     return instructionDescription().opcode1();
   }
@@ -170,7 +166,8 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   @Override
   public final String toString() {
     return "<X86Template #" + serial() + ": " + internalName() + " " +
-           format(instructionDescription().getMandatoryPrefix()) +
+           format(instructionDescription().mandatoryGroup1Prefix()) +
+           format(instructionDescription().hasOperandPrefix()? X86InstructionPrefix.OPERAND_SIZE : null) +
            format(instructionDescription().opcode1()) +
            format(instructionDescription().opcode2()) +
            _operands + ">";

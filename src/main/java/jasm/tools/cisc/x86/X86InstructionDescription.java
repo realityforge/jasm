@@ -19,7 +19,8 @@ public final class X86InstructionDescription
 
   private boolean _isExternalOperandOrderingInverted = true;
   private WordWidth _defaultOperandSize = WordWidth.BITS_32;
-  private X86InstructionPrefix _mandatoryPrefix;
+  private X86InstructionPrefix _operandPrefix;
+  private X86InstructionPrefix _mandatoryGroup1Prefix;
   private WordWidth _requiredAddressSize;
   private WordWidth _requiredOperandSize;
   /** true if descriptor represenets a a prefix rather than an instruction. */
@@ -75,12 +76,26 @@ public final class X86InstructionDescription
     return _defaultOperandSize;
   }
 
-  public X86InstructionPrefix getMandatoryPrefix() {
-    return _mandatoryPrefix;
+  public boolean hasOperandPrefix() {
+    return null != _operandPrefix;
   }
 
-  public X86InstructionDescription setMandatoryPrefix(X86InstructionPrefix mandatoryPrefix) {
-    _mandatoryPrefix = mandatoryPrefix;
+  public X86InstructionPrefix operandPrefix() {
+    return _operandPrefix;
+  }
+
+  public X86InstructionDescription requireOperandPrefix() {
+    _operandPrefix = X86InstructionPrefix.OPERAND_SIZE;
+    return this;
+  }
+
+  public X86InstructionPrefix mandatoryGroup1Prefix() {
+    return _mandatoryGroup1Prefix;
+  }
+
+  public X86InstructionDescription mandatoryGroup1Prefix(X86InstructionPrefix mandatoryGroup1Prefix) {
+    if( mandatoryGroup1Prefix.getGroup() != 1 ) throw new IllegalArgumentException();
+    _mandatoryGroup1Prefix = mandatoryGroup1Prefix;
     return this;
   }
 
