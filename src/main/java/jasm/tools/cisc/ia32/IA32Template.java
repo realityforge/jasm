@@ -52,7 +52,6 @@ public final class IA32Template
 
   private void addSib(Designation designation) throws TemplateNotNeededException {
     assert context().addressSizeAttribute() != WordWidth.BITS_16;
-    haveSibByte();
     switch (context().sibBaseCase()) {
       case GENERAL_REGISTER: {
         switch (context().modCase()) {

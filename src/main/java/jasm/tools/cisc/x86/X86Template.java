@@ -35,7 +35,6 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   private static final int MAX_NUM_OF_PARAMETERS = 3;
 
   private final boolean _hasModRMByte;
-  private boolean _hasSibByte;
   private final X86TemplateContext _context;
   private ModRMOpcode _modRMGroupOpcode;
   private ArrayList<X86Operand> _operands = new ArrayList<X86Operand>(MAX_NUM_OF_OPERANDS);
@@ -85,11 +84,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final boolean hasSibByte() {
-    return _hasSibByte;
-  }
-
-  protected final void haveSibByte() {
-    _hasSibByte = true;
+    return context().rmCase() == RMCase.SIB;
   }
 
   public final SibBaseCase sibBaseCase() {
