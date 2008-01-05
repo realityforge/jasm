@@ -80,7 +80,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final boolean hasSibByte() {
-    return context().rmCase() == RMCase.SIB;
+    return rmCase() == RMCase.SIB;
   }
 
   public final SibBaseCase sibBaseCase() {
