@@ -38,11 +38,11 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashSet;
 
 public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Template_Type>>
     extends AssemblerGenerator<Template_Type> {

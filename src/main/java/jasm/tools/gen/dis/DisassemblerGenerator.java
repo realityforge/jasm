@@ -8,14 +8,14 @@
  */
 package jasm.tools.gen.dis;
 
+import jasm.InstructionSet;
+import jasm.WordWidth;
 import jasm.annotations.Inline;
+import jasm.dis.DecoderException;
 import jasm.tools.Assembly;
 import jasm.tools.gen.as.AbstractGenerator;
 import jasm.tools.util.IndentWriter;
 import jasm.x86.dis2.AbstractDisassembler;
-import jasm.InstructionSet;
-import jasm.WordWidth;
-import jasm.dis.DecoderException;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
