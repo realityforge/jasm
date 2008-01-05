@@ -36,7 +36,6 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
 
   private final boolean _hasModRMByte;
   private final X86TemplateContext _context;
-  private ModRMOpcode _modRMGroupOpcode;
   private ArrayList<X86Operand> _operands = new ArrayList<X86Operand>(MAX_NUM_OF_OPERANDS);
   private ArrayList<X86ImplicitOperand> _implicitOperands = new ArrayList<X86ImplicitOperand>(MAX_NUM_OF_IMPLICIT_OPERANDS);
   private ArrayList<X86Parameter> _parameters = new ArrayList<X86Parameter>(MAX_NUM_OF_PARAMETERS);
@@ -76,7 +75,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final ModRMOpcode modRMGroupOpcode() {
-    return _modRMGroupOpcode;
+    return context().modRMGroupOpcode();
   }
 
   public final RMCase rmCase() {
@@ -184,7 +183,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
     if (null == modRMGroup) {
       return null;
     }
-    return modRMGroup.getDescription(_modRMGroupOpcode);
+    return modRMGroup.getDescription(modRMGroupOpcode());
   }
 
   protected final void addParameter(X86Parameter parameter, ArgumentRange argumentRange) {
@@ -302,11 +301,8 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final void visitModRMGroup(ModRMGroup modRMGroup) throws TemplateNotNeededException {
-    final ModRMDescription instructionDescription = modRMGroup.getDescription(_context.modRMGroupOpcode());
-    if (instructionDescription == null) {
-      throw new TemplateNotNeededException();
-    }
-    _modRMGroupOpcode = instructionDescription.opcode();
+    final ModRMDescription instructionDescription = modRMGroup.getDescription(context().modRMGroupOpcode());
+    if (instructionDescription == null) throw new TemplateNotNeededException();
     setInternalName(instructionDescription.name());
   }
 
