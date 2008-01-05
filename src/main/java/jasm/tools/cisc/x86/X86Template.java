@@ -19,7 +19,6 @@ import jasm.tools.Template;
 import jasm.tools.TestArgumentExclusion;
 import jasm.tools.Trace;
 import jasm.tools.cisc.TemplateNotNeededException;
-import jasm.util.HexByte;
 import jasm.x86.FPStackRegister;
 import jasm.x86.GeneralRegister;
 import jasm.x86.SegmentRegister;
@@ -42,7 +41,6 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   private ArrayList<X86Operand> _operands = new ArrayList<X86Operand>(MAX_NUM_OF_OPERANDS);
   private ArrayList<X86ImplicitOperand> _implicitOperands = new ArrayList<X86ImplicitOperand>(MAX_NUM_OF_IMPLICIT_OPERANDS);
   private ArrayList<X86Parameter> _parameters = new ArrayList<X86Parameter>(MAX_NUM_OF_PARAMETERS);
-  private boolean _isLabelMethodWritten;
   private String _namePrefix = "";
   private String _assemblerMethodName;
   private String _internalOperandTypeSuffix;
@@ -70,20 +68,12 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
     return _context;
   }
 
-  public boolean isLabelMethodWritten() {
-    return _isLabelMethodWritten;
-  }
-
-  public void setLabelMethodWritten(final boolean labelMethodWritten) {
-    _isLabelMethodWritten = labelMethodWritten;
-  }
-
   public final boolean hasModRMByte() {
     return _hasModRMByte;
   }
 
   public final ModCase modCase() {
-    return _context.modCase();
+    return context().modCase();
   }
 
   public final ModRMOpcode modRMGroupOpcode() {
@@ -91,7 +81,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final RMCase rmCase() {
-    return _context.rmCase();
+    return context().rmCase();
   }
 
   public final boolean hasSibByte() {
@@ -103,15 +93,15 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final SibBaseCase sibBaseCase() {
-    return _context.sibBaseCase();
+    return context().sibBaseCase();
   }
 
   public final WordWidth addressSizeAttribute() {
-    return _context.addressSizeAttribute();
+    return context().addressSizeAttribute();
   }
 
   public final WordWidth operandSizeAttribute() {
-    return _context.operandSizeAttribute();
+    return context().operandSizeAttribute();
   }
 
   public final WordWidth externalCodeSizeAttribute() {
@@ -143,21 +133,20 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
     return result;
   }
 
-  private String format(X86InstructionPrefix parameter) {
-    return parameter == null ? "" : parameter.getValue().toString() + ", ";
-  }
-
-  private String format(HexByte parameter) {
-    return parameter == null ? "" : parameter.toString() + ", ";
-  }
-
   @Override
   public final String toString() {
+    final X86InstructionDescription d = description();
+    final X86InstructionPrefix group1Prefix = d.mandatoryGroup1Prefix();
+    final String group1PrefixDesc = group1Prefix == null ? "" : group1Prefix.getValue() + ", ";
+    final String operandPrefixDesc =
+        d.hasOperandPrefix() ? X86InstructionPrefix.OPERAND_SIZE.getValue() + ", " : "";
+
+    final String opcode2Desc = d.opcode2() == null ? "" : d.opcode2() + ", ";
     return "<X86Template #" + serial() + ": " + internalName() + " " +
-           format(description().mandatoryGroup1Prefix()) +
-           format(description().hasOperandPrefix()? X86InstructionPrefix.OPERAND_SIZE : null) +
-           format(description().opcode1()) +
-           format(description().opcode2()) +
+           group1PrefixDesc +
+           operandPrefixDesc +
+           d.opcode1() +
+           opcode2Desc +
            _operands + ">";
   }
 
