@@ -42,6 +42,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.HashSet;
 
 public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Template_Type>>
     extends AssemblerGenerator<Template_Type> {
@@ -63,6 +64,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
   private final Map<Template_Type, Subroutine<Template_Type>> _templateToSubroutine = new HashMap<Template_Type, Subroutine<Template_Type>>();
   /** Map of generated code to subroutine. Only used during {@link #buildSubroutines()}. */
   private final Map<String, Subroutine<Template_Type>> _code2SubroutineMap = new HashMap<String, Subroutine<Template_Type>>();
+  private final HashSet<Template_Type> _writtenLabelMethods = new HashSet<Template_Type>();
   private boolean _buildingRequiredSubroutineMaps;
 
   protected X86AssemblerGenerator(Assembly<Template_Type> assembly,
@@ -549,7 +551,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
             (X86NumericalParameter) t.parameters().get(template.labelParameterIndex());
         final WordWidth width = numericalParameter.width();
         array[width.ordinal()] = new LabelWidthCase<Template_Type>(width, t);
-        t.setLabelMethodWritten(true);
+        _writtenLabelMethods.add(t);
       }
     }
     // Report the found cases in the order of ascending width:
@@ -613,7 +615,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
 
   private void printAddressLabelMethod(IndentWriter writer, Template_Type template) {
     final List<? extends Parameter> parameters = printLabelMethodHead(writer, template);
-    template.setLabelMethodWritten(true);
+    _writtenLabelMethods.add(template);
     writer.println("final int startOffset = currentOffset();");
     printInitialRawCall(writer, template);
     writer.print("new " + LabelAddressInstruction.class.getSimpleName());
@@ -637,7 +639,7 @@ public abstract class X86AssemblerGenerator<Template_Type extends X86Template<Te
   @Override
   protected final void printLabelMethod(IndentWriter writer, Template_Type labelTemplate, List<Template_Type> labelTemplates) {
     if (labelTemplate.addressSizeAttribute() == _addressWidth) {
-      if (!labelTemplate.isLabelMethodWritten()) {
+      if (!_writtenLabelMethods.contains(labelTemplate)) {
         final X86Parameter parameter = labelTemplate.parameters().get(labelTemplate.labelParameterIndex());
         if (parameter instanceof X86OffsetParameter) {
           printOffsetLabelMethod(writer, labelTemplate, labelTemplates);
