@@ -10,3 +10,5 @@ Without further ado...
   * [Using Use the project]
   * [Testing Test the assemblers]
   * [Contributing Contribute to the project]
+
+For more detailed information about the framework it may be useful to read the [http://portal.acm.org/citation.cfm?id=1168054.1168056 paper describing PMAS]. Unfortunately , at this time you need to me a member of the ACM digital library to get access to the paper. 
