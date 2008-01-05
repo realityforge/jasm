@@ -14,7 +14,6 @@ import jasm.SymbolicArgument;
 import jasm.tools.ArgumentRange;
 import jasm.tools.AssemblyTestComponent;
 import jasm.tools.TestArgumentExclusion;
-import jasm.tools.WrappableSpecification;
 import jasm.tools.risc.RiscConstant;
 import jasm.tools.risc.bitRange.BitRange;
 import jasm.tools.risc.bitRange.BitRangeOrder;
@@ -22,7 +21,8 @@ import jasm.tools.util.CollectionUtil;
 import jasm.util.StaticLoophole;
 import java.util.Collections;
 
-public final class SymbolicOperandField<Argument_Type extends SymbolicArgument> extends OperandField<Argument_Type> implements WrappableSpecification {
+public final class SymbolicOperandField<Argument_Type extends SymbolicArgument>
+    extends OperandField<Argument_Type> {
 
   private final SymbolSet<Argument_Type> _symbols;
 

@@ -120,7 +120,12 @@ public interface X86InstructionDescriptionVisitor {
 
         for (Object specification : specs) {
           final Designation designation = Designation.values()[designationIndex];
-          if (visitSpecification(visitor, specification, designation, ArgumentRange.UNSPECIFIED, TestArgumentExclusion.NONE, ExternalPresence.EXPLICIT)) {
+          if (visitSpecification(visitor,
+                                 specification,
+                                 designation,
+                                 ArgumentRange.UNSPECIFIED,
+                                 TestArgumentExclusion.NONE,
+                                 ExternalPresence.EXPLICIT)) {
             designationIndex++;
           }
         }

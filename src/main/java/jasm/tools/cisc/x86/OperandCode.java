@@ -13,7 +13,6 @@ import jasm.SymbolSet;
 import jasm.tools.ArgumentRange;
 import jasm.tools.AssemblyTestComponent;
 import jasm.tools.TestArgumentExclusion;
-import jasm.tools.WrappableSpecification;
 import static jasm.tools.cisc.x86.AddressingMethodCode.*;
 import static jasm.tools.cisc.x86.OperandTypeCode.*;
 import jasm.tools.util.CollectionUtil;
@@ -21,7 +20,7 @@ import jasm.util.StaticLoophole;
 import java.util.HashSet;
 import java.util.Set;
 
-public enum OperandCode implements WrappableSpecification {
+public enum OperandCode {
 
   Ap(A, p),
   Cd(C, d),

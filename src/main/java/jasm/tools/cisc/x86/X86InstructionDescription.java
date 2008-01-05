@@ -132,4 +132,20 @@ public final class X86InstructionDescription
     _requiredOperandSize = requiredOperandSize;
     return this;
   }
+
+  @Override
+  public String toString() {
+    final X86InstructionPrefix group1Prefix = mandatoryGroup1Prefix();
+    final String group1PrefixDesc = group1Prefix == null ? "" : group1Prefix.getValue() + ", ";
+    final String operandPrefixDesc =
+        hasOperandPrefix() ? X86InstructionPrefix.OPERAND_SIZE.getValue() + ", " : "";
+
+    final String opcode2Desc = opcode2() == null ? "" : opcode2() + ", ";
+    return "<X86InstructionDesc #" + serial() + ": " + name() + " " +
+           group1PrefixDesc +
+           operandPrefixDesc +
+           opcode1() + ", " +
+           opcode2Desc +
+           specifications() + ">";
+  }
 }

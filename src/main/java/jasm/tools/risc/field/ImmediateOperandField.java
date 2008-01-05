@@ -17,7 +17,6 @@ import jasm.tools.InstructionConstraint;
 import jasm.tools.Parameter;
 import jasm.tools.Template;
 import jasm.tools.TestArgumentExclusion;
-import jasm.tools.WrappableSpecification;
 import jasm.tools.risc.bitRange.AscendingBitRange;
 import jasm.tools.risc.bitRange.BitRange;
 import jasm.tools.risc.bitRange.BitRangeOrder;
@@ -29,7 +28,7 @@ import java.util.List;
 /** A field that contains an immediate value. */
 public class ImmediateOperandField
     extends OperandField<ImmediateArgument>
-    implements ImmediateParameter, WrappableSpecification, InstructionConstraint {
+    implements ImmediateParameter, InstructionConstraint {
 
   public String asJavaExpression() {
     final String value = valueString();

@@ -11,10 +11,9 @@ package jasm.tools.cisc.x86;
 import jasm.Argument;
 import jasm.tools.AssemblyTestComponent;
 import jasm.tools.TestArgumentExclusion;
-import jasm.tools.WrappableSpecification;
 import jasm.tools.util.CollectionUtil;
 
-public enum FloatingPointOperandCode implements WrappableSpecification {
+public enum FloatingPointOperandCode {
   bytes_2(""),
   bytes_14_28(""),
   bytes_98_108(""),

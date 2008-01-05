@@ -15,11 +15,14 @@ import java.util.Set;
 
 public final class TestArgumentExclusion {
 
+  public static final TestArgumentExclusion NONE = none();
+
   private final AssemblyTestComponent _component;
-  private final WrappableSpecification _specification;
+  private final Object _specification;
   private final Set<Argument> _arguments;
 
-  public TestArgumentExclusion(AssemblyTestComponent component, WrappableSpecification specification,
+  public TestArgumentExclusion(AssemblyTestComponent component,
+                               Object specification,
                                Set<Argument> arguments) {
     _component = component;
     _specification = specification;
@@ -30,7 +33,7 @@ public final class TestArgumentExclusion {
     return _component;
   }
 
-  public final WrappableSpecification wrappedSpecification() {
+  public final Object wrappedSpecification() {
     return _specification;
   }
 
@@ -40,12 +43,6 @@ public final class TestArgumentExclusion {
 
   private static TestArgumentExclusion none() {
     final Set<Argument> args = StaticLoophole.cast(Collections.emptySet());
-    return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, new WrappableSpecification() {
-      public TestArgumentExclusion excludeExternalTestArguments(Argument... arguments) {
-        return TestArgumentExclusion.NONE;
-      }
-    }, args);
+    return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, null, args);
   }
-
-  public static final TestArgumentExclusion NONE = none();
 }

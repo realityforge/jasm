@@ -11,18 +11,20 @@ package jasm.tools;
 import jasm.Argument;
 
 public final class ArgumentRange {
+  public static final ArgumentRange UNSPECIFIED = null;
 
-  private final WrappableSpecification _specification;
+  private boolean _appliesInternally = true;
+  private final Object _specification;
   private final long _minValue;
   private final long _maxValue;
 
-  public ArgumentRange(WrappableSpecification specification, long minValue, long maxValue) {
+  public ArgumentRange(Object specification, long minValue, long maxValue) {
     _specification = specification;
     _minValue = minValue;
     _maxValue = maxValue;
   }
 
-  public final WrappableSpecification wrappedSpecification() {
+  public final Object wrappedSpecification() {
     return _specification;
   }
 
@@ -38,8 +40,6 @@ public final class ArgumentRange {
     return _minValue <= argument.asLong() && argument.asLong() <= _maxValue;
   }
 
-  private boolean _appliesInternally = true;
-
   public final boolean appliesInternally() {
     return _appliesInternally;
   }
@@ -47,6 +47,4 @@ public final class ArgumentRange {
   public final void doNotApplyInternally() {
     _appliesInternally = false;
   }
-
-  public static final ArgumentRange UNSPECIFIED = null;
 }
