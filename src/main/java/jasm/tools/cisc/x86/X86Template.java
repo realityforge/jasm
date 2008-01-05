@@ -38,7 +38,6 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   private final boolean _hasModRMByte;
   private boolean _hasSibByte;
   private final X86TemplateContext _context;
-  private final X86InstructionPrefix _instructionSelectionPrefix;
   private ModRMOpcode _modRMGroupOpcode;
   private ArrayList<X86Operand> _operands = new ArrayList<X86Operand>(MAX_NUM_OF_OPERANDS);
   private ArrayList<X86ImplicitOperand> _implicitOperands = new ArrayList<X86ImplicitOperand>(MAX_NUM_OF_IMPLICIT_OPERANDS);
@@ -58,7 +57,6 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
     final String name = instructionDescription.name();
     if (null != name) setInternalName(name);
     _hasModRMByte = hasModRMByte;
-    _instructionSelectionPrefix = instructionDescription.getMandatoryPrefix();
     _context = context;
     Trace.line(2, "template #" + serial + ": " + context);
   }
@@ -81,7 +79,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   }
 
   public final X86InstructionPrefix instructionSelectionPrefix() {
-    return _instructionSelectionPrefix;
+    return instructionDescription().getMandatoryPrefix();
   }
 
   public final HexByte opcode1() {
@@ -172,7 +170,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   @Override
   public final String toString() {
     return "<X86Template #" + serial() + ": " + internalName() + " " +
-           format(_instructionSelectionPrefix) +
+           format(instructionDescription().getMandatoryPrefix()) +
            format(instructionDescription().opcode1()) +
            format(instructionDescription().opcode2()) +
            _operands + ">";
