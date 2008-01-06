@@ -355,9 +355,6 @@ public abstract class AssemblyTester<Template_Type extends Template<Template_Typ
 
     final String msg = "[" + testCaseCount + " test cases, " + illegalTestCaseCount + " illegal test cases]";
     notice(template, msg);
-    for (String message : uniqueExceptionMessages) {
-      notice(template, "Caught expected IllegalArgumentException: " + message);
-    }
     if (testingExternally) {
       for (int i = 0; i < NOOP_COUNT; i++) {
         if (!readNop(externalInputStream)) {
