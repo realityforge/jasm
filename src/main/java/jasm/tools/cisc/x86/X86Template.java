@@ -136,7 +136,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
     return "<X86Template #" + serial() + ": " + internalName() + " " +
            group1PrefixDesc +
            operandPrefixDesc +
-           d.opcode1() +
+           d.opcode1() + ", " +
            opcode2Desc +
            _operands + ">";
   }
