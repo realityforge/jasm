@@ -37,7 +37,7 @@ public final class X86InstructionDescription
                                    final String name,
                                    final ModRMGroup modRMGroup,
                                    final List<Object> specifications) {
-    super(null, specifications);
+    super(specifications);
     _opcode1 = opcode1;
     _opcode2 = opcode2;
     _name = name;

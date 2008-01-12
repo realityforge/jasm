@@ -32,7 +32,7 @@ public final class ModRMDescription
   }
 
   private ModRMDescription(ModRMOpcode opcode, String name, List<Object> specifications) {
-    super(null, specifications);
+    super(specifications);
     _opcode = opcode;
     _name = name;
   }
