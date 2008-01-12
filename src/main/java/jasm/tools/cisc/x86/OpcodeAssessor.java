@@ -26,7 +26,7 @@ final class OpcodeAssessor
   }
 
   @Override
-  public final void visitOperandCode(OperandCode operandCode, Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) {
+  public final void visitOperandCode(StandardOperandCode operandCode, Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) {
     final AddressingMethodCode code = operandCode.addressingMethodCode();
     if (code.hasAddressSizeVariants()) _instructionFamily.haveAddressSizeVariants();
     if (code.hasModRMByte()) _instructionFamily.haveModRMByte();

@@ -19,7 +19,7 @@ import static jasm.tools.cisc.ia32.IA32ModRMGroup.GROUP_7a;
 import static jasm.tools.cisc.ia32.IA32ModRMGroup.GROUP_7b;
 import static jasm.tools.cisc.ia32.IA32ModRMGroup.GROUP_8;
 import static jasm.tools.cisc.ia32.IA32ModRMGroup.GROUP_9;
-import static jasm.tools.cisc.x86.OperandCode.*;
+import static jasm.tools.cisc.x86.StandardOperandCode.*;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
 import static jasm.util.HexByte.*;
 import static jasm.x86.SegmentRegister.*;

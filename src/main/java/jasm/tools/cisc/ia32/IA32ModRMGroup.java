@@ -28,7 +28,7 @@ import static jasm.tools.cisc.x86.ModRMDescription.modRM;
 import jasm.tools.cisc.x86.ModRMGroup;
 import jasm.tools.cisc.x86.ModRMOpcode;
 import static jasm.tools.cisc.x86.ModRMOpcode.*;
-import static jasm.tools.cisc.x86.OperandCode.*;
+import static jasm.tools.cisc.x86.StandardOperandCode.*;
 import static jasm.tools.cisc.x86.OperandTypeCode.v;
 import jasm.tools.cisc.x86.X86RegisterOperandCode;
 

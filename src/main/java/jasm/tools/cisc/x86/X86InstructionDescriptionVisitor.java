@@ -26,7 +26,7 @@ import java.util.List;
  */
 public interface X86InstructionDescriptionVisitor {
 
-  void visitOperandCode(OperandCode operandCode, Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) throws TemplateNotNeededException;
+  void visitOperandCode(StandardOperandCode operandCode, Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) throws TemplateNotNeededException;
 
   void visitAddressingMethodCode(AddressingMethodCode addressingMethodCode, Designation designation) throws TemplateNotNeededException;
 
@@ -56,8 +56,8 @@ public interface X86InstructionDescriptionVisitor {
                                               final ArgumentRange argumentRange,
                                               final TestArgumentExclusion testArgumentExclusion,
                                               final ExternalPresence externalPresence) throws TemplateNotNeededException {
-      if (specification instanceof OperandCode) {
-        visitor.visitOperandCode((OperandCode) specification, designation, argumentRange, testArgumentExclusion);
+      if (specification instanceof StandardOperandCode) {
+        visitor.visitOperandCode((StandardOperandCode) specification, designation, argumentRange, testArgumentExclusion);
         return true;
       } else if (specification instanceof AddressingMethodCode) {
         visitor.visitAddressingMethodCode((AddressingMethodCode) specification, designation);

@@ -20,7 +20,7 @@ import jasm.x86.SegmentRegister;
 public class X86InstructionDescriptionAdapter
     implements X86InstructionDescriptionVisitor {
 
-  public void visitOperandCode(OperandCode operandCode, Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) throws TemplateNotNeededException {
+  public void visitOperandCode(StandardOperandCode operandCode, Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) throws TemplateNotNeededException {
   }
 
   public final void visitAddressingMethodCode(AddressingMethodCode addressingMethodCode, Designation designation) {

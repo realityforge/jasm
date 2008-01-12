@@ -15,7 +15,7 @@ import static jasm.ia32.IA32GeneralRegister32.*;
 import static jasm.ia32.IA32GeneralRegister8.*;
 import static jasm.tools.cisc.ia32.IA32ModRMGroup.*;
 import static jasm.tools.cisc.x86.AddressingMethodCode.M;
-import static jasm.tools.cisc.x86.OperandCode.*;
+import static jasm.tools.cisc.x86.StandardOperandCode.*;
 import static jasm.tools.cisc.x86.OperandTypeCode.b;
 import static jasm.tools.cisc.x86.OperandTypeCode.v;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;

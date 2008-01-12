@@ -20,7 +20,7 @@ import jasm.util.StaticLoophole;
 import java.util.HashSet;
 import java.util.Set;
 
-public enum OperandCode {
+public enum StandardOperandCode {
 
   Ap(A, p),
   Cd(C, d),
@@ -100,7 +100,7 @@ public enum OperandCode {
   private final AddressingMethodCode _addressingMethodCode;
   private final OperandTypeCode _operandTypeCode;
 
-  private OperandCode(AddressingMethodCode addressingMethodCode, OperandTypeCode operandTypeCode) {
+  private StandardOperandCode(AddressingMethodCode addressingMethodCode, OperandTypeCode operandTypeCode) {
     _addressingMethodCode = addressingMethodCode;
     _operandTypeCode = operandTypeCode;
   }

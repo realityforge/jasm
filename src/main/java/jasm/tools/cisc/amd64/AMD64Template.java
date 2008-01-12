@@ -28,7 +28,7 @@ import jasm.tools.TestArgumentExclusion;
 import jasm.tools.cisc.TemplateNotNeededException;
 import jasm.tools.cisc.x86.Designation;
 import jasm.tools.cisc.x86.ModCase;
-import jasm.tools.cisc.x86.OperandCode;
+import jasm.tools.cisc.x86.StandardOperandCode;
 import jasm.tools.cisc.x86.ParameterPlace;
 import jasm.tools.cisc.x86.X86AddressParameter;
 import jasm.tools.cisc.x86.X86DisplacementParameter;
@@ -222,7 +222,7 @@ public final class AMD64Template
     }
   }
 
-  public final void visitOperandCode(OperandCode operandCode, Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion)
+  public final void visitOperandCode(StandardOperandCode operandCode, Designation designation, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion)
       throws TemplateNotNeededException {
     switch (operandCode) {
       case Cq: {

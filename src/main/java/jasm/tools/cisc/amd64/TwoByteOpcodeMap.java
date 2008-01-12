@@ -13,7 +13,7 @@ import static jasm.amd64.AMD64GeneralRegister8.*;
 import jasm.amd64.AMD64XMMRegister;
 import static jasm.tools.cisc.amd64.AMD64ModRMGroup.*;
 import jasm.tools.cisc.x86.ModCase;
-import static jasm.tools.cisc.x86.OperandCode.*;
+import static jasm.tools.cisc.x86.StandardOperandCode.*;
 import jasm.tools.cisc.x86.X86InstructionDescriptionCreator;
 import static jasm.util.HexByte.*;
 import static jasm.x86.SegmentRegister.*;

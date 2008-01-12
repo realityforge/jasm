@@ -228,7 +228,7 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
   public final void visitAddressingMethodCode(AddressingMethodCode addressingMethodCode, Designation designation) throws TemplateNotNeededException {
     switch (addressingMethodCode) {
       case M: {
-        visitOperandCode(OperandCode.Mv, designation, ArgumentRange.UNSPECIFIED, TestArgumentExclusion.NONE);
+        visitOperandCode(StandardOperandCode.Mv, designation, ArgumentRange.UNSPECIFIED, TestArgumentExclusion.NONE);
         break;
       }
       default: {
