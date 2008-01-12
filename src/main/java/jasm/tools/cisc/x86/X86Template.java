@@ -188,11 +188,6 @@ public abstract class X86Template<Template_Type extends X86Template<Template_Typ
     parameter.setArgumentRange(argumentRange);
   }
 
-  protected final void addParameter(X86Parameter parameter, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) {
-    addParameter(parameter, argumentRange);
-    parameter.excludeTestArguments(testArgumentExclusion);
-  }
-
   protected final <EnumerableArgument_Type extends Enum<EnumerableArgument_Type> & EnumerableArgument> X86Parameter addEnumerableParameter(Designation designation, ParameterPlace parameterPlace,
                                                                                                                                            final SymbolSet<EnumerableArgument_Type> enumerator) {
     return addOperand(new X86EnumerableParameter<EnumerableArgument_Type>(designation, parameterPlace, enumerator));

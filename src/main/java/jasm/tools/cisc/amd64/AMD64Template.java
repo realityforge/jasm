@@ -40,6 +40,7 @@ import jasm.tools.cisc.x86.X86OffsetParameter;
 import jasm.tools.cisc.x86.X86RegisterOperandCode;
 import jasm.tools.cisc.x86.X86Template;
 import jasm.tools.cisc.x86.X86TemplateContext;
+import jasm.tools.cisc.x86.X86Parameter;
 import jasm.x86.ControlRegister;
 import jasm.x86.DebugRegister;
 import jasm.x86.GeneralRegister;
@@ -618,5 +619,10 @@ public final class AMD64Template
       }
     }
     return false;
+  }
+
+  protected final void addParameter(X86Parameter parameter, ArgumentRange argumentRange, TestArgumentExclusion testArgumentExclusion) {
+    addParameter(parameter, argumentRange);
+    parameter.excludeTestArguments(testArgumentExclusion);
   }
 }
