@@ -41,6 +41,12 @@ public final class TestArgumentExclusion {
     return _arguments;
   }
 
+  public String toString() {
+    return "Exclusion[From " + _component +
+           " for " + _specification +
+           " args=" + _arguments+ "]";
+  }
+
   private static TestArgumentExclusion none() {
     final Set<Argument> args = StaticLoophole.cast(Collections.emptySet());
     return new TestArgumentExclusion(AssemblyTestComponent.EXTERNAL_ASSEMBLER, null, args);
