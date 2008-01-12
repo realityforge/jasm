@@ -31,16 +31,13 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
 
   private static int _nextSerial;
   private int _serial;
-  private final String _architectureManualSection;
   private String _externalName;
   private boolean _isDisassemblable = true;
   private boolean _isExternallyTestable = true;
   /** The components of the description. */
   private final List<Object> _specifications;
 
-  public InstructionDescription(final String architectureManualSection,
-                                List<Object> specifications) {
-    _architectureManualSection = architectureManualSection;
+  protected InstructionDescription( List<Object> specifications) {
     _specifications = specifications;
     _serial = _nextSerial++;
   }
@@ -56,10 +53,6 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
   /** @return the objects from which this description is composed */
   public final List<Object> specifications() {
     return _specifications;
-  }
-
-  public final String architectureManualSection() {
-    return _architectureManualSection;
   }
 
   public final String externalName() {

@@ -20,11 +20,12 @@ public final class RiscInstructionDescription
 
   private boolean _synthetic;
   private List<InstructionConstraint> _constraints;
+  private final String _architectureManualSection;
 
   RiscInstructionDescription(final String architectureManualSection,
                              final List<Object> specifications) {
-    super(architectureManualSection, specifications);
-
+    super(specifications);
+    _architectureManualSection = architectureManualSection;
     int bits = 0;
     int mask = 0;
     for (Object specification : specifications) {
@@ -52,6 +53,10 @@ public final class RiscInstructionDescription
     if (bits != 32) {
       throw new IllegalStateException("RISC instruction description describes " + bits + " instruction field bits: " + specifications);
     }
+  }
+
+  public final String architectureManualSection() {
+    return _architectureManualSection;
   }
 
   public InstructionDescription beSynthetic() {
