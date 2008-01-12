@@ -12,7 +12,6 @@ import jasm.tools.cisc.x86.X86InstructionDescriptionVisitor;
 import jasm.tools.risc.RiscInstructionDescriptionVisitor;
 import jasm.tools.risc.field.InputOperandField;
 import jasm.util.StaticLoophole;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -27,7 +26,7 @@ import java.util.List;
  */
 @SuppressWarnings({"RedundantTypeArguments"})
 public abstract class InstructionDescription<InstructionDescription_Type extends InstructionDescription<InstructionDescription_Type>>
-    implements Iterable<Object>, Cloneable {
+    implements Cloneable {
 
   private static int _nextSerial;
   private int _serial;
@@ -37,7 +36,7 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
   /** The components of the description. */
   private final List<Object> _specifications;
 
-  protected InstructionDescription( List<Object> specifications) {
+  protected InstructionDescription(List<Object> specifications) {
     _specifications = specifications;
     _serial = _nextSerial++;
   }
@@ -87,10 +86,6 @@ public abstract class InstructionDescription<InstructionDescription_Type extends
   public final InstructionDescription_Type beNotExternallyTestable() {
     _isExternallyTestable = false;
     return StaticLoophole.<InstructionDescription_Type>cast(this);
-  }
-
-  public final Iterator<Object> iterator() {
-    return _specifications.iterator();
   }
 
   @Override
