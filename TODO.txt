@@ -1,0 +1,8 @@
+TODO
+----
+
+* Disassemble unknown instructions as data: The disassemblers do not always succeed. We should support a graceful failure mode where the failure results in decoding the unknown data as "unknown data" along with hex values. The data appearing in disassembly may be intentional "inline" data.
+* Remove the use of LabelAddressInstruction subclassing: The LabelAssembler uses anonymous subclasses of LabelAddressInstruction in each of the methods it defines. This can result in a large number of classes being defined (i.e. 888 in the case of ia32) which can result in a hefty code size for little real value. Each subclass defines a method indicating the template that created it (this could be passed in via the constructor) and an assemble method that assembles the instruction. It may be possible to address this in a more space efficient way at the cost of a little performance.
+* Support Lock prefix for ia32* instructions: The assembler needs to support the lock prefix for some instructions (Other instructions should cause an assert failure). This could possibly be implemented vi a method such as nextInstructionLocks() that is invoked prior to instruction method. The instruction method then checks a flag and emits lock prefix if flag set.
+* Add in automated CI tests for ISAs we care about.
+
