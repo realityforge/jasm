@@ -1,0 +1,5 @@
+#summary Contributing to Jasm
+
+= Contributing to Jasm =
+
+Contributions are welcome at any time. Feel free to email the project owners (see email address to the right) or add an issue to the [http://code.google.com/p/jasm/issues/list issue tracker]. Contributions will be looked on with particular favor if they come accompanied with a test case.

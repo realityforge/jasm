@@ -1,0 +1,61 @@
+#summary Overview of using the project
+#labels Phase-Implementation
+
+= Using =
+
+Both the assemblers and disassemblers are easy to get started with if you are familiar with the associated assembly language. The sections below describe basic usage patterns but for those who are more comfortable with code you can look at the unit tests for [http://jasm.googlecode.com/svn/trunk/src/test/java/test/jasm/ia32/InternalTest.java ia32], [http://jasm.googlecode.com/svn/trunk/src/test/java/test/jasm/ppc/InternalTest.java ppc], [http://jasm.googlecode.com/svn/trunk/src/test/java/test/jasm/sparc/InternalTest.java sparc] and [http://jasm.googlecode.com/svn/trunk/src/test/java/test/jasm/amd64/InternalTest.java amd64] that demonstrate the assemblers and disassemblers or the [http://jasm.googlecode.com/svn/trunk/examples/ examples] directory in the distribution.
+
+== Using the Assemblers ==
+
+The assemblers are classes that you instantiate with a parameter indicating the start address of the generated machine code. The `RawAssembler` parent class of the assembler provides a set of methods that match the assembly language. The `LabelAssembler` parent class adds methods to manipulate label, deferring calculation of offsets until machine code generation. 
+
+The following sample code demonstrates usage of the IA32Assembler class.
+
+{{{
+final int startAddress = 0x12358;
+final IA32Assembler asm = new IA32Assembler(startAddress);
+final Label startLabel = new Label();
+asm.bindLabel(startLabel);
+asm.add(EDX.indirect(), BL);
+asm.add(EAX.base(), EBX.index(), SCALE_2, CL);
+asm.m_add(0x1234AB78, EBP.index(), SCALE_1, AH);
+asm.m_add(0x12345678, BH);
+asm.add((byte) 0x23, EAX.indirect(), AL);
+asm.add((byte) 0x23, EAX.base(), EBX.index(), SCALE_4, CL);
+asm.add(0x87654321, EDI.indirect(), CH);
+asm.add(0x87654321, EAX.base(), EBX.index(), SCALE_1, DL);
+asm.add(CL, DL);
+asm.jmp(startLabel);
+
+final byte[] machineCode = asm.toByteArray();
+}}}
+
+== Using the Disassemblers ==
+
+The disassemblers are also instantiated with the start address as a parameter. The appropriate `scanAndPrint` method is called and passed input data stream and output stream for assembly.
+
+e.g.
+{{{
+final byte[] machineCode = ...;
+final IA32Disassembler disassembler = new IA32Disassembler(startAddress);
+final BufferedInputStream stream = 
+   new BufferedInputStream(new ByteArrayInputStream(machineCode));
+final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+disassembler.scanAndPrint(stream, baos);
+final String assembly = new String(baos.toByteArray());
+}}}
+
+Disassembling the machine code generated in the "Using the Assemblers" section produces the following. The columns are address, offset, label (if any), opcode, operands, machine code representation.
+
+{{{
+0x00012358   00   L1:   add       [edx], bl                    [00 1A]
+0x0001235A   02         add       eax[ebx * 2], cl             [00 0C 58]
+0x0001235D   05         add       0x1234AB78[ebp], ah          [00 24 2D 78 AB 34 12]
+0x00012364   12         add       [0x12345678], bh             [00 3D 78 56 34 12]
+0x0001236A   18         add       [eax + 35], al               [00 40 23]
+0x0001236D   21         add       eax[ebx * 4 + 35], cl        [00 4C 98 23]
+0x00012371   25         add       [edi - 2023406815], ch       [00 AF 21 43 65 87]
+0x00012377   31         add       eax[ebx - 2023406815], dl    [00 94 18 21 43 65 87]
+0x0001237E   38         add       cl, dl                       [00 D1]
+0x00012380   40         jmp       L1: -42                      [EB D6]
+}}}
